@@ -12,9 +12,17 @@ The platform roles are deliberately separate:
 - **LightNav-0** is the upstream navigation-VLA baseline that generates trajectory chunks.
 - The reconciliation method developed here is **not LightNav**.
 
-Current scope is **EXP-01 only**: characterize the discontinuity produced by a naive raw
-OLD→NEW switch under asynchronous LightNav inference. There is no interpolation, smoothing,
-correspondence factor, GTSAM dependency, or graph optimization in this stage.
+The current research-experiment scope remains **EXP-01 only**: characterize the discontinuity
+produced by a naive raw OLD→NEW switch under asynchronous LightNav inference. There is no
+interpolation, smoothing, correspondence factor, GTSAM dependency, or graph optimization in
+this stage.
+
+Before connecting LightNav, **Stage 0** validates the standalone Isaac Sim trajectory
+pipeline with the official Clearpath Jackal asset. It generates a deterministic SE(2)
+reference from configured unicycle commands, executes those commands through all four
+runtime-discovered wheel joints, records the actual world SE(2) trajectory, and displays
+both paths with non-physical DebugDraw geometry. Stage 0 is simulation pipeline validation,
+not research evidence.
 
 ## Local layout and environments
 
@@ -38,6 +46,32 @@ uv pip install --python .venv/bin/python -r requirements.txt
 
 LightNav must be installed in its own checkout according to its upstream instructions; do
 not install it here. The setup used for EXP-01 is recorded in `docs/WORK_LOG.md`.
+
+## Stage 0 Jackal GUI smoke test
+
+Run the default GUI workflow with one command:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+./scripts/isaac/run_jackal_trajectory_demo.sh
+```
+
+The launcher uses `~/isaacsim/python.sh`, not the research `.venv`. It scrubs inherited
+ROS/CUDA library environment variables only for that child process, then lets the Isaac
+launcher establish its own runtime paths. The GUI stays open after recording so the ground,
+Jackal, reference path, and accumulated actual path can be inspected together; close the
+window to exit. Outputs are written to an immutable ignored directory below
+`data/stage0/jackal_trajectory/<run_id>/`.
+
+Validate any saved run from the research environment:
+
+```bash
+.venv/bin/python scripts/validate_stage0_output.py \
+  data/stage0/jackal_trajectory/<run_id>
+```
+
+Configuration is in `configs/stage0_jackal_trajectory.yaml`; the full contract and observed
+limitations are documented in [Stage 0](docs/STAGE_00_JACKAL_TRAJECTORY.md).
 
 ## EXP-01 data workflow
 

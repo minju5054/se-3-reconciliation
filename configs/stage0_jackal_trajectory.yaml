@@ -1,0 +1,56 @@
+stage: stage0_jackal_trajectory_smoke_test
+
+simulation:
+  physics_dt: 0.01
+  sample_dt: 0.05
+  settling_duration_s: 0.5
+  initial_robot_pose_se2: [0.0, 0.0, 0.0]
+  spawn_height_m: 0.05
+
+robot:
+  asset_relative_path: Clearpath/Jackal/jackal.usd
+  asset_collection_path: /Isaac/Robots
+  reference_prim_path: /World/Jackal
+
+motion_profile:
+  - name: initial_stop
+    duration_s: 0.5
+    linear_velocity_mps: 0.0
+    angular_velocity_rps: 0.0
+  - name: straight_1
+    duration_s: 2.0
+    linear_velocity_mps: 0.6
+    angular_velocity_rps: 0.0
+  - name: gentle_left
+    duration_s: 3.0
+    linear_velocity_mps: 0.45
+    angular_velocity_rps: 0.25
+  - name: straight_2
+    duration_s: 2.0
+    linear_velocity_mps: 0.6
+    angular_velocity_rps: 0.0
+  - name: final_stop
+    duration_s: 0.5
+    linear_velocity_mps: 0.0
+    angular_velocity_rps: 0.0
+
+visualization:
+  z_offset_m: 0.08
+  reference_color_rgba: [0.10, 0.35, 1.00, 1.00]
+  actual_color_rgba: [1.00, 0.30, 0.05, 1.00]
+  start_color_rgba: [0.10, 1.00, 0.20, 1.00]
+  end_color_rgba: [1.00, 0.10, 0.80, 1.00]
+  reference_line_width: 4.0
+  actual_line_width: 6.0
+  waypoint_point_size: 5.0
+  endpoint_point_size: 16.0
+  waypoint_point_stride: 10
+  camera_eye: [5.0, -7.0, 5.5]
+  camera_target: [1.8, 0.7, 0.0]
+
+output:
+  root: data/stage0/jackal_trajectory
+
+success_checks:
+  minimum_straight_segment_displacement_m: 0.25
+  minimum_turn_segment_abs_yaw_change_rad: 0.02

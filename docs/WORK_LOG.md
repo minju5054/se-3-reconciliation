@@ -43,3 +43,55 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-02 17:13:29 KST (+0900) — Stage 0 Jackal trajectory smoke test
+
+- **Purpose:** Validate the pre-LightNav Isaac Sim trajectory pipeline using a deterministic
+  SE(2) reference, the official Clearpath Jackal execution platform, actual world-pose
+  recording, and simultaneous viewport visualization. This is simulation pipeline validation,
+  not research evidence.
+- **Implemented:** Added pure configurable unicycle trajectory generation and finite arbitrary
+  `N x 3` validation; immutable reference/actual NPY, aligned CSV, metadata output, sanity
+  metrics, overwrite protection, and an Isaac-independent validator. Added a GUI-default
+  Isaac runner and child-only environment-scrubbing launcher. The runtime resolves the asset
+  root and official `Clearpath/Jackal/jackal.usd`, discovers the articulation and actual DOFs,
+  derives side mapping from revolute-joint lateral positions, reads wheel radius from collision
+  cylinders, computes wheel separation from the asset, applies four wheel velocity targets,
+  extracts `[world_x, world_y, world_yaw]`, and updates reference/actual DebugDraw geometry at
+  every sample. Added config, tests, README instructions, and full Stage 0 documentation.
+- **Major files:** `README.md`, `configs/stage0_jackal_trajectory.yaml`,
+  `docs/STAGE_00_JACKAL_TRAJECTORY.md`, `docs/WORK_LOG.md`,
+  `src/reconciliation/trajectory.py`, `src/reconciliation/stage0_jackal.py`,
+  `scripts/isaac/jackal_trajectory_demo.py`,
+  `scripts/isaac/run_jackal_trajectory_demo.sh`, `scripts/validate_stage0_output.py`,
+  `tests/test_trajectory.py`, and `tests/test_stage0_jackal.py`.
+- **Commands:** Repository status/branch/remote/base inspection; local Isaac 6.0.1 API/example
+  inspection; isolated headless runtime asset probes; `.venv/bin/python -m pytest`;
+  `python -m compileall`; `bash -n`; two GUI-mode `run_jackal_trajectory_demo.sh --no-hold`
+  smoke runs; independent `validate_stage0_output.py`; `uv pip check`; Git diff/status,
+  explicit staging, cached-diff, commit, and normal push checks.
+- **Verification:** Full research suite: 47 passed, including all prior 30 EXP-01 tests.
+  Research environment dependency check: 17 packages compatible. Isaac Sim GUI mode opened
+  without headless/no-window flags, loaded the ground and Jackal, executed all four wheel DOFs,
+  and completed real-time DebugDraw updates. Final validated run ID:
+  `codex-stage0-smoke-validated-20260902`. Reference shape `(161, 3)`; actual shape `(161, 3)`.
+  Actual start `[-0.0002078209, -0.0000000562, 0.0000003236]`; actual end
+  `[3.7261931896, 0.0875781551, 0.0595319028]`; displacement `3.7274300040 m`; total yaw
+  change `0.0595315792 rad`. Straight-segment maximum displacement `1.1957686317 m` and
+  turn-segment absolute yaw change `0.0500163637 rad` passed configured smoke thresholds.
+  Independent saved-output validation returned `valid: true`.
+- **Runtime discovery:** Articulation prim `/World/Jackal`; DOF count 4; names
+  `front_left_wheel_joint`, `front_right_wheel_joint`, `rear_left_wheel_joint`, and
+  `rear_right_wheel_joint`. Asset-derived wheel radius `0.0979999974 m`; separation
+  `0.3755899966 m`.
+- **Issues and limitations:** The official asset emitted non-fatal obsolete
+  `customGeometry` PhysX warnings. Open-loop skid-steer motion did not closely track the ideal
+  unicycle turn (final position error `1.2761473886 m`, final yaw error `0.6904680972 rad`),
+  which is acceptable because Stage 0 is not a controller-quality study. DebugDraw is transient
+  viewport-only geometry. Generated run directories remain ignored and were not staged.
+  LightNav inference, checkpoints, OLD/NEW generation, ROS control, Nav2, MPC, correspondence,
+  GTSAM, and graph optimization were not introduced. System Python remained 3.12.3; ROS,
+  CUDA, NVIDIA driver, and Isaac Sim installations were not modified.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
