@@ -1,0 +1,41 @@
+{
+  "name": "trajectory-npy-graph-viewer",
+  "displayName": "SE(2) Trajectory NPY Graph Viewer",
+  "description": "Open canonical N x 3 trajectory NPY files as the repository's XY and yaw graph.",
+  "version": "0.1.0",
+  "publisher": "se3-reconciliation",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Visualization"
+  ],
+  "activationEvents": [
+    "onCustomEditor:reconciliation.trajectoryNpyGraph"
+  ],
+  "main": "./extension.js",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false,
+      "description": "Rendering invokes the trusted repository's research virtual environment and plotting script."
+    },
+    "virtualWorkspaces": {
+      "supported": false
+    }
+  },
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "reconciliation.trajectoryNpyGraph",
+        "displayName": "SE(2) Trajectory Graph",
+        "selector": [
+          {
+            "filenamePattern": "*.npy"
+          }
+        ],
+        "priority": "default"
+      }
+    ]
+  }
+}

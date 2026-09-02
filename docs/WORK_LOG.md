@@ -181,3 +181,41 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-02 20:26:10 KST (+0900) — VS Code SE(2) trajectory graph custom editor
+
+- **Purpose:** Make a clicked trajectory `.npy` file display the exact XY and stored-yaw graph
+  produced by the existing CLI, with no heatmap or pixel-image interpretation.
+- **Implemented:** Added a dependency-free repository-specific VS Code read-only custom editor
+  and a Python VSIX builder/installer. The editor invokes the tested
+  `scripts/view_trajectory_npy.py` through this repository's `.venv/bin/python` without a
+  shell, embeds only the resulting PNG in its webview, watches the opened file for changes,
+  and reports validation/render errors without modifying data. When sibling
+  `reference_trajectory.npy` and `actual_trajectory.npy` files exist, clicking either plots
+  both exactly as the CLI comparison does. Removed the conflicting generic image extension,
+  installed `se3-reconciliation.trajectory-npy-graph-viewer@0.1.0`, and explicitly associated
+  `*.npy` with `reconciliation.trajectoryNpyGraph` in VS Code user settings.
+- **Major files:** `.gitignore`, `README.md`, `docs/WORK_LOG.md`,
+  `scripts/install_vscode_trajectory_graph_viewer.py`,
+  `tools/vscode-trajectory-npy-viewer/{package.json,extension.js,README.md}`, and
+  `tests/test_vscode_trajectory_viewer.py`.
+- **Commands:** Repository status/branch/remote/base inspection; VSIX-format inspection;
+  targeted and full pytest; Electron/Node JavaScript syntax check; build-only VSIX and ZIP
+  integrity checks; installer execution; installed extension/source comparison; user editor
+  association update; VS Code open/new-window commands; Extension Host activation-log check;
+  actual Stage 0 two-file plot generation; rendered-image inspection; compileall; and Git
+  diff/status/staging/commit/push checks.
+- **Verification:** Full research suite: 55 passed. The built VSIX contained only the custom
+  editor manifest, JavaScript, and documentation; the installed package and JavaScript matched
+  repository source (apart from VS Code's injected metadata). Extension Host activated
+  `se3-reconciliation.trajectory-npy-graph-viewer` for the configured custom editor without a
+  render error. The real `(161, 3)` reference and actual trajectories produced the expected
+  1920 x 880 XY/yaw comparison image, which was visually inspected.
+- **Issues and limitations:** The workspace must be trusted and the repository `.venv` plus
+  plotting script must exist because the extension deliberately reuses the canonical tested
+  renderer. Other `.npy` shapes fail explicit `N x 3` validation. A tab retained from an older
+  NPY extension may need one VS Code window reload. No system Python, ROS, CUDA, driver, or
+  Isaac Sim installation was modified; generated VSIX and PNG artifacts are not committed.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.

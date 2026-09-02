@@ -6,6 +6,7 @@ __pycache__/
 .coverage
 htmlcov/
 *.egg-info/
+*.vsix
 
 # Local recordings, generated experiment products, and simulator state.
 data/

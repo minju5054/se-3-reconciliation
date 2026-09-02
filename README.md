@@ -70,16 +70,17 @@ Validate any saved run from the research environment:
   data/stage0/jackal_trajectory/<run_id>
 ```
 
-For direct image-only inspection in VS Code, install Numpy Image Preview once:
+For direct graph inspection in VS Code, install this repository's custom editor once:
 
 ```bash
-code --install-extension Kiameow.npy-image-preview
+.venv/bin/python scripts/install_vscode_trajectory_graph_viewer.py
 ```
 
-Associate `*.npy` with the `npy-image-preview.preview` editor in VS Code user settings. After
-that, clicking an `.npy` file opens its RGBA/grayscale image preview instead of the binary-file
-warning or a heatmap. If a file was already open during installation, close its tab and click
-it again (or use **Reopen Editor With... → Numpy Image Preview**).
+Associate `*.npy` with `reconciliation.trajectoryNpyGraph` in VS Code user settings. Clicking
+a finite `N x 3 [x, y, yaw]` file then shows the same XY/yaw Matplotlib image as the CLI—never
+a heatmap. When a Stage 0 run contains sibling `reference_trajectory.npy` and
+`actual_trajectory.npy` files, opening either one compares both automatically. If an old NPY
+editor remains open after installation, reload the VS Code window once.
 
 The following optional CLI can compare the saved reference and actual `N x 3 [x, y, yaw]`
 arrays or export them to PNG/CSV:
