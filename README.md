@@ -100,6 +100,40 @@ to export readable `x,y,yaw` CSV files. Existing exported files are protected un
 Configuration is in `configs/stage0_jackal_trajectory.yaml`; the full contract and observed
 limitations are documented in [Stage 0](docs/STAGE_00_JACKAL_TRAJECTORY.md).
 
+## Stage 0-B Jackal controller validation
+
+Stage 0-B separates wheel conversion, articulation tracking, and four-wheel skid-steer
+effects with straight, left/right rotation, and arc primitives. It then uses measured Jackal
+world-pose feedback with a monotonic nearest/lookahead path follower. Isaac Sim 6.0.1's
+`isaacsim.robot.experimental.wheeled_robots.controllers.DifferentialController` converts the
+resulting `[v, omega]` command to left/right wheel targets; runtime USD geometry maps those
+targets to the actual four wheel DOFs.
+
+Run the GUI primitive diagnostics and closed-loop composite validation:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+./scripts/isaac/run_jackal_controller_validation.sh
+./scripts/isaac/run_jackal_controller_validation.sh \
+  --controller closed_loop --scenarios composite
+```
+
+Both commands keep the GUI open by default with the Jackal, reference line, live actual line,
+and reference heading markers. Add `--no-hold` only for automated runs. Immutable local output
+is written below `data/stage0/controller_validation/<session_id>/` and remains ignored by Git.
+Validate and compare sessions from the research environment with:
+
+```bash
+.venv/bin/python scripts/summarize_controller_validation.py \
+  data/stage0/controller_validation/<primitive_session_id> \
+  data/stage0/controller_validation/<closed_loop_session_id>
+```
+
+The diagnostic evidence, telemetry schema, closed-loop timing/progress convention, measured
+before/after metrics, and limitations are documented in
+[Stage 0-B](docs/STAGE_00_CONTROLLER_VALIDATION.md). This is execution-layer validation, not
+LightNav integration or research evidence.
+
 ## EXP-01 data workflow
 
 Never overwrite a raw VLA recording. Store uncommitted inputs below `data/exp01/raw/`, and

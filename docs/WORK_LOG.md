@@ -219,3 +219,74 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-03 00:19:24 KST (+0900) — Stage 0-B Jackal controller validation
+
+- **Purpose:** Separate the Stage 0-A tracking error into wheel-conversion, wheel-drive, and
+  four-wheel skid-steer effects, then establish a pose-feedback execution layer suitable for
+  later LightNav trajectory integration. This is simulation pipeline validation, not research
+  evidence.
+- **Implemented:** Added finite differential-wheel conversion and geometry-based four-DOF side
+  mapping; a monotonic nearest/path-distance-lookahead SE(2) follower with terminal yaw
+  alignment; actual body-rate estimation; desired body, target wheel, directly measured wheel,
+  and actual pose telemetry; reference-index-aware metrics for unequal reference/actual sample
+  counts without interpolation; strict immutable NPY/CSV/JSON output validation; cross-session
+  summary tooling; GUI DebugDraw heading markers; child-only runtime environment scrubbing;
+  config, unit tests, README instructions, and full Stage 0-B documentation. Used Isaac Sim
+  6.0.1's non-deprecated experimental `DifferentialController`; did not modify the official
+  USD asset or override drive/contact properties.
+- **Controller comparison:** With runtime-derived wheel radius `0.0979999974 m` and separation
+  `0.3755899966 m`, custom and official left/right outputs had maximum absolute difference
+  `0 rad/s` for stop, `v=0.5` straight, `omega=+0.25` rotation, `v=0.4/omega=0.25` arc, and
+  `omega=-0.25` rotation. Conclusion: `wheel conversion formula bug is not supported`.
+- **Primitive validation:** Final GUI session `stage0b-official-primitives-20260903` produced
+  valid `(51, 3)` reference/actual arrays for all runs. Straight desired/measured mean speed
+  was `0.30000/0.29605 m/s`, wheel RMSE `0.04842 rad/s`, displacement `1.19522 m`, and yaw
+  drift `0.00021 rad`. Rotate-left desired/measured mean yaw rate was
+  `0.25000/0.07607 rad/s`, wheel RMSE `0.29289 rad/s`, and total yaw `0.30430 rad`.
+  Rotate-right was `-0.25000/-0.03696 rad/s`, wheel RMSE `0.10103 rad/s`, and total yaw
+  `-0.14785 rad`. Arc was desired/measured `v=0.30000/0.29348 m/s` and
+  `omega=0.20000/0.00800 rad/s`, wheel RMSE `0.06885 rad/s`; expected radius `1.5 m`,
+  measured effective radius `36.67637 m`.
+- **Root cause:** Straight/arc wheel and linear-speed tracking were adequate while yaw response
+  was far below ideal; pure rotation also exposed wheel tracking loss and left/right
+  asymmetry. The most likely large Stage 0-A error is the ideal-unicycle/physical-track-width
+  mismatch under four-wheel skid-steer tire/contact physics, not the conversion formula.
+  No arbitrary effective-width calibration, friction tuning, damping change, or effort change
+  was used.
+- **Closed-loop result:** Final GUI session `stage0b-closed-loop-accepted-20260903` saved
+  reference `(101, 3)` and actual `(143, 3)`, reached the goal before `18 s`, and passed strict
+  output validation. Position RMSE `0.0503478 m`, final position error `0.0740490 m`, yaw RMSE
+  `0.0568929 rad`, and final yaw error `0.0772074 rad` passed all four engineering thresholds.
+  Stage 0-A final errors were `1.2761474 m` and `0.6904681 rad`. The GUI displayed the ground,
+  Jackal, reference path/headings, and live accumulated actual path; the saved unequal-length
+  arrays also rendered correctly in the existing CLI/VS Code trajectory graph viewer.
+- **Major files:** `README.md`, `configs/stage0_jackal_controller_validation.yaml`,
+  `docs/STAGE_00_CONTROLLER_VALIDATION.md`, `docs/WORK_LOG.md`,
+  `src/reconciliation/controller_validation.py`,
+  `src/reconciliation/controllers/{__init__,differential,trajectory_follower}.py`,
+  `scripts/isaac/jackal_controller_validation.py`,
+  `scripts/isaac/run_jackal_controller_validation.sh`,
+  `scripts/summarize_controller_validation.py`, and the three Stage 0-B test modules.
+- **Commands:** Git status/branch/remote/base inspection; installed Isaac 6.0.1 source/API and
+  official asset inspection; official/custom numerical comparison; full pytest and compileall;
+  shell syntax and diff checks; two GUI-mode closed-loop trials and two GUI-mode four-primitive
+  sessions; strict JSON and output validation; cross-session table summary; saved trajectory
+  graph rendering and visual inspection; Git diff/status, explicit staging, cached-diff,
+  commit, and normal push checks.
+- **Verification:** Full research suite: `76 passed`, including all existing EXP-01, Stage 0-A,
+  CLI viewer, and VS Code viewer tests plus 21 new Stage 0-B tests. Isaac GUI runs used the
+  runtime articulation `/World/JackalReference` with DOFs `front_left_wheel_joint`,
+  `front_right_wheel_joint`, `rear_left_wheel_joint`, and `rear_right_wheel_joint`. Both final
+  sessions passed the independent run validator, and metadata passed strict JSON parsing.
+- **Issues and limitations:** Desired and measured body yaw rates remain different because the
+  feedback controller compensates over additional time instead of making skid-steer physics
+  ideal. Validation covers flat ground and one deterministic composite; it is not a safety or
+  general controller-performance claim. The official asset still emits non-fatal obsolete
+  `customGeometry` warnings. Generated local sessions remain ignored and uncommitted. LightNav,
+  OLD/NEW chunks, correspondence, GTSAM, graph optimization, ROS control, Nav2, MPC, and
+  obstacle avoidance remain unimplemented. No system Python, ROS, CUDA, driver, or Isaac Sim
+  installation was modified.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.

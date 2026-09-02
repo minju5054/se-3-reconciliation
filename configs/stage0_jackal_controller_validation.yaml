@@ -1,0 +1,90 @@
+stage: stage0-b-jackal-controller-validation
+
+simulation:
+  physics_dt: 0.016666666666666666
+  sample_dt: 0.1
+  settling_duration_s: 1.0
+  spawn_height_m: 0.15
+  initial_robot_pose_se2: [0.0, 0.0, 0.0]
+
+robot:
+  asset_collection_path: /Isaac/Robots
+  asset_relative_path: Clearpath/Jackal/jackal.usd
+  reference_prim_path: /World/JackalReference
+
+primitive_timing:
+  initial_stop_duration_s: 0.5
+  active_duration_s: 4.0
+  final_stop_duration_s: 0.5
+
+primitives:
+  straight:
+    linear_velocity_mps: 0.3
+    angular_velocity_rps: 0.0
+  rotate_left:
+    linear_velocity_mps: 0.0
+    angular_velocity_rps: 0.25
+  rotate_right:
+    linear_velocity_mps: 0.0
+    angular_velocity_rps: -0.25
+  arc:
+    linear_velocity_mps: 0.3
+    angular_velocity_rps: 0.2
+
+composite_motion_profile:
+  - name: initial_stop
+    duration_s: 1.0
+    linear_velocity_mps: 0.0
+    angular_velocity_rps: 0.0
+  - name: straight_1
+    duration_s: 3.0
+    linear_velocity_mps: 0.4
+    angular_velocity_rps: 0.0
+  - name: gentle_left
+    duration_s: 3.0
+    linear_velocity_mps: 0.45
+    angular_velocity_rps: 0.25
+  - name: straight_2
+    duration_s: 2.0
+    linear_velocity_mps: 0.6
+    angular_velocity_rps: 0.0
+  - name: final_stop
+    duration_s: 1.0
+    linear_velocity_mps: 0.0
+    angular_velocity_rps: 0.0
+
+closed_loop:
+  lookahead_distance_m: 0.25
+  position_gain: 1.2
+  heading_gain: 2.5
+  cross_track_gain: 1.0
+  max_linear_velocity_mps: 0.65
+  max_angular_velocity_rps: 1.5
+  goal_position_tolerance_m: 0.08
+  goal_yaw_tolerance_rad: 0.08
+  rotate_in_place_threshold_rad: 0.30
+  nearest_search_window: 30
+  maximum_duration_s: 18.0
+
+engineering_acceptance:
+  final_position_error_m: 0.20
+  position_rmse_m: 0.15
+  final_yaw_error_rad: 0.10
+  yaw_rmse_rad: 0.10
+
+visualization:
+  z_offset_m: 0.08
+  reference_color_rgba: [0.1, 0.45, 1.0, 1.0]
+  actual_color_rgba: [1.0, 0.25, 0.1, 1.0]
+  heading_color_rgba: [0.1, 0.9, 0.3, 1.0]
+  reference_line_width: 5.0
+  actual_line_width: 6.0
+  heading_line_width: 2.0
+  heading_marker_length_m: 0.18
+  heading_marker_stride: 10
+  endpoint_point_size: 12.0
+  camera_eye: [4.5, 4.5, 5.5]
+  camera_target: [1.5, 0.5, 0.0]
+
+output:
+  root: data/stage0/controller_validation
