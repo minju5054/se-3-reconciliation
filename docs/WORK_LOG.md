@@ -153,3 +153,31 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-02 20:08:38 KST (+0900) — Image-only VS Code NPY preview
+
+- **Purpose:** Replace the generic NPY viewer's unwanted heatmap rendering with an image-only
+  `.npy` preview when files are clicked in VS Code.
+- **Implemented:** Installed the user-scoped `Kiameow.npy-image-preview` extension version
+  1.1.0, verified that its `npy-image-preview.preview` custom editor renders NPY data as RGBA
+  or grayscale images, and removed the conflicting `subh-tools.npy-viewer` heatmap/statistics
+  extension. Added an explicit user-level `workbench.editorAssociations` mapping from `*.npy`
+  to the image preview editor and reopened a Stage 0 reference trajectory. Updated README to
+  document the corrected image-only workflow.
+- **Major files:** `README.md` and `docs/WORK_LOG.md`. User-local VS Code settings were updated
+  at `~/.config/Code/User/settings.json`; no extension code or generated image was vendored.
+- **Commands:** Repository status/branch/remote/base inspection; VS Code/extension/tooling
+  inspection; image-preview extension installation and manifest/README inspection; generic
+  viewer uninstallation; user editor-association verification; and `code --reuse-window`
+  against actual and reference Stage 0 trajectory arrays.
+- **Verification:** `kiameow.npy-image-preview@1.1.0` is the only installed NPY-related
+  extension. Its manifest registers `npy-image-preview.preview` as the default editor for
+  `*.npy`, and the VS Code user association explicitly selects that same editor. Both open
+  commands completed successfully.
+- **Issues and limitations:** A tab retained from the previous extension may need to be closed
+  and reopened once. The extension interprets numeric NPY contents as pixels; it does not
+  infer SE(2) trajectory semantics. No system Python, virtual environment, ROS, CUDA, driver,
+  or Isaac Sim installation was modified.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.

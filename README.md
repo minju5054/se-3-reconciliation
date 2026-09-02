@@ -70,16 +70,16 @@ Validate any saved run from the research environment:
   data/stage0/jackal_trajectory/<run_id>
 ```
 
-For direct inspection in VS Code, install the read-only NPY Viewer extension once:
+For direct image-only inspection in VS Code, install Numpy Image Preview once:
 
 ```bash
-code --install-extension subh-tools.npy-viewer
+code --install-extension Kiameow.npy-image-preview
 ```
 
-After installation, clicking any `.npy` file in the Explorer opens its Visual, Statistics,
-Data, and Metadata views instead of the binary-file warning. The extension's built-in parser
-does not require Python. If a file was already open in a text-editor tab during installation,
-close that tab and click it again (or use **Reopen Editor With... → NPY Viewer**).
+Associate `*.npy` with the `npy-image-preview.preview` editor in VS Code user settings. After
+that, clicking an `.npy` file opens its RGBA/grayscale image preview instead of the binary-file
+warning or a heatmap. If a file was already open during installation, close its tab and click
+it again (or use **Reopen Editor With... → Numpy Image Preview**).
 
 The following optional CLI can compare the saved reference and actual `N x 3 [x, y, yaw]`
 arrays or export them to PNG/CSV:
