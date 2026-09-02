@@ -70,6 +70,20 @@ Validate any saved run from the research environment:
   data/stage0/jackal_trajectory/<run_id>
 ```
 
+Open the saved reference and actual `N x 3 [x, y, yaw]` arrays together:
+
+```bash
+.venv/bin/python scripts/view_trajectory_npy.py \
+  data/stage0/jackal_trajectory/<run_id>/reference_trajectory.npy \
+  data/stage0/jackal_trajectory/<run_id>/actual_trajectory.npy
+```
+
+The viewer prints the shape, endpoint summary, and stored rows, then opens an interactive
+XY/yaw plot. It never transforms coordinates, unwraps yaw, or interpolates samples. Use
+`--no-show --save trajectory.png` for a non-interactive image, or `--csv-dir <directory>`
+to export readable `x,y,yaw` CSV files. Existing exported files are protected unless
+`--force` is explicitly supplied.
+
 Configuration is in `configs/stage0_jackal_trajectory.yaml`; the full contract and observed
 limitations are documented in [Stage 0](docs/STAGE_00_JACKAL_TRAJECTORY.md).
 

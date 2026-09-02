@@ -95,3 +95,33 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-02 19:54:06 KST (+0900) — Canonical trajectory NPY viewer
+
+- **Purpose:** Make recorded trajectory `.npy` files directly inspectable as canonical
+  `N x 3 [x, y, yaw]` data in both the terminal and an interactive plot.
+- **Implemented:** Added a safe non-pickled NPY loader backed by the existing finite SE(2)
+  validator; endpoint, path-length, and wrapped endpoint-yaw summaries; configurable
+  leading/trailing row output; multi-file XY and stored-yaw comparison plots with explicit
+  start/end markers; optional PNG output; and lossless row-wise `x,y,yaw` CSV export with
+  overwrite protection. The viewer performs no coordinate transform, interpolation,
+  resampling, or yaw unwrapping. Added README usage and unit/CLI coverage.
+- **Major files:** `README.md`, `docs/WORK_LOG.md`,
+  `src/reconciliation/trajectory_view.py`, `scripts/view_trajectory_npy.py`, and
+  `tests/test_trajectory_view.py`.
+- **Commands:** Repository status/branch/remote/base inspection; `.venv/bin/python -m pytest`;
+  `.venv/bin/python -m compileall`; viewer `--help`; non-interactive viewer run against the
+  validated Stage 0 reference and actual arrays with PNG and CSV export; rendered-image
+  inspection; `file`; `wc -l`; `git diff --check`; Git diff/status, explicit staging,
+  cached-diff, commit, and normal push checks.
+- **Verification:** Full research suite: 53 passed, including all existing 47 tests. The
+  validated Stage 0 `(161, 3)` reference and `(161, 3)` actual arrays loaded successfully.
+  A 1920 x 880 PNG showed both XY paths, start/end markers, and stored yaw histories; each
+  CSV contained its header plus all 161 unmodified pose rows.
+- **Issues and limitations:** The automated check used Matplotlib's non-interactive backend
+  and visually inspected the saved PNG; opening the default interactive window remains a
+  user desktop action. The viewer accepts only finite `N x 3` `.npy` trajectory arrays and
+  intentionally does not infer frames or timestamps that are absent from the file.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
