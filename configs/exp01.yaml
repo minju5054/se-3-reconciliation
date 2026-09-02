@@ -1,0 +1,27 @@
+experiment:
+  id: EXP-01
+  name: Latency-Induced Discontinuity in Successive LightNav Trajectory Chunks
+
+timing:
+  # LightNav rows do not intrinsically carry a time base. Replace this example value with
+  # the actual controller interval used during collection; scripts never assume horizon 10.
+  waypoint_dt_seconds: 0.25
+  convention: endpoint_after_one_interval
+  ready_time_is_usable: true
+
+frames:
+  pose_order: [x, y, yaw]
+  yaw_unit: rad
+  transform: T_world_waypoint = T_world_robot_at_observation * T_robot_waypoint
+
+paths:
+  raw: data/exp01/raw
+  derived: data/exp01/derived
+  results: results/exp01
+
+reporting_thresholds:
+  # Operational thresholds to summarize recorded switches; they are not model guarantees.
+  translation_gap_m: 0.05
+  yaw_gap_rad: 0.05
+  translational_motion_jump_m: 0.05
+  yaw_motion_jump_rad: 0.05

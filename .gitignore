@@ -1,0 +1,29 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Local recordings, generated experiment products, and simulator state.
+data/
+outputs/
+results/exp01/*
+!results/exp01/README.md
+isaac-sim/
+isaacsim/
+ov/
+
+# Model weights and common checkpoint formats.
+checkpoints/
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+
+# Local editor and OS files.
+.vscode/
+.idea/
+.DS_Store

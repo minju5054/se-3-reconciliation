@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "poses_local": [
+    [0.4, 0.0, 0.0],
+    [0.8, 0.0, 0.02],
+    [1.2, 0.02, 0.04],
+    [1.6, 0.04, 0.06],
+    [2.0, 0.06, 0.08]
+  ],
+  "observation_time": 100.0,
+  "ready_time": 100.0,
+  "inference_latency": 0.0,
+  "waypoint_dt": 0.25,
+  "robot_pose_at_observation": [5.0, 2.0, 0.3],
+  "frame": "robot_local_at_observation",
+  "source": "synthetic-test-fixture-not-research-evidence"
+}
