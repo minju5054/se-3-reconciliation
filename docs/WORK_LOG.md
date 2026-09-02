@@ -125,3 +125,31 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-02 20:00:07 KST (+0900) — VS Code direct NPY file viewing
+
+- **Purpose:** Open `.npy` files directly by clicking them in VS Code instead of requiring a
+  terminal command or showing the unsupported-binary-file message.
+- **Implemented:** Installed the user-scoped `subh-tools.npy-viewer` VS Code extension version
+  1.0.2. Verified its installed manifest declares the read-only `npyViewer.arrayEditor`
+  custom editor for `*.npy` with default priority and requires no Python for its built-in
+  parser. Reopened an actual Stage 0 trajectory through the current VS Code window and updated
+  README instructions so direct Explorer viewing is the primary workflow; the repository CLI
+  remains an optional comparison/PNG/CSV export tool.
+- **Major files:** `README.md` and `docs/WORK_LOG.md`. The extension itself is installed in the
+  user's VS Code extension directory and is not vendored into this repository.
+- **Commands:** Repository status/branch/remote/base inspection; VS Code version and installed
+  extension inspection; `code --install-extension subh-tools.npy-viewer --force`; installed
+  extension manifest inspection; VS Code user association check; and `code --reuse-window`
+  against the validated Stage 0 actual trajectory.
+- **Verification:** VS Code reported successful installation of
+  `subh-tools.npy-viewer@1.0.2`; the manifest targets `*.npy` as a default custom editor, and
+  no conflicting user or workspace `.npy` editor association was present. The actual
+  trajectory open command returned successfully.
+- **Issues and limitations:** A text-editor tab that was already open before extension
+  installation may retain the old binary warning until it is closed and reopened. `.npz` is
+  outside this extension's scope. No system Python, research virtual environment, ROS, CUDA,
+  driver, or Isaac Sim installation was modified.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
