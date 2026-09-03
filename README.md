@@ -142,6 +142,17 @@ Sim GUI and the LightNav model do not compete for GPU memory:
 
 ```bash
 cd ~/Workspace/se-3-reconciliation
+./scripts/run_lightnav_single_chunk_demo.sh
+```
+
+This wrapper runs all four stages sequentially. The first GUI is capture-only: the Jackal
+intentionally stays still while RGB history is recorded. After the inference and validation
+steps finish in the terminal, a second GUI opens, waits three seconds, and plays the Jackal
+motion at quarter speed so the short chunk is plainly visible.
+
+The same stages can be run individually when inspecting intermediate artifacts:
+
+```bash
 ./scripts/isaac/run_lightnav_single_chunk_capture.sh
 ./scripts/lightnav/run_lightnav_single_chunk_inference.sh \
   data/stage0/lightnav_single_chunk/<run_id>
@@ -156,6 +167,13 @@ external LightNav Python 3.11 environment. Playback uses Isaac's runtime and sta
 Jackal, derived reference/headings, and actual path can be inspected together. Raw model
 actions, RGB, derived paths, and execution artifacts occupy separate immutable directories
 under ignored `data/stage0/lightnav_single_chunk/`.
+
+To watch an already executed run move again without overwriting its immutable outputs:
+
+```bash
+./scripts/isaac/run_lightnav_single_chunk_playback.sh \
+  data/stage0/lightnav_single_chunk/<run_id> --replay
+```
 
 The released LightNav API returns cumulative observation-frame local poses in
 `[forward, lateral-left, yaw-CCW]`; its RVQ decoder has already composed the internal

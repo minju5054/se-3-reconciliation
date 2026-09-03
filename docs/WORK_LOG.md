@@ -368,3 +368,48 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-03 14:17:59 KST (+0900) — Observable and repeatable Stage 0-C GUI playback
+
+- **Purpose:** Diagnose why rerunning the documented Stage 0-C GUI workflow appeared to leave
+  the Jackal stationary, and make the short LightNav chunk visibly and safely replayable.
+- **Diagnosis:** Five recent local run directories contained RGB capture metadata and frames
+  but no inference, derived path, or playback artifacts. The first GUI command is intentionally
+  a stationary observation-history capture, which was not prominent enough in the workflow.
+  In addition, the 0.72 m chunk's 2.3 s simulation execution previously ran near full speed
+  and completed before a user could reliably move attention to the new GUI window. An already
+  executed run could not be run again because immutable output protection correctly rejected
+  the existing files.
+- **Implemented:** Added a top-level sequential `run_lightnav_single_chunk_demo.sh` that
+  captures, extracts the generated run path, runs isolated LightNav inference, validates, and
+  launches playback with one command. Capture now logs that the first GUI is stationary by
+  design. Playback shows the initial scene for three seconds and paces every physics step at
+  configurable 0.25x real time for smooth visible motion. Added `--replay` to execute an
+  already recorded run in a fresh Isaac stage without writing or replacing any artifact; a
+  normal second execution now gives an explicit instruction to use that option. README and
+  Stage 0-C documentation distinguish capture, first execution, visualization-only, and
+  immutable replay commands.
+- **Major files:** `README.md`, `configs/stage0_lightnav_single_chunk.yaml`,
+  `docs/STAGE_00_LIGHTNAV_SINGLE_CHUNK.md`, `docs/WORK_LOG.md`,
+  `scripts/isaac/lightnav_capture_observation.py`,
+  `scripts/isaac/lightnav_playback_single_chunk.py`, and
+  `scripts/run_lightnav_single_chunk_demo.sh`.
+- **Commands:** Initial Git/status/remote/HEAD inspection; local Stage 0-C run artifact
+  inventory; playback/config inspection; compileall; full pytest; launcher `bash -n`;
+  `git diff --check`; strict saved-run validation; two real GUI replay runs; mid-motion and
+  final desktop screenshot inspection; SHA-256 manifests of all derived/result files before
+  and after replay; explicit diff/status/staging/commit/push checks.
+- **Verification:** Full research suite: `87 passed`. The real validated run replayed with a
+  visible countdown and smooth quarter-speed motion, still reached the same 0.6417 m actual
+  displacement and `goal_reached=true`, and remained open at the final pose. Mid-motion and
+  final screenshots showed different Jackal positions. The pre/post artifact SHA-256 manifest
+  diff was empty, and the independent execution validator remained `valid: true`.
+- **Issues and limitations:** The first GUI remains stationary because moving during history
+  capture would change the intended observation protocol. A new full one-command run still
+  includes roughly 50 seconds of model inference between the two GUI phases. The existing
+  user modification to `configs/stage0_jackal_controller_validation.yaml` was preserved and
+  excluded from this task's staging. No generated data, checkpoint, environment, or external
+  LightNav source is committed.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.

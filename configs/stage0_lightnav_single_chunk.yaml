@@ -73,6 +73,8 @@ closed_loop:
   maximum_duration_s: 20.0
 
 visualization:
+  pre_execution_pause_s: 3.0
+  playback_real_time_factor: 0.25
   z_offset_m: 0.08
   trajectory_color_rgba: [0.1, 0.45, 1.0, 1.0]
   actual_color_rgba: [1.0, 0.25, 0.1, 1.0]

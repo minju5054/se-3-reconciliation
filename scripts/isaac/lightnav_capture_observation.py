@@ -164,6 +164,10 @@ def run() -> Path:
     rep.orchestrator.set_capture_on_play(False)
 
     world.reset()
+    print(
+        "[Stage 0-C] CAPTURE ONLY: Jackal intentionally remains stationary while the "
+        "LightNav RGB history is recorded. Motion occurs in the final playback step."
+    )
     settling_steps = int(round(float(simulation["settling_duration_s"]) / physics_dt))
     for _ in range(settling_steps):
         world.step(render=True)

@@ -171,6 +171,18 @@ the following commands:
 
 ```bash
 cd ~/Workspace/se-3-reconciliation
+./scripts/run_lightnav_single_chunk_demo.sh
+```
+
+The top-level wrapper performs capture, inference, validation, and playback in order. The
+first GUI is deliberately capture-only and the Jackal remains stationary. The second GUI is
+the execution phase; it shows the initial scene for three seconds, then paces physics at
+quarter real-time speed so the roughly 0.7 m chunk is observable instead of finishing before
+the user reaches the window.
+
+For individual stage control, run:
+
+```bash
 ./scripts/isaac/run_lightnav_single_chunk_capture.sh
 
 ./scripts/lightnav/run_lightnav_single_chunk_inference.sh \
@@ -189,6 +201,17 @@ cd ~/Workspace/se-3-reconciliation
 Capture exits after saving by default to free GPU memory. Playback keeps the GUI open by
 default; close the window to exit. Use `--no-hold` only for automated validation. Use
 `--visualize-only` to inspect a safe path without commanding the robot.
+
+An immutable run records execution artifacts once. To repeat the physical GUI motion without
+overwriting those files, use:
+
+```bash
+./scripts/isaac/run_lightnav_single_chunk_playback.sh \
+  data/stage0/lightnav_single_chunk/<run_id> --replay
+```
+
+Replay recomputes the controller motion in a fresh Isaac stage, reports metrics to the
+terminal, and leaves every existing raw, derived, and result file byte-for-byte unchanged.
 
 ## Observed validation run
 

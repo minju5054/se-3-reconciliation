@@ -10,6 +10,7 @@ import json
 import math
 from pathlib import Path
 import sys
+import time
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
@@ -25,6 +26,11 @@ def parse_args() -> argparse.Namespace:
         default=REPOSITORY_ROOT / "configs/stage0_lightnav_single_chunk.yaml",
     )
     parser.add_argument("--visualize-only", action="store_true")
+    parser.add_argument(
+        "--replay",
+        action="store_true",
+        help="execute again for GUI inspection without overwriting recorded artifacts",
+    )
     parser.add_argument("--no-hold", action="store_true")
     parser.add_argument("--headless", action="store_true", help="explicit diagnostic override")
     return parser.parse_args()
@@ -161,6 +167,8 @@ def draw_paths(draw, reference: np.ndarray, actual: np.ndarray, config) -> None:
 
 
 def run() -> dict:
+    if ARGS.visualize_only and ARGS.replay:
+        raise ValueError("--visualize-only and --replay cannot be combined")
     config = load_config(ARGS.config)
     run_dir = ARGS.run_directory.resolve()
     validation = validate_single_chunk_run(run_dir)
@@ -174,7 +182,20 @@ def run() -> dict:
     observation = load_json(run_dir / "raw/observation_metadata.json")
     anchor = np.asarray(observation["robot_pose_at_observation"], dtype=np.float64)
     execution_reference = np.vstack((anchor, world_path))
-    if not ARGS.visualize_only:
+    recorded_outputs = (
+        run_dir / "derived/execution_reference.npy",
+        run_dir / "derived/jackal_actual_trajectory.npy",
+        run_dir / "derived/execution_samples.csv",
+        run_dir / "results/execution_metrics.json",
+        run_dir / "results/execution_metadata.json",
+    )
+    existing_outputs = [path for path in recorded_outputs if path.exists()]
+    if existing_outputs and not ARGS.visualize_only and not ARGS.replay:
+        raise FileExistsError(
+            "this immutable run already has execution output; use --replay to watch the "
+            "Jackal execute again without overwriting it"
+        )
+    if not ARGS.visualize_only and not ARGS.replay:
         save_npy_exclusive(run_dir / "derived/execution_reference.npy", execution_reference)
 
     simulation = require_mapping(config, "simulation")
@@ -184,6 +205,10 @@ def run() -> dict:
     visualization = require_mapping(config, "visualization")
     physics_dt = finite_positive(simulation, "physics_dt")
     sample_dt = finite_positive(closed_loop, "sample_dt")
+    pre_execution_pause_s = float(visualization["pre_execution_pause_s"])
+    playback_real_time_factor = finite_positive(visualization, "playback_real_time_factor")
+    if not math.isfinite(pre_execution_pause_s) or pre_execution_pause_s < 0.0:
+        raise ValueError("visualization.pre_execution_pause_s must be finite and non-negative")
     sample_steps = int(round(sample_dt / physics_dt))
     if not math.isclose(sample_dt / physics_dt, sample_steps, abs_tol=1e-9):
         raise ValueError("closed-loop sample_dt must be divisible by physics_dt")
@@ -264,6 +289,13 @@ def run() -> dict:
     for _ in range(settling_steps):
         world.step(render=True)
     actual = [se2_from_world_pose(robot)]
+    draw_paths(draw, execution_reference, np.asarray(actual), visualization)
+    if pre_execution_pause_s > 0.0:
+        print(
+            f"[Stage 0-C] Jackal motion starts in {pre_execution_pause_s:.1f} s; "
+            f"GUI playback is paced at {playback_real_time_factor:.2f}x simulation time"
+        )
+        time.sleep(pre_execution_pause_s)
     command = follower.forward(actual[0])
     times = [0.0]
     commands = [[0.0, 0.0]]
@@ -282,7 +314,14 @@ def run() -> dict:
         for _ in range(sample_steps):
             if not SIMULATION_APP.is_running():
                 raise RuntimeError("Isaac Sim closed before LightNav playback completed")
+            wall_physics_step_start = time.monotonic()
             world.step(render=True)
+            target_wall_period = physics_dt / playback_real_time_factor
+            remaining_wall_time = target_wall_period - (
+                time.monotonic() - wall_physics_step_start
+            )
+            if remaining_wall_time > 0.0:
+                time.sleep(remaining_wall_time)
         pose = se2_from_world_pose(robot)
         next_command = follower.forward(pose)
         actual.append(pose)
@@ -314,50 +353,65 @@ def run() -> dict:
             "metric_scope": "controller integration only; not LightNav navigation quality",
         }
     )
-    save_npy_exclusive(run_dir / "derived/jackal_actual_trajectory.npy", telemetry.actual_trajectory)
     measured_v, measured_w = estimate_body_velocities(
         telemetry.actual_trajectory, telemetry.sim_times_s
     )
-    with (run_dir / "derived/execution_samples.csv").open(
-        "x", newline="", encoding="utf-8"
-    ) as stream:
-        writer = csv.writer(stream)
-        writer.writerow(
-            (
-                "sample_index", "sim_time_s", "reference_index", "ref_x", "ref_y", "ref_yaw",
-                "actual_x", "actual_y", "actual_yaw", "commanded_v_mps",
-                "commanded_omega_rps", "measured_v_mps", "measured_omega_rps",
-            )
+    if not ARGS.replay:
+        save_npy_exclusive(
+            run_dir / "derived/jackal_actual_trajectory.npy",
+            telemetry.actual_trajectory,
         )
-        for index in range(telemetry.sample_count):
+        with (run_dir / "derived/execution_samples.csv").open(
+            "x", newline="", encoding="utf-8"
+        ) as stream:
+            writer = csv.writer(stream)
             writer.writerow(
                 (
-                    index,
-                    telemetry.sim_times_s[index],
-                    telemetry.reference_indices[index],
-                    *telemetry.reference_trajectory[telemetry.reference_indices[index]],
-                    *telemetry.actual_trajectory[index],
-                    *telemetry.commanded_body[index],
-                    measured_v[index],
-                    measured_w[index],
+                    "sample_index", "sim_time_s", "reference_index", "ref_x", "ref_y",
+                    "ref_yaw", "actual_x", "actual_y", "actual_yaw", "commanded_v_mps",
+                    "commanded_omega_rps", "measured_v_mps", "measured_omega_rps",
                 )
             )
-    save_json_exclusive(run_dir / "results/execution_metrics.json", metrics)
-    save_json_exclusive(
-        run_dir / "results/execution_metadata.json",
-        {
-            "creation_time": datetime.now().astimezone().isoformat(timespec="seconds"),
-            "controller": "Stage 0-B TrajectoryFollower + Isaac DifferentialController",
-            "reference": "observation anchor prepended to derived LightNav world future poses",
-            "no_interpolation": True,
-            "robot_prim_path": articulation_root,
-            "actual_dof_names": list(robot.dof_names or []),
-            "wheel_parameters": wheels,
-            "visualized_in_gui": not ARGS.headless,
-            "research_evidence": False,
-        },
-    )
-    result = {"visualized": True, "executed": True, "metrics": metrics}
+            for index in range(telemetry.sample_count):
+                writer.writerow(
+                    (
+                        index,
+                        telemetry.sim_times_s[index],
+                        telemetry.reference_indices[index],
+                        *telemetry.reference_trajectory[telemetry.reference_indices[index]],
+                        *telemetry.actual_trajectory[index],
+                        *telemetry.commanded_body[index],
+                        measured_v[index],
+                        measured_w[index],
+                    )
+                )
+        save_json_exclusive(run_dir / "results/execution_metrics.json", metrics)
+        save_json_exclusive(
+            run_dir / "results/execution_metadata.json",
+            {
+                "creation_time": datetime.now().astimezone().isoformat(timespec="seconds"),
+                "controller": "Stage 0-B TrajectoryFollower + Isaac DifferentialController",
+                "reference": (
+                    "observation anchor prepended to derived LightNav world future poses"
+                ),
+                "no_interpolation": True,
+                "robot_prim_path": articulation_root,
+                "actual_dof_names": list(robot.dof_names or []),
+                "wheel_parameters": wheels,
+                "visualized_in_gui": not ARGS.headless,
+                "pre_execution_pause_s": pre_execution_pause_s,
+                "playback_real_time_factor": playback_real_time_factor,
+                "research_evidence": False,
+            },
+        )
+    else:
+        print("[Stage 0-C] replay mode: existing execution artifacts were not modified")
+    result = {
+        "visualized": True,
+        "executed": True,
+        "recorded": not ARGS.replay,
+        "metrics": metrics,
+    }
     print("STAGE0C_PLAYBACK_JSON=" + json.dumps(result, sort_keys=True))
     return result
 
