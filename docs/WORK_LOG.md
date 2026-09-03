@@ -413,3 +413,79 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-03 15:28:48 KST (+0900) — EXP-01A LightNav steady-state inference latency
+
+- **Purpose:** Measure first and warm LightNav `predict_waypoints(...)` latency with one model
+  build and one persistent process, using a controlled repeated actual Stage 0-C RGB history.
+  Compare warm host latency contextually with the validated Stage 0-C chunk execution time.
+  This task did not run Isaac Sim, execute Jackal, define waypoint timing, or implement an
+  online OLD/NEW loop.
+- **Implemented:** Added a configurable isolated-LightNav benchmark runner, one-command shell
+  launcher, pure statistics/validation module, immutable per-trial action and text artifacts,
+  strict CSV/JSON metadata and summary output, independent research-environment validator,
+  12 unit tests, README instructions, and the full measured protocol/result document. The
+  runner decodes images before timing, calls `build_tracking_agent(...)` exactly once, then
+  performs `reset` + 64 `observe` calls + one timed prediction for trial 0 and eight warm
+  trials. Host `monotonic_ns` latency, LightNav-reported latency, reset/ingest time, internal
+  data-prep/ViT/LLM timing, action contract, and cache entry count are all preserved.
+- **Benchmark:** Final immutable benchmark ID `exp01a-20260903T062524Z` used Stage 0-C input
+  `20260903T010425Z`, instruction `Go straight down the corridor.`, and 64 actual
+  `256 x 448 x 3 uint8 RGB` frames at 4 Hz. LightNav checkout was
+  `a645828d81a8439651172197ca80a75dc1377977`, package 0.1.0; checkpoint revision was
+  `7221d418bfff55cfcbadd09f7a26aaab81e1f8a6`; backend was vLLM 0.19.1 `vllm_local` with
+  torch 2.10.0+cu128 on NVIDIA GeForce RTX 5060 Ti compute capability 12.0.
+- **Cache inspection:** Runtime configuration had vLLM prefix caching enabled, LightNav ViT
+  caching enabled, eager mode enabled, 2 GiB explicit KV cache, multimodal embeddings enabled,
+  and chunked prefill disabled. Installed source shows `agent.reset()` clears both direct and
+  session ViT caches; each trial repopulated 23 direct-cache entries. The embedding patch uses
+  a fresh monotonic-derived video hash per request, so there is no cross-trial LightNav ViT or
+  vLLM image-embedding reuse. Text-only prefix reuse remains possible, but hit metrics were not
+  enabled. No cache setting was changed and no clear identical-image full-request cache hit
+  evidence justified a separate varied-image benchmark.
+- **Measurements:** Model/engine build was `10206.579 ms`; timed build-plus-nine-trial wall
+  time was `15447.836 ms`. First host/reported latency was `652.138/380.212 ms`. Warm host raw
+  values were `[556.915281, 556.759021, 557.341634, 556.714522, 556.838378, 557.131075,
+  556.581784, 556.469596] ms`; mean `556.844 ms`, median `556.799 ms`, population standard
+  deviation `0.266 ms`, min/max `556.470/557.342 ms`, and linear p90/p95
+  `557.194/557.268 ms`. First/warm-median ratio was `1.1712`. Warm LightNav-reported median
+  was `305.295 ms`; the distinction remains explicit because reported `llm_ms` excludes
+  preprocessing and ViT.
+- **Output validation:** All nine calls produced finite float32 `(10, 3)` arrays and separate
+  `actions/trial_NNN.npy` plus `raw_text/trial_NNN.txt` files. Output was deterministic across
+  trials, with first row `[0.15485105, 0.00006702, -0.00419930]` and last row
+  `[0.71874577, -0.00634444, -0.00297201]`. `trials.csv`, `trials.json`, `metadata.json`, and
+  `summary.json` passed strict JSON/artifact validation; generated data remains ignored and
+  uncommitted.
+- **Interpretation:** Warm median / validated Stage 0-C `2.300000 s` execution was `0.2421`
+  (execution was about `4.13x` longer), placing this observed stack in Case C and supporting an
+  EXP-01B persistent-preloaded asynchronous prototype. The prior Stage 0-C `49561.998 ms`
+  one-shot latency was about 89 times the warm median and is not steady-state latency. Its
+  exact cold/JIT/cache composition was not isolated here, so future online work must explicitly
+  warm the persistent process and keep cold start separate. The 2.3 s value belongs to one
+  0.72 m controller run; it is not a generic LightNav horizon because the action rows have no
+  intrinsic timestamps.
+- **Major files:** `README.md`, `configs/exp01a_lightnav_latency.yaml`,
+  `docs/EXP_01A_LIGHTNAV_LATENCY.md`, `docs/WORK_LOG.md`,
+  `src/reconciliation/latency_benchmark.py`,
+  `scripts/lightnav/{benchmark_repeated_inference.py,run_exp01a_lightnav_latency.sh}`,
+  `scripts/summarize_exp01a_latency.py`, and `tests/test_latency_benchmark.py`.
+- **Commands:** Initial research/LightNav Git status, branch, remote, and HEAD checks; local
+  LightNav/vLLM cache and blocking-call source inspection; GPU/process check; focused and full
+  pytest; compileall; shell syntax and diff checks; actual one-load RTX benchmark; independent
+  saved-output validation; per-trial NPY SHA/action/cache inspection; explicit Git
+  diff/status/staging/commit/push checks.
+- **Verification:** Focused suite `12 passed`; full research suite `99 passed`, including all
+  existing EXP-01 and Stage 0-A/B/C/controller/viewer tests. Compileall, `bash -n`,
+  `git diff --check`, the exact-one-build source check, strict JSON parsing, and final output
+  validation all passed.
+- **Issues and limitations:** Eight warm trials provide weak tail-percentile evidence and only
+  one scene/instruction/input history was tested. Prefix cache hits were not directly exposed.
+  The benchmark did not reproduce a clean-host cold start, vary requests, run Isaac, assess
+  navigation quality, or settle EXP-01B observation/ready/control/OLD-exhaustion timing. The
+  user's pre-existing controller-camera and Stage 0-C 0.45x playback config changes were
+  preserved and excluded from staging. No system Python, ROS, CUDA, driver, Isaac installation,
+  external LightNav source, checkpoint, or generated data was modified or committed.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.

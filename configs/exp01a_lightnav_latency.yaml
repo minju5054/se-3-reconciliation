@@ -1,0 +1,24 @@
+experiment: exp01a-lightnav-steady-state-latency
+
+input:
+  source_run_directory: data/stage0/lightnav_single_chunk/20260903T010425Z
+  instruction: Go straight down the corridor.
+  expected_history_frames: 64
+  expected_video_fps: 4.0
+
+lightnav:
+  checkout: ../external/LightNav-0
+  checkpoint_relative_path: checkpoints/LightNav-0
+  checkpoint_identifier: LightOriginsHQ/LightNav-0
+  backend: vllm_local
+  task_key: vlnce
+  task_type: vlnce_traj
+  expected_horizon: 10
+  gpu_memory_utilization: 0.90
+  aspect_mode: stretch
+
+benchmark:
+  warm_trials: 8
+  output_root: data/exp01a/lightnav_latency
+  stage0c_execution_metrics: data/stage0/lightnav_single_chunk/20260903T010425Z/results/execution_metrics.json
+  intrinsic_waypoint_time_base: false

@@ -181,6 +181,23 @@ The released LightNav API returns cumulative observation-frame local poses in
 [Stage 0-C](docs/STAGE_00_LIGHTNAV_SINGLE_CHUNK.md) for the source evidence, exact transform,
 validated run, and why this remains pre-EXP-01 integration validation.
 
+## EXP-01A LightNav latency benchmark
+
+Measure first-versus-warm `predict_waypoints(...)` latency with one model build and nine
+requests in the same isolated LightNav process:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+./scripts/lightnav/run_exp01a_lightnav_latency.sh
+```
+
+The default controlled workload reuses the validated Stage 0-C 64-frame history for one
+first and eight warm trials. Output is immutable and ignored below
+`data/exp01a/lightnav_latency/<benchmark_id>/`. Validate a saved result with
+`.venv/bin/python scripts/summarize_exp01a_latency.py <benchmark_directory>`. See
+[EXP-01A](docs/EXP_01A_LIGHTNAV_LATENCY.md) for the timing boundary, cache interpretation,
+measurements, and limits.
+
 ## EXP-01 data workflow
 
 Never overwrite a raw VLA recording. Store uncommitted inputs below `data/exp01/raw/`, and
