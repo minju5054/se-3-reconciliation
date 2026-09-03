@@ -198,6 +198,25 @@ first and eight warm trials. Output is immutable and ignored below
 [EXP-01A](docs/EXP_01A_LIGHTNAV_LATENCY.md) for the timing boundary, cache interpretation,
 measurements, and limits.
 
+## EXP-01B online OLD/NEW raw switch
+
+Run the persistent warmed LightNav server and the concurrent real-time-paced Isaac client with
+one command:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+./scripts/isaac/run_exp01b_online_raw_switch.sh
+```
+
+The default measurement is headless but keeps RGB camera rendering active. It records at least
+three timing-valid OLD→NEW transitions below the ignored immutable
+`data/exp01b/<experiment_id>/` directory. It uses NEW row 0 directly at measured ready time;
+there is no model waypoint-time assumption, stale-row deletion, smoothing, or reconciliation.
+Validate a saved experiment with
+`.venv/bin/python scripts/summarize_exp01b.py data/exp01b/<experiment_id>`. Add `--gui --hold`
+only for a separate qualitative run. See [EXP-01B](docs/EXP_01B_ONLINE_RAW_SWITCH.md) for the
+IPC architecture, timing gates, measured result, and claim boundary.
+
 ## EXP-01 data workflow
 
 Never overwrite a raw VLA recording. Store uncommitted inputs below `data/exp01/raw/`, and
@@ -249,10 +268,12 @@ observation time:
 T_world_waypoint = T_world_robot_at_observation * T_robot_waypoint
 ```
 
-NEW is never transformed with the robot pose at NEW ready time. Waypoint row `i` is assigned
-`observation_time + (i + 1) * waypoint_dt`; rows strictly earlier than `ready_time` are stale,
-while a row exactly at `ready_time` is usable. See [EXP-01](docs/EXPERIMENT_01.md) for the
-complete protocol and limitations.
+NEW is never transformed with the robot pose at NEW ready time. The offline/discrete EXP-01
+scaffold assigns row `i` to `observation_time + (i + 1) * waypoint_dt`; that is a configured
+controller convention, not a LightNav model time base. Live EXP-01B instead uses measured
+observation/ready events and raw NEW row 0 without time-based row deletion. See
+[EXP-01](docs/EXPERIMENT_01.md) and [EXP-01B](docs/EXP_01B_ONLINE_RAW_SWITCH.md) for their
+separate protocols and limitations.
 
 ## Tests
 

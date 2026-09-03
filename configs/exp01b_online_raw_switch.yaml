@@ -1,0 +1,88 @@
+experiment: EXP-01B
+name: Online Successive OLD/NEW Raw-Switch Discontinuity
+instruction: Go straight down the corridor.
+
+paths:
+  output_root: data/exp01b
+  lightnav_checkout: ../external/LightNav-0
+  checkpoint_relative_path: checkpoints/LightNav-0
+  warmup_source_run: data/stage0/lightnav_single_chunk/20260903T010425Z
+
+lightnav:
+  checkpoint_identifier: LightOriginsHQ/LightNav-0
+  backend: vllm_local
+  task_key: vlnce
+  task_type: vlnce_traj
+  expected_horizon: 10
+  expected_history_frames: 64
+  video_fps: 4.0
+  aspect_mode: stretch
+  prior_gpu_memory_utilization: 0.90
+  gpu_memory_utilization: 0.65
+  kv_cache_gib: 1.0
+  enforce_eager: true
+  intrinsic_waypoint_time_base: false
+
+ipc:
+  connect_timeout_s: 180.0
+  request_timeout_s: 120.0
+
+experiment_protocol:
+  required_valid_trial_count: 3
+  maximum_trial_count: 8
+  new_observation_delay_s: 0.50
+  acceptable_rtf_range: [0.90, 1.10]
+  motion_noise_floor_m: 0.0001
+  maximum_new_wait_sim_s: 3.0
+  maximum_new_execution_s: 10.0
+  pace_real_time_factor: 0.95
+
+simulation:
+  physics_dt: 0.016666666666666666
+  control_dt: 0.1
+  settling_duration_s: 1.0
+  spawn_height_m: 0.15
+  initial_robot_pose_se2: [0.0, 0.0, 0.0]
+
+robot:
+  asset_collection_path: /Isaac/Robots
+  asset_relative_path: Clearpath/Jackal/jackal.usd
+  reference_prim_path: /World/JackalReference
+
+scene:
+  corridor_length_m: 10.0
+  corridor_width_m: 3.0
+  wall_height_m: 2.0
+  wall_thickness_m: 0.12
+  wall_center_x_m: 4.0
+
+camera:
+  source: experiment_camera_attached_to_articulation_root
+  name: Exp01BEgocentricCamera
+  relative_translation_m: [0.30, 0.0, 0.48]
+  relative_rotation_xyz_deg: [90.0, 0.0, -90.0]
+  resolution_width: 448
+  resolution_height: 256
+  horizontal_fov_deg: 90.0
+  horizontal_aperture: 20.955
+  clipping_range_m: [0.05, 100.0]
+  rgb_format: HWC uint8 RGB
+  render_subframes: 1
+
+closed_loop:
+  lookahead_distance_m: 0.20
+  position_gain: 1.2
+  heading_gain: 2.5
+  cross_track_gain: 1.0
+  max_linear_velocity_mps: 0.55
+  max_angular_velocity_rps: 1.5
+  goal_position_tolerance_m: 0.08
+  goal_yaw_tolerance_rad: 0.08
+  rotate_in_place_threshold_rad: 0.30
+  nearest_search_window: 10
+
+reporting_thresholds:
+  translation_gap_m: 0.05
+  yaw_gap_rad: 0.05
+  translational_motion_jump_m: 0.05
+  yaw_motion_jump_rad: 0.05

@@ -489,3 +489,67 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-04 00:58:23 KST (+0900) — EXP-01B online LightNav raw-switch discontinuity
+
+- **Purpose:** Measure whether warmed, stateful LightNav produces a raw OLD→NEW boundary
+  mismatch when Jackal continues executing OLD during asynchronous NEW inference. This task
+  measured problem existence only; it added no reconciliation or new controller.
+- **Implemented:** Added versioned standard-library Unix-socket IPC with strict RGB/action
+  contracts; a LightNav Python 3.11 server that builds once, warms once, resets once per live
+  episode, and preserves history between OLD and NEW; and an isolated Isaac client that primes
+  64 stationary frames, runs the existing Stage 0-B follower and official differential
+  controller, appends live 4 Hz RGB, requests NEW asynchronously, and continues OLD physics and
+  control. NEW is anchored at the observation pose. Waypoint-time-free metrics are computed
+  before a separate controller-only ready-pose prepend. Absolute simulation-time deadline
+  pacing recovers render stalls. Invalid attempts remain saved; a bounded protocol gathers
+  three timing-valid transitions. Added validators, aggregation, 18 focused tests, README
+  commands, and full experiment documentation.
+- **Actual run:** Validated run `exp01b-20260903T155402Z` used LightNav SHA
+  `a645828d81a8439651172197ca80a75dc1377977`, package 0.1.0, checkpoint revision
+  `7221d418bfff55cfcbadd09f7a26aaab81e1f8a6`, vLLM 0.19.1 `vllm_local`, and RTX 5060 Ti.
+  Model load was 10,160.357 ms; warm-up was 622.080 ms host / 361.828 ms reported. The
+  coexistence gate used 13,270 MiB with 2,559 MiB free and no OOM. EXP-01A's 0.90 utilization /
+  2 GiB KV configuration was explicitly changed to 0.65 / 1 GiB for coexistence; installed
+  vLLM reports explicit KV bytes supersede utilization.
+- **Timing and motion:** Four attempts yielded three valid transitions; attempt 0 was retained
+  but excluded for RTF 0.654. Valid client latencies were
+  `[421.654, 423.228, 423.663] ms`, server prediction latencies
+  `[421.419, 422.951, 423.401] ms`, simulation latencies all 0.433333 s, and RTF values
+  `[1.027700, 1.023876, 1.022826]`. Jackal moved
+  `[0.158705, 0.161989, 0.162930] m`; OLD progress was `1 -> 2`, and all 26 in-flight timeline
+  rows per valid trial carried nonzero OLD commands.
+- **Raw-switch result:** Valid translation gaps were
+  `[0.003854, 0.161989, 0.008079] m`, yaw gaps
+  `[0.004164, 0.000043, 0.004113] rad`, translation-motion jumps
+  `[0.100789, 0.039447, 0.098742] m`, and yaw-motion jumps
+  `[0.006785, 0.000001, 0.006770] rad`. One of three exceeded the descriptive 0.05 m pose-gap
+  threshold and two exceeded the translation-motion threshold; no yaw threshold was exceeded.
+  Trial 2's real NEW response was an all-zero stop chunk; it remains unchanged and produced a
+  gap equal to inference-window movement. This is positive but narrow translational problem-
+  existence evidence, not evidence that a reconciliation method works.
+- **Major files:** `README.md`, `configs/exp01b_online_raw_switch.yaml`,
+  `docs/EXP_01B_ONLINE_RAW_SWITCH.md`, `docs/WORK_LOG.md`,
+  `src/reconciliation/{online_ipc.py,online_switch.py}`,
+  `scripts/lightnav/serve_online_lightnav.py`,
+  `scripts/isaac/{exp01b_online_raw_switch.py,run_exp01b_online_raw_switch.sh}`,
+  `scripts/summarize_exp01b.py`, and `tests/{test_online_ipc.py,test_online_switch.py}`.
+- **Commands:** Initial Git and external-LightNav state/environment inspection; installed
+  history/decoder/backend source checks; focused/full pytest; compileall; shell and whitespace
+  checks; three real concurrent engineering runs; GPU snapshots; strict final artifact, raw
+  hash, action/text, event, timeline, pose/progress, and aggregate validation; explicit Git
+  diff/status/staging/commit/push checks.
+- **Verification:** Focused tests: `18 passed`; full suite: `117 passed`. Compileall, `bash -n`,
+  `git diff --check`, and strict reconstruction/validation of all four final trial directories
+  passed. Raw arrays were finite `(10, 3)` and stayed separate from derived and controller
+  artifacts. Generated data is ignored and uncommitted.
+- **Issues and limitations:** Two development runs had no valid trials and are not evidence.
+  The final run's first attempt also failed its RTF gate. Nominally repeated episodes produced
+  different chunks, including stop, without cause attribution. Evidence is limited to three
+  valid transitions in one straight corridor and says nothing about navigation quality, real
+  robots, or reconciliation effectiveness. Existing user edits in
+  `configs/stage0_jackal_controller_validation.yaml` and
+  `configs/stage0_lightnav_single_chunk.yaml` were preserved and excluded from staging.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
