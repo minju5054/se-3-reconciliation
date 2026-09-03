@@ -1,0 +1,85 @@
+stage: stage0-c-lightnav-single-chunk
+instruction: Go straight down the corridor.
+
+paths:
+  lightnav_checkout: ../external/LightNav-0
+  checkpoint_relative_path: checkpoints/LightNav-0
+  output_root: data/stage0/lightnav_single_chunk
+
+lightnav:
+  task: vln
+  task_key: vlnce
+  task_type: vlnce_traj
+  backend: vllm_local
+  gpu_memory_utilization: 0.90
+  aspect_mode: stretch
+  expected_horizon: 10
+  expected_history_frames: 64
+  expected_video_fps: 4.0
+  intrinsic_waypoint_time_base: false
+
+simulation:
+  physics_dt: 0.016666666666666666
+  settling_duration_s: 1.0
+  spawn_height_m: 0.15
+  initial_robot_pose_se2: [0.0, 0.0, 0.0]
+
+robot:
+  asset_collection_path: /Isaac/Robots
+  asset_relative_path: Clearpath/Jackal/jackal.usd
+  reference_prim_path: /World/JackalReference
+
+scene:
+  corridor_length_m: 10.0
+  corridor_width_m: 3.0
+  wall_height_m: 2.0
+  wall_thickness_m: 0.12
+  wall_center_x_m: 4.0
+
+camera:
+  source: experiment_camera_attached_to_articulation_root
+  name: Stage0CEgocentricCamera
+  relative_translation_m: [0.30, 0.0, 0.48]
+  relative_rotation_xyz_deg: [90.0, 0.0, -90.0]
+  resolution_width: 448
+  resolution_height: 256
+  horizontal_fov_deg: 90.0
+  horizontal_aperture: 20.955
+  clipping_range_m: [0.05, 100.0]
+  rgb_format: HWC uint8 RGB
+
+capture:
+  frame_count: 64
+  fps: 4.0
+  render_subframes: 2
+
+execution_safety:
+  maximum_translation_from_observation_m: 5.0
+  maximum_absolute_local_yaw_rad: 3.141592653589793
+  maximum_consecutive_spacing_m: 1.5
+
+closed_loop:
+  sample_dt: 0.1
+  lookahead_distance_m: 0.20
+  position_gain: 1.2
+  heading_gain: 2.5
+  cross_track_gain: 1.0
+  max_linear_velocity_mps: 0.55
+  max_angular_velocity_rps: 1.5
+  goal_position_tolerance_m: 0.08
+  goal_yaw_tolerance_rad: 0.08
+  rotate_in_place_threshold_rad: 0.30
+  nearest_search_window: 10
+  maximum_duration_s: 20.0
+
+visualization:
+  z_offset_m: 0.08
+  trajectory_color_rgba: [0.1, 0.45, 1.0, 1.0]
+  actual_color_rgba: [1.0, 0.25, 0.1, 1.0]
+  heading_color_rgba: [0.1, 0.9, 0.3, 1.0]
+  line_width: 6.0
+  heading_line_width: 2.0
+  heading_marker_length_m: 0.18
+  endpoint_point_size: 12.0
+  camera_eye: [1.6, 2.4, 3.5]
+  camera_target: [0.35, 0.0, 0.0]

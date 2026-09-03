@@ -134,6 +134,35 @@ before/after metrics, and limitations are documented in
 [Stage 0-B](docs/STAGE_00_CONTROLLER_VALIDATION.md). This is execution-layer validation, not
 LightNav integration or research evidence.
 
+## Stage 0-C LightNav single-chunk integration
+
+Stage 0-C keeps Isaac Sim, research Python, and LightNav Python isolated while passing one
+real checkpoint output through the complete interface. Run the stages sequentially so Isaac
+Sim GUI and the LightNav model do not compete for GPU memory:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+./scripts/isaac/run_lightnav_single_chunk_capture.sh
+./scripts/lightnav/run_lightnav_single_chunk_inference.sh \
+  data/stage0/lightnav_single_chunk/<run_id>
+.venv/bin/python scripts/validate_lightnav_single_chunk.py \
+  data/stage0/lightnav_single_chunk/<run_id>
+./scripts/isaac/run_lightnav_single_chunk_playback.sh \
+  data/stage0/lightnav_single_chunk/<run_id>
+```
+
+Capture prints `<run_id>` and exits after saving 64 RGB frames. Inference uses only the
+external LightNav Python 3.11 environment. Playback uses Isaac's runtime and stays open so the
+Jackal, derived reference/headings, and actual path can be inspected together. Raw model
+actions, RGB, derived paths, and execution artifacts occupy separate immutable directories
+under ignored `data/stage0/lightnav_single_chunk/`.
+
+The released LightNav API returns cumulative observation-frame local poses in
+`[forward, lateral-left, yaw-CCW]`; its RVQ decoder has already composed the internal
+`se2_diff` representation. The rows have no intrinsic waypoint time base. See
+[Stage 0-C](docs/STAGE_00_LIGHTNAV_SINGLE_CHUNK.md) for the source evidence, exact transform,
+validated run, and why this remains pre-EXP-01 integration validation.
+
 ## EXP-01 data workflow
 
 Never overwrite a raw VLA recording. Store uncommitted inputs below `data/exp01/raw/`, and

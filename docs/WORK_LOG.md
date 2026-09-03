@@ -290,3 +290,81 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-03 10:13:49 KST (+0900) — Stage 0-C LightNav single-chunk integration
+
+- **Purpose:** Validate that actual stationary Jackal egocentric RGB from Isaac Sim 6.0.1 can
+  be passed to the real LightNav-0 checkpoint in its isolated Python 3.11 environment, then
+  preserve and source-validate the decoded chunk semantics, transform it from observation
+  robot-local to world SE(2), visualize it, and consume it through the existing Stage 0-B
+  closed-loop execution layer. This is simulation integration validation, not EXP-01 or
+  research evidence.
+- **Implemented:** Added an immutable sequential capture/inference/derive/playback workflow,
+  child-process environment isolation, a configurable corridor and attached egocentric RGB
+  camera, raw/derived artifact separation, public-decoder semantics validation, exact
+  observation-pose world transformation, safety and full-output validation, saved-actual GUI
+  replay, config, tests, README commands, and detailed Stage 0-C documentation. Raw model
+  output is never rewritten; no interpolation, clipping, smoothing, synthetic success data,
+  or fabricated waypoint period/ready timestamp is introduced.
+- **LightNav/source facts:** Local clean checkout
+  `a645828d81a8439651172197ca80a75dc1377977`, package 0.1.0, was one upstream commit behind
+  `0e9971784a04da2210bfccc446a68d45256e2894`; the only diff was
+  `docs/assets/wechat_group.png`, so no inference-code difference was found. Local decoder,
+  tokenizer, protocol, visualization, and deployment code jointly establish public `(H, 3)`
+  output as cumulative observation-frame `[forward, lateral-left, yaw-CCW]` poses. Although
+  the checkpoint RVQ manifest uses internal `se2_diff`, its official decoder SE(2)-composes
+  to absolute chunk-start poses before returning. Rows carry no intrinsic time base;
+  checkpoint `video_fps=4` concerns input history.
+- **Checkpoint/inference:** Downloaded the public `LightOriginsHQ/LightNav-0` checkpoint
+  revision `7221d418bfff55cfcbadd09f7a26aaab81e1f8a6` into the ignored external checkout and
+  verified all 20 remote files with the Hugging Face CLI. Actual `vllm_local` inference used
+  vLLM 0.19.1, torch 2.10.0+cu128, and an RTX 5060 Ti (compute capability 12.0). Excluding
+  model load, host latency was `49561.998 ms` and LightNav reported `49267.944 ms`. Output was
+  float32 `(10, 3)`, first row `[0.15485105, 0.00006702, -0.00419930]`, last row
+  `[0.71874577, -0.00634444, -0.00297201]`.
+- **Observation/transform:** Actual GUI capture saved 64 `256 x 448 x 3 uint8 RGB` frames at
+  4 Hz. Observation simulation time was `17.0333342217 s`; the final-frame Jackal pose was
+  `[-0.0010703253, -0.0000460156, -0.0006066629]`. The attached camera prim was
+  `/World/JackalReference/Stage0CEgocentricCamera` at `[0.30, 0, 0.48]` m and
+  `[90, 0, -90]` degrees relative to `/World/JackalReference`, resolution 448 x 256 and 90
+  degree HFOV. Raw-to-local was an identity-axis float64 derived copy; local/world shapes
+  were `(10, 3)`. World start/end were `[0.15378074, -0.00007294, -0.00480597]` and
+  `[0.71767146, -0.00682649, -0.00357868]`.
+- **Execution/GUI result:** The path passed all magnitude, yaw, spacing, timing, artifact, and
+  metadata checks, then executed with the unchanged Stage 0-B `TrajectoryFollower` plus Isaac
+  experimental `DifferentialController`. Actual trajectory was `(24, 3)`, goal reached in
+  `2.3000 s`, position RMSE `0.0458569 m`, final position error `0.0783258 m`, yaw RMSE
+  `0.00730783 rad`, and final yaw error `0.000107417 rad`. GUI-mode capture and execution both
+  ran. A subsequent saved-run GUI replay was screen-inspected with Jackal, reference path,
+  heading/start/end markers, and actual path visible together after camera/light correction.
+  These are controller integration metrics, not LightNav navigation-quality metrics.
+- **Major files:** `README.md`, `configs/stage0_lightnav_single_chunk.yaml`,
+  `docs/STAGE_00_LIGHTNAV_SINGLE_CHUNK.md`, `docs/WORK_LOG.md`,
+  `src/reconciliation/lightnav_adapter.py`, `tests/test_lightnav_adapter.py`,
+  `scripts/validate_lightnav_single_chunk.py`,
+  `scripts/lightnav/{infer_single_chunk.py,run_lightnav_single_chunk_inference.sh}`, and
+  `scripts/isaac/{lightnav_stage0c_runtime.py,lightnav_capture_observation.py,
+  lightnav_playback_single_chunk.py,run_lightnav_single_chunk_capture.sh,
+  run_lightnav_single_chunk_playback.sh}`.
+- **Commands:** Initial research/LightNav Git status, branch, remote, HEAD, Python/package/GPU
+  inspection; `hf download` and `hf cache verify`; checkpoint JSON/manifest and local source
+  cross-checks; upstream fetch/diff without pull/rebase; full and targeted pytest; compileall;
+  shell syntax and diff checks; GUI Isaac capture; real LightNav inference; derivation and
+  strict pre/post-execution validation; GUI closed-loop playback; GUI saved-path replay and
+  desktop screenshot inspection; explicit Git diff/status/staging/commit/push checks.
+- **Verification:** Full research suite: `87 passed`, including every existing EXP-01,
+  Stage 0-A/B, CLI/VS Code viewer test and 11 new Stage 0-C tests. `compileall`, launcher
+  `bash -n`, `git diff --check`, checkpoint verification, actual RGB/action/path checks, and
+  strict execution-output validation passed. Generated run
+  `data/stage0/lightnav_single_chunk/20260903T010425Z` remains ignored and uncommitted.
+- **Issues and limitations:** The single stationary-history corridor run does not evaluate
+  navigation quality or domain generalization. The experiment camera's 90 degree HFOV is an
+  explicit interface choice, not proof of checkpoint camera-domain equivalence. Eager vLLM
+  inference took about 49.6 seconds, so online concurrency/latency policy remains unresolved.
+  No model-intrinsic waypoint time base exists; EXP-01 must separately define observation,
+  ready, execution-period, OLD-continuation, and NEW-usability events. Isaac emitted the same
+  non-fatal legacy Jackal wheel-collision warnings seen previously. No system Python, ROS,
+  CUDA, driver, Isaac installation, official USD, or LightNav source was modified.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
