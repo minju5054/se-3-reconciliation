@@ -1,0 +1,42 @@
+schema_version: 1
+annotation_id: exp02-lightnav-development-pair-v1
+
+source_experiment:
+  experiment_id: exp01b-20260903T155402Z
+  trial_id: trial_001
+  raw_old_sha256: 8edd60bf794d067dba1820f557e39388a8c3af352db7443774108f550219cf06
+  raw_new_sha256: 072c29e991bea91fad89d00ad458c00697960dc684bbdfc68cf105e3ace362fe
+
+measurement_convention:
+  Z_ij: "Z_ij = inverse(O_i) * desired_X_j"
+  residual: "Log(inverse(Z_ij) * (inverse(O_i) * X_j))"
+  pose_frame: world
+  axes: "x forward, y left, yaw CCW positive"
+
+selection:
+  timing_valid: true
+  new_is_stop: false
+  reason: >-
+    Among timing-valid non-stop EXP-01B pairs, trial_001 had the largest recorded
+    translation-motion jump (0.10078891395658843 m versus 0.09874191242273564 m
+    for trial_003).
+
+correspondences:
+  - old_index: 1
+    new_index: 0
+    relative_transform: [0.0, 0.0, 0.0]
+    rationale: >-
+      Same first overlapping physical corridor pose; world positions differ by
+      0.019257 m before optimization and the ordered neighboring matches agree.
+  - old_index: 2
+    new_index: 1
+    relative_transform: [0.0, 0.0, 0.0]
+    rationale: >-
+      Same second overlapping physical corridor pose; world positions differ by
+      0.008998 m and both paths remain forward-monotonic.
+  - old_index: 3
+    new_index: 2
+    relative_transform: [0.0, 0.0, 0.0]
+    rationale: >-
+      Same third overlapping physical corridor pose; world positions differ by
+      0.012177 m, completing a non-crossing ordered sequence.

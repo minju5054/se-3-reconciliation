@@ -1,0 +1,64 @@
+experiment: EXP-02
+name: Oracle Correspondence + Minimal SE(2) Graph Reconciliation
+
+paths:
+  output_root: data/exp02
+  real_source_experiment: data/exp01b/exp01b-20260903T155402Z
+  real_source_trial: trial_001
+  real_oracle: configs/oracles/exp02_lightnav_development_pair.yaml
+
+residual_scales:
+  translation_m: 0.10
+  yaw_rad: 0.10
+
+weights:
+  boundary: 4.0
+  correspondence: 1.0
+  new_motion: 1.0
+
+solver:
+  max_iterations: 80
+  finite_difference_epsilon: 1.0e-6
+  initial_damping: 1.0e-3
+  damping_increase: 10.0
+  damping_decrease: 0.3
+  maximum_damping: 1.0e12
+  gradient_tolerance: 1.0e-9
+  step_tolerance: 1.0e-9
+  cost_tolerance: 1.0e-12
+
+synthetic:
+  ground_truth_pose_count: 9
+  local_step: [0.22, 0.0, 0.045]
+  old_pose_count: 5
+  new_start_index: 2
+  global_left_perturbation: [0.20, 0.15, 0.10]
+  identity_correspondences:
+    - [2, 0]
+    - [3, 1]
+    - [4, 2]
+  acceptance:
+    final_to_initial_cost_ratio_max: 1.0e-10
+    pose_translation_max_m: 1.0e-6
+    pose_yaw_max_rad: 1.0e-6
+    correspondence_translation_rms_m: 1.0e-7
+    new_motion_translation_rms_m: 1.0e-7
+
+ablations:
+  full:
+    boundary: 4.0
+    correspondence: 1.0
+    new_motion: 1.0
+  no_correspondence:
+    boundary: 4.0
+    correspondence: 0.0
+    new_motion: 1.0
+  no_new_motion:
+    boundary: 4.0
+    correspondence: 1.0
+    new_motion: 0.0
+
+weight_sensitivity:
+  fixed_boundary_weight: 4.0
+  fixed_new_motion_weight: 1.0
+  predefined_correspondence_to_new_motion_ratios: [0.25, 1.0, 4.0]

@@ -553,3 +553,79 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-04 14:40:19 KST (+0900) — EXP-02 oracle SE(2) graph reconciliation
+
+- **Purpose:** Validate the reconciliation mechanism itself using a synthetic known-answer gate
+  and then one valid non-stop real EXP-01B LightNav pair with manually verified oracle
+  correspondences. No learned detector, GTSAM, online Isaac execution, or new inference was
+  added.
+- **Implemented:** Added numerically stable SE(2) Exp/Log and right-local retraction; a
+  fixed-OLD/fixed-boundary, arbitrary-horizon editable-NEW graph; identity boundary,
+  `Z_ij = O_i^-1 X_j` oracle correspondence, and full-chain NEW relative-motion factors;
+  configurable residual scales/weights; and a NumPy damped Gauss–Newton/LM solver with central
+  numerical Jacobians, cost-decrease acceptance, finite/singular failure checks, and complete
+  histories. Added oracle validation/source hashes, graph/correction metrics, immutable output
+  validation, plots, correction CSVs, full/no-correspondence/no-NEW-motion ablations, the fixed
+  correspondence/NEW-motion ratio grid `[0.25, 1.0, 4.0]`, 22 focused tests, README commands,
+  and the experiment document.
+- **Synthetic gate:** Used a nine-pose curved GT with local step `[0.22, 0, 0.045]`, seven-pose
+  NEW suffix, global left perturbation `[0.20, 0.15, 0.10]`, boundary equal to GT NEW 0, and
+  identity pairs `(2,0),(3,1),(4,2)`. Cost fell `62.8351106 -> 1.8382e-26` in three iterations.
+  Pose recovery max was `2.9072e-14 m / 1.7319e-14 rad`; correspondence translation/yaw RMS
+  fell `0.290306/0.100000` to `2.3650e-15/2.7733e-15`; NEW-motion distortion was numerical
+  zero. Non-corresponded downstream poses recovered and the boundary input did not change.
+- **Real pair and oracle:** Selected valid, non-stop EXP-01B
+  `exp01b-20260903T155402Z/trial_001` because its `0.100788914 m` translation-motion jump was
+  the largest eligible value. OLD/NEW were `(10,3)`. Raw hashes remained
+  `8edd60bf794d067dba1820f557e39388a8c3af352db7443774108f550219cf06` and
+  `072c29e991bea91fad89d00ad458c00697960dc684bbdfc68cf105e3ace362fe`.
+  The ordered identity oracle pairs `(OLD 1,NEW 0)`, `(2,1)`, `(3,2)` represent the same three
+  consecutive corridor poses; their raw translation differences were
+  `0.019257, 0.008998, 0.012177 m`.
+- **Full result:** Balanced weights `B/C/N=4/1/1` converged in three iterations with cost
+  `0.100380521 -> 0.050148214`. Boundary translation/yaw changed
+  `0.00385449/0.00416388 -> 0.00560869/0.00086345`; translation/yaw motion jump changed
+  `0.10078891/0.00678489 -> 0.09585413/0.00312881`. Correspondence translation/yaw RMS
+  improved `0.01414317/0.00957319 -> 0.01031208/0.00150561`. NEW-motion distortion was
+  `0.00186831 m / 0.00130968 rad` RMS, max `0.00493834 m / 0.00365608 rad`.
+- **Propagation/ablation:** Full-graph per-pose translation correction increased smoothly from
+  `0.001756 m` at index 0 to about `0.01046 m` at indices 7–9; yaw stabilized near
+  `0.010122 rad`, so correction reached every non-corresponded pose without an end cutoff.
+  No-correspondence rigidly satisfied the boundary and preserved motion but worsened
+  correspondence RMS and left motion jumps raw. No-NEW-motion moved only oracle-connected
+  indices 0–2; correction dropped to zero at index 3 and created a
+  `0.012697 m / 0.011561 rad` edge kink.
+- **Sensitivity:** Ratios `0.25/1/4` all converged in three iterations. Translation boundary
+  gaps were `0.002230/0.005609/0.011722 m`; correspondence translation RMS values were
+  `0.013504/0.010312/0.006587 m`; translation-motion jumps were
+  `0.097087/0.095854/0.099448 m`. Higher correspondence influence improved alignment but
+  worsened translation boundary continuity. No post-result weights were added or selected.
+- **Interpretation:** Synthetic mathematics and full-chain propagation are valid. On the real
+  pair, correspondence and yaw terms improved with millimeter/milliradian distortion, but the
+  already-small translation pose gap worsened and the dominant translation-motion jump improved
+  only about 4.9%. The minimal pose-only boundary factor therefore gives mixed mechanism
+  evidence and exposes a formulation limitation; a boundary-transition motion treatment should
+  be scoped before freezing weights for unseen-pair evaluation.
+- **Major files:** `README.md`, `configs/exp02_oracle_graph.yaml`,
+  `configs/oracles/exp02_lightnav_development_pair.yaml`, `docs/EXP_02_ORACLE_GRAPH.md`,
+  `docs/WORK_LOG.md`, `src/reconciliation/{se2.py,se2_graph.py,graph_optimizer.py,
+  graph_metrics.py,oracle_correspondence.py,exp02.py}`, `scripts/{run_exp02_oracle_graph.py,
+  summarize_exp02.py}`, and `tests/{test_se2_lie.py,test_se2_graph.py,
+  test_oracle_correspondence.py}`.
+- **Commands and verification:** Initial Git/base/data inspection; EXP-01B pair/hash/pose
+  inspection; focused pytest; actual offline synthetic and real run; strict summary/source-hash
+  validation; PNG visual inspection; full pytest; compileall; ignore/diff/status/staging/commit/
+  push checks. Focused suite: `22 passed`; full suite: `139 passed`. Validated immutable output
+  `data/exp02/exp02-20260904T053813Z` contains synthetic `(7,3)`, real `(10,3)`, three
+  ablations, three predefined sensitivities, and matching source hashes. Generated data remains
+  ignored and uncommitted.
+- **Issues and limitations:** The first focused-test command inherited ROS 2 `PYTHONPATH`, so
+  pytest auto-loaded `launch_testing` and failed because `lark` was absent. No package or system
+  environment was changed; rerunning with subprocess-local `PYTHONPATH` removal and pytest
+  plugin autoload disabled passed. Real conclusions are limited to one manually annotated
+  straight-corridor pair. Existing user edits in the two Stage 0 config files remain preserved
+  and excluded from staging.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.

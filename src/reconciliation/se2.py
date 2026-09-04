@@ -65,6 +65,63 @@ def relative_pose(reference: ArrayLike, target: ArrayLike) -> FloatArray:
     return compose_poses(inverse_pose(reference), target)
 
 
+def se2_exp(tangent: ArrayLike) -> FloatArray:
+    """Exponential map from ``[v_x, v_y, omega]`` to an SE(2) pose.
+
+    The translational coordinates are body-frame tangent components. Inputs may
+    broadcast as long as their final dimension is three.
+    """
+
+    value = _poses(tangent, "tangent")
+    omega = value[..., 2]
+    small = np.abs(omega) < 1e-8
+    omega2 = omega * omega
+    a = np.where(
+        small,
+        1.0 - omega2 / 6.0 + omega2 * omega2 / 120.0,
+        np.sin(omega) / np.where(small, 1.0, omega),
+    )
+    b = np.where(
+        small,
+        omega / 2.0 - omega * omega2 / 24.0 + omega * omega2 * omega2 / 720.0,
+        (1.0 - np.cos(omega)) / np.where(small, 1.0, omega),
+    )
+    x = a * value[..., 0] - b * value[..., 1]
+    y = b * value[..., 0] + a * value[..., 1]
+    return np.stack((x, y, wrap_angle(omega)), axis=-1)
+
+
+def se2_log(pose: ArrayLike) -> FloatArray:
+    """Logarithm map from an SE(2) pose to ``[v_x, v_y, omega]``."""
+
+    value = _poses(pose, "pose")
+    omega = np.asarray(wrap_angle(value[..., 2]), dtype=np.float64)
+    small = np.abs(omega) < 1e-8
+    omega2 = omega * omega
+    a = np.where(
+        small,
+        1.0 - omega2 / 6.0 + omega2 * omega2 / 120.0,
+        np.sin(omega) / np.where(small, 1.0, omega),
+    )
+    b = np.where(
+        small,
+        omega / 2.0 - omega * omega2 / 24.0 + omega * omega2 * omega2 / 720.0,
+        (1.0 - np.cos(omega)) / np.where(small, 1.0, omega),
+    )
+    determinant = a * a + b * b
+    if np.any(determinant <= np.finfo(np.float64).eps):
+        raise ValueError("SE(2) logarithm is numerically singular")
+    vx = (a * value[..., 0] + b * value[..., 1]) / determinant
+    vy = (-b * value[..., 0] + a * value[..., 1]) / determinant
+    return np.stack((vx, vy, omega), axis=-1)
+
+
+def retract_pose(pose: ArrayLike, local_delta: ArrayLike) -> FloatArray:
+    """Apply a right-local perturbation ``T <- T * Exp(delta)``."""
+
+    return compose_poses(_poses(pose, "pose"), se2_exp(local_delta))
+
+
 def local_trajectory_to_world(
     robot_pose_at_observation: ArrayLike,
     poses_local: ArrayLike,

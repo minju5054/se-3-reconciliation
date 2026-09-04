@@ -217,6 +217,23 @@ Validate a saved experiment with
 only for a separate qualitative run. See [EXP-01B](docs/EXP_01B_ONLINE_RAW_SWITCH.md) for the
 IPC architecture, timing gates, measured result, and claim boundary.
 
+## EXP-02 oracle SE(2) graph
+
+Run the offline synthetic known-answer gate followed by the one-pair real LightNav oracle graph
+experiment:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+.venv/bin/python scripts/run_exp02_oracle_graph.py
+```
+
+The runner uses no Isaac Sim, GPU, or new LightNav inference. It reads the immutable EXP-01B
+development pair, preserves its raw hashes, and writes ignored immutable output below
+`data/exp02/<run_id>/`. Validate with
+`.venv/bin/python scripts/summarize_exp02.py data/exp02/<run_id>`. See
+[EXP-02](docs/EXP_02_ORACLE_GRAPH.md) for the factor equations, oracle rationale, ablations,
+weight sensitivity, measured trade-off, and strict claim boundary.
+
 ## EXP-01 data workflow
 
 Never overwrite a raw VLA recording. Store uncommitted inputs below `data/exp01/raw/`, and
