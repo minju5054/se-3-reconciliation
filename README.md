@@ -218,6 +218,23 @@ Validate a saved experiment with
 only for a separate qualitative run. See [EXP-01B](docs/EXP_01B_ONLINE_RAW_SWITCH.md) for the
 IPC architecture, timing gates, measured result, and claim boundary.
 
+### EXP-01B expanded characterization cohort
+
+Run the frozen four-condition, headless extension with one persistent warmed LightNav process:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+./scripts/isaac/run_exp01b_extension.sh
+```
+
+The primary protocol targets six timing-valid transitions per condition and stops each condition
+after at most ten attempts without weakening the RTF gate. Outputs are immutable, ignored below
+`data/exp01b_extension/<run_id>/`, retain STOP separately, and include aggregate CSV/JSON plus
+deterministically selected review plots. Validate an existing cohort with
+`.venv/bin/python scripts/summarize_exp01b_extension.py <run_dir> --validate-only`. This remains
+raw-switch characterization and does not invoke EXP-02A or any reconciliation code. See
+[EXP-01B Extension](docs/EXP_01B_EXTENSION.md).
+
 ## EXP-02 oracle SE(2) graph
 
 Run the offline synthetic known-answer gate followed by the one-pair real LightNav oracle graph

@@ -32,6 +32,10 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--gui", action="store_true", help="diagnostic display, not timing replay")
     parser.add_argument("--hold", action="store_true")
+    parser.add_argument(
+        "--smoke-condition",
+        help="diagnostic only: collect one valid attempt for the named frozen condition",
+    )
     return parser.parse_args()
 
 
@@ -82,6 +86,13 @@ from reconciliation.online_switch import (
     timing_validity,
     validate_experiment_output,
     validate_trial_output,
+)
+from reconciliation.exp01b_extension import (
+    classify_attempt,
+    geometry_descriptors,
+    is_stop_actions,
+    timeline_inference_activity,
+    validate_extension_config,
 )
 from reconciliation.se2 import wrap_angle
 from reconciliation.trajectory import validate_pose_se2
@@ -255,6 +266,7 @@ def pose_one_control_interval_before(
 def run_trial(
     *,
     trial_index: int,
+    global_episode_index: int | None = None,
     trial_dir: Path,
     config: Mapping[str, Any],
     world: World,
@@ -265,6 +277,9 @@ def run_trial(
     rgb_annotator,
     resolution: tuple[int, int],
     client: OnlineLightNavClient,
+    initial_pose_override=None,
+    new_observation_delay_override_s: float | None = None,
+    condition_id: str | None = None,
 ) -> dict[str, Any]:
     for folder in ("raw", "derived", "results"):
         (trial_dir / folder).mkdir(parents=True, exist_ok=False)
@@ -273,7 +288,12 @@ def run_trial(
     camera = config["camera"]
     lightnav = config["lightnav"]
     instruction = str(config["instruction"])
-    initial_pose = validate_pose_se2(simulation["initial_robot_pose_se2"])
+    initial_pose = validate_pose_se2(
+        simulation["initial_robot_pose_se2"]
+        if initial_pose_override is None
+        else initial_pose_override
+    )
+    episode_index = trial_index if global_episode_index is None else global_episode_index
     physics_dt = float(simulation["physics_dt"])
     control_dt = float(simulation["control_dt"])
     control_steps = int(round(control_dt / physics_dt))
@@ -301,7 +321,7 @@ def run_trial(
     frame_index = 0
     start_pose = se2_from_world_pose(robot)
     add_event(events, "episode_start", world, start_pose, trial_index=trial_index)
-    client.reset_episode(instruction, trial_index)
+    client.reset_episode(instruction, episode_index)
 
     expected_history = int(lightnav["expected_history_frames"])
     for prime_index in range(expected_history):
@@ -336,7 +356,11 @@ def run_trial(
     old_execution_start_time = float(world.current_time)
     add_event(events, "old_execution_start", world, se2_from_world_pose(robot))
 
-    new_delay = float(protocol["new_observation_delay_s"])
+    new_delay = float(
+        protocol["new_observation_delay_s"]
+        if new_observation_delay_override_s is None
+        else new_observation_delay_override_s
+    )
     max_wait = float(protocol["maximum_new_wait_sim_s"])
     pacing = float(protocol["pace_real_time_factor"])
     new_future = None
@@ -521,6 +545,33 @@ def run_trial(
     switch_payload["lightnav_reported_latency_ms"] = float(
         new_response["lightnav_reported_latency_ms"]
     )
+    stop_output = is_stop_actions(
+        new_actions,
+        absolute_tolerance=float(protocol.get("stop_action_absolute_tolerance", 1e-8)),
+    )
+    switch_payload["timing_valid"] = bool(validity["valid"])
+    switch_payload["stop_output"] = stop_output
+    switch_payload["classification"] = classify_attempt(
+        validity_checks=validity["checks"], stop_output=stop_output
+    )
+    switch_payload["condition_id"] = condition_id or "original_protocol"
+    switch_payload["attempt_index"] = trial_index
+    switch_payload["global_episode_index"] = episode_index
+    switch_payload["initial_pose_se2"] = initial_pose.tolist()
+    switch_payload["new_observation_delay_s"] = new_delay
+    switch_payload["old_progress_delta"] = (
+        int(old_follower.progress_index) - int(new_progress_observation)
+    )
+    switch_payload["geometry"] = geometry_descriptors(
+        actual_pose_before_ready=previous_pose,
+        actual_pose_at_ready=ready_pose,
+        fresh_world=new_world,
+        zero_motion_tolerance_m=float(
+            protocol.get("geometry_zero_motion_tolerance_m", 1e-8)
+        ),
+    )
+    switch_payload["inference_activity"] = timeline_inference_activity(timeline)
+    switch_payload["artifact_path"] = str(trial_dir)
     add_event(events, "raw_switch", world, ready_pose, metrics=switch_payload["metrics"])
 
     new_controller_reference = np.vstack((ready_pose, new_world))
@@ -622,8 +673,12 @@ def run_trial(
         },
     )
     metadata = {
-        "experiment": "EXP-01B",
+        "experiment": "EXP-01B Extension" if condition_id else "EXP-01B",
         "trial_index": trial_index,
+        "global_episode_index": episode_index,
+        "condition_id": condition_id,
+        "initial_pose_se2": initial_pose.tolist(),
+        "new_observation_delay_s": new_delay,
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "instruction": instruction,
         "action_horizon": int(lightnav["expected_horizon"]),
@@ -651,6 +706,8 @@ def run_trial(
         + json.dumps(
             {
                 "trial_index": trial_index,
+                "condition_id": condition_id,
+                "classification": switch_payload["classification"],
                 "valid": switch_payload["valid"],
                 "rtf": measured_timing.real_time_factor,
                 "translation_gap_m": switch_payload["metrics"]["translation_gap_m"],
@@ -713,7 +770,24 @@ def run() -> Path:
         while is_stage_loading():
             SIMULATION_APP.update()
         articulation_root = find_articulation_root(reference_path)
-        initial = validate_pose_se2(simulation["initial_robot_pose_se2"])
+        extension_conditions = (
+            validate_extension_config(config) if "extension_cohort" in config else None
+        )
+        if ARGS.smoke_condition:
+            if not extension_conditions:
+                raise ValueError("--smoke-condition requires an extension config")
+            extension_conditions = [
+                {**item, "target_valid": 1, "max_attempts": 1}
+                for item in extension_conditions
+                if item["id"] == ARGS.smoke_condition
+            ]
+            if not extension_conditions:
+                raise ValueError(f"unknown smoke condition: {ARGS.smoke_condition}")
+        initial = validate_pose_se2(
+            extension_conditions[0]["initial_pose_se2"]
+            if extension_conditions
+            else simulation["initial_robot_pose_se2"]
+        )
         robot = world.scene.add(
             SingleArticulation(
                 articulation_root,
@@ -767,50 +841,125 @@ def run() -> Path:
         )
         controller = robot.get_articulation_controller()
         trials = []
-        required_valid = int(protocol["required_valid_trial_count"])
-        maximum_trials = int(protocol["maximum_trial_count"])
-        if required_valid <= 0 or maximum_trials < required_valid:
-            raise ValueError("trial-count protocol is invalid")
-        for trial_index in range(maximum_trials):
-            trial = run_trial(
-                    trial_index=trial_index,
-                    trial_dir=experiment_dir / f"trial_{trial_index:03d}",
-                    config=config,
-                    world=world,
-                    robot=robot,
-                    controller=controller,
-                    differential=differential,
-                    wheels=wheels,
-                    rgb_annotator=rgb_annotator,
-                    resolution=resolution,
-                    client=client,
-                )
-            trials.append(trial)
-            if sum(bool(item["valid"]) for item in trials) >= required_valid:
-                break
+        if extension_conditions:
+            save_json_exclusive(
+                experiment_dir / "protocol.json",
+                {
+                    "experiment": "EXP-01B Extension",
+                    "frozen_before_collection": True,
+                    "primary_cohort": ARGS.smoke_condition is None,
+                    "smoke_condition": ARGS.smoke_condition,
+                    "instruction": str(config["instruction"]),
+                    "conditions": extension_conditions,
+                    "target_valid_per_condition": int(
+                        extension_conditions[0]["target_valid"]
+                    ),
+                    "max_attempts_per_condition": int(
+                        extension_conditions[0]["max_attempts"]
+                    ),
+                    "timing_gate": {
+                        "acceptable_rtf_range": list(protocol["acceptable_rtf_range"]),
+                        "motion_noise_floor_m": float(protocol["motion_noise_floor_m"]),
+                    },
+                    "controller": dict(config["closed_loop"]),
+                    "reporting_thresholds": dict(config["reporting_thresholds"]),
+                    "original_exp01b_immutable_reference": (
+                        "data/exp01b/exp01b-20260903T155402Z"
+                    ),
+                },
+            )
+            global_episode_index = 0
+            for condition in extension_conditions:
+                valid_in_condition = 0
+                for attempt_index in range(condition["max_attempts"]):
+                    trial = run_trial(
+                        trial_index=attempt_index,
+                        global_episode_index=global_episode_index,
+                        trial_dir=(
+                            experiment_dir
+                            / "attempts"
+                            / condition["id"]
+                            / f"attempt_{attempt_index:03d}"
+                        ),
+                        config=config,
+                        world=world,
+                        robot=robot,
+                        controller=controller,
+                        differential=differential,
+                        wheels=wheels,
+                        rgb_annotator=rgb_annotator,
+                        resolution=resolution,
+                        client=client,
+                        initial_pose_override=condition["initial_pose_se2"],
+                        new_observation_delay_override_s=condition[
+                            "new_observation_delay_s"
+                        ],
+                        condition_id=condition["id"],
+                    )
+                    trials.append(trial)
+                    global_episode_index += 1
+                    if trial["timing_valid"]:
+                        valid_in_condition += 1
+                    if valid_in_condition >= condition["target_valid"]:
+                        break
+        else:
+            required_valid = int(protocol["required_valid_trial_count"])
+            maximum_trials = int(protocol["maximum_trial_count"])
+            if required_valid <= 0 or maximum_trials < required_valid:
+                raise ValueError("trial-count protocol is invalid")
+            for trial_index in range(maximum_trials):
+                trial = run_trial(
+                        trial_index=trial_index,
+                        trial_dir=experiment_dir / f"trial_{trial_index:03d}",
+                        config=config,
+                        world=world,
+                        robot=robot,
+                        controller=controller,
+                        differential=differential,
+                        wheels=wheels,
+                        rgb_annotator=rgb_annotator,
+                        resolution=resolution,
+                        client=client,
+                    )
+                trials.append(trial)
+                if sum(bool(item["valid"]) for item in trials) >= required_valid:
+                    break
         server_info_end = client.server_info()
-        aggregate = aggregate_experiment(trials)
-        summary = {
-            "experiment": "EXP-01B",
-            "experiment_id": ARGS.experiment_id,
-            "aggregate": aggregate,
-            "claim_boundary": (
-                "Measured warmed LightNav + Isaac raw-switch discontinuity only; no "
-                "reconciliation method or navigation-improvement claim."
-            ),
-        }
-        save_json_exclusive(experiment_dir / "summary.json", summary)
+        if not extension_conditions:
+            aggregate = aggregate_experiment(trials)
+            summary = {
+                "experiment": "EXP-01B",
+                "experiment_id": ARGS.experiment_id,
+                "aggregate": aggregate,
+                "claim_boundary": (
+                    "Measured warmed LightNav + Isaac raw-switch discontinuity only; no "
+                    "reconciliation method or navigation-improvement claim."
+                ),
+            }
+            save_json_exclusive(experiment_dir / "summary.json", summary)
         save_json_exclusive(
             experiment_dir / "metadata.json",
             {
-                "experiment": "EXP-01B",
+                "experiment": "EXP-01B Extension" if extension_conditions else "EXP-01B",
                 "experiment_id": ARGS.experiment_id,
                 "created_utc": datetime.now(timezone.utc).isoformat(),
                 "research_git_commit_sha_at_run": git_sha(),
                 "research_git_status_at_run": git_status(),
                 "attempted_trial_count": len(trials),
-                "required_valid_trial_count": required_valid,
-                "maximum_trial_count": maximum_trials,
+                **(
+                    {
+                        "target_valid_trial_count": sum(
+                            item["target_valid"] for item in extension_conditions
+                        )
+                    }
+                    if extension_conditions
+                    else {"required_valid_trial_count": required_valid}
+                ),
+                "maximum_trial_count": (
+                    sum(item["max_attempts"] for item in extension_conditions)
+                    if extension_conditions
+                    else maximum_trials
+                ),
                 "instruction": str(config["instruction"]),
                 "intrinsic_waypoint_time_base": False,
                 "new_observation_trigger": (
@@ -840,11 +989,25 @@ def run() -> Path:
                 "reporting_thresholds": config["reporting_thresholds"],
             },
         )
-        validation = validate_experiment_output(experiment_dir)
-        save_json_exclusive(experiment_dir / "validation.json", validation)
-        print("EXP01B_OUTPUT_DIR=" + str(experiment_dir), flush=True)
-        print("EXP01B_SUMMARY=" + json.dumps(summary, sort_keys=True), flush=True)
-        print("EXP01B_VALIDATION=" + json.dumps(validation, sort_keys=True), flush=True)
+        if extension_conditions:
+            print("EXP01B_EXTENSION_OUTPUT_DIR=" + str(experiment_dir), flush=True)
+            print(
+                "EXP01B_EXTENSION_COLLECTION="
+                + json.dumps(
+                    {
+                        "attempted": len(trials),
+                        "timing_valid": sum(item["timing_valid"] for item in trials),
+                    },
+                    sort_keys=True,
+                ),
+                flush=True,
+            )
+        else:
+            validation = validate_experiment_output(experiment_dir)
+            save_json_exclusive(experiment_dir / "validation.json", validation)
+            print("EXP01B_OUTPUT_DIR=" + str(experiment_dir), flush=True)
+            print("EXP01B_SUMMARY=" + json.dumps(summary, sort_keys=True), flush=True)
+            print("EXP01B_VALIDATION=" + json.dumps(validation, sort_keys=True), flush=True)
         return experiment_dir
     finally:
         try:

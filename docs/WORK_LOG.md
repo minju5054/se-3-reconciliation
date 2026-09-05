@@ -689,3 +689,67 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-05 09:32:41 KST (+0900) — EXP-01B expanded online characterization
+
+- **Purpose:** Extend the immutable N=3 EXP-01B problem-existence pilot with a predeclared,
+  controlled four-condition online cohort while preserving the persistent warmed LightNav,
+  asynchronous OLD execution, observation-time FRESH anchoring, measured-ready, and raw row-0
+  semantics. This remains characterization; no reconciliation or EXP-02A code is used.
+- **Implemented:** Added the frozen A nominal `[0,0,0]/0.50 s`, B left
+  `[0,+0.15,+0.10]/0.50 s`, C right `[0,-0.15,-0.10]/0.50 s`, and D later
+  `[0,0,0]/0.75 s` conditions with target six valid and maximum ten attempts each. Extended the
+  existing Isaac episode runner without changing its original-config branch. Added explicit
+  classifications, FRESH STOP preservation, actual-vs-planned geometry descriptors, in-flight
+  OLD-command activity, all/STOP/non-STOP statistics and threshold indicators, strict immutable
+  validation, CSV summaries, deterministic representative selection, and eight review plots.
+  Added a one-command persistent LightNav + headless Isaac + research summarizer launcher.
+- **Actual collection:** Smoke `exp01b-extension-smoke-20260905T000000Z` passed with one valid
+  real STOP transition (RTF 1.023, 0.1645 m robot motion). Primary immutable run
+  `exp01b-extension-20260905T002500Z` executed the finite maximum 40 attempts with one model
+  build, one warm-up, 40 episode resets and 80 live predictions. It yielded A/B/C/D valid counts
+  `5/4/3/4` (16 total), including five FRESH STOP outputs; 21 attempts exhausted zero-action
+  OLD and three failed the unchanged RTF gate. No timeout, other protocol failure, or OOM
+  occurred. The predeclared N=24 target was not met and was not rescued by changing conditions,
+  gates, or attempt limits.
+- **Observed result:** Across all valid transitions, translation gap mean/median was
+  `0.08065/0.02395 m` and translation-motion jump `0.08349/0.10145 m`; threshold exceedance was
+  `7/16` and `11/16`. Excluding STOP, translation gap was `0.02908/0.01499 m` with `2/11`
+  exceedances, while translation-motion jump was `0.10640/0.10699 m` with `11/11`
+  exceedances. All five FRESH STOP outputs exceeded translation gap but not motion jump. No yaw
+  pose or motion metric exceeded 0.05 rad. Actual incoming motion was `0.0281–0.0428 m`, FRESH
+  first motion `0.1392–0.1511 m`, and non-STOP tangent disagreement only
+  `0.00017–0.00261 rad`; B/C therefore did not realize meaningful recovery steering despite
+  their controlled initial offsets.
+- **Runtime/GPU:** LightNav SHA `a645828d81a8439651172197ca80a75dc1377977`, package 0.1.0,
+  checkpoint revision `7221d418bfff55cfcbadd09f7a26aaab81e1f8a6`, vLLM 0.19.1, prefix
+  caching enabled, GPU utilization config 0.65 and 1 GiB explicit KV cache. RTX 5060 Ti memory
+  was 11,526 MiB after LightNav warm-up, 13,500 MiB after concurrent Isaac/camera load, and
+  13,571 MiB at the final snapshot; no OOM. Host request/response latency among valid attempts
+  was 0.4315–0.7028 s, RTF 1.0076–1.0767, and every valid in-flight timeline sample retained a
+  nonzero OLD command.
+- **Validation:** Focused extension/EXP-01B/IPC suite: `30 passed`. Full research suite:
+  `168 passed`. `compileall`, strict 40-attempt reconstruction/hashes, summary/CSV consistency,
+  original EXP-01B top-level hash recheck, generated-data ignore check, `git diff --check`, and
+  visual inspection of translation/yaw/scatter and corrected full observation-to-ready
+  representative overlays passed. The first pytest invocation was blocked only by ROS
+  `launch_testing` plugin auto-loading without `lark`; no package was installed, and all tests
+  passed with `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`.
+- **Major files:** `README.md`, `configs/exp01b_extension.yaml`,
+  `docs/{EXP_01B_EXTENSION.md,WORK_LOG.md}`, `src/reconciliation/exp01b_extension.py`,
+  `scripts/isaac/{exp01b_online_raw_switch.py,run_exp01b_extension.sh}`,
+  `scripts/summarize_exp01b_extension.py`, and `tests/test_exp01b_extension.py`.
+- **Commands:** Required Git/branch/remote/base/history and repository/doc/config/source/test
+  inspection; original artifact hash/inventory inspection; focused/full pytest; compileall;
+  actual LightNav+Isaac smoke and 40-attempt primary runs; strict saved-output validation;
+  numeric STOP/geometry/threshold inspection; plot rendering/visual review; diff/status/ignore
+  checks; explicit staging/cached-diff/commit/push workflow.
+- **Issues and limitations:** Reviewed expected SHA `cf773d2` differed from actual clean HEAD
+  `0f22b36` only by the already reviewed/pushed EXP-02A commit, so this work continued on top
+  without rewriting history. The target shortfall and lack of realized tangent diversity make
+  occurrence-frequency and steering-geometry claims insufficient. Generated data remains
+  ignored. The original EXP-01B hashes and outputs were unchanged. Existing user changes to the
+  Stage 0-B camera and Stage 0-C playback factor were preserved and excluded from staging.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
