@@ -1,5 +1,12 @@
 # EXP-02 — Oracle Correspondence + Minimal SE(2) Graph Reconciliation
 
+> **Historical status clarification (2026-09-05):** this experiment is retained unchanged as
+> a graph-machinery pilot/sanity experiment. Its collaborator-interface assumption—an SE(2)
+> relative-transform correspondence measurement named `Z_ij`—is obsolete. The current
+> official interface and experiment are EXP-02A: OLD + FRESH +
+> `SpatialEntryContext(entry_index=k, evidence)`. Old annotations and generated results are
+> not reinterpreted or modified.
+
 ## Research question
 
 Given actual OLD/NEW trajectories and verified oracle correspondences, can a minimal SE(2)

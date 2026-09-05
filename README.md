@@ -1,9 +1,9 @@
 # SE(3) Reconciliation Research
 
 This repository studies how to reconcile successive navigation action chunks while
-preserving the intent of a newly predicted trajectory. The final target is a local SE(2)
-back end that uses OLD/NEW segment correspondences and relative-transform measurements to
-distribute corrections over the editable future.
+preserving the intent of a newly predicted trajectory. The revised backend interface takes
+fixed OLD execution, a FRESH world-frame trajectory, and a structured pre-treatment context
+that selects a spatial entry index `k`; it then operates only on `FRESH[k:]`.
 
 The platform roles are deliberately separate:
 
@@ -12,10 +12,11 @@ The platform roles are deliberately separate:
 - **LightNav-0** is the upstream navigation-VLA baseline that generates trajectory chunks.
 - The reconciliation method developed here is **not LightNav**.
 
-The current research-experiment scope remains **EXP-01 only**: characterize the discontinuity
-produced by a naive raw OLD→NEW switch under asynchronous LightNav inference. There is no
-interpolation, smoothing, correspondence factor, GTSAM dependency, or graph optimization in
-this stage.
+EXP-01/01A/01B characterize raw switching and timing. The previous EXP-02 is retained as a
+graph-machinery pilot based on an obsolete collaborator-interface assumption (`Z_ij` as an
+SE(2) correspondence measurement). EXP-02A is the current formulation experiment: it treats
+collaborator-level Z as `SpatialEntryContext(k, evidence)`, never as a pose transform, and
+does not use evidence values as graph residuals or weights.
 
 Before connecting LightNav, **Stage 0** validates the standalone Isaac Sim trajectory
 pipeline with the official Clearpath Jackal asset. It generates a deterministic SE(2)
@@ -233,6 +234,30 @@ development pair, preserves its raw hashes, and writes ignored immutable output 
 `.venv/bin/python scripts/summarize_exp02.py data/exp02/<run_id>`. See
 [EXP-02](docs/EXP_02_ORACLE_GRAPH.md) for the factor equations, oracle rationale, ablations,
 weight sensitivity, measured trade-off, and strict claim boundary.
+
+This command reproduces the historical graph-machinery pilot. Its `Z_ij` measurement is not
+the current collaborator-facing Z interface and its saved results are not reinterpreted.
+
+## EXP-02A spatial-entry transition reconciliation
+
+Run the revised offline experiment with synthetic early/middle/late entries followed by the
+immutable EXP-01B LightNav backend pilot:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+.venv/bin/python scripts/run_exp02a_spatial_entry.py
+```
+
+The runner compares raw `FRESH[k:]`, the diagnostic pose anchor, entry preservation, and the
+incoming-motion-aware transition formulation for predeclared `k` values. Outputs are immutable
+and ignored under `data/exp02a/<run_id>/`. Validate a saved run with:
+
+```bash
+.venv/bin/python scripts/summarize_exp02a.py data/exp02a/<run_id>
+```
+
+See [EXP-02A](docs/EXP_02A_SPATIAL_ENTRY_RECONCILIATION.md) for the exact Z schema, factor
+units, synthetic and LightNav pilot results, inter-k retention metrics, and claim limits.
 
 ## EXP-01 data workflow
 

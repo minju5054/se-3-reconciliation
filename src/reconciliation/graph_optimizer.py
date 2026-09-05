@@ -10,7 +10,7 @@ import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
 from reconciliation.se2 import retract_pose
-from reconciliation.se2_graph import GraphProblem, graph_cost, graph_residual_vector
+from reconciliation.se2_graph import GraphProblem, graph_residual_vector
 from reconciliation.trajectory import validate_se2_trajectory
 
 
@@ -115,9 +115,26 @@ def numerical_jacobian(
     return jacobian
 
 
-def solve_graph(problem: GraphProblem, config: SolverConfig) -> OptimizationResult:
-    state = problem.raw_new.copy()
-    initial_cost = graph_cost(problem, state)
+def solve_least_squares(
+    initial_state: ArrayLike,
+    residual_function: Callable[[FloatArray], FloatArray],
+    config: SolverConfig,
+) -> OptimizationResult:
+    """Solve a finite SE(2)-trajectory least-squares problem.
+
+    This is the graph-independent numerical machinery.  Legacy EXP-02 keeps the
+    ``solve_graph`` wrapper below, while EXP-02A supplies its own residual function.
+    """
+
+    state = validate_se2_trajectory(initial_state, name="initial_state")
+
+    def cost_function(candidate: FloatArray) -> float:
+        residual = np.asarray(residual_function(candidate), dtype=np.float64)
+        if residual.ndim != 1 or not np.all(np.isfinite(residual)):
+            raise FloatingPointError("residual function must return a finite vector")
+        return float(residual @ residual)
+
+    initial_cost = cost_function(state)
     cost = initial_cost
     costs = [cost]
     damping = config.initial_damping
@@ -126,9 +143,9 @@ def solve_graph(problem: GraphProblem, config: SolverConfig) -> OptimizationResu
     reason = "maximum_iterations"
 
     for iteration in range(1, config.max_iterations + 1):
-        residual = graph_residual_vector(problem, state)
+        residual = np.asarray(residual_function(state), dtype=np.float64)
         jacobian = numerical_jacobian(
-            lambda candidate: graph_residual_vector(problem, candidate),
+            residual_function,
             state,
             config.finite_difference_epsilon,
         )
@@ -153,7 +170,7 @@ def solve_graph(problem: GraphProblem, config: SolverConfig) -> OptimizationResu
             reason = "step_tolerance"
             break
         candidate = retract_trajectory(state, delta)
-        candidate_cost = graph_cost(problem, candidate)
+        candidate_cost = cost_function(candidate)
         if candidate_cost < cost:
             decrease = cost - candidate_cost
             state = candidate
@@ -183,4 +200,14 @@ def solve_graph(problem: GraphProblem, config: SolverConfig) -> OptimizationResu
         termination_reason=reason,
         cost_history=tuple(costs),
         damping_history=tuple(dampings),
+    )
+
+
+def solve_graph(problem: GraphProblem, config: SolverConfig) -> OptimizationResult:
+    """Backward-compatible solver entry point for the EXP-02 pilot graph."""
+
+    return solve_least_squares(
+        problem.raw_new,
+        lambda candidate: graph_residual_vector(problem, candidate),
+        config,
     )

@@ -629,3 +629,63 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-05 01:21:43 KST (+0900) — EXP-02A k-conditioned SE(2) transition reconciliation
+
+- **Purpose:** Replace the obsolete collaborator-facing `Z_ij` correspondence assumption with
+  the official OLD + FRESH + `SpatialEntryContext(k, evidence)` backend interface, and test
+  whether a given spatial entry can be reconciled with incoming OLD motion without erasing k
+  or deforming the selected FRESH suffix. The previous EXP-02 implementation and outputs remain
+  intact as a graph-machinery pilot.
+- **Implemented:** Added immutable arbitrary-length transition inputs, exact `FRESH[k:]`
+  extraction, nested JSON-safe context/evidence round trips, explicit `k=N-1` rejection, and
+  separate planned/measured OLD-tail semantics. Generalized only the numerical optimizer core
+  behind its backward-compatible EXP-02 wrapper. Added pose-anchor, entry-preservation, and
+  incoming-motion-aware graphs with the complete suffix relative-motion chain. The incoming
+  factor aligns a raw-entry-radius-normalized B→entry vector with measured incoming direction
+  and compares yaw increments; it never equates entry distance with an OLD sample. Evidence is
+  structurally absent from cost and weights. Added transition/deformation/downstream/inter-k
+  metrics, immutable artifacts, strict validation, plots, runner/summarizer, config, 17 tests,
+  README instructions, and full experiment documentation.
+- **Synthetic result:** For fixed k=`0/3/6`, incoming-aware direction jumps changed
+  `0.588003→0.024987`, `0.282898→0.094924`, and `0.298377→0.179070 rad`; yaw-motion jumps were
+  approximately halved. Entry-separation retention was `0.964–0.998`, while pose anchoring
+  collapsed it to `1.3e-13–4.2e-13`. FRESH edge distortion remained numerical and correction
+  reached every suffix pose. Entry displacement (`0.120–0.146 m`) and weak reduction of the
+  larger translation-magnitude jumps remain explicit trade-offs.
+- **Real LightNav pilot:** Final ignored immutable run `exp02a-20260904T162149Z` referenced
+  timing-valid, non-stop EXP-01B `exp01b-20260903T155402Z/trial_001` with predeclared k=`0/3/6`.
+  Raw hashes remained `8edd60bf...cf06` (OLD) and `072c29e...2fe` (FRESH). Incoming-aware
+  direction jumps changed `3.121188→3.03e-7`, `0.009687→0.001680`, and
+  `0.011247→0.002669 rad`; yaw-motion jumps approximately halved. Entry displacement was
+  `0.007708/0.003668/0.004785 m`, edge distortion was numerical, and inter-k entry retention
+  was `0.9833–0.99995`. The large k=3/6 translation-magnitude jumps were essentially unchanged,
+  so the formulation is not accepted as a complete transition solution.
+- **Validation:** Focused graph/SE(2)/interface suite: `36 passed`. Full research suite:
+  `156 passed`. `compileall`, strict JSON/output reconstruction, source hash validation,
+  `git diff --check`, generated-data ignore verification, and visual inspection of synthetic
+  and real incoming-aware plus pose-anchor inter-k PNGs passed. The first diagnostic run exposed
+  a sine-only direction residual's antiparallel ambiguity at real k=0; the final formulation
+  replaced it with the explicit two-component normalized transition vector and reran all tests
+  and experiments. Failed/diagnostic ignored directories were not overwritten.
+- **Major files:** `README.md`, `configs/exp02a_spatial_entry.yaml`,
+  `docs/{EXP_02_ORACLE_GRAPH.md,EXP_02A_SPATIAL_ENTRY_RECONCILIATION.md,WORK_LOG.md}`,
+  `src/reconciliation/{spatial_entry.py,transition_graph.py,transition_metrics.py,exp02a.py,
+  graph_optimizer.py}`, `scripts/{run_exp02a_spatial_entry.py,summarize_exp02a.py}`, and
+  `tests/{test_spatial_entry.py,test_transition_graph.py}`.
+- **Commands:** Required Git/branch/remote/base/history and repository inspection; immutable
+  EXP-01B numeric/hash inspection; focused/full pytest; compileall; actual offline synthetic and
+  real-pilot runs; strict summarizer; plot inspection; ignore/diff/status checks; explicit
+  staging/cached-diff/commit/push workflow.
+- **Issues and limitations:** Evidence features and WHICH-k correctness are unvalidated and do
+  not influence optimization. The real result is one manual-k straight-corridor backend pilot
+  from only three valid EXP-01B transitions, not a representative dataset. Pose anchoring
+  destroys k semantics; entry preservation alone changes nothing; incoming motion improves
+  direction/yaw but not the spatial transition-length mismatch. No Isaac/LightNav execution,
+  online optimization, navigation-quality, obstacle, NavDP, selector, generalization, or
+  real-robot claim is made. Existing user changes to the two Stage 0 config files were preserved
+  and excluded from staging. Generated EXP-02A data and previous EXP-02/EXP-01B data remain
+  ignored and uncommitted.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.

@@ -1,0 +1,131 @@
+experiment: EXP-02A
+name: Z-conditioned Spatial-Entry Transition Reconciliation
+
+paths:
+  output_root: data/exp02a
+  real_source_experiment: data/exp01b/exp01b-20260903T155402Z
+  real_source_trial: trial_001
+
+# Residual units are normalized before weighting. The transition-vector residual
+# is dimensionless; pose yaw and incoming yaw-motion residuals are radians.
+residual_scales:
+  translation_m: 0.10
+  yaw_rad: 0.10
+  direction_unitless: 0.10
+
+# These values are fixed before looking at EXP-02A output. No evidence field in
+# SpatialEntryContext is read by the optimizer.
+variants:
+  pose_anchor:
+    pose_anchor: 1.0
+    entry_preservation: 0.0
+    incoming_direction: 0.0
+    incoming_yaw: 0.0
+    fresh_motion: 1.0
+  entry_preservation:
+    pose_anchor: 0.0
+    entry_preservation: 1.0
+    incoming_direction: 0.0
+    incoming_yaw: 0.0
+    fresh_motion: 1.0
+  incoming_motion_aware:
+    pose_anchor: 0.0
+    entry_preservation: 1.0
+    incoming_direction: 1.0
+    incoming_yaw: 1.0
+    fresh_motion: 1.0
+
+minimum_direction_translation_m: 1.0e-6
+
+solver:
+  max_iterations: 80
+  finite_difference_epsilon: 1.0e-6
+  initial_damping: 1.0e-3
+  damping_increase: 10.0
+  damping_decrease: 0.3
+  maximum_damping: 1.0e12
+  gradient_tolerance: 1.0e-9
+  step_tolerance: 1.0e-9
+  cost_tolerance: 1.0e-12
+
+synthetic:
+  old_start_pose: [-0.60, 0.0, 0.0]
+  old_local_step: [0.20, 0.0, 0.0]
+  old_pose_count: 3
+  committed_pose: [0.0, 0.0, 0.0]
+  fresh_initial_pose: [0.18, 0.12, 0.10]
+  fresh_local_step: [0.17, 0.0, 0.055]
+  fresh_pose_count: 10
+  contexts:
+    early:
+      entry_index: 0
+      evidence:
+        old_fresh_initial_tangent_divergence_rad: 0.10
+        shortcut_pressure: 0.18
+      evidence_status:
+        old_fresh_initial_tangent_divergence_rad: candidate
+        shortcut_pressure: candidate
+      source: oracle_exp02a_synthetic
+      metadata:
+        selection_role: early_controlled_entry
+        evidence_claim: synthetic_candidate_only
+    middle:
+      entry_index: 3
+      evidence:
+        old_fresh_initial_tangent_divergence_rad: 0.10
+        shortcut_pressure: 0.31
+      evidence_status:
+        old_fresh_initial_tangent_divergence_rad: candidate
+        shortcut_pressure: candidate
+      source: oracle_exp02a_synthetic
+      metadata:
+        selection_role: middle_controlled_entry
+        evidence_claim: synthetic_candidate_only
+    late:
+      entry_index: 6
+      evidence:
+        old_fresh_initial_tangent_divergence_rad: 0.10
+        shortcut_pressure: 0.46
+      evidence_status:
+        old_fresh_initial_tangent_divergence_rad: candidate
+        shortcut_pressure: candidate
+      source: oracle_exp02a_synthetic
+      metadata:
+        selection_role: late_controlled_entry
+        evidence_claim: synthetic_candidate_only
+
+# Chosen before graph execution. They span the first returned pose, a middle
+# moving pose, and a later moving pose in the same immutable non-stop trial.
+real_contexts:
+  early:
+    entry_index: 0
+    evidence:
+      selection_position: 0.0
+    evidence_status:
+      selection_position: candidate
+    source: oracle_exp02a_lightnav_pilot
+    metadata:
+      rationale: first returned FRESH entry baseline
+      evidence_claim: manually_predeclared_not_selector_validated
+  middle:
+    entry_index: 3
+    evidence:
+      selection_position: 0.3333333333333333
+    evidence_status:
+      selection_position: candidate
+    source: oracle_exp02a_lightnav_pilot
+    metadata:
+      rationale: predeclared middle moving entry before terminal slowdown
+      evidence_claim: manually_predeclared_not_selector_validated
+  late:
+    entry_index: 6
+    evidence:
+      selection_position: 0.6666666666666666
+    evidence_status:
+      selection_position: candidate
+    source: oracle_exp02a_lightnav_pilot
+    metadata:
+      rationale: predeclared later entry near the terminal approach
+      evidence_claim: manually_predeclared_not_selector_validated
+
+inter_k_first_pose_count: 3
