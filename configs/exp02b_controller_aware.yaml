@@ -1,0 +1,87 @@
+experiment: EXP-02B
+name: Controller-Aware k-Conditioned SE(2) Reconciliation Evaluation
+
+paths:
+  output_root: data/exp02b
+  source_root: data/exp01b_redesign/exp01b-controlled-primary-20260906T-frozen
+  exp01b_config: configs/exp01b_controlled_latency.yaml
+  exp02a_graph_config: configs/exp02a_spatial_entry.yaml
+
+# Frozen before any EXP-02B branch output was generated.
+selection:
+  normalization_epsilon: 1.0e-12
+  rules:
+    case_high_delta_v: maximum delta_v_abs_mps among VALID_MOVING; tie by full path
+    case_high_delta_omega: maximum delta_omega_abs_rps among VALID_MOVING; tie by full path
+    case_benign_delayed: minimum normalized combined discontinuity among VALID_MOVING L1_added_050; tie by full path
+
+frozen_source_cases:
+  case_high_delta_v:
+    relative_trial_path: primary/G1_turn/L0_natural/attempt_003
+    sha256:
+      raw/old_actions.npy: 31aa198da1cc2a42f5fcf992de5e4ad25844ecb1a74e66c5cccf5d6f3528811f
+      raw/fresh_actions.npy: 31aa198da1cc2a42f5fcf992de5e4ad25844ecb1a74e66c5cccf5d6f3528811f
+      derived/old_world.npy: aac92c8f6993b6f9ff5b01fc10713d6183138edeecb43e4a5ca393b47a2e6a97
+      derived/fresh_world.npy: b42af924228e8aaf5f14fceb6ceffc4251319a1eab44bd45b0f93e60bf9f5ac3
+      derived/controller_commands.csv: efaccbe787f4b5617694a35d269f8a65b47bc25f75b08a10213f475d77ef9d62
+      results/attempt.json: b3b32f4769961b8612962b97ee880bfb9cbdb1989d6bd8ab54b0f46f8f3afd71
+      metadata.json: 2ce03f9991691541e7fa48caca31a3b823dccc5837c0d8a62ae45fc9c3094e5a
+  case_high_delta_omega:
+    relative_trial_path: primary/G1_turn/L1_added_050/attempt_004
+    sha256:
+      raw/old_actions.npy: 31aa198da1cc2a42f5fcf992de5e4ad25844ecb1a74e66c5cccf5d6f3528811f
+      raw/fresh_actions.npy: 549ceb309dad5c07e5f3307a6b163dfd9e1cb8d32850a6e757b2dcda3e108b28
+      derived/old_world.npy: aac92c8f6993b6f9ff5b01fc10713d6183138edeecb43e4a5ca393b47a2e6a97
+      derived/fresh_world.npy: ea42defef3bd63a66efda631cef2454e128813b76d75cf085fc90db6dc64ba71
+      derived/controller_commands.csv: b7143a56ecf78d1b3c589790b83827909fd354c6c843823dacacca910dbd8418
+      results/attempt.json: 36cc7ef95bf3ce90b8fb752150c107ad0bb04e6077d16b599d69454803627e84
+      metadata.json: 75859f2aa66fd75f8b4dba22d7af35d9e43f136a8210fa36fb8194bda404dc99
+  case_benign_delayed:
+    relative_trial_path: primary/G2_route_change/L1_added_050/attempt_002
+    sha256:
+      raw/old_actions.npy: fe325775991cf0228e522df81933f698ed9554ff7d10358178e2c62a5c7b067a
+      raw/fresh_actions.npy: fe325775991cf0228e522df81933f698ed9554ff7d10358178e2c62a5c7b067a
+      derived/old_world.npy: c024f807bdd800772530f90aa6e82ad58df688599a31f538ef5f3ef473e09831
+      derived/fresh_world.npy: 3c5012844b667d08fa29cb7d51bf399e951723aad851ca5f047120afc190a084
+      derived/controller_commands.csv: 7dd2ee186bae0c3166db838b0aae9fd85e678ce1b6f860794e6dff984d82d9ee
+      results/attempt.json: 1eae8ce970b550d0fd1a90ac7c46a449ab971bbf58073ec03707690a2b417b4b
+      metadata.json: fc056833325804809e0407144b93a1b19593e72e17888ceac474b354f5fff540
+
+entry_indices: [0, 3, 6]
+methods: [raw_f0, raw_k, pose_anchor, rigid, graph]
+
+# M2 and M4 are loaded verbatim from configs/exp02a_spatial_entry.yaml.
+# EXP-02B does not introduce controller residuals or tune graph factors.
+graph_contract:
+  pose_anchor_variant: pose_anchor
+  graph_variant: incoming_motion_aware
+  objective_unchanged_from_exp02a: true
+  controller_residuals: false
+  selector_implemented: false
+  z_evidence_used: false
+
+metrics:
+  inter_k_first_pose_count: 3
+  improvement_denominator_epsilon: 1.0e-9
+
+execution:
+  physics_dt: 0.016666666666666666
+  control_dt: 0.1
+  settling_duration_s: 1.0
+  spawn_height_m: 0.15
+  branch_duration_s: 2.0
+  headless: true
+  replay_source_old_commands: true
+  exact_boundary_state_reset_after_gate: true
+  command_window: 3
+  comparability_gate:
+    # Three deterministic replays of case_high_delta_omega reproduced B exactly
+    # at stored float precision. These frozen gates therefore equal measured
+    # max error (0) plus the predeclared 5 mm / 0.01 rad margins.
+    frozen_after_qualification: true
+    translation_tolerance_m: 0.005
+    yaw_tolerance_rad: 0.01
+    command_tolerance: 1.0e-12
+    qualification_repetitions: 3
+    margin_translation_m: 0.005
+    margin_yaw_rad: 0.01

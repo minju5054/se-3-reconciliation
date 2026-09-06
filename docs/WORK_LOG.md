@@ -813,3 +813,69 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and final staged-diff review.
+
+## 2026-09-07T00:00:25+09:00 — EXP-02B controller-aware reconciliation evaluation
+
+- **Purpose:** Evaluate whether the unchanged EXP-02A k-conditioned geometric graph reduces
+  immediate Stage 0-B controller-command discontinuity on real, immutable LightNav transitions,
+  while keeping same-k FRESH intent; compare it with raw FRESH[0:], raw FRESH[k:], the diagnostic
+  pose anchor, and a graph-independent analytic rigid SE(2) baseline. This remains a
+  manual/oracle-k three-case development/stress evaluation, not end-to-end LightNav evidence.
+- **Implementation:** Added deterministic maximum-delta-v, maximum-delta-omega, and benign-L1
+  source selection with full-path tie breaks and seven-file SHA-256 verification per case. Added
+  an analytic rigid suffix transform, unchanged EXP-02A graph reuse, complete geometric/intent
+  metrics, inter-k retention, controller improvement helpers, strict output reconstruction, and
+  immutable candidate/result writing. Added a headless Isaac runner that replays saved OLD
+  commands, enforces a frozen B/command comparability gate, resets every accepted post-switch
+  branch to the exact saved B, reuses the Stage 0-B `TrajectoryFollower` and official
+  `DifferentialController`, and stores actual trajectory plus controller telemetry. Added summary
+  generation and nine static review figures.
+- **Frozen cases/protocol:** Case A was
+  `primary/G1_turn/L0_natural/attempt_003` (`delta_v=0.416563`,
+  `delta_omega=0.511720`); Case B was `primary/G1_turn/L1_added_050/attempt_004`
+  (`0.332694`, `1.405038`); Case C was
+  `primary/G2_route_change/L1_added_050/attempt_002` (`0.004422`, `0.001972`). Evaluated only
+  k=`0/3/6` and M0–M4. Three qualification replays reproduced B and the pre-switch command
+  exactly at stored precision; frozen tolerances are 0.005 m, 0.01 rad, and `1e-12` command.
+- **Actual run:** Final ignored immutable run
+  `data/exp02b/exp02b-controller-aware-20260906T150400Z/` generated and executed all 45 branches;
+  45/45 passed comparability. Isaac Sim reported `6.0.1-rc.7+release.42383.32955d8d.gl`, Jackal
+  four wheel DOFs were recorded, and wheel radius/separation were runtime-derived as
+  `0.0979999974/0.375589997 m`. Strict validation reported source hashes matched, execution and
+  summary present, and nine plots. Turning, command trace, benign, and trade-off plots were
+  visually inspected. No LightNav inference or source experiment was rerun.
+- **Observed result:** The graph did not consistently improve controller smoothness. Case A k=0
+  reduced delta-v only `0.4166→0.4137` while delta-omega rose `0.5117→1.0267`; k=3/6 were worse.
+  Case B k=0 reduced delta-omega `1.4050→1.2747` but increased delta-v, while k=3/6 increased
+  delta-omega to `2.2092/2.4170`. In benign Case C k=0, delta-v grew
+  `0.0044→0.2410`. Turn sign and yaw progression were preserved, and internal graph edge
+  deformation was at most numerical (`1.2e-11`), but endpoint/lateral changes and benign-case
+  modification were material. Rigid and graph results were geometrically similar; neither
+  consistently improved controller metrics, so the current factors provide no evidence that a
+  nonlinear graph is necessary. Pose anchoring again collapsed inter-k distinction.
+- **Validation:** Targeted rigid/EXP-02B/transition/controller/source suite: `37 passed`. Full
+  research suite: `197 passed`. Python compileall, shell syntax, source/output reconstruction,
+  strict JSON/NPY/CSV validation, generated-data ignore check, and `git diff --check` passed.
+  The first provenance-enhanced diagnostic output `...T150300Z` completed its branch files but
+  intentionally remained incomplete because the new version recorder exposed that the launcher
+  had not exported `ISAAC_SIM_ROOT`; the launcher was fixed, and the immutable final T150400Z run
+  was created rather than overwriting it.
+- **Major files:** `README.md`, `configs/exp02b_controller_aware.yaml`,
+  `docs/{EXP_02B_CONTROLLER_AWARE_RECONCILIATION.md,WORK_LOG.md}`,
+  `src/reconciliation/{exp02b.py,rigid_reconciliation.py}`,
+  `scripts/{run_exp02b_controller_aware.py,summarize_exp02b.py}`,
+  `scripts/isaac/{exp02b_branch_execution.py,run_exp02b_branch_execution.sh}`, and
+  `tests/{test_exp02b.py,test_rigid_reconciliation.py}`.
+- **Commands:** Required Git/base/history/remote and repository/doc/config/source inspection;
+  frozen cohort selection/hash inspection; targeted/full pytest with external plugin autoload
+  disabled; compileall and shell syntax; offline generation; three-replay qualification; turning
+  smoke; full 45-branch Isaac runs; strict summarization; numerical table extraction; plot visual
+  review; ignore/diff/status checks; explicit stage/cached-diff/commit/push workflow.
+- **Issues and limitations:** The chosen cases are outcome-selected stress/development cases,
+  k is manual, and no selector, controller residual, LightNav rerun, navigation benchmark,
+  obstacle metric, held-out evaluation, or generalization claim exists. M0 and same-k M1 answer
+  different questions. Existing user changes to the Stage 0-B camera and Stage 0-C playback
+  factor were preserved and excluded from staging. All generated EXP-02B data remain ignored.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and final staged-diff review.

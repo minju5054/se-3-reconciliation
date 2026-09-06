@@ -295,6 +295,27 @@ and ignored under `data/exp02a/<run_id>/`. Validate a saved run with:
 See [EXP-02A](docs/EXP_02A_SPATIAL_ENTRY_RECONCILIATION.md) for the exact Z schema, factor
 units, synthetic and LightNav pilot results, inter-k retention metrics, and claim limits.
 
+## EXP-02B controller-aware reconciliation evaluation
+
+EXP-02B evaluates the unchanged EXP-02A incoming-motion-aware graph through the validated
+Stage 0-B Jackal controller. It uses three deterministically selected, immutable redesigned
+EXP-01B stress/development cases and compares naive `FRESH[0:]`, same-k `FRESH[k:]`, the
+diagnostic pose anchor, an analytic rigid SE(2) baseline, and the graph for `k = 0, 3, 6`.
+The selector remains manual/oracle; this is not an end-to-end LightNav comparison.
+
+Run the offline candidate generation, headless Isaac branch evaluation, and strict summary in
+sequence:
+
+```bash
+.venv/bin/python scripts/run_exp02b_controller_aware.py --run-id <run_id>
+./scripts/isaac/run_exp02b_branch_execution.sh data/exp02b/<run_id>
+.venv/bin/python scripts/summarize_exp02b.py data/exp02b/<run_id>
+```
+
+Generated runs are immutable and ignored under `data/exp02b/`. See
+[EXP-02B](docs/EXP_02B_CONTROLLER_AWARE_RECONCILIATION.md) for the frozen case-selection
+rules, controller metrics, full results, and claim boundaries.
+
 ## EXP-01 data workflow
 
 Never overwrite a raw VLA recording. Store uncommitted inputs below `data/exp01/raw/`, and
