@@ -36,6 +36,15 @@ def parse_args() -> argparse.Namespace:
         "--smoke-condition",
         help="diagnostic only: collect one valid attempt for the named frozen condition",
     )
+    parser.add_argument(
+        "--controlled-phase",
+        choices=("qualification", "smoke", "primary"),
+        help="run the redesigned controlled-latency protocol",
+    )
+    parser.add_argument(
+        "--controlled-cell",
+        help="limit qualification/smoke to one declared geometry or cell id",
+    )
     return parser.parse_args()
 
 
@@ -69,6 +78,18 @@ from lightnav_stage0c_runtime import (
     se2_from_world_pose,
 )
 from reconciliation.controllers.trajectory_follower import FollowerConfig, TrajectoryFollower
+from reconciliation.controller_switch_metrics import (
+    controlled_switch_geometry,
+    controller_switch_metrics,
+)
+from reconciliation.exp01b_controlled_latency import (
+    ControlledLatencyTiming,
+    aggregate_controlled,
+    classify_controlled_attempt,
+    select_representative_samples as select_controlled_representatives,
+    validate_controlled_config,
+    validate_attempt_output as validate_controlled_attempt_output,
+)
 from reconciliation.lightnav_adapter import (
     DECODED_OUTPUT_SEMANTICS,
     lightnav_local_to_world,
@@ -111,6 +132,22 @@ TIMELINE_COLUMNS = (
     "active_reference_index",
     "new_inference_in_flight",
     "rgb_frame_index",
+)
+
+CONTROLLER_COMMAND_COLUMNS = (
+    "command_index",
+    "sim_time_s",
+    "host_monotonic_ns",
+    "reference_source",
+    "nearest_index",
+    "target_index",
+    "v_command_mps",
+    "omega_command_rps",
+    "actual_x",
+    "actual_y",
+    "actual_yaw",
+    "fresh_model_ready",
+    "added_delay_active",
 )
 
 
@@ -235,6 +272,35 @@ def timeline_row(
     }
 
 
+def controller_command_row(
+    rows: list[dict[str, Any]],
+    *,
+    sim_time_s: float,
+    source: str,
+    command,
+    pose: np.ndarray,
+    fresh_model_ready: bool,
+    added_delay_active: bool,
+) -> None:
+    rows.append(
+        {
+            "command_index": len(rows),
+            "sim_time_s": float(sim_time_s),
+            "host_monotonic_ns": time.monotonic_ns(),
+            "reference_source": source,
+            "nearest_index": int(command.nearest_index),
+            "target_index": int(command.target_index),
+            "v_command_mps": float(command.linear_velocity_mps),
+            "omega_command_rps": float(command.angular_velocity_rps),
+            "actual_x": float(pose[0]),
+            "actual_y": float(pose[1]),
+            "actual_yaw": float(pose[2]),
+            "fresh_model_ready": int(fresh_model_ready),
+            "added_delay_active": int(added_delay_active),
+        }
+    )
+
+
 def pace_to_simulation_deadline(
     *,
     origin_wall_s: float,
@@ -280,6 +346,12 @@ def run_trial(
     initial_pose_override=None,
     new_observation_delay_override_s: float | None = None,
     condition_id: str | None = None,
+    instruction_override: str | None = None,
+    controlled_cell_id: str | None = None,
+    geometry_class: str | None = None,
+    scene_id: str | None = None,
+    added_delay_s: float = 0.0,
+    controlled_phase: str | None = None,
 ) -> dict[str, Any]:
     for folder in ("raw", "derived", "results"):
         (trial_dir / folder).mkdir(parents=True, exist_ok=False)
@@ -287,7 +359,10 @@ def run_trial(
     protocol = config["experiment_protocol"]
     camera = config["camera"]
     lightnav = config["lightnav"]
-    instruction = str(config["instruction"])
+    instruction = str(config["instruction"] if instruction_override is None else instruction_override)
+    controlled = controlled_cell_id is not None
+    if not math.isfinite(float(added_delay_s)) or float(added_delay_s) < 0.0:
+        raise ValueError("added_delay_s must be finite and non-negative")
     initial_pose = validate_pose_se2(
         simulation["initial_robot_pose_se2"]
         if initial_pose_override is None
@@ -317,6 +392,7 @@ def run_trial(
 
     events: list[dict[str, Any]] = []
     timeline: list[dict[str, Any]] = []
+    controller_commands: list[dict[str, Any]] = []
     actual: list[np.ndarray] = []
     frame_index = 0
     start_pose = se2_from_world_pose(robot)
@@ -353,6 +429,15 @@ def run_trial(
     old_reference = np.vstack((old_observation_pose, old_world))
     old_follower = TrajectoryFollower(old_reference, follower_config(config))
     command = old_follower.forward(se2_from_world_pose(robot))
+    controller_command_row(
+        controller_commands,
+        sim_time_s=float(world.current_time),
+        source="OLD",
+        command=command,
+        pose=se2_from_world_pose(robot),
+        fresh_model_ready=False,
+        added_delay_active=False,
+    )
     old_execution_start_time = float(world.current_time)
     add_event(events, "old_execution_start", world, se2_from_world_pose(robot))
 
@@ -361,15 +446,25 @@ def run_trial(
         if new_observation_delay_override_s is None
         else new_observation_delay_override_s
     )
-    max_wait = float(protocol["maximum_new_wait_sim_s"])
+    max_wait = float(
+        protocol.get("maximum_fresh_wait_sim_s", protocol.get("maximum_new_wait_sim_s"))
+    )
     pacing = float(protocol["pace_real_time_factor"])
     new_future = None
     new_observation_pose = None
     new_observation_rgb = None
     new_observation_sim_time = None
+    new_observation_host_ns = None
     new_request_start_ns = None
     new_progress_observation = None
     new_target_observation = None
+    new_actions = None
+    new_response = None
+    new_response_ns = None
+    model_ready_pose = None
+    model_ready_sim_time = None
+    model_ready_host_ns = None
+    fresh_usable_host_ns = None
     queued_frames: list[tuple[int, float, np.ndarray]] = []
     old_exhausted = False
     wait_limit_exceeded = False
@@ -423,13 +518,14 @@ def run_trial(
                     new_target_observation = command.target_index
                     add_event(
                         events,
-                        "new_observation",
+                        "fresh_observation" if controlled else "new_observation",
                         world,
                         pose,
                         old_progress_index=new_progress_observation,
                         old_target_index=new_target_observation,
                         frame_index=frame_index,
                     )
+                    new_observation_host_ns = int(events[-1]["host_monotonic_ns"])
                     request_started = threading.Event()
                     request_clock: dict[str, int] = {}
 
@@ -446,7 +542,7 @@ def run_trial(
                     new_request_start_ns = request_clock["start"]
                     add_event(
                         events,
-                        "new_request_sent",
+                        "fresh_request" if controlled else "new_request_sent",
                         world,
                         pose,
                         client_request_host_monotonic_ns=new_request_start_ns,
@@ -457,48 +553,101 @@ def run_trial(
 
             if live_step % control_steps == 0:
                 command = old_follower.forward(pose)
+                controller_command_row(
+                    controller_commands,
+                    sim_time_s=float(world.current_time),
+                    source="OLD",
+                    command=command,
+                    pose=pose,
+                    fresh_model_ready=model_ready_sim_time is not None,
+                    added_delay_active=(
+                        model_ready_sim_time is not None
+                        and float(world.current_time) - model_ready_sim_time
+                        < float(added_delay_s) - 1e-9
+                    ),
+                )
             timeline.append(
                 timeline_row(
                     world,
                     pose,
-                    phase="old_execution_new_inference" if new_future else "old_execution",
+                    phase=(
+                        "old_execution_fresh_added_delay"
+                        if model_ready_sim_time is not None
+                        else "old_execution_new_inference"
+                        if new_future
+                        else "old_execution"
+                    ),
                     command=command,
                     active_chunk="OLD",
                     in_flight=new_future is not None and not new_future.done(),
                     rgb_frame_index=frame_index - 1,
                 )
             )
-            if new_future is not None and new_future.done():
+            if new_future is not None and new_future.done() and new_actions is None:
                 new_actions, new_response = new_future.result()
                 new_response_ns = request_clock["end"]
+                model_ready_pose = pose.copy()
+                model_ready_sim_time = float(world.current_time)
+                model_ready_host_ns = new_response_ns
+                add_event(
+                    events,
+                    "fresh_model_ready" if controlled else "new_ready",
+                    world,
+                    pose,
+                    server_predict_host_latency_ms=float(
+                        new_response["server_predict_host_latency_ms"]
+                    ),
+                    lightnav_reported_latency_ms=float(
+                        new_response["lightnav_reported_latency_ms"]
+                    ),
+                    client_response_host_monotonic_ns=new_response_ns,
+                    client_model_ready_detected_host_monotonic_ns=time.monotonic_ns(),
+                    queued_rgb_frames=len(queued_frames),
+                )
+            if (
+                new_actions is not None
+                and model_ready_sim_time is not None
+                and float(world.current_time) - model_ready_sim_time
+                >= float(added_delay_s) - 1e-9
+            ):
                 ready_pose = pose.copy()
                 ready_sim_time = float(world.current_time)
+                fresh_usable_host_ns = time.monotonic_ns()
                 break
             if (
                 new_future is not None
                 and new_observation_sim_time is not None
-                and float(world.current_time) - new_observation_sim_time > max_wait
+                and float(world.current_time) - new_observation_sim_time
+                > max_wait + float(added_delay_s)
             ):
                 wait_limit_exceeded = True
-            if live_step * physics_dt > new_delay + max_wait + 30.0:
+            if live_step * physics_dt > new_delay + max_wait + float(added_delay_s) + 30.0:
                 raise RuntimeError("NEW inference did not return within the emergency limit")
 
     if new_observation_pose is None or new_observation_rgb is None:
         raise RuntimeError("NEW observation was not captured")
-    if new_observation_sim_time is None or new_request_start_ns is None:
+    if (
+        new_observation_sim_time is None
+        or new_observation_host_ns is None
+        or new_request_start_ns is None
+    ):
         raise RuntimeError("NEW timing was not initialized")
-    add_event(
-        events,
-        "new_ready",
-        world,
-        ready_pose,
-        server_predict_host_latency_ms=float(new_response["server_predict_host_latency_ms"]),
-        lightnav_reported_latency_ms=float(new_response["lightnav_reported_latency_ms"]),
-        client_response_host_monotonic_ns=new_response_ns,
-        queued_rgb_frames=len(queued_frames),
-    )
-    for queued_index, queued_time, queued_rgb in queued_frames:
-        client.observe(queued_rgb, frame_index=queued_index, sim_time_s=queued_time)
+    if new_actions is None or new_response is None or new_response_ns is None:
+        raise RuntimeError("FRESH response was not completed")
+    if model_ready_sim_time is None or model_ready_host_ns is None or fresh_usable_host_ns is None:
+        raise RuntimeError("FRESH model-ready/usable timing was not initialized")
+    if controlled:
+        add_event(
+            events,
+            "fresh_usable",
+            world,
+            ready_pose,
+            configured_added_delay_s=float(added_delay_s),
+            measured_added_delay_sim_s=ready_sim_time - model_ready_sim_time,
+        )
+    if not controlled:
+        for queued_index, queued_time, queued_rgb in queued_frames:
+            client.observe(queued_rgb, frame_index=queued_index, sim_time_s=queued_time)
 
     new_local = raw_actions_to_local_path(
         new_actions,
@@ -511,7 +660,7 @@ def run_trial(
         observation_sim_time_s=new_observation_sim_time,
         ready_sim_time_s=ready_sim_time,
         request_host_monotonic_ns=new_request_start_ns,
-        response_host_monotonic_ns=new_response_ns,
+        response_host_monotonic_ns=(fresh_usable_host_ns if controlled else new_response_ns),
     )
     analysis = analyze_online_ready_switch(
         actual_pose_before_ready=previous_pose,
@@ -536,9 +685,21 @@ def run_trial(
     switch_payload = analysis.to_dict()
     switch_payload["valid"] = bool(validity["valid"])
     switch_payload["validity_checks"] = validity["checks"]
-    switch_payload["threshold_exceedance"] = apply_reporting_thresholds(
-        analysis, config["reporting_thresholds"]
-    )
+    if controlled:
+        switch_payload["threshold_exceedance"] = {
+            "translation_pose_gap_gt_descriptive_0p05m": (
+                analysis.transition.translation_gap_m
+                > float(config["reporting_thresholds"]["translation_gap_m"])
+            ),
+            "yaw_pose_gap_gt_descriptive_0p05rad": (
+                analysis.transition.yaw_gap_rad
+                > float(config["reporting_thresholds"]["yaw_gap_rad"])
+            ),
+        }
+    else:
+        switch_payload["threshold_exceedance"] = apply_reporting_thresholds(
+            analysis, config["reporting_thresholds"]
+        )
     switch_payload["lightnav_predict_host_latency_ms"] = float(
         new_response["server_predict_host_latency_ms"]
     )
@@ -551,9 +712,10 @@ def run_trial(
     )
     switch_payload["timing_valid"] = bool(validity["valid"])
     switch_payload["stop_output"] = stop_output
-    switch_payload["classification"] = classify_attempt(
-        validity_checks=validity["checks"], stop_output=stop_output
-    )
+    if not controlled:
+        switch_payload["classification"] = classify_attempt(
+            validity_checks=validity["checks"], stop_output=stop_output
+        )
     switch_payload["condition_id"] = condition_id or "original_protocol"
     switch_payload["attempt_index"] = trial_index
     switch_payload["global_episode_index"] = episode_index
@@ -562,25 +724,62 @@ def run_trial(
     switch_payload["old_progress_delta"] = (
         int(old_follower.progress_index) - int(new_progress_observation)
     )
-    switch_payload["geometry"] = geometry_descriptors(
-        actual_pose_before_ready=previous_pose,
-        actual_pose_at_ready=ready_pose,
-        fresh_world=new_world,
-        zero_motion_tolerance_m=float(
-            protocol.get("geometry_zero_motion_tolerance_m", 1e-8)
-        ),
+    switch_payload["geometry"] = (
+        controlled_switch_geometry(
+            actual_pose_before_switch=previous_pose,
+            actual_pose_at_switch=ready_pose,
+            robot_pose_at_fresh_observation=new_observation_pose,
+            fresh_world=new_world,
+            zero_motion_tolerance_m=float(
+                protocol.get("geometry_zero_motion_tolerance_m", 1e-8)
+            ),
+        )
+        if controlled
+        else geometry_descriptors(
+            actual_pose_before_ready=previous_pose,
+            actual_pose_at_ready=ready_pose,
+            fresh_world=new_world,
+            zero_motion_tolerance_m=float(
+                protocol.get("geometry_zero_motion_tolerance_m", 1e-8)
+            ),
+        )
     )
     switch_payload["inference_activity"] = timeline_inference_activity(timeline)
     switch_payload["artifact_path"] = str(trial_dir)
     add_event(events, "raw_switch", world, ready_pose, metrics=switch_payload["metrics"])
 
-    new_controller_reference = np.vstack((ready_pose, new_world))
+    new_controller_reference = new_world.copy() if controlled else np.vstack((ready_pose, new_world))
     new_follower = TrajectoryFollower(new_controller_reference, follower_config(config))
     command = new_follower.forward(ready_pose)
-    add_event(events, "new_execution_start", world, ready_pose)
+    controller_command_row(
+        controller_commands,
+        sim_time_s=float(world.current_time),
+        source="FRESH",
+        command=command,
+        pose=ready_pose,
+        fresh_model_ready=True,
+        added_delay_active=False,
+    )
+    add_event(
+        events,
+        "first_fresh_controller_command" if controlled else "new_execution_start",
+        world,
+        ready_pose,
+        v_command_mps=float(command.linear_velocity_mps),
+        omega_command_rps=float(command.angular_velocity_rps),
+    )
     new_execution_origin_wall_s = time.monotonic()
     new_execution_origin_sim_s = float(world.current_time)
-    maximum_steps = int(round(float(protocol["maximum_new_execution_s"]) / physics_dt))
+    maximum_steps = int(
+        round(
+            float(
+                protocol.get(
+                    "maximum_fresh_execution_s", protocol.get("maximum_new_execution_s")
+                )
+            )
+            / physics_dt
+        )
+    )
     for execution_step in range(maximum_steps):
         if command.goal_reached:
             break
@@ -601,6 +800,15 @@ def run_trial(
         actual.append(pose.copy())
         if (execution_step + 1) % control_steps == 0:
             command = new_follower.forward(pose)
+            controller_command_row(
+                controller_commands,
+                sim_time_s=float(world.current_time),
+                source="FRESH",
+                command=command,
+                pose=pose,
+                fresh_model_ready=True,
+                added_delay_active=False,
+            )
         timeline.append(
             timeline_row(
                 world,
@@ -622,17 +830,118 @@ def run_trial(
         new_goal_reached=bool(command.goal_reached),
     )
 
+    controlled_timing = None
+    controlled_metrics = None
+    if controlled:
+        controlled_timing = ControlledLatencyTiming(
+            observation_sim_time_s=new_observation_sim_time,
+            request_host_monotonic_ns=new_request_start_ns,
+            model_ready_sim_time_s=model_ready_sim_time,
+            model_ready_host_monotonic_ns=model_ready_host_ns,
+            fresh_usable_sim_time_s=ready_sim_time,
+            fresh_usable_host_monotonic_ns=fresh_usable_host_ns,
+            configured_added_delay_s=float(added_delay_s),
+        ).to_dict()
+        controlled_timing["lightnav_predict_host_latency_ms"] = float(
+            new_response["server_predict_host_latency_ms"]
+        )
+        controlled_timing["lightnav_reported_latency_ms"] = float(
+            new_response["lightnav_reported_latency_ms"]
+        )
+        controlled_timing["robot_translation_observation_to_switch_m"] = float(
+            analysis.observation_to_ready_translation_m
+        )
+        controlled_timing["robot_yaw_observation_to_switch_rad"] = float(
+            analysis.observation_to_ready_yaw_rad
+        )
+        old_values = np.asarray(
+            [
+                [row["v_command_mps"], row["omega_command_rps"]]
+                for row in controller_commands
+                if row["reference_source"] == "OLD"
+            ]
+        )
+        fresh_values = np.asarray(
+            [
+                [row["v_command_mps"], row["omega_command_rps"]]
+                for row in controller_commands
+                if row["reference_source"] == "FRESH"
+            ]
+        )
+        requested_window = int(protocol.get("controller_command_window", 3))
+        available_window = min(requested_window, len(old_values), len(fresh_values))
+        if available_window >= 1:
+            controlled_metrics = controller_switch_metrics(
+                old_values,
+                fresh_values,
+                control_dt_s=control_dt,
+                window_size=available_window,
+            )
+        else:
+            controlled_metrics = {}
+        model_rows = [
+            row for row in timeline
+            if row["new_inference_in_flight"] == 1 and row["active_chunk"] == "OLD"
+        ]
+        added_rows = [
+            row for row in timeline if row["phase"] == "old_execution_fresh_added_delay"
+        ]
+        def nonzero_old(row):
+            return abs(float(row["commanded_v"])) > 1e-9 or abs(float(row["commanded_omega"])) > 1e-9
+        active_model = bool(model_rows) and all(nonzero_old(row) for row in model_rows)
+        active_added = (
+            float(added_delay_s) == 0.0
+            or (bool(added_rows) and all(nonzero_old(row) for row in added_rows))
+        )
+        low_rtf, high_rtf = [float(value) for value in protocol["acceptable_rtf_range"]]
+        controlled_checks = {
+            "request_after_observation": new_request_start_ns >= new_observation_host_ns,
+            "response_received": not wait_limit_exceeded,
+            "rtf_in_range": low_rtf <= float(controlled_timing["real_time_factor"]) <= high_rtf,
+            "old_active_during_model": active_model and not old_exhausted,
+            "old_active_during_added_delay": active_added and not old_exhausted,
+            "robot_moved_observation_to_switch": (
+                analysis.observation_to_ready_translation_m
+                > float(protocol["motion_noise_floor_m"])
+            ),
+            "controller_switch_recorded": (
+                len(old_values) >= requested_window
+                and (stop_output or len(fresh_values) >= requested_window)
+            ),
+            "fresh_anchored_at_observation": True,
+            "fresh_raw_unchanged": True,
+        }
+        switch_payload["timing"] = controlled_timing
+        switch_payload["controller_metrics"] = controlled_metrics
+        switch_payload["geometry"] = switch_payload["geometry"]
+        switch_payload["validity_checks"] = controlled_checks
+        switch_payload["classification"] = classify_controlled_attempt(
+            checks=controlled_checks, stop_output=stop_output
+        )
+        switch_payload["cell_id"] = controlled_cell_id
+        switch_payload["geometry_class"] = geometry_class
+        switch_payload["scene_id"] = scene_id
+        switch_payload["latency_condition_id"] = controlled_cell_id.split("__", 1)[1]
+        switch_payload["added_delay_s"] = float(added_delay_s)
+        switch_payload["controlled_phase"] = controlled_phase
+        switch_payload["timing_valid"] = bool(controlled_checks["rtf_in_range"])
+        switch_payload["valid"] = switch_payload["classification"] == "VALID_MOVING"
+
     save_npy_exclusive(trial_dir / "raw/old_actions.npy", old_actions)
-    save_npy_exclusive(trial_dir / "raw/new_actions.npy", new_actions)
+    fresh_actions_name = "fresh_actions.npy" if controlled else "new_actions.npy"
+    fresh_text_name = "fresh_raw_text.txt" if controlled else "new_raw_text.txt"
+    fresh_rgb_name = "fresh_observation_rgb.png" if controlled else "new_observation_rgb.png"
+    fresh_world_name = "fresh_world.npy" if controlled else "new_world.npy"
+    save_npy_exclusive(trial_dir / f"raw/{fresh_actions_name}", new_actions)
     with (trial_dir / "raw/old_raw_text.txt").open("x", encoding="utf-8") as stream:
         stream.write(str(old_response["raw_text"]))
-    with (trial_dir / "raw/new_raw_text.txt").open("x", encoding="utf-8") as stream:
+    with (trial_dir / f"raw/{fresh_text_name}").open("x", encoding="utf-8") as stream:
         stream.write(str(new_response["raw_text"]))
-    with (trial_dir / "raw/new_observation_rgb.png").open("xb") as stream:
+    with (trial_dir / f"raw/{fresh_rgb_name}").open("xb") as stream:
         Image.fromarray(new_observation_rgb, mode="RGB").save(stream, format="PNG")
     save_json_exclusive(trial_dir / "raw/event_log.json", events)
     save_npy_exclusive(trial_dir / "derived/old_world.npy", old_world)
-    save_npy_exclusive(trial_dir / "derived/new_world.npy", new_world)
+    save_npy_exclusive(trial_dir / f"derived/{fresh_world_name}", new_world)
     save_npy_exclusive(
         trial_dir / "derived/new_controller_reference.npy", new_controller_reference
     )
@@ -641,10 +950,18 @@ def run_trial(
         writer = csv.DictWriter(stream, fieldnames=TIMELINE_COLUMNS)
         writer.writeheader()
         writer.writerows(timeline)
+    if controlled:
+        with (trial_dir / "derived/controller_commands.csv").open(
+            "x", newline="", encoding="utf-8"
+        ) as stream:
+            writer = csv.DictWriter(stream, fieldnames=CONTROLLER_COMMAND_COLUMNS)
+            writer.writeheader()
+            writer.writerows(controller_commands)
     save_json_exclusive(trial_dir / "results/switch_metrics.json", switch_payload)
-    save_json_exclusive(
-        trial_dir / "results/timing.json",
-        {
+    timing_payload = (
+        controlled_timing
+        if controlled
+        else {
             "valid": bool(validity["valid"]),
             "new_observation_sim_time_s": new_observation_sim_time,
             "new_ready_sim_time_s": ready_sim_time,
@@ -670,13 +987,30 @@ def run_trial(
                 "acceptable_rtf_range": list(protocol["acceptable_rtf_range"]),
                 "motion_noise_floor_m": float(protocol["motion_noise_floor_m"]),
             },
-        },
+        }
     )
+    save_json_exclusive(trial_dir / "results/timing.json", timing_payload)
+    if controlled:
+        save_json_exclusive(
+            trial_dir / "results/controller_switch_metrics.json", controlled_metrics
+        )
+        save_json_exclusive(trial_dir / "results/geometry.json", switch_payload["geometry"])
+        save_json_exclusive(trial_dir / "results/attempt.json", switch_payload)
     metadata = {
-        "experiment": "EXP-01B Extension" if condition_id else "EXP-01B",
+        "experiment": (
+            "EXP-01B Redesigned Controlled Latency"
+            if controlled
+            else "EXP-01B Extension"
+            if condition_id
+            else "EXP-01B"
+        ),
         "trial_index": trial_index,
         "global_episode_index": episode_index,
         "condition_id": condition_id,
+        "cell_id": controlled_cell_id,
+        "geometry_class": geometry_class,
+        "scene_id": scene_id,
+        "controlled_phase": controlled_phase,
         "initial_pose_se2": initial_pose.tolist(),
         "new_observation_delay_s": new_delay,
         "created_utc": datetime.now(timezone.utc).isoformat(),
@@ -688,18 +1022,29 @@ def run_trial(
         "robot_pose_at_old_observation": old_observation_pose.tolist(),
         "robot_pose_at_new_observation": new_observation_pose.tolist(),
         "robot_pose_at_new_ready": ready_pose.tolist(),
+        "robot_pose_at_fresh_observation": new_observation_pose.tolist() if controlled else None,
+        "robot_pose_at_fresh_model_ready": model_ready_pose.tolist() if controlled else None,
+        "robot_pose_at_fresh_usable": ready_pose.tolist() if controlled else None,
         "new_world_anchor": "robot pose at NEW observation, never NEW ready pose",
-        "controller_reference_policy": "prepend ready pose only; preserve all NEW world rows",
+        "controller_reference_policy": (
+            "use raw observation-anchored FRESH world path directly"
+            if controlled
+            else "prepend ready pose only; preserve all NEW world rows"
+        ),
         "old_response": old_response,
         "new_response": new_response,
         "raw_sha256": {},
     }
     metadata["raw_sha256"] = {
         "old_actions.npy": sha256_file(trial_dir / "raw/old_actions.npy"),
-        "new_actions.npy": sha256_file(trial_dir / "raw/new_actions.npy"),
+        fresh_actions_name: sha256_file(trial_dir / f"raw/{fresh_actions_name}"),
     }
     save_json_exclusive(trial_dir / "metadata.json", metadata)
-    output_validation = validate_trial_output(trial_dir)
+    output_validation = (
+        validate_controlled_attempt_output(trial_dir)
+        if controlled
+        else validate_trial_output(trial_dir)
+    )
     save_json_exclusive(trial_dir / "results/validation.json", output_validation)
     print(
         "EXP01B_TRIAL="
@@ -747,24 +1092,30 @@ def run() -> Path:
         stage = omni.usd.get_context().get_stage()
         dome = UsdLux.DomeLight.Define(stage, "/World/Exp01BDomeLight")
         dome.CreateIntensityAttr(1000.0)
-        length = float(scene["corridor_length_m"])
-        width = float(scene["corridor_width_m"])
-        height = float(scene["wall_height_m"])
-        thickness = float(scene["wall_thickness_m"])
-        center_x = float(scene["wall_center_x_m"])
-        for side, y in (("Left", width / 2.0), ("Right", -width / 2.0)):
+        if "static_boxes" in scene:
+            for box in scene["static_boxes"]:
+                add_static_box(
+                    f"/World/{box['id']}", box["center"], box["size"], box["color"]
+                )
+        else:
+            length = float(scene["corridor_length_m"])
+            width = float(scene["corridor_width_m"])
+            height = float(scene["wall_height_m"])
+            thickness = float(scene["wall_thickness_m"])
+            center_x = float(scene["wall_center_x_m"])
+            for side, y in (("Left", width / 2.0), ("Right", -width / 2.0)):
+                add_static_box(
+                    f"/World/Corridor{side}Wall",
+                    [center_x, y, height / 2.0],
+                    [length, thickness, height],
+                    [0.72, 0.74, 0.78],
+                )
             add_static_box(
-                f"/World/Corridor{side}Wall",
-                [center_x, y, height / 2.0],
-                [length, thickness, height],
-                [0.72, 0.74, 0.78],
+                "/World/CorridorEndMarker",
+                [center_x + length / 2.0, 0.0, 0.75],
+                [0.08, width * 0.45, 1.5],
+                [0.2, 0.45, 0.8],
             )
-        add_static_box(
-            "/World/CorridorEndMarker",
-            [center_x + length / 2.0, 0.0, 0.75],
-            [0.08, width * 0.45, 1.5],
-            [0.2, 0.45, 0.8],
-        )
         reference_path = str(robot_config["reference_prim_path"])
         add_reference_to_stage(str(asset["resolved_path"]), reference_path)
         while is_stage_loading():
@@ -773,6 +1124,42 @@ def run() -> Path:
         extension_conditions = (
             validate_extension_config(config) if "extension_cohort" in config else None
         )
+        controlled_cells = (
+            validate_controlled_config(config)
+            if "controlled_latency_design" in config
+            else None
+        )
+        if controlled_cells and not ARGS.controlled_phase:
+            raise ValueError("controlled config requires --controlled-phase")
+        if ARGS.controlled_phase and not controlled_cells:
+            raise ValueError("--controlled-phase requires a controlled-latency config")
+        if controlled_cells and ARGS.controlled_phase == "primary":
+            if config["controlled_latency_design"].get("primary_config_frozen") is not True:
+                raise ValueError("primary cohort cannot start before geometry config is frozen")
+        if controlled_cells and ARGS.controlled_cell:
+            controlled_cells = [
+                cell
+                for cell in controlled_cells
+                if cell["cell_id"] == ARGS.controlled_cell
+                or cell["geometry"]["id"] == ARGS.controlled_cell
+            ]
+            if not controlled_cells:
+                raise ValueError(f"unknown controlled cell/geometry: {ARGS.controlled_cell}")
+        if controlled_cells and ARGS.controlled_phase in ("qualification", "smoke"):
+            # Qualification runs natural latency once per geometry. Smoke runs one
+            # explicitly selected cell once. Neither contributes to the primary cohort.
+            if ARGS.controlled_phase == "qualification":
+                controlled_cells = [
+                    {**cell, "target_valid_moving": 1, "max_attempts": 3}
+                    for cell in controlled_cells
+                    if float(cell["latency"]["added_delay_s"]) == 0.0
+                ]
+            else:
+                if not ARGS.controlled_cell or len(controlled_cells) != 1:
+                    raise ValueError("controlled smoke requires one exact --controlled-cell")
+                controlled_cells = [
+                    {**controlled_cells[0], "target_valid_moving": 1, "max_attempts": 2}
+                ]
         if ARGS.smoke_condition:
             if not extension_conditions:
                 raise ValueError("--smoke-condition requires an extension config")
@@ -784,7 +1171,9 @@ def run() -> Path:
             if not extension_conditions:
                 raise ValueError(f"unknown smoke condition: {ARGS.smoke_condition}")
         initial = validate_pose_se2(
-            extension_conditions[0]["initial_pose_se2"]
+            controlled_cells[0]["geometry"]["initial_pose_se2"]
+            if controlled_cells
+            else extension_conditions[0]["initial_pose_se2"]
             if extension_conditions
             else simulation["initial_robot_pose_se2"]
         )
@@ -841,7 +1230,89 @@ def run() -> Path:
         )
         controller = robot.get_articulation_controller()
         trials = []
-        if extension_conditions:
+        if controlled_cells:
+            save_json_exclusive(
+                experiment_dir / "protocol.json",
+                {
+                    "experiment": "EXP-01B Redesigned Controlled Latency",
+                    "phase": ARGS.controlled_phase,
+                    "primary_config_frozen": bool(
+                        config["controlled_latency_design"]["primary_config_frozen"]
+                    ),
+                    "cells": controlled_cells,
+                    "timing_gate": {
+                        "acceptable_rtf_range": list(protocol["acceptable_rtf_range"]),
+                        "motion_noise_floor_m": float(protocol["motion_noise_floor_m"]),
+                    },
+                    "controller": dict(config["closed_loop"]),
+                    "raw_switch_policy": (
+                        "observation-anchored FRESH used directly; no smoothing, blending, "
+                        "interpolation, stale-row removal, re-anchoring, graph, or k"
+                    ),
+                    "previous_immutable_evidence": [
+                        "data/exp01b/exp01b-20260903T155402Z",
+                        "data/exp01b_extension/exp01b-extension-20260905T002500Z",
+                    ],
+                },
+            )
+            global_episode_index = 0
+            for cell in controlled_cells:
+                valid_moving = 0
+                geometry = cell["geometry"]
+                latency = cell["latency"]
+                for attempt_index in range(cell["max_attempts"]):
+                    if ARGS.controlled_phase == "primary":
+                        relative = (
+                            Path("primary")
+                            / geometry["id"]
+                            / latency["id"]
+                            / f"attempt_{attempt_index:03d}"
+                        )
+                    elif ARGS.controlled_phase == "qualification":
+                        relative = (
+                            Path("qualification")
+                            / geometry["id"]
+                            / f"attempt_{attempt_index:03d}"
+                        )
+                    else:
+                        relative = (
+                            Path("smoke")
+                            / cell["cell_id"]
+                            / f"attempt_{attempt_index:03d}"
+                        )
+                    trial = run_trial(
+                        trial_index=attempt_index,
+                        global_episode_index=global_episode_index,
+                        trial_dir=experiment_dir / relative,
+                        config=config,
+                        world=world,
+                        robot=robot,
+                        controller=controller,
+                        differential=differential,
+                        wheels=wheels,
+                        rgb_annotator=rgb_annotator,
+                        resolution=resolution,
+                        client=client,
+                        initial_pose_override=geometry["initial_pose_se2"],
+                        new_observation_delay_override_s=geometry[
+                            "fresh_observation_delay_s"
+                        ],
+                        condition_id=geometry["id"],
+                        instruction_override=geometry["instruction"],
+                        controlled_cell_id=cell["cell_id"],
+                        geometry_class=geometry["geometry_class"],
+                        scene_id=geometry["scene_id"],
+                        added_delay_s=float(latency["added_delay_s"]),
+                        controlled_phase=ARGS.controlled_phase,
+                    )
+                    trial["artifact_path"] = str(experiment_dir / relative)
+                    trials.append(trial)
+                    global_episode_index += 1
+                    if trial["classification"] == "VALID_MOVING":
+                        valid_moving += 1
+                    if valid_moving >= cell["target_valid_moving"]:
+                        break
+        elif extension_conditions:
             save_json_exclusive(
                 experiment_dir / "protocol.json",
                 {
@@ -925,7 +1396,25 @@ def run() -> Path:
                 if sum(bool(item["valid"]) for item in trials) >= required_valid:
                     break
         server_info_end = client.server_info()
-        if not extension_conditions:
+        if controlled_cells:
+            controlled_aggregate = aggregate_controlled(
+                trials, cell_ids=[cell["cell_id"] for cell in controlled_cells]
+            )
+            controlled_summary = {
+                "experiment": "EXP-01B Redesigned Controlled Latency",
+                "experiment_id": ARGS.experiment_id,
+                "phase": ARGS.controlled_phase,
+                "aggregate": controlled_aggregate,
+                "representative_samples": select_controlled_representatives(
+                    trials, [cell["cell_id"] for cell in controlled_cells]
+                ),
+                "claim_boundary": (
+                    "Raw controller/pose discontinuity under tested LightNav + Isaac + Jackal "
+                    "conditions only; no reconciliation or navigation-quality claim."
+                ),
+            }
+            save_json_exclusive(experiment_dir / "collection_summary.json", controlled_summary)
+        elif not extension_conditions:
             aggregate = aggregate_experiment(trials)
             summary = {
                 "experiment": "EXP-01B",
@@ -940,13 +1429,26 @@ def run() -> Path:
         save_json_exclusive(
             experiment_dir / "metadata.json",
             {
-                "experiment": "EXP-01B Extension" if extension_conditions else "EXP-01B",
+                "experiment": (
+                    "EXP-01B Redesigned Controlled Latency"
+                    if controlled_cells
+                    else "EXP-01B Extension"
+                    if extension_conditions
+                    else "EXP-01B"
+                ),
                 "experiment_id": ARGS.experiment_id,
                 "created_utc": datetime.now(timezone.utc).isoformat(),
                 "research_git_commit_sha_at_run": git_sha(),
                 "research_git_status_at_run": git_status(),
                 "attempted_trial_count": len(trials),
                 **(
+                    {
+                        "target_valid_moving_count": sum(
+                            item["target_valid_moving"] for item in controlled_cells
+                        )
+                    }
+                    if controlled_cells
+                    else
                     {
                         "target_valid_trial_count": sum(
                             item["target_valid"] for item in extension_conditions
@@ -956,11 +1458,17 @@ def run() -> Path:
                     else {"required_valid_trial_count": required_valid}
                 ),
                 "maximum_trial_count": (
-                    sum(item["max_attempts"] for item in extension_conditions)
+                    sum(item["max_attempts"] for item in controlled_cells)
+                    if controlled_cells
+                    else sum(item["max_attempts"] for item in extension_conditions)
                     if extension_conditions
                     else maximum_trials
                 ),
-                "instruction": str(config["instruction"]),
+                "instruction": (
+                    "varies by frozen geometry condition"
+                    if controlled_cells
+                    else str(config["instruction"])
+                ),
                 "intrinsic_waypoint_time_base": False,
                 "new_observation_trigger": (
                     "simulation-time delay from OLD execution start; not a waypoint duration"
@@ -989,7 +1497,23 @@ def run() -> Path:
                 "reporting_thresholds": config["reporting_thresholds"],
             },
         )
-        if extension_conditions:
+        if controlled_cells:
+            print("EXP01B_CONTROLLED_OUTPUT_DIR=" + str(experiment_dir), flush=True)
+            print(
+                "EXP01B_CONTROLLED_COLLECTION="
+                + json.dumps(
+                    {
+                        "phase": ARGS.controlled_phase,
+                        "attempted": len(trials),
+                        "valid_moving": sum(
+                            item["classification"] == "VALID_MOVING" for item in trials
+                        ),
+                    },
+                    sort_keys=True,
+                ),
+                flush=True,
+            )
+        elif extension_conditions:
             print("EXP01B_EXTENSION_OUTPUT_DIR=" + str(experiment_dir), flush=True)
             print(
                 "EXP01B_EXTENSION_COLLECTION="

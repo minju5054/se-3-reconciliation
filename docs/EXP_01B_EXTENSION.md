@@ -1,5 +1,13 @@
 # EXP-01B Extension — Expanded Online Raw-Switch Characterization
 
+> Historical status: this immutable cohort is a characterization pilot. Its left/right initial
+> perturbations did not realize meaningful OLD/FRESH tangent diversity, and its
+> `translation_motion_jump` compares actual control-interval displacement with untimed LightNav
+> waypoint spacing. That value must be interpreted only as a local spatial step-magnitude
+> mismatch, not velocity or acceleration discontinuity. The current controller-level evidence is
+> the separate [Redesigned EXP-01B](EXP_01B_REDESIGNED_CONTROLLED_LATENCY.md); the data and claims
+> below are not rewritten or deleted.
+
 ## Research question
 
 Across a larger, deliberately controlled cohort of timing-valid online LightNav transitions,

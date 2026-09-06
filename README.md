@@ -235,6 +235,25 @@ deterministically selected review plots. Validate an existing cohort with
 raw-switch characterization and does not invoke EXP-02A or any reconciliation code. See
 [EXP-01B Extension](docs/EXP_01B_EXTENSION.md).
 
+### Redesigned EXP-01B controlled latency × geometry
+
+Run the current 3-geometry × 2-latency raw-switch protocol with one persistent warmed LightNav
+server and headless Isaac RGB/control:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+./scripts/isaac/run_exp01b_controlled_latency.sh primary
+```
+
+This records canonical Stage 0-B controller commands `[v, omega]` around the switch and treats
+the old untimed waypoint-spacing comparison as a secondary spatial descriptor. The frozen
+protocol targets five timing-valid moving FRESH samples per cell (30 total), preserves STOP and
+failure attempts, and never changes or timestamps LightNav rows. Generated outputs are ignored
+under `data/exp01b_redesign/<run_id>/`. Validate a saved run with
+`.venv/bin/python scripts/summarize_exp01b_controlled_latency.py <run_dir> --validate-only`.
+See [Redesigned EXP-01B](docs/EXP_01B_REDESIGNED_CONTROLLED_LATENCY.md) for qualification,
+timing semantics, actual results, and the mixed execution-level conclusion.
+
 ## EXP-02 oracle SE(2) graph
 
 Run the offline synthetic known-answer gate followed by the one-pair real LightNav oracle graph

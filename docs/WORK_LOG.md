@@ -753,3 +753,63 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and the final staged-diff review.
+
+## 2026-09-06T21:45:34+09:00 — Redesigned EXP-01B controlled latency × geometry
+
+- **Purpose:** Replace the untimed waypoint-spacing comparison as the primary discontinuity
+  signal with canonical Stage 0-B command changes, then test natural versus +0.5 s effective
+  latency across prequalified straight, turn, and route-change scenes. This is raw-switch
+  characterization only; no EXP-02A, graph, `k`, smoothing, or correction was added.
+- **Implementation:** Added exact signed/absolute `delta_v` and `delta_omega`, last-three OLD /
+  first-three FRESH command windows, discrete command-slew labelling, near-zero-safe geometry
+  descriptors, exact 2×3 protocol validation, separate model-ready/FRESH-usable events, finite
+  attempt caps, STOP/failure classification, immutable raw hashing, strict reconstruction,
+  deterministic summaries, and 18 review plots. Reused the existing online runner, IPC,
+  Stage 0-B follower, and single-build/single-warmup LightNav server.
+- **Qualification:** Retained all diagnostics. G0 qualified at tangent `0.00273 rad`. Initial
+  G1/G2 and two further G2 prompts were rejected as straight. Revised G1 qualified by yaw
+  progression `0.32728 rad`/lateral `0.07977 m`; final G2 qualified at tangent `0.68042 rad`, yaw
+  progression `0.82458 rad`, and lateral `1.06728 m`. Config was frozen before primary result
+  inspection. G0-natural and G2-delayed smoke passed; G2 measured `0.500000026 sim s` added delay
+  with OLD-command activity fraction `1.0`.
+- **Actual run:** Ignored immutable
+  `data/exp01b_redesign/exp01b-controlled-primary-20260906T-frozen/` obtained all 30 planned
+  moving transitions in 37 attempts (`7/9/6/5/5/5` per cell): three FRESH STOP, three OLD
+  exhausted, one RTF invalid, no timeout/other failure/OOM. One model build, one warm-up, 37
+  episode resets, and 74 live OLD/FRESH predictions were used.
+- **Results:** Natural→delayed effective latency mean was `0.45889→0.97000 s`, robot travel
+  `0.16506→0.33305 m`, with comparable model wall latency `0.44519→0.44247 s` and travel
+  correlation `r=0.926`. G0 mean/median `|delta_v|` increased
+  `0.01947/0.02638→0.11578/0.12745 m/s`; G1 decreased
+  `0.09436/0.01328→0.07393/0.00904`; G2 was outlier-sensitive
+  `0.00747/0.00781→0.06895/0.00489`. Median `|delta_omega|` changed G0
+  `0.01417→0.03178`, G1 `0.02646→0.03357`, G2 `0.00118→0.00197 rad/s`. One actually divergent
+  G1 sample per latency cell dominated means (`0.512`, `1.405 rad/s`). Effective-latency
+  correlations with `|delta_v|/|delta_omega|` were `0.241/0.117`; tangent disagreement versus
+  `|delta_omega|` was `0.673` (descriptive only).
+- **Geometry/boundary:** Translation pose-gap means increased with delay in G0/G1/G2:
+  `0.0164→0.1736`, `0.0307→0.1674`, `0.0156→0.2046 m`. Pose gap versus `|delta_v|` was only
+  `r=0.087`. Primary G1 retained curved futures but most entries were parallel; G2 did not
+  reproduce its qualified route change (primary tangent `0.00036–0.00146 rad`). This and repeated
+  discrete outputs are limitations, not removed outliers. Spatial step mismatch is not velocity.
+- **Runtime:** Isaac Sim 6.0.1; LightNav SHA `a645828d81a8439651172197ca80a75dc1377977`, package
+  0.1.0, checkpoint revision `7221d418bfff55cfcbadd09f7a26aaab81e1f8a6`, vLLM 0.19.1,
+  prefix caching enabled, GPU config 0.65/1 GiB KV. RTX 5060 Ti snapshot was 13,589 MiB used.
+- **Validation:** Targeted suite `37 passed`; full suite `184 passed`; compileall, shell syntax,
+  strict 37-attempt/30-moving reconstruction, plot visual review, ignore rules, and original
+  immutable hashes passed. Prior summary/metadata hashes remained `4908f078...bf90`,
+  `b3a27447...ec8c`, `ed34450...e71f`, and `1c75ad8e...843`.
+- **Major files:** `README.md`, `configs/exp01b_controlled_latency.yaml`,
+  `docs/{EXP_01B_EXTENSION.md,EXP_01B_REDESIGNED_CONTROLLED_LATENCY.md,WORK_LOG.md}`,
+  `src/reconciliation/{controller_switch_metrics.py,exp01b_controlled_latency.py}`,
+  the reused Isaac/LightNav runners, new launcher/summarizer, and two test modules.
+- **Commands:** Git/repository/source inspection; targeted/full pytest with ROS plugin auto-load
+  disabled; compileall/shell syntax; retained qualification cohorts; two smoke and one 37-attempt
+  primary run; strict validation, hashes, numeric contrasts, plots, diff/stage/commit/push flow.
+- **Issues:** Evidence is mixed: delay robustly changed travel/pose gap, but immediate commands
+  were not uniformly larger and the lookahead follower absorbed most switches. G2 qualification
+  was not repeatable. Generated data remain ignored. Existing user changes to Stage 0-B camera
+  and Stage 0-C playback factor were preserved and excluded from staging.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after this entry and final staged-diff review.

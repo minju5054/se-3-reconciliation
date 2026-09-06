@@ -124,6 +124,13 @@ def main() -> None:
     paths = config["paths"]
     lightnav = config["lightnav"]
     instruction = str(config["instruction"])
+    design = config.get("controlled_latency_design")
+    allowed_instructions = {instruction}
+    if isinstance(design, dict):
+        allowed_instructions.update(
+            str(item["instruction"])
+            for item in design.get("geometry_conditions", [])
+        )
     if bool(lightnav["intrinsic_waypoint_time_base"]):
         raise ValueError("EXP-01B must not fabricate a LightNav waypoint time base")
     checkout = resolve_path(paths["lightnav_checkout"])
@@ -132,7 +139,10 @@ def main() -> None:
     expected_history = int(lightnav["expected_history_frames"])
     expected_horizon = int(lightnav["expected_horizon"])
     prior = load_json(warmup_source / "raw/lightnav_inference.json")
-    if prior.get("instruction") != instruction:
+    warmup_instruction = str(prior.get("instruction", ""))
+    if not warmup_instruction:
+        raise ValueError("warm-up input has no instruction")
+    if not isinstance(design, dict) and warmup_instruction != instruction:
         raise ValueError("warm-up input instruction differs from EXP-01B instruction")
     eval_config = load_json(checkpoint / "eval_config.json")
     task = eval_config["tasks"][str(lightnav["task_key"])]
@@ -155,12 +165,12 @@ def main() -> None:
         task_key=str(lightnav["task_key"]),
     )
     model_load_ms = (time.monotonic_ns() - load_start) / 1e6
-    agent.reset(instruction=instruction)
+    agent.reset(instruction=warmup_instruction)
     for frame in frames:
         agent.observe(frame)
     warm_start = time.monotonic_ns()
     warm_actions_raw, warm_text, warm_reported_ms = agent.predict_waypoints(
-        instruction, task_type=str(lightnav["task_type"])
+        warmup_instruction, task_type=str(lightnav["task_type"])
     )
     warm_host_ms = (time.monotonic_ns() - warm_start) / 1e6
     warm_actions = validate_action_array(warm_actions_raw, expected_horizon=expected_horizon)
@@ -201,6 +211,8 @@ def main() -> None:
         "gpu_after_warmup": gpu_snapshot(),
         "episode_reset_count": 0,
         "prediction_count": 0,
+        "allowed_episode_instructions": sorted(allowed_instructions),
+        "warmup_instruction": warmup_instruction,
     }
 
     socket_path = args.socket.resolve()
@@ -218,6 +230,7 @@ def main() -> None:
         connection, _ = listener.accept()
         with connection:
             observed_frames = 0
+            episode_instruction = instruction
             while True:
                 header, payload = receive_message(connection)
                 request_id = header.get("request_id")
@@ -235,9 +248,9 @@ def main() -> None:
                         )
                     elif message_type == "episode_reset":
                         episode_instruction = str(header["instruction"])
-                        if episode_instruction != instruction:
-                            raise ValueError("episode instruction differs from server instruction")
-                        agent.reset(instruction=instruction)
+                        if episode_instruction not in allowed_instructions:
+                            raise ValueError("episode instruction is not declared by the server config")
+                        agent.reset(instruction=episode_instruction)
                         observed_frames = 0
                         server_info["episode_reset_count"] += 1
                         send_message(
@@ -266,7 +279,7 @@ def main() -> None:
                             raise RuntimeError("episode history is not primed")
                         start_ns = time.monotonic_ns()
                         actions_raw, raw_text, reported_ms = agent.predict_waypoints(
-                            instruction, task_type=str(lightnav["task_type"])
+                            episode_instruction, task_type=str(lightnav["task_type"])
                         )
                         end_ns = time.monotonic_ns()
                         actions = validate_action_array(

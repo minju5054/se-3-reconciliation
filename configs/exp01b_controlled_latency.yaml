@@ -1,0 +1,154 @@
+experiment: EXP-01B Redesigned
+name: Controlled Latency x Verified Geometry Raw-Switch Characterization
+instruction: Go straight down the corridor.
+
+paths:
+  output_root: data/exp01b_redesign
+  lightnav_checkout: ../external/LightNav-0
+  checkpoint_relative_path: checkpoints/LightNav-0
+  warmup_source_run: data/stage0/lightnav_single_chunk/20260903T010425Z
+
+lightnav:
+  checkpoint_identifier: LightOriginsHQ/LightNav-0
+  backend: vllm_local
+  task_key: vlnce
+  task_type: vlnce_traj
+  expected_horizon: 10
+  expected_history_frames: 64
+  video_fps: 4.0
+  aspect_mode: stretch
+  prior_gpu_memory_utilization: 0.90
+  gpu_memory_utilization: 0.65
+  kv_cache_gib: 1.0
+  enforce_eager: true
+  intrinsic_waypoint_time_base: false
+
+ipc:
+  connect_timeout_s: 180.0
+  request_timeout_s: 120.0
+
+experiment_protocol:
+  acceptable_rtf_range: [0.90, 1.10]
+  motion_noise_floor_m: 0.0001
+  maximum_fresh_wait_sim_s: 3.0
+  maximum_fresh_execution_s: 3.0
+  pace_real_time_factor: 0.95
+  stop_action_absolute_tolerance: 1.0e-8
+  geometry_zero_motion_tolerance_m: 1.0e-5
+  controller_command_window: 3
+
+# Frozen after the separate diagnostic geometry-qualification runs listed in
+# each condition. Primary discontinuity outcomes had not been inspected.
+controlled_latency_design:
+  primary_config_frozen: true
+  target_valid_moving_per_cell: 5
+  max_attempts_per_cell: 10
+  latency_conditions:
+    - id: L0_natural
+      added_delay_s: 0.0
+    - id: L1_added_050
+      added_delay_s: 0.5
+  geometry_conditions:
+    - id: G0_straight
+      geometry_class: straight
+      scene_id: straight_corridor
+      instruction: Go straight down the corridor.
+      initial_pose_se2: [0.0, 0.0, 0.0]
+      fresh_observation_delay_s: 0.50
+      qualification:
+        accepted: true
+        criterion: small OLD/FRESH tangent disagreement or straight FRESH yaw progression
+        artifact: data/exp01b_redesign/exp01b-controlled-qualification-20260906T-fixed/qualification/G0_straight/attempt_000
+        timing_classification: TIMING_INVALID; accepted for diagnostic geometry only
+        old_fresh_tangent_disagreement_abs_rad: 0.0027308981524445386
+        fresh_total_yaw_progression_rad: 0.00122729130089283
+        fresh_endpoint_lateral_from_incoming_tangent_m: -0.006221110692556599
+    - id: G1_turn
+      geometry_class: turn
+      scene_id: left_turn
+      instruction: Turn left at the blue wall and continue along the left corridor.
+      initial_pose_se2: [0.0, 8.0, -0.40]
+      fresh_observation_delay_s: 0.50
+      qualification:
+        accepted: true
+        criterion: tangent disagreement > 0.15 rad or clear FRESH yaw/curvature progression
+        artifact: data/exp01b_redesign/exp01b-controlled-qualification-20260906T-candidate2/qualification/G1_turn/attempt_000
+        timing_classification: VALID_MOVING
+        old_fresh_tangent_disagreement_abs_rad: 0.001450711407228411
+        fresh_total_yaw_progression_rad: 0.3272843926679343
+        fresh_endpoint_lateral_from_incoming_tangent_m: 0.07977227256499421
+    - id: G2_route_change
+      geometry_class: route_change
+      scene_id: right_route_change
+      instruction: Enter the doorway on your left.
+      initial_pose_se2: [0.0, -8.0, 0.40]
+      fresh_observation_delay_s: 0.50
+      qualification:
+        accepted: true
+        criterion: lateral/path-shape departure from OLD verified by saved descriptors
+        artifact: data/exp01b_redesign/exp01b-controlled-qualification-20260906T-g2candidate5/qualification/G2_route_change/attempt_000
+        timing_classification: VALID_MOVING
+        old_fresh_tangent_disagreement_abs_rad: 0.6804166270151231
+        fresh_total_yaw_progression_rad: 0.8245808184146881
+        fresh_endpoint_lateral_from_incoming_tangent_m: 1.0672793678506924
+
+simulation:
+  physics_dt: 0.016666666666666666
+  control_dt: 0.1
+  settling_duration_s: 1.0
+  spawn_height_m: 0.15
+  initial_robot_pose_se2: [0.0, 0.0, 0.0]
+
+robot:
+  asset_collection_path: /Isaac/Robots
+  asset_relative_path: Clearpath/Jackal/jackal.usd
+  reference_prim_path: /World/JackalReference
+
+scene:
+  static_boxes:
+    # G0: 3 m straight corridor centered at y=0.
+    - {id: G0_left_wall, center: [4.0, 1.5, 1.0], size: [10.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+    - {id: G0_right_wall, center: [4.0, -1.5, 1.0], size: [10.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+    - {id: G0_blue_marker, center: [9.0, 0.0, 0.75], size: [0.08, 1.35, 1.5], color: [0.2, 0.45, 0.8]}
+    # G1: a short approach at y=8, with straight route blocked and open left branch.
+    - {id: G1_lower_wall, center: [1.8, 6.5, 1.0], size: [5.6, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+    - {id: G1_upper_approach_wall, center: [0.5, 9.5, 1.0], size: [3.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+    - {id: G1_blocking_blue_wall, center: [2.0, 8.0, 1.0], size: [0.12, 3.0, 2.0], color: [0.15, 0.35, 0.9]}
+    - {id: G1_left_branch_wall_left, center: [2.0, 11.5, 1.0], size: [0.12, 4.0, 2.0], color: [0.72, 0.74, 0.78]}
+    - {id: G1_left_branch_wall_right, center: [5.0, 10.0, 1.0], size: [0.12, 7.0, 2.0], color: [0.72, 0.74, 0.78]}
+    # G2: mirrored right-turn route at y=-8 with a red blocking wall.
+    - {id: G2_upper_wall, center: [1.8, -6.5, 1.0], size: [5.6, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+    - {id: G2_lower_approach_wall, center: [0.5, -9.5, 1.0], size: [3.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+    - {id: G2_blocking_red_wall, center: [2.0, -8.0, 1.0], size: [0.12, 3.0, 2.0], color: [0.9, 0.12, 0.08]}
+    - {id: G2_right_branch_wall_left, center: [2.0, -11.5, 1.0], size: [0.12, 4.0, 2.0], color: [0.72, 0.74, 0.78]}
+    - {id: G2_right_branch_wall_right, center: [5.0, -10.0, 1.0], size: [0.12, 7.0, 2.0], color: [0.72, 0.74, 0.78]}
+
+camera:
+  source: experiment_camera_attached_to_articulation_root
+  name: Exp01BControlledEgocentricCamera
+  relative_translation_m: [0.30, 0.0, 0.48]
+  relative_rotation_xyz_deg: [90.0, 0.0, -90.0]
+  resolution_width: 448
+  resolution_height: 256
+  horizontal_fov_deg: 90.0
+  horizontal_aperture: 20.955
+  clipping_range_m: [0.05, 100.0]
+  rgb_format: HWC uint8 RGB
+  render_subframes: 1
+
+closed_loop:
+  lookahead_distance_m: 0.20
+  position_gain: 1.2
+  heading_gain: 2.5
+  cross_track_gain: 1.0
+  max_linear_velocity_mps: 0.55
+  max_angular_velocity_rps: 1.5
+  goal_position_tolerance_m: 0.08
+  goal_yaw_tolerance_rad: 0.08
+  rotate_in_place_threshold_rad: 0.30
+  nearest_search_window: 10
+
+reporting_thresholds:
+  translation_gap_m: 0.05
+  yaw_gap_rad: 0.05
+  threshold_semantics: descriptive pose-only thresholds; no arbitrary delta-command threshold
