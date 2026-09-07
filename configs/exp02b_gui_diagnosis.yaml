@@ -1,0 +1,45 @@
+experiment: EXP-02B GUI Execution Diagnosis
+name: OLD Replay Reference/Controller/Wheel Telemetry Diagnosis
+
+paths:
+  output_root: data/exp02b_gui_diagnosis
+  exp02b_run: data/exp02b/exp02b-controller-aware-20260906T150400Z
+  exp02b_config: configs/exp02b_controller_aware.yaml
+  exp01b_config: configs/exp01b_controlled_latency.yaml
+
+# Diagnostic playback only. These values do not alter the frozen quantitative runner.
+diagnostic_playback:
+  real_time_factor: 0.50
+  pre_reset_hold_wall_s: 2.0
+  exact_reset_hold_wall_s: 1.0
+
+visualization:
+  base_z_m: 0.06
+  line_width: 4.0
+  heading_line_width: 2.0
+  heading_length_m: 0.12
+  marker_size: 13.0
+  camera_height_m: 2.5
+  camera_xy_offset_m: [-0.3, -0.5]
+  colors:
+    planned_old: [0.10, 0.45, 1.00, 1.00]
+    old_actual: [0.00, 0.95, 1.00, 1.00]
+    raw_fresh: [0.65, 0.65, 0.65, 1.00]
+    selected_suffix: [1.00, 0.55, 0.05, 1.00]
+    candidate: [0.90, 0.05, 0.95, 1.00]
+    post_actual: [0.10, 1.00, 0.20, 1.00]
+    fresh_observation: [1.00, 1.00, 1.00, 1.00]
+    saved_boundary: [1.00, 0.05, 0.05, 1.00]
+    reproduced_boundary: [0.00, 0.95, 1.00, 1.00]
+    exact_reset_boundary: [1.00, 1.00, 0.10, 1.00]
+    selected_entry: [1.00, 0.55, 0.05, 1.00]
+    candidate_entry: [0.90, 0.05, 0.95, 1.00]
+
+# Visibility flags only; these thresholds do not define causal diagnoses or acceptance.
+diagnostic_thresholds:
+  reference_rms_m: 0.05
+  body_v_rmse_mps: 0.05
+  body_omega_rmse_rps: 0.10
+  wheel_rmse_rad_s: 0.25
+  reset_translation_m: 0.001
+  reset_yaw_rad: 0.001

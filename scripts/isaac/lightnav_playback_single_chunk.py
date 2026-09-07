@@ -54,6 +54,11 @@ from isaacsim.robot.experimental.wheeled_robots.controllers import DifferentialC
 from isaacsim.util.debug_draw import _debug_draw
 from pxr import Gf, UsdGeom, UsdLux, UsdPhysics
 
+from debug_draw_trajectories import (
+    draw_heading_markers,
+    draw_polyline,
+    draw_pose_points,
+)
 from lightnav_stage0c_runtime import (
     canonical_wheel_names,
     canonical_wheel_values,
@@ -116,53 +121,45 @@ def follower_config(config) -> FollowerConfig:
     )
 
 
-def rgba(value) -> list[float]:
-    result = [float(item) for item in value]
-    if len(result) != 4:
-        raise ValueError("DebugDraw colors must be RGBA")
-    return result
-
-
 def draw_paths(draw, reference: np.ndarray, actual: np.ndarray, config) -> None:
     z = float(config["z_offset_m"])
-    reference_points = [[float(x), float(y), z] for x, y in reference[:, :2]]
-    actual_points = [[float(x), float(y), z * 1.15] for x, y in actual[:, :2]]
     draw.clear_lines()
     draw.clear_points()
-    if len(reference_points) > 1:
-        draw.draw_lines(
-            reference_points[:-1],
-            reference_points[1:],
-            [rgba(config["trajectory_color_rgba"])] * (len(reference_points) - 1),
-            [float(config["line_width"])] * (len(reference_points) - 1),
-        )
-    if len(actual_points) > 1:
-        draw.draw_lines(
-            actual_points[:-1],
-            actual_points[1:],
-            [rgba(config["actual_color_rgba"])] * (len(actual_points) - 1),
-            [float(config["line_width"])] * (len(actual_points) - 1),
-        )
-    starts = reference_points
-    ends = [
-        [
-            point[0] + float(config["heading_marker_length_m"]) * math.cos(float(pose[2])),
-            point[1] + float(config["heading_marker_length_m"]) * math.sin(float(pose[2])),
-            z,
-        ]
-        for point, pose in zip(starts, reference, strict=True)
-    ]
-    draw.draw_lines(
-        starts,
-        ends,
-        [rgba(config["heading_color_rgba"])] * len(starts),
-        [float(config["heading_line_width"])] * len(starts),
+    draw_polyline(
+        draw,
+        reference,
+        z=z,
+        color=config["trajectory_color_rgba"],
+        width=float(config["line_width"]),
     )
-    points = [reference_points[0], reference_points[-1], actual_points[0], actual_points[-1]]
-    draw.draw_points(
-        points,
-        [rgba(config["heading_color_rgba"])] * len(points),
-        [float(config["endpoint_point_size"])] * len(points),
+    draw_polyline(
+        draw,
+        actual,
+        z=z * 1.15,
+        color=config["actual_color_rgba"],
+        width=float(config["line_width"]),
+    )
+    draw_heading_markers(
+        draw,
+        reference,
+        z=z,
+        color=config["heading_color_rgba"],
+        width=float(config["heading_line_width"]),
+        length_m=float(config["heading_marker_length_m"]),
+    )
+    draw_pose_points(
+        draw,
+        np.asarray((reference[0], reference[-1])),
+        z=z,
+        color=config["heading_color_rgba"],
+        size=float(config["endpoint_point_size"]),
+    )
+    draw_pose_points(
+        draw,
+        np.asarray((actual[0], actual[-1])),
+        z=z * 1.15,
+        color=config["heading_color_rgba"],
+        size=float(config["endpoint_point_size"]),
     )
 
 

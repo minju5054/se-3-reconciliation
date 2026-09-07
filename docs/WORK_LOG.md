@@ -879,3 +879,61 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after this entry and final staged-diff review.
+
+## 2026-09-07T18:04:46+09:00 — EXP-02B GUI OLD replay execution diagnosis
+
+- **Purpose and scope:** Answer only why planned OLD and actual Jackal motion differ in EXP-02B,
+  separating nearest-reference geometry, body command versus measured motion, wheel target
+  versus measured joint motion, and replay/reset display artifacts. No optimization objective,
+  graph residual/weight, gate, selector, k interface, correspondence, benchmark, or LightNav
+  implementation changed. Starting local and fetched `origin/main` were both
+  `8a0563e26df3fb64d9cded96c2fd95d239c25137`.
+- **Implementation:** Added a diagnostic-only GUI runner/config/launcher that reads the frozen
+  EXP-02B candidate, verifies source/candidate hashes, reproduces the existing OLD replay and
+  comparability gate, visibly pauses before reset, explicitly resets to saved B with the last
+  OLD wheel target, and executes one existing candidate. Reused/refactored the Stage 0
+  DebugDraw geometry into a small helper. The viewport separates planned OLD, OLD actual,
+  full raw FRESH, selected FRESH suffix, current candidate, and post-reset actual; saved,
+  reproduced, reset, observation, selected-entry, and candidate-entry poses remain separate
+  logical markers. LiDAR display clutter is disabled only in the diagnostic viewport.
+- **Telemetry/metrics:** Added physics-step OLD/post pose, command, canonical four-wheel target,
+  directly measured joint velocity, and finite-difference body-motion logging. Added
+  nearest-OLD-polyline distance/yaw descriptors explicitly marked non-time-aligned, body and
+  per-wheel RMSE, immutable six-file output, strict validation, non-causal multi-label status,
+  source observation/model-ready/FRESH-usable timestamps, diagnostic phase timestamps, world
+  frame/yaw/units, and overwrite/non-finite guards. Outputs are ignored under
+  `data/exp02b_gui_diagnosis/<run_id>/`.
+- **Representative observation:** Actual GUI run
+  `exp02b-gui-case-high-omega-k3-raw-k-20260907T-final` completed
+  `case_high_delta_omega / k=3 / raw_k` with 89 OLD and 121 post samples. OLD nearest-polyline
+  mean/RMS/max/final were `0.05290/0.06460/0.15243/0.04661 m`. Body v/omega command-versus-
+  measured RMSE were `0.12133 m/s` and `0.63989 rad/s`; mean commanded/measured omega was
+  `0.75534/0.13920 rad/s`. Aggregate wheel RMSE was `0.84874 rad/s` (FL/FR/RL/RR
+  `1.04616/0.83351/0.75309/0.72462`). `B_saved` and `B_reproduced` matched exactly; reset
+  difference was `0 m / 1.51e-8 rad`. Raw-k post-switch delta-v/delta-omega remained the frozen
+  `0.54023 m/s / 1.42799 rad/s` result.
+- **GUI smoke:** Jackal moved during both OLD replay and post-switch execution. All six path
+  layers and marker states were visually inspected in the Isaac Sim 6.0.1 viewport; terminal
+  phase/live telemetry updated. PRE_RESET and exact-reset holds kept simulation time fixed at
+  `2.500000130 s`, and OLD cyan/post green histories remained split. The final no-hold GUI run
+  exited successfully with strict output validation. An untouched original runner GUI
+  qualification was also used while isolating initialization parity and reproduced the frozen
+  boundary exactly.
+- **Interpretation:** Reference deviation, body execution mismatch, and wheel tracking mismatch
+  are all visible under documented diagnostic thresholds. This representative replay rules out
+  a failed B reproduction and reset-history mixing as explanations for the displayed OLD gap,
+  but it does not isolate skid-steer/contact, controller behavior, wheel tracking, or their
+  interaction as a unique causal root cause.
+- **Validation:** New/related targeted suite `20 passed`; full suite `203 passed`. Python
+  compileall, launcher `bash -n`, strict output reconstruction, generated-data ignore check,
+  and `git diff --check` passed. Frozen recursive manifests remained
+  `d6a8176f...54533` for EXP-02B and `a3ec7b83...efaf` for its EXP-01B source. The existing
+  user camera/playback config changes were preserved and excluded from staging.
+- **Major files:** `README.md`, `configs/exp02b_gui_diagnosis.yaml`,
+  `docs/{EXP_02B_CONTROLLER_AWARE_RECONCILIATION.md,EXP_02B_GUI_DIAGNOSIS.md,WORK_LOG.md}`,
+  `src/reconciliation/exp02b_diagnosis.py`,
+  `scripts/isaac/{debug_draw_trajectories.py,exp02b_gui_diagnosis.py,lightnav_playback_single_chunk.py,run_exp02b_gui_diagnosis.sh}`,
+  and `tests/test_exp02b_diagnosis.py`.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.

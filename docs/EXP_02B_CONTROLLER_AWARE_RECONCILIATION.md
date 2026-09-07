@@ -61,6 +61,33 @@ reproduced B and the last OLD command exactly at stored precision. The gate was 
 is reset exactly to saved B with the last OLD wheel target restored. This reset is disclosed as
 the fairest deterministic post-switch comparison available; it is not a new controller.
 
+### Separate GUI execution diagnosis
+
+The frozen 45-branch quantitative protocol, M0–M4 definitions, candidates, and summary metrics
+remain unchanged. A separate diagnostic-only runner makes the replay/reset boundary and
+execution layers observable without writing into the frozen run:
+
+```bash
+./scripts/isaac/run_exp02b_gui_diagnosis.sh \
+  --case case_high_delta_omega \
+  --k 3 \
+  --method raw_k
+```
+
+It simultaneously draws planned OLD, OLD replay actual, raw full FRESH, selected FRESH[k:],
+the chosen frozen candidate, and post-reset actual. `B_saved`, `B_reproduced`, the exact-reset
+pose, FRESH observation, `F_k`, and `X_k` are separate logical markers. Diagnostic-only paused
+holds expose `PRE_RESET_INSPECTION` and `EXACT_BOUNDARY_RESET`; terminal JSON exposes every
+phase plus live body/wheel telemetry. OLD versus reference is measured only as nearest-polyline
+spatial deviation because LightNav waypoint rows have no intrinsic timestamps.
+
+The representative GUI smoke reproduced B exactly and observed OLD reference-distance RMS
+`0.06460 m`, body command-versus-measured RMSE `0.12133 m/s` and `0.63989 rad/s`, and aggregate
+wheel target-versus-measured RMSE `0.84874 rad/s`. These are descriptive execution observations,
+not proof of a skid-steer/contact root cause. The complete protocol, colors, telemetry schema,
+output contract, observations, and interpretation limits are in
+[EXP-02B GUI diagnosis](EXP_02B_GUI_DIAGNOSIS.md).
+
 ## Offline reconciliation results
 
 For M1–M4, `entry` is `Log(Fk^-1 Xk)` translation; M0 is intentionally evaluated against its

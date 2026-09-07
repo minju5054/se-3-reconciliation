@@ -316,6 +316,23 @@ Generated runs are immutable and ignored under `data/exp02b/`. See
 [EXP-02B](docs/EXP_02B_CONTROLLER_AWARE_RECONCILIATION.md) for the frozen case-selection
 rules, controller metrics, full results, and claim boundaries.
 
+To diagnose why the OLD reference and the executed Jackal path differ, run the separate GUI
+pipeline on the representative frozen branch:
+
+```bash
+./scripts/isaac/run_exp02b_gui_diagnosis.sh \
+  --case case_high_delta_omega \
+  --k 3 \
+  --method raw_k
+```
+
+The viewport separates planned OLD, replayed OLD actual, full FRESH, selected FRESH suffix,
+the current candidate, and post-reset actual history. The terminal prints phase and live
+controller/wheel telemetry. Diagnostic artifacts are immutable and ignored under
+`data/exp02b_gui_diagnosis/<run_id>/`; they do not modify the frozen EXP-02B result. See
+[EXP-02B GUI diagnosis](docs/EXP_02B_GUI_DIAGNOSIS.md) for colors, reset semantics, output
+schema, observed representative-case values, and interpretation limits.
+
 ## EXP-01 data workflow
 
 Never overwrite a raw VLA recording. Store uncommitted inputs below `data/exp01/raw/`, and
