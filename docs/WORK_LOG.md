@@ -937,3 +937,74 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.
+
+## 2026-09-07T19:54:01+09:00 — Stage 0-D Jackal execution-layer calibration and validation
+
+- **Purpose and scope:** Isolate the large EXP-02B OLD yaw-execution mismatch from
+  reconciliation, characterize the official Jackal command/wheel/body chain, test only the
+  smallest predeclared feedforward/PI correction, and gate it on calibration-independent
+  execution experiments. No LightNav output, trajectory, graph factor/weight, candidate,
+  physical/contact parameter, or historical result changed. Starting local and fetched
+  `origin/main` were both `7f52c1439575b4068844a474f563a27979e15a4e`.
+- **Protocol:** Added a frozen 61-trial nominal grid (`v=0/0.15/0.30 m/s`,
+  `omega=0/+-0.15/+-0.30/+-0.60 rad/s`; three moving repetitions), a disjoint 72-trial paired
+  held-out grid (`v=0.10/0.22/0.35`, `omega=+-0.20/+-0.45`; three repetitions per mode), the
+  unchanged Stage 0-B composite in both modes, and nominal/calibrated replay of all three
+  frozen EXP-02B OLD command histories. Acceptance gates, config, raw/derived separation,
+  physical/effective geometry fields, every raw hash, and the no-held-out-tuning flag are
+  explicit. Primary actual run:
+  `data/stage0/execution_calibration/stage0d-20260907T102700Z/`.
+- **Baseline evidence:** Nominal yaw response was deterministic but strongly condition
+  dependent: steady gain ranged `0.01950–0.36440`, group gain range was `0.34490`, and the
+  largest paired left/right response difference was `0.04922 rad/s`. Effective-width medians
+  where defined ranged approximately `0.898–8.216 m`. Several moving arcs retained low yaw
+  gain with small wheel RMSE (for example gain `0.0603`, wheel RMSE `0.0384 rad/s` at
+  `v=0.15, omega=-0.30`), while other conditions also had material wheel error. Wheel tracking
+  alone therefore does not explain the body mismatch; a body/contact contribution is plausible
+  but not causally identified.
+- **Correction selection:** The through-origin gain `c=0.136006` implied feedforward scale
+  `7.35263` and controller-only `b_eff=2.76157 m`. It failed worst-condition prediction error
+  (`0.12748>0.12 rad/s`) and condition-gain range (`0.34490>0.20`). Only then were the frozen
+  gentle/moderate/strong PI candidates run; all failed calibration accuracy. Strong
+  `(kp,ki)=(3,2)` was fixed solely as the lowest calibration angular-RMSE diagnostic candidate
+  (`0.19020 rad/s`), not as a passing calibration. It uses saturation, wheel bounds,
+  deterministic reset, finite checks, sign protection, and conditional anti-windup without
+  changing the physical asset.
+- **Held-out/composite:** Selected calibrated held-out omega RMSE improved
+  `0.32423→0.18354 rad/s`, but remained above `0.12`; v RMSE worsened
+  `0.02664→0.10130 m/s`, above `0.06`, and per-condition omega accuracy failed. Sign,
+  repeatability, no-oscillation, and saturation checks passed. The calibrated composite passed
+  all absolute Stage 0-B gates (position RMS/final `0.02201/0.07863 m`, yaw RMS/final
+  `0.02308/0.00398 rad`, goal reached), but strict non-degradation failed because final position
+  error increased from `0.05334 m`.
+- **Frozen replay result:** For representative high-delta-omega OLD, nominal→calibrated spatial
+  RMS was `0.06460→0.09296 m`, body omega RMSE `0.63989→0.62880 rad/s` (only 1.73% reduction),
+  body v RMSE `0.12133→0.21764 m/s`, and wheel RMSE `0.84874→1.05665 rad/s`. Nominal B remained
+  exact; calibrated B differed by `0.13212 m / 1.60263 rad` because its executed commands were
+  intentionally changed, not because of hidden reset mixing. High-delta-v also worsened;
+  benign motion was nearly unchanged in body metrics but wheel RMSE rose.
+- **Decision:** `EXECUTION_LAYER_NOT_YET_VALIDATED`. The held-out primitive and representative
+  replay gates failed, so the candidate must not be frozen as the future reconciliation
+  platform. Thresholds were not altered and no more complex controller was invented. This is
+  execution engineering evidence, not reconciliation-method evidence.
+- **GUI:** Actual Isaac GUI runs completed all five primitives (straight, both turns, both arcs),
+  the composite, and representative EXP-02B replay. Blue reference/planned OLD, orange nominal,
+  green calibrated, grey FRESH, and separate saved/nominal/calibrated boundary markers are drawn
+  using the existing DebugDraw helper. Final overlays were raised above the chassis after visual
+  review so the short failed calibrated replay remains visible. Jackal motion, reset between
+  modes, left/right turns, three histories, and live desired/executed/measured body plus four-
+  wheel target/measured telemetry were inspected. Diagnostic slowdown/hold is wall-time-only;
+  viewport captures are under the ignored primary run `gui_metadata/`.
+- **Validation:** Focused pure suite `16 passed`; complete suite `219 passed`. Python compileall,
+  both launcher syntax checks, config/split reconstruction, generated-data ignore check, visual
+  review of all eight quantitative plots plus GUI captures, and `git diff --check` passed.
+  Actual Isaac Sim was `6.0.1-rc.7+release.42383.32955d8d.gl`; runtime physical radius/separation
+  were `0.0979999974/0.375589997 m` and physics overrides were empty. Existing user camera and
+  playback-factor edits were preserved and excluded from staging.
+- **Major files:** `README.md`, `configs/stage0_jackal_execution_calibration.yaml`,
+  `docs/{STAGE_00_EXECUTION_LAYER_CALIBRATION.md,EXP_02B_CONTROLLER_AWARE_RECONCILIATION.md,WORK_LOG.md}`,
+  `src/reconciliation/{execution_calibration.py,controllers/jackal_execution_controller.py}`,
+  headless/GUI Isaac runners and launchers, summarizer, and two pure test modules.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.

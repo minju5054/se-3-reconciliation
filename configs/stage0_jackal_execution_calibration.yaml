@@ -1,0 +1,108 @@
+stage: stage0-d-jackal-execution-layer-calibration-and-validation
+
+paths:
+  output_root: data/stage0/execution_calibration
+  stage0b_config: configs/stage0_jackal_controller_validation.yaml
+  exp02b_config: configs/exp02b_controller_aware.yaml
+  exp02b_run: data/exp02b/exp02b-controller-aware-20260906T150400Z
+
+simulation:
+  physics_dt_s: 0.016666666666666666
+  control_dt_s: 0.1
+  settling_duration_s: 1.0
+  initial_stop_duration_s: 0.5
+  active_duration_s: 4.0
+  final_stop_duration_s: 0.5
+  steady_state_tail_s: 1.5
+  spawn_height_m: 0.15
+  initial_pose_se2: [0.0, 0.0, 0.0]
+
+# Frozen before the Stage 0-D primary characterization run.
+characterization:
+  repetitions: 3
+  linear_velocity_mps: [0.0, 0.15, 0.30]
+  angular_velocity_rps: [-0.60, -0.30, -0.15, 0.0, 0.15, 0.30, 0.60]
+  include_stationary_condition_once: true
+
+# These conditions are excluded from fitting and tuning.
+held_out_validation:
+  repetitions: 3
+  linear_velocity_mps: [0.10, 0.22, 0.35]
+  angular_velocity_rps: [-0.45, -0.20, 0.20, 0.45]
+
+# Option A is accepted only if a single through-origin nominal yaw-response gain
+# predicts leave-one-calibration-condition-out folds under these predeclared gates.
+model_selection:
+  effective_track_width_assessment:
+    leave_one_condition_out_omega_rmse_rps: 0.12
+    maximum_condition_mean_abs_error_rps: 0.12
+    minimum_sign_correct_fraction: 1.0
+    maximum_group_gain_range: 0.20
+    minimum_abs_measured_omega_rps: 0.02
+    maximum_feedforward_scale: 12.0
+  # Evaluated in this order only if Option A fails. Selection uses calibration
+  # trials only; held-out results cannot change the chosen controller.
+  feedback_candidates:
+    - id: pi_gentle
+      yaw_rate_kp: 1.0
+      yaw_rate_ki: 0.5
+    - id: pi_moderate
+      yaw_rate_kp: 2.0
+      yaw_rate_ki: 1.0
+    - id: pi_strong
+      yaw_rate_kp: 3.0
+      yaw_rate_ki: 2.0
+  maximum_abs_executed_omega_rps: 8.0
+  maximum_abs_wheel_target_rad_s: 30.0
+  sign_protection: true
+  anti_windup: conditional_integration
+
+# Frozen before any calibration or held-out output was generated.
+acceptance_criteria:
+  steady_state_sign_correct_fraction: 1.0
+  per_condition_omega_mean_abs_error_floor_rps: 0.06
+  per_condition_omega_mean_abs_error_fraction: 0.20
+  aggregate_omega_rmse_rps: 0.12
+  aggregate_v_rmse_mps: 0.06
+  per_condition_repeatability_std_omega_rps: 0.05
+  maximum_active_saturation_fraction: 0.20
+  maximum_sustained_sign_alternations: 4
+  composite:
+    final_position_error_m: 0.20
+    position_rmse_m: 0.15
+    final_yaw_error_rad: 0.10
+    yaw_rmse_rad: 0.10
+    non_degradation_tolerance: 1.0e-6
+  exp02b_replay:
+    representative_case: case_high_delta_omega
+    minimum_representative_omega_rmse_reduction_fraction: 0.30
+    maximum_spatial_rms_ratio: 1.25
+    maximum_spatial_rms_absolute_increase_m: 0.02
+
+exp02b_replay_validation:
+  cases: [case_high_delta_omega, case_high_delta_v, case_benign_delayed]
+  entry_index: 3
+  method: raw_k
+
+gui:
+  real_time_factor: 0.50
+  inter_mode_hold_wall_s: 1.0
+  final_hold: true
+  primitive_scenarios:
+    - {id: straight, linear_velocity_mps: 0.30, angular_velocity_rps: 0.0}
+    - {id: left_turn, linear_velocity_mps: 0.0, angular_velocity_rps: 0.30}
+    - {id: right_turn, linear_velocity_mps: 0.0, angular_velocity_rps: -0.30}
+    - {id: left_arc, linear_velocity_mps: 0.22, angular_velocity_rps: 0.45}
+    - {id: right_arc, linear_velocity_mps: 0.22, angular_velocity_rps: -0.45}
+  visualization:
+    z_offset_m: 0.07
+    reference_color_rgba: [0.10, 0.45, 1.00, 1.00]
+    nominal_color_rgba: [1.00, 0.25, 0.10, 1.00]
+    calibrated_color_rgba: [0.10, 1.00, 0.20, 1.00]
+    fresh_color_rgba: [0.65, 0.65, 0.65, 1.00]
+    saved_boundary_color_rgba: [1.00, 1.00, 0.10, 1.00]
+    nominal_boundary_color_rgba: [1.00, 0.25, 0.10, 1.00]
+    calibrated_boundary_color_rgba: [0.10, 1.00, 0.20, 1.00]
+    line_width: 5.0
+    marker_size: 13.0
+    camera_height_m: 4.0

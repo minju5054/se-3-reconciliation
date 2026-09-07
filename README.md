@@ -135,6 +135,45 @@ before/after metrics, and limitations are documented in
 [Stage 0-B](docs/STAGE_00_CONTROLLER_VALIDATION.md). This is execution-layer validation, not
 LightNav integration or research evidence.
 
+## Stage 0-D Jackal execution-layer calibration
+
+Stage 0-D isolates desired body commands, wheel targets, measured wheel motion, and measured
+body motion before further reconciliation research. Its headless primary run freezes a
+calibration grid and held-out gates, characterizes the nominal Jackal, tests a minimal
+effective-width/feedforward plus yaw-rate PI correction, and validates it on disjoint primitive
+conditions, the unchanged Stage 0-B composite path, and frozen EXP-02B OLD replays:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+./scripts/isaac/run_jackal_execution_calibration.sh --run-id <new_run_id>
+.venv/bin/python scripts/summarize_execution_calibration.py \
+  data/stage0/execution_calibration/<new_run_id>
+```
+
+Run the three qualitative suites against a completed primary run:
+
+```bash
+./scripts/isaac/run_jackal_execution_calibration_gui.sh \
+  data/stage0/execution_calibration/<run_id> \
+  --suite primitive --scenario all --real-time-factor 0.5 --no-hold
+./scripts/isaac/run_jackal_execution_calibration_gui.sh \
+  data/stage0/execution_calibration/<run_id> \
+  --suite composite --real-time-factor 0.5 --no-hold
+./scripts/isaac/run_jackal_execution_calibration_gui.sh \
+  data/stage0/execution_calibration/<run_id> \
+  --suite exp02b --case case_high_delta_omega --k 3 --method raw_k \
+  --real-time-factor 0.5 --no-hold
+```
+
+Blue is the reference/planned OLD, orange-red is nominal actual, green is calibrated actual,
+and grey is raw FRESH. Live terminal output separates desired/executed/measured body motion and
+target/measured wheels. Outputs are immutable and ignored below
+`data/stage0/execution_calibration/<run_id>/`; no frozen result or physical asset is modified.
+The primary 2026-09-07 run ended `EXECUTION_LAYER_NOT_YET_VALIDATED`: the correction improved
+some angular/composite metrics but failed the predefined held-out and EXP-02B replay gates. See
+[Stage 0-D](docs/STAGE_00_EXECUTION_LAYER_CALIBRATION.md) for protocol, results, plots, GUI
+legend, and claim limits.
+
 ## Stage 0-C LightNav single-chunk integration
 
 Stage 0-C keeps Isaac Sim, research Python, and LightNav Python isolated while passing one

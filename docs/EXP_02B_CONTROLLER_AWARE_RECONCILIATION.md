@@ -88,6 +88,16 @@ not proof of a skid-steer/contact root cause. The complete protocol, colors, tel
 output contract, observations, and interpretation limits are in
 [EXP-02B GUI diagnosis](EXP_02B_GUI_DIAGNOSIS.md).
 
+### Subsequent Stage 0-D execution-layer gate
+
+[Stage 0-D](STAGE_00_EXECUTION_LAYER_CALIBRATION.md) subsequently characterized and attempted
+to calibrate this execution layer without changing any frozen EXP-02B source, candidate,
+objective, weight, or historical metric. Its selected minimal correction failed the predefined
+held-out primitive and representative OLD-replay gates, so its final status is
+`EXECUTION_LAYER_NOT_YET_VALIDATED`. In particular, representative OLD angular RMSE changed
+only `0.63989 -> 0.62880 rad/s` while spatial RMS worsened `0.06460 -> 0.09296 m`.
+These are separate engineering results and do not revise the frozen 45-branch EXP-02B result.
+
 ## Offline reconciliation results
 
 For M1–M4, `entry` is `Log(Fk^-1 Xk)` translation; M0 is intentionally evaluated against its
@@ -257,8 +267,8 @@ It is not supported that the selector works, that any k is best, that the graph 
 LightNav end to end, that graph optimization is necessary, or that navigation, obstacle
 avoidance, generalization, real-robot behavior, or average occurrence rates improve.
 
-The smallest next experiment should change one formulation aspect only: add a controller-aware
-transition residual or an explicit reconciliation gate, then evaluate it against the frozen
-M1/M3/M4 branches on these same cases before any larger held-out study. The current results
-especially motivate a gate that leaves low-command-discontinuity transitions untouched. The
-choice and units of such a residual remain the primary uncertainty.
+Before a controller-facing reconciliation claim, the execution platform now has to clear the
+independent Stage 0-D held-out gate. Only after freezing such a validated controller should a
+future experiment change one formulation aspect, such as a controller-aware transition residual
+or an explicit reconciliation gate, against the frozen M1/M3/M4 branches. This sequencing note
+does not implement or select either formulation.
