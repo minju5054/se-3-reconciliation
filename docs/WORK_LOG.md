@@ -1071,3 +1071,68 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.
+
+## 2026-09-08T13:48:25+09:00 — Stage 0-F LightNav trajectory execution-envelope analysis
+
+- **Purpose and scope:** Resolve only whether the frozen redesigned EXP-01B LightNav OLD/FRESH
+  workload is covered by the current frozen calibrated Jackal trajectory-execution layer. This
+  is geometry characterization and execution-envelope validation, not reconciliation evidence.
+  No controller/follower gain, Stage 0-D candidate, track width, physics/contact/USD, LightNav,
+  EXP-02 objective, graph weight, selector, or correspondence changed. Starting local and
+  fetched `origin/main` were both `dd9ec20e52b456fb5903ce70b3363cb643f31a29` on `main`.
+  Existing user camera-eye and playback-factor config edits were preserved and excluded.
+- **Frozen inventory:** Strict reconstruction/hash validation retained 37 attempts: 30 eligible
+  timing-valid moving transitions, three `MODEL_STOP_OUTPUT`, three `OLD_EXHAUSTED`, and one
+  `TIMING_INVALID`. Six attempts had all-zero FRESH arrays, but only the three model STOPs are
+  labelled `STOP_OUTPUT`; the other three remain failed OLD-exhaustion attempts. Moving data
+  deduplicated to 8 OLD/8 FRESH raw-action hashes and 9 OLD/16 FRESH world-reference hashes.
+  No new LightNav inference ran and no source artifact changed.
+- **Geometry:** Added untimed spatial descriptors with wrapped pose-yaw and XY-tangent
+  progression kept separate, a 1 mm undefined-edge convention, finite curvature/radius
+  handling, lateral departure, tangent turn, sign change, and near-zero statistics. Added all
+  144 valid-length `FRESH[k:]` suffix descriptors without selecting k or testing a splice. The
+  fixture-only ten-dimensional range normalizer, outside radius, ambiguity margin, and
+  lexicographic severity order were frozen before execution. All 25 LightNav references were
+  descriptively outside the sparse Stage 0-E fixture neighborhood; this was not treated as an
+  execution prediction or a learned classifier.
+- **Primary execution:** Actual Isaac Sim run
+  `data/stage0/lightnav_execution_envelope/stage0f-20260908T043300Z/` completed 75 calibrated
+  trials (25 unique references x 3) plus 24 nominal trials (8 geometry-frozen representatives
+  x 3). OLD started at the recorded OLD observation pose and FRESH at its FRESH observation
+  pose. Every run used the unchanged Stage 0-B follower, frozen Stage 0-D `pi_strong`, official
+  Jackal, flat ground, zero-wheel/full-controller reset, and Stage 0-E absolute gates. Strict
+  validation passed all 99 trials and provenance hashes.
+- **Results:** Calibrated passed OLD 9/9 and FRESH 16/16 unique conditions with 75/75 goals.
+  Worst yaw RMSE was `0.08606 rad` for `old_aac92c8f6993b6f9`; hardest-severity
+  `fresh_b42af924228e8aaf` passed at position/yaw RMS `0.04022 m / 0.08121 rad`, final
+  `0.07296 m / 0.04183 rad`, desired-omega RMSE `0.22423 rad/s`, wheel RMSE
+  `0.53145 rad/s`, and saturation `0.06667`. The representative subset was nominal 3/8 versus
+  calibrated 8/8; its three most consequential nominal yaw failures improved from
+  `1.48171`, `1.54814`, and `0.88711 rad` to `0.05488`, `0.05813`, and `0.08121 rad`.
+- **Decision and limitation:** Final label is
+  `LIGHTNAV_ENVELOPE_COVERED_BY_CURRENT_CALIBRATED_PLATFORM`, with separate
+  `OLD_EXECUTION_ENVELOPE_COVERED` and
+  `FRESH_EXECUTION_ENVELOPE_COVERED_AT_OBSERVATION_STATE`. The decision intentionally keeps
+  `execution_platform_validated=false`, preserves both Stage 0-E strong-turn failures, and does
+  not claim suffix/splice or reconciliation success, future-distribution coverage, obstacles,
+  stochastic/real-robot robustness, or a unique controller/contact cause.
+- **GUI and plots:** Actual non-headless low, global-median, highest-severity, and nearest-strong
+  runs completed. Blue reference, green calibrated, red/orange nominal where available, magenta
+  FRESH start, explicit nominal-to-calibrated reset, Jackal motion, and live pose/follower/body/
+  wheel/PI telemetry were observed. The high view retained the nominal failure loop next to the
+  passing calibrated path. All four viewport captures were visually inspected; no calibrated
+  failure existed for a `first_fail` view. Ten requested plots were generated and visually
+  reviewed with cross-frame XY paths separated or explicitly display-canonicalized.
+- **Validation:** Focused Stage 0-F suite `10 passed`; complete suite `237 passed`. Python
+  compileall, both new shell launchers' `bash -n`, strict 99-trial `--validate-only`
+  reconstruction, generated-data ignore checks, source/reference hash validation, and
+  `git diff --check` passed. Several immutable superseded local runs were retained rather than
+  overwritten while correcting preprocessing edge semantics, output schema, and per-reference
+  provenance before the final run.
+- **Major files:** `README.md`, `configs/stage0_lightnav_execution_envelope.yaml`,
+  `docs/{STAGE_00_LIGHTNAV_EXECUTION_ENVELOPE.md,WORK_LOG.md}`,
+  `src/reconciliation/lightnav_execution_envelope.py`, preparation/headless/GUI/summarization
+  scripts and launchers, and `tests/test_lightnav_execution_envelope.py`.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.

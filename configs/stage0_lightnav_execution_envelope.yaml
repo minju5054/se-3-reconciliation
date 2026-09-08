@@ -1,0 +1,101 @@
+stage: stage0-f-lightnav-trajectory-execution-envelope
+
+paths:
+  output_root: data/stage0/lightnav_execution_envelope
+  source_cohort: data/exp01b_redesign/exp01b-controlled-primary-20260906T-frozen
+  source_config: configs/exp01b_controlled_latency.yaml
+  stage0e_run: data/stage0/closed_loop_execution_validation/stage0e-20260908T021433Z
+
+source_provenance:
+  experiment_id: exp01b-controlled-primary-20260906T-frozen
+  metadata_sha256: 294294a9fc63aa2b4d57a2eb1a12b4f8783af4a69606c130f93f854a552d5d35
+  protocol_sha256: 476e39fa3ba7c22692544249eadc42643450621f3504dad571112427853a1ecd
+  validation_sha256: f7e190857a4087bb289f2a1159e3432c2b115a2867f599de0f79114167c695fc
+  collection_summary_sha256: fc8d52fc4fdc859eb94f220b20586c03f06ee2dd31af0517979e59fa56e8a0d9
+  summary_sha256: e5799c802e629c6d23e86f412ca39dbfd77dcb8bbc18cd46a69426ad52b49e34
+  source_config_sha256: 9fe8a0c8423a76169dbeb7b41fd88b2e9d10a6318a733080f8f66d4351f89682
+  expected_attempt_count: 37
+  expected_valid_moving_count: 30
+  stop_action_absolute_tolerance: 1.0e-8
+
+stage0e_provenance:
+  run_id: stage0e-20260908T021433Z
+  metadata_sha256: 808eb16ec36cd05b2f43e9abef872e512f67edbbcb0805084b66bf63da93473a
+  config_snapshot_sha256: 93c0b10a94fca817da43c816ca8d2a5229f030e66ac0f688b5688541a0f9e4da
+  controlled_summary_sha256: 476bcef12cd8c4a4880cf9f32ea92cc7290d91f5ad604a509237282b5352ceb8
+  decision_sha256: abbf173a4ecd53b1a9bd40ff07ee7f72c717269358b702f95a9f99276d442d02
+  required_decision: EXECUTION_PLATFORM_NOT_READY
+  calibrated_controlled_pass_count: 5
+  strong_turn_failures: [strong_left, strong_right]
+
+geometry:
+  # Sub-millimetre XY edges make atan2-based tangents numerically unstable and
+  # are undefined for this descriptor; pose-yaw progression remains recorded.
+  segment_epsilon_m: 1.0e-3
+  curvature_zero_epsilon_per_m: 1.0e-9
+  intrinsic_waypoint_time_base: false
+  descriptor_distance:
+    # Every center/scale/outside radius is derived only from the seven Stage 0-E
+    # fixtures. LightNav descriptors are never used to fit the comparison space.
+    normalization: stage0e_fixture_min_max_range
+    scale_floor: 1.0e-9
+    features:
+      - path_length_m
+      - endpoint_displacement_m
+      - abs_net_pose_yaw_change_rad
+      - cumulative_abs_pose_yaw_change_rad
+      - max_abs_pose_yaw_increment_rad
+      - pose_yaw_per_meter_p95_abs_rad_per_m
+      - tangent_curvature_p95_abs_per_m
+      - cumulative_abs_tangent_turn_rad
+      - max_abs_lateral_departure_m
+      - curvature_sign_change_count
+    outside_rule: maximum_fixture_leave_one_out_nearest_distance
+    ambiguous_margin_fraction_of_outside_radius: 0.10
+  severity_order:
+    - tangent_curvature_p95_abs_per_m
+    - cumulative_abs_tangent_turn_rad
+    - max_abs_pose_yaw_increment_rad
+  severity_direction: ascending_easy_to_hard_lexicographic
+
+execution:
+  maximum_unique_references: 80
+  repetitions: 3
+  calibrated_mode: frozen_stage0d_candidate_from_stage0e
+  nominal_scope: geometry_frozen_representatives_only
+  historical_controller_commands_reused: false
+  canonicalize_references: false
+  old_start_pose: robot_pose_at_old_observation
+  fresh_start_pose: robot_pose_at_fresh_observation
+  scene: official_jackal_flat_ground_without_added_obstacles
+  acceptance_criteria_source: frozen_stage0e_config_snapshot
+
+representatives:
+  selection_before_execution: true
+  median_rule: lower_middle_after_severity_sort
+  rules:
+    - lowest_severity_old
+    - median_severity_old
+    - highest_severity_old
+    - lowest_severity_fresh
+    - median_severity_fresh
+    - highest_severity_fresh
+    - nearest_strong_turn_failing_fixture
+    - highest_sign_change_reference_if_any
+  merge_duplicate_kind_and_world_hash: true
+
+gui:
+  real_time_factor: 1.0
+  inter_mode_hold_wall_s: 1.0
+  final_hold: true
+  visualization:
+    z_offset_m: 0.72
+    reference_color_rgba: [0.10, 0.45, 1.00, 1.00]
+    nominal_color_rgba: [1.00, 0.25, 0.10, 1.00]
+    calibrated_color_rgba: [0.10, 1.00, 0.20, 1.00]
+    observation_marker_color_rgba: [0.95, 0.20, 0.95, 1.00]
+    line_width: 5.0
+    marker_size: 14.0
+    heading_marker_stride: 2
+    heading_marker_length_m: 0.14
+    camera_height_m: 4.0

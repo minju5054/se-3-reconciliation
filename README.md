@@ -213,6 +213,45 @@ nominal failed all aggregate gates. This selects no future reconciliation execut
 and does not trigger controller retuning. See
 [Stage 0-E](docs/STAGE_00_CLOSED_LOOP_EXECUTION_VALIDATION.md).
 
+## Stage 0-F LightNav trajectory execution envelope
+
+Stage 0-F asks the application-specific question left open by Stage 0-E: whether the frozen
+Stage 0-D calibrated candidate covers the geometry actually emitted by the frozen redesigned
+EXP-01B LightNav cohort. It does not tune the controller or test reconciliation. OLD and FRESH
+references are deduplicated by hash, model STOP outputs are reported separately, and FRESH is
+executed from its recorded observation pose. All waypoint descriptors are spatial because
+LightNav rows have no intrinsic timestamp.
+
+Prepare an immutable source/geometry inventory, execute every unique moving OLD/FRESH
+reference three times in Isaac, and validate the result with:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+.venv/bin/python scripts/prepare_lightnav_execution_envelope.py \
+  --run-id <new_run_id>
+./scripts/isaac/run_jackal_lightnav_execution_envelope.sh \
+  data/stage0/lightnav_execution_envelope/<new_run_id>
+.venv/bin/python scripts/summarize_lightnav_execution_envelope.py \
+  data/stage0/lightnav_execution_envelope/<new_run_id>
+```
+
+Inspect deterministic low, median, high, or nearest-strong-turn representatives in the actual
+Isaac viewport:
+
+```bash
+./scripts/isaac/run_jackal_lightnav_execution_envelope_gui.sh \
+  data/stage0/lightnav_execution_envelope/<run_id> \
+  --selection high --real-time-factor 1.0 --no-hold
+```
+
+`BLUE` is the LightNav reference, `GREEN` calibrated actual, `ORANGE/RED` nominal actual when
+the geometry-frozen representative belongs to the nominal subset, and `MAGENTA` is the FRESH
+observation/start pose. The frozen 2026-09-08 run covered all 9 unique OLD and 16 unique FRESH
+world references under the unchanged Stage 0-E absolute gates. This result is limited to the
+observed deterministic LightNav workload; it does not erase the two Stage 0-E strong-turn
+fixture failures or declare the execution platform generally validated. See
+[Stage 0-F](docs/STAGE_00_LIGHTNAV_EXECUTION_ENVELOPE.md).
+
 ## Stage 0-C LightNav single-chunk integration
 
 Stage 0-C keeps Isaac Sim, research Python, and LightNav Python isolated while passing one
