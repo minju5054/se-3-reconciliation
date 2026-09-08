@@ -1,0 +1,71 @@
+experiment: EXP-02C
+name: Current M4 Factor Isolation and Failure Attribution
+
+paths:
+  output_root: data/exp02c_factor_isolation
+  frozen_exp02b_run: data/exp02b/exp02b-controller-aware-20260906T150400Z
+  exp02b_config: configs/exp02b_controller_aware.yaml
+  frozen_candidate_manifest: configs/exp02b_calibrated_reeval.yaml
+  exp02a_graph_config: configs/exp02a_spatial_entry.yaml
+  exp01b_config: configs/exp01b_controlled_latency.yaml
+
+cases: [case_high_delta_v, case_high_delta_omega, case_benign_delayed]
+entry_indices: [0, 3, 6]
+variants:
+  - V0_RAW
+  - V1_ENTRY_FRESH
+  - V2_ENTRY_DIRECTION_FRESH
+  - V3_ENTRY_YAW_FRESH
+  - V4_FULL_CURRENT_M4
+  - V5_NO_ENTRY
+  - V6_NO_DIRECTION
+  - V7_NO_YAW
+  - V8_DIAGNOSTIC_NO_PROPAGATION
+
+# The values below are copied exactly from the frozen EXP-02A incoming-motion-aware
+# M4. Factor removal never renormalizes the remaining factors.
+residual_scales:
+  translation_m: 0.10
+  yaw_rad: 0.10
+  direction_unitless: 0.10
+historical_weights:
+  entry_preservation: 1.0
+  incoming_direction: 1.0
+  incoming_yaw: 1.0
+  fresh_motion: 1.0
+minimum_direction_translation_m: 1.0e-6
+solver:
+  max_iterations: 80
+  finite_difference_epsilon: 1.0e-6
+  initial_damping: 1.0e-3
+  damping_increase: 10.0
+  damping_decrease: 0.3
+  maximum_damping: 1.0e12
+  gradient_tolerance: 1.0e-9
+  step_tolerance: 1.0e-9
+  cost_tolerance: 1.0e-12
+
+diagnostics:
+  full_m4_regression_tolerance: 1.0e-9
+  raw_zero_tolerance: 1.0e-10
+  cosine_zero_norm_tolerance: 1.0e-9
+  controller_command_window: 3
+  synthetic_old_final_command_v_omega: [0.40, 0.0]
+
+gui:
+  hold: true
+  camera_height_m: 4.0
+  z_offset_m: 0.20
+  line_width: 5.0
+  marker_size: 14.0
+  colors:
+    old: [0.10, 0.40, 1.00, 1.00]
+    raw: [0.55, 0.55, 0.55, 1.00]
+    V1_ENTRY_FRESH: [0.10, 0.85, 0.85, 1.00]
+    V2_ENTRY_DIRECTION_FRESH: [1.00, 0.55, 0.10, 1.00]
+    V3_ENTRY_YAW_FRESH: [0.65, 0.25, 1.00, 1.00]
+    V4_FULL_CURRENT_M4: [1.00, 0.15, 0.15, 1.00]
+    V5_NO_ENTRY: [0.15, 0.90, 0.20, 1.00]
+    V8_DIAGNOSTIC_NO_PROPAGATION: [1.00, 0.15, 0.85, 1.00]
+    desired_target: [1.00, 1.00, 0.10, 1.00]
+    boundary: [1.00, 1.00, 1.00, 1.00]

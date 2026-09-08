@@ -1206,3 +1206,67 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.
+
+## 2026-09-08T17:00:09+09:00 — EXP-02C current-M4 factor isolation
+
+- **Purpose and scope:** Attribute the unchanged EXP-02A/EXP-02B M4 failure to its current
+  entry, incoming-direction, incoming-yaw, and FRESH relative-motion factors. This is an
+  offline formulation diagnostic, not an improved optimizer. No production graph residual,
+  weight, selector, gate, controller, physics, LightNav artifact, or frozen EXP-02A/B/B-R
+  result changed. Work started on fetched `origin/main` and local `main` at
+  `57dbd4317abb4360333954315e58b7bb1e832295`. Existing unrelated user camera-eye and
+  LightNav playback-factor edits were preserved and excluded.
+- **Implementation:** Added a separate `exp02c_factor_isolation` problem that reuses the
+  exact physical M4 residual functions, frozen scales/weights, right-local retract, central
+  finite difference (`epsilon=1e-6`), and LM algorithm while exposing V0–V8 factor subsets.
+  V8 reconstructs downstream nodes from exact raw FRESH so only X_k can change. Every solve
+  records exact accepted/rejected steps, initial/final physical and weighted per-factor
+  residuals/gradients, first/downstream node gradient norms, initial/final gradient cosines,
+  controller desired-command spatial probes, geometry/correction profiles, and best-fit left
+  SE(2) rigidity metrics. No intrinsic waypoint time was invented.
+- **Frozen regression and execution:** Final immutable ignored run
+  `data/exp02c_factor_isolation/exp02c-factor-isolation-20260908T133000Z/` completed 5
+  synthetic mechanism conditions and all 3 frozen real cases x `k={0,3,6}` x 9 variants,
+  producing 126 variant directories. Frozen EXP-02B top-level and candidate hashes were
+  checked against the EXP-02B-R manifest before output creation. V4 residual vectors and all
+  nine historical M4 candidate poses matched exactly: maximum residual, translation, and
+  wrapped-yaw differences were all `0.0` against the `1e-9` gate.
+- **Synthetic checks:** S0 was an exact all-factor/no-motion no-op. S1 had only direction
+  nonzero and V2/FULL moved the entry `0.271964 m` while V3 was a no-op. S2 had only yaw
+  nonzero and V3 changed entry yaw `0.175000 rad` while V2 was a no-op. S3's magnitude stress
+  left every current factor zero, exposing only a missing-mechanism candidate. In S4, FULL
+  moved entry/endpoint `0.271964/0.271964 m` with `5.53e-14 m` rigid-fit RMS; V8 kept the
+  endpoint raw but incurred `0.121626 m` edge RMS and `0.0880515 m` rigid-fit RMS. Synthetic
+  outputs are mechanism demonstrations only.
+- **Real attribution:** Every raw entry cost was zero and every raw fresh-motion cost was
+  at numerical zero. Benign Case C k=0 direction/yaw costs were `400.000` and
+  `1.31683e-5`, with weighted gradient norms `1007.6283` and `0.0362881`. Direction-only
+  changed desired `|delta v|` from `0.00442238` to `0.24096762 m/s`; yaw-only left it at
+  `0.00442236 m/s`; FULL was `0.24096764 m/s`. FULL entry displacement was `0.381925 m`.
+  At the solution, entry-versus-direction gradient cosine was `-0.999999886`, while removing
+  entry increased displacement to `0.396972 m`. Across all nine real FULL suffixes, worst
+  best-fit-single-left-SE(2) translation RMS was `1.26703e-11 m`.
+- **Interpretation:** Incoming direction supplies the undesirable benign-case target; entry
+  strongly conflicts with and restrains it; relative fresh-motion preservation propagates
+  the entry correction as an almost rigid suffix; no absolute downstream recovery or direct
+  OLD-to-entry magnitude residual exists. No factor is established as globally redundant.
+  The one recommended next experiment is to redesign incoming-direction residual semantics
+  before adding another factor; no such redesign was implemented here.
+- **Plots and GUI:** Generated and visually checked all 13 required plots, including raw and
+  final cosine panels, correction propagation, real overlay, and S1/S2/S4 mechanisms. Actual
+  non-headless Isaac Sim 6.0 DebugDraw runs completed for real benign k=0 and synthetic S4;
+  both viewport captures were inspected. The real view separates OLD/raw/V1–V5/B/F_k/X_k;
+  S4 separates raw/desired diagnostic target/FULL/no-propagation/B. Terminal JSON prints
+  factor costs/gradients, desired deltas, displacement, and rigidity. Both are static
+  qualitative views with `physics_executed=false`.
+- **Validation:** Focused EXP-02C suite `26 passed`; complete suite `272 passed`. Strict
+  artifact reconstruction passed `126` variants, `9` V4 regressions, `13` plots, and `2` GUI
+  captures. Whole-repository Python compileall, new launcher `bash -n`, all strict JSON/finite
+  checks, generated-data Git-ignore checks, and `git diff --check` passed.
+- **Major files:** `README.md`, `configs/exp02c_factor_isolation.yaml`,
+  `docs/{EXP_02C_FACTOR_ISOLATION.md,WORK_LOG.md}`,
+  `src/reconciliation/exp02c_factor_isolation.py`, offline runner, plot summarizer, Isaac
+  DebugDraw runner/launcher, and `tests/test_exp02c_factor_isolation.py`.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.

@@ -489,6 +489,36 @@ controller/wheel telemetry. Diagnostic artifacts are immutable and ignored under
 [EXP-02B GUI diagnosis](docs/EXP_02B_GUI_DIAGNOSIS.md) for colors, reset semantics, output
 schema, observed representative-case values, and interpretation limits.
 
+## EXP-02C current-M4 factor isolation
+
+EXP-02C is an offline failure-attribution diagnostic for the exact historical M4 factors. It
+does not change the graph objective, tune weights, add a gate, or claim improved navigation.
+Run the five synthetic mechanism fixtures and all 9 frozen real case/k conditions, then render
+the 13 saved plots:
+
+```bash
+.venv/bin/python scripts/run_exp02c_factor_isolation.py --run-id <run_id>
+.venv/bin/python scripts/summarize_exp02c_factor_isolation.py \
+  data/exp02c_factor_isolation/<run_id>
+```
+
+Inspect the primary benign-case attribution and the S4 downstream-conflict counterfactual in
+Isaac DebugDraw (static geometry only; no physics execution):
+
+```bash
+RUN=data/exp02c_factor_isolation/<run_id>
+./scripts/isaac/run_exp02c_factor_isolation_gui.sh "$RUN" \
+  --view real_benign_k0
+./scripts/isaac/run_exp02c_factor_isolation_gui.sh "$RUN" \
+  --view synthetic_s4
+```
+
+All arrays, residuals, costs, numerical Jacobian gradients, desired-command probes, geometry,
+rigidity diagnostics, summaries, plots, and GUI captures are written exclusively below the
+ignored run directory. LightNav rows remain untimed spatial waypoints. See
+[EXP-02C](docs/EXP_02C_FACTOR_ISOLATION.md) for exact variants, observed attribution, and the
+single recommended next formulation experiment.
+
 ## EXP-01 data workflow
 
 Never overwrite a raw VLA recording. Store uncommitted inputs below `data/exp01/raw/`, and
