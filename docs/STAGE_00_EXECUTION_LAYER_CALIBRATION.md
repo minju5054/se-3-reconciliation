@@ -310,3 +310,8 @@ the reconciliation research platform, and the selected parameters must not be pr
 production calibration. The bounded experiment stops here instead of inventing a more complex
 controller. These engineering results do not improve, invalidate, or otherwise constitute
 evidence for any reconciliation optimization method.
+
+Follow-on Stage 0-E evaluates this same frozen candidate under a different, same-reference
+closed-loop trajectory protocol. Its result and the reason it must not be conflated with the
+historical command replay above are documented in
+[Stage 0-E](STAGE_00_CLOSED_LOOP_EXECUTION_VALIDATION.md).

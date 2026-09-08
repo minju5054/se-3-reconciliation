@@ -1008,3 +1008,66 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.
+
+## 2026-09-08T12:10:00+09:00 — Stage 0-E closed-loop trajectory execution validation
+
+- **Purpose and scope:** Compare nominal and the frozen Stage 0-D `pi_strong` candidate on the
+  same trajectory references with a fresh `TrajectoryFollower` command at every measured-pose
+  control step. This is an execution-platform selection gate, not reconciliation evidence. No
+  follower/controller tuning, physics/USD change, LightNav change, or EXP-02A/02B graph change
+  was made. Starting local and fetched `origin/main` were both
+  `8ddaf2265201b552d878d2dffe37405a0bb17b54`. Existing user camera and playback-factor edits
+  were preserved and excluded from staging.
+- **Frozen protocol:** Added seven deterministic arbitrary-`N` controlled references, the
+  unchanged Stage 0-B composite, and all three frozen EXP-02B OLD arrays as a
+  `reference-matched closed-loop evaluation`. Every condition runs nominal/calibrated three
+  times from an independent world/pose/zero-wheel/reset controller state. Stage 0-B follower,
+  physics/control timing, asset, scene, and gates remain identical across modes. The Stage 0-D
+  model/metadata/config hashes and selected-candidate provenance are verified before execution;
+  historical command CSV rows are never used.
+- **Primary evidence:** Actual Isaac Sim run
+  `data/stage0/closed_loop_execution_validation/stage0e-20260908T021433Z/` completed 66/66
+  trials. Nominal passed 1/7 controlled conditions and failed composite and all three OLD
+  references on yaw/goal gates. Calibrated passed 5/7 controlled paths, including both gentle
+  turn directions, S-curve, and straight-turn-straight, but strong-left/right yaw RMS was
+  `0.17309/0.17028 rad`, above `0.10`; controlled aggregate therefore failed the frozen 6/7
+  gate. Calibrated passed composite (position/yaw RMS `0.00250 m / 0.01900 rad`, 3/3 goals) and
+  all three frozen source cases.
+- **Representative OLD reference:** In high-delta-omega same-reference closed loop,
+  nominal/calibrated position RMS was `0.06697/0.03997 m`, yaw RMS `0.38108/0.07980 rad`,
+  desired-omega RMSE `0.74357/0.20583 rad/s`, desired-v RMSE `0.10313/0.11402 m/s`, and wheel
+  RMSE `1.11290/0.57746 rad/s`; both reached 3/3 goals. Calibrated saturation was 0.0667 with
+  two sign-protection events. Its executed-omega versus measured RMSE was `1.60261 rad/s`, kept
+  separate from desired tracking. High-delta-v has the same frozen OLD hash/geometry and thus
+  identical Stage 0-E measurements; it remains a distinct source transition, not independent
+  OLD geometry.
+- **Historical replay distinction:** Stage 0-D held saved commands fixed and changed execution,
+  yielding representative calibrated spatial/omega/wheel RMS `0.09296 m / 0.62880 rad/s /
+  1.05665 rad/s` plus a changed reproduced boundary. Stage 0-E holds the reference fixed and
+  permits each measured-pose feedback loop to regenerate commands until goal/timeout. The
+  improved closed-loop result therefore answers a different question and does not revise the
+  frozen EXP-02B result.
+- **Decision:** `EXECUTION_PLATFORM_NOT_READY`. Nominal failed controlled/composite/EXP-02B;
+  calibrated passed composite/EXP-02B but failed controlled 5/7. No execution mode was frozen,
+  no threshold was changed, and the termination rule prevented further controller development.
+  Repeatability standard deviations were zero or floating-point epsilon across all conditions.
+- **GUI and artifacts:** Actual non-headless S-curve, Stage 0-B composite, and representative
+  EXP-02B runs completed. Existing DebugDraw helpers render blue reference/planned OLD,
+  orange-red nominal actual, green calibrated actual, and grey FRESH context excluded from
+  metrics. Nominal ghosts persisted across the explicit reset, Jackal motion and live
+  desired/executed/measured body plus target/measured four-wheel telemetry were observed, and
+  all three viewport captures were inspected. The immutable ignored run contains raw telemetry,
+  hashes, five required summaries, and 15 unit-labelled plots. A first failed plot attempt was
+  retained separately as `plots_failed_matplotlib_api/`; the completed official plots are in
+  `plots/`.
+- **Validation:** Focused pure suite `24 passed`; complete suite `227 passed`. Python compileall,
+  both launcher syntax checks, strict 66-trial reconstruction, generated-data ignore check,
+  visual review of representative plots plus all three GUI captures, and `git diff --check`
+  passed.
+- **Major files:** `README.md`, `configs/stage0_closed_loop_execution_validation.yaml`,
+  `docs/{STAGE_00_CLOSED_LOOP_EXECUTION_VALIDATION.md,STAGE_00_EXECUTION_LAYER_CALIBRATION.md,WORK_LOG.md}`,
+  `src/reconciliation/closed_loop_execution_validation.py`, shared/headless/GUI Isaac runners
+  and launchers, summarizer, and `tests/test_closed_loop_execution_validation.py`.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.

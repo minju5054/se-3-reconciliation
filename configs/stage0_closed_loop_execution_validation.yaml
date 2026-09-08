@@ -1,0 +1,107 @@
+stage: stage0-e-closed-loop-trajectory-execution-validation
+
+paths:
+  output_root: data/stage0/closed_loop_execution_validation
+  stage0b_config: configs/stage0_jackal_controller_validation.yaml
+  stage0d_run: data/stage0/execution_calibration/stage0d-20260907T102700Z
+  exp02b_config: configs/exp02b_controller_aware.yaml
+  exp02b_run: data/exp02b/exp02b-controller-aware-20260906T150400Z
+
+# These hashes freeze the completed Stage 0-D candidate used as an input.  Runtime
+# gains and saturation settings are loaded from that artifact, never copied here.
+stage0d_candidate_provenance:
+  run_id: stage0d-20260907T102700Z
+  calibration_model_sha256: 40821584e14a3f444fdd19ff27acc03e752ec3d0c5f2e8635b824a1419a81464
+  metadata_sha256: 5e5dff62dc9f87598562a1545de08954114b14733eac4d82733730dc82c32cfa
+  config_snapshot_sha256: 7a14d0f1efc0aa8bbe36750b4d9b75613b0efa7be64200885662d3caa06f6ecf
+  selected_candidate_id: pi_strong
+
+simulation:
+  physics_dt_s: 0.016666666666666666
+  control_dt_s: 0.1
+  settling_duration_s: 1.0
+  spawn_height_m: 0.15
+  initial_pose_se2: [0.0, 0.0, 0.0]
+
+# Frozen deterministic trajectory-level held-out fixtures.  They are not exact
+# copies of the Stage 0-D constant body-command calibration grid and are not
+# reconciliation research evidence.
+controlled_paths:
+  repetitions: 3
+  scenarios:
+    - id: straight
+      geometry: straight
+      segments:
+        - {name: straight, duration_s: 4.0, linear_velocity_mps: 0.35, angular_velocity_rps: 0.0}
+    - id: gentle_left
+      geometry: left
+      segments:
+        - {name: gentle_left, duration_s: 4.5, linear_velocity_mps: 0.32, angular_velocity_rps: 0.18}
+    - id: gentle_right
+      geometry: right
+      segments:
+        - {name: gentle_right, duration_s: 4.5, linear_velocity_mps: 0.32, angular_velocity_rps: -0.18}
+    - id: strong_left
+      geometry: left
+      segments:
+        - {name: strong_left, duration_s: 3.5, linear_velocity_mps: 0.24, angular_velocity_rps: 0.42}
+    - id: strong_right
+      geometry: right
+      segments:
+        - {name: strong_right, duration_s: 3.5, linear_velocity_mps: 0.24, angular_velocity_rps: -0.42}
+    - id: s_curve
+      geometry: direction_change
+      segments:
+        - {name: s_left, duration_s: 2.5, linear_velocity_mps: 0.30, angular_velocity_rps: 0.28}
+        - {name: s_right, duration_s: 2.5, linear_velocity_mps: 0.30, angular_velocity_rps: -0.28}
+    - id: straight_turn_straight
+      geometry: direction_change
+      segments:
+        - {name: straight_in, duration_s: 1.5, linear_velocity_mps: 0.30, angular_velocity_rps: 0.0}
+        - {name: turn, duration_s: 2.5, linear_velocity_mps: 0.25, angular_velocity_rps: 0.35}
+        - {name: straight_out, duration_s: 1.5, linear_velocity_mps: 0.30, angular_velocity_rps: 0.0}
+
+stage0b_composite:
+  repetitions: 3
+
+exp02b_old_reference:
+  repetitions: 3
+  cases: [case_high_delta_omega, case_high_delta_v, case_benign_delayed]
+  representative_case: case_high_delta_omega
+  evaluation_semantics: reference-matched closed-loop evaluation
+
+# Frozen before Stage 0-E simulator results were generated.  Pose/yaw RMSE use
+# nearest spatial reference projections, not a waypoint-row time alignment.
+acceptance_criteria:
+  minimum_goal_successes: 2
+  repetitions: 3
+  position_rmse_m: 0.15
+  final_position_error_m: 0.20
+  yaw_rmse_rad: 0.10
+  final_yaw_error_rad: 0.10
+  maximum_active_saturation_fraction: 0.20
+  minimum_progress_completion_ratio: 0.90
+  controlled_minimum_passing_scenarios: 6
+  controlled_scenario_count: 7
+  exp02b_minimum_passing_cases: 2
+  exp02b_case_count: 3
+  require_left_curved_pass: true
+  require_right_curved_pass: true
+  require_direction_change_pass: true
+
+gui:
+  real_time_factor: 0.5
+  inter_mode_hold_wall_s: 1.0
+  final_hold: true
+  controlled_scenarios: [straight, gentle_left, gentle_right, s_curve]
+  visualization:
+    z_offset_m: 0.70
+    reference_color_rgba: [0.10, 0.45, 1.00, 1.00]
+    nominal_color_rgba: [1.00, 0.25, 0.10, 1.00]
+    calibrated_color_rgba: [0.10, 1.00, 0.20, 1.00]
+    fresh_context_color_rgba: [0.65, 0.65, 0.65, 1.00]
+    line_width: 5.0
+    marker_size: 12.0
+    heading_marker_stride: 10
+    heading_marker_length_m: 0.16
+    camera_height_m: 4.0

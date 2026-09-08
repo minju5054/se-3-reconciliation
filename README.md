@@ -174,6 +174,45 @@ some angular/composite metrics but failed the predefined held-out and EXP-02B re
 [Stage 0-D](docs/STAGE_00_EXECUTION_LAYER_CALIBRATION.md) for protocol, results, plots, GUI
 legend, and claim limits.
 
+## Stage 0-E closed-loop trajectory execution validation
+
+Stage 0-E compares the nominal and frozen Stage 0-D `pi_strong` execution layers on the
+**same trajectory references**. Unlike Stage 0-D historical command replay, every mode starts
+from an independently reset pose/wheel state and a new `TrajectoryFollower` recomputes
+`[v, omega]` from the measured pose at every control step. The frozen primary protocol covers
+seven deterministic held-out paths, the unchanged Stage 0-B composite, and all three frozen
+EXP-02B `derived/old_world.npy` references with three repetitions per mode:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+./scripts/isaac/run_jackal_closed_loop_execution_validation.sh --run-id <new_run_id>
+.venv/bin/python scripts/summarize_closed_loop_execution_validation.py \
+  data/stage0/closed_loop_execution_validation/<new_run_id>
+```
+
+Run the three qualitative GUI suites against a completed primary run:
+
+```bash
+./scripts/isaac/run_jackal_closed_loop_execution_validation_gui.sh \
+  data/stage0/closed_loop_execution_validation/<run_id> \
+  --suite controlled --scenario all --real-time-factor 0.5 --no-hold
+./scripts/isaac/run_jackal_closed_loop_execution_validation_gui.sh \
+  data/stage0/closed_loop_execution_validation/<run_id> \
+  --suite composite --real-time-factor 0.5 --no-hold
+./scripts/isaac/run_jackal_closed_loop_execution_validation_gui.sh \
+  data/stage0/closed_loop_execution_validation/<run_id> \
+  --suite exp02b --case all --real-time-factor 0.5 --no-hold
+```
+
+Blue is the reference/planned OLD, orange-red is nominal actual, green is calibrated actual,
+and grey is EXP-02B FRESH context excluded from metrics. Terminal telemetry keeps follower
+desired, low-level executed, measured body motion, and four target/measured wheel velocities
+separate. The 2026-09-08 primary run ended `EXECUTION_PLATFORM_NOT_READY`: calibrated passed
+the composite and all three frozen OLD-reference cases but only 5/7 controlled paths, while
+nominal failed all aggregate gates. This selects no future reconciliation execution platform
+and does not trigger controller retuning. See
+[Stage 0-E](docs/STAGE_00_CLOSED_LOOP_EXECUTION_VALIDATION.md).
+
 ## Stage 0-C LightNav single-chunk integration
 
 Stage 0-C keeps Isaac Sim, research Python, and LightNav Python isolated while passing one
