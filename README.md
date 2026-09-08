@@ -252,6 +252,45 @@ observed deterministic LightNav workload; it does not erase the two Stage 0-E st
 fixture failures or declare the execution platform generally validated. See
 [Stage 0-F](docs/STAGE_00_LIGHTNAV_EXECUTION_ENVELOPE.md).
 
+## EXP-02B-R frozen calibrated re-evaluation
+
+EXP-02B-R re-executes only the 27 exact historical EXP-02B `raw_k`, `rigid`, and
+`graph` candidate files (three cases x `k={0,3,6}`) through the frozen Stage 0-D
+calibrated post-switch controller. OLD replay remains historical nominal, the saved
+boundary and final OLD wheel target are restored, and the calibrated PI state starts
+at zero. Desired follower commands, calibrated executed commands, measured body
+motion, and target/measured wheels are stored separately.
+
+Prepare, execute, summarize, and strictly validate a new immutable run with:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+.venv/bin/python scripts/prepare_exp02b_calibrated_reeval.py \
+  --run-id <new_run_id>
+./scripts/isaac/run_exp02b_calibrated_reeval.sh \
+  data/exp02b_calibrated_reeval/<new_run_id>
+.venv/bin/python scripts/summarize_exp02b_calibrated_reeval.py \
+  data/exp02b_calibrated_reeval/<new_run_id>
+.venv/bin/python scripts/summarize_exp02b_calibrated_reeval.py \
+  data/exp02b_calibrated_reeval/<new_run_id> --validate-only
+```
+
+Inspect one branch in the actual viewport:
+
+```bash
+./scripts/isaac/run_exp02b_calibrated_reeval_gui.sh \
+  data/exp02b_calibrated_reeval/<run_id> \
+  --case case_high_delta_omega --k 3 --method graph
+```
+
+Blue is the frozen candidate, green calibrated actual, orange historical nominal
+actual, and grey raw FRESH context; yellow/cyan/magenta mark `B_saved`, candidate
+entry, and raw `F_k`. The reset inspection hold pauses physics. The completed run
+passed the first-desired-command invariant 27/27 with zero difference and concluded
+`EXP02B_FORMULATION_CONCLUSION_UNCHANGED`: angular desired tracking improved, but M4
+did not become consistently better than raw_k or rigid. See
+[EXP-02B-R](docs/EXP_02B_CALIBRATED_REEVALUATION.md).
+
 ## Stage 0-C LightNav single-chunk integration
 
 Stage 0-C keeps Isaac Sim, research Python, and LightNav Python isolated while passing one

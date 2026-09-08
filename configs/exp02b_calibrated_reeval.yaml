@@ -1,0 +1,116 @@
+experiment: EXP-02B-R
+name: Frozen EXP-02B Candidate Re-evaluation under Calibrated Execution
+
+paths:
+  output_root: data/exp02b_calibrated_reeval
+  historical_exp02b_run: data/exp02b/exp02b-controller-aware-20260906T150400Z
+  historical_exp02b_config: configs/exp02b_controller_aware.yaml
+  source_exp01b_config: configs/exp01b_controlled_latency.yaml
+  stage0d_run: data/stage0/execution_calibration/stage0d-20260907T102700Z
+  stage0f_run: data/stage0/lightnav_execution_envelope/stage0f-20260908T043300Z
+
+historical_provenance:
+  run_id: exp02b-controller-aware-20260906T150400Z
+  source_selection_sha256: a879618500d978dacbb10fac2b3fafea38a323527029e47f586a6fb0948d7239
+  protocol_sha256: add45eb55a3aa260834e88607e838bdf1cfbfc640d10c0bb3324e45ccbecc7e1
+  offline_summary_sha256: 5a46db41e5575df3a99fb8bda9dbe1bda3fad6a1344d83af4df9cb3cd98653ee
+  offline_validation_sha256: 18397320ad33aa48898a0e4b3f7eb76123de192fb4cbb9fb553213099f52c145
+  execution_summary_sha256: 78a9314df2ef2eed43dcc12253987375a5c5abab315156aacb476ffcbc29fac5
+  summary_sha256: 641e6162b5dd4cd3052067fd14224c8886e3585a5e202f2540fd5558b819588b
+  exp02b_config_sha256: 23cb6f4f57613a47d28fd67eebda5f47f7efc7ea038b95f3ab468993df9b014b
+  exp01b_config_sha256: 9fe8a0c8423a76169dbeb7b41fd88b2e9d10a6318a733080f8f66d4351f89682
+
+stage0d_candidate_provenance:
+  run_id: stage0d-20260907T102700Z
+  calibration_model_sha256: 40821584e14a3f444fdd19ff27acc03e752ec3d0c5f2e8635b824a1419a81464
+  metadata_sha256: 5e5dff62dc9f87598562a1545de08954114b14733eac4d82733730dc82c32cfa
+  config_snapshot_sha256: 7a14d0f1efc0aa8bbe36750b4d9b75613b0efa7be64200885662d3caa06f6ecf
+  final_validation_sha256: 92c5a1fb993886baf5fb3e8ee1c91d58e99c2ca9ec750b484098fd5286ce7f9d
+  selected_candidate_id: pi_strong
+
+stage0f_scope_provenance:
+  run_id: stage0f-20260908T043300Z
+  config_snapshot_sha256: ef437df5e81251dd21f781da38d569751cab895497ea84f70a85c7e4ce38628c
+  execution_metadata_sha256: e5f371a506fe4ea4ad0200ffc4ed349479c9efa94df6427b37c344aa24b168ea
+  final_decision_sha256: 6188a3cf54eaeb8987ed0d97929bac0997d958bbe685b16d9e28a75d63ad43eb
+  required_status: LIGHTNAV_ENVELOPE_COVERED_BY_CURRENT_CALIBRATED_PLATFORM
+
+cases: [case_high_delta_v, case_high_delta_omega, case_benign_delayed]
+entry_indices: [0, 3, 6]
+methods: [raw_k, rigid, graph]
+
+# Frozen historical candidate bytes. These are loaded in place and never regenerated.
+candidate_sha256:
+  case_high_delta_v:
+    k_0:
+      raw_k: b42af924228e8aaf5f14fceb6ceffc4251319a1eab44bd45b0f93e60bf9f5ac3
+      rigid: 55bbcbca6e503104d7bc1a1f5f0b08fb2c301f7e0226c28175508e1512656061
+      graph: da4ef15e5bbbf883d75591a2a4d9792983a584a18c2bf2b31412fac4a798f0e9
+    k_3:
+      raw_k: d4ccbbdd13fab04bf59eb6700900be2c1096507bb6aa3409ab8f39f773d5fab0
+      rigid: 237f2cec37763296b87571f0196ccaaccdd016f3bbcc5d922c502ac6e0dc4433
+      graph: eba7762b617254887ad0ca688de7919c71d46c695c27660b0acb50eb26fb46f1
+    k_6:
+      raw_k: 61c1f0da614a5b4077bfcd4e1b976ceb3b3349f026c992bfa46917dd02ea5646
+      rigid: 2c3ee13a87ef95c52120942f587f28cb8d92900e328772a744ba92aa98e84f1f
+      graph: 8e641009be4c2ee5c0a77351a7c0d38186c4a0be29075e49bd58e350ea722139
+  case_high_delta_omega:
+    k_0:
+      raw_k: ea42defef3bd63a66efda631cef2454e128813b76d75cf085fc90db6dc64ba71
+      rigid: 2edc4d640d895abf5c31ca8dc781ffbbeb1eb53b4a9e9ff34d10db97984906dd
+      graph: d5ca07c86f13476fb6debdefa783d9414b5d5c046ec7d7dadc6527f439b48506
+    k_3:
+      raw_k: 1c6d11aa8c71e73ed41dd727bc91d9aacc576d5ff72b2d23ccf2f88aed5c9618
+      rigid: 79eb3ad8b9e1d86c5e37ec1cf05408b0109a8ae15eff83894829ad0c3239511a
+      graph: 5335b1b7541db435e51961cd3e888958c96b0cf8c786c0dd0120a1dc09e2f9c8
+    k_6:
+      raw_k: 14ebe4f1cef3353d19375cfd0e3c9617008481cb4041ec96f97547c123631af3
+      rigid: a6e2819464f533311182cca120422d4a77afa745da33a243e0e17843a05707c9
+      graph: 1eba156cf4862e057fcc8c31832ad65484a839e6b32238a12598f27387604b7f
+  case_benign_delayed:
+    k_0:
+      raw_k: 3c5012844b667d08fa29cb7d51bf399e951723aad851ca5f047120afc190a084
+      rigid: 24c36525bd8be4b7b1b549564138e8d4320fa0a65c08c81d4de06a43062f438c
+      graph: 12b6b15f03852d6b60511d4a8e2827d4c4b4a396d364b1216fa54ed6854429bb
+    k_3:
+      raw_k: 366bb90a9cd010aed601c160a41af905a45818063ea5e0f90dc194cabe1d4865
+      rigid: 60949f5773c8b2587439d76cdb7d34e3daaef36bcbdc5ca8f29422505aae0648
+      graph: 80c59179c760458c7ac860dda7fa39a154a48af2fee443d71e6a9d35c2c22f5c
+    k_6:
+      raw_k: 8ef6e4d56cd22fed45147bbb9328adde8bd0abecbbd1cddc6f3c214725d201cc
+      rigid: 324b20f05792462c7bdd2fe1ab033ad1c571b90841d0c3bfa17dcc9120a355ad
+      graph: cfea048bca8e03bcc01e50a18d4aadf435210602f2ce3e32b11f13ab777f8df7
+
+protocol:
+  replay_old_with_historical_nominal_execution: true
+  exact_boundary_state_reset_after_gate: true
+  restore_last_old_wheel_target: true
+  calibrated_controller_state_at_switch: RESET
+  first_calibrated_feedback_measurement: final_pre_reset_old_control_interval
+  branch_duration_s: 2.0
+  command_window: 3
+  first_desired_invariant_tolerance: 1.0e-12
+  pairwise_tie_tolerance: 1.0e-12
+
+simulation:
+  physics_dt_s: 0.016666666666666666
+  control_dt_s: 0.1
+  settling_duration_s: 1.0
+  spawn_height_m: 0.15
+
+gui:
+  real_time_factor: 0.5
+  exact_reset_hold_wall_s: 1.0
+  final_hold: true
+  visualization:
+    z_offset_m: 0.72
+    candidate_color_rgba: [0.10, 0.45, 1.00, 1.00]
+    calibrated_actual_color_rgba: [0.10, 1.00, 0.20, 1.00]
+    historical_actual_color_rgba: [1.00, 0.25, 0.10, 1.00]
+    fresh_context_color_rgba: [0.55, 0.55, 0.55, 1.00]
+    boundary_color_rgba: [1.00, 1.00, 0.10, 1.00]
+    candidate_entry_color_rgba: [0.15, 0.80, 1.00, 1.00]
+    raw_entry_color_rgba: [0.95, 0.20, 0.95, 1.00]
+    line_width: 5.0
+    marker_size: 14.0
+    camera_height_m: 3.5

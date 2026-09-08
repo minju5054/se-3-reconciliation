@@ -1136,3 +1136,73 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.
+
+## 2026-09-08T15:13:04+09:00 — EXP-02B-R frozen calibrated candidate re-evaluation
+
+- **Purpose and scope:** Re-execute only the exact historical EXP-02B M1 `raw_k`, M3
+  `rigid`, and M4 `graph` candidates through the already frozen Stage 0-D calibrated
+  post-switch execution layer and determine whether the formulation conclusion changes.
+  This added no optimization residual, graph/weight change, selector, gate, correspondence,
+  controller tuning, LightNav run, or physics/USD modification. Starting local and fetched
+  `origin/main` were both `d9f496d331cd9af6dd0f642e10fa63b915dfa431` on `main`.
+  Existing unrelated user edits to the Stage 0 controller-validation and LightNav
+  single-chunk configs were preserved and excluded from this work.
+- **Frozen protocol:** Strictly validated historical run
+  `data/exp02b/exp02b-controller-aware-20260906T150400Z/`, then hash-verified and loaded
+  its 27 candidate arrays in place for three cases x `k={0,3,6}` x
+  `{raw_k,rigid,graph}`. Historical nominal OLD commands were replayed, the comparability
+  gate was checked, saved B was restored exactly, the last OLD wheel target was restored,
+  and the frozen calibrated `pi_strong` PI state was reset at the switch. The final
+  pre-reset OLD interval supplies the first feedback measurement; no derivative crosses
+  the exact-reset teleport. Stage 0-D model SHA-256 remained
+  `40821584...1464` (`kp=3`, `ki=2`, feedforward `7.352630`, effective separation
+  `2.761574 m`), and Stage 0-F bounded-scope provenance was verified before execution.
+- **Primary execution:** Actual Isaac Sim run
+  `data/exp02b_calibrated_reeval/exp02b-r-20260908T054233Z/` completed and strictly
+  validated 27/27 branches. All 27 nominal OLD replay gates passed with zero saved-versus-
+  reproduced translation/yaw/command error. All 27 historical-versus-reevaluated first
+  desired `[v,omega]` invariants passed at `1e-12`; both maximum differences were exactly
+  zero. Each branch stores desired/executed/measured body layers, control-interval poses,
+  four target/measured wheel rates, PI/saturation state, follower progress, spatial
+  candidate metrics, raw hashes, and immutable source provenance.
+- **Physical result:** At common 0.1 s control-time sampling, aggregate nominal-to-
+  calibrated desired-omega tracking RMSE improved `0.596104 -> 0.217624 rad/s`, while
+  desired-v RMSE worsened `0.116737 -> 0.119536 m/s`, nearest-candidate position RMS
+  worsened `0.268973 -> 0.281053 m`, and nearest-candidate yaw RMS worsened
+  `0.133262 -> 0.178637 rad`. Immediate measured transition means were essentially
+  unchanged (`|delta v| 0.00394544 -> 0.00394546 m/s`, `|delta omega| 0.02861954 ->
+  0.02861958 rad/s`). Calibrated wheel RMSE averaged `0.689193 rad/s`; historical
+  EXP-02B has no equivalent wheel telemetry, so no historical wheel-improvement claim was
+  made. Spatial metrics are nearest-polyline/pose descriptors, never time-aligned waypoint
+  errors.
+- **Method result:** Graph was not consistently better. Against raw_k, the 18 immediate
+  measured components counted 12 better / 6 worse, while all nine metrics across nine
+  pairs counted 37 better / 44 worse. Against rigid, immediate components counted 10
+  better / 6 worse / 2 ties and all metrics counted 43 better / 36 worse / 2 ties. In
+  benign Case C k=0, raw/graph desired `|delta v|` remained exactly the historical
+  `0.004422/0.240968 m/s`; calibration reduced graph's immediate measured consequence,
+  but graph still displaced the selected entry `0.381925 m` with only numerical suffix
+  deformation. Final status is `EXP02B_FORMULATION_CONCLUSION_UNCHANGED`; the execution
+  result is mixed rather than a broad physical-tracking improvement.
+- **GUI and plots:** Actual non-headless GUI runs completed for high-delta-omega k=3
+  raw_k/rigid/graph and benign k=0 raw_k/graph. Existing DebugDraw helpers show blue
+  candidate, green calibrated actual, orange historical nominal actual, grey raw FRESH,
+  and separate saved/candidate/raw-entry markers; terminal rows show all three body-command
+  layers, measured transition, follower progress, wheels, PI, saturation, and sign events.
+  A first GUI-only inspection exposed that an unpaused viewport hold advanced physics; the
+  superseded captures were retained under `gui_metadata_pre_fix_do_not_use/`. The hold was
+  changed to pause/play the world, all five cases were rerun, and corrected first intervals
+  exactly matched headless outputs. Seven focused plots were generated and visually reviewed.
+- **Validation:** New focused suite `9 passed`; complete suite `246 passed`. Python
+  compileall, both new launcher `bash -n` checks, strict 27-branch reconstruction, seven-plot
+  validation, generated-data ignore checks, viewport/plot visual review, and
+  `git diff --check` passed. Frozen recursive manifests remained
+  `d6a8176fe2a2370b1bb1d812c72e52a1151f8fce45ed3688c9be71b7b7054533` for EXP-02B and
+  `a3ec7b83af54789b1d582257b7916c732b2b093e65010ceb3f2587d0b7e4efaf` for its source.
+- **Major files:** `README.md`, `configs/exp02b_calibrated_reeval.yaml`,
+  `docs/{EXP_02B_CALIBRATED_REEVALUATION.md,WORK_LOG.md}`,
+  `src/reconciliation/exp02b_calibrated_reeval.py`, preparation/headless/GUI/summarization
+  scripts and launchers, and `tests/test_exp02b_calibrated_reeval.py`.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.
