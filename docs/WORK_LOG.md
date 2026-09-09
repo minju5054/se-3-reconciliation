@@ -1381,3 +1381,29 @@ This file is append-only. Add each completed task at the bottom.
   `configs/stage0_lightnav_single_chunk.yaml` were preserved and excluded.
 - **Validation:** Complete suite passed `272`; generated-bank absence, historical-source
   presence, stale import/reference search, and `git diff --check` passed.
+
+## 2026-09-09T19:20:00+09:00 — DATA-02 collector implementation (pre-execution)
+
+- **Purpose:** Add an outcome-independent collector for genuine same-episode successive
+  LightNav OLD/FRESH pairs across ten predeclared navigation families. This is collection and
+  telemetry only; no graph, optimization, factor, selector, smoothing, LightNav change,
+  controller tuning, or physics tuning was added.
+- **Frozen protocol:** Added explicit D0-D9 static scenes/instructions, mirrored left/right
+  cases, five deterministic initial-condition variants, a fixed 0.50 s FRESH observation
+  trigger, natural-latency timing, 3-output qualification rules, 5-valid/10-attempt primary
+  limits, geometry descriptors, and dataset acceptance gates.
+- **Runtime:** The Isaac collector reuses the existing LightNav IPC, Stage 0-B follower,
+  official Jackal asset, and hash-verified frozen Stage 0-D calibrated controller. It records
+  all RGB inputs, raw/world paths, actual OLD execution, desired/executed/measured body motion,
+  target/measured wheels, P/B, timing, raw-switch probe, and provenance. FRESH remains
+  observation-anchored and is not executed.
+- **Curation:** Added immutable attempt/bank writing, raw/context identities, STOP/failure
+  retention, predeclared geometric qualification, descriptive output labels, raw-pair-grouped
+  70/30 split with scenario/geometry coverage, per-pair plots, six overview plots, acceptance
+  summary, and strict reconstruction validation.
+- **Pre-execution validation:** DATA-02 focused pure suite passed `19`; Python compilation,
+  launcher syntax, config validation, and `git diff --check` passed. Actual server/Isaac
+  smoke, qualification, GUI, primary collection, plot review, and strict artifact validation
+  follow from the committed collector so artifacts record a stable generator SHA.
+- **Unrelated changes:** Existing user edits to the two Stage 0 configs remain preserved and
+  excluded.

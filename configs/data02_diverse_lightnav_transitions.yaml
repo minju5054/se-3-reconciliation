@@ -1,0 +1,242 @@
+dataset: DATA-02 Diverse Real Successive LightNav OLD/FRESH Transition Collection
+instruction: Go straight down the corridor.
+
+paths:
+  output_root: data/data02_lightnav_diverse_transitions
+  lightnav_checkout: ../external/LightNav-0
+  checkpoint_relative_path: checkpoints/LightNav-0
+  warmup_source_run: data/stage0/lightnav_single_chunk/20260903T010425Z
+  stage0b_config: configs/stage0_jackal_controller_validation.yaml
+  stage0e_config: configs/stage0_closed_loop_execution_validation.yaml
+
+lightnav:
+  checkpoint_identifier: LightOriginsHQ/LightNav-0
+  backend: vllm_local
+  task_key: vlnce
+  task_type: vlnce_traj
+  expected_horizon: 10
+  expected_history_frames: 64
+  video_fps: 4.0
+  aspect_mode: stretch
+  prior_gpu_memory_utilization: 0.90
+  gpu_memory_utilization: 0.65
+  kv_cache_gib: 1.0
+  enforce_eager: true
+  intrinsic_waypoint_time_base: false
+
+ipc:
+  connect_timeout_s: 180.0
+  request_timeout_s: 120.0
+
+simulation:
+  physics_dt_s: 0.016666666666666666
+  control_dt_s: 0.1
+  settling_duration_s: 1.0
+  spawn_height_m: 0.15
+
+camera:
+  source: DATA-02 egocentric camera attached to Jackal articulation root
+  name: Data02EgocentricCamera
+  relative_translation_m: [0.30, 0.0, 0.48]
+  relative_rotation_xyz_deg: [90.0, 0.0, -90.0]
+  resolution_width: 448
+  resolution_height: 256
+  horizontal_fov_deg: 90.0
+  horizontal_aperture: 20.955
+  clipping_range_m: [0.05, 100.0]
+  rgb_format: HWC uint8 RGB
+  render_subframes: 1
+
+# Frozen collection semantics. No artificial inference delay is permitted.
+protocol:
+  fresh_observation_delay_s: 0.50
+  pace_real_time_factor: 0.95
+  acceptable_inference_real_time_factor: [0.80, 1.20]
+  maximum_fresh_wait_sim_s: 3.0
+  stop_action_absolute_tolerance: 1.0e-8
+  moving_path_length_min_m: 0.05
+  old_reference_distance_rms_max_m: 0.20
+  old_reference_distance_max_max_m: 0.40
+  active_saturation_fraction_max: 0.25
+  minimum_observation_to_boundary_motion_m: 0.0001
+  qualification_valid_outputs_per_family: 3
+  qualification_max_attempts_per_family: 5
+  primary_valid_moving_per_family: 5
+  primary_max_attempts_per_family: 10
+  primary_minimum_valid_moving_total: 45
+  primary_minimum_unique_raw_pairs: 30
+  primary_config_frozen: true
+  natural_latency_only: true
+  execute_fresh_after_collection: false
+
+# Frozen before primary collection. Lateral is positive to the initial robot's left.
+variations:
+  - {id: V0_BASELINE, yaw_offset_rad: 0.0, lateral_offset_m: 0.0}
+  - {id: V1_YAW_POS, yaw_offset_rad: 0.075, lateral_offset_m: 0.0}
+  - {id: V2_YAW_NEG, yaw_offset_rad: -0.075, lateral_offset_m: 0.0}
+  - {id: V3_LATERAL_POS, yaw_offset_rad: 0.0, lateral_offset_m: 0.10}
+  - {id: V4_LATERAL_NEG, yaw_offset_rad: 0.0, lateral_offset_m: -0.10}
+
+# Criteria are descriptive geometry qualification gates, never reconciliation outcomes.
+qualification_thresholds:
+  straight_max_cumulative_abs_pose_yaw_rad: 0.15
+  straight_max_abs_lateral_departure_m: 0.20
+  gentle_min_cumulative_abs_pose_yaw_rad: 0.15
+  gentle_min_abs_lateral_departure_m: 0.20
+  strong_min_cumulative_abs_pose_yaw_rad: 0.35
+  strong_min_cumulative_abs_tangent_turn_rad: 0.35
+  route_min_abs_lateral_departure_m: 0.25
+  route_min_cumulative_abs_tangent_turn_rad: 0.30
+  s_min_curvature_sign_changes: 1
+  s_min_cumulative_abs_tangent_turn_rad: 0.30
+  direction_sign_epsilon_rad: 0.03
+
+data02_collection:
+  coordinate_frame: Isaac world, x forward/east, y left/north, yaw CCW radians
+  scenario_order:
+    - D0_STRAIGHT
+    - D1_GENTLE_LEFT
+    - D2_GENTLE_RIGHT
+    - D3_STRONG_LEFT
+    - D4_STRONG_RIGHT
+    - D5_OBSTACLE_DETOUR_LEFT
+    - D6_OBSTACLE_DETOUR_RIGHT
+    - D7_BRANCH_OR_DOORWAY_LEFT
+    - D8_BRANCH_OR_DOORWAY_RIGHT
+    - D9_S_CURVE_OR_CHICANE
+  scenarios:
+    - id: D0_STRAIGHT
+      scene_id: straight_corridor
+      instruction: Go straight down the corridor.
+      initial_pose_se2: [0.0, 0.0, 0.0]
+      expected_geometry_class: straight
+      qualification_rule: straight
+      boxes:
+        - {id: left_wall, center: [4.0, 1.5, 1.0], size: [10.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: right_wall, center: [4.0, -1.5, 1.0], size: [10.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: end_blue, center: [9.0, 0.0, 0.75], size: [0.08, 1.35, 1.5], color: [0.2, 0.45, 0.8]}
+    - id: D1_GENTLE_LEFT
+      scene_id: gentle_left_open_bend
+      instruction: Follow the corridor as it bends gently left.
+      initial_pose_se2: [0.0, 10.0, 0.0]
+      expected_geometry_class: left
+      qualification_rule: gentle_left
+      boxes:
+        - {id: lower_wall, center: [4.0, 8.5, 1.0], size: [10.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: upper_near, center: [1.5, 11.5, 1.0], size: [5.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: guide_blue, center: [5.0, 11.0, 0.75], size: [0.10, 0.8, 1.5], color: [0.2, 0.45, 0.8]}
+    - id: D2_GENTLE_RIGHT
+      scene_id: gentle_right_open_bend
+      instruction: Follow the corridor as it bends gently right.
+      initial_pose_se2: [0.0, -10.0, 0.0]
+      expected_geometry_class: right
+      qualification_rule: gentle_right
+      boxes:
+        - {id: upper_wall, center: [4.0, -8.5, 1.0], size: [10.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: lower_near, center: [1.5, -11.5, 1.0], size: [5.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: guide_red, center: [5.0, -11.0, 0.75], size: [0.10, 0.8, 1.5], color: [0.9, 0.12, 0.08]}
+    - id: D3_STRONG_LEFT
+      scene_id: blocked_left_turn
+      instruction: Turn left at the blue wall and continue along the left corridor.
+      initial_pose_se2: [0.0, 20.0, -0.40]
+      expected_geometry_class: left
+      qualification_rule: strong_left
+      boxes:
+        - {id: lower_wall, center: [1.8, 18.5, 1.0], size: [5.6, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: upper_wall, center: [0.5, 21.5, 1.0], size: [3.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: block_blue, center: [2.0, 20.0, 1.0], size: [0.12, 3.0, 2.0], color: [0.15, 0.35, 0.9]}
+        - {id: branch_left, center: [2.0, 23.5, 1.0], size: [0.12, 4.0, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: branch_right, center: [5.0, 22.0, 1.0], size: [0.12, 7.0, 2.0], color: [0.72, 0.74, 0.78]}
+    - id: D4_STRONG_RIGHT
+      scene_id: blocked_right_turn
+      instruction: Turn right at the red wall and continue along the right corridor.
+      initial_pose_se2: [0.0, -20.0, 0.40]
+      expected_geometry_class: right
+      qualification_rule: strong_right
+      boxes:
+        - {id: upper_wall, center: [1.8, -18.5, 1.0], size: [5.6, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: lower_wall, center: [0.5, -21.5, 1.0], size: [3.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: block_red, center: [2.0, -20.0, 1.0], size: [0.12, 3.0, 2.0], color: [0.9, 0.12, 0.08]}
+        - {id: branch_upper, center: [2.0, -23.5, 1.0], size: [0.12, 4.0, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: branch_lower, center: [5.0, -22.0, 1.0], size: [0.12, 7.0, 2.0], color: [0.72, 0.74, 0.78]}
+    - id: D5_OBSTACLE_DETOUR_LEFT
+      scene_id: left_obstacle_detour
+      instruction: Go around the yellow obstacle on the left and continue forward.
+      initial_pose_se2: [0.0, 30.0, 0.0]
+      expected_geometry_class: route_change
+      qualification_rule: route_left
+      boxes:
+        - {id: left_wall, center: [4.0, 31.5, 1.0], size: [10.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: right_wall, center: [4.0, 28.5, 1.0], size: [10.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: obstacle, center: [2.0, 29.65, 0.65], size: [0.65, 0.70, 1.3], color: [0.95, 0.75, 0.08]}
+    - id: D6_OBSTACLE_DETOUR_RIGHT
+      scene_id: right_obstacle_detour
+      instruction: Go around the yellow obstacle on the right and continue forward.
+      initial_pose_se2: [0.0, -30.0, 0.0]
+      expected_geometry_class: route_change
+      qualification_rule: route_right
+      boxes:
+        - {id: left_wall, center: [4.0, -28.5, 1.0], size: [10.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: right_wall, center: [4.0, -31.5, 1.0], size: [10.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: obstacle, center: [2.0, -29.65, 0.65], size: [0.65, 0.70, 1.3], color: [0.95, 0.75, 0.08]}
+    - id: D7_BRANCH_OR_DOORWAY_LEFT
+      scene_id: left_doorway_branch
+      instruction: Enter the doorway on your left.
+      initial_pose_se2: [0.0, 40.0, 0.40]
+      expected_geometry_class: route_change
+      qualification_rule: route_left
+      boxes:
+        - {id: upper_wall, center: [1.8, 41.5, 1.0], size: [5.6, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: lower_wall, center: [0.5, 38.5, 1.0], size: [3.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: block, center: [2.0, 40.0, 1.0], size: [0.12, 3.0, 2.0], color: [0.75, 0.45, 0.15]}
+        - {id: door_left, center: [2.0, 43.5, 1.0], size: [0.12, 4.0, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: door_right, center: [5.0, 42.0, 1.0], size: [0.12, 7.0, 2.0], color: [0.72, 0.74, 0.78]}
+    - id: D8_BRANCH_OR_DOORWAY_RIGHT
+      scene_id: right_doorway_branch
+      instruction: Enter the doorway on your right.
+      initial_pose_se2: [0.0, -40.0, -0.40]
+      expected_geometry_class: route_change
+      qualification_rule: route_right
+      boxes:
+        - {id: upper_wall, center: [0.5, -38.5, 1.0], size: [3.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: lower_wall, center: [1.8, -41.5, 1.0], size: [5.6, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: block, center: [2.0, -40.0, 1.0], size: [0.12, 3.0, 2.0], color: [0.75, 0.45, 0.15]}
+        - {id: door_upper, center: [2.0, -43.5, 1.0], size: [0.12, 4.0, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: door_lower, center: [5.0, -42.0, 1.0], size: [0.12, 7.0, 2.0], color: [0.72, 0.74, 0.78]}
+    - id: D9_S_CURVE_OR_CHICANE
+      scene_id: alternating_chicane
+      instruction: Navigate through the chicane and continue forward.
+      initial_pose_se2: [0.0, 50.0, 0.0]
+      expected_geometry_class: s_curve
+      qualification_rule: s_curve
+      boxes:
+        - {id: left_wall, center: [4.0, 51.6, 1.0], size: [10.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: right_wall, center: [4.0, 48.4, 1.0], size: [10.0, 0.12, 2.0], color: [0.72, 0.74, 0.78]}
+        - {id: first, center: [1.7, 50.55, 0.60], size: [0.55, 0.75, 1.2], color: [0.15, 0.55, 0.85]}
+        - {id: second, center: [3.1, 49.45, 0.60], size: [0.55, 0.75, 1.2], color: [0.85, 0.25, 0.15]}
+
+split:
+  heldout_fraction: 0.30
+  deterministic_seed: DATA02-FROZEN-SPLIT-v1
+
+frames:
+  raw_lightnav: observation-time robot frame; x forward, y left, yaw CCW; metres/radians
+  world: Isaac world; x/y metres, yaw CCW radians
+  boundary_canonical: visualization-only T_B_inverse world frame
+  intrinsic_waypoint_time_base: false
+
+gui:
+  real_time_factor: 0.50
+  inter_episode_hold_wall_s: 0.75
+  final_hold: true
+  visualization:
+    z_offset_m: 0.72
+    old_reference_color_rgba: [0.10, 0.45, 1.00, 1.00]
+    old_actual_color_rgba: [0.10, 1.00, 0.20, 1.00]
+    fresh_reference_color_rgba: [1.00, 0.55, 0.10, 1.00]
+    boundary_color_rgba: [1.00, 0.10, 0.10, 1.00]
+    previous_pose_color_rgba: [0.05, 0.05, 0.05, 1.00]
+    observation_color_rgba: [0.85, 0.20, 0.95, 1.00]
+    line_width: 5.0
+    marker_size: 14.0
+    camera_height_m: 5.0

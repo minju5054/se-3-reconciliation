@@ -261,6 +261,36 @@ have therefore been removed in a forward change. The historical EXP-01B source a
 Git history remain intact for reproducibility. See the retained
 [DATA-01 retirement record](docs/DATA_01_FROZEN_LIGHTNAV_TRANSITION_BANK.md).
 
+## DATA-02 diverse successive LightNav transitions
+
+DATA-02 is the primary coverage-oriented formulation-development source. Each sample is a
+genuine same-episode pair: LightNav predicts OLD from an earlier observation, the Jackal
+executes OLD through the frozen calibrated execution layer, and an asynchronous natural-
+latency FRESH request is made from a later observation while OLD remains active. FRESH stays
+anchored at that observation pose; collection stops at readiness boundary B without executing
+FRESH or any reconciled trajectory.
+
+Run qualification, a one-attempt-per-family GUI smoke, and the frozen primary collection:
+
+```bash
+cd ~/Workspace/se-3-reconciliation
+./scripts/isaac/run_data02_transition_collection.sh qualification \
+  --run-id <qualification_run_id>
+./scripts/isaac/run_data02_transition_collection.sh smoke \
+  --run-id <gui_smoke_run_id> --scenario all --gui --no-hold
+./scripts/isaac/run_data02_transition_collection.sh primary \
+  --run-id <primary_run_id> \
+  --qualification-run data/data02_lightnav_diverse_transitions/<qualification_run_id>
+.venv/bin/python scripts/validate_data02_transitions.py \
+  data/data02_lightnav_diverse_transitions/<primary_run_id>
+```
+
+Normal GUI launches omit `--no-hold` and keep Isaac open with a visible moving Jackal. Blue
+is OLD, green is actual OLD execution, orange is observation-anchored FRESH, magenta is its
+observation pose, black is P, and red is B. Generated attempts/banks/plots are immutable and
+ignored below `data/data02_lightnav_diverse_transitions/`. See
+[DATA-02](docs/DATA_02_DIVERSE_LIGHTNAV_TRANSITIONS.md).
+
 ## EXP-02B-R frozen calibrated re-evaluation
 
 EXP-02B-R re-executes only the 27 exact historical EXP-02B `raw_k`, `rigid`, and
