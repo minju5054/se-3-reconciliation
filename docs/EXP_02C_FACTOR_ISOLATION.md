@@ -220,10 +220,18 @@ RUN=data/exp02c_factor_isolation/exp02c-factor-isolation-20260908T133000Z
 
 The real legend is blue OLD, grey raw FRESH/F_k, cyan V1, orange V2, purple V3, red FULL,
 green NO_ENTRY, white B, and colored X_k markers. The S4 legend is grey raw, yellow desired
-diagnostic target, red FULL, magenta no-propagation, and white B. Terminal JSON prints factor
-costs/gradients, desired deltas, entry/endpoint displacement, and rigid-fit RMS. Both views are
-static Isaac DebugDraw only (`physics_executed=false`); GUI images do not replace numeric
+diagnostic target, red FULL, magenta no-propagation, and white B. Both views also load the
+official `Clearpath/Jackal/jackal.usd` used by Stage 0 and place it at the real view's saved B
+or S4's declared synthetic B. This is a static pose reference: the articulation is not
+initialized, the timeline is not played, and no robot motion or physics evidence is produced
+(`physics_executed=false`). Metadata records the world-frame SE(2) pose and units. The terminal
+explicitly prints this meaning and the robot pose, then prints factor costs/gradients, desired
+deltas, entry/endpoint displacement, and rigid-fit RMS. GUI images do not replace numeric
 evidence.
+
+Interactive execution holds at `EXP02C_GUI_PHASE=READY_AND_HOLDING` until the Isaac window is
+closed or `Ctrl-C` is pressed. `--no-hold` is an automation-only option that intentionally
+closes the window after its viewport capture; it should not be used for visual inspection.
 
 ## 18. Claims, limitations, and one recommendation
 

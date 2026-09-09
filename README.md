@@ -503,7 +503,9 @@ the 13 saved plots:
 ```
 
 Inspect the primary benign-case attribution and the S4 downstream-conflict counterfactual in
-Isaac DebugDraw (static geometry only; no physics execution):
+Isaac. The viewport includes the official Jackal USD as a **static visual reference at real
+saved boundary B (or the declared synthetic B)** together with the DebugDraw geometry; it does
+not execute physics:
 
 ```bash
 RUN=data/exp02c_factor_isolation/<run_id>
@@ -512,6 +514,10 @@ RUN=data/exp02c_factor_isolation/<run_id>
 ./scripts/isaac/run_exp02c_factor_isolation_gui.sh "$RUN" \
   --view synthetic_s4
 ```
+
+The interactive command stays open until the Isaac window is closed or `Ctrl-C` is pressed.
+Do not add `--no-hold` for manual inspection: that option is reserved for automated capture
+checks and intentionally closes the window after saving the screenshot.
 
 All arrays, residuals, costs, numerical Jacobian gradients, desired-command probes, geometry,
 rigidity diagnostics, summaries, plots, and GUI captures are written exclusively below the

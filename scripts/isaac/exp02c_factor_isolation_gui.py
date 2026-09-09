@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Isaac DebugDraw-only GUI for saved EXP-02C factor-isolation artifacts."""
+"""Isaac GUI for saved EXP-02C factor-isolation artifacts and a static Jackal reference."""
 
 from __future__ import annotations
 
 import argparse
 from datetime import datetime, timezone
 import json
+import math
 from pathlib import Path
 import sys
 import time
@@ -24,7 +25,11 @@ def parse_args() -> argparse.Namespace:
         choices=("real_benign_k0", "synthetic_s4"),
         default="real_benign_k0",
     )
-    parser.add_argument("--no-hold", action="store_true")
+    parser.add_argument(
+        "--no-hold",
+        action="store_true",
+        help="automation only: close after saving the viewport capture",
+    )
     parser.add_argument("--headless", action="store_true", help="render validation only")
     return parser.parse_args()
 
@@ -37,12 +42,16 @@ from isaacsim import SimulationApp
 SIMULATION_APP = SimulationApp({"headless": ARGS.headless})
 
 import numpy as np
+import omni.usd
 import yaml
+from isaacsim.core.utils.stage import add_reference_to_stage, is_stage_loading
 from isaacsim.core.utils.viewports import set_camera_view
 from isaacsim.util.debug_draw import _debug_draw
 from omni.kit.viewport.utility import capture_viewport_to_file, get_active_viewport
+from pxr import Gf, UsdGeom, UsdLux
 
 from debug_draw_trajectories import draw_heading_markers, draw_polyline, draw_pose_points
+from lightnav_stage0c_runtime import resolve_jackal_asset
 from reconciliation.online_switch import load_strict_json, save_json_exclusive, sha256_file
 
 
@@ -52,6 +61,51 @@ def load_yaml(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValueError(f"{path} must contain a mapping")
     return value
+
+
+def resolve_repository_path(value: str | Path) -> Path:
+    path = Path(value).expanduser()
+    return path.resolve() if path.is_absolute() else (REPOSITORY_ROOT / path).resolve()
+
+
+def add_static_boundary_jackal(
+    config: dict[str, Any], boundary: np.ndarray, boundary_kind: str
+) -> dict[str, Any]:
+    """Load the official Jackal as a non-executing visual reference at view boundary B."""
+
+    exp01b_config_path = resolve_repository_path(config["paths"]["exp01b_config"])
+    exp01b_config = load_yaml(exp01b_config_path)
+    robot_config = exp01b_config["robot"]
+    asset = resolve_jackal_asset(robot_config)
+    spawn_height = float(exp01b_config["simulation"]["spawn_height_m"])
+    wrapper_path = "/World/Exp02CStaticBoundaryJackal"
+    reference_path = wrapper_path + "/Asset"
+    stage = omni.usd.get_context().get_stage()
+    wrapper = UsdGeom.Xform.Define(stage, wrapper_path)
+    wrapper.AddTranslateOp().Set(
+        Gf.Vec3d(float(boundary[0]), float(boundary[1]), spawn_height)
+    )
+    wrapper.AddRotateZOp().Set(math.degrees(float(boundary[2])))
+    add_reference_to_stage(str(asset["resolved_path"]), reference_path)
+    dome = UsdLux.DomeLight.Define(stage, "/World/Exp02CStaticViewLight")
+    dome.CreateIntensityAttr(1000.0)
+    while is_stage_loading():
+        if not SIMULATION_APP.is_running():
+            raise RuntimeError("Isaac Sim closed while loading the Jackal visual")
+        SIMULATION_APP.update()
+    return {
+        "asset": asset,
+        "reference_prim_path": reference_path,
+        "pose_se2": [float(value) for value in boundary],
+        "pose_frame": "world",
+        "translation_unit": "m",
+        "yaw_unit": "rad",
+        "boundary_kind": boundary_kind,
+        "spawn_height_m": spawn_height,
+        "visual_only": True,
+        "articulation_initialized": False,
+        "physics_executed": False,
+    }
 
 
 def capture(path: Path) -> None:
@@ -127,6 +181,7 @@ def main() -> None:
         old = np.load(trial / "derived/old_world.npy", allow_pickle=False)
         attempt = load_strict_json(trial / "results/attempt.json")
         boundary = np.asarray(attempt["robot_pose_at_new_ready"], dtype=float)
+        boundary_kind = "saved_source_boundary"
         raw = np.load(root / "V0_RAW/raw_fresh.npy", allow_pickle=False)
         draw_polyline(draw, old, z=z, color=colors["old"], width=width)
         draw_polyline(draw, raw, z=z + 0.02, color=colors["raw"], width=width)
@@ -176,6 +231,7 @@ def main() -> None:
         full = np.load(root / "V4_FULL_CURRENT_M4/optimized.npy", allow_pickle=False)
         no_prop = np.load(root / "V8_DIAGNOSTIC_NO_PROPAGATION/optimized.npy", allow_pickle=False)
         boundary = np.asarray([0.0, 0.0, 0.0])
+        boundary_kind = "declared_synthetic_boundary"
         for offset, (poses, color) in enumerate(
             (
                 (raw, colors["raw"]),
@@ -197,8 +253,23 @@ def main() -> None:
             "WHITE_STAR": "B",
         }
 
+    print("EXP02C_GUI_PHASE=LOADING_STATIC_JACKAL", flush=True)
+    robot_visual = add_static_boundary_jackal(config, boundary, boundary_kind)
     configure_camera(paths, float(visual["camera_height_m"]))
     print(f"EXP02C_GUI_PHASE=STATIC_FACTOR_DIAGNOSIS view={ARGS.view}", flush=True)
+    print(
+        "EXP02C_GUI_ROBOT="
+        + json.dumps(
+            {
+                "meaning": "static visual reference at view boundary B; not an execution trace",
+                "boundary_kind": robot_visual["boundary_kind"],
+                "pose_se2": robot_visual["pose_se2"],
+                "reference_prim_path": robot_visual["reference_prim_path"],
+            },
+            sort_keys=True,
+        ),
+        flush=True,
+    )
     print("EXP02C_GUI_LEGEND=" + json.dumps(legend, sort_keys=True), flush=True)
     for variant in terminal_variants:
         print_variant(root, variant)
@@ -224,6 +295,7 @@ def main() -> None:
             "isaac_debug_draw": True,
             "physics_executed": False,
             "quantitative_evidence": False,
+            "robot_visual": robot_visual,
             "legend": legend,
             "terminal_variants": list(terminal_variants),
             "screenshot": str(screenshot) if screenshot.is_file() else None,
@@ -231,8 +303,11 @@ def main() -> None:
         },
     )
     print("EXP02C_GUI_PHASE=FINISHED output=" + str(output), flush=True)
-    if bool(config["gui"]["hold"]) and not ARGS.no_hold:
-        print("Close Isaac Sim to exit the static diagnostic view.", flush=True)
+    if not ARGS.no_hold:
+        print(
+            "EXP02C_GUI_PHASE=READY_AND_HOLDING; close Isaac Sim or press Ctrl-C to exit.",
+            flush=True,
+        )
         while SIMULATION_APP.is_running():
             SIMULATION_APP.update()
             time.sleep(0.02)

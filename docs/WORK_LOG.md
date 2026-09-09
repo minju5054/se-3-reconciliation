@@ -1270,3 +1270,39 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.
+
+## 2026-09-09T14:34:29+09:00 — EXP-02C GUI visible-Jackal and hold correction
+
+- **Issue and scope:** The saved EXP-02C GUI showed only DebugDraw trajectories because the
+  runner never added a robot USD, and automated smoke commands using `--no-hold` intentionally
+  closed the window after capture. Work started from fetched local/origin `main` at
+  `3ada4301cd14db8b7e3f33ddc4205be945274261`. Existing unrelated user edits to the Stage 0
+  controller-validation and LightNav single-chunk configs were preserved and excluded.
+- **Correction:** The GUI now reuses the Stage 0/EXP-01B asset resolver, loads the official
+  `Clearpath/Jackal/jackal.usd`, and places it at real saved B or declared synthetic B. It is
+  explicitly a visual-only reference: no articulation initialization, timeline playback,
+  physics step, or robot execution is performed. GUI metadata records the resolved asset
+  provenance, world-frame B pose and units, boundary kind, spawn height, prim path, and
+  `visual_only`/`physics_executed` flags. Terminal output likewise identifies the model as a
+  static reference rather than experimental evidence.
+- **Lifetime behavior:** Normal interactive launch now always reaches
+  `EXP02C_GUI_PHASE=READY_AND_HOLDING` and remains open until the window is closed or `Ctrl-C`
+  is pressed. `--no-hold` remains available only for automated capture and its help text and
+  documentation now state that it deliberately closes the GUI.
+- **Actual GUI verification:** A non-headless real-benign-k0 capture completed at
+  `gui_metadata/real_benign_k0-20260909T053224Z/`; the viewport image was inspected and showed
+  the Jackal at B together with OLD/raw/V1--V5 trajectories and markers. A final-code
+  synthetic-S4 capture at `gui_metadata/synthetic_s4-20260909T053822Z/` was also inspected and
+  showed the Jackal at declared B with raw/target/FULL/no-propagation paths. A second
+  non-headless real launch without `--no-hold` reached and remained at `READY_AND_HOLDING`;
+  it was then stopped manually with `Ctrl-C` after the persistence check. Generated captures
+  remain below the ignored EXP-02C run directory.
+- **Validation:** Complete suite `272 passed`; whole-repository Python compileall, launcher
+  `bash -n`, generated-capture Git-ignore check, recorded metadata inspection, and
+  `git diff --check` passed. No frozen EXP-02C numeric artifact or earlier EXP-02A/B/B-R result
+  was modified.
+- **Major files:** `README.md`, `docs/{EXP_02C_FACTOR_ISOLATION.md,WORK_LOG.md}`, and
+  `scripts/isaac/exp02c_factor_isolation_gui.py`.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.
