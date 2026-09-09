@@ -1407,3 +1407,48 @@ This file is append-only. Add each completed task at the bottom.
   follow from the committed collector so artifacts record a stable generator SHA.
 - **Unrelated changes:** Existing user edits to the two Stage 0 configs remain preserved and
   excluded.
+
+## 2026-09-09T19:27:06+09:00 — repository cleanup after DATA-02 abandonment
+
+- **Purpose and scope:** Performed a cleanup-only, forward change. No dataset collection,
+  LightNav inference, Isaac execution, graph/formulation work, controller change, or new
+  experiment was performed. Work started on local `main` at
+  `351f6a171bea0d2720733f5b98a60272ac673df4`; fetched `origin/main` was
+  `758a67209771fa2083b5b8ea5f46faa3056fcecd`. The branch was two commits ahead before this
+  cleanup.
+- **DATA-02 removal:** Removed the complete tracked DATA-02 config/document/collector,
+  launcher, summarizer, validator, library, and test; reverted the DATA-02-only instruction
+  allowance in the shared LightNav server; removed all 343,287,660 bytes below
+  `data/data02_lightnav_diverse_transitions/`; and removed 17 `/tmp/data02-*` runtime
+  directories. Historical WORK_LOG entries remain unchanged because this log is append-only.
+- **DATA-01 removal:** Removed the remaining dedicated DATA-01 document. The preceding
+  forward retirement commit had already removed its config/build/plot/validate/library/test
+  pipeline, and its generated bank was already absent. The independent frozen EXP-01B source
+  cohort remains preserved.
+- **Generated cleanup:** Removed repository Python/test/build caches and explicit
+  smoke/test/failed/pre-fix/pre-annotation/superseded outputs. The incomplete EXP-02B T150300Z
+  run documented above was removed; T150400Z remains the frozen primary. Nine non-final
+  EXP-02B GUI outputs were removed while the documented `...T-final` diagnosis was retained.
+- **Preserved evidence:** Verified the requested EXP-01B primary, EXP-02B primary, EXP-02B-R,
+  EXP-02C, and Stage 0-D/E/F directories remain present. No source/raw artifact in those
+  directories was changed. Additional uncited legacy runs were classified, not mass-deleted.
+  Full path/size/reference decisions are recorded in
+  `docs/REPOSITORY_CLEANUP_AUDIT_20260909.md`.
+- **Storage:** Final `du -sh` changed from `817M` to `429M` for the repository and from `626M`
+  to `241M` for `data/`; `.venv` remained `182M` and untouched. Explicit project deletion targets
+  totaled 382,630,936 bytes, plus 195,388 bytes of DATA-02 `/tmp` state.
+- **Current state:** README now states that feedback-1 execution-platform diagnosis is
+  complete within its claim limits, EXP-02C identified the current incoming-direction-factor
+  problem, DATA-01 is retired, replacement formulation data collection must be redesigned,
+  and EXP-02D has not started.
+- **Validation:** Full suite passed `272`; compileall passed for `src`, `scripts`, and `tests`;
+  every retained tracked shell launcher passed `bash -n`; stale executable DATA-01/DATA-02
+  references were absent; and `git diff --check` passed. Generated caches from validation were
+  removed again afterward.
+- **Unrelated changes:** Pre-existing user edits to
+  `configs/stage0_jackal_controller_validation.yaml` and
+  `configs/stage0_lightnav_single_chunk.yaml` were preserved and excluded from the cleanup
+  commit.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md` after commit).
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after final staged-diff review.

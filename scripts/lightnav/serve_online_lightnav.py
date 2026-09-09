@@ -131,12 +131,6 @@ def main() -> None:
             str(item["instruction"])
             for item in design.get("geometry_conditions", [])
         )
-    data02_design = config.get("data02_collection")
-    if isinstance(data02_design, dict):
-        allowed_instructions.update(
-            str(item["instruction"])
-            for item in data02_design.get("scenarios", [])
-        )
     if bool(lightnav["intrinsic_waypoint_time_base"]):
         raise ValueError("EXP-01B must not fabricate a LightNav waypoint time base")
     checkout = resolve_path(paths["lightnav_checkout"])
