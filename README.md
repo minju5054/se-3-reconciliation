@@ -7,9 +7,10 @@ here is separate from LightNav.
 
 ## Current research state
 
-- Stage 0-G2 replaced the abstract qualification map with one frozen, realistic Isaac Hospital
-  while keeping Jackal and the exact Stage 0-G LightNav/camera/history contract. Its primary
-  run still failed reproducible left/right/detour geometry; DATA-02 collection is not authorized.
+- Stage 0-G3 compared the frozen Stage 0-G2 stationary histories with 30 paired scripted moving
+  Jackal histories ending at the same observation poses. Moving history changed 16/30 raw outputs
+  but did not qualify left/right/doorway-or-detour behavior; successive collection is not
+  authorized.
 - The execution-platform investigation prompted by feedback item 1 is complete through the
   frozen Stage 0-D/E/F and EXP-02B-R evidence. This does not claim that the platform is
   generally validated beyond the observed LightNav execution envelope.
@@ -62,6 +63,7 @@ this machine because current claims and provenance depend on them:
 | Calibrated EXP-02B re-evaluation | `data/exp02b_calibrated_reeval/exp02b-r-20260908T054233Z/` |
 | Current-M4 factor isolation EXP-02C | `data/exp02c_factor_isolation/exp02c-factor-isolation-20260908T133000Z/` |
 | Jackal domain-scene qualification Stage 0-G2 | `data/stage0/lightnav_scene_qualification_g2/20260909T_stage0g2_primary_r3/` |
+| Moving-history qualification Stage 0-G3 | `data/stage0/lightnav_moving_history_qualification/20260909T_stage0g3_primary_r6/` |
 
 These are not a new formulation dataset. The complete keep/archive/delete dependency audit is
 in [the 2026-09-09 cleanup audit](docs/REPOSITORY_CLEANUP_AUDIT_20260909.md).
@@ -76,7 +78,8 @@ Detailed protocols, commands, schemas, observed results, and claim limitations l
   [execution calibration](docs/STAGE_00_EXECUTION_LAYER_CALIBRATION.md),
   [closed-loop validation](docs/STAGE_00_CLOSED_LOOP_EXECUTION_VALIDATION.md), and
   [LightNav execution envelope](docs/STAGE_00_LIGHTNAV_EXECUTION_ENVELOPE.md).
-- LightNav scene qualification: [Stage 0-G2 Jackal domain scene](docs/STAGE_00G2_JACKAL_DOMAIN_SCENE_QUALIFICATION.md).
+- LightNav qualification: [Stage 0-G2 Jackal domain scene](docs/STAGE_00G2_JACKAL_DOMAIN_SCENE_QUALIFICATION.md)
+  and [Stage 0-G3 moving egocentric history](docs/STAGE_00G3_MOVING_HISTORY_QUALIFICATION.md).
 - Transition characterization: [EXP-01](docs/EXPERIMENT_01.md),
   [EXP-01A](docs/EXP_01A_LIGHTNAV_LATENCY.md),
   [EXP-01B](docs/EXP_01B_ONLINE_RAW_SWITCH.md),
@@ -133,3 +136,15 @@ Run the persistent Stage 0-G2 GUI with the stationary Jackal and frozen predicti
 
 The GUI is inference-only: cyan is the observation-anchored LightNav path, yellow marks decoded
 headings, and Jackal remains stationary. Close Isaac Sim to end the persistent view.
+
+Replay the Stage 0-G3 scripted moving history with the official Jackal visibly moving at 4 Hz:
+
+```bash
+./scripts/isaac/run_stage0g3_moving_history_qualification.sh \
+  data/stage0/lightnav_moving_history_qualification/20260909T_stage0g3_primary_r6 \
+  --mode gui --scenario G2_Q1_LEFT_TURN --variant V1
+```
+
+The GUI persists and repeats until Isaac Sim is closed. Green is the scripted history, magenta is
+the G3 prediction, cyan is the paired G2 prediction, and yellow is the shared final observation.
+The moving Jackal is a direct-pose `SCRIPTED HISTORY REPLAY`, not controller execution.

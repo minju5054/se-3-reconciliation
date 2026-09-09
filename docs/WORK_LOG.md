@@ -1537,3 +1537,54 @@ This file is append-only. Add each completed task at the bottom.
   check, and `git diff --check` passed.
 - **Unrelated changes:** Existing user edits to the two Stage 0 configs remain preserved and
   excluded.
+
+## 2026-09-09T23:40:00+09:00 — Stage 0-G3 moving-egocentric-history qualification
+
+- **Purpose and scope:** Tested exactly one variable against frozen Stage 0-G2: 64 stationary
+  views versus 64 deterministic moving egocentric views ending at the same observation pose.
+  This remained inference-only qualification. No controller/wheel execution, physics tuning,
+  LightNav change, OLD/FRESH collection, DATA-02, graph, objective, factor, selector, gate,
+  optimization, smoothing, or new environment was introduced.
+- **Repository and control:** Work started from fetched local/origin `main` at
+  `a2272ead99cca7431e2fefdcc4867729b970cb66`. The read-only Stage 0-G2 r3 control was strictly
+  revalidated at config SHA-256
+  `49d339d16694d96dc5113271a2236e79ce413ae2411915e340885f8310fc9f01`:
+  all 30 cases, instructions, final observation poses, raw hashes, official Jackal, Hospital,
+  LightNav SHA, and checkpoint revision matched.
+- **Pre-inference approach:** Oriented-footprint collision checks rejected the common 1.5, 1.4,
+  and 1.3 m approach distances for all Q2 variants and selected the largest common feasible
+  distance, 1.2 m. All 30 selected 64-pose histories were collision-query-feasible. The G3
+  config was frozen before capture/inference at SHA-256
+  `0515f6b8c8bd86d55e39db5d6128acbd5acac9f0fe1bccb6c3a620511ef08cf8`.
+- **Technical pre-runs:** r1-r5 produced zero LightNav predictions. They exposed simulator-clock
+  tolerance, float32 start-distance tolerance, and stale first-frame Jackal rendering across
+  cases. Only these technical validity issues were corrected. r6 contact sheets confirmed a
+  moving scene and no stale robot before any G3 inference.
+- **Primary run:**
+  `data/stage0/lightnav_moving_history_qualification/20260909T_stage0g3_primary_r6/` captured all
+  30 histories and ran Q0/Q1/Q2 V0 smoke followed by the remaining 27 exactly once. Maximum
+  G2/G3 final-pose mismatch was `4.76837158203125e-7` m and
+  `3.4547587013378234e-7` rad. Mean inter-frame translation averaged 0.01904762 m. Mean
+  consecutive RGB MAE averaged 1.6021 and first-to-final RGB MAE averaged 17.5371 uint8 levels.
+- **Observed result:** G2→G3 intended matches were Q0 5→5, Q1 0→3, Q2 0→0, Q3 task-local
+  5→5, Q4 0→0, and Q5 0→0. Only 2/5 doorway matches were distinct from unrelated raw groups.
+  Moving history changed the exact raw array in 16/30 pairs, changed the frozen geometry class in
+  7/30, produced 3 fail→pass and 0 pass→fail transitions, 9 unique raw arrays, dominant fraction
+  0.367, four signatures, and zero STOP/nonmoving cases. Translation/yaw rowwise RMS-difference
+  means were 0.083643 m and 0.055288 rad. This shows an association with changed output, not a
+  causal or navigation-success result.
+- **Decision:** `STAGE0G3_MOVING_HISTORY_QUALIFICATION_FAILED`. Q1 missed 4/5, Q2 was 0/5, and
+  neither distinct doorway nor a detour family reached 4/5. Moving visual history alone was not
+  sufficient; successive collection remains unauthorized and the setup was not redesigned.
+- **Visualization:** Inspected all six V0 pre-inference contact sheets, all six V0 paired plots,
+  and all overview figures. A real Isaac GUI smoke on Q1/V1 visibly showed the official Jackal,
+  green 64-pose approach, magenta G3 prediction, cyan G2 prediction, and yellow shared final
+  pose. The 4 Hz `SCRIPTED HISTORY REPLAY` completed one loop, entered the next, and persisted
+  until manually closed; it issued no controller command. A screenshot is retained under r6
+  `overview/`.
+- **Validation:** Focused G3 suite passed `18`; full repository suite passed `315`; strict G2
+  control validation and strict 30-case G3 artifact validation passed. Python compileall, both
+  new launcher `bash -n` checks, ignored-output verification, and `git diff --check` passed.
+- **Unrelated changes:** Existing user edits to
+  `configs/stage0_jackal_controller_validation.yaml` and
+  `configs/stage0_lightnav_single_chunk.yaml` were preserved and excluded.

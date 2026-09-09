@@ -1,0 +1,51 @@
+stage: stage0-g3-moving-history-qualification
+schema_version: 1
+
+frozen_control:
+  config_path: configs/stage0g2_jackal_domain_scene_qualification.yaml
+  expected_config_sha256: 49d339d16694d96dc5113271a2236e79ce413ae2411915e340885f8310fc9f01
+  primary_run: data/stage0/lightnav_scene_qualification_g2/20260909T_stage0g2_primary_r3
+  expected_status: STAGE0G2_SCENE_QUALIFICATION_FAILED
+  expected_case_count: 30
+
+paths:
+  output_root: data/stage0/lightnav_moving_history_qualification
+
+history:
+  mode: moving_scripted
+  frame_count: 64
+  fps: 4.0
+  interpolation: linear_se2_straight_approach
+  yaw_policy: constant_final_yaw
+  approach_direction: behind_final_heading
+  maximum_common_distance_m: 1.5
+  minimum_common_distance_m: 0.8
+  distance_search_step_m: 0.1
+  final_translation_tolerance_m: 1.0e-6
+  final_yaw_tolerance_rad: 1.0e-6
+  footprint_clearance_margin_m: 0.02
+  feasibility_box_height_center_m: 0.24
+  feasibility_box_half_height_m: 0.10
+
+paired_comparison:
+  raw_equality: exact_array_equal
+  translation_difference: rowwise_euclidean_rms_and_max
+  yaw_difference: wrapped_rowwise_rms_and_max
+  endpoint_difference: moving_minus_stationary_local
+  class_transition: frozen_stage0g2_geometry_classifier
+
+qualification:
+  required_matches_per_scenario: 4
+  minimum_unique_raw_outputs: 5
+  maximum_dominant_exact_raw_fraction: 0.80
+  maximum_stop_or_nonmoving_count: 6
+
+visualization:
+  history_color_rgba: [0.20, 0.95, 0.30, 1.0]
+  moving_prediction_color_rgba: [0.95, 0.15, 0.75, 1.0]
+  stationary_prediction_color_rgba: [0.05, 0.85, 1.0, 1.0]
+  final_pose_color_rgba: [1.0, 0.82, 0.10, 1.0]
+  line_width: 7.0
+  point_size: 13.0
+  z_offset_m: 0.15
+  gui_replay_hz: 4.0
