@@ -96,6 +96,7 @@ from reconciliation.data02_online_successive import (
     validate_raw_chunk,
     variant_pose,
 )
+from reconciliation.data02_v2 import validate_independent_template_bank
 from reconciliation.exp01b_extension import is_stop_actions
 from reconciliation.lightnav_adapter import save_json_exclusive, save_npy_exclusive
 from reconciliation.online_ipc import OnlineLightNavClient, validate_rgb_frame
@@ -115,6 +116,8 @@ TELEMETRY_COLUMNS = (
 RGB_INDEX_COLUMNS = (
     "frame_index", "sim_time_s", "actual_x", "actual_y", "actual_yaw",
     "server_observed_frames", "history_buffer_length", "rgb_relative_path", "rgb_file_sha256",
+    "capture_host_duration_ms", "observe_host_duration_ms", "rgb_persist_host_duration_ms",
+    "inference_queue_depth_at_capture", "persistence_deferred",
 )
 
 
@@ -140,7 +143,7 @@ def source_status() -> list[str]:
 
 
 def validate_config(config: Mapping[str, Any]) -> None:
-    if config.get("stage") != "data02-online-successive-v1":
+    if config.get("stage") not in ("data02-online-successive-v1", "data02-online-successive-v2"):
         raise ValueError("wrong DATA-02 identity")
     if len(config.get("episode_templates", [])) < 10:
         raise RuntimeError("DATA02_EPISODE_TEMPLATE_INSUFFICIENT")
@@ -157,6 +160,18 @@ def validate_config(config: Mapping[str, Any]) -> None:
     camera = config["camera"]
     if (int(camera["resolution_width"]), int(camera["resolution_height"]), float(camera["horizontal_fov_deg"])) != (480, 270, 112.0):
         raise ValueError("Stage 0-G2 camera contract changed")
+    if config.get("stage") == "data02-online-successive-v2":
+        independence = config.get("template_independence", {})
+        v1_config = load_yaml(resolve_path(independence["immutable_v1_template_config"]))
+        result = validate_independent_template_bank(
+            config["episode_templates"],
+            v1_config["episode_templates"],
+            required_per_family=int(independence["templates_per_family"]),
+            translation_threshold_m=float(independence["translation_threshold_m"]),
+            yaw_threshold_rad=float(independence["wrapped_yaw_threshold_rad"]),
+        )
+        if not result["valid"]:
+            raise RuntimeError(f"DATA02V2_TEMPLATE_BANK_INSUFFICIENT: {result['checks']}")
 
 
 def verify_sources(config: Mapping[str, Any]) -> dict[str, Any]:
@@ -274,6 +289,37 @@ def save_png_exclusive(path: Path, image: np.ndarray) -> None:
         Image.fromarray(image, mode="RGB").save(stream, format="PNG")
 
 
+def persist_buffered_rgb(
+    episode: Path,
+    buffered: list[tuple[int, np.ndarray]],
+    frame_rows: list[dict[str, Any]],
+) -> dict[str, float]:
+    """Persist exact captured pixels after online execution has finished.
+
+    PNG encoding, hashing, and disk I/O are deliberately excluded from the
+    online physics/inference loop.  Capture and server observation order are
+    unchanged; only persistence is deferred.
+    """
+
+    rows_by_index = {int(row["frame_index"]): row for row in frame_rows}
+    durations_ms: list[float] = []
+    for frame_index, image in buffered:
+        path = episode / "rgb" / f"frame_{frame_index:06d}.png"
+        started = time.monotonic_ns()
+        save_png_exclusive(path, image)
+        row = rows_by_index[frame_index]
+        row["rgb_file_sha256"] = sha256_file(path)
+        duration_ms = (time.monotonic_ns() - started) / 1e6
+        row["rgb_persist_host_duration_ms"] = duration_ms
+        durations_ms.append(duration_ms)
+    return {
+        "frame_count": float(len(durations_ms)),
+        "total_host_s": float(sum(durations_ms) / 1000.0),
+        "mean_host_ms": float(np.mean(durations_ms)) if durations_ms else 0.0,
+        "maximum_host_ms": float(max(durations_ms, default=0.0)),
+    }
+
+
 def save_csv_exclusive(path: Path, rows: list[Mapping[str, Any]], columns: tuple[str, ...]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("x", encoding="utf-8", newline="") as stream:
@@ -376,6 +422,7 @@ def render_template_previews(config: Mapping[str, Any], runtime: Mapping[str, An
             "initial_pose_se2": pose.tolist(), "settled_pose_se2": actual.tolist(),
             "instruction": template["instruction"], "visible_affordance": template["visible_affordance"],
             "expected_route": template["expected_route"], "minimum_intended_clearance_m": template["minimum_intended_clearance_m"],
+            "independence_note": template.get("independence_note"),
             "preview": f"{template['id']}.png", "collision_paths_at_v0": paths,
             "settling_translation_m": float(np.linalg.norm(actual[:2] - pose[:2])),
             "selected_before_primary_inference": True,
@@ -406,11 +453,25 @@ def render_template_previews(config: Mapping[str, Any], runtime: Mapping[str, An
                 "settling_translation_m": float(np.linalg.norm(settled[:2] - requested[:2])),
                 "collision_paths": hits, "feasible": not hits and float(np.linalg.norm(settled[:2] - requested[:2])) <= 0.05,
             })
+    independence = None
+    if config.get("stage") == "data02-online-successive-v2":
+        contract = config["template_independence"]
+        v1_config = load_yaml(resolve_path(contract["immutable_v1_template_config"]))
+        independence = validate_independent_template_bank(
+            config["episode_templates"],
+            v1_config["episode_templates"],
+            required_per_family=int(contract["templates_per_family"]),
+            translation_threshold_m=float(contract["translation_threshold_m"]),
+            yaw_threshold_rad=float(contract["wrapped_yaw_threshold_rad"]),
+        )
+    all_variants_feasible = all(item["feasible"] for item in variant_checks)
     manifest = {
         "created_utc": datetime.now(timezone.utc).isoformat(), "template_count": len(feasibility),
         "variant_count": len(config["variants"]), "overview": "overview.png", "templates": feasibility,
         "variant_feasibility": variant_checks,
-        "all_variants_feasible": all(item["feasible"] for item in variant_checks),
+        "all_variants_feasible": all_variants_feasible,
+        "independence_validation": independence,
+        "template_bank_valid": all_variants_feasible and (independence is None or bool(independence["valid"])),
         "selection_used_lightnav_outputs": False,
     }
     save_json_exclusive(destination / "manifest.json", manifest)
@@ -527,18 +588,40 @@ def run_episode(index: int, template: Mapping[str, Any], variant: Mapping[str, A
     if not math.isclose(control_steps * physics_dt, control_dt, abs_tol=1e-9) or not math.isclose(rgb_steps * physics_dt, 1.0 / float(config["lightnav"]["video_fps"]), abs_tol=1e-9):
         raise ValueError("control/RGB periods must be divisible by physics dt")
     origin_wall, origin_sim = time.monotonic(), float(world.current_time)
-    frame_rows = []
+    frame_rows: list[dict[str, Any]] = []
+    buffered_rgb: list[tuple[int, np.ndarray]] = []
+    defer_rgb_persistence = config["protocol"].get("rgb_persistence_mode") == "buffered_episode_end"
     frame_index = 0
     for _ in range(int(config["protocol"]["initial_history_frames"])):
         for step in range(rgb_steps):
             world.step(render=ARGS.gui or step == rgb_steps - 1)
             pace(origin_wall, origin_sim, float(world.current_time), float(config["simulation"]["pace_real_time_factor"]))
         pose = se2_from_world_pose(robot)
+        capture_started = time.monotonic_ns()
         rgb = capture_rgb(runtime, config, pose)
-        save_png_exclusive(episode / "rgb" / f"frame_{frame_index:06d}.png", rgb)
-        rgb_path = episode / "rgb" / f"frame_{frame_index:06d}.png"
+        capture_ms = (time.monotonic_ns() - capture_started) / 1e6
+        rgb_hash = ""
+        persist_ms = 0.0
+        if defer_rgb_persistence:
+            buffered_rgb.append((frame_index, rgb))
+        else:
+            persist_started = time.monotonic_ns()
+            rgb_path = episode / "rgb" / f"frame_{frame_index:06d}.png"
+            save_png_exclusive(rgb_path, rgb)
+            rgb_hash = sha256_file(rgb_path)
+            persist_ms = (time.monotonic_ns() - persist_started) / 1e6
+        observe_started = time.monotonic_ns()
         response = client.observe(rgb, frame_index=frame_index, sim_time_s=float(world.current_time))
-        frame_rows.append({"frame_index": frame_index, "sim_time_s": float(world.current_time), "actual_x": pose[0], "actual_y": pose[1], "actual_yaw": pose[2], "server_observed_frames": response["observed_frames"], "history_buffer_length": response["history_buffer_length"], "rgb_relative_path": f"rgb/frame_{frame_index:06d}.png", "rgb_file_sha256": sha256_file(rgb_path)})
+        observe_ms = (time.monotonic_ns() - observe_started) / 1e6
+        frame_rows.append({
+            "frame_index": frame_index, "sim_time_s": float(world.current_time),
+            "actual_x": pose[0], "actual_y": pose[1], "actual_yaw": pose[2],
+            "server_observed_frames": response["observed_frames"], "history_buffer_length": response["history_buffer_length"],
+            "rgb_relative_path": f"rgb/frame_{frame_index:06d}.png", "rgb_file_sha256": rgb_hash,
+            "capture_host_duration_ms": capture_ms, "observe_host_duration_ms": observe_ms,
+            "rgb_persist_host_duration_ms": persist_ms, "inference_queue_depth_at_capture": 0,
+            "persistence_deferred": int(defer_rgb_persistence),
+        })
         frame_index += 1
     initial_observation = se2_from_world_pose(robot)
     start_ns = time.monotonic_ns()
@@ -628,20 +711,58 @@ def run_episode(index: int, template: Mapping[str, Any], variant: Mapping[str, A
                     "collision_detected": int(bool(hits)), "rgb_frame_index": frame_index if capture_due else -1,
                 })
                 if capture_due:
+                    capture_started = time.monotonic_ns()
                     rgb = capture_rgb(runtime, config, pose)
-                    save_png_exclusive(episode / "rgb" / f"frame_{frame_index:06d}.png", rgb)
-                    rgb_path = episode / "rgb" / f"frame_{frame_index:06d}.png"
+                    capture_ms = (time.monotonic_ns() - capture_started) / 1e6
+                    observe_ms = 0.0
+                    rgb_hash = ""
+                    persist_ms = 0.0
+                    if defer_rgb_persistence:
+                        buffered_rgb.append((frame_index, rgb))
+                    else:
+                        persist_started = time.monotonic_ns()
+                        rgb_path = episode / "rgb" / f"frame_{frame_index:06d}.png"
+                        save_png_exclusive(rgb_path, rgb)
+                        rgb_hash = sha256_file(rgb_path)
+                        persist_ms = (time.monotonic_ns() - persist_started) / 1e6
                     if request_future is None:
+                        observe_started = time.monotonic_ns()
                         response_observe = client.observe(rgb, frame_index=frame_index, sim_time_s=float(world.current_time))
-                        frame_rows.append({"frame_index": frame_index, "sim_time_s": float(world.current_time), "actual_x": pose[0], "actual_y": pose[1], "actual_yaw": pose[2], "server_observed_frames": response_observe["observed_frames"], "history_buffer_length": response_observe["history_buffer_length"], "rgb_relative_path": f"rgb/frame_{frame_index:06d}.png", "rgb_file_sha256": sha256_file(rgb_path)})
+                        observe_ms = (time.monotonic_ns() - observe_started) / 1e6
+                        observed_frames = response_observe["observed_frames"]
+                        history_length = response_observe["history_buffer_length"]
                     else:
                         queued_frames.append((frame_index, float(world.current_time), rgb))
-                        frame_rows.append({"frame_index": frame_index, "sim_time_s": float(world.current_time), "actual_x": pose[0], "actual_y": pose[1], "actual_yaw": pose[2], "server_observed_frames": -1, "history_buffer_length": -1, "rgb_relative_path": f"rgb/frame_{frame_index:06d}.png", "rgb_file_sha256": sha256_file(rgb_path)})
+                        observed_frames = -1
+                        history_length = -1
+                    frame_rows.append({
+                        "frame_index": frame_index, "sim_time_s": float(world.current_time),
+                        "actual_x": pose[0], "actual_y": pose[1], "actual_yaw": pose[2],
+                        "server_observed_frames": observed_frames, "history_buffer_length": history_length,
+                        "rgb_relative_path": f"rgb/frame_{frame_index:06d}.png", "rgb_file_sha256": rgb_hash,
+                        "capture_host_duration_ms": capture_ms, "observe_host_duration_ms": observe_ms,
+                        "rgb_persist_host_duration_ms": persist_ms,
+                        "inference_queue_depth_at_capture": len(queued_frames),
+                        "persistence_deferred": int(defer_rgb_persistence),
+                    })
                     frame_index += 1
                     if request_future is None and float(world.current_time) - chunk_start_sim >= float(config["protocol"]["fresh_trigger_delay_sim_s"]) - 1e-9:
                         obs_pose = pose.copy(); obs_sim = float(world.current_time); obs_frame = frame_index - 1
                         request_ns = time.monotonic_ns(); old_command_at_request = current_desired.copy()
                         state.start_request(); request_future = executor.submit(client.predict, prediction_kind="new")
+                    # Capture/rendering is one measured host-side blocking region.
+                    # Poll again without advancing simulation so a response that
+                    # completed during capture is not delayed to the next step.
+                    if (
+                        config.get("stage") == "data02-online-successive-v2"
+                        and request_future is not None
+                        and fresh_response is None
+                        and request_future.done()
+                    ):
+                        fresh_response_ns = time.monotonic_ns()
+                        fresh_actions, fresh_response = request_future.result()
+                        model_ready_sim = float(world.current_time)
+                        model_ready_pose = pose.copy()
                 if hits:
                     termination = "EXECUTION_COLLISION"
                 if float(np.linalg.norm(pose[:2] - initial[:2])) > float(config["protocol"]["out_of_envelope_translation_from_start_m"]):
@@ -660,13 +781,17 @@ def run_episode(index: int, template: Mapping[str, Any], variant: Mapping[str, A
             if request_future is not None and fresh_response is not None:
                 assert fresh_response_ns is not None and model_ready_sim is not None and model_ready_pose is not None
                 ready_sim = model_ready_sim
+                queued_count_at_ready = len(queued_frames)
+                flush_started_ns = time.monotonic_ns()
+                rows_by_index = {int(row["frame_index"]): row for row in frame_rows}
                 for queued_index, queued_time, queued_rgb in queued_frames:
+                    observe_started = time.monotonic_ns()
                     observed = client.observe(queued_rgb, frame_index=queued_index, sim_time_s=queued_time)
-                    for row in frame_rows:
-                        if row["frame_index"] == queued_index:
-                            row["server_observed_frames"] = observed["observed_frames"]
-                            row["history_buffer_length"] = observed["history_buffer_length"]
-                            break
+                    row = rows_by_index[queued_index]
+                    row["server_observed_frames"] = observed["observed_frames"]
+                    row["history_buffer_length"] = observed["history_buffer_length"]
+                    row["observe_host_duration_ms"] = (time.monotonic_ns() - observe_started) / 1e6
+                queued_flush_s = (time.monotonic_ns() - flush_started_ns) / 1e9
                 queued_frames.clear()
                 assert obs_pose is not None and obs_sim is not None and request_ns is not None and obs_frame is not None and old_command_at_request is not None
                 history_first_index = max(0, obs_frame - int(config["lightnav"]["expected_history_frames"]) + 1)
@@ -691,6 +816,17 @@ def run_episode(index: int, template: Mapping[str, Any], variant: Mapping[str, A
                     model_reported_s=float(fresh_response["lightnav_reported_latency_ms"]) / 1000.0, real_time_factor=rtf,
                 )
                 timing = timing_object.validate(config["simulation"]["acceptable_rtf_range"])
+                server_start_ns = int(fresh_response["server_predict_start_monotonic_ns"])
+                server_end_ns = int(fresh_response["server_predict_end_monotonic_ns"])
+                timing["technical_profile"] = {
+                    "server_prediction_s": (server_end_ns - server_start_ns) / 1e9,
+                    "request_dispatch_s": (server_start_ns - request_ns) / 1e9,
+                    "main_loop_detection_delay_s": (fresh_response_ns - server_end_ns) / 1e9,
+                    "queued_frame_count_at_ready": queued_count_at_ready,
+                    "queued_observe_flush_host_s": queued_flush_s,
+                    "rgb_persistence_during_online_transition_host_s": 0.0,
+                    "response_polled_after_rgb_capture": config.get("stage") == "data02-online-successive-v2",
+                }
                 stop = is_stop_actions(fresh_actions, absolute_tolerance=float(config["protocol"]["stop_action_absolute_tolerance"]))
                 status = classify_transition(
                     model_stop=stop, old_exhausted=old_exhausted or command.goal_reached, timing_valid=bool(timing["valid"]),
@@ -722,6 +858,16 @@ def run_episode(index: int, template: Mapping[str, Any], variant: Mapping[str, A
         runtime["articulation"].apply_action(ArticulationAction(joint_velocities=np.zeros(robot.num_dof)))
     finally:
         executor.shutdown(wait=True)
+    if defer_rgb_persistence:
+        rgb_persistence = persist_buffered_rgb(episode, buffered_rgb, frame_rows)
+    else:
+        persist_durations = [float(row["rgb_persist_host_duration_ms"]) for row in frame_rows]
+        rgb_persistence = {
+            "frame_count": float(len(persist_durations)),
+            "total_host_s": float(sum(persist_durations) / 1000.0),
+            "mean_host_ms": float(np.mean(persist_durations)) if persist_durations else 0.0,
+            "maximum_host_ms": float(max(persist_durations, default=0.0)),
+        }
     save_csv_exclusive(episode / "telemetry.csv", all_telemetry, TELEMETRY_COLUMNS)
     save_csv_exclusive(episode / "rgb_frames.csv", frame_rows, RGB_INDEX_COLUMNS)
     metadata = {
@@ -735,6 +881,9 @@ def run_episode(index: int, template: Mapping[str, Any], variant: Mapping[str, A
         "live_frame_count": max(0, len(frame_rows) - int(config["protocol"]["initial_history_frames"])),
         "initial_old_request_host_s": (initial_ready_ns - start_ns) / 1e9, "transition_limit": transition_limit,
         "termination_reason": termination, "no_reset_between_successive_chunks": True,
+        "cohort_id": str(config.get("cohort_id", "v1")),
+        "rgb_persistence_mode": str(config["protocol"].get("rgb_persistence_mode", "synchronous_online")),
+        "rgb_persistence_profile": rgb_persistence,
         "completed_utc": datetime.now(timezone.utc).isoformat(),
     }
     save_json_exclusive(episode / "metadata.json", metadata)
@@ -779,18 +928,28 @@ def initialize_run(config_path: Path, config: Mapping[str, Any], sources: Mappin
         },
         "transition_statuses": list(TRANSITION_STATUSES),
         "episode_templates": config["episode_templates"], "variants": config["variants"],
+        "cohort_id": str(config.get("cohort_id", "v1")),
+        "template_independence": config.get("template_independence"),
         "readiness": config["readiness"],
     }
     save_json_exclusive(run / "protocol.json", protocol)
     metadata = {
         "schema": "DATA02_OnlineSuccessiveRun_v1", "run_id": run.name, "phase": phase,
+        "cohort_id": str(config.get("cohort_id", "v1")),
         "created_utc": datetime.now(timezone.utc).isoformat(), "repository_root": str(ROOT),
         "collector_git_sha": git("rev-parse HEAD"), "collector_git_status": source_status(),
         "config_snapshot_sha256": sha256_file(run / "config_snapshot.yaml"),
         "protocol_sha256": sha256_file(run / "protocol.json"), "sources": sources,
         "research_scope": "data collection only; no reconciliation or optimization",
+        "runtime_only_cleanup": {
+            "rgb_persistence": str(config["protocol"].get("rgb_persistence_mode", "synchronous_online")),
+            "response_poll_after_capture": config.get("stage") == "data02-online-successive-v2",
+            "scientific_protocol_changed": False,
+        },
         "stage0g_g2_g3_results_rewritten": False,
     }
+    if config.get("stage") == "data02-online-successive-v2":
+        metadata["data02_v2_collector_git_sha"] = metadata["collector_git_sha"]
     save_json_exclusive(run / "metadata.json", metadata)
     return metadata
 
@@ -854,9 +1013,15 @@ def collect(config_path: Path, config: Mapping[str, Any], sources: Mapping[str, 
     metadata = initialize_run(config_path, config, sources, run, ARGS.phase)
     if not (run / "template_bank/manifest.json").is_file():
         manifest = render_template_previews(config, runtime, run)
-        if not manifest["all_variants_feasible"]:
-            save_json_exclusive(run / "final_status.json", {"status": "DATA02_EPISODE_TEMPLATE_INSUFFICIENT", "reason": "one or more frozen template variants failed pre-inference feasibility"})
-            raise RuntimeError("DATA02_EPISODE_TEMPLATE_INSUFFICIENT")
+        if not manifest["template_bank_valid"]:
+            status = str(config["protocol"].get("template_bank_insufficient_status", "DATA02_EPISODE_TEMPLATE_INSUFFICIENT"))
+            save_json_exclusive(run / "final_status.json", {
+                "status": status,
+                "reason": "one or more pre-inference feasibility or independence checks failed",
+                "all_variants_feasible": manifest["all_variants_feasible"],
+                "independence_valid": None if manifest["independence_validation"] is None else manifest["independence_validation"]["valid"],
+            })
+            raise RuntimeError(status)
     client = OnlineLightNavClient(ARGS.socket, timeout_s=float(config["ipc"]["request_timeout_s"]))
     server_info = client.server_info()
     invocation = run / "invocations" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -1015,7 +1180,11 @@ def main() -> None:
         run = resolve_path(config["paths"]["output_root"]) / run_id
         initialize_run(config_path, config, sources, run, "preview")
         manifest = render_template_previews(config, runtime, run)
-        print(f"DATA02_TEMPLATE_PREVIEW={run} feasible={manifest['all_variants_feasible']}", flush=True)
+        print(
+            f"DATA02_TEMPLATE_PREVIEW={run} feasible={manifest['all_variants_feasible']} "
+            f"template_bank_valid={manifest['template_bank_valid']}",
+            flush=True,
+        )
     else:
         collect(config_path, config, sources, runtime)
 

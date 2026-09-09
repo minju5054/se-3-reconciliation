@@ -1,0 +1,212 @@
+stage: data02-online-successive-v2
+schema_version: 2
+cohort_id: v2
+
+paths:
+  output_root: data/data02_online_successive_v2
+  lightnav_checkout: ../external/LightNav-0
+  checkpoint_relative_path: checkpoints/LightNav-0
+  warmup_source_run: data/stage0/lightnav_scene_qualification_g2/20260909T_stage0g2_primary_r3/qualification/G2_Q0_STRAIGHT/V0
+  warmup_rgb_glob: input/history/frame_*.png
+  stage0d_run: data/stage0/execution_calibration/stage0d-20260907T102700Z
+  stage0e_run: data/stage0/closed_loop_execution_validation/stage0e-20260908T021433Z
+  stage0f_run: data/stage0/lightnav_execution_envelope/stage0f-20260908T043300Z
+  immutable_v1_run: data/data02_online_successive_v1/data02-online-successive-primary-v1
+
+baseline:
+  expected_isaac_sim_version_prefix: 6.0.1
+  expected_lightnav_git_sha: a645828d81a8439651172197ca80a75dc1377977
+  checkpoint_identifier: LightOriginsHQ/LightNav-0
+  expected_checkpoint_revision: 7221d418bfff55cfcbadd09f7a26aaab81e1f8a6
+  expected_file_sha256:
+    eval_config.json: 7f475edbef4a13d2db99fa12eff5e9dedf48916969ec777f75e6e85e2a492b57
+    config.json: 0e047b5e9ae7981cf0066e74d8b655a2f49d7d7965c25fca386f9eea80b63e58
+    processor_config.json: ac89ec99ea773dc28f5b217edec5947120071ad5b9edcd48d3843ecc63b9877e
+    action_tokenizer/manifest.json: 00d77ae028edf59e0ce68b49122dd0a60da527f48508f5ee335a580993a12864
+    tokenizer_config.json: 8e8e879bfe8a52ececc118c9b80a48240ab35ff01a8be88d9a071df7ee7c4803
+    model.safetensors.index.json: d725f1a587bde70cdf16ae5e1e672ff13cada2740c11baf13fbcff49dd7e00b1
+
+lightnav:
+  checkpoint_identifier: LightOriginsHQ/LightNav-0
+  task: vln
+  task_key: vlnce
+  task_type: vlnce_traj
+  prompt_style: unified_traj
+  backend: vllm_local
+  prior_gpu_memory_utilization: 0.90
+  gpu_memory_utilization: 0.65
+  kv_cache_gib: 1.0
+  enforce_eager: true
+  aspect_mode: stretch
+  expected_horizon: 10
+  expected_history_frames: 64
+  video_fps: 4.0
+  intrinsic_waypoint_time_base: false
+  decoded_output_semantics: absolute_poses_in_observation_robot_frame
+  axes: [forward_m, lateral_m_left_positive, yaw_rad_ccw_positive]
+
+ipc:
+  connect_timeout_s: 180.0
+  request_timeout_s: 120.0
+
+simulation:
+  physics_dt: 0.016666666666666666
+  control_dt: 0.1
+  settling_duration_s: 1.0
+  spawn_height_m: 0.15
+  pace_real_time_factor: 1.0
+  acceptable_rtf_range: [0.90, 1.10]
+
+robot:
+  required_embodiment: Jackal
+  asset_collection_path: /Isaac/Robots
+  asset_relative_path: Clearpath/Jackal/jackal.usd
+  reference_prim_path: /World/JackalReference
+  approximate_footprint_width_m: 0.43
+  approximate_footprint_length_m: 0.51
+
+environment:
+  family: isaac_hospital_6_0_1
+  asset_relative_path: /Isaac/Environments/Hospital/hospital.usd
+  reference_prim_path: /World/Data02Hospital
+  scale: 1.0
+  stage_units_in_meters: 1.0
+  up_axis: Z
+  collision_basis: authored_hospital_collisions
+
+camera:
+  source: frozen_stage0g2_contract
+  name: Data02EgocentricCamera
+  relative_translation_m: [0.30, 0.0, 0.48]
+  relative_rotation_xyz_deg: [90.0, 0.0, -90.0]
+  resolution_width: 480
+  resolution_height: 270
+  horizontal_fov_deg: 112.0
+  horizontal_aperture: 20.955
+  clipping_range_m: [0.05, 100.0]
+  rgb_format: HWC uint8 RGB
+  model_preprocess_size_hw: [256, 448]
+  model_resample: bilinear
+  render_subframes: 2
+
+stage0d_candidate_provenance:
+  run_id: stage0d-20260907T102700Z
+  calibration_model_sha256: 40821584e14a3f444fdd19ff27acc03e752ec3d0c5f2e8635b824a1419a81464
+  metadata_sha256: 5e5dff62dc9f87598562a1545de08954114b14733eac4d82733730dc82c32cfa
+  config_snapshot_sha256: 7a14d0f1efc0aa8bbe36750b4d9b75613b0efa7be64200885662d3caa06f6ecf
+  selected_candidate_id: pi_strong
+
+stage0f_provenance:
+  decision_sha256: 6188a3cf54eaeb8987ed0d97929bac0997d958bbe685b16d9e28a75d63ad43eb
+  status: LIGHTNAV_ENVELOPE_COVERED_BY_CURRENT_CALIBRATED_PLATFORM
+  execution_platform_validated: false
+
+follower:
+  source: frozen_stage0b_values_used_by_stage0f
+  lookahead_distance_m: 0.25
+  position_gain: 1.2
+  heading_gain: 2.5
+  cross_track_gain: 1.0
+  max_linear_velocity_mps: 0.65
+  max_angular_velocity_rps: 1.5
+  goal_position_tolerance_m: 0.08
+  goal_yaw_tolerance_rad: 0.08
+  rotate_in_place_threshold_rad: 0.30
+  nearest_search_window: 30
+
+protocol:
+  initial_history_frames: 64
+  fresh_trigger_delay_sim_s: 0.50
+  maximum_transitions_per_episode: 6
+  maximum_fresh_wait_sim_s: 4.0
+  maximum_episode_sim_s: 12.0
+  stop_action_absolute_tolerance: 1.0e-8
+  nonfinite_termination: true
+  no_reset_between_successive_chunks: true
+  one_fresh_request_in_flight: true
+  raw_fresh_observation_anchored: true
+  prepend_switch_boundary: false
+  waypoint_dt: null
+  out_of_envelope_translation_from_start_m: 4.0
+  pathological_command_abs_omega_rps: 1.5
+  rgb_persistence_mode: buffered_episode_end
+  template_bank_insufficient_status: DATA02V2_TEMPLATE_BANK_INSUFFICIENT
+
+template_independence:
+  immutable_v1_template_config: configs/data02_online_successive_v1.yaml
+  translation_threshold_m: 0.40
+  wrapped_yaw_threshold_rad: 0.15
+  required_semantic_families: [straight, left, right, doorway, detour, compound]
+  templates_per_family: 4
+  selection_inputs: [hospital_geometry, camera_preview, collision_clearance, instruction_clarity, semantic_affordance, v1_pose_and_semantic_independence]
+  lightnav_outputs_used: false
+
+variants:
+  - {id: V0, yaw_offset_rad: 0.0, lateral_offset_m: 0.0, longitudinal_offset_m: 0.0}
+  - {id: V_YAW_POS, yaw_offset_rad: 0.05, lateral_offset_m: 0.0, longitudinal_offset_m: 0.0}
+  - {id: V_YAW_NEG, yaw_offset_rad: -0.05, lateral_offset_m: 0.0, longitudinal_offset_m: 0.0}
+  - {id: V_LAT_POS, yaw_offset_rad: 0.0, lateral_offset_m: 0.09, longitudinal_offset_m: 0.0}
+  - {id: V_LAT_NEG, yaw_offset_rad: 0.0, lateral_offset_m: -0.09, longitudinal_offset_m: 0.0}
+  - {id: V_LONG_POS, yaw_offset_rad: 0.0, lateral_offset_m: 0.0, longitudinal_offset_m: 0.15}
+  - {id: V_LONG_NEG, yaw_offset_rad: 0.0, lateral_offset_m: 0.0, longitudinal_offset_m: -0.15}
+
+episode_templates:
+  - {id: V2_S00_CENTRAL_SOUTHBOUND, class: straight, region: central_mid_upper, initial_pose_se2: [19.0, 20.0, -1.5707963267948966], instruction: "Continue straight south along the hospital corridor.", visible_affordance: "long unobstructed southbound corridor", expected_route: "continue south without entering a room", minimum_intended_clearance_m: 1.20, independence_note: "3.5 m from nearest v1 base pose"}
+  - {id: V2_S01_CENTRAL_NORTHBOUND, class: straight, region: central_mid_upper, initial_pose_se2: [19.0, 20.0, 1.5707963267948966], instruction: "Continue straight north along the hospital corridor.", visible_affordance: "long unobstructed northbound corridor", expected_route: "continue north without entering a room", minimum_intended_clearance_m: 1.20, independence_note: "8.0 m from same-heading v1 base pose"}
+  - {id: V2_S02_CENTRAL_LOWER_SOUTHBOUND, class: straight, region: central_lower_hall, initial_pose_se2: [19.0, 15.0, -1.5707963267948966], instruction: "Continue straight south past the patient-room doors.", visible_affordance: "southbound lower central patient corridor", expected_route: "continue south past the side doorways", minimum_intended_clearance_m: 1.20, independence_note: "new lower-corridor position and direction relative to v1 straight starts"}
+  - {id: V2_S03_JUNCTION_APPROACH_NORTHBOUND, class: straight, region: south_junction_approach, initial_pose_se2: [19.0, 24.0, 1.5707963267948966], instruction: "Continue straight north toward the end of this corridor.", visible_affordance: "northbound approach to the southern junction", expected_route: "continue north without taking a side branch", minimum_intended_clearance_m: 1.20, independence_note: "different heading and goal from nearest v1 straight start"}
+  - {id: V2_L00_SOUTH_JUNCTION_APPROACH, class: left, region: south_junction_approach, initial_pose_se2: [19.0, 25.5, 1.5707963267948966], instruction: "At the upcoming junction, turn left into the side corridor.", visible_affordance: "northbound approach with left branch ahead", expected_route: "approach north then take the left branch", minimum_intended_clearance_m: 1.20, independence_note: "1.2 m longitudinal separation from nearest same-heading v1 left start"}
+  - {id: V2_L01_NORTH_JUNCTION_APPROACH, class: left, region: north_junction_approach, initial_pose_se2: [19.0, 30.5, -1.5707963267948966], instruction: "At the upcoming junction, turn left and continue along the cross corridor.", visible_affordance: "southbound approach with left branch ahead", expected_route: "approach south then take the left branch", minimum_intended_clearance_m: 1.20, independence_note: "opposite heading from v1 left start at this junction"}
+  - {id: V2_L02_ROOM_WEST_SOUTH, class: left, region: central_room_row_south, initial_pose_se2: [19.0, 22.0, -1.5707963267948966], instruction: "Turn left into the open patient room on the east side.", visible_affordance: "open patient-room doorway beside southbound corridor", expected_route: "southbound approach then left through east doorway", minimum_intended_clearance_m: 0.60, independence_note: "new room row and turn-to-door semantics"}
+  - {id: V2_L03_SERVICE_ROOM_SOUTH, class: left, region: central_room_row_north, initial_pose_se2: [19.0, 16.0, -1.5707963267948966], instruction: "Turn left into the visible service-room opening.", visible_affordance: "service-room opening and cleaning equipment on left of southbound corridor", expected_route: "southbound approach then left through visible service-room opening", minimum_intended_clearance_m: 0.60, independence_note: "new room row, direction, and service-room semantics"}
+  - {id: V2_R00_SOUTH_JUNCTION_APPROACH, class: right, region: south_junction_approach, initial_pose_se2: [19.0, 25.5, 1.5707963267948966], instruction: "At the upcoming junction, turn right into the side corridor.", visible_affordance: "northbound approach with right branch ahead", expected_route: "approach north then take the right branch", minimum_intended_clearance_m: 1.20, independence_note: "different start distance and goal from v1 right starts"}
+  - {id: V2_R01_NORTH_JUNCTION_APPROACH, class: right, region: north_junction_approach, initial_pose_se2: [19.0, 30.5, -1.5707963267948966], instruction: "At the upcoming junction, turn right and continue along the cross corridor.", visible_affordance: "southbound approach with right branch ahead", expected_route: "approach south then take the right branch", minimum_intended_clearance_m: 1.20, independence_note: "1.0 m longitudinal separation from nearest same-heading v1 right start"}
+  - {id: V2_R02_ROOM_WEST_NORTH, class: right, region: central_room_row_south, initial_pose_se2: [19.0, 22.0, 1.5707963267948966], instruction: "Turn right into the open patient room on the east side.", visible_affordance: "open patient-room doorway beside northbound corridor", expected_route: "northbound approach then right through east doorway", minimum_intended_clearance_m: 0.60, independence_note: "new room row and turn-to-door semantics"}
+  - {id: V2_R03_ROOM_EAST_NORTH, class: right, region: central_room_row_north, initial_pose_se2: [19.0, 16.0, 1.5707963267948966], instruction: "Turn right into the open patient room on the east side.", visible_affordance: "bright open patient-room doorway on right of northbound corridor", expected_route: "northbound approach then right through east doorway", minimum_intended_clearance_m: 0.60, independence_note: "new room row and turn-to-door semantics"}
+  - {id: V2_D00_MID_ROOM_LEFT_SOUTHBOUND, class: doorway, region: central_room_row_south, initial_pose_se2: [19.0, 22.0, -1.5707963267948966], instruction: "Enter the open patient-room doorway on the left.", visible_affordance: "open side doorway visible from southbound corridor", expected_route: "turn from corridor and cross the visible left doorway", minimum_intended_clearance_m: 0.60, independence_note: "new room row and side-door approach relative to v1 frontal doorway"}
+  - {id: V2_D01_NORTH_ROOM_RIGHT_NORTHBOUND, class: doorway, region: central_room_row_north, initial_pose_se2: [19.0, 16.0, 1.5707963267948966], instruction: "Enter the open patient-room doorway on the right.", visible_affordance: "open side doorway visible from northbound corridor", expected_route: "turn from corridor and cross the visible right doorway", minimum_intended_clearance_m: 0.60, independence_note: "new room row and approach direction"}
+  - {id: V2_D02_MID_ROOM_LEFT_NORTHBOUND, class: doorway, region: central_room_row_south, initial_pose_se2: [19.0, 22.0, 1.5707963267948966], instruction: "Go through the open doorway on the left into the patient room.", visible_affordance: "west-side opening visible from northbound corridor", expected_route: "turn left and cross the visible room threshold", minimum_intended_clearance_m: 0.60, independence_note: "different side-door context and heading from v1 doorway"}
+  - {id: V2_D03_NORTH_SERVICE_ROOM_LEFT_SOUTHBOUND, class: doorway, region: central_room_row_north, initial_pose_se2: [19.0, 16.0, -1.5707963267948966], instruction: "Go through the visible service-room doorway on the left.", visible_affordance: "service-room opening and cleaning equipment visible southbound", expected_route: "turn left and cross the visible service-room threshold", minimum_intended_clearance_m: 0.60, independence_note: "new room row, doorway purpose, and opposite travel direction"}
+  - {id: V2_T00_CART_NORTHBOUND_LEFT, class: detour, region: supply_cart_south, initial_pose_se2: [19.0, 25.5, 1.5707963267948966], instruction: "Pass the supply cart on the left and continue north.", visible_affordance: "blue supply cart near the south junction", expected_route: "northbound pass left of visible cart", minimum_intended_clearance_m: 0.80, independence_note: "new cart-relative context absent from v1 detours"}
+  - {id: V2_T01_CART_NORTHBOUND_RIGHT, class: detour, region: supply_cart_south, initial_pose_se2: [19.0, 25.5, 1.5707963267948966], instruction: "Pass the supply cart on the right and continue north.", visible_affordance: "blue supply cart near the south junction", expected_route: "northbound pass right of visible cart", minimum_intended_clearance_m: 0.80, independence_note: "new cart-relative context absent from v1 detours"}
+  - {id: V2_T02_CART_SOUTHBOUND_LEFT, class: detour, region: supply_cart_north, initial_pose_se2: [19.0, 30.5, -1.5707963267948966], instruction: "Pass the blue supply cart on the left and continue south.", visible_affordance: "blue supply cart near the north junction", expected_route: "southbound pass left of visible cart", minimum_intended_clearance_m: 0.80, independence_note: "new landmark, region, and direction relative to v1 sign detours"}
+  - {id: V2_T03_CART_SOUTHBOUND_RIGHT, class: detour, region: supply_cart_north, initial_pose_se2: [19.0, 30.5, -1.5707963267948966], instruction: "Pass the blue supply cart on the right and continue south.", visible_affordance: "blue supply cart near the north junction", expected_route: "southbound pass right of visible cart", minimum_intended_clearance_m: 0.80, independence_note: "new landmark, region, and direction relative to v1 sign detours"}
+  - {id: V2_C00_SOUTH_APPROACH_LEFT, class: compound, region: south_junction_far_approach, initial_pose_se2: [19.0, 24.4, 1.5707963267948966], instruction: "Continue north to the junction, turn left, then follow the side corridor.", visible_affordance: "longer approach to the southern junction and left branch", expected_route: "approach north then left and continue", minimum_intended_clearance_m: 1.20, independence_note: "0.6 m from nearest v1 compound start and distinct continuation wording"}
+  - {id: V2_C01_SOUTH_APPROACH_RIGHT, class: compound, region: south_junction_far_approach, initial_pose_se2: [19.0, 24.4, 1.5707963267948966], instruction: "Continue north to the junction, turn right, then follow the side corridor.", visible_affordance: "longer approach to the southern junction and right branch", expected_route: "approach north then right and continue", minimum_intended_clearance_m: 1.20, independence_note: "new right-turn compound goal from this start"}
+  - {id: V2_C02_NORTH_APPROACH_LEFT, class: compound, region: north_junction_far_approach, initial_pose_se2: [19.0, 29.4, -1.5707963267948966], instruction: "Continue south to the junction, turn left, then follow the cross corridor.", visible_affordance: "longer southbound approach and left branch", expected_route: "approach south then left and continue", minimum_intended_clearance_m: 1.20, independence_note: "0.6 m from nearest v1 compound start and opposite turn goal"}
+  - {id: V2_C03_NORTH_APPROACH_RIGHT, class: compound, region: north_junction_far_approach, initial_pose_se2: [19.0, 29.4, -1.5707963267948966], instruction: "Continue south to the junction, turn right, then follow the cross corridor.", visible_affordance: "longer southbound approach and right branch", expected_route: "approach south then right and continue", minimum_intended_clearance_m: 1.20, independence_note: "0.6 m from nearest v1 compound start with distinct continuation"}
+
+readiness:
+  minimum_eligible_moving: 300
+  minimum_unique_ordered_raw_pairs: 75
+  maximum_largest_pair_fraction: 0.20
+  minimum_unique_old_chunks: 25
+  minimum_unique_fresh_chunks: 25
+  minimum_straight_like: 30
+  minimum_positive_turning: 20
+  minimum_negative_turning: 20
+  minimum_benign: 20
+  minimum_challenging: 20
+  minimum_heldout_eligible: 60
+  heldout_fraction: 0.25
+  required_split_semantic_families: [straight, left, right, doorway, detour, compound]
+  required_split_geometry_bins: [STRAIGHT_LIKE, POSITIVE_TURNING, NEGATIVE_TURNING]
+  required_split_difficulty_bins: [BENIGN, CHALLENGING]
+
+visualization:
+  gui_replay_dome_light_intensity: 1200.0
+  gui_replay_sphere_light_intensity: 30000.0
+  gui_replay_camera_height_m: 1.15
+  gui_replay_camera_back_m: 1.55
+  gui_replay_camera_left_m: 0.80
+  gui_replay_camera_lookahead_m: 0.55
+  z_offset_m: 0.15
+  old_color_rgba: [0.1, 0.45, 1.0, 1.0]
+  fresh_color_rgba: [0.95, 0.25, 0.85, 1.0]
+  actual_color_rgba: [0.1, 1.0, 0.2, 1.0]
+  observation_color_rgba: [1.0, 0.85, 0.1, 1.0]
+  p_color_rgba: [1.0, 0.45, 0.1, 1.0]
+  boundary_color_rgba: [0.85, 0.1, 0.1, 1.0]
+  line_width: 6.0
+  marker_size: 15.0
+  replay_real_time_factor: 0.4
