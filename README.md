@@ -252,33 +252,14 @@ observed deterministic LightNav workload; it does not erase the two Stage 0-E st
 fixture failures or declare the execution platform generally validated. See
 [Stage 0-F](docs/STAGE_00_LIGHTNAV_EXECUTION_ENVELOPE.md).
 
-## DATA-01 frozen LightNav transition bank
+## DATA-01 retirement
 
-DATA-01 freezes every timing-valid moving transition context from the redesigned EXP-01B
-cohort before EXP-02D formulation work. The bank keeps repeated OLD/FRESH arrays when they
-come from different trials, copies raw and world arrays byte-for-byte, stores the exact P/B
-switch context and historical raw-switch commands, and freezes a raw-pair-grouped 20/10
-development/held-out split without consulting graph results. It runs no LightNav inference,
-optimization, or Isaac physics.
-
-Build, plot, and strictly validate the immutable ignored bank with:
-
-```bash
-cd ~/Workspace/se-3-reconciliation
-.venv/bin/python scripts/build_frozen_transition_bank.py \
-  --config configs/lightnav_transition_bank_v1.yaml
-.venv/bin/python scripts/plot_frozen_transition_bank.py \
-  data/frozen_transition_bank/lightnav_exp01b_v1
-.venv/bin/python scripts/validate_frozen_transition_bank.py \
-  data/frozen_transition_bank/lightnav_exp01b_v1
-```
-
-Each pair has blue OLD/orange FRESH world and visualization-only B-centered XY plots, plus
-untimed yaw-versus-spatial-path-length. The red star is boundary B, the black circle is the
-previous pose P, and the black arrow is P→B. Use `split_manifest.json` as the authoritative
-EXP-02D partition: development may be used for formulation work; held-out must remain unseen
-until formulation and weights are frozen. See
-[DATA-01](docs/DATA_01_FROZEN_LIGHTNAV_TRANSITION_BANK.md).
+DATA-01 is `RETIRED_FROM_PRIMARY_FORMULATION_USE`. Its EXP-01B source cohort was collected
+for latency and G0/G1/G2 characterization and did not provide the trajectory diversity needed
+for primary formulation research. The generated local bank and its EXP-01B-specific builder
+have therefore been removed in a forward change. The historical EXP-01B source artifacts and
+Git history remain intact for reproducibility. See the retained
+[DATA-01 retirement record](docs/DATA_01_FROZEN_LIGHTNAV_TRANSITION_BANK.md).
 
 ## EXP-02B-R frozen calibrated re-evaluation
 

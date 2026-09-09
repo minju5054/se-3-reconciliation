@@ -1,5 +1,12 @@
 # DATA-01 Frozen Real LightNav OLD/FRESH Transition Bank
 
+> **Status: `RETIRED_FROM_PRIMARY_FORMULATION_USE` (2026-09-09).** DATA-01 is a legacy
+> EXP-01B-derived regression artifact. It must not be used as the primary formulation dataset
+> or as the mandatory source for EXP-02D. Its source cohort was designed for controlled
+> latency/G0-G2 characterization and lacked sufficient output-trajectory diversity. The
+> generated local bank and EXP-01B-specific build tooling were removed by a forward commit;
+> historical EXP-01B/EXP-02B/EXP-02C artifacts and the original DATA-01 commit remain intact.
+
 ## Why this dataset exists
 
 DATA-01 fixes the real inputs for the next formulation stage before that formulation is
@@ -234,22 +241,10 @@ protocol. It establishes neither that a new graph is better nor that a universal
 threshold or optimal k exists. It supplies no obstacle-safety evidence, physical-execution
 evidence, reconciliation improvement, or guarantee about future held-out performance.
 
-## Mandatory EXP-02D use
+## Current research-use rule
 
-EXP-02D must read pair IDs from:
-
-```text
-data/frozen_transition_bank/lightnav_exp01b_v1/split_manifest.json
-```
-
-For each ID, exact inputs are:
-
-```text
-pairs/<pair_id>/raw/{old_lightnav,fresh_lightnav}.npy
-pairs/<pair_id>/derived/{old_world,fresh_world}.npy
-pairs/<pair_id>/{context,source_provenance,descriptors}.json
-```
-
-Use `development_pair_ids` for residual redesign, debugging, and ablation. Do not generate a
-new-formulation result for `heldout_pair_ids` until the formulation and weights are frozen.
-Always run the strict validator above before consuming the bank.
+Do not rebuild or consume DATA-01 as the primary formulation source. DATA-02 replaces that
+role with newly collected, genuine same-episode successive OLD/FRESH outputs from predeclared
+diverse scenarios. The measurements above remain a historical record and may support an
+explicitly labelled regression comparison only; they do not satisfy DATA-02 diversity or
+held-out requirements.

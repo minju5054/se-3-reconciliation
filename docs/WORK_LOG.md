@@ -1360,3 +1360,24 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md` after commit).
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after official bank generation and final validation.
+## 2026-09-09T18:20:00+09:00 — DATA-01 primary-use retirement
+
+- **Status:** DATA-01 is `RETIRED_FROM_PRIMARY_FORMULATION_USE`. Its EXP-01B cohort was
+  designed for latency and G0/G1/G2 characterization and did not provide sufficient
+  trajectory diversity for primary formulation research.
+- **Forward-only change:** Work started from local and fetched `origin/main` at
+  `758a67209771fa2083b5b8ea5f46faa3056fcecd` on `main`. The previous DATA-01 commit and log
+  entry were not amended. Active README/EXP-02D instructions were removed, the historical
+  DATA-01 document was retained with a retirement banner, and its EXP-01B-specific config,
+  builder, plotter, validator, implementation, and focused tests were removed.
+- **Local artifacts:** The ignored generated bank at
+  `data/frozen_transition_bank/lightnav_exp01b_v1/` was moved to the desktop trash. The
+  historical source `data/exp01b_redesign/exp01b-controlled-primary-20260906T-frozen/` and
+  all EXP-01A/B/02A/B/C artifacts remain present and unchanged.
+- **Next role:** DATA-02 will be the primary diverse same-episode successive LightNav
+  OLD/FRESH collection. DATA-01 may only be described as a legacy regression artifact.
+- **Unrelated changes:** Existing user edits to
+  `configs/stage0_jackal_controller_validation.yaml` and
+  `configs/stage0_lightnav_single_chunk.yaml` were preserved and excluded.
+- **Validation:** Complete suite passed `272`; generated-bank absence, historical-source
+  presence, stale import/reference search, and `git diff --check` passed.
