@@ -1306,3 +1306,57 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md 로 확인)`
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after final status/diff/staged-diff review.
+
+## 2026-09-09T16:56:53+09:00 — DATA-01 frozen LightNav transition bank
+
+- **Purpose and scope:** Freeze real OLD/FRESH inputs and outcome-independent development /
+  held-out partitions before EXP-02D formulation work. This is data curation and static
+  visualization only. No residual, graph solve, factor weight, selector, controller,
+  LightNav inference, or Isaac physics execution was added or run. Local and fetched
+  `origin/main` both started at `275d17b39317fee0faf8790856329d5b172305ea` on `main`.
+  Existing unrelated edits to the Stage 0 controller-validation and LightNav single-chunk
+  configs were preserved and excluded.
+- **Source and schema:** Strict EXP-01B/Stage 0-F validation reconstructed 37 attempts: 36
+  timing-valid, 30 `VALID_MOVING`, three `MODEL_STOP_OUTPUT`, three `OLD_EXHAUSTED`, and one
+  `TIMING_INVALID`. All 30 eligible transition contexts were retained even when arrays repeat.
+  Every pair stores byte-identical raw OLD/FRESH and derived world NPY copies, exact P/B event
+  and timeline semantics, observation/model-ready/usable times and poses, complete source
+  hashes/provenance, Stage 0-F spatial descriptors, frozen historical raw-switch controller
+  metrics, and deterministic ranks. LightNav rows remain untimed.
+- **Identity and split:** The bank contains 8/8 unique OLD/FRESH raw arrays, 9/16 unique
+  OLD/FRESH world arrays, 15 ordered raw-pair groups, and 16 world-pair groups. Stable pair IDs
+  hash the source-relative trial, four array hashes, and boundary/timing context. Exhaustive
+  deterministic assignment of complete raw-pair groups produced 20 development and 10
+  held-out pairs with zero leakage. Every G0/G1/G2 x L0/L1 stratum appears in both partitions;
+  counts are `3/2, 3/2, 3/2, 3/2, 4/1, 4/1` development/held-out respectively.
+- **Observed raw descriptors:** Across 30 pairs, `|delta v|` min/median/max was
+  `0.002782/0.013260/0.416563 m/s`; `|delta omega|` was
+  `0.001184/0.016439/1.405038 rad/s`; P→B versus B→F0 direction disagreement was
+  `0.754941/3.140092/3.141545 rad`; yaw-increment disagreement was
+  `0.000337/0.000812/0.226989 rad`; and effective simulation latency was
+  `0.450000/0.716667/1.000000 s`. These are descriptive raw k=0 context statistics, not
+  optimization or optimal-k outcomes.
+- **Visualization:** Generated 90 per-pair PNGs (world XY, visualization-only B-centered XY,
+  and yaw versus cumulative spatial length) and nine overview/contact sheets. Blue OLD,
+  orange FRESH, red B, black P/P→B, independent world axes, canonical B at zero, explicit
+  non-time yaw axis, titles, legends, equal aspect, and clipping were visually checked for
+  low/median/high-delta-v/high-delta-omega/largest-direction representatives, a held-out
+  example, and both all-pair overviews.
+- **Validation:** Two isolated end-to-end immutable preflight banks completed. Final-code
+  strict validation passed 30 pairs, 20/10 split, 15 groups, 481 frozen source artifact
+  hash/mtime records, zero leakage, and all 99 PNG signatures/hashes. Focused tests passed
+  `17`; complete suite passed `289`. Whole-repository compileall, generated-data ignore check,
+  and `git diff --check` passed. The official ignored bank is generated from the focused
+  commit before push so its manifest records that generator commit.
+- **Representatives:** raw-only roles selected `pair_4a4d7f199b92` (minimum combined),
+  `pair_1d5f64ce0384` (median combined), `pair_a7703fd6b06d` (maximum delta-v),
+  `pair_6f8a42dd8306` (maximum delta-omega and yaw disagreement), and
+  `pair_4bd02d56c173` (maximum direction disagreement). They are visualization examples, not
+  an evaluation subset.
+- **Major files:** `README.md`, `configs/lightnav_transition_bank_v1.yaml`,
+  `docs/{DATA_01_FROZEN_LIGHTNAV_TRANSITION_BANK.md,WORK_LOG.md}`,
+  `src/reconciliation/frozen_transition_bank.py`, three build/plot/validate scripts, and
+  `tests/test_frozen_transition_bank.py`.
+- **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md` after commit).
+- **Branch:** `main`
+- **Push:** Target `origin/main`; planned after official bank generation and final validation.
