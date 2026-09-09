@@ -7,8 +7,9 @@ here is separate from LightNav.
 
 ## Current research state
 
-- Stage 0-G resolved the LightNav input contract but the frozen six-scene qualification
-  failed left/right/detour reproducibility and diversity; DATA-02 collection is not authorized.
+- Stage 0-G2 replaced the abstract qualification map with one frozen, realistic Isaac Hospital
+  while keeping Jackal and the exact Stage 0-G LightNav/camera/history contract. Its primary
+  run still failed reproducible left/right/detour geometry; DATA-02 collection is not authorized.
 - The execution-platform investigation prompted by feedback item 1 is complete through the
   frozen Stage 0-D/E/F and EXP-02B-R evidence. This does not claim that the platform is
   generally validated beyond the observed LightNav execution envelope.
@@ -60,6 +61,7 @@ this machine because current claims and provenance depend on them:
 | LightNav envelope Stage 0-F | `data/stage0/lightnav_execution_envelope/stage0f-20260908T043300Z/` |
 | Calibrated EXP-02B re-evaluation | `data/exp02b_calibrated_reeval/exp02b-r-20260908T054233Z/` |
 | Current-M4 factor isolation EXP-02C | `data/exp02c_factor_isolation/exp02c-factor-isolation-20260908T133000Z/` |
+| Jackal domain-scene qualification Stage 0-G2 | `data/stage0/lightnav_scene_qualification_g2/20260909T_stage0g2_primary_r3/` |
 
 These are not a new formulation dataset. The complete keep/archive/delete dependency audit is
 in [the 2026-09-09 cleanup audit](docs/REPOSITORY_CLEANUP_AUDIT_20260909.md).
@@ -74,6 +76,7 @@ Detailed protocols, commands, schemas, observed results, and claim limitations l
   [execution calibration](docs/STAGE_00_EXECUTION_LAYER_CALIBRATION.md),
   [closed-loop validation](docs/STAGE_00_CLOSED_LOOP_EXECUTION_VALIDATION.md), and
   [LightNav execution envelope](docs/STAGE_00_LIGHTNAV_EXECUTION_ENVELOPE.md).
+- LightNav scene qualification: [Stage 0-G2 Jackal domain scene](docs/STAGE_00G2_JACKAL_DOMAIN_SCENE_QUALIFICATION.md).
 - Transition characterization: [EXP-01](docs/EXPERIMENT_01.md),
   [EXP-01A](docs/EXP_01A_LIGHTNAV_LATENCY.md),
   [EXP-01B](docs/EXP_01B_ONLINE_RAW_SWITCH.md),
@@ -119,3 +122,14 @@ git diff --check
 
 Synthetic fixtures are tests and mechanism demonstrations only. They are never experimental
 evidence.
+
+Run the persistent Stage 0-G2 GUI with the stationary Jackal and frozen prediction:
+
+```bash
+./scripts/isaac/run_stage0g2_jackal_domain_scene_qualification.sh \
+  data/stage0/lightnav_scene_qualification_g2/20260909T_stage0g2_primary_r3 \
+  --mode gui --scenario G2_Q3_DOORWAY --variant V0
+```
+
+The GUI is inference-only: cyan is the observation-anchored LightNav path, yellow marks decoded
+headings, and Jackal remains stationary. Close Isaac Sim to end the persistent view.

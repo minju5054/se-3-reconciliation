@@ -1379,6 +1379,7 @@ This file is append-only. Add each completed task at the bottom.
 - **Unrelated changes:** Existing user edits to
   `configs/stage0_jackal_controller_validation.yaml` and
   `configs/stage0_lightnav_single_chunk.yaml` were preserved and excluded.
+
 - **Validation:** Complete suite passed `272`; generated-bank absence, historical-source
   presence, stale import/reference search, and `git diff --check` passed.
 
@@ -1501,3 +1502,38 @@ This file is append-only. Add each completed task at the bottom.
 - **Unrelated changes:** Existing user edits to
   `configs/stage0_jackal_controller_validation.yaml` and
   `configs/stage0_lightnav_single_chunk.yaml` were preserved and excluded.
+
+## 2026-09-09T21:30:00+09:00 — Stage 0-G2 Jackal realistic-domain qualification
+
+- **Scope:** Kept Jackal, LightNav/checkpoint, camera, preprocessing, stationary history, output
+  semantics, and Stage 0-G geometry thresholds fixed; changed only the visual/navigation domain.
+  No controller, physics tuning, planner, DATA-02, OLD/FRESH, graph, residual, factor, selector,
+  gate, optimization, or smoothing work was introduced.
+- **Asset audit/selection:** Official Isaac 6.0.1 Office (4,653 prims, one detected collision),
+  Hospital (1,910 prims, 126 collisions), and Simple_Room (139 prims, 60 collisions) loaded.
+  Simple_Warehouse (3,417 prims, 781 collisions) and Grid were also considered. Hospital was
+  selected before any G2 inference for its coherent realistic corridors, doors, hospital
+  objects, Jackal-scale clearance, and collision
+  coverage. Exact audit decisions are in the run manifest.
+- **Preview/freeze:** Two pre-freeze runs produced zero inference: r1 exposed a closed-door
+  doorway and r2 exposed a marginally displaced right-turn pose. Both remain non-primary ignored
+  diagnostics. r3 passed all six explicit V0 visibility/camera/route/settling gates and froze
+  config SHA-256 `49d339d16694d96dc5113271a2236e79ce413ae2411915e340885f8310fc9f01`.
+- **Primary protocol:** `data/stage0/lightnav_scene_qualification_g2/20260909T_stage0g2_primary_r3/`.
+  Captured 30 immutable 64-frame histories. Ran Q0/Q1/Q2 V0 smoke and then the remaining 27 once,
+  without retry or tuning. All outputs were finite and moving.
+- **Observed result:** Q0 straight 5/5 and Q3 doorway task-local forward 5/5; Q1 left, Q2 right,
+  Q4 detour-left, and Q5 detour-right each 0/5. Total exact unique outputs were 5, dominant group
+  fraction 0.667, and coarse signatures 3. Doorway distinct intent was not demonstrated.
+- **Stage 0-G comparison:** Descriptively, unique arrays changed 3→5, dominant fraction
+  ~0.767→0.667, and signatures 2→3, while all four non-straight turn/detour families remained
+  0/5. No causal statistical claim is made.
+- **Decision:** `STAGE0G2_SCENE_QUALIFICATION_FAILED`; DATA-02 remains unauthorized.
+- **GUI:** Actual Isaac GUI smoke on Q3/V0 initially exposed a wall-occluded camera. The GUI-only
+  chase view was corrected without touching inference artifacts; the second screenshot visibly
+  shows stationary Jackal, Hospital doorway, cyan prediction, heading marker, and endpoint.
+- **Validation:** Strict 30-case artifact validation passed; focused G2 tests passed `13`; the
+  full repository suite passed `297`; compileall, both new launcher syntax checks, ignored-output
+  check, and `git diff --check` passed.
+- **Unrelated changes:** Existing user edits to the two Stage 0 configs remain preserved and
+  excluded.
