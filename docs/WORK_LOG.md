@@ -1588,3 +1588,50 @@ This file is append-only. Add each completed task at the bottom.
 - **Unrelated changes:** Existing user edits to
   `configs/stage0_jackal_controller_validation.yaml` and
   `configs/stage0_lightnav_single_chunk.yaml` were preserved and excluded.
+
+## 2026-09-10T01:39:20+09:00 — DATA-02 online-successive collector freeze
+
+- **Research decision and scope:** Implemented the target-data collector for genuine same-episode
+  successive LightNav OLD/FRESH contexts while the wheel-driven Isaac Jackal continues OLD during
+  natural asynchronous FRESH latency. This is data collection/characterization only. No Stage 0-G4,
+  reconciliation, graph, objective, residual, correspondence, selector, gate, smoothing, obstacle
+  avoidance, controller tuning, physics tuning, or LightNav modification was introduced. Historical
+  Stage 0-G/G2/G3 failures remain failures.
+- **Starting repository:** Fetched local/origin `main` both pointed to
+  `4c37b5c9ff37ca8b460b1466c9acdee1e1f58a45`. The clean external LightNav checkout remained
+  `a645828d81a8439651172197ca80a75dc1377977`; checkpoint revision remained
+  `7221d418bfff55cfcbadd09f7a26aaab81e1f8a6`, with all declared checkpoint hashes matching.
+- **Frozen system:** Actual Isaac `6.0.1-rc.7+release.42383.32955d8d.gl`, official Hospital and
+  Jackal assets, the Stage 0-G2 480 x 270/112-degree/4 Hz input contract, persistent warmed
+  LightNav at 0.65 GPU-memory utilization and 1 GiB KV cache, and the unchanged
+  `TrajectoryFollower` + frozen Stage 0-D `pi_strong` + `DifferentialController` wheel stack.
+  Stage 0-F's `execution_platform_validated=false` limitation remains explicit.
+- **Frozen design:** Declared 12 Hospital templates across straight/left/right/doorway/detour/
+  compound setups and seven common deterministic pose variants, yielding the fixed 84-episode,
+  maximum-504-opportunity primary grid. Template previews and all 84 collision/settling feasibility
+  checks occur before primary inference. FRESH triggers at exactly 0.50 simulation seconds; its raw
+  observation-anchored path is activated unchanged and becomes the next OLD without an episode
+  reset. Waypoint rows remain spatial and untimed. Frozen config SHA-256 is
+  `b92f4ddc1ba7e80d5544573ffedd8b8175e6b92ae79c8d79637cbb3e17c5a313`.
+- **Artifacts and validation:** Added immutable episode RGB/chunk/transition streams, explicit
+  observation/host/model-ready/switch clocks, model-ready/P/B poses, body/wheel/controller telemetry,
+  raw/world ordered identities, run protocol/collection manifests, strict reconstruction, frozen
+  coverage/readiness gates, leakage-isolated splitting, ten required plots, and saved-only GUI replay.
+  GUI uses a replay-only chase view/light and phase panel; it does not rerun LightNav.
+- **Technical smoke:** `data02-online-successive-smoke-r6` completed one episode and three successive
+  transitions with one model build, one episode reset, and four predictions. Strict validation
+  passed all raw/world/frame/timing/hash checks. Statuses were 2 `ELIGIBLE_MOVING` and 1 preserved
+  `TIMING_INVALID`; eligible host latency was 0.556--0.827 s, effective latency 0.600--0.850 s,
+  and motion to model readiness 0.176--0.258 m. All ten smoke plots were produced. GUI smoke on
+  transition 1 visibly showed illuminated Jackal motion, OLD/FRESH/actual, observation/P/B, and
+  live phase. Smoke is not primary scientific evidence and did not change the frozen protocol.
+- **Validation/resources:** Full repository suite passed `357`; compileall, launcher `bash -n`,
+  `git diff --check`, and generated-data ignore checks passed. The filesystem had 1.6 TiB free;
+  the smoke episode used 5.83 MiB, giving a conservative sub-1-GiB 84-episode data estimate before
+  primary collection (plots/replay products excluded from the per-episode estimate).
+- **Next provenance step:** Commit and push the frozen collector, then run the entire primary grid
+  from a separate clean worktree at that exact collector SHA. Primary results will be documented in
+  the second result-only commit.
+- **Unrelated changes:** Existing user edits to
+  `configs/stage0_jackal_controller_validation.yaml` and
+  `configs/stage0_lightnav_single_chunk.yaml` remain preserved and will not be staged.

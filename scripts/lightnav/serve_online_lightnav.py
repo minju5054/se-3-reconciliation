@@ -58,8 +58,10 @@ def load_json(path: Path) -> dict[str, Any]:
     return result
 
 
-def load_warmup_frames(source: Path, expected: int) -> list[np.ndarray]:
-    paths = sorted((source / "raw/rgb").glob("frame_*.png"))
+def load_warmup_frames(
+    source: Path, expected: int, pattern: str = "raw/rgb/frame_*.png"
+) -> list[np.ndarray]:
+    paths = sorted(source.glob(pattern))
     if len(paths) != expected:
         raise ValueError(f"expected {expected} warm-up frames, found {len(paths)}")
     frames = []
@@ -123,14 +125,21 @@ def main() -> None:
         raise ValueError("config must contain a mapping")
     paths = config["paths"]
     lightnav = config["lightnav"]
-    instruction = str(config["instruction"])
+    instruction = str(config.get("instruction", ""))
     design = config.get("controlled_latency_design")
-    allowed_instructions = {instruction}
+    allowed_instructions = {instruction} if instruction else set()
     if isinstance(design, dict):
         allowed_instructions.update(
             str(item["instruction"])
             for item in design.get("geometry_conditions", [])
         )
+    templates = config.get("episode_templates")
+    if isinstance(templates, list):
+        allowed_instructions.update(str(item["instruction"]) for item in templates)
+        if not instruction:
+            instruction = str(templates[0]["instruction"])
+    if not instruction:
+        raise ValueError("config must declare an instruction or episode_templates")
     if bool(lightnav["intrinsic_waypoint_time_base"]):
         raise ValueError("EXP-01B must not fabricate a LightNav waypoint time base")
     checkout = resolve_path(paths["lightnav_checkout"])
@@ -138,10 +147,11 @@ def main() -> None:
     warmup_source = resolve_path(paths["warmup_source_run"])
     expected_history = int(lightnav["expected_history_frames"])
     expected_horizon = int(lightnav["expected_horizon"])
-    prior = load_json(warmup_source / "raw/lightnav_inference.json")
-    warmup_instruction = str(prior.get("instruction", ""))
+    prior_path = warmup_source / "raw/lightnav_inference.json"
+    prior = load_json(prior_path) if prior_path.is_file() else {}
+    warmup_instruction = str(prior.get("instruction", instruction))
     if not warmup_instruction:
-        raise ValueError("warm-up input has no instruction")
+        raise ValueError("warm-up input/config has no instruction")
     if not isinstance(design, dict) and warmup_instruction != instruction:
         raise ValueError("warm-up input instruction differs from EXP-01B instruction")
     eval_config = load_json(checkpoint / "eval_config.json")
@@ -150,7 +160,11 @@ def main() -> None:
         raise ValueError("checkpoint history contract differs from EXP-01B config")
     if int(task["predict_horizon"]) != expected_horizon:
         raise ValueError("checkpoint horizon differs from EXP-01B config")
-    frames = load_warmup_frames(warmup_source, expected_history)
+    frames = load_warmup_frames(
+        warmup_source,
+        expected_history,
+        str(paths.get("warmup_rgb_glob", "raw/rgb/frame_*.png")),
+    )
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA is unavailable in the LightNav environment")
 
@@ -183,7 +197,7 @@ def main() -> None:
         "model_build_call_count": 1,
         "model_load_ms": model_load_ms,
         "warmup": {
-            "method": "saved validated Stage 0-C 64-frame RGB history",
+            "method": "saved validated 64-frame RGB history",
             "source_run": str(warmup_source),
             "host_latency_ms": warm_host_ms,
             "lightnav_reported_latency_ms": float(warm_reported_ms),
