@@ -85,6 +85,35 @@ def camera_prims_below(reference_prim_path: str) -> list[str]:
     return [str(prim.GetPath()) for prim in Usd.PrimRange(root) if prim.IsA(UsdGeom.Camera)]
 
 
+def suppress_sensor_viewport_visualization(
+    reference_prim_path: str, tokens: tuple[str, ...] = ("lidar", "laser")
+) -> dict[str, list[str]]:
+    """Hide sensor-only GUI clutter without changing robot articulation physics."""
+
+    stage = omni.usd.get_context().get_stage()
+    root = stage.GetPrimAtPath(reference_prim_path)
+    sensor_roots = [
+        prim
+        for prim in Usd.PrimRange(root)
+        if any(token in prim.GetName().lower() for token in tokens)
+    ]
+    hidden: list[str] = []
+    disabled: list[str] = []
+    for sensor_root in sensor_roots:
+        for prim in Usd.PrimRange(sensor_root):
+            imageable = UsdGeom.Imageable(prim)
+            if imageable:
+                imageable.MakeInvisible()
+                hidden.append(str(prim.GetPath()))
+            if prim.GetName().lower() in tokens:
+                prim.SetActive(False)
+                disabled.append(str(prim.GetPath()))
+    return {
+        "hidden_imageable_prim_paths": sorted(set(hidden)),
+        "disabled_sensor_prim_paths": sorted(set(disabled)),
+    }
+
+
 def _collision_cylinder_radius(stage, wheel_body_prim) -> float:
     radii = []
     for prim in Usd.PrimRange(wheel_body_prim):

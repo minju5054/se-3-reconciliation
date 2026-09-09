@@ -1,0 +1,159 @@
+stage: stage0-g-lightnav-scene-qualification
+schema_version: 1
+
+paths:
+  lightnav_checkout: ../external/LightNav-0
+  checkpoint_relative_path: checkpoints/LightNav-0
+  output_root: data/stage0/lightnav_scene_qualification
+
+baseline:
+  expected_lightnav_git_sha: a645828d81a8439651172197ca80a75dc1377977
+  checkpoint_identifier: LightOriginsHQ/LightNav-0
+  expected_checkpoint_revision: 7221d418bfff55cfcbadd09f7a26aaab81e1f8a6
+  expected_file_sha256:
+    eval_config.json: 7f475edbef4a13d2db99fa12eff5e9dedf48916969ec777f75e6e85e2a492b57
+    config.json: 0e047b5e9ae7981cf0066e74d8b655a2f49d7d7965c25fca386f9eea80b63e58
+    processor_config.json: ac89ec99ea773dc28f5b217edec5947120071ad5b9edcd48d3843ecc63b9877e
+    action_tokenizer/manifest.json: 00d77ae028edf59e0ce68b49122dd0a60da527f48508f5ee335a580993a12864
+    tokenizer_config.json: 8e8e879bfe8a52ececc118c9b80a48240ab35ff01a8be88d9a071df7ee7c4803
+    model.safetensors.index.json: d725f1a587bde70cdf16ae5e1e672ff13cada2740c11baf13fbcff49dd7e00b1
+
+lightnav:
+  task: vln
+  task_key: vlnce
+  task_type: vlnce_traj
+  prompt_style: unified_traj
+  backend: vllm_local
+  gpu_memory_utilization: 0.90
+  aspect_mode: stretch
+  expected_horizon: 10
+  expected_history_frames: 64
+  expected_video_fps: 4.0
+  timestamp_relative: true
+  intrinsic_waypoint_time_base: false
+  decoded_output_semantics: absolute_poses_in_observation_robot_frame
+  axes: [forward_m, lateral_m_left_positive, yaw_rad_ccw_positive]
+
+simulation:
+  physics_dt: 0.016666666666666666
+  settling_duration_s: 1.0
+  spawn_height_m: 0.15
+
+robot:
+  asset_collection_path: /Isaac/Robots
+  asset_relative_path: Clearpath/Jackal/jackal.usd
+  reference_prim_path: /World/JackalReference
+
+camera:
+  source: stage0g_experiment_camera_rigidly_synchronized_to_jackal_observation_pose
+  selection_basis: official_lightnav_wheeled_mujoco_view_with_jackal_safe_mount_height
+  relative_translation_m: [0.30, 0.0, 0.48]
+  relative_rotation_xyz_deg: [90.0, 0.0, -90.0]
+  orientation: level_robot_forward
+  resolution_width: 480
+  resolution_height: 270
+  horizontal_fov_deg: 112.0
+  horizontal_aperture: 20.955
+  clipping_range_m: [0.05, 100.0]
+  rgb_format: HWC_uint8_RGB
+  model_preprocess_size_hw: [256, 448]
+  model_resample: bilinear
+
+capture:
+  frame_count: 64
+  fps: 4.0
+  render_subframes: 2
+  stationary_history: true
+
+scene:
+  family: coherent_primitive_indoor_qualification_map
+  bay_spacing_m: 12.0
+  corridor_half_width_m: 1.50
+  wall_height_m: 2.20
+  wall_thickness_m: 0.14
+  floor_color_rgb: [0.32, 0.34, 0.37]
+  wall_color_rgb: [0.72, 0.74, 0.78]
+  accent_color_rgb: [0.18, 0.38, 0.62]
+  obstacle_color_rgb: [0.55, 0.24, 0.12]
+
+variants:
+  - {id: V0, yaw_offset_rad: 0.0, lateral_offset_m: 0.0}
+  - {id: V1, yaw_offset_rad: 0.05, lateral_offset_m: 0.0}
+  - {id: V2, yaw_offset_rad: -0.05, lateral_offset_m: 0.0}
+  - {id: V3, yaw_offset_rad: 0.0, lateral_offset_m: 0.09}
+  - {id: V4, yaw_offset_rad: 0.0, lateral_offset_m: -0.09}
+
+scenarios:
+  - id: Q0_STRAIGHT
+    index: 0
+    instruction: Go straight through the corridor.
+    intended_class: straight
+    baseline_pose_se2: [0.0, 0.0, 0.0]
+    geometry: straight_corridor
+  - id: Q1_LEFT_TURN
+    index: 1
+    instruction: Turn left at the intersection.
+    intended_class: left
+    baseline_pose_se2: [0.0, 12.0, 0.0]
+    geometry: left_only_t_junction
+  - id: Q2_RIGHT_TURN
+    index: 2
+    instruction: Turn right at the intersection.
+    intended_class: right
+    baseline_pose_se2: [0.0, 24.0, 0.0]
+    geometry: right_only_t_junction
+  - id: Q3_DOORWAY
+    index: 3
+    instruction: Go through the open doorway.
+    intended_class: doorway
+    baseline_pose_se2: [0.0, 36.0, 0.0]
+    geometry: centered_open_doorway
+  - id: Q4_DETOUR_LEFT
+    index: 4
+    instruction: Go around the obstacle on the left and continue forward.
+    intended_class: detour_left
+    baseline_pose_se2: [0.0, 48.0, 0.0]
+    geometry: obstacle_with_left_passage
+  - id: Q5_DETOUR_RIGHT
+    index: 5
+    instruction: Go around the obstacle on the right and continue forward.
+    intended_class: detour_right
+    baseline_pose_se2: [0.0, 60.0, 0.0]
+    geometry: obstacle_with_right_passage
+
+qualification:
+  required_matches_per_scenario: 4
+  meaningful_path_length_m: 0.05
+  meaningful_forward_progress_m: 0.30
+  stop_path_length_m: 0.01
+  straight:
+    max_abs_endpoint_lateral_m: 0.15
+    max_abs_net_yaw_rad: 0.15
+    max_abs_lateral_excursion_m: 0.20
+  left:
+    min_endpoint_lateral_m: 0.20
+    min_net_yaw_rad: 0.20
+    contradictory_endpoint_lateral_m: -0.15
+    contradictory_net_yaw_rad: -0.15
+  right:
+    max_endpoint_lateral_m: -0.20
+    max_net_yaw_rad: -0.20
+    contradictory_endpoint_lateral_m: 0.15
+    contradictory_net_yaw_rad: 0.15
+  detour_left:
+    min_left_excursion_m: 0.25
+  detour_right:
+    max_right_excursion_m: -0.25
+  global:
+    minimum_unique_raw_outputs: 5
+    maximum_stop_or_nonmoving_count: 6
+
+visualization:
+  z_offset_m: 0.12
+  trajectory_color_rgba: [0.05, 0.85, 1.0, 1.0]
+  heading_color_rgba: [1.0, 0.82, 0.1, 1.0]
+  line_width: 7.0
+  point_size: 12.0
+  heading_length_m: 0.18
+  camera_eye_offset: [-2.4, -3.5, 3.2]
+  camera_target_offset: [1.6, 0.0, 0.3]

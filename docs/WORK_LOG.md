@@ -1452,3 +1452,52 @@ This file is append-only. Add each completed task at the bottom.
 - **Commit reference:** `SELF (git log -1 -- docs/WORK_LOG.md` after commit).
 - **Branch:** `main`
 - **Push:** Target `origin/main`; planned after final staged-diff review.
+
+## 2026-09-09T20:30:00+09:00 — Stage 0-G LightNav input/scene qualification
+
+- **Purpose and scope:** Audited the exact LightNav input contract, built six coherent indoor
+  qualification scenes, captured five deterministic nearby stationary histories per scene,
+  ran exactly 30 single-chunk predictions, computed immutable descriptors/diversity evidence,
+  and added a non-executing Isaac GUI. No OLD/FRESH collection, controller execution/tuning,
+  LightNav change, graph/objective/factor/selector/gate/smoothing change, or DATA-02 pipeline
+  was introduced.
+- **Baseline:** Work started on clean-history local/origin `main` at
+  `524ced9ce193acf1b796f34ddc85010f8ce61338`. The separate, clean LightNav checkout was
+  `a645828d81a8439651172197ca80a75dc1377977`; checkpoint revision was
+  `7221d418bfff55cfcbadd09f7a26aaab81e1f8a6`. Expected checkout, revision, and six checkpoint
+  file hashes all matched.
+- **Input contract:** Frozen 480 x 270 HWC uint8 RGB, 112-degree HFOV, level forward 0.48 m
+  Jackal-safe camera, stretch-to-256 x 448 bilinear preprocessing, 64 stationary frames at
+  4 Hz, `vln`/`vlnce`/`vlnce_traj` `unified_traj`, and cumulative observation-local float32
+  `[forward, left, CCW yaw]` output. Frame timestamps are recorded; waypoint rows remain
+  explicitly untimed. World paths use only the final input-frame observation pose.
+- **Preview/freeze:** A first pre-freeze run failed before audit completion due to a duplicated
+  checkpoint manifest path. A second pre-freeze preview exposed that the Replicator camera did
+  not follow articulation teleports. Both produced zero inference and are retained as technical
+  invalidities. The transform was fixed without changing intended research conditions. All six
+  V0 scenes were then visibly inspected before freezing r2 config SHA-256
+  `8be2c0c65b7188a3a1e38d2528b99dd38006a6842239ce4d303cf7648a4d5d57`.
+- **Primary run:** `data/stage0/lightnav_scene_qualification/20260909T_stage0g_primary_r2/`.
+  Smoke used Q0/Q1/Q2 V0, then the other 27 cases ran once. Q0 straight and Q3 doorway were
+  5/5; Q1 left, Q2 right, Q4 detour-left, and Q5 detour-right were 0/5. All 30 were finite and
+  moving, but there were only 3 unique raw outputs and 2 coarse geometry signatures. No
+  condition or threshold was tuned after inspecting predictions.
+- **Decision:** `STAGE0G_SCENE_QUALIFICATION_FAILED`. Input-contract, preview legibility,
+  validity/non-STOP, Q0, and Q3 forward-progress checks passed; left, right, detour, and global
+  diversity requirements failed. This does not authorize DATA-02 or successive OLD/FRESH
+  collection and is not a navigation/controller/reconciliation performance conclusion.
+- **GUI:** Actual GUI smoke Q1/V0 showed the stationary official Jackal, T-junction scene,
+  cyan world prediction, yellow headings, and endpoint marker. An initial viewpoint exposed
+  wall occlusion, and a second exposed LiDAR-ray clutter; viewport-only framing and the existing
+  sensor-clutter suppression pattern were then applied. Final screenshot visibly contains both
+  Jackal and prediction. No trajectory execution occurs.
+- **Artifacts:** Stored all histories/timestamps, raw decoder outputs/text, observation-anchored
+  world paths, metadata/provenance, descriptors, per-case plots, two inspected overviews,
+  duplicate groups, pairwise distances, summary, decision, and strict validation. Generated
+  content remains ignored and primary raw outputs are exclusively written.
+- **Validation:** Focused Stage 0-G tests passed `12`; full repository suite passed `284`;
+  strict generated-artifact validation passed all 30 cases with the scientific status
+  remaining FAILED. Compileall, both new shell launchers, and `git diff --check` passed.
+- **Unrelated changes:** Existing user edits to
+  `configs/stage0_jackal_controller_validation.yaml` and
+  `configs/stage0_lightnav_single_chunk.yaml` were preserved and excluded.

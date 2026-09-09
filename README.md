@@ -7,6 +7,8 @@ here is separate from LightNav.
 
 ## Current research state
 
+- Stage 0-G resolved the LightNav input contract but the frozen six-scene qualification
+  failed left/right/detour reproducibility and diversity; DATA-02 collection is not authorized.
 - The execution-platform investigation prompted by feedback item 1 is complete through the
   frozen Stage 0-D/E/F and EXP-02B-R evidence. This does not claim that the platform is
   generally validated beyond the observed LightNav execution envelope.
