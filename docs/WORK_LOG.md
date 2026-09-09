@@ -1635,3 +1635,52 @@ This file is append-only. Add each completed task at the bottom.
 - **Unrelated changes:** Existing user edits to
   `configs/stage0_jackal_controller_validation.yaml` and
   `configs/stage0_lightnav_single_chunk.yaml` remain preserved and will not be staged.
+
+## 2026-09-10T02:31:00+09:00 — DATA-02 frozen primary collection and decision
+
+- **Immutable collection:** Ran the complete 12-template x 7-variant primary grid from a separate
+  clean detached worktree at collector commit
+  `254ab6f07ce69847b8612bc40082a28adf5f45bd`. Run
+  `data/data02_online_successive_v1/data02-online-successive-primary-v1/` completed all 84 planned
+  episodes and 480 actual transition attempts. Frozen config SHA-256 was
+  `b92f4ddc1ba7e80d5544573ffedd8b8175e6b92ae79c8d79637cbb3e17c5a313`; protocol SHA-256 was
+  `883099b35d0cec8724b08367057cd6b008b7d3eb3a96190a8ba36e14199e1868`.
+- **Persistent model/execution:** One LightNav process built the model once, reset its history 84
+  times, served 564 predictions, and exited cleanly with zero process restart or OOM. The actual
+  official Jackal remained wheel-driven through the frozen `TrajectoryFollower` + Stage 0-D
+  `pi_strong` + `DifferentialController` stack; no controller, physics, LightNav, timing-gate, or
+  scenario changes were made after the collector freeze.
+- **Exact status result:** 248 `ELIGIBLE_MOVING`, 219 `TIMING_INVALID`, 4
+  `EXECUTION_COLLISION`, 6 `OLD_EXHAUSTED`, and 3 `MODEL_STOP`; all four other protocol statuses
+  were zero. Timing-invalid and terminal contexts remain stored rather than being retried or
+  silently discarded.
+- **Eligible characterization:** Host latency min/median/p90/p95/max was
+  0.470697/0.569578/0.837373/0.844859/0.851770 s; effective latency was
+  0.500000/0.600000/0.850000/0.850000/0.950000 s; inference translation was
+  0.076784/0.188265/0.269348/0.285378/0.330803 m. There were 45 unique OLD raw chunks, 59 unique
+  FRESH raw chunks, and 96 unique ordered raw pairs, but the largest pair occupied 93/248 = 37.5%.
+  Geometry was 169 straight-like, 39 positive-turning, 34 negative-turning, and 6 other;
+  difficulty was 80 benign, 123 intermediate, and 45 challenging.
+- **Split and decision:** Bipartite episode/raw-pair components yielded 213 development and 35
+  held-out eligible transitions with zero episode leakage and zero exact raw-pair leakage. The
+  held-out side missed the required size and meaningful full scenario/geometry coverage. Sample
+  size (248 < 300), duplicate domination (37.5% > 20%), and split feasibility failed; raw-pair,
+  chunk, geometry, difficulty, and artifact gates passed. Exact decision:
+  `DATA02_COLLECTED_BUT_DIVERSITY_INSUFFICIENT`. EXP-02D is not authorized.
+- **Artifacts/visual review:** Strict validation reconstructed all 84 frame streams and all 480
+  transition transforms/times/hashes with zero errors. Generated all ten required figures and a
+  deterministic 30-transition representative manifest. Saved-only GUI smoke on
+  `episode_000014_transition_04` visibly showed the official Jackal moving through Hospital with
+  blue OLD, magenta FRESH, green actual, observation/P/B markers, and live phase changes; the
+  validated non-black capture is `gui_replays/episode_000014_transition_04.png`. Replay performs
+  neither LightNav inference nor physics re-execution.
+- **Regression validation:** Full repository suite passed `357`; compileall, new launcher
+  `bash -n`, strict dataset validator, raw-hash verification, generated-data ignore, clean
+  collector-worktree, and `git diff --check` all passed. The ignored primary run is about 857 MiB.
+- **Claim limitation:** This is a scenario-stratified coverage dataset, not an estimate of natural
+  navigation frequencies. It does not validate instruction satisfaction, general navigation
+  quality, collision avoidance, causal tire/contact effects, or a reconciliation formulation.
+- **Unrelated changes:** Pre-existing user edits to
+  `configs/stage0_jackal_controller_validation.yaml` and
+  `configs/stage0_lightnav_single_chunk.yaml` remain preserved and excluded from this result
+  commit.

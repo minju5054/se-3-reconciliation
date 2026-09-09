@@ -7,10 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+- DATA-02 collected the frozen 84-episode online-successive Hospital grid from one persistent
+  LightNav process and actual wheel-driven Jackal execution. The immutable primary run contains
+  480 attempted transitions, including 248 timing-valid `ELIGIBLE_MOVING` contexts and 96 unique
+  ordered raw pairs. Its final decision is
+  `DATA02_COLLECTED_BUT_DIVERSITY_INSUFFICIENT`, so it does not authorize formulation work.
 - Stage 0-G3 compared the frozen Stage 0-G2 stationary histories with 30 paired scripted moving
   Jackal histories ending at the same observation poses. Moving history changed 16/30 raw outputs
-  but did not qualify left/right/doorway-or-detour behavior; successive collection is not
-  authorized.
+  but did not qualify left/right/doorway-or-detour behavior. That historical failure remains
+  unchanged; DATA-02 is the later explicit research decision to collect the target context rather
+  than another indirect qualification stage.
 - The execution-platform investigation prompted by feedback item 1 is complete through the
   frozen Stage 0-D/E/F and EXP-02B-R evidence. This does not claim that the platform is
   generally validated beyond the observed LightNav execution envelope.
@@ -19,8 +25,8 @@ here is separate from LightNav.
 - The EXP-01B-derived DATA-01 bank is retired from primary formulation use. Its dedicated
   generated bank and pipeline are removed, while the independent frozen EXP-01B source
   evidence is preserved.
-- A replacement formulation-development LightNav dataset must be redesigned. No DATA-02
-  collector or generated DATA-02 artifact is active in this repository.
+- DATA-02 is coverage-oriented and descriptive. It does not estimate natural deployment
+  frequencies, validate instruction satisfaction, or evaluate any reconciliation formulation.
 - EXP-02D has not started.
 
 ## System boundaries
@@ -64,6 +70,7 @@ this machine because current claims and provenance depend on them:
 | Current-M4 factor isolation EXP-02C | `data/exp02c_factor_isolation/exp02c-factor-isolation-20260908T133000Z/` |
 | Jackal domain-scene qualification Stage 0-G2 | `data/stage0/lightnav_scene_qualification_g2/20260909T_stage0g2_primary_r3/` |
 | Moving-history qualification Stage 0-G3 | `data/stage0/lightnav_moving_history_qualification/20260909T_stage0g3_primary_r6/` |
+| Online-successive DATA-02 primary | `data/data02_online_successive_v1/data02-online-successive-primary-v1/` |
 
 These are not a new formulation dataset. The complete keep/archive/delete dependency audit is
 in [the 2026-09-09 cleanup audit](docs/REPOSITORY_CLEANUP_AUDIT_20260909.md).
@@ -80,6 +87,7 @@ Detailed protocols, commands, schemas, observed results, and claim limitations l
   [LightNav execution envelope](docs/STAGE_00_LIGHTNAV_EXECUTION_ENVELOPE.md).
 - LightNav qualification: [Stage 0-G2 Jackal domain scene](docs/STAGE_00G2_JACKAL_DOMAIN_SCENE_QUALIFICATION.md)
   and [Stage 0-G3 moving egocentric history](docs/STAGE_00G3_MOVING_HISTORY_QUALIFICATION.md).
+- Dataset collection: [DATA-02 online-successive OLD/FRESH](docs/DATA_02_ONLINE_SUCCESSIVE_OLD_FRESH.md).
 - Transition characterization: [EXP-01](docs/EXPERIMENT_01.md),
   [EXP-01A](docs/EXP_01A_LIGHTNAV_LATENCY.md),
   [EXP-01B](docs/EXP_01B_ONLINE_RAW_SWITCH.md),
@@ -148,3 +156,16 @@ Replay the Stage 0-G3 scripted moving history with the official Jackal visibly m
 The GUI persists and repeats until Isaac Sim is closed. Green is the scripted history, magenta is
 the G3 prediction, cyan is the paired G2 prediction, and yellow is the shared final observation.
 The moving Jackal is a direct-pose `SCRIPTED HISTORY REPLAY`, not controller execution.
+
+Replay a saved DATA-02 transition with the official Jackal visibly moving along its recorded
+wheel-driven execution history (this performs no LightNav inference):
+
+```bash
+./scripts/isaac/run_data02_online_successive.sh \
+  --replay-run data/data02_online_successive_v1/data02-online-successive-primary-v1 \
+  --episode episode_000014 --transition 4 --gui
+```
+
+Blue is OLD, magenta is raw observation-anchored FRESH, green is recorded actual motion, and
+yellow/orange/red mark the FRESH observation/P/B poses. Close Isaac Sim to end the persistent
+replay.

@@ -146,6 +146,129 @@ and difficulty counts, a valid isolated split, and strict artifact validity. Oth
 status is `DATA02_COLLECTED_BUT_DIVERSITY_INSUFFICIENT`, `DATA02_TECHNICAL_INVALID`, or
 `DATA02_EPISODE_TEMPLATE_INSUFFICIENT`. Gates are not changed after results.
 
+## Frozen primary result
+
+The immutable primary run is
+`data/data02_online_successive_v1/data02-online-successive-primary-v1/`. It was collected from a
+separate clean worktree at collector commit
+`254ab6f07ce69847b8612bc40082a28adf5f45bd`; `collector_git_status` is empty. The config and
+protocol SHA-256 values are respectively
+`b92f4ddc1ba7e80d5544573ffedd8b8175e6b92ae79c8d79637cbb3e17c5a313` and
+`883099b35d0cec8724b08367057cd6b008b7d3eb3a96190a8ba36e14199e1868`.
+
+All 12 predeclared templates and their seven variants were attempted:
+
+| ID | Class | Physical region | Exact instruction |
+|---|---|---|---|
+| H00_STRAIGHT_SOUTH | straight | central_south_hall | Continue straight down the hospital hallway. |
+| H01_STRAIGHT_NORTH | straight | central_mid_hall | Continue straight down the hospital hallway. |
+| H02_LEFT_SOUTH_JUNCTION | left | south_cross_corridor | At the end of the hallway, turn left into the cross corridor. |
+| H03_LEFT_NORTH_JUNCTION | left | north_cross_corridor | At the junction, turn left into the hospital hallway. |
+| H04_RIGHT_NORTH_JUNCTION | right | north_cross_corridor | At the junction, turn right into the hospital hallway. |
+| H05_RIGHT_SOUTH_JUNCTION | right | south_cross_corridor | At the junction, turn right into the cross corridor. |
+| H06_DOORWAY_WEST | doorway | south_patient_room | Go forward through the open patient-room doorway. |
+| H07_DOORWAY_CONTINUE | doorway | south_patient_room | Enter through the open patient-room doorway and continue toward the bed. |
+| H08_DETOUR_LEFT | detour | warning_sign_south | Go around the warning sign on the left and continue forward. |
+| H09_DETOUR_RIGHT | detour | warning_sign_south | Go around the warning sign on the right and continue forward. |
+| H10_COMPOUND_SOUTH | compound | south_cross_corridor | Continue to the junction, turn left, then proceed down the cross corridor. |
+| H11_COMPOUND_NORTH | compound | north_cross_corridor | Continue to the junction, turn right, then proceed down the cross corridor. |
+
+The variant grid was V0, yaw offsets +0.05/-0.05 rad, lateral offsets +0.09/-0.09 m, and
+longitudinal offsets +0.15/-0.15 m. The fixed plan was therefore 84 episodes and at most 504
+transition opportunities. All 84 episodes completed collection. One model process served the
+entire run without restart: one model build, 84 episode resets, and 564 predictions (84 initial
+chunks plus 480 FRESH requests). Explicit episode termination produced 480 actual attempts.
+
+The exact transition-status distribution is:
+
+| Status | Count |
+|---|---:|
+| ELIGIBLE_MOVING | 248 |
+| MODEL_STOP | 3 |
+| OLD_EXHAUSTED | 6 |
+| CHUNK_EXHAUSTED_BEFORE_TRIGGER | 0 |
+| TIMING_INVALID | 219 |
+| NONFINITE_MODEL_OUTPUT | 0 |
+| EXECUTION_COLLISION | 4 |
+| EXECUTION_OUT_OF_ENVELOPE | 0 |
+| TECHNICAL_INVALID | 0 |
+
+The 219 timing-invalid contexts and all terminal outcomes remain in the raw dataset; only the 248
+eligible contexts enter timing-dependent characterization. Natural inference/real-time-factor
+variation was not corrected by changing the frozen gate.
+
+For eligible transitions, distributions below are min / median / p90 / p95 / max:
+
+| Quantity | Distribution |
+|---|---|
+| Host latency [s] | 0.470697 / 0.569578 / 0.837373 / 0.844859 / 0.851770 |
+| Model-reported latency [s] | 0.380114 / 0.440547 / 0.483625 / 0.490124 / 0.512790 |
+| Effective latency `tau` [s] | 0.500000 / 0.600000 / 0.850000 / 0.850000 / 0.950000 |
+| RTF [dimensionless] | 0.900087 / 0.932721 / 1.077281 / 1.081253 / 1.088596 |
+| Translation during inference [m] | 0.076784 / 0.188265 / 0.269348 / 0.285378 / 0.330803 |
+| Absolute yaw during inference [rad] | 0.000002 / 0.000348 / 0.047175 / 0.132404 / 0.342143 |
+
+Raw identity counts were 45 unique OLD chunks, 59 unique FRESH chunks, and 96 unique ordered raw
+pairs. The largest exact raw pair occurred 93 times, or 37.5% of eligible transitions. World
+identity counts were 238 OLD, 241 FRESH, and 241 ordered pairs. World uniqueness is kept separate
+because the same raw output anchored at different observations is not new model-output diversity.
+
+FRESH spatial geometry counts were 169 `STRAIGHT_LIKE`, 39 `POSITIVE_TURNING`, 34
+`NEGATIVE_TURNING`, and 6 `OTHER`. Representative continuous distributions are:
+
+| Untimed FRESH descriptor | Min / median / p90 / p95 / max |
+|---|---|
+| Path length [m] | 0.069281 / 1.355959 / 1.356219 / 1.356219 / 1.364536 |
+| Endpoint lateral [m] | -0.513864 / 0.000024 / 0.202798 / 0.498392 / 0.770318 |
+| Signed net yaw [rad] | -1.015159 / 0.000607 / 0.586948 / 0.905325 / 1.252415 |
+| Cumulative absolute pose yaw [rad] | 0.000025 / 0.003597 / 0.841081 / 0.913693 / 1.252415 |
+| Maximum absolute pose-yaw increment [rad] | 0.000007 / 0.000892 / 0.146627 / 0.166033 / 0.309027 |
+| Maximum lateral excursion [m] | 0.000007 / 0.000317 / 0.424120 / 0.498392 / 0.770318 |
+
+These are spatial descriptors of untimed waypoint rows, not time-aligned motion metrics. The
+difficulty distribution was 80 `BENIGN`, 123 `INTERMEDIATE`, and 45 `CHALLENGING`. Absolute
+desired-command jumps were:
+
+| Quantity | Min / median / p90 / p95 / max |
+|---|---|
+| `abs(delta_v_des)` [m/s] | 0.000000 / 0.059809 / 0.228359 / 0.362339 / 0.473801 |
+| `abs(delta_omega_des)` [rad/s] | 0.000026 / 0.011407 / 0.491180 / 1.363820 / 1.698676 |
+
+The isolated splitter found 13 episode/raw-pair connected components. It assigned 213 eligible
+transitions to development and 35 to held-out (14.11%, versus the 25% target), with zero episode
+leakage and zero exact ordered-raw-pair leakage. Development contains all 12 scenarios; held-out
+contains H02, H03, H05, H06, H08, H09, and H10. Difficulty classes occur in both splits, but
+held-out has no `OTHER` geometry, only seven scenario families, and fewer than the required 60
+eligible contexts. Split feasibility therefore fails rather than relaxing isolation.
+
+The predeclared A-H readiness checks were: A sample size fail (248 < 300), B raw-pair diversity
+pass (96 >= 75), C duplicate domination fail (37.5% > 20%), D chunk diversity pass (45 OLD and 59
+FRESH), E geometry coverage pass, F difficulty coverage pass, G isolated-split feasibility fail,
+and H strict artifact validity pass. The exact final decision is therefore:
+
+`DATA02_COLLECTED_BUT_DIVERSITY_INSUFFICIENT`
+
+This result does not authorize EXP-02D formulation development. It also does not justify changing
+the observed outputs, thresholds, controller, timing gate, or scenario weights after inspection.
+
+Strict validation independently reconstructed all 84 frame streams, raw-to-world transforms,
+observation anchors, timing/order relations, P/B samples, successive chunk chains, and hashes for
+all 480 transitions with zero errors. The generated run occupies about 857 MiB and remains ignored
+by Git. All ten required figures are under the run's `plots/` directory:
+`eligible_transition_counts.png`, `latency_distribution.png`,
+`robot_motion_during_inference.png`, `command_jump_distribution.png`,
+`fresh_geometry_distribution.png`, `raw_pair_frequency.png`,
+`scenario_geometry_matrix.png`, `benign_challenging_matrix.png`,
+`development_heldout_summary.png`, and `representative_transition_overview.png`.
+
+The deterministic representative set contains 30 transition IDs in
+`summary/representatives.json`. A real saved-only GUI smoke used representative
+`episode_000014_transition_04`: the official Jackal visibly traversed the recorded history in
+Hospital; OLD/FRESH/actual curves and observation/P/B markers were visible; the phase changed from
+`ACTIVE_OLD` through `FRESH_IN_FLIGHT` to `FINISHED`; and a non-black capture was saved to
+`gui_replays/episode_000014_transition_04.png`. No inference or physics re-execution occurred in
+that replay.
+
 ## Commands
 
 Technical smoke (one episode, up to three transitions):
@@ -186,7 +309,7 @@ Saved-only GUI replay performs no model inference:
 ```bash
 ./scripts/isaac/run_data02_online_successive.sh \
   --replay-run data/data02_online_successive_v1/data02-online-successive-primary-v1 \
-  --episode episode_000012 --transition 3 --gui
+  --episode episode_000014 --transition 4 --gui
 ```
 
 GUI legend: blue is OLD, magenta is raw observation-anchored FRESH, green is recorded Jackal
