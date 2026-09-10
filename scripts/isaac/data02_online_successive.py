@@ -17,7 +17,7 @@ import shutil
 import subprocess
 import sys
 import time
-from typing import Any, Mapping
+from typing import Any, Callable, Mapping
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -36,7 +36,13 @@ def arguments() -> argparse.Namespace:
     parser.add_argument("--replay-run", type=Path)
     parser.add_argument("--episode")
     parser.add_argument("--transition", type=int)
+    parser.add_argument("--demo", action="store_true", help="short saved-only collection presentation")
+    parser.add_argument("--duration", type=float, default=12.0, help="demo presentation duration (10-15 s)")
+    parser.add_argument("--hold", dest="no_hold", action="store_false")
     parser.add_argument("--no-hold", action="store_true")
+    parser.add_argument("--show-rgb", dest="show_rgb", action="store_true")
+    parser.add_argument("--no-show-rgb", dest="show_rgb", action="store_false")
+    parser.set_defaults(show_rgb=True)
     return parser.parse_args()
 
 
@@ -95,6 +101,14 @@ from reconciliation.data02_online_successive import (
     transition_metrics,
     validate_raw_chunk,
     variant_pose,
+)
+from reconciliation.data02_collection_demo import (
+    SavedDemoEvidence,
+    load_saved_demo,
+    phase_at,
+    phase_progress,
+    saved_sample_index,
+    scientific_time_for_presentation,
 )
 from reconciliation.data02_v2 import validate_independent_template_bank
 from reconciliation.exp01b_extension import is_stop_actions
@@ -221,7 +235,7 @@ def resolved_asset(relative: str) -> str:
     return str(resolved)
 
 
-def create_runtime(config: Mapping[str, Any]):
+def create_runtime(config: Mapping[str, Any], initial_pose: np.ndarray | None = None):
     dt = float(config["simulation"]["physics_dt"])
     world = World(physics_dt=dt, rendering_dt=dt, stage_units_in_meters=1.0)
     hospital = resolved_asset(str(config["environment"]["asset_relative_path"]))
@@ -232,7 +246,12 @@ def create_runtime(config: Mapping[str, Any]):
     while is_stage_loading():
         APP.update()
     articulation_root = find_articulation_root(robot_reference)
-    first = np.asarray(config["episode_templates"][0]["initial_pose_se2"], dtype=float)
+    first = np.asarray(
+        config["episode_templates"][0]["initial_pose_se2"] if initial_pose is None else initial_pose,
+        dtype=float,
+    )
+    if first.shape != (3,) or not np.all(np.isfinite(first)):
+        raise ValueError("runtime initial pose must be finite SE(2)")
     robot = world.scene.add(SingleArticulation(
         articulation_root, name="data02_jackal",
         position=np.array([first[0], first[1], float(config["simulation"]["spawn_height_m"])]),
@@ -1159,6 +1178,309 @@ def replay(config: Mapping[str, Any], runtime: Mapping[str, Any]) -> None:
         while APP.is_running(): APP.update()
 
 
+def _demo_camera_and_lighting(config: Mapping[str, Any], evidence: SavedDemoEvidence) -> None:
+    """Set one stable oblique view; this does not advance simulation physics."""
+
+    visual = config["visualization"]
+    stage = omni.usd.get_context().get_stage()
+    dome = UsdLux.DomeLight.Define(stage, "/World/Data02CollectionDemoDomeLight")
+    dome.CreateIntensityAttr(float(visual["gui_replay_dome_light_intensity"]))
+    geometry = np.vstack((evidence.old_world, evidence.fresh_world, evidence.actual_poses))
+    center = (geometry[:, :2].min(axis=0) + geometry[:, :2].max(axis=0)) / 2.0
+    yaw = float(evidence.actual_poses[0, 2])
+    forward = np.array([math.cos(yaw), math.sin(yaw)])
+    left = np.array([-forward[1], forward[0]])
+    eye = center - 2.05 * forward + 1.05 * left
+    key_light = UsdLux.SphereLight.Define(stage, "/World/Data02CollectionDemoKeyLight")
+    key_light.CreateIntensityAttr(float(visual["gui_replay_sphere_light_intensity"]))
+    key_light.CreateRadiusAttr(0.35)
+    UsdGeom.XformCommonAPI(key_light).SetTranslate(
+        Gf.Vec3d(float(eye[0]), float(eye[1]), 2.05)
+    )
+    set_camera_view(
+        eye=[float(eye[0]), float(eye[1]), 1.45],
+        target=[float(center[0]), float(center[1]), .18],
+        camera_prim_path="/OmniverseKit_Persp",
+    )
+
+
+def _capture_demo_viewport(
+    episode_id: str, transition_index: int, refresh_saved_pose: Callable[[], None]
+) -> Path:
+    """Capture outside the immutable DATA-02 run directory."""
+
+    output_dir = ROOT / "data/data02_collection_demo" / datetime.now(timezone.utc).strftime(
+        "%Y%m%dT%H%M%SZ"
+    )
+    output_dir.mkdir(parents=True, exist_ok=False)
+    output = output_dir / f"{episode_id}_transition_{transition_index:02d}.png"
+    viewport = get_active_viewport()
+    if viewport is None:
+        raise RuntimeError("active viewport unavailable")
+    capture_viewport_to_file(viewport, file_path=str(output))
+    deadline = time.monotonic() + 20.0
+    minimum_refresh = time.monotonic() + 1.0
+    while (not output.is_file() or time.monotonic() < minimum_refresh) and time.monotonic() < deadline:
+        refresh_saved_pose()
+        time.sleep(.03)
+    if not output.is_file():
+        raise RuntimeError("DATA-02 demo screenshot failed")
+    with Image.open(output) as screenshot:
+        extrema = screenshot.convert("RGB").getextrema()
+    if all(maximum == 0 for _, maximum in extrema):
+        raise RuntimeError("DATA-02 demo screenshot is fully black")
+    return output
+
+
+def replay_demo(
+    config: Mapping[str, Any], runtime: Mapping[str, Any], evidence: SavedDemoEvidence
+) -> None:
+    """Present recorded states only: no LightNav, controller, or physics replay."""
+
+    if not ARGS.gui or ARGS.replay_run is None or ARGS.episode is None or ARGS.transition is None:
+        raise ValueError("demo requires --replay-run, --episode, --transition, and --gui")
+    # phase_schedule validation occurs inside phase_at before any replay starts.
+    phase_at(0.0, ARGS.duration)
+    print("DATA02_DEMO_MODE=Saved-only replay", flush=True)
+    print("DATA02_DEMO_LIGHTNAV=No LightNav inference", flush=True)
+    print("DATA02_DEMO_PHYSICS=No physics re-execution", flush=True)
+    print("DATA02_DEMO_TIMING=Presentation timing != scientific timing", flush=True)
+    print(
+        f"DATA02_DEMO_SELECTION={evidence.run} {evidence.episode_id} "
+        f"transition={evidence.transition_index}",
+        flush=True,
+    )
+    print(
+        "DATA02_DEMO_LEGEND blue=OLD magenta=raw_observation_anchored_FRESH "
+        "green=saved_actual yellow=observation orange=P red=B",
+        flush=True,
+    )
+
+    suppress_sensor_viewport_visualization(str(config["robot"]["reference_prim_path"]))
+    visual = config["visualization"]
+    draw = _debug_draw.acquire_debug_draw_interface()
+    draw.clear_lines()
+    draw.clear_points()
+    z = float(visual["z_offset_m"])
+    draw_polyline(
+        draw,
+        evidence.old_world,
+        z=z,
+        color=visual["old_color_rgba"],
+        width=float(visual["line_width"]),
+    )
+    draw_pose_points(
+        draw,
+        evidence.actual_poses[[0]],
+        z=z + .06,
+        color=visual["actual_color_rgba"],
+        size=float(visual["marker_size"]) * .6,
+    )
+    _demo_camera_and_lighting(config, evidence)
+
+    panel = ui.Window(
+        "DATA-02 ONLINE COLLECTION DEMO", width=610, height=300, position_x=15, position_y=55
+    )
+    with panel.frame:
+        with ui.VStack(spacing=6, style={"margin": 10}):
+            ui.Label("DATA-02 ONLINE COLLECTION DEMO", style={"font_size": 22})
+            ui.Label("PRESENTATION-TIME REPLAY  |  NOT REAL-TIME SCIENTIFIC TIMING")
+            phase_label = ui.Label("PHASE 1 — OLD EXECUTING", style={"font_size": 26})
+            phase_detail = ui.Label("OLD is already active", style={"font_size": 18})
+            semantics_label = ui.Label("BLUE OLD  |  GREEN saved actual Jackal history")
+            scientific_label = ui.Label(
+                f"saved: t_obs={evidence.timing.t_obs_sim_s:.3f}s  "
+                f"τ_model={evidence.timing.model_reported_s:.3f}s  "
+                f"τ_effective={evidence.timing.effective_latency_s:.3f}s  "
+                f"t_switch={evidence.timing.t_switch_sim_s:.3f}s"
+            )
+            context_label = ui.Label("P/B appear when saved FRESH becomes ready")
+            inference_model = ui.SimpleFloatModel(0.0)
+            ui.ProgressBar(inference_model, height=14, style={"color": 0xFFE033CC})
+            time_label = ui.Label("presentation 0.0 / 12.0 s")
+
+    rgb_panel = None
+    if ARGS.show_rgb:
+        rgb_panel = ui.Window(
+            "SAVED LIGHTNAV OBSERVATION", width=350, height=260, position_x=1050, position_y=55
+        )
+        rgb_panel.visible = False
+        with rgb_panel.frame:
+            with ui.VStack(spacing=4, style={"margin": 8}):
+                ui.Label("LightNav observation — exact SAVED RGB", style={"font_size": 17})
+                ui.Image(
+                    f"file:{evidence.rgb_path}",
+                    width=320,
+                    height=180,
+                    fill_policy=ui.FillPolicy.PRESERVE_ASPECT_FIT,
+                )
+                ui.Label(
+                    f"frame {evidence.rgb_frame_index}  |  {evidence.rgb_relative_path}"
+                )
+
+    timeline = ui.Window(
+        "DATA-02 demo timeline", width=900, height=105, position_x=180, position_y=790
+    )
+    with timeline.frame:
+        with ui.VStack(spacing=4, style={"margin": 8}):
+            ui.Label("OLD active  ──  observation  ──  FRESH ready  ──  B / raw switch  ──  FRESH active")
+            timeline_model = ui.SimpleFloatModel(0.0)
+            ui.ProgressBar(timeline_model, height=18, style={"color": 0xFF22CC55})
+            timeline_label = ui.Label("cursor: OLD active")
+
+    initial = evidence.actual_poses[0]
+
+    def set_demo_robot_pose(pose: np.ndarray) -> None:
+        # Direct articulation state assignment mirrors the existing saved GUI
+        # replay. It does not call a controller, apply an action, or step physics.
+        runtime["robot"].set_world_pose(
+            position=np.array([
+                pose[0], pose[1], float(config["simulation"]["spawn_height_m"])
+            ]),
+            orientation=quaternion_from_yaw(float(pose[2])),
+        )
+
+    set_demo_robot_pose(initial)
+    for _ in range(30):
+        set_demo_robot_pose(initial)
+        runtime["world"].render()
+
+    last_phase = None
+    last_index = 0
+    observation_drawn = False
+    fresh_drawn = False
+    switch_context_drawn = False
+    started = time.monotonic()
+    while APP.is_running():
+        elapsed = min(time.monotonic() - started, float(ARGS.duration))
+        phase = phase_at(elapsed, ARGS.duration)
+        if phase.key != last_phase:
+            print(f"DATA02_DEMO_PHASE={phase.terminal_name}", flush=True)
+            last_phase = phase.key
+        progress = phase_progress(elapsed, phase)
+        scientific_time = scientific_time_for_presentation(
+            elapsed, ARGS.duration, evidence.timing
+        )
+        index = saved_sample_index(evidence, scientific_time)
+        pose = evidence.actual_poses[index]
+        set_demo_robot_pose(pose)
+        if index > last_index:
+            draw_polyline(
+                draw,
+                evidence.actual_poses[last_index:index + 1],
+                z=z + .06,
+                color=visual["actual_color_rgba"],
+                width=float(visual["line_width"]),
+            )
+            last_index = index
+        if phase.key != "OLD_EXECUTING" and not observation_drawn:
+            draw_pose_points(
+                draw,
+                evidence.observation_pose[None, :],
+                z=z + .10,
+                color=visual["observation_color_rgba"],
+                size=float(visual["marker_size"]) + 4.0,
+            )
+            observation_drawn = True
+            if rgb_panel is not None:
+                rgb_panel.visible = True
+        if phase.key in ("FRESH_READY", "RAW_SWITCH", "FRESH_ACTIVE") and not fresh_drawn:
+            draw_polyline(
+                draw,
+                evidence.fresh_world,
+                z=z + .03,
+                color=visual["fresh_color_rgba"],
+                width=float(visual["line_width"]),
+            )
+            draw_heading_markers(
+                draw,
+                evidence.fresh_world,
+                z=z + .07,
+                color=visual["fresh_color_rgba"],
+                width=2.5,
+                length_m=.16,
+                stride=1,
+            )
+            fresh_drawn = True
+        if phase.key in ("FRESH_READY", "RAW_SWITCH", "FRESH_ACTIVE") and not switch_context_drawn:
+            for marker, color in (
+                (evidence.p_pose, visual["p_color_rgba"]),
+                (evidence.boundary_pose, visual["boundary_color_rgba"]),
+            ):
+                draw_pose_points(
+                    draw,
+                    marker[None, :],
+                    z=z + .12,
+                    color=color,
+                    size=float(visual["marker_size"]) + 5.0,
+                )
+                draw_heading_markers(
+                    draw,
+                    marker[None, :],
+                    z=z + .14,
+                    color=color,
+                    width=3.0,
+                    length_m=.24,
+                )
+            switch_context_drawn = True
+
+        phase_label.text = phase.title
+        phase_detail.text = phase.subtitle
+        if phase.key == "OLD_EXECUTING":
+            semantics_label.text = "BLUE OLD  |  GREEN saved actual Jackal history"
+            context_label.text = "OLD is already being executed"
+            inference_model.set_value(0.0)
+        elif phase.key == "FRESH_IN_FLIGHT":
+            semantics_label.text = "FRESH inference in progress  |  BLUE OLD remains active"
+            context_label.text = (
+                f"robot motion during inference = {evidence.motion_during_inference_m:.3f} m"
+            )
+            inference_model.set_value(progress)
+        elif phase.key == "FRESH_READY":
+            semantics_label.text = "MAGENTA RAW FRESH — anchored at observation pose (not B)"
+            context_label.text = "ORANGE P: last control pose before switch  |  RED B: actual switch boundary"
+            inference_model.set_value(1.0)
+        elif phase.key == "RAW_SWITCH":
+            semantics_label.text = "OLD → raw observation-anchored FRESH (no reconciliation)"
+            context_label.text = "switch occurs at saved RED B; raw FRESH is not translated to B"
+            inference_model.set_value(1.0)
+        else:
+            semantics_label.text = "MAGENTA raw FRESH active  |  GREEN saved post-switch actual"
+            context_label.text = "saved robot pose replay only"
+            inference_model.set_value(1.0)
+        time_label.text = (
+            f"presentation {elapsed:4.1f} / {float(ARGS.duration):.1f} s  |  "
+            f"saved sim time {scientific_time:.3f} s"
+        )
+        timeline_model.set_value(elapsed / float(ARGS.duration))
+        timeline_label.text = f"cursor: {phase.title.replace('PHASE ', '')}"
+        runtime["world"].render()
+        if elapsed >= float(ARGS.duration):
+            break
+        time.sleep(.01)
+
+    actual_duration = time.monotonic() - started
+    print(f"DATA02_DEMO_PRESENTATION_DURATION_S={actual_duration:.3f}", flush=True)
+    if ARGS.no_hold:
+        final_pose = evidence.actual_poses[-1]
+
+        def refresh_final_pose() -> None:
+            set_demo_robot_pose(final_pose)
+            runtime["world"].render()
+
+        output = _capture_demo_viewport(
+            evidence.episode_id,
+            evidence.transition_index,
+            refresh_final_pose,
+        )
+        print(f"DATA02_DEMO_CAPTURE={output}", flush=True)
+    else:
+        print("DATA02_DEMO_HOLD=final saved state; close Isaac Sim to exit", flush=True)
+        while APP.is_running():
+            set_demo_robot_pose(evidence.actual_poses[-1])
+            runtime["world"].render()
+
+
 def main() -> None:
     config_path = (
         ARGS.replay_run.resolve() / "config_snapshot.yaml"
@@ -1167,6 +1489,13 @@ def main() -> None:
     )
     config = load_yaml(config_path)
     validate_config(config)
+    if ARGS.demo:
+        if ARGS.replay_run is None or ARGS.episode is None or ARGS.transition is None:
+            raise ValueError("demo requires --replay-run, --episode, and --transition")
+        evidence = load_saved_demo(ARGS.replay_run, ARGS.episode, ARGS.transition)
+        runtime = create_runtime(config, initial_pose=evidence.actual_poses[0])
+        replay_demo(config, runtime, evidence)
+        return
     sources = verify_sources(config)
     runtime = create_runtime(config)
     sources = dict(sources)

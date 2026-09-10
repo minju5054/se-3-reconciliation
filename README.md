@@ -91,8 +91,9 @@ Detailed protocols, commands, schemas, observed results, and claim limitations l
   [LightNav execution envelope](docs/STAGE_00_LIGHTNAV_EXECUTION_ENVELOPE.md).
 - LightNav qualification: [Stage 0-G2 Jackal domain scene](docs/STAGE_00G2_JACKAL_DOMAIN_SCENE_QUALIFICATION.md)
   and [Stage 0-G3 moving egocentric history](docs/STAGE_00G3_MOVING_HISTORY_QUALIFICATION.md).
-- Dataset collection: [DATA-02 online-successive OLD/FRESH v1](docs/DATA_02_ONLINE_SUCCESSIVE_OLD_FRESH.md)
-  and [v2 extension/final combined assessment](docs/DATA_02_V2_EXTENSION_AND_FINAL_SPLIT.md).
+- Dataset collection: [DATA-02 online-successive OLD/FRESH v1](docs/DATA_02_ONLINE_SUCCESSIVE_OLD_FRESH.md),
+  [v2 extension/final combined assessment](docs/DATA_02_V2_EXTENSION_AND_FINAL_SPLIT.md), and
+  [saved collection GUI demo](docs/DATA_02_COLLECTION_GUI_DEMO.md).
 - Transition characterization: [EXP-01](docs/EXPERIMENT_01.md),
   [EXP-01A](docs/EXP_01A_LIGHTNAV_LATENCY.md),
   [EXP-01B](docs/EXP_01B_ONLINE_RAW_SWITCH.md),
@@ -164,6 +165,15 @@ The moving Jackal is a direct-pose `SCRIPTED HISTORY REPLAY`, not controller exe
 
 Replay a saved DATA-02 transition with the official Jackal visibly moving along its recorded
 wheel-driven execution history (this performs no LightNav inference):
+
+For a 12-second professor-facing saved collection walkthrough, run:
+
+```bash
+./scripts/isaac/run_data02_collection_demo.sh
+```
+
+This is a presentation-time replay of saved poses, paths, events, and observation RGB—not
+real-time scientific timing, inference, controller execution, or physics re-execution.
 
 ```bash
 ./scripts/isaac/run_data02_online_successive.sh \

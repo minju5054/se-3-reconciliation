@@ -1748,3 +1748,42 @@ This file is append-only. Add each completed task at the bottom.
   diagnosis only. It does not validate instructions, estimate deployment frequencies, establish a
   causal timing effect, evaluate reconciliation, or justify inspecting/tuning against held-out
   transitions.
+
+## 2026-09-10T15:49:49+09:00 — Short saved DATA-02 collection GUI demo
+
+- **Repository and scope:** Started from local/origin `main` at
+  `7ad6d1a3406b910e5097191d8732331280f56763`. Added a presentation-only mode to the existing
+  DATA-02 saved replay plus the one-command launcher
+  `./scripts/isaac/run_data02_collection_demo.sh`. No optimization, reconciliation, EXP-02D,
+  LightNav invocation, recollection, controller action, physics replay, or scientific result
+  change was made. The existing user edits to the two Stage 0 configs remain unstaged and
+  untouched.
+- **Default saved evidence:** The launcher selects immutable v2 run
+  `data/data02_online_successive_v2/data02-online-successive-extension-v2`, episode
+  `episode_000061`, transition `4`. The loader verifies stored hashes for OLD, raw FRESH,
+  transition actual poses/telemetry, and observation RGB; checks strict timing, P-before-B,
+  OLD-active in-flight samples, and post-switch FRESH activation; and returns read-only copies.
+  It writes captures only to the separate ignored `data/data02_collection_demo/` root.
+- **Presentation:** The default 12-second mapping is OLD EXECUTING (0–2 s), FRESH INFERENCE while
+  OLD continues (2–5 s), FRESH READY (5–7 s), OLD-to-raw-FRESH switch (7–10 s), and FRESH ACTIVE
+  (10–12 s). The GUI labels this `PRESENTATION-TIME REPLAY` and
+  `NOT REAL-TIME SCIENTIFIC TIMING`, while retaining saved `t_obs=21.533334456384182 s`, reported
+  model latency `0.43086534799658693 s`, effective latency `0.5000000260770321 s`, switch time
+  `22.033334482461214 s`, and inference motion `0.15539962298348772 m`.
+- **Visual content:** Stable Hospital/Jackal viewport with blue OLD, magenta raw
+  observation-anchored FRESH, green saved actual history, yellow observation, orange P, red B,
+  FRESH/P/B heading arrows, a large phase panel, inference progress, exact saved RGB frame 81,
+  and a minimal event timeline. The raw FRESH path remains anchored at observation and is never
+  translated to B.
+- **GUI validation:** The exact default launcher completed all five phases automatically in
+  `12.025 s` and saved the non-black capture
+  `data/data02_collection_demo/20260910T065343Z/episode_000061_transition_04.png`. Direct visual
+  inspection confirmed Hospital, the official Jackal mesh, and all final paths/markers were
+  visible. An initial implementation reproduced the historical lines-without-robot symptom;
+  changing display refresh from plain `APP.update()` to render-only `World.render()` synchronized
+  articulation kinematics without a physics step and made the Jackal visibly follow saved poses.
+- **Validation:** Full repository suite passed `374`; focused demo suite passed `9`; compileall
+  for `src scripts tests`, shell syntax for all involved DATA-02 launchers, and
+  `git diff --check` passed. The GUI code contains no `world.step`, controller application,
+  DifferentialController construction, or LightNav client construction. Existing headless and
+  saved replay behavior retains its defaults because the new path is gated by explicit `--demo`.
