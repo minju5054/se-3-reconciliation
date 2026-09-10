@@ -1876,3 +1876,22 @@ This file is append-only. Add each completed task at the bottom.
   and combined (1,479 attempts/959 eligible) validators passed. The generated EXP-02D root is
   Git-ignored, and optimized candidates remain offline counterfactuals that are never physically
   executed by the GUI.
+
+## 2026-09-11T02:08:27+09:00 — EXP-02D invalid primary attempt and protocol correction
+
+- **Invalid attempt:** Protocol commit `67d0444b1bed7bc8b431c91d6545716cf78f9f28` was pushed and
+  one clean-worktree attempt was generated as
+  `exp02d-lookahead-primary-20260910T165213Z`. The solver completed `959/959`, but the strict
+  post-run validator initially exposed missing `host_latency_s` declarations in its CSV/input
+  schemas and an invalid `math.isclose(..., atol=...)` call. Correcting those read-only checks
+  allowed all 12,489 artifacts to be inspected and exposed a substantive protocol mismatch:
+  geometry-correlation bootstrap draws used `bootstrap_seed + 1` instead of the single frozen
+  config seed `20260910`.
+- **Disposition:** No scientific result from that attempt is retained or interpreted. It was
+  removed from the official ignored output root and recoverably quarantined at
+  `/tmp/exp02d-invalid-primary-20260910T165213Z`. Immutable DATA-02 sources were not touched.
+- **Correction:** The geometry cluster bootstrap now consumes exactly the configured seed, and
+  the strict validator requires that seed/repetition/unit metadata. CSV emission and validator
+  field order now have a direct regression assertion; input-reference latency fields are included
+  in strict validation, and numeric closeness has regression coverage. A new protocol commit and
+  clean worktree are required before the replacement one-time primary execution.

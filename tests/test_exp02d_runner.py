@@ -23,6 +23,10 @@ def _load(name: str, relative: str):
 
 RUNNER = _load("exp02d_runner_test", "scripts/run_exp02d_lookahead_direction.py")
 PLOTTER = _load("exp02d_plotter_test", "scripts/plot_exp02d_lookahead_direction.py")
+VALIDATOR = _load(
+    "exp02d_validator_schema_test",
+    "scripts/validate_exp02d_lookahead_direction.py",
+)
 CONFIG_PATH = ROOT / "configs/exp02d_lookahead_direction.yaml"
 
 
@@ -121,6 +125,7 @@ def test_undefined_analysis_row_is_csv_safe_and_retains_status_identity():
     assert json.loads(csv["undefined_statuses"]) == [
         "LOOKAHEAD_DIRECTION_UNDEFINED"
     ]
+    assert tuple(csv) == VALIDATOR.CSV_FIELDS
 
 
 def test_empty_required_partition_summary_uses_null_not_nan():
@@ -154,6 +159,27 @@ def test_method_summary_reports_pair_and_transition_weighted_yaw_diagnostics():
     assert summary["pair_balanced_mean_yaw_deformation_rms_rad"] == pytest.approx(0.1)
     assert summary["transition_weighted_mean_rigid_fit_yaw_rms_rad"] == pytest.approx(0.01)
     assert summary["candidate_target_changed_pair_balanced_fraction"] == pytest.approx(0.5)
+
+
+def test_geometry_hypothesis_bootstrap_uses_the_single_frozen_seed():
+    rows = [
+        {
+            "ordered_raw_pair_sha256": pair,
+            "alpha_entry_minus_alpha_look_rad": x,
+            "j_cmd_m1": y,
+            "j_cmd_m3": 0.0,
+        }
+        for pair, x, y in (
+            ("pair-a", 0.0, 0.1),
+            ("pair-b", 0.5, 0.4),
+            ("pair-c", 1.0, 0.8),
+        )
+    ]
+    values = config()
+    result = RUNNER.hypothesis_analysis(rows, values)
+    bootstrap = result["pair_cluster_bootstrap_pearson_ci"]
+    assert bootstrap["seed"] == values["evaluation"]["bootstrap_seed"]
+    assert bootstrap["repetitions"] == values["evaluation"]["bootstrap_repetitions"]
 
 
 def _plot_record(index: int) -> dict:

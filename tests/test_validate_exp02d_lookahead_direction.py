@@ -172,5 +172,14 @@ def test_plot_validator_requires_exact_frozen_ten_pngs(tmp_path: Path) -> None:
 
 
 def test_recursive_json_comparison_rejects_nonfinite() -> None:
+    validator.close(1.0, 1.0 + 1e-13, "close probe")
+    with pytest.raises(ValueError, match="mismatch"):
+        validator.close(1.0, 2.0, "close probe")
     with pytest.raises(ValueError, match="finite"):
         validator._same_json_value({"value": float("nan")}, {"value": 1.0}, "root")
+
+
+def test_validator_source_requires_configured_hypothesis_bootstrap_seed() -> None:
+    source = SCRIPT.read_text(encoding="utf-8")
+    assert 'hypothesis_bootstrap.get("seed")' in source
+    assert 'int(evaluation["bootstrap_seed"])' in source

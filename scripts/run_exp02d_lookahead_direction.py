@@ -718,7 +718,7 @@ def hypothesis_analysis(rows: Sequence[Mapping[str, Any]], config: Mapping[str, 
     gy = np.asarray([np.mean([float(row["j_cmd_m1"] - row["j_cmd_m3"]) for row in group]) for group in groups.values()])
     evaluation = config["evaluation"]
     repetitions = int(evaluation["bootstrap_repetitions"])
-    rng = np.random.default_rng(int(evaluation["bootstrap_seed"]) + 1)
+    rng = np.random.default_rng(int(evaluation["bootstrap_seed"]))
     indices = rng.integers(0, len(gx), size=(repetitions, len(gx)))
     bx = gx[indices]; by = gy[indices]
     bx_center = bx - np.mean(bx, axis=1, keepdims=True)
@@ -741,7 +741,7 @@ def hypothesis_analysis(rows: Sequence[Mapping[str, Any]], config: Mapping[str, 
             "ci_lower": float(np.quantile(finite, tail)),
             "ci_upper": float(np.quantile(finite, 1.0 - tail)),
             "valid_draw_count": int(len(finite)),
-            "seed": int(evaluation["bootstrap_seed"]) + 1,
+            "seed": int(evaluation["bootstrap_seed"]),
             "repetitions": repetitions,
             "bootstrap_unit": "ordered_raw_pair_sha256",
         },

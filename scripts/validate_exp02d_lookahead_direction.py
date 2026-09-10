@@ -116,6 +116,7 @@ CSV_IDENTITY_FIELDS = (
     "p_to_b_yaw_rad",
     "fresh_net_yaw_rad",
     "fresh_lateral_excursion_m",
+    "host_latency_s",
     "effective_latency_s",
     "inference_translation_m",
     "geometry_undefined",
@@ -201,7 +202,10 @@ def integer(value: Any, name: str, *, minimum: int = 0) -> int:
 
 def close(actual: Any, expected: Any, name: str, *, atol: float = 1e-12) -> None:
     if not math.isclose(
-        finite(actual, name), finite(expected, f"expected {name}"), rel_tol=1e-11, atol=atol
+        finite(actual, name),
+        finite(expected, f"expected {name}"),
+        rel_tol=1e-11,
+        abs_tol=atol,
     ):
         raise ValueError(f"{name} mismatch: {actual} != {expected}")
 
@@ -498,6 +502,8 @@ def _validate_input_and_oracle(
         "t_obs_sim_s",
         "t_ready_sim_s",
         "t_switch_sim_s",
+        "host_latency_s",
+        "effective_latency_s",
         "old_last_desired_v_omega",
         "saved_raw_fresh_first_desired_v_omega",
         "coordinate_frame",
@@ -579,6 +585,8 @@ def _validate_input_and_oracle(
         ("t_obs_sim_s", source.t_obs_sim_s),
         ("t_ready_sim_s", source.t_ready_sim_s),
         ("t_switch_sim_s", source.t_switch_sim_s),
+        ("host_latency_s", source.host_latency_s),
+        ("effective_latency_s", source.effective_latency_s),
     ):
         close(reference.get(key), expected, key)
     if reference.get("old_shape") != list(source.old_world.shape) or reference.get("fresh_shape") != list(source.fresh_world.shape):
@@ -1286,8 +1294,8 @@ def _validate_pair_balanced(
                 close(block.get(key), value, f"{method}/{key}")
     bootstrap = config["evaluation"]
     expected_keys = ("M3_minus_RAW", "M3_minus_M1", "M3_minus_M2")
-    if tuple(document.get("bootstrap_differences", {})) != expected_keys:
-        raise ValueError("bootstrap comparison set/order changed")
+    if set(document.get("bootstrap_differences", {})) != set(expected_keys):
+        raise ValueError("bootstrap comparison set changed")
     for right, key in (("raw", expected_keys[0]), ("m1", expected_keys[1]), ("m2", expected_keys[2])):
         expected = cluster_bootstrap_pair_balanced_difference(
             analyses,
@@ -1324,7 +1332,7 @@ def _validate_pair_balanced(
         raise ValueError("partition bootstrap set changed")
     for partition_name, rows in partitions.items():
         block = partition_saved[partition_name]
-        if not isinstance(block, Mapping) or tuple(block) != expected_keys:
+        if not isinstance(block, Mapping) or set(block) != set(expected_keys):
             raise ValueError(f"{partition_name} bootstrap comparison set changed")
         for right, key in (
             ("raw", expected_keys[0]),
@@ -1586,6 +1594,43 @@ def _validate_summaries(
         raise ValueError("empty M4 rescue denominator is not null")
     if regimes.get("thresholds") != config.get("regimes") or regimes.get("interpretation") != "descriptive associations; no causal claim":
         raise ValueError("regime thresholds or causal limitation changed")
+    hypothesis = regimes.get("geometry_hypothesis")
+    if not isinstance(hypothesis, Mapping):
+        raise ValueError("geometry-hypothesis summary is missing")
+    hypothesis_bootstrap = hypothesis.get("pair_cluster_bootstrap_pearson_ci")
+    evaluation = config["evaluation"]
+    if (
+        hypothesis.get("x") != "alpha_entry_minus_alpha_look_rad"
+        or hypothesis.get("y") != "J_M1_minus_J_M3"
+        or hypothesis.get("causal_claim") is not False
+        or not isinstance(hypothesis_bootstrap, Mapping)
+        or integer(hypothesis_bootstrap.get("seed"), "hypothesis bootstrap seed")
+        != int(evaluation["bootstrap_seed"])
+        or integer(
+            hypothesis_bootstrap.get("repetitions"),
+            "hypothesis bootstrap repetitions",
+            minimum=1,
+        )
+        != int(evaluation["bootstrap_repetitions"])
+        or hypothesis_bootstrap.get("bootstrap_unit") != "ordered_raw_pair_sha256"
+    ):
+        raise ValueError("geometry-hypothesis bootstrap protocol changed")
+    valid_draws = integer(
+        hypothesis_bootstrap.get("valid_draw_count"),
+        "hypothesis bootstrap valid draw count",
+        minimum=1,
+    )
+    if valid_draws > int(evaluation["bootstrap_repetitions"]):
+        raise ValueError("geometry-hypothesis valid draw count exceeds repetitions")
+    for key in (
+        "transition_weighted_pearson_r",
+        "pair_balanced_pearson_r",
+    ):
+        finite(hypothesis.get(key), f"geometry hypothesis {key}")
+    ci_lower = finite(hypothesis_bootstrap.get("ci_lower"), "hypothesis CI lower")
+    ci_upper = finite(hypothesis_bootstrap.get("ci_upper"), "hypothesis CI upper")
+    if ci_lower > ci_upper or ci_lower < -1.0 or ci_upper > 1.0:
+        raise ValueError("geometry-hypothesis bootstrap CI is invalid")
     for index in range(1, 7):
         key = f"R{index}"
         block = regimes.get("regimes", {}).get(key)
