@@ -38,7 +38,20 @@ def arguments() -> argparse.Namespace:
     parser.add_argument("--episode")
     parser.add_argument("--transition", type=int)
     parser.add_argument("--duration", type=float, default=DEFAULT_DURATION_S)
-    parser.add_argument("--hold", action="store_true", help="hold final view until Isaac closes")
+    hold = parser.add_mutually_exclusive_group()
+    hold.add_argument(
+        "--hold",
+        dest="hold",
+        action="store_true",
+        help="hold the final B view until Isaac closes (default)",
+    )
+    hold.add_argument(
+        "--no-hold",
+        dest="hold",
+        action="store_false",
+        help="automation only: close after captures",
+    )
+    parser.set_defaults(hold=True)
     parser.add_argument("--show-rgb", action="store_true", help="show saved observation RGB inset")
     return parser.parse_args()
 
@@ -49,7 +62,7 @@ ARGS = arguments()
 def _default_selection() -> tuple[Path, str, int]:
     path = ROOT / DEFAULT_SELECTION_OUTPUT_RELATIVE / "selected_transition.json"
     document = json.loads(path.read_text(encoding="utf-8"))
-    if document.get("clearly_higher_motion_than_previous_default") is not True:
+    if document.get("more_active_old_motion_than_pre_correction_default") is not True:
         raise RuntimeError("default high-motion selection did not pass its comparison gate")
     selected = document["selected"]
     return Path(selected["source_run_path"]), str(selected["episode_id"]), int(
@@ -81,10 +94,8 @@ from omni.kit.viewport.utility import capture_viewport_to_file, get_active_viewp
 from pxr import Gf, UsdGeom, UsdLux  # noqa: E402
 
 from debug_draw_trajectories import (  # noqa: E402
-    draw_heading_markers,
     draw_polyline,
     draw_pose_points,
-    rgba,
 )
 from lightnav_stage0c_runtime import (  # noqa: E402
     resolve_jackal_asset,
@@ -170,23 +181,6 @@ def configure_view(config: Mapping[str, Any], evidence: ReplayEvidence):
     return framing
 
 
-def _footprint_segments(pose: np.ndarray) -> tuple[list[list[float]], list[list[float]]]:
-    half_length, half_width = 0.31, 0.26
-    local = np.array(
-        [
-            [-half_length, -half_width],
-            [half_length, -half_width],
-            [half_length, half_width],
-            [-half_length, half_width],
-        ]
-    )
-    c, s = math.cos(float(pose[2])), math.sin(float(pose[2]))
-    rotation = np.array([[c, -s], [s, c]])
-    world_xy = local @ rotation.T + pose[:2]
-    points = [[float(x), float(y), 0.31] for x, y in world_xy]
-    return points, points[1:] + points[:1]
-
-
 def draw_scene(
     draw,
     evidence: ReplayEvidence,
@@ -199,53 +193,20 @@ def draw_scene(
     draw_polyline(draw, evidence.old_world, z=0.19, color=OLD_COLOR, width=8.0)
     trail = np.vstack((evidence.actual_poses[: lower_index + 1], display_pose))
     draw_polyline(draw, trail, z=0.25, color=ACTUAL_COLOR, width=9.0)
-    draw_pose_points(draw, display_pose[None, :], z=0.29, color=ACTUAL_COLOR, size=17.0)
 
-    if phase_key != "OLD_EXECUTING":
+    if phase_key != "OLD_ACTIVE":
+        draw_polyline(draw, evidence.fresh_world, z=0.22, color=FRESH_COLOR, width=9.0)
         draw_pose_points(
             draw,
             evidence.observation_pose[None, :],
             z=0.32,
             color=OBSERVATION_COLOR,
-            size=27.0,
-        )
-        draw_heading_markers(
-            draw,
-            evidence.observation_pose[None, :],
-            z=0.34,
-            color=OBSERVATION_COLOR,
-            width=8.0,
-            length_m=0.48,
-        )
-        starts, ends = _footprint_segments(evidence.observation_pose)
-        draw.draw_lines(
-            starts,
-            ends,
-            [rgba(OBSERVATION_COLOR)] * len(starts),
-            [7.0] * len(starts),
-        )
-        draw.draw_lines(
-            [[float(evidence.observation_pose[0]), float(evidence.observation_pose[1]), 0.30]],
-            [[float(display_pose[0]), float(display_pose[1]), 0.30]],
-            [rgba((1.0, 0.9, 0.05, 0.85))],
-            [4.0],
+            size=20.0,
         )
 
-    if phase_key in ("FRESH_READY_SWITCH", "FRESH_ACTIVE"):
-        draw_polyline(draw, evidence.fresh_world, z=0.22, color=FRESH_COLOR, width=9.0)
-        draw_heading_markers(
-            draw,
-            evidence.fresh_world,
-            z=0.25,
-            color=FRESH_COLOR,
-            width=4.0,
-            length_m=0.20,
-        )
+    if phase_key == "AT_B":
         for pose, color in ((evidence.p_pose, P_COLOR), (evidence.boundary_pose, BOUNDARY_COLOR)):
-            draw_pose_points(draw, pose[None, :], z=0.36, color=color, size=28.0)
-            draw_heading_markers(
-                draw, pose[None, :], z=0.38, color=color, width=7.0, length_m=0.42
-            )
+            draw_pose_points(draw, pose[None, :], z=0.36, color=color, size=22.0)
 
 
 def set_robot_pose(
@@ -322,15 +283,15 @@ def run_demo(config: Mapping[str, Any], evidence: ReplayEvidence) -> None:
     with panel.frame:
         with ui.VStack(spacing=7, style={"margin": 11}):
             ui.Label("DATA-02 COLLECTION — SAVED HIGH-MOTION EXAMPLE", style={"font_size": 23})
-            ui.Label("SAVED-DATA REPLAY  |  PRESENTATION SPEED: PHASE-MAPPED")
-            phase_label = ui.Label("PHASE 1 — OLD EXECUTING", style={"font_size": 27})
-            detail_label = ui.Label("saved pre-observation approach", style={"font_size": 17})
-            moved_label = ui.Label("MOVED DURING FRESH INFERENCE: 0.000 m", style={"font_size": 28})
-            displacement_label = ui.Label("observation → current: Δ = 0.000 m", style={"font_size": 19})
-            ui.Label("BLUE OLD  |  MAGENTA raw FRESH  |  GREEN saved actual")
+            ui.Label("SAVED ACTUAL OLD-ACTIVE REPLAY  |  PRESENTATION SPEED != SCIENTIFIC TIME")
+            phase_label = ui.Label("PHASE 1 — CURRENT OLD ACTIVE", style={"font_size": 27})
+            detail_label = ui.Label("saved motion after this OLD became active", style={"font_size": 17})
+            moved_label = ui.Label("MOVED SINCE FRESH OBSERVATION: 0.000 m", style={"font_size": 28})
+            displacement_label = ui.Label("OLD-active path shown: 0.000 m", style={"font_size": 19})
+            ui.Label("BLUE current OLD  |  MAGENTA raw FRESH  |  GREEN current-OLD actual")
             ui.Label("YELLOW FRESH OBSERVATION  |  ORANGE P  |  RED B")
             timing_label = ui.Label("presentation 0.0 s  |  saved sim time initializing")
-            ui.Label("Saved replay — no LightNav inference / no controller / no physics re-execution")
+            ui.Label("No previous/post-switch actual | no inference/controller/physics re-execution")
 
     rgb_panel = None
     if ARGS.show_rgb:
@@ -353,21 +314,29 @@ def run_demo(config: Mapping[str, Any], evidence: ReplayEvidence) -> None:
 
     initial = evidence.actual_poses[0]
     set_robot_pose(robot_transform, config, initial)
-    draw_scene(draw, evidence, initial, 0, "OLD_EXECUTING")
+    draw_scene(draw, evidence, initial, 0, "OLD_ACTIVE")
     for _ in range(35):
         set_robot_pose(robot_transform, config, initial)
         world.render()
 
-    capture_plan = (
-        ("01_before_observation.png", 0, 0.75),
-        ("02_during_inference.png", 1, 0.70),
-        ("03_after_switch.png", 3, 0.60),
-    )
     phases = phase_schedule(ARGS.duration)
     capture_targets = {
-        name: phases[phase_index].start_s
-        + fraction * (phases[phase_index].end_s - phases[phase_index].start_s)
-        for name, phase_index, fraction in capture_plan
+        "01_old_active.png": {
+            "presentation_time_s": phases[0].start_s
+            + 0.65 * (phases[0].end_s - phases[0].start_s),
+            "saved_time_s": None,
+            "phase_key": "OLD_ACTIVE",
+        },
+        "02_at_observation.png": {
+            "presentation_time_s": phases[1].start_s,
+            "saved_time_s": evidence.candidate.t_obs_sim_s,
+            "phase_key": "FRESH_INFERENCE_OLD_ACTIVE",
+        },
+        "03_at_B.png": {
+            "presentation_time_s": phases[2].start_s,
+            "saved_time_s": evidence.candidate.t_switch_sim_s,
+            "phase_key": "AT_B",
+        },
     }
     captures: list[dict[str, Any]] = []
     last_phase = ""
@@ -383,21 +352,24 @@ def run_demo(config: Mapping[str, Any], evidence: ReplayEvidence) -> None:
         if phase.key != last_phase:
             print(f"DATA02_HIGH_MOTION_PHASE={phase.key}", flush=True)
             last_phase = phase.key
-        if rgb_panel is not None and phase.key != "OLD_EXECUTING":
+        if rgb_panel is not None and phase.key != "OLD_ACTIVE":
             rgb_panel.visible = True
 
         displacement = float(np.linalg.norm(display.pose[:2] - evidence.observation_pose[:2]))
-        inference_motion = (
-            0.0
-            if phase.key == "OLD_EXECUTING"
-            else displacement
-            if phase.key == "FRESH_INFERENCE"
-            else evidence.candidate.inference_translation_m
-        )
+        motion_since_observation = 0.0 if saved_time < evidence.candidate.t_obs_sim_s else displacement
         phase_label.text = phase.title
-        detail_label.text = phase.subtitle
-        moved_label.text = f"MOVED DURING FRESH INFERENCE: {inference_motion:.3f} m"
-        displacement_label.text = f"observation → current: Δ = {displacement:.3f} m"
+        detail_label.text = (
+            "FRESH ready; current OLD remains active until B"
+            if phase.key == "FRESH_INFERENCE_OLD_ACTIVE"
+            and saved_time > evidence.candidate.t_ready_sim_s + 1e-9
+            else phase.subtitle
+        )
+        moved_label.text = f"MOVED SINCE FRESH OBSERVATION: {motion_since_observation:.3f} m"
+        shown_path = evidence.actual_poses[: display.lower_index + 1]
+        displacement_label.text = (
+            f"OLD-active path shown: "
+            f"{float(np.linalg.norm(np.diff(shown_path[:, :2], axis=0), axis=1).sum()):.3f} m"
+        )
         timing_label.text = (
             f"presentation {elapsed:4.1f}/{ARGS.duration:.1f} s  |  "
             f"saved sim time {saved_time:.3f} s  |  DISPLAY INTERPOLATION"
@@ -408,12 +380,27 @@ def run_demo(config: Mapping[str, Any], evidence: ReplayEvidence) -> None:
             (
                 (name, target)
                 for name, target in capture_targets.items()
-                if target <= elapsed and not any(row["file"] == name for row in captures)
+                if float(target["presentation_time_s"]) <= elapsed
+                and not any(row["file"] == name for row in captures)
             ),
             None,
         )
         if pending is not None:
             name, target = pending
+            capture_saved_time = (
+                saved_time
+                if target["saved_time_s"] is None
+                else float(target["saved_time_s"])
+            )
+            capture_display = interpolated_pose_at(evidence, capture_saved_time)
+            set_robot_pose(robot_transform, config, capture_display.pose)
+            draw_scene(
+                draw,
+                evidence,
+                capture_display.pose,
+                capture_display.lower_index,
+                str(target["phase_key"]),
+            )
             pause_started = time.monotonic()
             capture(
                 output / name,
@@ -422,30 +409,32 @@ def run_demo(config: Mapping[str, Any], evidence: ReplayEvidence) -> None:
                 config,
                 evidence,
                 draw,
-                display,
-                phase.key,
+                capture_display,
+                str(target["phase_key"]),
             )
             capture_pause_s += time.monotonic() - pause_started
             captures.append(
                 {
                     "file": name,
-                    "target_presentation_time_s": target,
+                    "target_presentation_time_s": target["presentation_time_s"],
                     "actual_presentation_time_s": elapsed,
-                    "saved_sim_time_s": saved_time,
-                    "saved_lower_index": display.lower_index,
-                    "saved_upper_index": display.upper_index,
+                    "saved_sim_time_s": capture_saved_time,
+                    "saved_lower_index": capture_display.lower_index,
+                    "saved_upper_index": capture_display.upper_index,
                     "saved_lower_pose_world_se2": evidence.actual_poses[
-                        display.lower_index
+                        capture_display.lower_index
                     ].tolist(),
                     "saved_upper_pose_world_se2": evidence.actual_poses[
-                        display.upper_index
+                        capture_display.upper_index
                     ].tolist(),
-                    "display_interpolation_alpha": display.alpha,
-                    "displayed_pose_world_se2": display.pose.tolist(),
+                    "display_interpolation_alpha": capture_display.alpha,
+                    "displayed_pose_world_se2": capture_display.pose.tolist(),
+                    "phase": target["phase_key"],
                 }
             )
             print(
-                f"DATA02_HIGH_MOTION_CAPTURE={output / name} pose={display.pose.tolist()}",
+                f"DATA02_HIGH_MOTION_CAPTURE={output / name} "
+                f"pose={capture_display.pose.tolist()}",
                 flush=True,
             )
 
@@ -456,29 +445,38 @@ def run_demo(config: Mapping[str, Any], evidence: ReplayEvidence) -> None:
     if len(captures) != 3:
         raise RuntimeError(f"expected three phase captures, got {len(captures)}")
     pose_xy = [np.asarray(row["displayed_pose_world_se2"][:2]) for row in captures]
-    d_before_during = float(np.linalg.norm(pose_xy[1] - pose_xy[0]))
-    d_during_after = float(np.linalg.norm(pose_xy[2] - pose_xy[1]))
-    changed = max(d_before_during, d_during_after) > 1e-6
-    substantial_threshold = 0.20 * evidence.candidate.full_demo_path_length_m
-    substantial = max(d_before_during, d_during_after) >= substantial_threshold
+    d_old_to_observation = float(np.linalg.norm(pose_xy[1] - pose_xy[0]))
+    d_observation_to_b = float(np.linalg.norm(pose_xy[2] - pose_xy[1]))
+    changed = max(d_old_to_observation, d_observation_to_b) > 1e-6
+    substantial_threshold = 0.20 * evidence.candidate.active_old_path_length_m
+    substantial = max(d_old_to_observation, d_observation_to_b) >= substantial_threshold
     manifest = {
-        "schema": "DATA02HighMotionDemoCapture_v1",
+        "schema": "DATA02HighMotionDemoCapture_v2",
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "mode": "SAVED-DATA REPLAY",
-        "presentation_speed": "piecewise mapping over four presentation phases",
+        "presentation_speed": "piecewise mapping over current-OLD active/inference/B phases",
         "display_interpolation": "linear XY and shortest-angle yaw between adjacent saved samples",
         "no_physics_no_inference": True,
         "source": asdict(evidence.candidate),
         "source_sha256": dict(evidence.source_sha256),
         "duration_s": float(ARGS.duration),
-        "replay_window_sim_s": [
-            evidence.candidate.replay_start_sim_s,
-            evidence.candidate.replay_end_sim_s,
+        "active_old_interval_sim_s": [
+            evidence.candidate.old_active_start_sim_s,
+            evidence.candidate.old_active_end_sim_s,
         ],
+        "actual_primary_source": "selected transition actual.npy and telemetry.csv",
+        "activation_source": evidence.candidate.old_activation_source,
+        "activation_boundary_prepended": evidence.candidate.activation_boundary_prepended,
+        "display_contains_previous_chunk_actual": False,
+        "display_contains_post_switch_actual": False,
+        "every_telemetry_row_active_chunk_id": evidence.candidate.old_chunk_id,
+        "display_ends_at_saved_B": bool(
+            np.allclose(evidence.actual_poses[-1], evidence.boundary_pose, rtol=0.0, atol=1e-6)
+        ),
         "camera": asdict(framing),
         "captures": captures,
-        "d_before_during_m": d_before_during,
-        "d_during_after_m": d_during_after,
+        "d_old_capture_to_observation_m": d_old_to_observation,
+        "d_observation_to_B_m": d_observation_to_b,
         "displayed_robot_pose_changed": changed,
         "substantial_stage_displacement_threshold_m": substantial_threshold,
         "substantial_stage_displacement_verified": substantial,
@@ -488,8 +486,8 @@ def run_demo(config: Mapping[str, Any], evidence: ReplayEvidence) -> None:
     )
     if not changed or not substantial:
         raise RuntimeError("captured displayed robot motion was not substantial")
-    print(f"DATA02_HIGH_MOTION_D_BEFORE_DURING_M={d_before_during:.6f}", flush=True)
-    print(f"DATA02_HIGH_MOTION_D_DURING_AFTER_M={d_during_after:.6f}", flush=True)
+    print(f"DATA02_HIGH_MOTION_D_OLD_TO_OBSERVATION_M={d_old_to_observation:.6f}", flush=True)
+    print(f"DATA02_HIGH_MOTION_D_OBSERVATION_TO_B_M={d_observation_to_b:.6f}", flush=True)
     print("DATA02_HIGH_MOTION_DISPLAYED_POSE_CHANGED=true", flush=True)
     print(f"DATA02_HIGH_MOTION_OUTPUT={output}", flush=True)
 
@@ -499,7 +497,7 @@ def run_demo(config: Mapping[str, Any], evidence: ReplayEvidence) -> None:
         while APP.is_running():
             set_robot_pose(robot_transform, config, final_display.pose)
             draw_scene(
-                draw, evidence, final_display.pose, final_display.lower_index, "FRESH_ACTIVE"
+                draw, evidence, final_display.pose, final_display.lower_index, "AT_B"
             )
             world.render()
 
@@ -507,8 +505,8 @@ def run_demo(config: Mapping[str, Any], evidence: ReplayEvidence) -> None:
 def main() -> None:
     config = load_config(RUN)
     evidence = load_replay_evidence(RUN, EPISODE, TRANSITION)
-    print("DATA02_HIGH_MOTION_MODE=SAVED-DATA REPLAY", flush=True)
-    print("DATA02_HIGH_MOTION_PRESENTATION_SPEED=piecewise four-phase", flush=True)
+    print("DATA02_HIGH_MOTION_MODE=SAVED ACTUAL OLD-ACTIVE REPLAY", flush=True)
+    print("DATA02_HIGH_MOTION_PRESENTATION_SPEED=not scientific time", flush=True)
     print("DATA02_HIGH_MOTION_EXECUTION=NO PHYSICS / NO INFERENCE / NO CONTROLLER", flush=True)
     print(
         f"DATA02_HIGH_MOTION_SELECTION={RUN} {EPISODE} transition={TRANSITION}", flush=True
@@ -516,6 +514,22 @@ def main() -> None:
     print(
         "DATA02_HIGH_MOTION_LEGEND=blue OLD; magenta raw FRESH; green saved actual; "
         "yellow FRESH observation; orange P; red B",
+        flush=True,
+    )
+    print(
+        "DATA02_HIGH_MOTION_ACTIVE_OLD="
+        + json.dumps(
+            {
+                "old_chunk_id": evidence.candidate.old_chunk_id,
+                "start_sim_time_s": evidence.candidate.old_active_start_sim_s,
+                "observation_sim_time_s": evidence.candidate.t_obs_sim_s,
+                "switch_sim_time_s": evidence.candidate.t_switch_sim_s,
+                "path_length_m": evidence.candidate.active_old_path_length_m,
+                "previous_chunk_actual_displayed": False,
+                "post_switch_actual_displayed": False,
+            },
+            sort_keys=True,
+        ),
         flush=True,
     )
     print(

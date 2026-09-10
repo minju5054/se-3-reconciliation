@@ -12,8 +12,9 @@ here is separate from LightNav.
   execution. The reference-only union contains 1,479 attempted transitions, 959
   `ELIGIBLE_MOVING` contexts, and 191 unique ordered raw pairs. However, one pair occupies
   593/959 contexts and creates a 920-transition connected component. Duplicate domination and
-  isolated-split feasibility therefore fail. The exact final decision is
-  `DATA02_COMBINED_DIVERSITY_INSUFFICIENT`; EXP-02D is not authorized.
+  isolated-split feasibility therefore fail. The exact historical decision remains
+  `DATA02_COMBINED_DIVERSITY_INSUFFICIENT`. EXP-02D uses the complete immutable union only as a
+  development corpus for mechanism/formulation analysis, never as an independent final test set.
 - Stage 0-G3 compared the frozen Stage 0-G2 stationary histories with 30 paired scripted moving
   Jackal histories ending at the same observation poses. Moving history changed 16/30 raw outputs
   but did not qualify left/right/doorway-or-detour behavior. That historical failure remains
@@ -23,13 +24,16 @@ here is separate from LightNav.
   frozen Stage 0-D/E/F and EXP-02B-R evidence. This does not claim that the platform is
   generally validated beyond the observed LightNav execution envelope.
 - EXP-02C attributes the principal current-M4 failure to the incoming-direction transition
-  factor. This diagnoses the existing objective; it does not introduce an improved objective.
+  factor. EXP-02D keeps historical M4 intact and freezes one isolated redesign: its new M3 points
+  the direction factor at the raw follower lookahead `F_q` rather than nearest entry `F_k`.
 - The EXP-01B-derived DATA-01 bank is retired from primary formulation use. Its dedicated
   generated bank and pipeline are removed, while the independent frozen EXP-01B source
   evidence is preserved.
 - DATA-02 is coverage-oriented and descriptive. It does not estimate natural deployment
   frequencies, validate instruction satisfaction, or evaluate any reconciliation formulation.
-- EXP-02D has not started.
+- The EXP-02D protocol, pair-balanced evaluation, success/failure labels, and representative-case
+  rules are frozen before its one-time primary run. Optimized candidates are evaluated offline and
+  are not physically executed.
 
 ## System boundaries
 
@@ -104,7 +108,8 @@ Detailed protocols, commands, schemas, observed results, and claim limitations l
   [EXP-02B](docs/EXP_02B_CONTROLLER_AWARE_RECONCILIATION.md),
   [EXP-02B GUI diagnosis](docs/EXP_02B_GUI_DIAGNOSIS.md),
   [EXP-02B-R](docs/EXP_02B_CALIBRATED_REEVALUATION.md), and
-  [EXP-02C](docs/EXP_02C_FACTOR_ISOLATION.md).
+  [EXP-02C](docs/EXP_02C_FACTOR_ISOLATION.md), and
+  [EXP-02D](docs/EXP_02D_LOOKAHEAD_DIRECTION.md).
 - Chronology and commands actually run: [append-only work log](docs/WORK_LOG.md).
 
 ## Local environment
@@ -172,10 +177,39 @@ For the 15-second professor-facing high-motion replay, run:
 ./scripts/isaac/run_data02_high_motion_demo.sh
 ```
 
-The default is deterministically selected from hash-verified immutable v1/v2 data and replays
-about one saved second before observation through two saved seconds after the switch. It uses no
-LightNav inference, controller command, physics re-execution, or spatial motion scaling. Saved
-adjacent poses are interpolated only for smooth display; add `--show-rgb` for the observation inset.
+The default is deterministically selected from hash-verified immutable v1/v2 data. Green now
+contains only the exact current-OLD active interval: the previous switch boundary (or earliest
+bootstrap telemetry) through the selected `B`, with every telemetry row belonging to the displayed
+OLD. No previous-chunk or post-switch actual path is shown. It uses no LightNav inference,
+controller command, physics re-execution, or spatial motion scaling. Saved adjacent poses are
+interpolated only for smooth display; add `--show-rgb` for the observation inset and `--no-hold`
+for automated capture.
+
+Run the frozen EXP-02D technical dry validation, then the one-time primary only from its clean
+protocol commit:
+
+```bash
+.venv/bin/python scripts/run_exp02d_lookahead_direction.py \
+  --phase dry-validation --run-id exp02d-dry-YYYYMMDDTHHMMSSZ
+
+.venv/bin/python scripts/run_exp02d_lookahead_direction.py \
+  --phase primary --run-id exp02d-lookahead-primary-YYYYMMDDTHHMMSSZ \
+  --require-git-sha <EXP02D_PROTOCOL_GIT_SHA>
+
+.venv/bin/python scripts/validate_exp02d_lookahead_direction.py \
+  data/exp02d_lookahead_direction/exp02d-lookahead-primary-YYYYMMDDTHHMMSSZ
+```
+
+After the complete run has selected a frozen representative, explain it with the saved-motion GUI:
+
+```bash
+./scripts/isaac/run_exp02d_success_failure_gui.sh \
+  --run data/exp02d_lookahead_direction/exp02d-lookahead-primary-YYYYMMDDTHHMMSSZ \
+  --case S1
+```
+
+Phase A moves the official Jackal mesh through saved current-OLD-only poses. At `B` it stops;
+Phase B reveals RAW/M1/M3 (and optional M2) as offline candidates. None is executed.
 
 The scientific saved-transition replay remains available separately:
 

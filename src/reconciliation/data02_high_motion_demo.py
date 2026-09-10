@@ -1,9 +1,9 @@
 """Deterministic saved-data selection and replay helpers for the DATA-02 GUI.
 
 This module is deliberately Isaac-free.  It reads immutable DATA-02 artifacts,
-verifies their recorded hashes, selects a high-motion transition, and maps a
-presentation clock to adjacent saved telemetry samples.  It never invokes
-LightNav, a controller, or simulation physics.
+verifies their recorded hashes, selects a high-motion transition using only its
+exact current-OLD interval, and maps a presentation clock to adjacent saved
+states.  It never invokes LightNav, a controller, or simulation physics.
 """
 
 from __future__ import annotations
@@ -19,7 +19,7 @@ from typing import Any, Iterable, Mapping, Sequence
 import numpy as np
 from numpy.typing import NDArray
 
-from reconciliation.data02_online_successive import validate_transition_artifact
+from reconciliation.data02_active_old import ActiveOldInterval, load_active_old_interval
 from reconciliation.online_switch import sha256_file
 
 
@@ -30,13 +30,11 @@ DEFAULT_RUNS_RELATIVE = (
 DEFAULT_SELECTION_OUTPUT_RELATIVE = Path("data/data02_collection_demo_selection")
 DEFAULT_DEMO_OUTPUT_RELATIVE = Path("data/data02_high_motion_demo")
 OLD_DEFAULT_RUN_ID = "data02-online-successive-extension-v2"
-OLD_DEFAULT_EPISODE = "episode_000061"
-OLD_DEFAULT_TRANSITION = 4
+OLD_DEFAULT_EPISODE = "episode_000062"
+OLD_DEFAULT_TRANSITION = 3
 DEFAULT_DURATION_S = 15.0
 MINIMUM_DURATION_S = 12.0
 MAXIMUM_DURATION_S = 18.0
-PRE_OBSERVATION_MARGIN_S = 1.0
-POST_SWITCH_MARGIN_S = 2.0
 TOP_INFERENCE_FRACTION = 0.10
 
 
@@ -49,20 +47,25 @@ class MotionCandidate:
     variant_id: str
     transition_id: str
     transition_index: int
+    old_chunk_id: str
+    fresh_chunk_id: str
     status: str
     fresh_geometry: str
     t_obs_sim_s: float
     t_ready_sim_s: float
     t_switch_sim_s: float
     p_sim_time_s: float
-    replay_start_sim_s: float
-    replay_end_sim_s: float
-    replay_sample_count: int
+    old_active_start_sim_s: float
+    old_active_end_sim_s: float
+    old_active_telemetry_sample_count: int
+    old_active_display_pose_count: int
+    old_activation_source: str
+    activation_boundary_prepended: bool
     inference_translation_m: float
     inference_path_length_m: float
-    full_demo_path_length_m: float
-    full_demo_net_displacement_m: float
-    full_demo_yaw_change_rad: float
+    active_old_path_length_m: float
+    active_old_net_displacement_m: float
+    active_old_yaw_change_rad: float
     abs_delta_v_des_mps: float
     abs_delta_omega_des_rps: float
     transition_json_sha256: str
@@ -135,20 +138,23 @@ class CameraFraming:
 
 
 _PHASES = (
-    ("OLD_EXECUTING", "PHASE 1 — OLD EXECUTING", "saved pre-observation approach"),
     (
-        "FRESH_INFERENCE",
-        "PHASE 2 — FRESH INFERENCE — OLD STILL EXECUTING",
-        "fixed observation ghost; OLD remains active",
+        "OLD_ACTIVE",
+        "PHASE 1 — CURRENT OLD ACTIVE",
+        "saved motion after this OLD became active",
     ),
     (
-        "FRESH_READY_SWITCH",
-        "PHASE 3 — FRESH READY / SWITCH AT B",
-        "P is last pre-switch pose; B is switch boundary; raw FRESH stays observation-anchored",
+        "FRESH_INFERENCE_OLD_ACTIVE",
+        "PHASE 2 — FRESH REQUEST / INFERENCE — OLD STILL ACTIVE",
+        "observation to selected switch; no chunk promotion yet",
     ),
-    ("FRESH_ACTIVE", "PHASE 4 — FRESH ACTIVE", "saved post-switch robot motion"),
+    (
+        "AT_B",
+        "PHASE 3 — STOPPED AT SELECTED B",
+        "actual replay ends; raw FRESH is displayed but is not replayed",
+    ),
 )
-_DEFAULT_PHASE_BOUNDARIES_S = (0.0, 4.0, 9.0, 11.0, 15.0)
+_DEFAULT_PHASE_BOUNDARIES_S = (0.0, 4.0, 11.0, 15.0)
 
 
 def _strict_json(path: Path) -> dict[str, Any]:
@@ -186,38 +192,6 @@ def _readonly(array: np.ndarray, name: str, *, columns: int = 3) -> NDArray[np.f
     return result
 
 
-def _readonly_pose(value: Sequence[float], name: str) -> NDArray[np.float64]:
-    result = np.array(value, dtype=np.float64, copy=True)
-    if result.shape != (3,) or not np.all(np.isfinite(result)):
-        raise ValueError(f"{name} must be finite SE(2)")
-    result.setflags(write=False)
-    return result
-
-
-def _telemetry_arrays(
-    rows: Sequence[Mapping[str, str]],
-) -> tuple[NDArray[np.float64], NDArray[np.float64]]:
-    times = np.asarray(
-        [_finite_float(row["sim_time_s"], "sim_time_s") for row in rows], dtype=np.float64
-    )
-    poses = np.asarray(
-        [
-            [
-                _finite_float(row["actual_x"], "actual_x"),
-                _finite_float(row["actual_y"], "actual_y"),
-                _finite_float(row["actual_yaw"], "actual_yaw"),
-            ]
-            for row in rows
-        ],
-        dtype=np.float64,
-    )
-    if times.size < 2 or not np.all(np.diff(times) > 0.0):
-        raise ValueError("episode telemetry times must be strictly increasing")
-    if not np.all(np.isfinite(poses)):
-        raise ValueError("episode telemetry poses contain NaN/Inf")
-    return times, poses
-
-
 def wrapped_angle(value: float) -> float:
     result = (float(value) + math.pi) % (2.0 * math.pi) - math.pi
     return math.pi if result == -math.pi and value > 0.0 else result
@@ -229,141 +203,65 @@ def _path_length(poses: np.ndarray) -> float:
     return float(np.linalg.norm(np.diff(poses[:, :2], axis=0), axis=1).sum())
 
 
-def _manifest_episode(run: Path, episode_id: str) -> Mapping[str, Any]:
-    manifest = _strict_json(run / "collection_manifest.json")
-    matches = [row for row in manifest["episodes"] if row["episode_id"] == episode_id]
-    if len(matches) != 1:
-        raise ValueError(f"manifest has no unique entry for {episode_id}")
-    return matches[0]
-
-
-def _verified_transition_metadata(
-    run: Path,
-    episode_id: str,
-    transition_index: int,
-    manifest_episode: Mapping[str, Any],
-) -> tuple[Path, dict[str, Any], dict[str, str]]:
-    transition_dir = (
-        run / "episodes" / episode_id / "transitions" / f"transition_{transition_index:02d}"
-    )
-    metadata = validate_transition_artifact(transition_dir)
-    transition_path = transition_dir / "transition.json"
-    transition_hashes = list(manifest_episode["transition_metadata_sha256"])
-    if transition_index >= len(transition_hashes):
-        raise ValueError("transition index is outside collection manifest")
-    transition_json_sha256 = sha256_file(transition_path)
-    if transition_json_sha256 != str(transition_hashes[transition_index]):
-        raise ValueError("transition JSON hash differs from collection manifest")
-    artifacts = metadata["artifact_sha256"]
-    return transition_dir, metadata, {
-        "transition.json": transition_json_sha256,
-        "derived/old_world.npy": str(artifacts["derived/old_world.npy"]),
-        "derived/fresh_world.npy": str(artifacts["derived/fresh_world.npy"]),
-        "actual.npy": str(artifacts["actual.npy"]),
-        "transition_telemetry.csv": str(artifacts["telemetry.csv"]),
-    }
-
-
-def _candidate_from_saved(
-    run: Path,
-    episode_id: str,
-    transition_index: int,
-    manifest_episode: Mapping[str, Any],
-    episode_times: NDArray[np.float64],
-    episode_poses: NDArray[np.float64],
-    episode_telemetry_sha256: str,
-) -> MotionCandidate:
-    transition_dir, metadata, source_hashes = _verified_transition_metadata(
-        run, episode_id, transition_index, manifest_episode
-    )
+def _candidate_from_interval(interval: ActiveOldInterval) -> MotionCandidate:
+    metadata = interval.transition_metadata
     if metadata["status"] != "ELIGIBLE_MOVING":
         raise ValueError("not ELIGIBLE_MOVING")
-    timing = metadata["timing"]
-    t_obs = _finite_float(timing["t_obs_sim_s"], "t_obs")
-    t_ready = _finite_float(timing["t_ready_sim_s"], "t_ready")
-    t_switch = _finite_float(timing["t_switch_sim_s"], "t_switch")
-    p_time = _finite_float(
-        metadata["pose_immediately_before_switch_P_sim_time_s"], "P time"
+    inference_mask = (
+        interval.telemetry_sim_times_s >= interval.observation_sim_time_s - 1e-9
+    ) & (
+        interval.telemetry_sim_times_s <= interval.model_ready_sim_time_s + 1e-9
     )
-    if timing.get("valid") is not True or not t_obs <= p_time < t_switch:
-        raise ValueError("invalid P/B timing")
-    if not t_obs <= t_ready <= t_switch:
-        raise ValueError("invalid observation/ready/switch timing")
-
-    pre_mask = (episode_times >= t_obs - PRE_OBSERVATION_MARGIN_S - 1e-9) & (
-        episode_times < t_obs - 1e-9
-    )
-    post_mask = (episode_times > t_switch + 1e-9) & (
-        episode_times <= t_switch + POST_SWITCH_MARGIN_S + 1e-9
-    )
-    replay_mask = (episode_times >= t_obs - PRE_OBSERVATION_MARGIN_S - 1e-9) & (
-        episode_times <= t_switch + POST_SWITCH_MARGIN_S + 1e-9
-    )
-    inference_mask = (episode_times >= t_obs - 1e-9) & (
-        episode_times <= t_ready + 1e-9
-    )
-    if not np.any(pre_mask):
-        raise ValueError("missing pre-observation telemetry")
-    if not np.any(post_mask):
-        raise ValueError("missing post-switch telemetry")
-    replay = episode_poses[replay_mask]
-    replay_times = episode_times[replay_mask]
-    inference = episode_poses[inference_mask]
-    inference_times = episode_times[inference_mask]
-    if len(replay) < 2 or len(inference) < 2:
-        raise ValueError("replay or inference interval has too few samples")
-
-    observation_pose = np.asarray(metadata["observation_pose_world_se2"], dtype=np.float64)
-    ready_pose = np.asarray(metadata["model_ready_pose_world_se2"], dtype=np.float64)
-    if observation_pose.shape != (3,) or ready_pose.shape != (3,):
-        raise ValueError("observation/model-ready pose is malformed")
-    if not np.all(np.isfinite(np.concatenate((observation_pose, ready_pose)))):
-        raise ValueError("observation/model-ready pose is non-finite")
-    if not math.isclose(float(inference_times[0]), t_obs, abs_tol=1e-6):
-        raise ValueError("episode telemetry lacks exact observation sample")
-    if not math.isclose(float(inference_times[-1]), t_ready, abs_tol=1e-6):
-        raise ValueError("episode telemetry lacks exact model-ready sample")
-    if not np.allclose(inference[0], observation_pose, rtol=0.0, atol=1e-6):
-        raise ValueError("observation pose differs from episode telemetry")
-    if not np.allclose(inference[-1], ready_pose, rtol=0.0, atol=1e-6):
-        raise ValueError("model-ready pose differs from episode telemetry")
-
-    full_path = _path_length(replay)
-    if full_path <= 1e-9:
-        raise ValueError("saved replay has no actual robot motion")
+    inference = interval.telemetry_actual_poses[inference_mask]
+    if len(inference) < 1:
+        raise ValueError("active OLD telemetry has no inference sample")
+    if interval.active_old_path_length_m <= 1e-9:
+        raise ValueError("saved active OLD interval has no robot motion")
     command = metadata["metrics"]["command_discontinuity"]
     return MotionCandidate(
-        run_id=run.name,
-        source_run_path=str(run),
-        episode_id=episode_id,
+        run_id=interval.run.name,
+        source_run_path=str(interval.run),
+        episode_id=interval.episode_id,
         template_id=str(metadata["template_id"]),
         variant_id=str(metadata["variant_id"]),
         transition_id=str(metadata["transition_id"]),
-        transition_index=transition_index,
+        transition_index=interval.transition_index,
+        old_chunk_id=interval.old_chunk_id,
+        fresh_chunk_id=interval.fresh_chunk_id,
         status=str(metadata["status"]),
         fresh_geometry=str(metadata["metrics"]["fresh_geometry_bin"]),
-        t_obs_sim_s=t_obs,
-        t_ready_sim_s=t_ready,
-        t_switch_sim_s=t_switch,
-        p_sim_time_s=p_time,
-        replay_start_sim_s=float(replay_times[0]),
-        replay_end_sim_s=float(replay_times[-1]),
-        replay_sample_count=int(len(replay_times)),
-        inference_translation_m=float(np.linalg.norm(ready_pose[:2] - observation_pose[:2])),
+        t_obs_sim_s=interval.observation_sim_time_s,
+        t_ready_sim_s=interval.model_ready_sim_time_s,
+        t_switch_sim_s=interval.switch_sim_time_s,
+        p_sim_time_s=interval.p_sim_time_s,
+        old_active_start_sim_s=interval.activation_sim_time_s,
+        old_active_end_sim_s=interval.switch_sim_time_s,
+        old_active_telemetry_sample_count=len(interval.telemetry_rows),
+        old_active_display_pose_count=len(interval.display_actual_poses),
+        old_activation_source=interval.activation_source,
+        activation_boundary_prepended=interval.activation_boundary_prepended,
+        inference_translation_m=float(
+            np.linalg.norm(
+                interval.model_ready_pose_world_se2[:2]
+                - interval.observation_pose_world_se2[:2]
+            )
+        ),
         inference_path_length_m=_path_length(inference),
-        full_demo_path_length_m=full_path,
-        full_demo_net_displacement_m=float(np.linalg.norm(replay[-1, :2] - replay[0, :2])),
-        full_demo_yaw_change_rad=abs(wrapped_angle(float(replay[-1, 2] - replay[0, 2]))),
+        active_old_path_length_m=interval.active_old_path_length_m,
+        active_old_net_displacement_m=interval.active_old_net_displacement_m,
+        active_old_yaw_change_rad=interval.active_old_yaw_change_rad,
         abs_delta_v_des_mps=abs(_finite_float(command["delta_v_mps"], "delta_v")),
         abs_delta_omega_des_rps=abs(
             _finite_float(command["delta_omega_rps"], "delta_omega")
         ),
-        transition_json_sha256=source_hashes["transition.json"],
-        old_world_sha256=source_hashes["derived/old_world.npy"],
-        fresh_world_sha256=source_hashes["derived/fresh_world.npy"],
-        actual_sha256=source_hashes["actual.npy"],
-        transition_telemetry_sha256=source_hashes["transition_telemetry.csv"],
-        episode_telemetry_sha256=episode_telemetry_sha256,
+        transition_json_sha256=interval.source_sha256["transition.json"],
+        old_world_sha256=interval.source_sha256["derived/old_world.npy"],
+        fresh_world_sha256=interval.source_sha256["derived/fresh_world.npy"],
+        actual_sha256=interval.source_sha256["actual.npy"],
+        transition_telemetry_sha256=interval.source_sha256[
+            "transition_telemetry.csv"
+        ],
+        episode_telemetry_sha256=interval.source_sha256["episode_telemetry.csv"],
     )
 
 
@@ -378,12 +276,6 @@ def scan_high_motion_candidates(run_paths: Iterable[str | Path]) -> ScanResult:
         for manifest_episode in sorted(manifest["episodes"], key=lambda row: row["episode_id"]):
             episode_id = str(manifest_episode["episode_id"])
             episode_dir = run_value / "episodes" / episode_id
-            episode_telemetry_path = episode_dir / "telemetry.csv"
-            episode_hash = sha256_file(episode_telemetry_path)
-            if episode_hash != str(manifest_episode["telemetry_sha256"]):
-                raise ValueError(f"episode telemetry hash mismatch: {episode_id}")
-            rows = _csv_rows(episode_telemetry_path)
-            episode_times, episode_poses = _telemetry_arrays(rows)
             transition_count = int(manifest_episode["transition_count"])
             for transition_index in range(transition_count):
                 transition_json = _strict_json(
@@ -396,14 +288,8 @@ def scan_high_motion_candidates(run_paths: Iterable[str | Path]) -> ScanResult:
                     continue
                 eligible_count += 1
                 try:
-                    candidate = _candidate_from_saved(
-                        run_value,
-                        episode_id,
-                        transition_index,
-                        manifest_episode,
-                        episode_times,
-                        episode_poses,
-                        episode_hash,
+                    candidate = _candidate_from_interval(
+                        load_active_old_interval(run_value, episode_id, transition_index)
                     )
                 except ValueError as error:
                     reason = str(error)
@@ -438,9 +324,9 @@ def select_high_motion_candidate(candidates: Sequence[MotionCandidate]) -> Selec
 
     def rank_key(candidate: MotionCandidate) -> tuple[Any, ...]:
         return (
-            -candidate.full_demo_path_length_m,
+            -candidate.active_old_path_length_m,
             -candidate.inference_translation_m,
-            -candidate.full_demo_net_displacement_m,
+            -candidate.active_old_net_displacement_m,
             candidate.fresh_geometry == "STRAIGHT_LIKE",
             -candidate.abs_delta_omega_des_rps,
             *_identity(candidate),
@@ -472,9 +358,9 @@ def selection_is_clearly_higher_motion(selection: SelectionResult) -> bool:
     selected = selection.selected
     previous = selection.previous_default
     return (
-        selected.inference_translation_m > previous.inference_translation_m
-        and selected.full_demo_path_length_m > previous.full_demo_path_length_m
-        and selected.full_demo_net_displacement_m > previous.full_demo_net_displacement_m
+        selected.active_old_path_length_m > previous.active_old_path_length_m
+        and selected.active_old_net_displacement_m
+        > previous.active_old_net_displacement_m
     )
 
 
@@ -520,7 +406,7 @@ def write_selection_outputs(
             )
             writer.writerow(row)
     document = {
-        "schema": "DATA02HighMotionDemoSelection_v1",
+        "schema": "DATA02HighMotionDemoSelection_v2",
         "selection_purpose": "visualization only; not scientific sample selection",
         "eligible_transition_count": scan.eligible_transition_count,
         "valid_candidate_count": len(scan.candidates),
@@ -533,10 +419,10 @@ def write_selection_outputs(
             ),
             "top_count_with_boundary_ties": selection.inference_top_decile_count,
             "threshold_m": selection.inference_top_decile_threshold_m,
-            "primary": "maximum full_demo_path_length_m",
+            "primary": "maximum active_old_path_length_m",
             "tie_break": [
                 "larger inference_translation_m",
-                "larger full_demo_net_displacement_m",
+                "larger active_old_net_displacement_m",
                 "non-straight FRESH geometry",
                 "larger abs_delta_omega_des_rps",
                 "lexicographic run/episode/transition ID",
@@ -544,16 +430,18 @@ def write_selection_outputs(
         },
         "selected": asdict(selection.selected),
         "previous_default": asdict(selection.previous_default),
-        "clearly_higher_motion_than_previous_default": selection_is_clearly_higher_motion(
-            selection
+        "more_active_old_motion_than_pre_correction_default": (
+            selection_is_clearly_higher_motion(selection)
         ),
         "ratios_selected_over_previous": {
             "inference_translation": selection.selected.inference_translation_m
             / selection.previous_default.inference_translation_m,
-            "full_demo_path_length": selection.selected.full_demo_path_length_m
-            / selection.previous_default.full_demo_path_length_m,
-            "full_demo_net_displacement": selection.selected.full_demo_net_displacement_m
-            / selection.previous_default.full_demo_net_displacement_m,
+            "active_old_path_length": selection.selected.active_old_path_length_m
+            / selection.previous_default.active_old_path_length_m,
+            "active_old_net_displacement": (
+                selection.selected.active_old_net_displacement_m
+                / selection.previous_default.active_old_net_displacement_m
+            ),
         },
     }
     selected_path.write_text(
@@ -568,61 +456,24 @@ def select_and_write_defaults(repository_root: str | Path) -> SelectionResult:
     selection = select_high_motion_candidate(scan.candidates)
     write_selection_outputs(scan, selection, root / DEFAULT_SELECTION_OUTPUT_RELATIVE)
     if not selection_is_clearly_higher_motion(selection):
-        raise RuntimeError("selected transition is not clearly higher motion than previous default")
+        raise RuntimeError(
+            "selected transition has no more active-OLD motion than the pre-correction default"
+        )
     return selection
-
-
-def _load_candidate_for_replay(run: Path, episode_id: str, transition_index: int) -> MotionCandidate:
-    manifest_episode = _manifest_episode(run, episode_id)
-    telemetry_path = run / "episodes" / episode_id / "telemetry.csv"
-    episode_hash = sha256_file(telemetry_path)
-    if episode_hash != str(manifest_episode["telemetry_sha256"]):
-        raise ValueError("episode telemetry hash mismatch")
-    times, poses = _telemetry_arrays(_csv_rows(telemetry_path))
-    return _candidate_from_saved(
-        run,
-        episode_id,
-        transition_index,
-        manifest_episode,
-        times,
-        poses,
-        episode_hash,
-    )
 
 
 def load_replay_evidence(
     run: str | Path, episode_id: str, transition_index: int
 ) -> ReplayEvidence:
-    """Load a replay window and mark every returned scientific array read-only."""
+    """Load the exact current-OLD active interval as read-only replay evidence."""
 
     run_path = Path(run).expanduser().resolve()
-    candidate = _load_candidate_for_replay(run_path, episode_id, transition_index)
+    interval = load_active_old_interval(run_path, episode_id, transition_index)
+    candidate = _candidate_from_interval(interval)
     episode_dir = run_path / "episodes" / episode_id
     transition_dir = episode_dir / "transitions" / f"transition_{transition_index:02d}"
-    metadata = _strict_json(transition_dir / "transition.json")
-    rows = _csv_rows(episode_dir / "telemetry.csv")
-    times, poses = _telemetry_arrays(rows)
-    mask = (times >= candidate.replay_start_sim_s - 1e-9) & (
-        times <= candidate.replay_end_sim_s + 1e-9
-    )
-    replay_times = np.array(times[mask], copy=True)
-    replay_poses = np.array(poses[mask], copy=True)
-    replay_times.setflags(write=False)
-    replay_poses.setflags(write=False)
-    old_world = _readonly(
-        np.load(transition_dir / "derived/old_world.npy", allow_pickle=False), "OLD world"
-    )
-    fresh_world = _readonly(
-        np.load(transition_dir / "derived/fresh_world.npy", allow_pickle=False), "raw FRESH world"
-    )
-    source_hashes = {
-        "transition.json": candidate.transition_json_sha256,
-        "derived/old_world.npy": candidate.old_world_sha256,
-        "derived/fresh_world.npy": candidate.fresh_world_sha256,
-        "actual.npy": candidate.actual_sha256,
-        "transition_telemetry.csv": candidate.transition_telemetry_sha256,
-        "episode_telemetry.csv": candidate.episode_telemetry_sha256,
-    }
+    metadata = interval.transition_metadata
+    source_hashes = dict(interval.source_sha256)
 
     rgb_path: Path | None = None
     rgb_frame_index: int | None = None
@@ -647,22 +498,14 @@ def load_replay_evidence(
     return ReplayEvidence(
         candidate=candidate,
         run=run_path,
-        old_world=old_world,
-        fresh_world=fresh_world,
-        actual_sim_times_s=replay_times,
-        actual_poses=replay_poses,
-        observation_pose=_readonly_pose(
-            metadata["observation_pose_world_se2"], "observation pose"
-        ),
-        model_ready_pose=_readonly_pose(
-            metadata["model_ready_pose_world_se2"], "model-ready pose"
-        ),
-        p_pose=_readonly_pose(
-            metadata["pose_immediately_before_switch_P_world_se2"], "P pose"
-        ),
-        boundary_pose=_readonly_pose(
-            metadata["switch_boundary_B_world_se2"], "B pose"
-        ),
+        old_world=interval.old_world,
+        fresh_world=interval.fresh_world,
+        actual_sim_times_s=interval.display_sim_times_s,
+        actual_poses=interval.display_actual_poses,
+        observation_pose=interval.observation_pose_world_se2,
+        model_ready_pose=interval.model_ready_pose_world_se2,
+        p_pose=interval.p_pose_world_se2,
+        boundary_pose=interval.boundary_pose_world_se2,
         observation_rgb_path=rgb_path,
         observation_rgb_frame_index=rgb_frame_index,
         source_sha256=source_hashes,
@@ -698,10 +541,12 @@ def saved_time_for_presentation(
         max((presentation_time_s - phase.start_s) / (phase.end_s - phase.start_s), 0.0), 1.0
     )
     intervals = {
-        "OLD_EXECUTING": (candidate.replay_start_sim_s, candidate.t_obs_sim_s),
-        "FRESH_INFERENCE": (candidate.t_obs_sim_s, candidate.t_ready_sim_s),
-        "FRESH_READY_SWITCH": (candidate.t_ready_sim_s, candidate.t_switch_sim_s),
-        "FRESH_ACTIVE": (candidate.t_switch_sim_s, candidate.replay_end_sim_s),
+        "OLD_ACTIVE": (candidate.old_active_start_sim_s, candidate.t_obs_sim_s),
+        "FRESH_INFERENCE_OLD_ACTIVE": (
+            candidate.t_obs_sim_s,
+            candidate.t_switch_sim_s,
+        ),
+        "AT_B": (candidate.t_switch_sim_s, candidate.t_switch_sim_s),
     }
     start, end = intervals[phase.key]
     return float(start + progress * (end - start))
@@ -831,12 +676,18 @@ def _print_selection(selection: SelectionResult) -> None:
     for prefix, candidate in (("", selected), ("PREVIOUS_DEFAULT_", previous)):
         print(f"{prefix}INFERENCE_TRANSLATION_M={candidate.inference_translation_m:.15g}")
         print(f"{prefix}INFERENCE_PATH_LENGTH_M={candidate.inference_path_length_m:.15g}")
-        print(f"{prefix}FULL_DEMO_PATH_LENGTH_M={candidate.full_demo_path_length_m:.15g}")
         print(
-            f"{prefix}FULL_DEMO_NET_DISPLACEMENT_M="
-            f"{candidate.full_demo_net_displacement_m:.15g}"
+            f"{prefix}ACTIVE_OLD_PATH_LENGTH_M="
+            f"{candidate.active_old_path_length_m:.15g}"
         )
-        print(f"{prefix}FULL_DEMO_YAW_CHANGE_RAD={candidate.full_demo_yaw_change_rad:.15g}")
+        print(
+            f"{prefix}ACTIVE_OLD_NET_DISPLACEMENT_M="
+            f"{candidate.active_old_net_displacement_m:.15g}"
+        )
+        print(
+            f"{prefix}ACTIVE_OLD_YAW_CHANGE_RAD="
+            f"{candidate.active_old_yaw_change_rad:.15g}"
+        )
         print(f"{prefix}FRESH_GEOMETRY={candidate.fresh_geometry}")
         print(f"{prefix}ABS_DELTA_V_DES={candidate.abs_delta_v_des_mps:.15g}")
         print(f"{prefix}ABS_DELTA_OMEGA_DES={candidate.abs_delta_omega_des_rps:.15g}")

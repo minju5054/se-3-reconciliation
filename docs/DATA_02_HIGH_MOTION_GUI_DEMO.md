@@ -1,116 +1,116 @@
-# DATA-02 Saved High-Motion GUI Demo
+# DATA-02 Saved Current-OLD GUI Demo
 
 ## Purpose and boundary
 
-This is a professor-facing visualization of immutable DATA-02 evidence, not an algorithm change,
-new experiment, or scientific sample-selection result. It supersedes the earlier short collection
-demo because that default moved only `0.15539962298348772 m` from FRESH observation to model
-readiness and looked nearly stationary in the Hospital viewport.
+This is a professor-facing visualization of immutable DATA-02 evidence, not an algorithm
+change, new experiment, or scientific sample-selection result. It reads saved telemetry and
+directly displays the official Jackal mesh at recorded poses. It does not start LightNav,
+recollect data, issue controller or wheel commands, advance physics to recreate motion,
+reconcile OLD/FRESH, or spatially scale `x/y/yaw`.
 
-The replacement reads saved telemetry and directly displays the official Jackal mesh at recorded
-poses. It does not start LightNav, recollect data, issue trajectory-follower or wheel commands,
-advance physics to recreate motion, reconcile OLD/FRESH, scale `x/y/yaw`, or modify DATA-02. The
-one-command default is:
+The one-command default is:
 
 ```bash
 ./scripts/isaac/run_data02_high_motion_demo.sh
 ```
 
-Optional overrides are `--run PATH`, `--episode ID`, `--transition N`, `--duration 12..18`,
-`--hold`, and `--show-rgb`. RGB is hidden by default so it cannot obscure the Jackal or paths.
+It animates for 15 presentation seconds and then holds the final B view until Isaac is closed.
+Use `--no-hold` for automated capture-and-exit. Optional overrides are `--run PATH`,
+`--episode ID`, `--transition N`, `--duration 12..18`, and `--show-rgb`. `--hold` is accepted
+explicitly but is already the default. RGB is hidden by default so it cannot obscure the robot.
+
+## Correct current-OLD semantics
+
+The earlier version used an arbitrary episode window from one second before FRESH observation
+until two seconds after the selected switch. That mixed motion from adjacent active chunks into
+the green line and could make the displayed Jackal look unrelated to the displayed OLD.
+
+The corrected loader treats each selected transition's `actual.npy` and `telemetry.csv` as the
+primary source. The collector created this segment after the current OLD was activated and
+before its FRESH was promoted. It verifies that the transition CSV is an exact contiguous slice
+of the hash-checked episode telemetry and requires every telemetry row to have
+`active_chunk_id == old_chunk_id`.
+
+For transition `i > 0`, the exact activation event is the preceding transition's saved switch
+time and B pose. That B is prepended to the display path as an explicit boundary event; it is
+not claimed to be a current-OLD telemetry row, because the first current-OLD telemetry sample
+arrives one physics step later. For transition zero, the earliest saved bootstrap-OLD telemetry
+state is used and no earlier pose is extrapolated. The interval ends exactly at the selected
+transition's B. Observation must lie inside it, P must precede B, and the last actual sample must
+equal B. No previous-chunk actual path and no post-switch actual path are displayed.
 
 ## Deterministic selection
 
-Before Isaac opens, the launcher scans both immutable runs and writes generated, ignored analysis
-to `data/data02_collection_demo_selection/high_motion_candidates.csv` and
-`selected_transition.json`. It checks the collection-manifest hash of each episode telemetry file,
-the manifest hash of every selected transition JSON, and the artifact hashes checked by the DATA-02
-validator. Only `ELIGIBLE_MOVING` transitions with valid P/B ordering, pre-observation samples,
-post-switch samples, and nonzero saved motion are candidates.
+Before Isaac opens, the launcher scans both immutable runs and writes generated, ignored
+analysis to `data/data02_collection_demo_selection/high_motion_candidates.csv` and
+`selected_transition.json`. It verifies collection-manifest, transition, array, and telemetry
+hashes. All 959 saved `ELIGIBLE_MOVING` transitions satisfy the corrected active-OLD
+reconstruction.
 
-The chosen transition must first be in the top 10% by observation-to-model-ready translation
-(rank-based, including boundary ties). Within that set, the primary sort is decreasing replay path
-length, followed by decreasing inference translation, decreasing replay net displacement,
-non-straight FRESH geometry, decreasing absolute desired-omega jump, then lexicographic identity.
-No GUI appearance is used to choose a candidate.
+The visualization-only selection first restricts candidates to the top 10% by
+observation-to-model-ready translation (rank-based, boundary ties included). It then ranks by
+decreasing `active_old_path_length_m`, decreasing inference translation, decreasing active-OLD
+net displacement, non-straight geometry, absolute desired-omega jump, and lexical identity.
+No GUI appearance is used to choose the case.
 
-The resulting default is v2 `episode_000062`, `transition_03`:
+The corrected default is v1 `episode_000007`, `transition_03`, current OLD `chunk_03`:
 
-| Saved measurement | New default | Previous `episode_000061/transition_04` |
+| Saved measurement | Corrected default | Pre-correction default v2 `episode_000062/transition_03` |
 |---|---:|---:|
-| inference translation | 0.344356561 m | 0.155399623 m |
-| inference path length | 0.344356787 m | 0.155587229 m |
-| full replay path length | 1.410891385 m | 0.804321695 m |
-| full replay net displacement | 1.410890601 m | 0.690719358 m |
-| absolute full-window yaw change | 0.000485740 rad | 1.083185727 rad |
-| absolute desired-v jump | 0.035927807 m/s | 0.365681231 m/s |
-| absolute desired-omega jump | 0.002997163 rad/s | 1.737875451 rad/s |
-| FRESH geometry | STRAIGHT_LIKE | POSITIVE_TURNING |
+| OLD activation time | 20.133334383 s | 20.233334389 s |
+| FRESH observation time | 20.783334417 s | 20.783334417 s |
+| selected switch B time | 21.733334467 s | 21.733334467 s |
+| active-OLD path length | 0.580704094 m | 0.542412192 m |
+| active-OLD net displacement | 0.580703864 m | 0.542411814 m |
+| inference translation | 0.330802986 m | 0.344356561 m |
+| absolute desired-v jump | 0.042670638 m/s | 0.035927807 m/s |
+| absolute desired-omega jump | 0.001111356 rad/s | 0.002997163 rad/s |
 
-The new inference translation is 2.216 times the previous value; its full replay path is 1.754
-times as long. This selection is for motion legibility, not representativeness or scientific
-difficulty.
+The old extended-window path length of `1.410891385 m` is no longer a selection or display
+metric: approximately `0.160660 m` belonged before current-OLD activation and `0.707819 m`
+belonged after the selected switch. The corrected default's unscaled active-OLD motion is about
+`0.581 m` and remains plainly visible when replayed at presentation speed.
 
-## Replay and presentation semantics
+## Replay phases and legend
 
-The default uses 236 saved episode-telemetry samples from simulation time
-`19.800001033 s` through `23.716667904 s`: approximately 1 second before
-`t_obs=20.783334417 s`, through `t_ready=t_switch=21.733334467 s`, to approximately 2 seconds
-after the selected switch. No pose outside that saved interval is invented. Because DATA-02 is a
-successive stream, later collection events can occur inside the two-second tail; the visualization
-only highlights the selected transition and makes no claim that its one FRESH chunk controls the
-entire tail.
+The presentation clock is deliberately distinct from immutable scientific simulation time:
 
-The default 15-second presentation clock is distinct from immutable scientific time:
-
-| Presentation | Phase | Saved interval shown |
+| Presentation | Phase | Saved state |
 |---:|---|---|
-| 0–4 s | OLD EXECUTING | pre-observation approach |
-| 4–9 s | FRESH INFERENCE — OLD STILL EXECUTING | observation to model readiness |
-| 9–11 s | FRESH READY / SWITCH AT B | readiness-to-switch hold; equal timestamps here |
-| 11–15 s | FRESH ACTIVE | saved motion after the selected B |
+| 0-4 s | CURRENT OLD ACTIVE | activation boundary/earliest bootstrap state to observation |
+| 4-11 s | FRESH REQUEST / INFERENCE, OLD STILL ACTIVE | observation to selected B |
+| 11-15 s | STOPPED AT SELECTED B | robot stays at B; no FRESH execution |
 
-For smooth rendering, `x/y` are linearly interpolated and yaw follows the wrapped shortest angle
-only between the two adjacent saved samples bracketing the display time. This
-`DISPLAY INTERPOLATION BETWEEN SAVED TELEMETRY SAMPLES` is presentation-only. Scientific samples,
-endpoints, event times, and path geometry remain unchanged.
+For smooth display only, XY is interpolated linearly and yaw by the wrapped shortest angle
+between the two adjacent saved samples. This does not create a scientific measurement.
 
-## View and legend
+- Blue: current OLD world trajectory.
+- Green: growing saved actual path while that OLD alone was active.
+- Magenta: raw observation-anchored FRESH trajectory, revealed after observation.
+- Yellow: FRESH observation.
+- Orange: P, the last saved controller-boundary pose before the selected switch.
+- Red: selected switch boundary B.
 
-The stable elevated oblique camera is computed once from saved actual, OLD, and FRESH bounds. For
-the default it uses a 55-degree horizontal field of view, targets
-`[19.000864, 27.278085, 0.18]`, and estimates the full actual replay extent at `63.4%` of the
-viewport and all displayed geometry at `82.0%`. It does not rotate or follow the robot. Hospital
-floor, walls, and furniture remain stationary visual references.
+There are no per-waypoint headings, footprint polygons, observation-to-current connector,
+previous-chunk trail, or post-switch trail. At B the Jackal stops. Raw FRESH is shown as a
+reference and is not executed.
 
-- Blue, thick line: saved OLD world trajectory.
-- Magenta, thick line: saved raw observation-anchored FRESH world trajectory.
-- Green, growing thick line: saved actual robot history.
-- Yellow footprint, point, heading, and observation-to-current line: fixed FRESH observation.
-- Orange marker and heading: P, last saved pose immediately before the selected switch.
-- Red marker and heading: B, saved selected switch boundary.
+## Camera, captures, and integrity
 
-The official Jackal mesh moves while the yellow observation ghost remains fixed. During inference,
-the overlay prominently reports `MOVED DURING FRESH INFERENCE` and current observation-to-Jackal
-displacement. The bottom text says `Saved replay — no LightNav inference / no physics
-re-execution`.
+The stable elevated oblique camera is computed once from current OLD, raw FRESH, and the exact
+active-OLD path. Hospital geometry remains visible as a spatial reference. Each completed run
+creates a new ignored directory under `data/data02_high_motion_demo/<UTC>/` containing:
 
-## Captures and integrity
-
-Every completed run creates a new ignored directory under
-`data/data02_high_motion_demo/<UTC>/` containing:
-
-- `01_before_observation.png`
-- `02_during_inference.png`
-- `03_after_switch.png`
+- `01_old_active.png`
+- `02_at_observation.png`
+- `03_at_B.png`
 - `capture_manifest.json`
 
-The manifest records each capture's saved-time bracket, exact lower/upper saved poses,
-interpolation fraction, displayed pose, camera bounds, `d_before_during`, `d_during_after`, source
-hashes, and numeric confirmation that the displayed pose changed substantially. A non-black image
-alone is not accepted. Source arrays returned by the loader are copies marked read-only, and the
-source DATA-02 trees remain untouched.
+The manifest records source hashes, activation semantics, exact active interval, saved-time
+brackets and interpolation fractions, camera bounds, observed display displacement, and explicit
+`false` flags for previous-chunk and post-switch actual display. It also confirms that the final
+display pose equals B. Scientific source arrays are copied read-only and source DATA-02 trees
+remain untouched.
 
-These displays establish that the Jackal changed position in the recorded wheel-driven DATA-02
-execution. They do not establish a causal controller, wheel, tire-contact, or LightNav explanation,
-and presentation interpolation must not be treated as a new measurement.
+This visualization establishes how the saved Jackal moved while the selected OLD was active. It
+does not establish a causal controller, wheel, tire-contact, or LightNav explanation.

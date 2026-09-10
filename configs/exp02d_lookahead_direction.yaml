@@ -1,0 +1,127 @@
+experiment: EXP-02D
+name: Lookahead-Aware Transition Direction Success and Failure Regimes
+schema_version: 1
+
+scope:
+  corpus_role: EXP02D_DEVELOPMENT_CORPUS
+  final_test_set: false
+  data02_combined_decision: DATA02_COMBINED_DIVERSITY_INSUFFICIENT
+  candidate_execution: false
+  lightnav_waypoint_timestamps: false
+  only_semantic_change: B_to_F_k_direction_target_becomes_B_to_F_q
+
+paths:
+  output_root: data/exp02d_lookahead_direction
+  combined_corpus: data/data02_combined_v1_v2/data02-combined-v1-v2-final
+  v1_run: data/data02_online_successive_v1/data02-online-successive-primary-v1
+  v2_run: data/data02_online_successive_v2/data02-online-successive-extension-v2
+  historical_exp02a_config: configs/exp02a_spatial_entry.yaml
+  historical_exp02c_config: configs/exp02c_factor_isolation.yaml
+
+source_integrity:
+  combined_manifest_sha256: 26b391feb0053ab7c44f4882a26f6602e75b84d4807bb61e411f650a1241f331
+  all_transition_index_sha256: dc69be42d0ebdd0d2e9748c58ec4a45e9253e5c5de84c90d2226099769d8d73b
+  v1_collection_manifest_sha256: e3418cde107a4c644787cec45d3099bc856daa4dbcfbe2fa35d4da43125ad227
+  v1_config_snapshot_sha256: b92f4ddc1ba7e80d5544573ffedd8b8175e6b92ae79c8d79637cbb3e17c5a313
+  v2_collection_manifest_sha256: 96c89d0a923341b93ba9edac7594cbe03a85bf8bf5a05514bc1ab9770b789362
+  v2_config_snapshot_sha256: 8e5ed277729adb479e15309f9843780e22138080e0560b62ea227560245dfbe4
+
+methods:
+  - M0_RAW
+  - M1_HISTORICAL_M4
+  - M2_NO_DIRECTION
+  - M3_LOOKAHEAD
+
+# Copied exactly from the frozen EXP-02A/EXP-02C current-M4 source of truth.
+residual_scales:
+  translation_m: 0.10
+  yaw_rad: 0.10
+  direction_unitless: 0.10
+historical_weights:
+  entry_preservation: 1.0
+  incoming_direction: 1.0
+  incoming_yaw: 1.0
+  fresh_motion: 1.0
+minimum_direction_translation_m: 1.0e-6
+
+# Copied exactly from the frozen EXP-02A/EXP-02C solver source of truth.
+solver:
+  max_iterations: 80
+  finite_difference_epsilon: 1.0e-6
+  initial_damping: 1.0e-3
+  damping_increase: 10.0
+  damping_decrease: 0.3
+  maximum_damping: 1.0e12
+  gradient_tolerance: 1.0e-9
+  step_tolerance: 1.0e-9
+  cost_tolerance: 1.0e-12
+
+oracle:
+  source: frozen_DATA02_TrajectoryFollower_evaluated_once_at_B
+  lookahead_distance_source: each_saved_run_config
+  expected_lookahead_distance_m: 0.25
+  first_command_absolute_tolerance: 1.0e-12
+
+evaluation:
+  command_score_linear_scale_mps: 0.15
+  command_score_angular_scale_rps: 0.30
+  benign_max_abs_delta_v_mps: 0.05
+  benign_max_abs_delta_omega_rps: 0.10
+  challenging_min_abs_delta_v_mps: 0.15
+  challenging_min_abs_delta_omega_rps: 0.30
+  challenging_improved_ratio: 0.80
+  challenging_worse_ratio: 1.20
+  bootstrap_seed: 20260910
+  bootstrap_repetitions: 10000
+  confidence_level: 0.95
+
+execution:
+  primary_workers: 1
+  progress_interval: 25
+
+# Frozen before primary execution. These bins are descriptive regime probes,
+# not deployment gates and not objective terms.
+regimes:
+  alpha_entry_large_rad: 1.0471975511965976
+  alpha_look_small_rad: 0.2617993877991494
+  alpha_look_large_rad: 0.7853981633974483
+  positional_gap_large_m: 0.20
+  degenerate_lookahead_radius_m: 0.05
+  insufficient_lookahead_arc_m: 0.05
+  large_deformation_rms_m: 0.20
+  small_command_benefit_fraction: 0.10
+  rigid_fit_translation_rms_m: 1.0e-6
+  rigid_fit_yaw_rms_rad: 1.0e-6
+  rigid_correction_min_entry_m: 0.05
+  rigid_endpoint_entry_difference_m: 1.0e-6
+  latency_bin_edges_s: [0.60, 0.80]
+
+representatives:
+  identity_tie_break: lexicographic_corpus_transition_id
+  S1: RAW_BENIGN_and_M1_non_BENIGN_and_M3_BENIGN_rank_max_J_M1_minus_J_M3
+  S2: RAW_CHALLENGING_and_J_M3_lt_J_RAW_and_J_M3_lt_J_M2_rank_max_J_RAW_minus_J_M3
+  F1: FRESH_TURNING_and_J_M3_ge_1.20_J_RAW_rank_max_J_M3_minus_J_RAW
+  F2: alpha_look_le_15deg_and_B_to_F_k_ge_0.20m_and_abs_J_RAW_minus_J_M3_le_0.10_J_RAW_rank_max_gap
+  unavailable_policy: NOT_AVAILABLE_do_not_relax
+
+gui:
+  presentation_duration_s: 10.0
+  hold_by_default: true
+  camera_horizontal_fov_deg: 55.0
+  camera_geometry_fraction: 0.74
+  camera_height_min_m: 3.0
+  z_offset_m: 0.22
+  line_width: 8.0
+  marker_size: 18.0
+  colors:
+    old: [0.10, 0.45, 1.00, 1.00]
+    actual: [0.05, 1.00, 0.18, 1.00]
+    raw: [0.55, 0.55, 0.55, 1.00]
+    historical_m4: [1.00, 0.50, 0.05, 1.00]
+    no_direction: [0.05, 0.85, 0.90, 1.00]
+    lookahead: [1.00, 0.10, 0.85, 1.00]
+    observation: [1.00, 0.90, 0.05, 1.00]
+    p: [1.00, 0.42, 0.05, 1.00]
+    boundary: [1.00, 0.05, 0.05, 1.00]
+    entry: [0.82, 0.82, 0.82, 1.00]
+    lookahead_target: [1.00, 0.10, 0.85, 1.00]

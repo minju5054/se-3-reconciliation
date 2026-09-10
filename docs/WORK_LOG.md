@@ -1831,3 +1831,48 @@ This file is append-only. Add each completed task at the bottom.
   `ae22a160f94284d094efb5e1102d023300be77b3f42c767330e0614807c59462`. Full pytest passed
   `373`; focused high-motion tests passed `8`; compileall for `src scripts tests`, shell syntax for
   the new launcher, and `git diff --check` passed.
+
+## 2026-09-11T01:44:29+09:00 — EXP-02D protocol freeze and active-OLD GUI correction
+
+- **Repository and scope:** Started from local and fetched `origin/main` at
+  `bad40aa60743da26f1b7263475ececfeb0e767f2`. Added the development-only EXP-02D formulation,
+  frozen evaluation and representative rules, offline result validator/plots, and saved-evidence
+  GUI. Historical M4 is called through the production implementation and is not modified. No
+  LightNav, system Python, ROS 2, CUDA, Isaac Sim, historical generated evidence, or source
+  DATA-02 artifact was changed. The user's unrelated edits to the two Stage 0 configs remain
+  unstaged and untouched.
+- **Isolated formulation:** `M0_RAW` is the raw selected suffix; `M1_HISTORICAL_M4` is the exact
+  historical entry + fresh-motion + `B->F_k` direction + yaw objective; `M2_NO_DIRECTION` removes
+  only direction; and `M3_LOOKAHEAD` changes only that factor to fixed-radius `B->F_q`, where one
+  frozen follower call at exact `B` supplies raw `k/q`. All weights remain `1.0`, scales remain
+  `0.10 m`, `0.10 rad`, and `0.10`, and the historical solver settings remain frozen. The
+  controller command score is evaluation-only and never enters the objective.
+- **Dry reconstruction:** Hash-checked all `959` v1+v2 `ELIGIBLE_MOVING` transitions; all `959`
+  reconstructed and `0` had undefined direction geometry or input failure. Raw follower command
+  reconstruction had maximum absolute error `0`; the corpus contains `191` exact ordered raw-pair
+  groups. The observed distributions were
+  `k={0:823, 1:133, 2:1, 5:2}`, `q={2:818, 3:133, 4:1, 9:7}`, and
+  `q-k={2:951, 4:3, 7:1, 9:4}`. These counts are observed dry-validation output, not hard-coded
+  corpus gates. The primary run has deliberately not yet occurred; it must run once from the
+  clean protocol commit recorded after this entry.
+- **Correct active-OLD semantics:** Added a shared strict loader that displays only the contiguous
+  interval in which the selected transition's `old_chunk_id` was active. For transition `i>0`,
+  the preceding saved `B` is an explicit activation-boundary event followed by current-OLD
+  telemetry; transition zero starts at its earliest bootstrap-OLD sample. Every displayed saved
+  telemetry row belongs to the current OLD and the path ends exactly at selected `B`. No
+  previous-chunk or post-switch actual path is shown.
+- **Real corrected GUI validation:** The deterministic corrected high-motion default is immutable
+  v1 `episode_000007/transition_03`, current OLD `chunk_03`, with activation
+  `20.133334383368492 s`, observation `20.783334417268634 s`, P
+  `21.63333446159959 s`, and B/switch `21.733334466814995 s`. Its unscaled current-OLD active path
+  is `0.5807040935130896 m` (`0.5807038644341246 m` net). The real Isaac GUI run
+  `data/data02_high_motion_demo/20260910T161500.312194Z/` visibly showed the official Jackal move
+  from activation through B, with uncluttered blue OLD, green current-OLD actual, magenta raw
+  FRESH, and observation/P/B markers. It contained `96` current-OLD telemetry rows plus the
+  explicit activation boundary and no adjacent-chunk trail.
+- **Validation before protocol commit:** Full repository pytest passed `429`; EXP-02D/high-motion
+  focused tests passed `57`; compileall for `src scripts tests`, `bash -n` for the new/modified
+  launchers, and `git diff --check` passed. Strict v1 (84 episodes/480 transitions), v2 (168/999),
+  and combined (1,479 attempts/959 eligible) validators passed. The generated EXP-02D root is
+  Git-ignored, and optimized candidates remain offline counterfactuals that are never physically
+  executed by the GUI.
