@@ -1787,3 +1787,47 @@ This file is append-only. Add each completed task at the bottom.
   `git diff --check` passed. The GUI code contains no `world.step`, controller application,
   DifferentialController construction, or LightNav client construction. Existing headless and
   saved replay behavior retains its defaults because the new path is gated by explicit `--demo`.
+
+## 2026-09-10T18:08:39+09:00 — DATA-02 saved high-motion GUI replacement
+
+- **Repository and supersession:** Started from local/origin `main` at
+  `0617b75ea121ad40ac7eec57e006b3116c8c56b9`. Removed the active low-motion demo module,
+  tests, launcher, and documentation and reverted only its presentation-specific changes in the
+  DATA-02 collector. The historical entry immediately above remains intact. Added a standalone
+  saved-data viewer; no history rewrite, LightNav, collection, controller, graph, reconciliation,
+  physics replay, or scientific DATA-02 artifact change was made. The user's unrelated edits to
+  the two Stage 0 configs remain unstaged and untouched.
+- **Deterministic saved-data scan:** Hash-checked both immutable v1/v2 collections. Of `959`
+  `ELIGIBLE_MOVING` transitions, `813` had valid P/B timing, pre-observation telemetry, post-switch
+  telemetry, and actual saved motion; the other `146` lacked a post-switch sample window. The
+  top-decile inference-motion threshold was `0.24825657265982382 m` (`82` candidates). Ranking
+  those candidates first by full replay path deterministically selected v2 `episode_000062`,
+  `transition_03`, `STRAIGHT_LIKE`.
+- **Motion evidence and comparison:** The selected saved transition has inference translation
+  `0.3443565605774114 m`, inference path length `0.34435678710392725 m`, full-window path
+  `1.4108913846051951 m`, net displacement `1.4108906013484364 m`, absolute endpoint yaw change
+  `0.00048574010784285804 rad`, `|delta_v_des|=0.03592780662560641 m/s`, and
+  `|delta_omega_des|=0.0029971625633567174 rad/s`. Versus the previous default, inference
+  translation is `2.216x`, full path `1.754x`, and net displacement `2.043x` larger. Generated
+  ranking/selection files are under the ignored `data/data02_collection_demo_selection/` root.
+- **Presentation:** The default 15 seconds map 236 immutable episode samples from saved simulation
+  time `19.80000103265047` to `23.716667903587222 s` into four phases: OLD approach (0–4 s),
+  FRESH inference while OLD continues (4–9 s), ready/switch hold (9–11 s), and post-switch motion
+  (11–15 s). The camera is fixed and dynamically fit to put the actual replay at an estimated
+  `63.4%` of the viewport. Thick blue OLD, magenta raw FRESH, growing green actual, fixed yellow
+  observation footprint/heading, orange P, red B, Hospital geometry, and prominent motion text are
+  shown. Smooth display uses only linear XY and shortest-wrapped-yaw interpolation between adjacent
+  saved samples; no spatial scaling is used.
+- **GUI validation:** The exact default launcher completed all four phases. An initial capture
+  check correctly rejected a visually stationary articulation despite moving telemetry; the final
+  implementation moves a parent USD display transform so the official Jackal mesh itself visibly
+  traverses the scene without a physics step. The final inspected run is
+  `data/data02_high_motion_demo/20260910T090924.941474Z/`. Its before/during/after displayed poses
+  moved `0.319115 m` and `0.525728 m`; visual inspection confirmed obvious Jackal displacement,
+  the observation ghost left behind, growing green trail, fixed Hospital references, distinct
+  OLD/FRESH, and visible P/B. Human-visible motion verdict: **YES**.
+- **Integrity and validation:** v1/v2 full-tree digests remained
+  `b7041d4e42bfec2530eb6b9b0fd57e6e5cbe00ec5ad8818ca36f6897b100923c` and
+  `ae22a160f94284d094efb5e1102d023300be77b3f42c767330e0614807c59462`. Full pytest passed
+  `373`; focused high-motion tests passed `8`; compileall for `src scripts tests`, shell syntax for
+  the new launcher, and `git diff --check` passed.
