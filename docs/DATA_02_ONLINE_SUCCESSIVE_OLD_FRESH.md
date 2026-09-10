@@ -1,5 +1,12 @@
 # DATA-02 Online-Successive OLD/FRESH v1
 
+> This document freezes the original v1 protocol and result. It has not been reinterpreted or
+> relabeled. The independent v2 cohort, read-only v1 timing diagnosis, and final reference-only
+> v1+v2 assessment are documented in
+> [DATA-02 v2 Extension and Final v1+v2 Assessment](DATA_02_V2_EXTENSION_AND_FINAL_SPLIT.md).
+> The combined decision is `DATA02_COMBINED_DIVERSITY_INSUFFICIENT`, so EXP-02D remains
+> unauthorized.
+
 ## Scope and research question
 
 DATA-02 asks whether the actual online LightNav + wheel-driven Isaac Jackal system produces

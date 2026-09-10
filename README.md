@@ -7,11 +7,13 @@ here is separate from LightNav.
 
 ## Current research state
 
-- DATA-02 collected the frozen 84-episode online-successive Hospital grid from one persistent
-  LightNav process and actual wheel-driven Jackal execution. The immutable primary run contains
-  480 attempted transitions, including 248 timing-valid `ELIGIBLE_MOVING` contexts and 96 unique
-  ordered raw pairs. Its final decision is
-  `DATA02_COLLECTED_BUT_DIVERSITY_INSUFFICIENT`, so it does not authorize formulation work.
+- DATA-02 now includes the immutable 84-episode v1 cohort and an independently predeclared
+  168-episode v2 extension, both collected by persistent LightNav and actual wheel-driven Jackal
+  execution. The reference-only union contains 1,479 attempted transitions, 959
+  `ELIGIBLE_MOVING` contexts, and 191 unique ordered raw pairs. However, one pair occupies
+  593/959 contexts and creates a 920-transition connected component. Duplicate domination and
+  isolated-split feasibility therefore fail. The exact final decision is
+  `DATA02_COMBINED_DIVERSITY_INSUFFICIENT`; EXP-02D is not authorized.
 - Stage 0-G3 compared the frozen Stage 0-G2 stationary histories with 30 paired scripted moving
   Jackal histories ending at the same observation poses. Moving history changed 16/30 raw outputs
   but did not qualify left/right/doorway-or-detour behavior. That historical failure remains
@@ -70,7 +72,9 @@ this machine because current claims and provenance depend on them:
 | Current-M4 factor isolation EXP-02C | `data/exp02c_factor_isolation/exp02c-factor-isolation-20260908T133000Z/` |
 | Jackal domain-scene qualification Stage 0-G2 | `data/stage0/lightnav_scene_qualification_g2/20260909T_stage0g2_primary_r3/` |
 | Moving-history qualification Stage 0-G3 | `data/stage0/lightnav_moving_history_qualification/20260909T_stage0g3_primary_r6/` |
-| Online-successive DATA-02 primary | `data/data02_online_successive_v1/data02-online-successive-primary-v1/` |
+| Online-successive DATA-02 v1 primary | `data/data02_online_successive_v1/data02-online-successive-primary-v1/` |
+| Independent DATA-02 v2 extension | `data/data02_online_successive_v2/data02-online-successive-extension-v2/` |
+| Reference-only DATA-02 v1+v2 assessment | `data/data02_combined_v1_v2/data02-combined-v1-v2-final/` |
 
 These are not a new formulation dataset. The complete keep/archive/delete dependency audit is
 in [the 2026-09-09 cleanup audit](docs/REPOSITORY_CLEANUP_AUDIT_20260909.md).
@@ -87,7 +91,8 @@ Detailed protocols, commands, schemas, observed results, and claim limitations l
   [LightNav execution envelope](docs/STAGE_00_LIGHTNAV_EXECUTION_ENVELOPE.md).
 - LightNav qualification: [Stage 0-G2 Jackal domain scene](docs/STAGE_00G2_JACKAL_DOMAIN_SCENE_QUALIFICATION.md)
   and [Stage 0-G3 moving egocentric history](docs/STAGE_00G3_MOVING_HISTORY_QUALIFICATION.md).
-- Dataset collection: [DATA-02 online-successive OLD/FRESH](docs/DATA_02_ONLINE_SUCCESSIVE_OLD_FRESH.md).
+- Dataset collection: [DATA-02 online-successive OLD/FRESH v1](docs/DATA_02_ONLINE_SUCCESSIVE_OLD_FRESH.md)
+  and [v2 extension/final combined assessment](docs/DATA_02_V2_EXTENSION_AND_FINAL_SPLIT.md).
 - Transition characterization: [EXP-01](docs/EXPERIMENT_01.md),
   [EXP-01A](docs/EXP_01A_LIGHTNAV_LATENCY.md),
   [EXP-01B](docs/EXP_01B_ONLINE_RAW_SWITCH.md),
@@ -169,3 +174,24 @@ wheel-driven execution history (this performs no LightNav inference):
 Blue is OLD, magenta is raw observation-anchored FRESH, green is recorded actual motion, and
 yellow/orange/red mark the FRESH observation/P/B poses. Close Isaac Sim to end the persistent
 replay.
+
+Replay the challenging v2 representative and exit automatically after capture:
+
+```bash
+./scripts/isaac/run_data02_v2_online_successive.sh \
+  --replay-run data/data02_online_successive_v2/data02-online-successive-extension-v2 \
+  --episode episode_000061 --transition 4 --gui --no-hold
+```
+
+Build and validate the immutable reference-only v1+v2 assessment:
+
+```bash
+.venv/bin/python scripts/build_data02_combined.py \
+  --v1-run data/data02_online_successive_v1/data02-online-successive-primary-v1 \
+  --v2-run data/data02_online_successive_v2/data02-online-successive-extension-v2 \
+  --output data/data02_combined_v1_v2/data02-combined-v1-v2-final
+.venv/bin/python scripts/plot_data02_combined.py \
+  data/data02_combined_v1_v2/data02-combined-v1-v2-final
+.venv/bin/python scripts/validate_data02_combined.py \
+  data/data02_combined_v1_v2/data02-combined-v1-v2-final
+```

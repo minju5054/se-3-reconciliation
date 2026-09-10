@@ -1684,3 +1684,67 @@ This file is append-only. Add each completed task at the bottom.
   `configs/stage0_jackal_controller_validation.yaml` and
   `configs/stage0_lightnav_single_chunk.yaml` remain preserved and excluded from this result
   commit.
+
+## 2026-09-10T13:25:12+09:00 — DATA-02 v2 independent extension and combined assessment
+
+- **Repository/provenance:** Work started after fetching local/origin `main` at
+  `2362ae3dd8a2c9f8906b89690422d750a63daa14`. The code/config/test freeze was committed and
+  pushed as `ee87d3897f03a81371af494ed258fe263d750ebe` (`data: freeze independent online extension
+  cohort`). The 168-episode primary then ran from a clean detached worktree at exactly that SHA;
+  recorded collector status is empty. Existing user edits to the two Stage 0 configs remained
+  unstaged and unchanged.
+- **v1 preservation and diagnosis:** The strict read-only validator reconfirmed all 84 episodes,
+  480 attempts, 248 original eligible contexts, transforms, clocks, P/B, successive chains, and
+  hashes with zero errors. No v1 file, status, or `[0.90, 1.10]` RTF threshold changed. Of 219
+  timing-invalid v1 attempts, 158 were below and 61 above the gate. Saved associations do not
+  support model latency alone: response-detection delay versus RTF was `r=-0.561`, while
+  simulation-ready latency was `r=0.506`. The v1 loop synchronously persisted PNGs; offline median
+  encode/hash estimates were 14.506/0.049 ms. These are descriptive, not causal findings.
+- **Technical-only cleanup:** v2 polls immediately after camera capture and defers identical
+  lossless PNG encode/write/hash work until episode end. Capture ordering, exact LightNav input,
+  output, controller/physics, trigger, clocks, and RTF gate remain unchanged. Across primary,
+  14,813 frames were persisted after their episode loops; episode-median mean persistence cost was
+  22.017 ms/frame. This timing comparison is not a controlled scientific effect estimate.
+- **Frozen independent bank:** Declared 24 new templates before inference, exactly four each for
+  straight/left/right/doorway/detour/compound, with the same seven variants (168 episodes). All
+  168 initial states passed collision/settling preview. IDs are new, family balance passes, and no
+  candidate met the conjunction of `<0.4 m`, `<0.15 rad`, and semantic equivalence to v1.
+  Selection used no LightNav output. Frozen config/protocol SHA-256 values are
+  `8e5ed277729adb479e15309f9843780e22138080e0560b62ea227560245dfbe4` and
+  `f395409b9fb86e0671f12e6b216fe503e2829274e43c965798c1e74b40b2d064`.
+- **Full v2 collection:** Run
+  `data/data02_online_successive_v2/data02-online-successive-extension-v2/` completed all 168
+  planned episodes and 999 actual transition attempts in one invocation. One persistent model
+  build served 1,167 predictions with 168 history resets, zero process restart, and no OOM.
+  Statuses were 711 `ELIGIBLE_MOVING`, 282 `TIMING_INVALID`, 4 `OLD_EXHAUSTED`, 1 `MODEL_STOP`,
+  and 1 `EXECUTION_COLLISION`; every other status was zero. Strict validation reconstructed every
+  frame stream/transition with zero errors.
+- **v2 characterization:** Eligible v2 contains 52 unique OLD, 53 unique FRESH, and 113 unique
+  ordered raw pairs; 18 pair identities overlap v1. Geometry is 617 straight-like, 55 positive,
+  34 negative, and 5 other. Difficulty is 605 benign, 55 intermediate, and 51 challenging. The
+  largest raw pair is 500/711 = 70.323%; it was retained unchanged.
+- **Combined result:** Built read-only reference corpus
+  `data/data02_combined_v1_v2/data02-combined-v1-v2-final/` without copying raw data. It contains
+  1,479 attempts, 959 eligible, 82 unique OLD, 94 unique FRESH, and 191 unique pairs. Geometry is
+  786/94/68/11 straight/positive/negative/other; difficulty is 685/178/96
+  benign/intermediate/challenging. One pair is 593/959 = 61.835%.
+- **Split and gates:** Episode-or-exact-pair connectivity yielded 12 components; the largest has
+  920 eligible transitions. Whole-component assignment produced 39 development and 920 held-out
+  transitions with zero episode and raw-pair leakage, but missed the 25% held-out target and
+  development lacks straight-family coverage. Gates A/B/D/E/F/H pass; C duplicate domination and
+  G isolated-split feasibility fail. Exact decision:
+  `DATA02_COMBINED_DIVERSITY_INSUFFICIENT`. EXP-02D remains unauthorized.
+- **Plots and GUI:** Generated and visually inspected all ten required combined plots; pair-rank,
+  component-size, and split plots expose the failure. A saved-only real Isaac GUI replay of
+  challenging representative `episode_000061_transition_04` visibly showed Hospital, the official
+  moving Jackal, blue OLD, magenta raw FRESH, green actual, observation/P/B markers, and live
+  phases. It exited cleanly and saved a non-black capture; it ran no inference or physics
+  re-execution.
+- **Validation:** Full suite passed `365`; compileall, launcher `bash -n`, `git diff --check`, v1
+  strict validator (84/480), v2 strict validator (168/999), and combined validator (1,479 source
+  hashes plus 11 combined artifacts) all passed with zero errors. v1, v2, and combined generated
+  roots are Git-ignored; the primary collector worktree remains clean.
+- **Claim boundary:** This is collection, characterization, duplicate control, and split
+  diagnosis only. It does not validate instructions, estimate deployment frequencies, establish a
+  causal timing effect, evaluate reconciliation, or justify inspecting/tuning against held-out
+  transitions.
