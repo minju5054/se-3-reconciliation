@@ -16,11 +16,13 @@ from reconciliation.exp02d_gui import (
     RepresentativeUnavailableError,
     _validate_case_rule,
     available_representatives,
+    compute_exp02d_camera_plan,
     gui_phase_and_saved_time,
     latest_completed_run,
     load_exp02d_gui_case,
     saved_only_gui_contract,
     saved_pose_at,
+    validate_gui_capture_rgb,
 )
 from reconciliation.online_switch import sha256_file
 
@@ -153,6 +155,168 @@ def test_gui_phase_maps_phase_a_to_saved_interval_then_freezes_at_b() -> None:
         gui_phase_and_saved_time(0.0, 0.0, active)
     with pytest.raises(ValueError, match="finite"):
         gui_phase_and_saved_time(float("nan"), 10.0, active)
+
+
+def test_indoor_camera_frames_normal_candidates_in_requested_range() -> None:
+    actual = np.array(
+        [[19.0, 26.8, 1.5], [19.02, 27.2, 1.5]], dtype=np.float64
+    )
+    old = np.array([[19.0, 26.7, 1.5], [19.05, 28.5, 1.5]], dtype=np.float64)
+    raw = np.array([[19.02, 27.0, 1.5], [19.05, 28.45, 1.5]], dtype=np.float64)
+    m1 = raw + np.array([0.02, 0.01, 0.0])
+    m3 = raw + np.array([-0.01, -0.01, 0.0])
+    snapshots = [value.copy() for value in (old, actual, raw, m1, m3)]
+    candidate_z = (0.84, 0.88, 0.92)
+    plan = compute_exp02d_camera_plan(
+        old,
+        actual,
+        [raw, m1, m3],
+        candidate_path_z_m=candidate_z,
+        observation_pose_world_se2=actual[1],
+    )
+    assert plan.maximum_projected_ndc <= plan.containment_limit_ndc + 1e-12
+    assert plan.minimum_projected_depth_m >= 0.15
+    assert plan.eye_xyz[2] <= plan.maximum_eye_height_m
+    assert plan.full_context_and_jackal_contained
+    assert plan.candidate_fraction_target_achieved
+    assert plan.limiting_constraint == "CANDIDATE_TARGET"
+    assert 0.65 <= plan.projected_candidate_geometry_fraction <= 0.80
+    assert plan.azimuth_candidates_evaluated >= 72
+    assert np.linalg.norm(plan.nominal_view_direction_xy) == pytest.approx(1.0)
+    assert plan.vertical_fov_deg == pytest.approx(36.04505155316516)
+    assert plan.old_path_z_m == pytest.approx(0.78)
+    assert plan.actual_path_ground_z_m == pytest.approx(0.255)
+    assert plan.actual_path_visual_z_m == pytest.approx(0.80)
+    assert plan.observation_marker_visual_z_m == pytest.approx(0.88)
+    assert plan.candidate_path_z_m == candidate_z
+    for value, snapshot in zip((old, actual, raw, m1, m3), snapshots, strict=True):
+        np.testing.assert_array_equal(value, snapshot)
+
+
+def test_indoor_camera_records_unscaled_short_candidate_visibility_limit() -> None:
+    actual = np.array([[0.0, 0.0, 0.0], [0.15, 0.02, 0.1]], dtype=np.float64)
+    old = np.array([[0.4, 0.2, 0.0], [0.0, 0.0, 0.0]], dtype=np.float64)
+    raw = np.array([[0.15, 0.02, 0.1], [0.25, 0.05, 0.2]], dtype=np.float64)
+    plan = compute_exp02d_camera_plan(old, actual, [raw])
+    assert plan.slant_distance_m >= 1.80
+    assert not plan.candidate_fraction_target_achieved
+    assert plan.projected_candidate_geometry_fraction < 0.65
+    assert plan.limiting_constraint == "FULL_CONTEXT_AND_JACKAL_VISIBILITY_LIMIT"
+    assert plan.full_context_and_jackal_contained
+    assert plan.eye_xyz[2] < 1.85
+
+
+def test_camera_eye_height_cap_preserves_slant_framing() -> None:
+    actual = np.array([[0.0, 0.0, 0.0], [0.0, 4.0, 0.0]], dtype=np.float64)
+    old = actual.copy()
+    candidate = np.array([[0.0, 0.0, 0.0], [0.0, 4.0, 0.0]], dtype=np.float64)
+    plan = compute_exp02d_camera_plan(
+        old, actual, [candidate], maximum_eye_height_m=1.20
+    )
+    assert plan.eye_xyz[2] == pytest.approx(1.20)
+    assert plan.elevation_deg < 47.0
+    assert plan.candidate_fraction_target_achieved
+    assert 0.65 <= plan.projected_candidate_geometry_fraction <= 0.80
+
+
+def test_camera_backs_off_from_containment_limit_to_requested_fraction() -> None:
+    actual = np.array([[0.0, 0.0, 0.0], [0.1, 0.0, 0.0]], dtype=np.float64)
+    old = actual.copy()
+    candidate = np.array([[-2.0, 0.0, 0.0], [2.0, 0.0, 0.0]], dtype=np.float64)
+    plan = compute_exp02d_camera_plan(old, actual, [candidate])
+    assert plan.candidate_fraction_target_achieved
+    assert plan.projected_candidate_geometry_fraction == pytest.approx(0.74)
+
+
+def test_camera_respects_explicit_world_frame_eye_half_plane() -> None:
+    actual = np.array([[0.0, 0.0, 0.0], [0.1, 1.0, 0.0]], dtype=np.float64)
+    old = actual.copy()
+    candidate = np.array([[0.0, 0.0, 0.0], [0.1, 1.5, 0.0]], dtype=np.float64)
+    preferred = np.array([1.0, -1.0], dtype=np.float64)
+    preferred /= np.linalg.norm(preferred)
+    plan = compute_exp02d_camera_plan(
+        old,
+        actual,
+        [candidate],
+        preferred_eye_direction_xy=preferred,
+        preferred_eye_half_angle_deg=90.0,
+    )
+    assert np.dot(plan.eye_direction_xy, preferred) >= -1e-12
+    np.testing.assert_allclose(plan.preferred_eye_direction_xy, preferred)
+    assert plan.preferred_eye_half_angle_deg == pytest.approx(90.0)
+
+
+def test_capture_visibility_check_rejects_white_and_accepts_scene_evidence() -> None:
+    white = np.full((100, 120, 3), 250, dtype=np.uint8)
+    with pytest.raises(ValueError, match="blank/occluded"):
+        validate_gui_capture_rgb(white)
+    scene = np.full((100, 120, 3), 120, dtype=np.uint8)
+    scene[10:20, 10:30] = [0, 255, 20]
+    metrics = validate_gui_capture_rgb(scene)
+    assert metrics["dark_scene_fraction"] > 0.99
+    assert metrics["chromatic_fraction"] > 0.01
+
+
+def test_capture_visibility_requires_jackal_and_requested_path_palette() -> None:
+    image = np.full((100, 120, 3), 120, dtype=np.uint8)
+    image[5:30, 5:35] = [255, 235, 10]
+    image[50:53, 10:30] = [26, 115, 255]
+    image[60:63, 10:30] = [13, 255, 46]
+    metrics = validate_gui_capture_rgb(
+        image,
+        required_palette={
+            "old": (0.10, 0.45, 1.00, 1.00),
+            "actual": (0.05, 1.00, 0.18, 1.00),
+        },
+        require_jackal=True,
+    )
+    assert metrics["jackal_yellow_pixel_count"] == 750
+    assert metrics["palette_pixel_counts"]["old"] == 60
+    assert metrics["palette_pixel_counts"]["actual"] == 60
+
+    without_robot = image.copy()
+    without_robot[5:30, 5:35] = 120
+    with pytest.raises(ValueError, match="visible Jackal"):
+        validate_gui_capture_rgb(without_robot, require_jackal=True)
+
+    with pytest.raises(ValueError, match="visible old"):
+        validate_gui_capture_rgb(
+            image,
+            required_palette={"old": (1.0, 0.0, 1.0, 1.0)},
+        )
+
+
+def test_capture_visibility_accepts_shaded_jackal_panels_not_gray_scene() -> None:
+    image = np.full((100, 120, 3), 90, dtype=np.uint8)
+    image[5:30, 5:35] = [130, 120, 5]
+    metrics = validate_gui_capture_rgb(image, require_jackal=True)
+    assert metrics["jackal_yellow_pixel_count"] == 750
+
+    gray = np.full((100, 120, 3), 110, dtype=np.uint8)
+    with pytest.raises(ValueError, match="blank/occluded|visible Jackal"):
+        validate_gui_capture_rgb(gray, require_jackal=True)
+
+
+@pytest.mark.parametrize(
+    "kwargs",
+    (
+        {"candidate_geometry_fraction": 0.90},
+        {"minimum_slant_distance_m": 0.0},
+        {"maximum_eye_height_m": 0.1},
+        {"candidate_path_z_m": (0.8, 0.9)},
+        {"azimuth_coarse_step_deg": 0.0},
+        {"azimuth_coarse_step_deg": 5.0, "azimuth_fine_step_deg": 6.0},
+        {"preferred_eye_direction_xy": [0.0, 0.0]},
+        {
+            "preferred_eye_direction_xy": [1.0, 0.0],
+            "preferred_eye_half_angle_deg": 181.0,
+        },
+    ),
+)
+def test_indoor_camera_rejects_invalid_contract(kwargs: dict[str, float]) -> None:
+    path = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]], dtype=np.float64)
+    with pytest.raises(ValueError):
+        compute_exp02d_camera_plan(path, path, [path], **kwargs)
 
 
 def test_frozen_representative_explanations_require_their_actual_rules() -> None:

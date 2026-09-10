@@ -42,6 +42,50 @@ class SavedDisplayPose:
 
 
 @dataclass(frozen=True, slots=True)
+class Exp02DCameraPlan:
+    """Indoor-safe framing for saved EXP-02D GUI evidence."""
+
+    eye_xyz: tuple[float, float, float]
+    target_xyz: tuple[float, float, float]
+    horizontal_fov_deg: float
+    vertical_fov_deg: float
+    viewport_aspect_ratio: float
+    elevation_deg: float
+    slant_distance_m: float
+    back_distance_m: float
+    lateral_offset_m: float
+    nominal_view_direction_xy: tuple[float, float]
+    eye_direction_xy: tuple[float, float]
+    preferred_eye_direction_xy: tuple[float, float] | None
+    preferred_eye_half_angle_deg: float | None
+    azimuth_world_deg: float
+    azimuth_offset_from_initial_heading_deg: float
+    azimuth_search_coarse_step_deg: float
+    azimuth_search_fine_step_deg: float
+    azimuth_candidates_evaluated: int
+    minimum_slant_distance_m: float
+    minimum_back_distance_m: float
+    maximum_eye_height_m: float
+    containment_limit_ndc: float
+    maximum_projected_ndc: float
+    minimum_projected_depth_m: float
+    old_path_z_m: float
+    actual_path_ground_z_m: float
+    actual_path_visual_z_m: float
+    observation_marker_visual_z_m: float
+    candidate_path_z_m: tuple[float, ...]
+    candidate_bounds_xy: tuple[tuple[float, float], tuple[float, float]]
+    focus_bounds_xy: tuple[tuple[float, float], tuple[float, float]]
+    drawn_bounds_xy: tuple[tuple[float, float], tuple[float, float]]
+    projected_candidate_geometry_fraction: float
+    projected_focus_geometry_fraction: float
+    requested_candidate_geometry_fraction: float
+    candidate_fraction_target_achieved: bool
+    full_context_and_jackal_contained: bool
+    limiting_constraint: str
+
+
+@dataclass(frozen=True, slots=True)
 class Exp02DGuiCase:
     run: Path
     case: str
@@ -490,6 +534,578 @@ def load_exp02d_gui_case(run: str | Path, case: str) -> Exp02DGuiCase:
         source_sha256=MappingProxyType(dict(sorted(source_hashes.items()))),
         result_sha256=MappingProxyType(dict(sorted(result_hashes.items()))),
     )
+
+
+def compute_exp02d_camera_plan(
+    old_world: np.ndarray,
+    actual_poses: np.ndarray,
+    candidate_paths: Sequence[np.ndarray],
+    *,
+    horizontal_fov_deg: float = 55.0,
+    candidate_geometry_fraction: float = 0.74,
+    viewport_aspect_ratio: float = 1.60,
+    minimum_slant_distance_m: float = 1.80,
+    minimum_back_distance_m: float = 1.55,
+    eye_height_m: float = 1.45,
+    minimum_eye_height_m: float = 1.15,
+    maximum_eye_height_m: float = 1.85,
+    target_z_m: float = 0.25,
+    lateral_offset_m: float = 0.25,
+    azimuth_coarse_step_deg: float = 5.0,
+    azimuth_fine_step_deg: float = 0.25,
+    containment_limit_ndc: float = 0.95,
+    minimum_depth_m: float = 0.15,
+    old_path_z_m: float = 0.78,
+    actual_path_ground_z_m: float = 0.255,
+    actual_path_visual_z_m: float = 0.80,
+    candidate_path_z_m: Sequence[float] | None = None,
+    observation_pose_world_se2: Sequence[float] | None = None,
+    observation_marker_visual_z_m: float = 0.88,
+    observation_marker_radius_m: float = 0.04,
+    preferred_eye_direction_xy: Sequence[float] | None = None,
+    preferred_eye_half_angle_deg: float = 90.0,
+) -> Exp02DCameraPlan:
+    """Fit full saved context and a swept Jackal proxy with exact pinhole projection.
+
+    The camera azimuth is selected by a deterministic coarse/fine sweep so
+    path geometry is not unnecessarily foreshortened.  Every rendered path,
+    the visual-only raised actual-path duplicate, and a swept 0.51 x 0.43 m
+    Jackal proxy are constrained inside the useful viewport.  Requested
+    65--80% candidate occupancy is reported as infeasible only after the full
+    azimuth sweep; evidence is never scaled.
+    """
+
+    old = _readonly_trajectory(old_world, "camera OLD trajectory")
+    actual = _readonly_trajectory(actual_poses, "camera active-OLD actual")
+    if not candidate_paths:
+        raise ValueError("camera requires at least one candidate trajectory")
+    candidates = tuple(
+        _readonly_trajectory(path, f"camera candidate {index}")
+        for index, path in enumerate(candidate_paths)
+    )
+    fov = _finite(horizontal_fov_deg, "camera horizontal FOV")
+    aspect = _finite(viewport_aspect_ratio, "camera viewport aspect ratio")
+    requested = _finite(
+        candidate_geometry_fraction, "camera candidate geometry fraction"
+    )
+    minimum_distance = _finite(
+        minimum_slant_distance_m, "camera minimum slant distance"
+    )
+    minimum_back = _finite(
+        minimum_back_distance_m, "camera minimum back distance"
+    )
+    requested_eye_height = _finite(eye_height_m, "camera eye height")
+    minimum_eye_height = _finite(
+        minimum_eye_height_m, "camera minimum eye height"
+    )
+    maximum_height = _finite(maximum_eye_height_m, "camera maximum eye height")
+    target_z = _finite(target_z_m, "camera target z")
+    lateral_offset = _finite(lateral_offset_m, "camera lateral offset")
+    coarse_step = _finite(
+        azimuth_coarse_step_deg, "camera azimuth coarse step"
+    )
+    fine_step = _finite(azimuth_fine_step_deg, "camera azimuth fine step")
+    containment = _finite(containment_limit_ndc, "camera containment NDC")
+    minimum_depth = _finite(minimum_depth_m, "camera minimum depth")
+    old_visual_z = _finite(old_path_z_m, "camera OLD path z")
+    actual_ground_z = _finite(
+        actual_path_ground_z_m, "camera actual-path ground z"
+    )
+    actual_visual_z = _finite(
+        actual_path_visual_z_m, "camera actual-path visual z"
+    )
+    observation_visual_z = _finite(
+        observation_marker_visual_z_m, "camera observation-marker z"
+    )
+    observation_radius = _finite(
+        observation_marker_radius_m, "camera observation-marker radius"
+    )
+    preferred_eye: np.ndarray | None = None
+    preferred_half_angle: float | None = None
+    if preferred_eye_direction_xy is not None:
+        preferred_eye = np.asarray(preferred_eye_direction_xy, dtype=np.float64)
+        if preferred_eye.shape != (2,) or not np.all(np.isfinite(preferred_eye)):
+            raise ValueError("camera preferred eye direction must be one finite XY vector")
+        preferred_norm = float(np.linalg.norm(preferred_eye))
+        if preferred_norm <= 1e-12:
+            raise ValueError("camera preferred eye direction must be nonzero")
+        preferred_eye = preferred_eye / preferred_norm
+        preferred_half_angle = _finite(
+            preferred_eye_half_angle_deg, "camera preferred eye half angle"
+        )
+        if not 0.0 < preferred_half_angle <= 180.0:
+            raise ValueError("camera preferred eye half angle must lie in (0, 180]")
+    if candidate_path_z_m is None:
+        candidate_visual_z = (0.84,) * len(candidates)
+    else:
+        if len(candidate_path_z_m) != len(candidates):
+            raise ValueError("camera candidate z count must match candidate paths")
+        candidate_visual_z = tuple(
+            _finite(value, f"camera candidate {index} z")
+            for index, value in enumerate(candidate_path_z_m)
+        )
+    if not 30.0 <= fov <= 90.0:
+        raise ValueError("camera horizontal FOV must be in [30, 90] degrees")
+    if aspect <= 0.0:
+        raise ValueError("camera viewport aspect ratio must be positive")
+    if not 0.65 <= requested <= 0.80:
+        raise ValueError("camera candidate geometry fraction must be in [0.65, 0.80]")
+    if minimum_distance <= 0.0 or minimum_back <= 0.0:
+        raise ValueError("camera minimum distances must be positive")
+    if not target_z < minimum_eye_height <= maximum_height:
+        raise ValueError("camera eye-height bounds must lie above target z")
+    if requested_eye_height < minimum_eye_height:
+        raise ValueError("camera requested eye height is below its indoor minimum")
+    if not 0.0 < containment < 1.0 or minimum_depth <= 0.0:
+        raise ValueError("camera projection limits are invalid")
+    if not 0.0 < fine_step <= coarse_step <= 45.0:
+        raise ValueError("camera azimuth steps must satisfy 0 < fine <= coarse <= 45")
+    if min(
+        old_visual_z,
+        actual_ground_z,
+        actual_visual_z,
+        observation_visual_z,
+        *candidate_visual_z,
+    ) <= 0.0:
+        raise ValueError("camera rendered path heights must be positive")
+    if observation_radius <= 0.0:
+        raise ValueError("camera observation-marker radius must be positive")
+    applied_eye_height = min(requested_eye_height, maximum_height)
+
+    candidate_xy = np.vstack([path[:, :2] for path in candidates])
+    focus_xy = np.vstack((actual[:, :2], candidate_xy))
+    drawn_xy = np.vstack((old[:, :2], focus_xy))
+
+    def bounds_and_extent(
+        xy: np.ndarray,
+    ) -> tuple[np.ndarray, np.ndarray, float]:
+        minimum = np.min(xy, axis=0)
+        maximum = np.max(xy, axis=0)
+        return minimum, maximum, float(np.linalg.norm(maximum - minimum))
+
+    candidate_min, candidate_max, candidate_extent = bounds_and_extent(candidate_xy)
+    focus_min, focus_max, focus_extent = bounds_and_extent(focus_xy)
+    drawn_min, drawn_max, drawn_extent = bounds_and_extent(drawn_xy)
+    if candidate_extent <= 1e-9 or focus_extent <= 1e-9 or drawn_extent <= 1e-9:
+        raise ValueError("camera geometry has no finite spatial extent")
+
+    def xyz_at_height(path: np.ndarray, z: float) -> np.ndarray:
+        return np.column_stack((path[:, :2], np.full(len(path), z)))
+
+    candidate_xyz = np.vstack(
+        [
+            xyz_at_height(path, height)
+            for path, height in zip(candidates, candidate_visual_z, strict=True)
+        ]
+    )
+    focus_xyz = np.vstack(
+        (
+            candidate_xyz,
+            xyz_at_height(actual, actual_ground_z),
+            xyz_at_height(actual, actual_visual_z),
+        )
+    )
+    path_xyz = np.vstack((xyz_at_height(old, old_visual_z), focus_xyz))
+
+    # Clearpath Jackal's nominal footprint is about 0.51 x 0.43 m.  Include
+    # every saved pose so a stable camera does not crop the moving robot.
+    robot_points: list[list[float]] = []
+    for x, y, yaw in actual:
+        cosine = math.cos(float(yaw))
+        sine = math.sin(float(yaw))
+        for local_x in (-0.255, 0.255):
+            for local_y in (-0.215, 0.215):
+                world_x = float(x) + cosine * local_x - sine * local_y
+                world_y = float(y) + sine * local_x + cosine * local_y
+                for world_z in (0.05, 0.75):
+                    robot_points.append([world_x, world_y, world_z])
+    required_parts = [path_xyz, np.asarray(robot_points, dtype=np.float64)]
+    if observation_pose_world_se2 is not None:
+        observation = np.asarray(observation_pose_world_se2, dtype=np.float64)
+        if observation.shape != (3,) or not np.all(np.isfinite(observation)):
+            raise ValueError("camera observation pose must be one finite SE(2) pose")
+        x, y = map(float, observation[:2])
+        required_parts.append(
+            np.asarray(
+                [
+                    [x, y, observation_visual_z],
+                    [x - observation_radius, y, observation_visual_z],
+                    [x + observation_radius, y, observation_visual_z],
+                    [x, y - observation_radius, observation_visual_z],
+                    [x, y + observation_radius, observation_visual_z],
+                ],
+                dtype=np.float64,
+            )
+        )
+    required_xyz = np.vstack(required_parts)
+
+    center = (focus_min + focus_max) / 2.0
+    initial_heading_angle = float(actual[0, 2])
+    target_array = np.array([center[0], center[1], target_z], dtype=np.float64)
+    horizontal_fov = math.radians(fov)
+    vertical_fov = 2.0 * math.atan(math.tan(horizontal_fov / 2.0) / aspect)
+
+    def projection(back_distance: float, azimuth_rad: float) -> dict[str, Any]:
+        view_direction = np.array(
+            [math.cos(azimuth_rad), math.sin(azimuth_rad)], dtype=np.float64
+        )
+        side = np.array([-view_direction[1], view_direction[0]], dtype=np.float64)
+        eye_array = np.array(
+            [
+                center[0]
+                - back_distance * view_direction[0]
+                + lateral_offset * side[0],
+                center[1]
+                - back_distance * view_direction[1]
+                + lateral_offset * side[1],
+                applied_eye_height,
+            ],
+            dtype=np.float64,
+        )
+        forward = target_array - eye_array
+        distance = float(np.linalg.norm(forward))
+        forward /= distance
+        right = np.cross(forward, np.array([0.0, 0.0, 1.0]))
+        right /= np.linalg.norm(right)
+        up = np.cross(right, forward)
+
+        def project(points: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+            relative = points - eye_array
+            depth = relative @ forward
+            with np.errstate(divide="ignore", invalid="ignore"):
+                x_ndc = (relative @ right) / (depth * math.tan(horizontal_fov / 2.0))
+                y_ndc = (relative @ up) / (depth * math.tan(vertical_fov / 2.0))
+            return depth, x_ndc, y_ndc
+
+        depth, x_ndc, y_ndc = project(required_xyz)
+        candidate_depth, candidate_x, candidate_y = project(candidate_xyz)
+        focus_depth, focus_x, focus_y = project(focus_xyz)
+
+        def screen_span(x_values: np.ndarray, y_values: np.ndarray) -> float:
+            return float(
+                max(
+                    (np.max(x_values) - np.min(x_values)) / 2.0,
+                    (np.max(y_values) - np.min(y_values)) / 2.0,
+                )
+            )
+
+        maximum_ndc = float(max(np.max(np.abs(x_ndc)), np.max(np.abs(y_ndc))))
+        eye_direction = eye_array[:2] - target_array[:2]
+        eye_direction /= np.linalg.norm(eye_direction)
+        return {
+            "eye": eye_array,
+            "distance": distance,
+            "minimum_depth": float(
+                min(np.min(depth), np.min(candidate_depth), np.min(focus_depth))
+            ),
+            "maximum_ndc": maximum_ndc,
+            "candidate_fraction": screen_span(candidate_x, candidate_y),
+            "focus_fraction": screen_span(focus_x, focus_y),
+            "azimuth_rad": float(azimuth_rad),
+            "view_direction": view_direction,
+            "eye_direction": eye_direction,
+        }
+
+    vertical_delta = applied_eye_height - target_z
+    distance_floor_squared = max(
+        minimum_distance * minimum_distance
+        - lateral_offset * lateral_offset
+        - vertical_delta * vertical_delta,
+        0.0,
+    )
+    lower = max(minimum_back, math.sqrt(distance_floor_squared))
+
+    def acceptable(result: Mapping[str, Any]) -> bool:
+        return bool(
+            result["minimum_depth"] >= minimum_depth
+            and result["maximum_ndc"] <= containment
+            and result["candidate_fraction"] <= 0.80
+        )
+
+    def fit_at_azimuth(azimuth_rad: float) -> tuple[dict[str, Any], float] | None:
+        if preferred_eye is not None and preferred_half_angle is not None:
+            nominal_eye = -np.asarray(
+                [math.cos(azimuth_rad), math.sin(azimuth_rad)], dtype=np.float64
+            )
+            minimum_dot = math.cos(math.radians(preferred_half_angle))
+            if float(nominal_eye @ preferred_eye) < minimum_dot - 1e-12:
+                return None
+        lower_result = projection(lower, azimuth_rad)
+        if acceptable(lower_result):
+            return lower_result, lower
+        upper = lower
+        upper_result = lower_result
+        while upper < 50.0 and not acceptable(upper_result):
+            upper *= 1.10
+            upper_result = projection(upper, azimuth_rad)
+        if not acceptable(upper_result):
+            return None
+        failed = lower
+        passed = upper
+        fitted = upper_result
+        for _ in range(64):
+            midpoint = 0.5 * (failed + passed)
+            midpoint_result = projection(midpoint, azimuth_rad)
+            if acceptable(midpoint_result):
+                passed = midpoint
+                fitted = midpoint_result
+            else:
+                failed = midpoint
+        # The nearest containment-valid view can make candidate geometry larger
+        # than the requested framing fraction.  Back off deterministically to
+        # the request instead of merely accepting any value below the 0.80 cap.
+        if float(fitted["candidate_fraction"]) > requested:
+            near = passed
+            far = passed
+            far_result = fitted
+            while far < 100.0 and float(far_result["candidate_fraction"]) > requested:
+                far *= 1.10
+                far_result = projection(far, azimuth_rad)
+            if float(far_result["candidate_fraction"]) > requested:
+                return None
+            requested_fit = far_result
+            for _ in range(64):
+                midpoint = 0.5 * (near + far)
+                midpoint_result = projection(midpoint, azimuth_rad)
+                if float(midpoint_result["candidate_fraction"]) <= requested:
+                    far = midpoint
+                    requested_fit = midpoint_result
+                else:
+                    near = midpoint
+            return requested_fit, far
+        return fitted, passed
+
+    def wrapped_offset(azimuth_rad: float) -> float:
+        return math.atan2(
+            math.sin(azimuth_rad - initial_heading_angle),
+            math.cos(azimuth_rad - initial_heading_angle),
+        )
+
+    def camera_rank(item: tuple[dict[str, Any], float]) -> tuple[float, ...]:
+        result, fitted_back = item
+        fraction = float(result["candidate_fraction"])
+        offset = abs(wrapped_offset(float(result["azimuth_rad"])))
+        preference_offset = 0.0
+        if preferred_eye is not None:
+            preference_offset = math.acos(
+                float(
+                    np.clip(
+                        np.asarray(result["eye_direction"], dtype=np.float64)
+                        @ preferred_eye,
+                        -1.0,
+                        1.0,
+                    )
+                )
+            )
+        if fraction >= 0.65:
+            return (
+                0.0,
+                abs(fraction - requested),
+                preference_offset,
+                offset,
+                fitted_back,
+            )
+        return (1.0, -fraction, preference_offset, offset, fitted_back)
+
+    coarse_count = max(8, int(math.ceil(360.0 / coarse_step)))
+    coarse_angles = [
+        initial_heading_angle + 2.0 * math.pi * index / coarse_count
+        for index in range(coarse_count)
+    ]
+    coarse_fits = [
+        fitted
+        for angle in coarse_angles
+        if (fitted := fit_at_azimuth(angle)) is not None
+    ]
+    if not coarse_fits:
+        raise ValueError("no finite indoor camera fit contains EXP-02D context")
+    coarse_best = min(coarse_fits, key=camera_rank)
+    coarse_best_angle = float(coarse_best[0]["azimuth_rad"])
+    fine_radius = 2.0 * math.pi / coarse_count
+    fine_step_rad = math.radians(fine_step)
+    fine_count_each_side = max(1, int(math.ceil(fine_radius / fine_step_rad)))
+    fine_angles = [
+        coarse_best_angle + index * fine_step_rad
+        for index in range(-fine_count_each_side, fine_count_each_side + 1)
+    ]
+    fine_fits = [
+        fitted
+        for angle in fine_angles
+        if (fitted := fit_at_azimuth(angle)) is not None
+    ]
+    chosen, back_distance = min((*coarse_fits, *fine_fits), key=camera_rank)
+
+    eye_array = np.asarray(chosen["eye"], dtype=np.float64)
+    eye = tuple(map(float, eye_array))
+    target = tuple(map(float, target_array))
+    distance = float(chosen["distance"])
+    horizontal_distance = float(np.linalg.norm(target_array[:2] - eye_array[:2]))
+    elevation = math.degrees(math.atan2(vertical_delta, horizontal_distance))
+    candidate_fraction = float(chosen["candidate_fraction"])
+    focus_fraction = float(chosen["focus_fraction"])
+    achieved = bool(0.65 <= candidate_fraction <= 0.80)
+    limiting_constraint = (
+        "CANDIDATE_TARGET"
+        if achieved
+        else "FULL_CONTEXT_AND_JACKAL_VISIBILITY_LIMIT"
+    )
+    values = np.asarray(
+        (
+            *eye,
+            *target,
+            elevation,
+            distance,
+            candidate_fraction,
+            focus_fraction,
+            float(chosen["maximum_ndc"]),
+            float(chosen["minimum_depth"]),
+        ),
+        dtype=np.float64,
+    )
+    if not np.all(np.isfinite(values)):
+        raise ValueError("computed EXP-02D camera plan is non-finite")
+    return Exp02DCameraPlan(
+        eye_xyz=eye,
+        target_xyz=target,
+        horizontal_fov_deg=float(fov),
+        vertical_fov_deg=float(math.degrees(vertical_fov)),
+        viewport_aspect_ratio=float(aspect),
+        elevation_deg=float(elevation),
+        slant_distance_m=float(distance),
+        back_distance_m=float(back_distance),
+        lateral_offset_m=float(lateral_offset),
+        nominal_view_direction_xy=tuple(
+            map(float, np.asarray(chosen["view_direction"], dtype=np.float64))
+        ),
+        eye_direction_xy=tuple(
+            map(float, np.asarray(chosen["eye_direction"], dtype=np.float64))
+        ),
+        preferred_eye_direction_xy=(
+            None if preferred_eye is None else tuple(map(float, preferred_eye))
+        ),
+        preferred_eye_half_angle_deg=(
+            None if preferred_half_angle is None else float(preferred_half_angle)
+        ),
+        azimuth_world_deg=float(
+            math.degrees(float(chosen["azimuth_rad"])) % 360.0
+        ),
+        azimuth_offset_from_initial_heading_deg=float(
+            math.degrees(wrapped_offset(float(chosen["azimuth_rad"])))
+        ),
+        azimuth_search_coarse_step_deg=float(360.0 / coarse_count),
+        azimuth_search_fine_step_deg=float(fine_step),
+        azimuth_candidates_evaluated=len(coarse_fits) + len(fine_fits),
+        minimum_slant_distance_m=float(minimum_distance),
+        minimum_back_distance_m=float(minimum_back),
+        maximum_eye_height_m=float(maximum_height),
+        containment_limit_ndc=float(containment),
+        maximum_projected_ndc=float(chosen["maximum_ndc"]),
+        minimum_projected_depth_m=float(chosen["minimum_depth"]),
+        old_path_z_m=float(old_visual_z),
+        actual_path_ground_z_m=float(actual_ground_z),
+        actual_path_visual_z_m=float(actual_visual_z),
+        observation_marker_visual_z_m=float(observation_visual_z),
+        candidate_path_z_m=tuple(map(float, candidate_visual_z)),
+        candidate_bounds_xy=(
+            tuple(map(float, candidate_min)),
+            tuple(map(float, candidate_max)),
+        ),
+        focus_bounds_xy=(
+            tuple(map(float, focus_min)),
+            tuple(map(float, focus_max)),
+        ),
+        drawn_bounds_xy=(
+            tuple(map(float, drawn_min)),
+            tuple(map(float, drawn_max)),
+        ),
+        projected_candidate_geometry_fraction=float(candidate_fraction),
+        projected_focus_geometry_fraction=float(focus_fraction),
+        requested_candidate_geometry_fraction=float(requested),
+        candidate_fraction_target_achieved=achieved,
+        full_context_and_jackal_contained=bool(
+            chosen["maximum_ndc"] <= containment
+            and chosen["minimum_depth"] >= minimum_depth
+        ),
+        limiting_constraint=limiting_constraint,
+    )
+
+
+def validate_gui_capture_rgb(
+    rgb: np.ndarray,
+    *,
+    required_palette: Mapping[str, Sequence[float]] | None = None,
+    require_jackal: bool = False,
+    minimum_palette_pixels: int = 16,
+    minimum_jackal_pixels: int = 500,
+) -> dict[str, Any]:
+    """Reject blank/occluded captures missing requested visible evidence.
+
+    Palette checks target the unlit DebugDraw RGB values within a small tolerance.
+    The Jackal check uses its large yellow/olive body panels across direct and
+    oblique lighting; later yellow point markers are too small to satisfy the
+    minimum on their own.
+    """
+
+    image = np.asarray(rgb)
+    if image.ndim != 3 or image.shape[2] != 3 or image.size == 0:
+        raise ValueError("GUI capture must be a non-empty H x W x 3 RGB image")
+    if not np.issubdtype(image.dtype, np.number) or not np.all(np.isfinite(image)):
+        raise ValueError("GUI capture contains non-finite/non-numeric pixels")
+    values = image.astype(np.float64, copy=False)
+    if np.min(values) < 0.0 or np.max(values) > 255.0:
+        raise ValueError("GUI capture RGB values must lie in [0, 255]")
+    luminance = np.mean(values, axis=2)
+    chroma = np.max(values, axis=2) - np.min(values, axis=2)
+    dark_scene_fraction = float(np.mean(luminance < 220.0))
+    chromatic_fraction = float(np.mean(chroma > 40.0))
+    red = values[:, :, 0]
+    green = values[:, :, 1]
+    blue = values[:, :, 2]
+    jackal_yellow = (
+        (red > 100.0)
+        & (green > 90.0)
+        & (blue < 80.0)
+        & (np.minimum(red, green) - blue > 40.0)
+    )
+    palette_pixel_counts: dict[str, int] = {}
+    if required_palette is not None:
+        for name, color in required_palette.items():
+            target = np.asarray(color, dtype=np.float64)
+            if target.shape not in ((3,), (4,)) or not np.all(np.isfinite(target)):
+                raise ValueError(f"invalid GUI palette color for {name}")
+            target = target[:3]
+            if np.max(target) <= 1.0:
+                target = 255.0 * target
+            if np.min(target) < 0.0 or np.max(target) > 255.0:
+                raise ValueError(f"GUI palette color for {name} lies outside [0, 255]")
+            count = int(
+                np.sum(np.max(np.abs(values - target[None, None, :]), axis=2) <= 12.0)
+            )
+            palette_pixel_counts[str(name)] = count
+            if count < minimum_palette_pixels:
+                raise ValueError(
+                    f"GUI capture lacks visible {name} evidence "
+                    f"({count} < {minimum_palette_pixels} pixels)"
+                )
+    jackal_pixel_count = int(np.sum(jackal_yellow))
+    metrics: dict[str, Any] = {
+        "mean_luminance": float(np.mean(luminance)),
+        "p05_luminance": float(np.percentile(luminance, 5.0)),
+        "dark_scene_fraction": dark_scene_fraction,
+        "chromatic_fraction": chromatic_fraction,
+        "jackal_yellow_pixel_count": jackal_pixel_count,
+        "palette_pixel_counts": palette_pixel_counts,
+    }
+    if dark_scene_fraction < 0.005 or chromatic_fraction < 0.0001:
+        raise ValueError(
+            "GUI capture is blank/occluded: insufficient scene contrast or colored evidence"
+        )
+    if require_jackal and jackal_pixel_count < minimum_jackal_pixels:
+        raise ValueError(
+            "GUI capture lacks a visible Jackal yellow body "
+            f"({jackal_pixel_count} < {minimum_jackal_pixels} pixels)"
+        )
+    return metrics
 
 
 def saved_pose_at(active: ActiveOldInterval, sim_time_s: float) -> SavedDisplayPose:

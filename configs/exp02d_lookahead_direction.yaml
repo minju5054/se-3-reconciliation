@@ -109,7 +109,41 @@ gui:
   hold_by_default: true
   camera_horizontal_fov_deg: 55.0
   camera_geometry_fraction: 0.74
-  camera_height_min_m: 3.0
+  camera_viewport_aspect_ratio: 1.60
+  camera_minimum_slant_distance_m: 1.80
+  camera_minimum_back_distance_m: 1.55
+  camera_eye_height_m: 1.45
+  camera_indoor_min_eye_height_m: 1.15
+  camera_indoor_max_eye_height_m: 1.85
+  camera_target_z_m: 0.25
+  camera_lateral_offset_m: 0.25
+  camera_azimuth_coarse_step_deg: 5.0
+  camera_azimuth_fine_step_deg: 0.25
+  camera_preferred_eye_direction_world_xy: [1.0, -1.0]
+  camera_preferred_eye_half_angle_deg: 90.0
+  camera_case_view_sectors:
+    S1:
+      preferred_eye_direction_world_xy: [1.0, 1.0]
+      preferred_eye_half_angle_deg: 90.0
+    S2:
+      preferred_eye_direction_world_xy: [0.0, -1.0]
+      preferred_eye_half_angle_deg: 35.0
+    F1:
+      preferred_eye_direction_world_xy: [1.0, -1.0]
+      preferred_eye_half_angle_deg: 45.0
+  camera_target_fill_intensity: 18000.0
+  camera_target_fill_height_m: 1.60
+  camera_containment_limit_ndc: 0.95
+  camera_minimum_depth_m: 0.15
+  old_path_visual_z_m: 0.78
+  actual_path_visual_z_m: 0.80
+  raw_path_visual_z_m: 0.84
+  historical_m4_path_visual_z_m: 0.88
+  no_direction_path_visual_z_m: 0.90
+  lookahead_path_visual_z_m: 0.92
+  observation_marker_visual_z_m: 0.88
+  historical_m4_line_width_scale: 1.50
+  lookahead_line_width_scale: 0.75
   z_offset_m: 0.22
   line_width: 8.0
   marker_size: 18.0

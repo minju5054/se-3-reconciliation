@@ -31,9 +31,12 @@ here is separate from LightNav.
   evidence is preserved.
 - DATA-02 is coverage-oriented and descriptive. It does not estimate natural deployment
   frequencies, validate instruction satisfaction, or evaluate any reconciliation formulation.
-- The EXP-02D protocol, pair-balanced evaluation, success/failure labels, and representative-case
-  rules are frozen before its one-time primary run. Optimized candidates are evaluated offline and
-  are not physically executed.
+- EXP-02D completed its development-only primary over all 959 reconstructable transitions. Its
+  pair-balanced mean `J_cmd` is RAW `1.3936`, historical M4 `0.9179`, no-direction `1.2085`, and
+  lookahead M3 `0.8724`; M3 is lower than RAW and no-direction overall, but not distinguishable
+  from historical M4 under the frozen pair-cluster bootstrap. Optimized candidates were evaluated
+  offline and were not physically executed. See the dedicated report for the important benign,
+  intermediate, challenging, and failure-regime qualifications.
 
 ## System boundaries
 
@@ -79,6 +82,7 @@ this machine because current claims and provenance depend on them:
 | Online-successive DATA-02 v1 primary | `data/data02_online_successive_v1/data02-online-successive-primary-v1/` |
 | Independent DATA-02 v2 extension | `data/data02_online_successive_v2/data02-online-successive-extension-v2/` |
 | Reference-only DATA-02 v1+v2 assessment | `data/data02_combined_v1_v2/data02-combined-v1-v2-final/` |
+| EXP-02D lookahead-direction development primary | `data/exp02d_lookahead_direction/exp02d-lookahead-primary-20260910T171139Z/` |
 
 These are not a new formulation dataset. The complete keep/archive/delete dependency audit is
 in [the 2026-09-09 cleanup audit](docs/REPOSITORY_CLEANUP_AUDIT_20260909.md).
@@ -185,31 +189,29 @@ controller command, physics re-execution, or spatial motion scaling. Saved adjac
 interpolated only for smooth display; add `--show-rgb` for the observation inset and `--no-hold`
 for automated capture.
 
-Run the frozen EXP-02D technical dry validation, then the one-time primary only from its clean
-protocol commit:
+The completed EXP-02D primary was generated from clean corrected protocol commit
+`f25fda2877bcfda8a599b739c252ab174d62f5b9` and validates with:
 
 ```bash
-.venv/bin/python scripts/run_exp02d_lookahead_direction.py \
-  --phase dry-validation --run-id exp02d-dry-YYYYMMDDTHHMMSSZ
-
-.venv/bin/python scripts/run_exp02d_lookahead_direction.py \
-  --phase primary --run-id exp02d-lookahead-primary-YYYYMMDDTHHMMSSZ \
-  --require-git-sha <EXP02D_PROTOCOL_GIT_SHA>
-
 .venv/bin/python scripts/validate_exp02d_lookahead_direction.py \
-  data/exp02d_lookahead_direction/exp02d-lookahead-primary-YYYYMMDDTHHMMSSZ
+  data/exp02d_lookahead_direction/exp02d-lookahead-primary-20260910T171139Z
 ```
 
-After the complete run has selected a frozen representative, explain it with the saved-motion GUI:
+Replay an available deterministic representative with the saved-motion GUI:
 
 ```bash
 ./scripts/isaac/run_exp02d_success_failure_gui.sh \
-  --run data/exp02d_lookahead_direction/exp02d-lookahead-primary-YYYYMMDDTHHMMSSZ \
+  --run data/exp02d_lookahead_direction/exp02d-lookahead-primary-20260910T171139Z \
   --case S1
 ```
 
-Phase A moves the official Jackal mesh through saved current-OLD-only poses. At `B` it stops;
-Phase B reveals RAW/M1/M3 (and optional M2) as offline candidates. None is executed.
+Use `--case S2` for the challenging success and `--case F1` for the predeclared turning failure
+candidate; `F2` is honestly `F2_NOT_AVAILABLE`. Phase A moves the official Jackal mesh through
+saved current-OLD-only poses. At `B` it stops; Phase B reveals RAW/M1/M3 (and optional M2 via
+`--show-m2`) as offline candidates. None is executed. The camera preserves the full Jackal and
+unscaled evidence inside the Hospital; when a scene-safe view or very short candidate geometry
+cannot occupy the requested 65--80% of the viewport, the capture manifest records that framing
+constraint rather than scaling the trajectories.
 
 The scientific saved-transition replay remains available separately:
 

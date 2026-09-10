@@ -11,7 +11,10 @@ from pathlib import Path
 import sys
 import textwrap
 import time
+import traceback
 from typing import Any, Mapping, Sequence
+
+import yaml
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
@@ -21,11 +24,13 @@ from reconciliation.exp02d_gui import (  # noqa: E402
     PHASE_A_FRACTION,
     REPRESENTATIVE_CASES,
     Exp02DGuiCase,
+    compute_exp02d_camera_plan,
     gui_phase_and_saved_time,
     latest_completed_run,
     load_exp02d_gui_case,
     saved_only_gui_contract,
     saved_pose_at,
+    validate_gui_capture_rgb,
 )
 
 
@@ -81,7 +86,15 @@ RUN = (
     else latest_completed_run(REPOSITORY_ROOT / "data/exp02d_lookahead_direction")
 )
 EVIDENCE = load_exp02d_gui_case(RUN, ARGS.case)
-GUI_CONFIG = EVIDENCE.config["gui"]
+GUI_RENDER_CONFIG_PATH = REPOSITORY_ROOT / "configs/exp02d_lookahead_direction.yaml"
+GUI_RENDER_DOCUMENT = yaml.safe_load(GUI_RENDER_CONFIG_PATH.read_text(encoding="utf-8"))
+if (
+    not isinstance(GUI_RENDER_DOCUMENT, Mapping)
+    or GUI_RENDER_DOCUMENT.get("experiment") != "EXP-02D"
+    or not isinstance(GUI_RENDER_DOCUMENT.get("gui"), Mapping)
+):
+    raise ValueError("repository EXP-02D GUI render config is invalid")
+GUI_CONFIG = dict(GUI_RENDER_DOCUMENT["gui"])
 DURATION_S = float(
     GUI_CONFIG["presentation_duration_s"] if ARGS.duration is None else ARGS.duration
 )
@@ -100,7 +113,6 @@ APP = SimulationApp(
 import numpy as np  # noqa: E402
 import omni.ui as ui  # noqa: E402
 import omni.usd  # noqa: E402
-import yaml  # noqa: E402
 from PIL import Image  # noqa: E402
 from isaacsim.core.api import World  # noqa: E402
 from isaacsim.core.utils.stage import add_reference_to_stage, is_stage_loading  # noqa: E402
@@ -135,6 +147,46 @@ def strict_yaml(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValueError(f"{path} must contain a YAML mapping")
     return value
+
+
+def gui_processing_provenance(evidence: Exp02DGuiCase) -> dict[str, Any]:
+    """Record exact post-primary renderer inputs independently of Git state."""
+
+    artifacts = {
+        "gui_runner": Path(__file__).resolve(),
+        "gui_helper": REPOSITORY_ROOT / "src/reconciliation/exp02d_gui.py",
+        "gui_launcher": REPOSITORY_ROOT
+        / "scripts/isaac/run_exp02d_success_failure_gui.sh",
+    }
+    for name, path in artifacts.items():
+        if not path.is_file():
+            raise RuntimeError(f"EXP-02D GUI processing artifact is missing: {name}: {path}")
+    quantitative_config = evidence.run / "config_snapshot.yaml"
+    quantitative_config_hash = sha256_file(quantitative_config)
+    if quantitative_config_hash != evidence.result_sha256["config_snapshot.yaml"]:
+        raise RuntimeError("EXP-02D primary config changed before GUI rendering")
+    return {
+        "derivation": "post-primary saved-evidence rendering only",
+        "processing_artifact_sha256": {
+            name: sha256_file(path) for name, path in sorted(artifacts.items())
+        },
+        "quantitative_config_source": str(quantitative_config),
+        "quantitative_config_source_sha256": quantitative_config_hash,
+        "gui_render_config_source": str(GUI_RENDER_CONFIG_PATH),
+        "gui_render_config_source_sha256": sha256_file(GUI_RENDER_CONFIG_PATH),
+        "runtime_gui_mapping": json.loads(json.dumps(GUI_CONFIG, sort_keys=True)),
+        "effective_presentation_duration_s": DURATION_S,
+        "effective_hold": HOLD,
+        "cli_flags": {
+            "headless": bool(ARGS.headless),
+            "show_m2": bool(ARGS.show_m2),
+            "show_entry_vector": bool(ARGS.show_entry_vector),
+        },
+        "note": (
+            "quantitative evidence comes from the immutable primary snapshot; "
+            "camera-only post-processing comes from the separately hashed repository config"
+        ),
+    }
 
 
 def source_scene_config(evidence: Exp02DGuiCase) -> dict[str, Any]:
@@ -205,107 +257,240 @@ def create_saved_display(
 
 
 def configure_camera(evidence: Exp02DGuiCase) -> dict[str, Any]:
-    paths = [
-        evidence.active_old.old_world,
-        evidence.active_old.display_actual_poses,
+    base_z = float(GUI_CONFIG["z_offset_m"])
+    old_path_z = float(GUI_CONFIG.get("old_path_visual_z_m", 0.78))
+    actual_ground_z = base_z + 0.035
+    actual_visual_z = float(GUI_CONFIG.get("actual_path_visual_z_m", 0.80))
+    candidate_z = [
+        float(GUI_CONFIG.get("raw_path_visual_z_m", 0.84)),
+        float(GUI_CONFIG.get("historical_m4_path_visual_z_m", 0.88)),
+        float(GUI_CONFIG.get("lookahead_path_visual_z_m", 0.92)),
+    ]
+    candidate_paths = [
         evidence.selected_raw_fresh,
         evidence.method_candidates["M1_HISTORICAL_M4"],
         evidence.method_candidates["M3_LOOKAHEAD"],
     ]
     if ARGS.show_m2:
-        paths.append(evidence.method_candidates["M2_NO_DIRECTION"])
-    xy = np.vstack([path[:, :2] for path in paths])
-    candidate_xy = np.vstack(
-        [
-            evidence.selected_raw_fresh[:, :2],
-            evidence.method_candidates["M1_HISTORICAL_M4"][:, :2],
-            evidence.method_candidates["M3_LOOKAHEAD"][:, :2],
-        ]
-    )
-    minimum, maximum = np.min(xy, axis=0), np.max(xy, axis=0)
-    candidate_min, candidate_max = (
-        np.min(candidate_xy, axis=0),
-        np.max(candidate_xy, axis=0),
-    )
-    center = (minimum + maximum) / 2.0
-    all_extent = max(float(np.linalg.norm(maximum - minimum)), 0.50)
-    candidate_extent = max(
-        float(np.linalg.norm(candidate_max - candidate_min)), 0.35
-    )
+        candidate_paths.append(evidence.method_candidates["M2_NO_DIRECTION"])
+        candidate_z.append(float(GUI_CONFIG.get("no_direction_path_visual_z_m", 0.90)))
+    sectors = GUI_CONFIG.get("camera_case_view_sectors", {})
+    sector = sectors.get(evidence.case, {}) if isinstance(sectors, Mapping) else {}
+    if not isinstance(sector, Mapping):
+        raise ValueError(f"EXP-02D camera sector for {evidence.case} must be a mapping")
     fov_deg = float(GUI_CONFIG["camera_horizontal_fov_deg"])
     target_fraction = float(GUI_CONFIG["camera_geometry_fraction"])
-    if not 30.0 <= fov_deg <= 90.0 or not 0.65 <= target_fraction <= 0.80:
-        raise ValueError("EXP-02D GUI camera contract changed")
-    candidate_distance = (candidate_extent / 2.0) / math.tan(
-        math.radians(fov_deg * target_fraction / 2.0)
+    minimum_slant_distance = float(
+        GUI_CONFIG.get("camera_minimum_slant_distance_m", 1.80)
     )
-    all_fit_distance = (all_extent / 2.0) / math.tan(
-        math.radians(fov_deg * 0.90 / 2.0)
+    maximum_eye_height = float(
+        GUI_CONFIG.get("camera_indoor_max_eye_height_m", 1.85)
     )
-    elevation = math.radians(47.0)
-    height_min = float(GUI_CONFIG["camera_height_min_m"])
-    distance = max(
-        candidate_distance,
-        all_fit_distance,
-        height_min / math.sin(elevation),
-    )
-    motion = (
-        evidence.active_old.display_actual_poses[-1, :2]
-        - evidence.active_old.display_actual_poses[0, :2]
-    )
-    norm = float(np.linalg.norm(motion))
-    if norm <= 1e-9:
-        motion = np.array(
-            [
-                math.cos(float(evidence.active_old.boundary_pose_world_se2[2])),
-                math.sin(float(evidence.active_old.boundary_pose_world_se2[2])),
-            ],
-            dtype=np.float64,
+    plan = compute_exp02d_camera_plan(
+        evidence.active_old.old_world,
+        evidence.active_old.display_actual_poses,
+        candidate_paths,
+        horizontal_fov_deg=fov_deg,
+        candidate_geometry_fraction=target_fraction,
+        viewport_aspect_ratio=float(
+            GUI_CONFIG.get("camera_viewport_aspect_ratio", 1.60)
+        ),
+        minimum_slant_distance_m=minimum_slant_distance,
+        minimum_back_distance_m=float(
+            GUI_CONFIG.get("camera_minimum_back_distance_m", 1.55)
+        ),
+        eye_height_m=float(GUI_CONFIG.get("camera_eye_height_m", 1.45)),
+        minimum_eye_height_m=float(
+            GUI_CONFIG.get("camera_indoor_min_eye_height_m", 1.15)
+        ),
+        maximum_eye_height_m=maximum_eye_height,
+        target_z_m=float(GUI_CONFIG.get("camera_target_z_m", 0.25)),
+        lateral_offset_m=float(GUI_CONFIG.get("camera_lateral_offset_m", 0.25)),
+        azimuth_coarse_step_deg=float(
+            GUI_CONFIG.get("camera_azimuth_coarse_step_deg", 5.0)
+        ),
+        azimuth_fine_step_deg=float(
+            GUI_CONFIG.get("camera_azimuth_fine_step_deg", 0.25)
+        ),
+        containment_limit_ndc=float(
+            GUI_CONFIG.get("camera_containment_limit_ndc", 0.95)
+        ),
+        minimum_depth_m=float(GUI_CONFIG.get("camera_minimum_depth_m", 0.15)),
+        old_path_z_m=old_path_z,
+        actual_path_ground_z_m=actual_ground_z,
+        actual_path_visual_z_m=actual_visual_z,
+        candidate_path_z_m=candidate_z,
+        observation_pose_world_se2=(
+            evidence.active_old.observation_pose_world_se2
+        ),
+        observation_marker_visual_z_m=float(
+            GUI_CONFIG.get("observation_marker_visual_z_m", 0.88)
+        ),
+        preferred_eye_direction_xy=GUI_CONFIG.get(
+            "camera_preferred_eye_direction_world_xy", [1.0, -1.0]
         )
-    else:
-        motion /= norm
-    side = np.array([-motion[1], motion[0]], dtype=np.float64)
-    view_direction = 0.88 * side - 0.475 * motion
-    view_direction /= np.linalg.norm(view_direction)
-    horizontal_distance = distance * math.cos(elevation)
-    target_z = 0.20
-    eye_xy = center - horizontal_distance * view_direction
-    eye = [
-        float(eye_xy[0]),
-        float(eye_xy[1]),
-        float(target_z + distance * math.sin(elevation)),
-    ]
-    target = [float(center[0]), float(center[1]), target_z]
+        if "preferred_eye_direction_world_xy" not in sector
+        else sector["preferred_eye_direction_world_xy"],
+        preferred_eye_half_angle_deg=float(
+            sector.get(
+                "preferred_eye_half_angle_deg",
+                GUI_CONFIG.get("camera_preferred_eye_half_angle_deg", 90.0),
+            )
+        ),
+    )
+    eye = list(plan.eye_xyz)
+    target = list(plan.target_xyz)
+    stage = omni.usd.get_context().get_stage()
+    camera_path = "/World/Exp02DPresentationCamera"
+    camera = UsdGeom.Camera.Define(stage, camera_path)
+    camera_xform = UsdGeom.Xformable(camera.GetPrim())
+    camera_xform.AddTranslateOp().Set(Gf.Vec3d(0.0, 0.0, 0.0))
+    camera_xform.AddOrientOp().Set(Gf.Quatf(1.0, Gf.Vec3f(0.0, 0.0, 0.0)))
+    aperture = 20.955
+    vertical_aperture = aperture / plan.viewport_aspect_ratio
+    focal = aperture / (2.0 * math.tan(math.radians(fov_deg) / 2.0))
+    horizontal_set = camera.CreateHorizontalApertureAttr().Set(aperture)
+    vertical_set = camera.CreateVerticalApertureAttr().Set(vertical_aperture)
+    focal_set = camera.CreateFocalLengthAttr().Set(focal)
+    viewport = get_active_viewport()
+    if viewport is None:
+        raise RuntimeError("active Isaac viewport is unavailable for camera setup")
+    viewport.camera_path = camera.GetPath()
     set_camera_view(
         eye=eye,
         target=target,
-        camera_prim_path="/OmniverseKit_Persp",
+        camera_prim_path=camera_path,
+        viewport_api=viewport,
     )
-    stage = omni.usd.get_context().get_stage()
-    camera = UsdGeom.Camera(stage.GetPrimAtPath("/OmniverseKit_Persp"))
-    aperture = 20.955
-    focal = aperture / (2.0 * math.tan(math.radians(fov_deg) / 2.0))
-    camera.CreateHorizontalApertureAttr(aperture)
-    camera.CreateFocalLengthAttr(focal)
+    read_horizontal_aperture = float(camera.GetHorizontalApertureAttr().Get())
+    read_vertical_aperture = float(camera.GetVerticalApertureAttr().Get())
+    read_focal = float(camera.GetFocalLengthAttr().Get())
+    read_horizontal_fov = math.degrees(
+        2.0 * math.atan(read_horizontal_aperture / (2.0 * read_focal))
+    )
+    read_vertical_fov = math.degrees(
+        2.0 * math.atan(read_vertical_aperture / (2.0 * read_focal))
+    )
+    print(
+        "EXP02D_GUI_CAMERA_LENS="
+        f"authored={horizontal_set}/{vertical_set}/{focal_set} "
+        f"apertures={read_horizontal_aperture:.9f}/{read_vertical_aperture:.9f} "
+        f"focal_length={read_focal:.9f} "
+        f"horizontal_fov_deg={read_horizontal_fov:.9f} "
+        f"vertical_fov_deg={read_vertical_fov:.9f}",
+        flush=True,
+    )
+    if not math.isclose(
+        read_horizontal_fov, plan.horizontal_fov_deg, rel_tol=0.0, abs_tol=1e-5
+    ) or not math.isclose(
+        read_vertical_fov, plan.vertical_fov_deg, rel_tol=0.0, abs_tol=1e-5
+    ):
+        raise RuntimeError(
+            "USD camera lens readback differs from EXP-02D projection plan: "
+            f"{read_horizontal_fov}/{read_vertical_fov} deg"
+        )
+    camera_projection = {
+        "model": "USD_pinhole_fixed_apertures",
+        "camera_prim_path": camera_path,
+        "viewport_resolution_px": [1440, 900],
+        "horizontal_aperture": read_horizontal_aperture,
+        "vertical_aperture": read_vertical_aperture,
+        "focal_length": read_focal,
+        "derived_horizontal_fov_deg": read_horizontal_fov,
+        "derived_vertical_fov_deg": read_vertical_fov,
+        "matches_projection_plan": True,
+    }
     light = stage.GetPrimAtPath("/World/Exp02DSavedGuiKeyLight")
     if light.IsValid():
         UsdGeom.XformCommonAPI(light).SetTranslate(Gf.Vec3d(*eye))
-    candidate_fraction = (
-        math.degrees(2.0 * math.atan(candidate_extent / (2.0 * distance))) / fov_deg
-    )
-    all_fraction = (
-        math.degrees(2.0 * math.atan(all_extent / (2.0 * distance))) / fov_deg
-    )
+    fill_path = "/World/Exp02DSavedGuiFillLight"
+    fill = UsdLux.SphereLight.Define(stage, fill_path)
+    fill_intensity = float(GUI_CONFIG.get("camera_target_fill_intensity", 18000.0))
+    fill_height = float(GUI_CONFIG.get("camera_target_fill_height_m", 1.60))
+    fill.CreateIntensityAttr(fill_intensity)
+    fill.CreateRadiusAttr(0.40)
+    fill_xyz = [float(target[0]), float(target[1]), fill_height]
+    UsdGeom.XformCommonAPI(fill.GetPrim()).SetTranslate(Gf.Vec3d(*fill_xyz))
+    legacy_height_min = GUI_CONFIG.get("camera_height_min_m")
+    if legacy_height_min is not None:
+        print(
+            "EXP02D_GUI_CAMERA_CORRECTION="
+            "legacy 3-D minimum height is not applied because it placed the camera "
+            "above the Hospital ceiling; indoor eye-height cap is active",
+            flush=True,
+        )
     result = {
         "eye_xyz": eye,
         "target_xyz": target,
-        "horizontal_fov_deg": fov_deg,
-        "requested_candidate_geometry_fraction": target_fraction,
-        "estimated_candidate_geometry_fraction": candidate_fraction,
-        "estimated_all_geometry_fraction": all_fraction,
-        "all_bounds_xy_m": [minimum.tolist(), maximum.tolist()],
-        "candidate_bounds_xy_m": [candidate_min.tolist(), candidate_max.tolist()],
+        "horizontal_fov_deg": plan.horizontal_fov_deg,
+        "vertical_fov_deg": plan.vertical_fov_deg,
+        "viewport_aspect_ratio": plan.viewport_aspect_ratio,
+        "elevation_deg": plan.elevation_deg,
+        "slant_distance_m": plan.slant_distance_m,
+        "back_distance_m": plan.back_distance_m,
+        "lateral_offset_m": plan.lateral_offset_m,
+        "nominal_view_direction_xy": list(plan.nominal_view_direction_xy),
+        "eye_direction_xy": list(plan.eye_direction_xy),
+        "preferred_eye_direction_world_xy": (
+            None
+            if plan.preferred_eye_direction_xy is None
+            else list(plan.preferred_eye_direction_xy)
+        ),
+        "preferred_eye_half_angle_deg": plan.preferred_eye_half_angle_deg,
+        "case_view_sector": json.loads(json.dumps(sector, sort_keys=True)),
+        "azimuth_world_deg": plan.azimuth_world_deg,
+        "azimuth_offset_from_initial_heading_deg": (
+            plan.azimuth_offset_from_initial_heading_deg
+        ),
+        "azimuth_search_coarse_step_deg": plan.azimuth_search_coarse_step_deg,
+        "azimuth_search_fine_step_deg": plan.azimuth_search_fine_step_deg,
+        "azimuth_candidates_evaluated": plan.azimuth_candidates_evaluated,
+        "minimum_slant_distance_m": plan.minimum_slant_distance_m,
+        "minimum_back_distance_m": plan.minimum_back_distance_m,
+        "indoor_maximum_eye_height_m": plan.maximum_eye_height_m,
+        "containment_limit_ndc": plan.containment_limit_ndc,
+        "maximum_projected_ndc": plan.maximum_projected_ndc,
+        "minimum_projected_depth_m": plan.minimum_projected_depth_m,
+        "projection": camera_projection,
+        "requested_candidate_geometry_fraction": plan.requested_candidate_geometry_fraction,
+        "projected_candidate_geometry_fraction": plan.projected_candidate_geometry_fraction,
+        "projected_focus_geometry_fraction": plan.projected_focus_geometry_fraction,
+        "candidate_fraction_target_achieved": plan.candidate_fraction_target_achieved,
+        "full_context_and_jackal_contained": plan.full_context_and_jackal_contained,
+        "limiting_constraint": plan.limiting_constraint,
+        "candidate_bounds_xy_m": [list(row) for row in plan.candidate_bounds_xy],
+        "focus_bounds_xy_m": [list(row) for row in plan.focus_bounds_xy],
+        "drawn_bounds_xy_m": [list(row) for row in plan.drawn_bounds_xy],
+        "framing_scope": "saved active-OLD interval plus offline candidates",
+        "full_old_still_drawn": True,
+        "rendered_path_z_m": {
+            "old": plan.old_path_z_m,
+            "actual_ground": plan.actual_path_ground_z_m,
+            "actual_visual_duplicate": plan.actual_path_visual_z_m,
+            "observation_marker": plan.observation_marker_visual_z_m,
+            "candidate_path_order": [
+                "M0_RAW",
+                "M1_HISTORICAL_M4",
+                "M3_LOOKAHEAD",
+            ]
+            + (["M2_NO_DIRECTION"] if ARGS.show_m2 else []),
+            "candidate_paths_in_projection_order": list(plan.candidate_path_z_m),
+        },
+        "legacy_camera_height_min_m": legacy_height_min,
+        "legacy_height_min_applied": False,
+        "legacy_override_reason": (
+            "3-D minimum put the viewport above/inside the Hospital ceiling"
+            if legacy_height_min is not None
+            else None
+        ),
         "stable_elevated_oblique": True,
+        "spatial_scaling": False,
+        "target_fill_light": {
+            "prim_path": fill_path,
+            "intensity": fill_intensity,
+            "position_world_xyz": fill_xyz,
+            "visualization_only": True,
+        },
     }
     print("EXP02D_GUI_CAMERA=" + json.dumps(result, sort_keys=True), flush=True)
     return result
@@ -379,6 +564,28 @@ def actual_trail(evidence: Exp02DGuiCase, display) -> np.ndarray:
     return values
 
 
+def draw_observation_pin(draw, pose: np.ndarray, *, z: float, color, size: float) -> None:
+    """Draw one compact visual-only cross centered on the exact observation XY."""
+
+    x, y = (float(pose[0]), float(pose[1]))
+    arm = 0.025
+    starts = [
+        [x - arm, y, z],
+        [x, y - arm, z],
+    ]
+    ends = [
+        [x + arm, y, z],
+        [x, y + arm, z],
+    ]
+    draw.draw_lines(
+        starts,
+        ends,
+        [rgba(color)] * len(starts),
+        [max(4.0, 0.35 * float(size))] * len(starts),
+    )
+    draw.draw_points([[x, y, z]], [rgba(color)], [float(size)])
+
+
 def draw_scene(
     draw,
     evidence: Exp02DGuiCase,
@@ -389,6 +596,12 @@ def draw_scene(
     visual = GUI_CONFIG
     colors = visual["colors"]
     z = float(visual["z_offset_m"])
+    old_z = float(visual.get("old_path_visual_z_m", 0.78))
+    actual_visual_z = float(visual.get("actual_path_visual_z_m", 0.80))
+    raw_z = float(visual.get("raw_path_visual_z_m", 0.84))
+    m1_z = float(visual.get("historical_m4_path_visual_z_m", 0.88))
+    m2_z = float(visual.get("no_direction_path_visual_z_m", 0.90))
+    m3_z = float(visual.get("lookahead_path_visual_z_m", 0.92))
     width = float(visual["line_width"])
     marker = float(visual["marker_size"])
     draw.clear_lines()
@@ -396,7 +609,7 @@ def draw_scene(
     draw_polyline(
         draw,
         evidence.active_old.old_world,
-        z=z,
+        z=old_z,
         color=colors["old"],
         width=width,
     )
@@ -407,11 +620,21 @@ def draw_scene(
         color=colors["actual"],
         width=width + 1.0,
     )
+    # The final part of a short truthful centerline lies beneath the opaque
+    # Jackal.  Repeat the exact same XY as a thin elevated halo; no XY scaling
+    # or shift is applied, and the GUI/manifest label it visual-only.
+    draw_polyline(
+        draw,
+        actual_trail(evidence, display),
+        z=actual_visual_z,
+        color=colors["actual"],
+        width=max(3.0, 0.45 * width),
+    )
     if saved_time_s >= evidence.active_old.observation_sim_time_s - 1e-9:
-        draw_pose_points(
+        draw_observation_pin(
             draw,
-            evidence.active_old.observation_pose_world_se2[None, :],
-            z=z + 0.13,
+            evidence.active_old.observation_pose_world_se2,
+            z=float(visual.get("observation_marker_visual_z_m", 0.88)),
             color=colors["observation"],
             size=marker,
         )
@@ -421,32 +644,35 @@ def draw_scene(
     draw_polyline(
         draw,
         evidence.method_candidates["M0_RAW"],
-        z=z + 0.025,
+        z=raw_z,
         color=colors["raw"],
         width=width,
     )
     if mode == MODE_COMPARISON:
-        draw_polyline(
-            draw,
-            evidence.method_candidates["M1_HISTORICAL_M4"],
-            z=z + 0.060,
-            color=colors["historical_m4"],
-            width=width,
-        )
         if ARGS.show_m2:
             draw_polyline(
                 draw,
                 evidence.method_candidates["M2_NO_DIRECTION"],
-                z=z + 0.080,
+                z=m2_z,
                 color=colors["no_direction"],
                 width=width,
             )
+        # M1 is intentionally wider beneath the thinner M3 so both colors
+        # remain visible where paths overlap; neither path is shifted/scaled.
+        draw_polyline(
+            draw,
+            evidence.method_candidates["M1_HISTORICAL_M4"],
+            z=m1_z,
+            color=colors["historical_m4"],
+            width=width
+            * float(visual.get("historical_m4_line_width_scale", 1.50)),
+        )
         draw_polyline(
             draw,
             evidence.method_candidates["M3_LOOKAHEAD"],
-            z=z + 0.100,
+            z=m3_z,
             color=colors["lookahead"],
-            width=width,
+            width=width * float(visual.get("lookahead_line_width_scale", 0.75)),
         )
 
     point_rows = (
@@ -553,6 +779,7 @@ def create_panel(evidence: Exp02DGuiCase):
                 f"k={evidence.k_fresh}  q={evidence.q_fresh}"
             )
             ui.Label("BLUE OLD reference  |  GREEN saved OLD-active actual")
+            ui.Label("raised line heights repeat exact SE(2) XY (visibility only; no scaling)")
             ui.Label("GRAY RAW[k:]  |  ORANGE M1  |  MAGENTA M3" + ("  |  CYAN M2" if ARGS.show_m2 else ""))
             ui.Label("points: YELLOW observation | ORANGE P | RED B | GRAY F_k | MAGENTA F_q")
             ui.Label("arrows: ORANGE P->B INCOMING ACTUAL MOTION | MAGENTA B->F_q RAW FOLLOWER LOOKAHEAD")
@@ -607,10 +834,18 @@ def capture_view(
     display,
     mode: str,
     saved_time_s: float,
-) -> None:
+) -> dict[str, Any]:
     viewport = get_active_viewport()
     if viewport is None:
         raise RuntimeError("active Isaac viewport is unavailable")
+    # Make the requested saved pose/phase visible to Hydra before asking the
+    # asynchronous viewport capture service for an image.  Without this
+    # warm-up, a fast capture can save the immediately preceding animation
+    # frame (notably hiding the marker at exact t_obs).
+    for _ in range(3):
+        set_robot_pose(robot_transform, source_config, display.pose)
+        draw_scene(draw, EVIDENCE, display, mode, saved_time_s)
+        world.render()
     capture_viewport_to_file(viewport, file_path=str(path))
     started = time.monotonic()
     deadline = started + 20.0
@@ -625,9 +860,27 @@ def capture_view(
     if not path.is_file():
         raise RuntimeError(f"EXP-02D viewport capture failed: {path}")
     with Image.open(path) as image:
-        extrema = image.convert("RGB").getextrema()
-    if all(maximum == 0 for _, maximum in extrema):
-        raise RuntimeError(f"EXP-02D viewport capture is fully black: {path}")
+        rgb = np.asarray(image.convert("RGB"))
+    try:
+        content = validate_gui_capture_rgb(
+            rgb,
+            required_palette=GUI_CONFIG["colors"],
+            require_jackal=True,
+            minimum_palette_pixels=0,
+        )
+        counts = content["palette_pixel_counts"]
+        required = ["old", "actual"]
+        if saved_time_s >= EVIDENCE.active_old.observation_sim_time_s - 1e-9:
+            required.append("observation")
+        missing = [name for name in required if counts[name] < 16]
+        if missing:
+            raise ValueError(
+                "GUI capture lacks required visible path colors: "
+                + ", ".join(missing)
+            )
+        return content
+    except ValueError as error:
+        raise RuntimeError(f"EXP-02D viewport capture failed visibility check: {path}: {error}") from error
 
 
 def create_output_directory(run: Path, case: str) -> Path:
@@ -791,7 +1044,7 @@ def run_gui(evidence: Exp02DGuiCase) -> None:
             )
             path = output / str(pending["file"])
             pause_started = time.monotonic()
-            capture_view(
+            content_check = capture_view(
                 path,
                 world,
                 robot_transform,
@@ -809,6 +1062,7 @@ def run_gui(evidence: Exp02DGuiCase) -> None:
                 "saved_lower_index": capture_display.lower_index,
                 "saved_upper_index": capture_display.upper_index,
                 "display_interpolation_alpha": capture_display.alpha,
+                "viewport_content_check": content_check,
                 "sha256": sha256_file(path),
             }
             captures.append(row)
@@ -822,6 +1076,21 @@ def run_gui(evidence: Exp02DGuiCase) -> None:
         raise RuntimeError(
             f"EXP-02D GUI closed before all captures: {len(captures)}/{len(targets)}"
         )
+    raw_capture = next(row for row in captures if row["file"] == "03_at_B_raw.png")
+    comparison_capture = next(
+        row for row in captures if row["file"] == "04_method_comparison.png"
+    )
+    raw_palette = raw_capture["viewport_content_check"]["palette_pixel_counts"]
+    comparison_palette = comparison_capture["viewport_content_check"][
+        "palette_pixel_counts"
+    ]
+    for name in ("historical_m4", "lookahead"):
+        gained = int(comparison_palette[name]) - int(raw_palette[name])
+        if gained < 24:
+            raise RuntimeError(
+                f"EXP-02D final comparison does not visibly add {name}: "
+                f"palette gain {gained} < 24 pixels"
+            )
     active = evidence.active_old
     manifest = {
         "schema": "EXP02D_SavedSuccessFailureGuiCapture_v1",
@@ -833,6 +1102,7 @@ def run_gui(evidence: Exp02DGuiCase) -> None:
         "primary_result_manifest_sha256": sha256_file(
             evidence.run / "result_manifest.json"
         ),
+        "processing_provenance": gui_processing_provenance(evidence),
         "source_run": str(active.run),
         "source_transition": str(active.transition_directory),
         "source_sha256": dict(evidence.source_sha256),
@@ -880,6 +1150,17 @@ def run_gui(evidence: Exp02DGuiCase) -> None:
         "F_k_world_se2": evidence.f_k_world_se2.tolist(),
         "F_q_world_se2": evidence.f_q_world_se2.tolist(),
         "camera": camera,
+        "visualization": {
+            "trajectory_xy_spatial_scaling": False,
+            "rendered_path_z_m": camera["rendered_path_z_m"],
+            "all_path_z_lifts_are_visual_only": True,
+            "observation_marker_visual_z_m": float(
+                GUI_CONFIG.get("observation_marker_visual_z_m", 0.88)
+            ),
+            "observation_marker_z_lift_is_visual_only": True,
+            "actual_path_z_lift_is_visual_only": True,
+            "method_widths_preserve_overlap_without_xy_shift": True,
+        },
         "scene": scene,
         "captures": captures,
         "interpretation": evidence.interpretation,
@@ -938,5 +1219,9 @@ def main() -> None:
 
 try:
     main()
+except BaseException:
+    print("EXP02D_GUI_FATAL=see traceback below", file=sys.stderr, flush=True)
+    traceback.print_exc()
+    raise
 finally:
     APP.close()

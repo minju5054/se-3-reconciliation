@@ -1895,3 +1895,82 @@ This file is append-only. Add each completed task at the bottom.
   field order now have a direct regression assertion; input-reference latency fields are included
   in strict validation, and numeric closeness has regression coverage. A new protocol commit and
   clean worktree are required before the replacement one-time primary execution.
+
+## 2026-09-11T03:56:15+09:00 — EXP-02D valid primary, regime analysis, and final GUI evidence
+
+- **Valid replacement primary:** Committed and pushed the technical protocol correction as
+  `f25fda2877bcfda8a599b739c252ab174d62f5b9`, then generated exactly one replacement primary from
+  a clean detached worktree at that SHA. The canonical ignored result is
+  `data/exp02d_lookahead_direction/exp02d-lookahead-primary-20260910T171139Z/`. Strict validation
+  recomputed `959` `ELIGIBLE_MOVING`, `959` input-reconstruction-valid, `959` solver-valid, zero
+  input failures, zero undefined geometries, zero solver failures, `191` ordered-pair groups,
+  `12,489` hashed artifacts, and all `10` predeclared plots. The invalid attempt documented above
+  remains excluded from every result and claim.
+- **Follower oracle and frozen mechanisms:** Exact raw first-command reconstruction error was
+  `0.0` (tolerance `1e-12`). Observed distributions were
+  `k={0:823, 1:133, 2:1, 5:2}`, `q={2:818, 3:133, 4:1, 9:7}`, and
+  `q-k={2:951, 4:3, 7:1, 9:4}`. M0 is raw; M1 is unchanged historical
+  entry + `B->F_k` direction + yaw + fresh-motion; M2 removes only direction; M3 changes only the
+  direction target to fixed-raw-radius `B->F_q`. All factor weights are `1.0`, scales are
+  `0.10 m / 0.10 rad / 0.10`, and the existing right-local central-difference LM solver remains
+  frozen. `J_cmd` is evaluation-only and no candidate was physically executed.
+- **Aggregate command evidence:** Pair-balanced/transition-weighted mean `J_cmd` was
+  RAW `1.393617454/0.536701738`, M1 `0.917927768/0.633044601`, M2
+  `1.208490073/0.483677523`, and M3 `0.872420716/0.381861584`. Pair-cluster bootstrap differences
+  were M3-RAW `-0.521196739` (95% CI `[-0.761689581,-0.279911498]`), M3-M2
+  `-0.336069357` (`[-0.554956379,-0.109996964]`), and M3-M1 `-0.045507053`
+  (`[-0.150310910,0.066939864]`). This is development-corpus immediate-command evidence, not a
+  held-out generalization or navigation result.
+- **Success and negative evidence:** Among `685` raw-BENIGN transitions, M1/M2/M3 broke
+  `662/0/1`; M3 preserved `684` and satisfied `M4_FALSE_CORRECTION_RESCUED` in `661`. Among `96`
+  raw-CHALLENGING transitions, M3 rescued/improved/mixed/worsened `42/17/31/6`. M3 was lower than
+  RAW and M2 in the CHALLENGING pair-balanced bootstrap, but indistinguishable from M1; in the
+  INTERMEDIATE partition its frozen differences versus every comparator had CIs above zero. The
+  geometry-benefit association was modest (`r_pair=0.222586234`, 95% CI
+  `[0.092550510,0.342933471]`) and is not causal. R1 contained `807` transitions and concentrated
+  the false-correction rescues; R2 contained only `3` mixed turning cases; R3/R5/R6 contained
+  zero; R4 contained `2` high-deformation improvements. M1/M2 were nearly rigid under the
+  best-fit diagnostic, while M3 retained nonzero rigid-fit residual; none proves downstream intent
+  preservation or feasibility.
+- **Frozen representatives:** S1 is `v1:episode_000016_transition_00` (RAW/M1/M2/M3
+  `J=0.098274/0.879276/0.077402/0.079256`); S2 is
+  `v1:episode_000027_transition_01` (`5.645091/1.701474/5.502338/0.382505`); F1 is
+  `v1:episode_000044_transition_04` (`0.912903/9.854300/0.458701/9.886601`); and F2 remained
+  exactly `F2_NOT_AVAILABLE`. Criteria were not relaxed. F1 is an
+  `INTENT_CONFLICT_CANDIDATE`, not proof of instruction-intent violation.
+- **Final real Isaac GUI:** Opened and visually inspected all four captures for every available
+  representative. Final directories are `gui/S1_20260910T185116.949864Z/`,
+  `gui/S2_20260910T184930.187443Z/`, and `gui/F1_20260910T185024.163005Z/` under the canonical
+  primary. The official Jackal visibly changes pose in Phase A; at `B` it remains fixed while
+  offline RAW/M1/M3 are revealed. All telemetry rows carry the displayed current OLD, the displays
+  end at exact saved `B`, and no previous-chunk or post-switch actual row is present. Active
+  intervals/path lengths are S1 `[17.0500008892,18.1333342791] s` / `0.388668168 m`, S2
+  `[18.1333342791,19.6333343573] s` / `0.560807006 m`, and F1
+  `[22.1333344877,23.5333345607] s` / `0.227760859 m`.
+- **GUI framing and provenance:** A dedicated 55-degree USD camera now read-backs exact
+  `54.999999319/36.045051678 deg` horizontal/vertical FOV. Deterministic azimuth search, explicit
+  Hospital open-view sectors, a visual-only fill light, and containment of every path, marker, and
+  swept Jackal proxy avoid the former ceiling/rack views. Candidate fractions are S1 `0.679339`,
+  S2 `0.350917`, and F1 `0.090259`; S1 meets the requested range, while S2 prioritizes an
+  unobstructed scene and F1 is limited by its roughly `0.09 m` RAW/M1 geometry. No XY scaling was
+  applied. Raised line/marker Z and lighting are presentation-only. Every manifest stores PNG,
+  source/result, GUI runner/helper/launcher, quantitative-config, and GUI-render-config hashes.
+- **Corrected collection viewer:** Reconfirmed the separate v1
+  `episode_000007/transition_03`, current OLD `chunk_03`, output
+  `data/data02_high_motion_demo/20260910T161500.312194Z/`: activation/observation/P/B are
+  `20.1333343834/20.7833344173/21.6333344616/21.7333344668 s`; all `96` telemetry rows carry the
+  current OLD ID, the activation-boundary pose is prepended separately, active path/net distance is
+  `0.580704094/0.580703864 m`, and neither previous nor post-switch actual motion is displayed.
+- **Final validation:** Full pytest passed `447`; compileall over `src scripts tests`, launcher
+  `bash -n`, and `git diff --check` passed. Strict EXP-02D, DATA-02 v1 (`84/480`), DATA-02 v2
+  (`168/999`), and EXP-02A validators passed. EXP-02C was regenerated successfully from a
+  read-only canonical copy in `/tmp` with all `13` plots, leaving its source untouched. DATA-02
+  validators rechecked all canonical hashes; previously recorded v1/v2 full-tree digests remain
+  `b7041d4e42bfec2530eb6b9b0fd57e6e5cbe00ec5ad8818ca36f6897b100923c` and
+  `ae22a160f94284d094efb5e1102d023300be77b3f42c767330e0614807c59462`.
+- **Integrity and boundary:** Historical M4 production code/output and EXP-02C evidence remain
+  unchanged. DATA-02's exact decision remains `DATA02_COMBINED_DIVERSITY_INSUFFICIENT`; EXP-02D is
+  development-only. It cannot establish physical Jackal improvement, feasibility, obstacle or
+  instruction success, correspondence quality, or generalization. The user's unrelated changes to
+  `configs/stage0_jackal_controller_validation.yaml` and
+  `configs/stage0_lightnav_single_chunk.yaml` remain untouched and unstaged.
