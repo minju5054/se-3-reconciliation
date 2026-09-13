@@ -2282,3 +2282,71 @@ This file is append-only. Add each completed task at the bottom.
   → **503 passed in 20.23 s**. Compileall, launcher bash syntax, report links and diff
   whitespace checks passed. Added Korean matched-video report and links from prior report
   and README. All raw data, frames, movies, dependencies remain outside Git.
+
+## 2026-09-13 — search for an exclusive Exp02D success on a curved path
+
+- **Request/scope:** User requested a non-straight episode where RAW and historical
+  objective fail but Exp02D succeeds, shown in GUI. Started on main at `543245b`, inspected
+  status/remotes and preserved both unrelated Stage0 configuration edits. Kept frozen
+  Stage0E tracking criteria; explicitly distinguished goal arrival from tracking PASS.
+  Communicated 30-degree/0.5-m search thresholds before physical execution.
+- **Predeclared search:** `configs/exp02d_turning_search.yaml`: M3 reference arc >= .5 m,
+  unwrapped waypoint-yaw excursion >=30 degrees, XY tangent-direction excursion >=30
+  degrees using reference segments >=.02 m. Final M3 actual arc >=.5 m and yaw excursion
+  >=30 degrees. Of the 959 saved transitions, 103 met yaw/arc and 87 also had geometric
+  curvature. Rank by descending min(J_RAW,J_M1)-J_M3 then ID; execute ALL 87 with all
+  three methods, not just the best-looking command-score cases. One-repeat screening is
+  explicitly provisional; same numerical gates, repetition/required-goal count 1. Confirm
+  exclusive passes under the original 3-repeat gates; prefer missing-goal baselines.
+- **Implementation/provenance:** New hash-verified arbitrary-transition archive leaves
+  frozen representatives untouched and matches their candidate arrays/source hashes exactly
+  for S1/S2/F1. New search runner uses the unchanged Hospital runtime, current calibrated
+  controller/follower and saved candidates; no optimization/inference/tuning. Same saved B,
+  world XY metres/CCW yaw radians, 1 s settling, 1/60 physics and .1 s control, goal/18 s
+  timeout, prior online velocity/PI/contact history reset. Scene construction stays at the
+  historical S1 B and is recorded separately from trial B. Config, all 959 inclusion rows,
+  ordering, code/source hashes, timestamps, raw references/telemetry and derived outcomes
+  are preserved in new output. No raw or prior result was overwritten.
+- **Executed:** `./scripts/isaac/run_exp02d_turning_search.sh --run-id
+  exp02d-turning-search-20260913`; output `data/exp02d_turning_search/exp02d-turning-search-20260913/`,
+  log `/tmp/exp02d-turning-search.log` has COMPLETE. 261 screening trials plus 9 confirmation
+  trials. Screening tracking-pass counts RAW/M1/M3 = 40/58/39; own-endpoint arrival counts
+  70/66/67. These describe a selected development subset, not unbiased success rates.
+- **Selected:** `v1:episode_000016_transition_02`, GUI alias R1 in `confirmation_00`. This
+  differs from earlier straight S1 transition_00. All methods reached their own endpoint
+  3/3 times. RAW yaw RMS .10054325398 exceeds the unchanged .1-rad gate by only .000543
+  rad (~.031 degrees); M1 .85255364055 also fails yaw. M3 .09244573229 passes all gates.
+  Position RMS RAW/M1/M3 = .01502691/.09531314/.01341358 m; durations 4.7/13.2/4.1 s.
+  M3 moves 1.1023 m with net yaw change 58.27 degrees, excursion 61.01 degrees; its
+  reference tangent excursion is 50.88 degrees. Values repeat to reported precision.
+  Report RAW's borderline failure prominently; this is not an exclusive goal-arrival
+  rescue or strong general superiority over RAW. M1 travels 2.6418 m with 184.99-degree
+  yaw excursion before settling at the endpoint.
+- **Excluded alternative:** `v1:episode_000025_transition_02` had only M3 reach its own
+  endpoint in screening, but M3 yaw RMS .3350 failed the quality gate. It was not relabeled
+  as strict success or promoted to confirmation. All screening outcomes remain available.
+- **GUI/video:** Extended the existing recorder to explicit protocol case labels and
+  frozen arbitrary transition IDs, recorded scene-initialization pose and fallback indoor
+  camera settings; legacy S1/S2/F1 loading remains unchanged. Added primary yaw RMS and
+  gate to the GUI, showing RAW .1005 versus .1000 rather than just a FAIL label. Executed
+  `--run .../confirmation_00 --cases R1 --methods M0_RAW M1_HISTORICAL_M4 M3_LOOKAHEAD`.
+  `video_gui/2026-09-13T090619.141155_0000` records 95/265/83 real sampled frames; all three
+  complete pose arrays exactly match confirmation repetition 00. Visually reviewed raw
+  GUI and decoded samples at movie 3/9/18 s: same case/time/camera, actual curved motion,
+  method labels, yaw gate and completed-state holds are visible.
+- **Movie delivery:** Added optional `--three-way` to the existing validated encoder.
+  `confirmation_00/movies/` contains three individual, two paired and one RAW/M1/M3
+  side-by-side MP4 plus hashes/commands. Same 20-Hz physical sampling, 2x slowdown, 30-fps
+  repeated frames, no pose interpolation, labeled end cards, whole-window resize. The
+  three-way movie is 3840x778, 28.4 s / 852 decoded frames. All six videos decoded cleanly.
+  Loaded the triple in Totem and issued playback; no screenshots are substituted for the
+  requested driving video. New detailed Korean report links all movies and qualifications.
+- **Validation:** New read-only audit rechecked all 261 screening trials, references,
+  raw bytes, geometry, source hashes, gate outputs, search ordering and selection, plus
+  the 9 confirmation trials. Primary execution code hashes unchanged after search/GUI.
+  `audit/validation.json` records the audit and movie verification. Synthetic tests cover
+  +/-pi yaw handling, world rigid-transform invariance, rejecting a straight reference
+  with changing yaw, and excluding rotation without travel; no synthetic evidence claim.
+  Targeted suite 62 passed; final whole suite **506 passed in 20.22 s** with local sockets
+  allowed and unrelated ROS pytest plugin autoload disabled. Compileall, bash syntax,
+  report links and diff checks passed. All datasets/frames/movies remain ignored by Git.

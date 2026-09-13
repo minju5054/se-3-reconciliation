@@ -24,7 +24,7 @@ from exp02d_physical_execution import resolve, utc, write_json
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--run", type=Path, required=True)
-parser.add_argument("--cases", nargs="+", choices=["S1", "S2", "F1"], default=["S1", "S2", "F1"])
+parser.add_argument("--cases", nargs="+", help="case labels from the supplied physical protocol")
 parser.add_argument("--methods", nargs="+", choices=["M0_RAW", "M1_HISTORICAL_M4", "M3_LOOKAHEAD"],
                     default=["M1_HISTORICAL_M4", "M3_LOOKAHEAD"])
 parser.add_argument("--stride", type=int, default=3, help="one actual frame per N physics steps")
@@ -37,7 +37,15 @@ config = protocol["config"]
 for name, digest in protocol["code_sha256"].items():
     if sha256_file(ROOT / name) != digest:
         raise ValueError(f"primary execution code changed: {name}")
-cases = {case: load_exp02d_gui_case(protocol["source_run"], case) for case in config["cases"]}
+if "transition_ids" in config:
+    from reconciliation.exp02d_turning_search import FrozenArchive
+    archive = FrozenArchive(protocol["source_run"])
+    cases = {case: archive.load(config["transition_ids"][case], case) for case in config["cases"]}
+else:
+    cases = {case: load_exp02d_gui_case(protocol["source_run"], case) for case in config["cases"]}
+args.cases = args.cases or config["cases"]
+if not args.cases or any(case not in cases for case in args.cases):
+    raise ValueError("requested video case is not in the physical protocol")
 for case, evidence in cases.items():
     expected = protocol["input_hashes"][case]
     if dict(evidence.source_sha256) != expected["source"] or dict(evidence.result_sha256) != expected["result"]:
@@ -87,7 +95,12 @@ class RecordingRuntime(HospitalExecutionRuntime):
 
 def camera_for(runtime, evidence, directory):
     source = resolve(config["gui"]["camera_config"])
-    view = yaml.safe_load(source.read_text())["gui"]["camera_case_view_sectors"][evidence.case]
+    gui = yaml.safe_load(source.read_text())["gui"]
+    view = config["gui"].get("camera_case_view_sectors", {}).get(evidence.case)
+    if view is None:
+        view = gui["camera_case_view_sectors"].get(evidence.case, {
+            "preferred_eye_direction_world_xy": gui["camera_preferred_eye_direction_world_xy"],
+            "preferred_eye_half_angle_deg": gui["camera_preferred_eye_half_angle_deg"]})
     actual = [np.load(run / "trials" / evidence.case / method /
                      "repetition_00/raw/actual_trajectory.npy", allow_pickle=False) for method in config["methods"]]
     references = [evidence.method_candidates[method] for method in config["methods"]]
@@ -127,7 +140,8 @@ def main():
     output.mkdir(parents=True, exist_ok=False)
     source = protocol["source_system"]
     runtime = RecordingRuntime(APP, source, protocol["candidate"],
-        cases[config["cases"][0]].active_old.boundary_pose_world_se2, render=True)
+        np.asarray(protocol.get("scene_initialization_pose_world_se2",
+            cases[config["cases"][0]].active_old.boundary_pose_world_se2)), render=True)
     runtime.world.pause()
     loop, follower = loop_configs(source, config["maximum_duration_s"])
     draw = _debug_draw.acquire_debug_draw_interface()
@@ -137,7 +151,7 @@ def main():
             ui.Label("SAME EPISODE / SAME CONTROLLER", height=35, style={"font_size": 19})
             case_label = ui.Label("", height=48, word_wrap=True, style={"font_size": 17})
             method_label = ui.Label("", height=55, word_wrap=True, style={"font_size": 22})
-            primary_label = ui.Label("", height=95, word_wrap=True, style={"font_size": 16})
+            primary_label = ui.Label("", height=120, word_wrap=True, style={"font_size": 16})
             live_label = ui.Label("", height=150, word_wrap=True, style={"font_size": 17})
             ui.Label("ORANGE: historical objective path\nMAGENTA: Exp02D path\nGREEN: live measured motion\nGRAY: raw FRESH / YELLOW: start B",
                      height=100, word_wrap=True, style={"font_size": 16})
@@ -183,6 +197,8 @@ def main():
             method_label.text = names[method]
             primary_label.text = (f"Primary tracking: {primary['physical_tracking_status']}\n"
                 f"Goal: {primary['goal_successes']}/3\n"
+                f"Yaw RMS: {primary['repeatability']['yaw_rmse_rad']['mean']:.4f} rad\n"
+                f"Yaw RMS gate: < {protocol['acceptance_criteria']['yaw_rmse_rad']:.4f} rad\n"
                 f"Failed gates: {', '.join(primary['failed_checks']) or 'none'}")
             def frame(rt):
                 t = float(rt.world.current_time) - rt.recording_origin

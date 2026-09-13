@@ -35,6 +35,7 @@ def main():
     parser.add_argument("--recordings", nargs="+", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--ffmpeg", type=Path, required=True)
+    parser.add_argument("--three-way", action="store_true", help="also place RAW, historical and Exp02D side by side")
     args = parser.parse_args()
     ffmpeg = str(args.ffmpeg.resolve())
     output = args.output.resolve()
@@ -122,6 +123,20 @@ def main():
             subprocess.run([ffmpeg, "-v", "error", "-i", str(path), "-f", "null", "-"], check=True)
             manifest["comparisons"][path.name] = {"left": left, "right": right,
                 "sha256": sha256_file(path), "command": command, "synchronized_at": "settled B, simulation t=0"}
+        triplet = ["M0_RAW", "M1_HISTORICAL_M4", "M3_LOOKAHEAD"]
+        if args.three_way and all(method in selected for method in triplet):
+            path = output / f"{case}_RAW_BEFORE_Exp02D.mp4"
+            command = [ffmpeg, "-hide_banner", "-loglevel", "error", "-n"]
+            for method in triplet:
+                command.extend(["-i", str(output / f"{case}_{method}.mp4")])
+            command.extend(["-filter_complex",
+                "[0:v]scale=1280:-2[a];[1:v]scale=1280:-2[b];[2:v]scale=1280:-2[c];[a][b][c]hstack=inputs=3[v]",
+                "-map", "[v]", "-c:v", "libx264", "-preset", "fast", "-crf", "18",
+                "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(path)])
+            subprocess.run(command, check=True)
+            subprocess.run([ffmpeg, "-v", "error", "-i", str(path), "-f", "null", "-"], check=True)
+            manifest["comparisons"][path.name] = {"left_to_right": triplet, "sha256": sha256_file(path),
+                "command": command, "synchronized_at": "settled B, simulation t=0"}
         print(f"ENCODED_CASE={case}", flush=True)
     write_json(output / "manifest.json", manifest)
     print(f"OBJECTIVE_MOVIES_READY={output}", flush=True)

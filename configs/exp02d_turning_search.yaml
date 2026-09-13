@@ -1,0 +1,23 @@
+experiment: EXP02D_TURNING_EXCLUSIVE_SUCCESS_SEARCH
+source_run: data/exp02d_lookahead_direction/exp02d-lookahead-primary-20260910T171139Z
+output_root: data/exp02d_turning_search
+stage0e_config: configs/stage0_closed_loop_execution_validation.yaml
+methods: [M0_RAW, M1_HISTORICAL_M4, M3_LOOKAHEAD]
+maximum_duration_s: 18.0
+mode: calibrated
+minimum_reference_yaw_excursion_deg: 30.0
+minimum_reference_tangent_excursion_deg: 30.0
+minimum_reference_arc_m: 0.5
+minimum_actual_yaw_excursion_deg: 30.0
+minimum_actual_arc_m: 0.5
+tangent_minimum_segment_m: 0.02
+scan_repetitions: 1
+confirmation_repetitions: 3
+ranking: descending min(J_RAW,J_M1)-J_M3 then lexicographic transition ID
+selection: M3 passes unchanged tracking gates and actual turning; both baselines fail; prefer both baselines missing goal, then lexicographic ID
+scan_scope: all geometry-eligible saved candidates, all three methods, no objective changes
+claim_scope: post-hoc development-example search, not unbiased success-rate evaluation
+scene_initialization_case: S1
+gui:
+  camera_config: configs/exp02d_lookahead_direction.yaml
+  line_height_m: 0.035
