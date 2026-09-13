@@ -2394,3 +2394,44 @@ This file is append-only. Add each completed task at the bottom.
   `env PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q tests/test_trajectory_follower.py tests/test_closed_loop_execution_validation.py tests/test_exp02b_diagnosis.py`.
   No implementation changed; new diagnostic replay uses real recorded poses, not synthetic
   experimental evidence. Reviewed diff and whitespace before focused documentation commit.
+
+## 2026-09-13 — display OLD/FRESH context in objective execution videos
+
+- User requested OLD/FRESH context in the GUI and asked why historical and Exp02D objectives
+  were designed. Started at `1e89d4c`, read AGENTS.md, checked main/status/remotes, and retained
+  the unrelated camera/playback config edits. No controller, objective, solver, or LightNav
+  modification, source overwrite, new correspondence logic, or new optimization.
+- Existing real-physics recorder now draws blue planned OLD, cyan static recorded actual
+  OLD, gray full original FRESH, historical orange / Exp02D magenta candidates, green live
+  post-reset motion, and yellow B. Camera bounds include all context. Added per-method purpose,
+  recorded OLD interval, FRESH observation/readiness and switch/reset labels. Static OLD history
+  is explicitly distinguished from the new live B-reset run; no invented connecting segment,
+  online continuity, historical-velocity restoration, XY/yaw transform or resampling is claimed.
+- New per-case `transition_context.json` records the exact displayed arrays, P/B, source and
+  result hashes, observation/readiness/execution event times, prepended activation-event semantics
+  from the existing loader and visual-only Z convention. GUI source hashing remains in provenance.
+- Executed unchanged physics/controller on R1 `v1:episode_000016_transition_02` with all three
+  methods using `./scripts/isaac/run_exp02d_objective_video_gui.sh --run
+  data/exp02d_turning_search/exp02d-turning-search-20260913/confirmation_00 --cases R1
+  --methods M0_RAW M1_HISTORICAL_M4 M3_LOOKAHEAD`. Log `/tmp/exp02d-old-fresh-context-gui.log`
+  reports all three COMPLETE and READY. New recording is
+  `confirmation_00/video_gui/2026-09-13T095009.381082_0000/`; 95/265/83 frames recorded.
+  Complete measured pose arrays for all methods exactly match primary repetition 00.
+- Used existing encoder with that `--recordings`, `--output .../confirmation_00/movies_old_fresh_context`,
+  `--ffmpeg /tmp/exp02d-video-tools/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2 --three-way`.
+  Six movies preserve 2x slow motion, t=0 alignment, completed-run end cards and no pose
+  interpolation. All decoded cleanly; hashes and report links verified. Reviewed RAW t=1 s,
+  M1 t=3 s raw GUI frames and decoded paired movie t=6 s (physical t=3 s): OLD/FRESH and B,
+  candidate curves, live motion, purpose and tracking gate labels visible.
+- Read-only checks verified display OLD/FRESH/history/P/B arrays and saved times against the
+  hash-verified original source and confirmed GUI code hashes unchanged since recording.
+  Updated curved-case report with new videos and the common E/Y/F versus changed D semantics:
+  historical B-to-corrected-entry versus Exp02D B-to-corrected-lookahead; measured P-to-B
+  incoming motion is fixed. Clarified that J_cmd is an evaluation metric, not a direct cost,
+  and whole-run tracking PASS is distinct from transition continuity / obstacle safety.
+- Validation: compileall, launcher bash syntax, diff checks and **57 passed in 2.39 s** using
+  `env PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q tests/test_exp02d_gui.py
+  tests/test_exp02d_execution.py tests/test_exp02d_turning_search.py tests/test_video_timing.py
+  tests/test_physics_display.py`. An initial command named a nonexistent additional test file
+  and ran no tests; corrected to the existing relevant suite. No new SE(2) operation or timing
+  convention was introduced. Raw/derived recordings and movies remain ignored by Git.

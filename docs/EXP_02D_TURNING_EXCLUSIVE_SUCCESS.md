@@ -10,6 +10,8 @@ RAW/M1/M3를 3회씩 실행한 결과, 기존 추종 판정에서 M3만 PASS였�
 
 ## 실제 GUI 주행 영상
 
+- [OLD/FRESH 표시 추가: 이전 objective / Exp02D 비교](../data/exp02d_turning_search/exp02d-turning-search-20260913/confirmation_00/movies_old_fresh_context/R1_BEFORE_AFTER.mp4)
+- [OLD/FRESH 표시 추가: RAW / 이전 objective / Exp02D 세 방법 비교](../data/exp02d_turning_search/exp02d-turning-search-20260913/confirmation_00/movies_old_fresh_context/R1_RAW_BEFORE_Exp02D.mp4)
 - [세 방법 동시 비교: RAW / 이전 objective / Exp02D](../data/exp02d_turning_search/exp02d-turning-search-20260913/confirmation_00/movies/R1_RAW_BEFORE_Exp02D.mp4)
 - [이전 objective / Exp02D 비교](../data/exp02d_turning_search/exp02d-turning-search-20260913/confirmation_00/movies/R1_BEFORE_AFTER.mp4)
 - [RAW / Exp02D 비교](../data/exp02d_turning_search/exp02d-turning-search-20260913/confirmation_00/movies/R1_RAW_Exp02D.mp4)
@@ -164,3 +166,50 @@ terminal yaw에 들어가 4.1초에 종료했다. M1/M3의 요청된 끝점 yaw 
 기존 [controller 효과 검사](CURRENT_CONTROLLER_EFFECT_CHECK.md)에서도 제자리 회전의
 과도 응답과 측정 위치 이동이 남아 있었다. 이번 M3 통과로 controller 전체 검증 실패를
 뒤집지 않는다. 관련 기존 단위 테스트 21개가 통과했다.
+
+## OLD/FRESH를 함께 표시한 GUI와 objective의 목적
+
+2026-09-13 후속 GUI는 파랑 planned OLD, 청록 saved actual OLD, 회색 full raw FRESH,
+주황 historical objective 후보, 자홍 Exp02D 후보, 초록 live measured motion과 노랑 B를
+함께 표시한다. 현재 실행하는 기준 경로만 굵게 그린다. 각 방법의 목적과 OLD 활성화,
+FRESH 관측/readiness 및 B 전환 시각을 표시하며, 모든 표시 경로를 포함해 카메라를 잡는다.
+
+청록 선은 원래 온라인 수집에서 OLD가 활성화된 동안의 실제 주행 **정적 문맥**이다.
+초록 선은 같은 B에서 reset 후 새로 실행한 물리 주행이다. 이 두 선을 동일한 연속
+온라인 실행으로 제시하지 않는다. 속도·PI·접촉 이력의 reset 조건은 유지한다.
+원본 world XY/yaw를 그대로 표시하고 선의 Z만 시각화 높이에 둔다. OLD 끝점을 B에
+붙이거나 FRESH를 이동·회전하여 시각적으로 연결하지 않는다. 원본 경로와 후보 및
+좌표/시간/hash는 각 녹화의 `R1/transition_context.json`에 기록한다.
+
+두 objective는 OLD를 따라오던 움직임에서 선택된 FRESH suffix로 전환할 때 생기는
+불연속을 줄이면서 FRESH를 보존하려는 목적을 공유한다. OLD 계획과 실제 P/B는 고정하고
+FRESH[k:]의 후보 노드만 최적화한다. 이미 지나온 실제 움직임 P→B가 연결의 기준이며,
+planned OLD의 마지막 점과 FRESH의 첫 점을 무조건 겹치는 문제가 아니다.
+
+| 항목 | 이전 objective M1 | Exp02D M3 |
+|---|---|---|
+| 진입점 보존 E | 보정 진입 pose를 원본 FRESH 진입 pose에 가깝게 유지 | 동일 |
+| 진행 방향 D | B→보정 진입점 방향을 실제 OLD 진입 방향 P→B와 맞춤 | B→보정 lookahead 지점 방향을 P→B와 맞춤 |
+| yaw 변화 Y | B→보정 진입점 yaw 변화가 직전 P→B yaw 변화와 가까워지도록 함 | 동일 |
+| FRESH 상대 운동 F | 연속 waypoint 사이의 상대 이동/회전을 원본과 가깝게 유지 | 동일 |
+
+방향 residual에는 고정된 원본 B→대상점 거리도 사용하므로 순수 각도 항만은 아니다.
+Exp02D의 lookahead는 동결된 follower가 raw FRESH에서 선택한 약 0.25 m 앞의 waypoint다.
+진입점은 뒤나 옆에 있어도 실제 controller는 앞쪽 지점을 보고 정상적으로 전진할 수
+있다. 이전 D가 그런 진입점을 문제로 간주해 과하게 보정한 EXP02C 진단 때문에, M3는
+방향을 검사하는 대상을 실제 follower의 lookahead로 바꿨다. 나머지 factor/가중치/solver는
+동일하다. 자세한 수식은 [Exp02D 정의](EXP_02D_LOOKAHEAD_DIRECTION.md)에 있다.
+
+`J_cmd`는 B에서 OLD 마지막 명령과 새 첫 명령의 차이를 측정하는 평가 지표이며,
+objective에 직접 추가한 명령 오차 항은 아니다. 물리 주행의 전체 추종 PASS는 별도
+후속 검사다. 이 둘을 구분해야 연결부 개선이라는 연구 질문과 GUI를 일치시킬 수 있다.
+현재 objective에는 장애물 거리나 충돌 제약이 없고, 원본 FRESH 보존도 soft penalty다.
+따라서 연결 방향의 개선만으로 안전 주행이나 최종 목적지 성공을 보장하지 않는다.
+
+새 녹화는 `confirmation_00/video_gui/2026-09-13T095009.381082_0000/`, 새 영상은
+`confirmation_00/movies_old_fresh_context/`에 보존했다. 기존 GUI 실행 명령을 그대로
+사용하고 encoder의 `--recordings`를 위 새 녹화 경로, `--output`을 위 새 영상 경로로
+지정했다. RAW/M1/M3 각각 95/265/83프레임을 저장했고 세 방법의 전체 실제 pose 배열은
+기존 정량 실행과 정확히 일치했다. OLD/FRESH/실제 OLD 표시 배열과 시각도 원본과 정확히
+일치함을 검사했다. 관련 GUI/실행/회전/영상 시간 테스트는 57개 통과했다. 여섯 MP4 전체를
+디코딩하고 원시 GUI 및 비교 영상의 시각적 표본을 검토했다.

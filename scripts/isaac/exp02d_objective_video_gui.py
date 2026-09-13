@@ -105,6 +105,8 @@ def camera_for(runtime, evidence, directory):
                      "repetition_00/raw/actual_trajectory.npy", allow_pickle=False) for method in config["methods"]]
     references = [evidence.method_candidates[method] for method in config["methods"]]
     z = float(config["gui"]["line_height_m"])
+    references = [evidence.active_old.fresh_world, *references]
+    actual = [evidence.active_old.display_actual_poses, *actual]
     plan = compute_exp02d_camera_plan(evidence.active_old.old_world, np.vstack(actual), references,
         viewport_aspect_ratio=1.60, old_path_z_m=z, actual_path_visual_z_m=z,
         candidate_path_z_m=[z] * len(references),
@@ -133,6 +135,23 @@ def camera_for(runtime, evidence, directory):
     write_json(directory / "camera.json", {"plan": asdict(plan), "camera_config_sha256": sha256_file(source),
                "coordinate_transform": "identity world XY metres; visual line Z only", "line_height_m": z,
                "identical_camera_for_all_methods_in_case": True})
+    old = evidence.active_old
+    write_json(directory / "transition_context.json", {
+        "corpus_transition_id": evidence.corpus_transition_id,
+        "source_sha256": dict(evidence.source_sha256), "result_sha256": dict(evidence.result_sha256),
+        "coordinate_frame": "saved Isaac world XY metres / +Z CCW yaw radians; identity XY/yaw; line Z is visual only",
+        "planned_old_world_se2": old.old_world.tolist(),
+        "saved_actual_old_world_se2": old.display_actual_poses.tolist(),
+        "saved_actual_old_sim_times_s": old.display_sim_times_s.tolist(),
+        "full_raw_fresh_world_se2": old.fresh_world.tolist(),
+        "P_world_se2": old.p_pose_world_se2.tolist(), "B_world_se2": old.boundary_pose_world_se2.tolist(),
+        "activation_sim_time_s": old.activation_sim_time_s,
+        "activation_boundary_prepended": old.activation_boundary_prepended,
+        "activation_source": old.activation_source,
+        "observation_sim_time_s": old.observation_sim_time_s,
+        "readiness_sim_time_s": old.model_ready_sim_time_s, "switch_sim_time_s": old.switch_sim_time_s,
+        "display_semantics": "OLD planned path and actual OLD history are static saved context; only post-reset motion is live physics; no synthetic bridge or continuous online replay",
+    })
 
 
 def main():
@@ -145,20 +164,20 @@ def main():
     runtime.world.pause()
     loop, follower = loop_configs(source, config["maximum_duration_s"])
     draw = _debug_draw.acquire_debug_draw_interface()
-    panel = ui.Window("EXP02D matched objective recording", width=530, height=850)
+    panel = ui.Window("EXP02D OLD to FRESH comparison", width=550, height=950)
     with panel.frame:
-        with ui.VStack(spacing=7, style={"margin": 12}):
-            ui.Label("SAME EPISODE / SAME CONTROLLER", height=35, style={"font_size": 19})
+        with ui.VStack(spacing=5, style={"margin": 12}):
+            ui.Label("OLD -> FRESH | SAME CONTROLLER", height=32, style={"font_size": 19})
             case_label = ui.Label("", height=48, word_wrap=True, style={"font_size": 17})
-            method_label = ui.Label("", height=55, word_wrap=True, style={"font_size": 22})
-            primary_label = ui.Label("", height=120, word_wrap=True, style={"font_size": 16})
-            live_label = ui.Label("", height=150, word_wrap=True, style={"font_size": 17})
-            ui.Label("ORANGE: historical objective path\nMAGENTA: Exp02D path\nGREEN: live measured motion\nGRAY: raw FRESH / YELLOW: start B",
-                     height=100, word_wrap=True, style={"font_size": 16})
-            ui.Label("Real physics, recorded at sampled steps.\nNo saved-pose playback or interpolation.\nVideo playback is 2x slow motion.",
-                     height=75, word_wrap=True)
-            ui.Label("Reset at saved B. Prior velocity and PI reset.\nPASS/FAIL: tracking gates, not navigation.\nFinal frame is held after each run ends.",
-                     height=75, word_wrap=True)
+            method_label = ui.Label("", height=50, word_wrap=True, style={"font_size": 22})
+            objective_label = ui.Label("", height=54, word_wrap=True, style={"font_size": 16})
+            ui.Label("BLUE: planned OLD\nCYAN: recorded actual OLD (static)\nGRAY: original FRESH\nORANGE: previous objective / MAGENTA: Exp02D\nGREEN: live post-switch motion\nYELLOW B: saved switch / new run start",
+                     height=138, word_wrap=True, style={"font_size": 16})
+            context_label = ui.Label("", height=64, word_wrap=True, style={"font_size": 15})
+            live_label = ui.Label("", height=125, word_wrap=True, style={"font_size": 17})
+            primary_label = ui.Label("", height=112, word_wrap=True, style={"font_size": 16})
+            ui.Label("Saved OLD context; live physics starts at B.\nPrior velocity and PI reset. No bridge inserted.\nPASS/FAIL describes reference tracking only.\n2x slow motion; end state held after completion.",
+                     height=96, word_wrap=True, style={"font_size": 15})
     for _ in range(3):
         APP.update()
     stage_window = ui.Workspace.get_window("Stage")
@@ -181,6 +200,9 @@ def main():
         "coordinate_frame": protocol["coordinate_frame"], "timing": protocol["timing"]})
     results = []
     names = {"M0_RAW": "RAW FRESH", "M1_HISTORICAL_M4": "BEFORE: historical objective", "M3_LOOKAHEAD": "AFTER: Exp02D objective"}
+    purposes = {"M0_RAW": "Original selected FRESH suffix.\nNo trajectory optimization.",
+        "M1_HISTORICAL_M4": "Align B -> corrected entry with incoming OLD motion.\nPreserve FRESH entry and relative motion.",
+        "M3_LOOKAHEAD": "Align B -> corrected lookahead with incoming OLD motion.\nSame entry / yaw / FRESH-motion factors."}
     colors = {"M0_RAW": (.65, .65, .65, 1), "M1_HISTORICAL_M4": (1, .5, .05, 1), "M3_LOOKAHEAD": (.9, .1, .85, 1)}
     for case in args.cases:
         evidence = cases[case]
@@ -195,6 +217,11 @@ def main():
             primary = summary["outcomes"][case][method]
             case_label.text = f"{case}: {evidence.corpus_transition_id}"
             method_label.text = names[method]
+            objective_label.text = purposes[method]
+            old = evidence.active_old
+            context_label.text = (f"Saved OLD interval: {old.activation_sim_time_s:.2f} -> {old.switch_sim_time_s:.2f} s\n"
+                f"FRESH observation / ready: {old.observation_sim_time_s:.2f} / {old.model_ready_sim_time_s:.2f} s\n"
+                f"Live t=0: reset at B ({old.boundary_pose_world_se2[0]:.2f}, {old.boundary_pose_world_se2[1]:.2f}) m")
             primary_label.text = (f"Primary tracking: {primary['physical_tracking_status']}\n"
                 f"Goal: {primary['goal_successes']}/3\n"
                 f"Yaw RMS: {primary['repeatability']['yaw_rmse_rad']['mean']:.4f} rad\n"
@@ -208,6 +235,9 @@ def main():
                 draw.clear_lines()
                 draw.clear_points()
                 z = float(config["gui"]["line_height_m"])
+                draw_polyline(draw, old.old_world, z=z, color=(.12, .35, 1., 1.), width=4)
+                draw_polyline(draw, old.display_actual_poses, z=z, color=(.05, .95, 1., 1.), width=5)
+                draw_polyline(draw, old.fresh_world, z=z, color=colors["M0_RAW"], width=2)
                 for ref_method in config["methods"]:
                     draw_polyline(draw, evidence.method_candidates[ref_method], z=z,
                         color=colors[ref_method], width=6 if ref_method == method else 2)
