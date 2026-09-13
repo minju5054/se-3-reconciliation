@@ -2435,3 +2435,42 @@ This file is append-only. Add each completed task at the bottom.
   tests/test_physics_display.py`. An initial command named a nonexistent additional test file
   and ran no tests; corrected to the existing relevant suite. No new SE(2) operation or timing
   convention was introduced. Raw/derived recordings and movies remain ignored by Git.
+
+## 2026-09-13 — review research slides and write a ten-slide Korean talk
+
+- User supplied `/home/gpuadmin/Downloads/연구 .pdf` and requested corrections/additions and
+  a professor-facing presentation script for Exp02D. Read the PDF skill, preserved the source
+  PDF, and treated its NEXT items as presentation content, not instructions to implement them.
+  Started on main at `a637a35`, inspected status/remotes, and preserved both unrelated Stage0
+  configuration edits. No controller, objective, dataset, or experiment changes.
+- Inspected PDF metadata (10 pages, 720x405 points), extracted text, rendered all ten pages to
+  1500-pixel PNGs under `/tmp/exp02d-slides-review/`, and visually reviewed every page. Source
+  PDF SHA-256 `2f8283894e589d25c0e8b22de7a5f790f5525bfdfe87fb6c652fd36aab261072`.
+  Identified a material evidence mismatch: page 8 says S2 but its screenshots explicitly show
+  R1 `episode_000016_transition_02` and R1 metrics. Supplied actual S2 episode 27 / transition 01
+  movie links and wrote the page-8 script contingent on correcting that mismatch.
+- Cross-checked Exp02B/C/D definitions/results, DATA02 timing/collection limits, current
+  controller OFF/ON diagnostics, and S2/R1 physical records. Independently recomputed primary
+  counts and pair-balanced means from all 959 saved transition rows: 191 raw-pair groups,
+  largest group 593; partitions 685/178/96; benign breaks M1/M2/M3 662/0/1; challenging
+  outcomes 42 rescued, 17 improved, 31 mixed, 6 worse. Verified global/partition J and desired
+  delta-v/delta-omega/deformation means, and checked original frozen bootstrap intervals.
+  Numeric scratch audit saved at `/tmp/exp02d-slides-review/numeric_audit.json`; CSV SHA-256
+  `f8e5ea82bb2ebe939cd53612663f4b4e3d26d8becb8b537ecbc038657f28c2eb`.
+- Wrote `docs/EXP_02D_SLIDE_REVIEW_AND_SCRIPT_20260913.md`: prioritized corrections for every
+  page, exact replacement claims/tables, suggested OLD/P/B/Fk/Fq conceptual figure, definition
+  and weighting of J_cmd, ten complete spoken Korean scripts in current slide order (~10-minute
+  adjustable delivery), video cues, nine anticipated professor questions, and source/provenance.
+  The report distinguishes confirmed mechanism/conditional benefits from unresolved overall
+  navigation performance; avoids both overstating success and erasing observed M1-to-M3 gains.
+- Specific corrections: partial execution improvement versus invariant first-command failure;
+  benign-case-local ablation attribution; controller correction OFF/ON versus code-version
+  before/after; prior DATA02 already calibrated; conditional data recollection; duplication and
+  independent-evaluation limits; original S2 versus R1; R1 borderline RAW failure and post-hoc
+  selection; physical reset versus continuous online switching; obstacle-factor work as future
+  design/evaluation rather than a completed factor. Noted that global desired delta-omega is
+  higher for M3 than M1 even though composite J is lower.
+- Validation: complete visual PDF review; independent numeric recomputation; all local report
+  source/movie links and exactly ten page-specific scripts checked; formula/units/CI and metric
+  semantics reviewed; source PDF remains unchanged. Documentation-only change needs no new
+  simulation or implementation tests. Reviewed unstaged/staged changes and diff whitespace.
