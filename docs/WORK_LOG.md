@@ -2518,3 +2518,45 @@ This file is append-only. Add each completed task at the bottom.
 - Browser policy rejected automatic opening of the local file URL. Did not work
   around it; deliver local MP4/HTML links and distinguish FFmpeg verification from
   browser playback. No browser playback verification claimed.
+
+### 2026-09-13 — Slide 3: direction-factor mechanism figures and 2D diagnostic GUI
+
+- User requested a clearer GUI, or trajectory images, explaining why direction
+  causes the Exp02C benign-case over-correction. Inspected Git status/branch/remotes;
+  preserved unrelated controller-camera and single-chunk playback YAML changes.
+- Read frozen Exp02C Case C k=0, exact source OLD/FRESH/P/B, and saved V0/V1/V2/V4/V6/V8
+  paths. Identified the visual mechanism: F0 projects 0.198486 m behind B along
+  incoming P-to-B, while the RAW follower target F3 projects 0.253842 m ahead.
+  Incoming versus B-to-F0 directions differ by 179.995434 degrees. Computed the
+  original D residual's zero point T at fixed raw radius, explicitly an explanatory
+  point rather than the full optimum, follower target, or observed waypoint.
+- Added `scripts/view_exp02c_direction_mechanism.py`: exports a 16:9 three-panel
+  figure (target mismatch / FULL / No D), a reference-point enlargement, and a
+  FULL versus no-propagation diagnostic, each as PNG and SVG. Loads stored paths
+  only; no optimization, controller changes, physical execution, pose interpolation,
+  or raw-array modification. World XY metres / +Z CCW yaw radians remain unchanged;
+  zoom bounds are explicit and D-present/absent panels use identical equal-aspect axes.
+- Added a native Tk/Matplotlib GUI and launcher `scripts/run_exp02c_direction_gui.sh`.
+  Seven radio selections expose the reference-point explanation, RAW, E+F, adding
+  D to E+F, FULL, removing D, and the fixed-downstream counterfactual. Shows first
+  desired-command change and entry/endpoint displacement; states physical execution
+  is absent. Final interactive GUI was launched and reported READY for user inspection.
+- Saved final derived artifacts under `data/exp02c_presentation/slide03-20260913-final/`.
+  `manifest.json` records source/processor/output hashes, source observation/ready/
+  usable timestamps and anchoring, P/B, axis/units/bounds, target index, T semantics,
+  and variant metrics. Initial font/layout inspection artifacts are preserved under
+  `slide03-20260913/` and are not the final deliverable. SVG uses text elements.
+- Validation: checked all source hashes against original provenance; recomputed six
+  variants' first desired commands, follower state and entry/endpoint displacement
+  against stored metrics to 1e-12. Verified exact RAW/E+F no-op. Tested the computed
+  T against the production direction residual. Added synthetic geometry-only tests
+  (opposite directions, arbitrary world orientation, forward no-op, degenerate and
+  nonfinite inputs), explicitly not experimental evidence. All 40 relevant tests
+  passed. Actual Tk smoke test selected all seven states, checked updated plots/titles
+  and saved canvases. Visually inspected final PNGs and GUI canvas, corrected missing
+  subscript glyphs, label collisions and panel-title alignment. Final output hashes
+  and report links verified.
+- Added `docs/EXP_02C_SLIDE03_DIRECTION_GUI.md` with figures, GUI sequence, causal
+  scope, exact factor comparisons, coordinate/timing semantics, reproduction and a
+  Korean professor-facing script; linked it from the existing deck review's page 3.
+  Did not edit the source PDF/PPTX or implement any future research stage.
