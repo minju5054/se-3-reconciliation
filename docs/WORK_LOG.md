@@ -2105,3 +2105,106 @@ This file is append-only. Add each completed task at the bottom.
   excluded from results, and fixed by supplying the existing validators' semantic fields
   before the exclusive `-r2` rerun. Runner emits an explicit failure/completion marker
   because Isaac shutdown can obscure an exception's exit status.
+
+## 2026-09-13 — Physically execute frozen EXP-02D candidates and show success/failure
+
+- **User authorization and boundary:** User explicitly requested driving Jackal on EXP-02D
+  corrected paths and showing success and failure in GUI. Added a separate post-primary
+  execution diagnostic. Original EXP-02D candidate-only metadata, raw/derived paths,
+  objective, solver, LightNav, controller and follower remain unchanged. Initial branch
+  `main`, HEAD `0b57f45`, origin `https://github.com/minju5054/se-3-reconciliation.git`;
+  fetched origin and confirmed no divergence. Preserved/excluded the existing user's
+  Stage 0-B camera and Stage 0-C playback-speed config edits.
+- **Implementation:** Added `configs/exp02d_physical_execution.yaml`, a Hospital runtime
+  using unchanged Stage 0-E apply/reset/closed-loop execution, a headless runner and
+  launcher, strict result/plot summarizer, physical-outcome bookkeeping, a live GUI and
+  launcher, and a small paused-render helper. Added synthetic bookkeeping/display-clock
+  tests; these fixtures are not experimental evidence. New Korean report is
+  `docs/EXP_02D_PHYSICAL_EXECUTION.md`; README and historical EXP-02D documentation link it
+  explicitly as a later diagnostic rather than rewriting past claims.
+- **Frozen inputs and setup:** Source
+  `data/exp02d_lookahead_direction/exp02d-lookahead-primary-20260910T171139Z/`;
+  selected saved S1/S2/F1 RAW suffix and M3 arrays are hash-verified by the existing loader,
+  copied unchanged, not reoptimized/resampled/translated, and B is not inserted. Source
+  DATA-02 Hospital/Jackal assets and authored collisions are used without an extra ground
+  plane. Each execution requests the saved switch B world XY/yaw, world/wheel reset and
+  1-second settling with new follower/PI state. Original velocity, contact history and
+  online OLD execution are not restored. No new inference, planner or gain tuning.
+  Source observation/readiness/switch and new UTC/execution clocks are explicit.
+- **Current controller:** Stage 0-D `pi_strong`, model SHA-256
+  `40821584e14a3f444fdd19ff27acc03e752ec3d0c5f2e8635b824a1419a81464`, controller code
+  `0bc4a97b4dac6407fe9bedd9d37451ab2d53a19c8efc396d84f496b8115c04a5`.
+  Physical wheel radius/separation are `0.097999997437/0.375589996576 m`. Protocol freezes
+  the entire source system, acceptance criteria, candidate, source/result/code hashes and
+  config snapshot. Source and primary execution code hashes verified after all trials.
+- **Completed primary:** `data/exp02d_physical_execution/exp02d-physical-20260913T072000Z/`,
+  generated with `run_exp02d_physical_execution.sh --run-id exp02d-physical-20260913T072000Z`.
+  S1/S2/F1 x RAW/M3 x 3 reset repetitions = 18 valid new physical trials. Stop at existing
+  follower goal (8 cm / 0.08 rad) or 18 seconds. Existing Stage 0-E absolute scenario
+  gates classify each method; none were relaxed. Historic S/F labels do not force physical
+  outcomes; absent outcome classes would remain null. Selection prefers S2/S1/F1 among
+  actual M3 passes and F1/S2/S1 among actual failures, yielding S1 success and F1 failure;
+  S2 is additionally displayed because it times out.
+- **S1 physical success:** `v1:episode_000016_transition_00`. RAW/M3 position RMS
+  `0.008246637/0.008105629 m`, yaw RMS `0.052102921/0.056479296 rad`, goal `3/3` for both,
+  times `4.1/4.2 s`; both PASS. M3 maximum spatial deviation `0.022538873 m`, zero
+  saturation. This shows an executable M3 example, not a substantial benefit over RAW.
+- **S2 physical failure:** `v1:episode_000027_transition_01`. RAW reaches goal `3/3` at
+  `16.8 s`, but yaw RMS `0.479679241 rad` fails. M3 position RMS is only `0.003200385 m`
+  and yaw RMS `0.041648037 rad`, yet goals are `0/3`, endpoint error `0.750296464 m` at
+  `18 s`; goal/final-position/progress gates fail. GUI shows the body stopped in front of
+  a storage cart while the desired command remains forward. Obstacle interference is
+  a plausible interpretation of the visible geometry, not a separately measured contact
+  force/root-cause result. Small path distance/first-command score is not navigation success.
+- **F1 physical failure despite reaching goal:** `v1:episode_000044_transition_04`.
+  RAW/M3 position RMS `0.355985038/0.055295602 m`, yaw RMS `0.709716325/0.469072528 rad`.
+  RAW times out `18 s`; M3 reaches goal `3/3` in `0.7 s` but fails yaw RMS and saturation
+  (`0.714285714`, versus existing maximum `0.20`). The M3 path is only `0.151576376 m`.
+  This is corrected FRESH execution after B, not re-execution of original case 44 OLD.
+- **Figures:** Strict summarizer validates all 18 trials, raw hashes, references, protocol
+  links and recomputed classifications. Generated per-case physical comparison PNGs with
+  path, distance, yaw and numerical verdict; additional `--gui-plots` creates small primary
+  XY insets with separate provenance. All plots preserve world XY metres; cm=m*100 and
+  nearest-polyline distances are spatial, not waypoint-time errors. Three repetitions agree
+  at reported precision; repeated reset fixtures are not independent generalization data.
+- **GUI semantics and verification:** GUI performs new follower/controller/physics execution,
+  with magenta M3, green new actual, gray RAW context, yellow B; optional RAW comparison
+  records orange new actual. All path lines now share a floor overlay at visual Z=0.035 m
+  to avoid apparent separation from perspective. A separately labeled primary XY inset
+  reveals short F1 geometry obscured by the robot. GUI source initialization now uses the
+  same first-case construction pose as the primary even when directly selecting F1/S2.
+  It records its own telemetry, metrics, hashes, camera plan, captures, and comparison with
+  primary repetition 00; equality is checked, never presumed. Initial comparison GUI
+  `gui/2026-09-13T072233.212977_0000/` has exact primary pose equality for both methods of
+  S1/F1. Direct-case development GUIs with a different construction pose differed; retained
+  separately and not included in the 18-trial primary. Final delivery GUI is
+  `gui/2026-09-13T075333.852691_0000/`, with S1/S2/F1 automatic executions and case buttons.
+- **Display clock handling:** Captures strictly assert an unchanged physics clock. A
+  render-only helper reasserts pause; editor Stop resets the clock to zero rather than
+  advancing physics. An earlier strict hold treated that reset as an error; its actual
+  `19.03333432599902 -> 0` log established the distinction. Interactive and between-case
+  holds now report editor Stop and permit another explicit run; capture checks remain
+  strict. No saved trial is overwritten. GUI slowdown changes wall pacing only.
+- **Checks and incomplete outputs:** Full pytest `488 passed in 20.62s`; targeted
+  bookkeeping/render tests passed 20, earlier relevant suite passed 50. Compileall,
+  launcher shell syntax, report links, raw validators and whitespace checks passed.
+  Initial headless attempts `exp02d-physical-20260913T070000Z` and
+  `exp02d-physical-20260913T071600Z` were preserved incomplete (sensor display argument,
+  then required scenario metadata); both excluded. Finished primary has explicit
+  `EXP02D_PHYSICAL_COMPLETE`, complete summary and strict validation. All generated
+  data/captures remain under ignored `data/`; no raw recording is staged.
+- **Final delivery verification:** All three final GUI M3 pose arrays exactly match their
+  primary repetition 00, with maximum absolute difference zero. All three strict GUI
+  telemetry validators and source/candidate hash rechecks passed. Visually reviewed S1,
+  S2 and F1 whole-window captures; correct body, case identity, verdict, current/primary
+  metrics, legend and labeled primary XY inset are visible. Final F1 full-window image is
+  `02_F1/presentation_window_reviewed.png` to avoid a transient partially updated text
+  frame in the first whole-window capture. `gui_validation.json` records review and hashes.
+  Whole-window PNGs are unmodified XComposite reads of only Isaac, not image composites.
+  Native input attempts did not establish button callback activation, so no physical
+  button-click test is claimed; `--all-cases` verified the shared GUI execution function
+  for all three cases. The final GUI was left at the completed F1 view with case buttons.
+- **Subsequent close:** Final status inspection found a normal GUI shutdown after an
+  editor Stop, with `completed.json` recording all three cases and closure at
+  `2026-09-13T07:56:51.012348+00:00`. Saved runs and reviewed screenshots remain available;
+  the report includes commands to reopen each case.

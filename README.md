@@ -114,7 +114,8 @@ Detailed protocols, commands, schemas, observed results, and claim limitations l
   [EXP-02B GUI diagnosis](docs/EXP_02B_GUI_DIAGNOSIS.md),
   [EXP-02B-R](docs/EXP_02B_CALIBRATED_REEVALUATION.md), and
   [EXP-02C](docs/EXP_02C_FACTOR_ISOLATION.md), and
-  [EXP-02D](docs/EXP_02D_LOOKAHEAD_DIRECTION.md).
+  [EXP-02D](docs/EXP_02D_LOOKAHEAD_DIRECTION.md), and
+  [EXP-02D candidate physical execution and GUI](docs/EXP_02D_PHYSICAL_EXECUTION.md).
 - Chronology and commands actually run: [append-only work log](docs/WORK_LOG.md).
 
 ## Local environment

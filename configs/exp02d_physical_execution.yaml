@@ -1,0 +1,23 @@
+experiment: EXP02D_POSTHOC_PHYSICAL_EXECUTION
+source_run: data/exp02d_lookahead_direction/exp02d-lookahead-primary-20260910T171139Z
+output_root: data/exp02d_physical_execution
+stage0e_config: configs/stage0_closed_loop_execution_validation.yaml
+cases: [S1, S2, F1]
+methods: [M0_RAW, M3_LOOKAHEAD]
+repetitions: 3
+maximum_duration_s: 18.0
+mode: calibrated
+initialization: saved switch B world XY/yaw; reset world, wheel rates, follower and PI; settle 1 second
+restore_online_velocity_or_integral: false
+environment: source DATA02 Hospital with authored collisions; no extra ground plane
+classification: unchanged Stage0E evaluate_scenario absolute gates, applied separately per case/method
+classification_scope: reset-state simulation path tracking; not original online continuity or navigation success
+gui:
+  real_time_factor: 0.35
+  line_height_m: 0.72
+  camera_config: configs/exp02d_lookahead_direction.yaml
+  reference_color: [0.90, 0.10, 0.85, 1.0]
+  actual_color: [0.05, 1.0, 0.18, 1.0]
+  raw_reference_color: [0.65, 0.65, 0.65, 1.0]
+  raw_actual_color: [1.0, 0.45, 0.10, 1.0]
+  boundary_color: [1.0, 0.85, 0.10, 1.0]

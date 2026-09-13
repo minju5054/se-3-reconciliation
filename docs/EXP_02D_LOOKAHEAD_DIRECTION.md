@@ -513,3 +513,11 @@ intent. The next uncertainty is therefore:
 
 That question could motivate a later EXP-03 downstream-intent-recovery study. No such factor,
 objective, selector, or experiment is implemented in EXP-02D.
+
+## Post-primary physical execution (2026-09-13)
+
+At the user's later request, frozen RAW/M3 representatives were physically executed in
+Hospital with the unchanged current controller and reset state at saved B. This is a separate
+post-hoc result; the original primary artifacts and their candidate-only scope remain unchanged.
+[The physical execution report and GUI](EXP_02D_PHYSICAL_EXECUTION.md) distinguish actual
+tracking outcomes from the historical S1/S2/F1 command-score labels.
