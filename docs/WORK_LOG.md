@@ -2208,3 +2208,77 @@ This file is append-only. Add each completed task at the bottom.
   editor Stop, with `completed.json` recording all three cases and closure at
   `2026-09-13T07:56:51.012348+00:00`. Saved runs and reviewed screenshots remain available;
   the report includes commands to reopen each case.
+
+## 2026-09-13 — matched pre-Exp02D objective execution and real GUI movies
+
+- **Request:** User clarified they wanted actual driving video, questioned collision/
+  threshold wheel-spin attribution to FRESH, and correctly requested same-episode
+  historical-objective versus Exp02D comparison. Prior RAW/M3-only evidence does not
+  isolate the objective change. Starting commit `88e9f0e`, branch main. Preserved the
+  unrelated camera and playback edits in the two Stage0 configuration files.
+- **Frozen matched protocol:** Added `configs/exp02d_objective_execution.yaml`; used the
+  existing unmodified physical runner, runtime, calibrated controller and follower.
+  Source remains `exp02d-lookahead-primary-20260910T171139Z`. All existing S1/S2/F1
+  representatives × RAW/M1_HISTORICAL_M4/M3_LOOKAHEAD × 3 repetitions = 27 new trials.
+  No positive rescue selection, optimization, VLA inference, obstacle removal, controller
+  tuning, threshold change or source modification. Hospital authored collisions, original
+  world XY metres/CCW yaw radians, reset at B, 1 s settling, physics 1/60 s, control .1 s,
+  goal or 18 s timeout. Original online velocity/PI/contact history is not restored.
+- **Command/output:** `./scripts/isaac/run_exp02d_physical_execution.sh --config
+  configs/exp02d_objective_execution.yaml --run-id exp02d-objective-matched-20260913`.
+  Output `data/exp02d_objective_execution/exp02d-objective-matched-20260913/`;
+  `/tmp/exp02d-objective-matched.log` has COMPLETE and 27 valid trials. Source/candidate
+  hashes and all primary execution-code hashes were rechecked after recording.
+- **Honest outcomes:** S1 M1 and M3 both PASS (goals 3/3, position RMS 1.075/0.811 cm,
+  duration 4.4/4.2 s). S2 both FAIL/goal 0/3 (position RMS 16.944/.320 cm, remaining
+  endpoint distance .6428/.7503 m). F1 both FAIL despite goal 3/3 (yaw RMS .2505/.4691
+  rad and saturation .7500/.7143). There is NO M1-fail/M3-pass representative here.
+  These do not demonstrate a physical success-rate improvement. Repeated reset states
+  are not independent episodes; success refers to each candidate's own endpoint.
+- **Collision interpretation:** S2 RAW reaches its endpoint but fails yaw quality. M3
+  does not reach its shifted endpoint (35.10 cm away from RAW's endpoint). Final desired
+  v .3581 m/s, measured v -.000253 m/s, left wheel speeds 7.25/7.01 rad/s show wheel
+  motion without body progress. GUI shows the storage cart obstruction. Contact-force
+  attribution and obstacle-removal controls were not run; FRESH alone is not established
+  as the cause. Explain original-path feasibility, correction displacement, tracking,
+  and terrain/contact as distinct possibilities. Exp02D adds no obstacle/terrain factor.
+- **Actual recording:** Added `exp02d_objective_video_gui.py` and its launcher. A runtime
+  subclass adds only actual-state render/read operations, with unchanged parent reset,
+  step, apply and loop. XComposite reads only the Isaac client window; no input injection
+  or saved-pose playback. Capture every 3 physics steps (20 simulation fps), pause and
+  assert unchanged clock while rendering/reading, then resume. Same camera for methods
+  in a case. Original observation/readiness/switch times, new UTC, physics indices,
+  timestamps, poses, wheel speeds, raw telemetry/frames and hashes are separate outputs.
+- **Recorded runs:** S1 at `video_gui/2026-09-13T081351.078563_0000` (M1/M3);
+  S2 at `video_gui/2026-09-13T081502.048785_0000` (RAW/M1/M3);
+  F1 at `video_gui/2026-09-13T082056.943061_0000` (M1/M3).
+  All 7 entire pose arrays exactly equal primary repetition 00. All 1,265 sampled frame
+  times/poses match telemetry and hashes were validated before encoding. No failed or
+  divergent physical recording is hidden. S1 pilot was usable as the final S1 recording.
+- **Movies:** Installed imageio-ffmpeg 0.6.0 into `/tmp/exp02d-video-tools` with `uv pip
+  install --python .venv/bin/python --target /tmp/exp02d-video-tools imageio-ffmpeg`;
+  project environment/dependencies unchanged. The initial attempt with venv `pip` failed
+  because pip is not installed. Added `encode_exp02d_objective_videos.py`: validated raw
+  PNGs → H264 MP4 at 2x slow motion, 30 fps frame repetition only, no pose interpolation.
+  Full-window aspect-preserving resize; side-by-side comparison aligns B/time zero.
+  Finished methods show their labeled end-state card, final shared hold 2 s. Outputs
+  `movies_S1`, `movies_S2`, `movies_F1`, with 7 individual + 4 comparison MP4s and manifests
+  containing raw references, encoder version/hash, processing hash and exact commands.
+  Encoding's unchanged frame-index rule was subsequently extracted into a pure function
+  to test synchronization and end-card boundaries; manifests retain the actual earlier
+  processing hash used for encoding.
+- **Verification:** 27-trial strict validator; source/candidate and execution hashes;
+  7 recorded-trial validators and exact pose equality; video frame time/pose/hash checks;
+  all 11 MP4s decoded successfully. Paired S1/S2/F1/S2-RAW clips have 324/1140/108/1140
+  frames at 30 fps (10.8/38/3.6/38 s). Reviewed raw GUI samples and decoded comparison
+  samples: correct case, method, same sim time, visible moving body/wheels and paths.
+  Opened S2 in Totem; MPRIS confirmed Playing at position 18.881 s with duration 38 s;
+  queued other comparisons. Delivery audit is `delivery_validation.json`.
+- **Tests/docs:** New synthetic tests cover captured-clock/pose mismatch, missing or
+  reordered frames, aligned playback and final holds. Initial pytest auto-loaded a ROS
+  plugin missing lark; disabling plugin autoload avoids that unrelated environment issue.
+  Restricted full run had only two local socket permission failures; allowed-socket final
+  run: `env -u PYTHONPATH PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q`
+  → **503 passed in 20.23 s**. Compileall, launcher bash syntax, report links and diff
+  whitespace checks passed. Added Korean matched-video report and links from prior report
+  and README. All raw data, frames, movies, dependencies remain outside Git.

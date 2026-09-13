@@ -139,3 +139,7 @@ controller, objective, LightNav 및 원본 raw VLA 출력은 변경하지 않았
 최종 GUI `2026-09-13T075333.852691_0000`의 S1/S2/F1 측정 pose 배열은 각각 정량
 첫 반복과 정확히 일치했다. 세 사례의 GUI 화면을 시각적으로 검토하고 source/candidate
 hash를 다시 확인했다. 전체 테스트는 **488개 통과**했다.
+
+후속 요청에서는 [동일 에피소드의 이전 objective / Exp02D 실제 주행 영상](EXP_02D_MATCHED_OBJECTIVE_VIDEOS.md)을
+추가했다. RAW 비교만으로 objective 변경 효과를 분리할 수 없으므로 M1을 포함해
+새 27회 실험을 수행했다. 기존 세 대표에서 M1 실패 → M3 성공은 없었다.

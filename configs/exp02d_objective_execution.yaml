@@ -1,0 +1,20 @@
+experiment: EXP02D_MATCHED_OBJECTIVE_PHYSICAL_EXECUTION
+source_run: data/exp02d_lookahead_direction/exp02d-lookahead-primary-20260910T171139Z
+output_root: data/exp02d_objective_execution
+stage0e_config: configs/stage0_closed_loop_execution_validation.yaml
+cases: [S1, S2, F1]
+methods: [M0_RAW, M1_HISTORICAL_M4, M3_LOOKAHEAD]
+repetitions: 3
+maximum_duration_s: 18.0
+mode: calibrated
+initialization: saved switch B world XY/yaw; reset world, wheel rates, follower and PI; settle 1 second
+restore_online_velocity_or_integral: false
+environment: source DATA02 Hospital with authored collisions; no extra ground plane
+classification: unchanged Stage0E evaluate_scenario absolute gates, applied separately per case/method
+classification_scope: paired reset-state simulation tracking; not full navigation success
+comparison: M1 historical objective versus M3 Exp02D; RAW diagnostic control
+selection: all three existing frozen representatives; do not require or manufacture a fail-to-pass pair
+gui:
+  camera_config: configs/exp02d_lookahead_direction.yaml
+  real_time_factor: 0.35
+  line_height_m: 0.035
