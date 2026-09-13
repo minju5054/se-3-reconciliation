@@ -95,8 +95,9 @@ Detailed protocols, commands, schemas, observed results, and claim limitations l
   [controller validation](docs/STAGE_00_CONTROLLER_VALIDATION.md),
   [single-chunk LightNav](docs/STAGE_00_LIGHTNAV_SINGLE_CHUNK.md),
   [execution calibration](docs/STAGE_00_EXECUTION_LAYER_CALIBRATION.md),
-  [closed-loop validation](docs/STAGE_00_CLOSED_LOOP_EXECUTION_VALIDATION.md), and
-  [LightNav execution envelope](docs/STAGE_00_LIGHTNAV_EXECUTION_ENVELOPE.md).
+  [closed-loop validation](docs/STAGE_00_CLOSED_LOOP_EXECUTION_VALIDATION.md),
+  [LightNav execution envelope](docs/STAGE_00_LIGHTNAV_EXECUTION_ENVELOPE.md), and
+  [current controller effect check, 2026-09-13](docs/CURRENT_CONTROLLER_EFFECT_CHECK.md).
 - LightNav qualification: [Stage 0-G2 Jackal domain scene](docs/STAGE_00G2_JACKAL_DOMAIN_SCENE_QUALIFICATION.md)
   and [Stage 0-G3 moving egocentric history](docs/STAGE_00G3_MOVING_HISTORY_QUALIFICATION.md).
 - Dataset collection: [DATA-02 online-successive OLD/FRESH v1](docs/DATA_02_ONLINE_SUCCESSIVE_OLD_FRESH.md),

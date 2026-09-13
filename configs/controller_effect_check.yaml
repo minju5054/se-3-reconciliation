@@ -1,0 +1,28 @@
+stage: current-controller-effect-check
+stage0e_config: configs/stage0_closed_loop_execution_validation.yaml
+data02_run: data/data02_online_successive_v1/data02-online-successive-primary-v1
+output_root: data/controller_effect_check
+repetitions: 3
+saved_old_cases:
+  - {episode: episode_000014, transition: 4}
+  - {episode: episode_000044, transition: 4}
+saved_reference_maximum_duration_s: 8.0
+rotation:
+  initial_pose_world_se2: [0.0, 0.0, 0.0]
+  initial_stop_s: 0.5
+  active_s: 2.0
+  final_stop_s: 0.5
+  desired_omega_rps: [-1.5, -0.3, 0.3, 1.5]
+  steady_tail_s: 0.5
+  minimum_measured_omega_rps: 0.02
+semantics:
+  modes: [nominal, calibrated]
+  controller_tuning: false
+  environment: existing Stage 0-E flat ground, not Hospital
+  saved_reference_start: previous saved switch B, unchanged world XY/yaw
+  reset: world and wheel reset plus 1 second settling; new follower and PI state
+  original_online_history_restored: false
+  original_online_velocity_restored: false
+  original_online_integral_restored: false
+  raw_waypoint_time_base: none
+  new_acceptance_thresholds: none; descriptive comparison only

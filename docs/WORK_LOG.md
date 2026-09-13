@@ -2021,3 +2021,87 @@ This file is append-only. Add each completed task at the bottom.
   passed. No original experiment output or user config was overwritten. Generated outputs
   remain under the ignored `data/` tree. README and diagnosis documentation include the command,
   legend, source contract, and explanation for the professor.
+
+## 2026-09-13 — Check the current frozen controller against nominal execution
+
+- **Request and boundary:** User requested checking the effect of the currently modified
+  controller, following questions about DATA-02 cases 14 and 44. Compared correction on/off
+  with new Isaac physics runs; did not tune or change the execution controller, follower,
+  objective, original VLA outputs, or historical experiment results. Initial branch was `main`,
+  HEAD `b9efd18`, origin `https://github.com/minju5054/se-3-reconciliation.git`; refreshed
+  origin/main and confirmed no divergence before committing. Preserved/excluded the user's
+  camera edit in `configs/stage0_jackal_controller_validation.yaml` and playback-speed edit
+  in `configs/stage0_lightnav_single_chunk.yaml`.
+- **Implementation:** Added versioned `configs/controller_effect_check.yaml`, a small
+  `controller_effect_check.py` recorder/metric helper, an independent Isaac runner/launcher,
+  a strict validating plot summarizer, and 10 synthetic timing/metric tests. Existing
+  Stage 0-E runtime and strict telemetry validators are reused. No new SE(2) operation,
+  optimizer, correspondence factor, LightNav modification, or acceptance gate was added.
+  README links `docs/CURRENT_CONTROLLER_EFFECT_CHECK.md`, which records commands, results,
+  frame/timing conventions, GUI legend, and claim limits.
+- **Frozen controller:** Selected Stage 0-D `pi_strong`; model SHA-256
+  `40821584e14a3f444fdd19ff27acc03e752ec3d0c5f2e8635b824a1419a81464`;
+  controller source SHA-256
+  `0bc4a97b4dac6407fe9bedd9d37451ab2d53a19c8efc396d84f496b8115c04a5`.
+  Checked the new runtime's source and input hashes before/after execution. The additional
+  run protocol includes the exact uncommitted runner/helper hashes as well as starting HEAD.
+  DATA-02 follower values match the frozen source protocol. Nominal means disabling this
+  correction in the same runtime, not checking out an entire historical software version.
+- **Existing suite, 66 trials:** Ran `run_jackal_closed_loop_execution_validation.sh
+  --run-id controller-current-20260913T062219Z`, then the existing summarizer. Primary output
+  is `data/stage0/closed_loop_execution_validation/controller-current-20260913T062219Z/`.
+  Seven controlled fixtures, one composite and three saved OLD references, two modes,
+  three reset repetitions each. Gentle-left position RMS was 11.6694 -> 0.3478 cm and
+  S-curve 9.6530 -> 0.9833 cm. Strong-left/right calibrated yaw RMS remained
+  0.173091/0.170283 rad above the unchanged 0.10 rad threshold. Controlled scenarios
+  passed 5/7 (minimum 6); composite and all three saved EXP-02B references passed. Exact
+  overall decision remains `EXECUTION_PLATFORM_NOT_READY`.
+- **Additional suite, 36 trials:** Ran `run_current_controller_effect_check.sh --run-id
+  controller-current-20260913T062219Z-r2`; primary output is
+  `data/controller_effect_check/controller-current-20260913T062219Z-r2/`. Same saved
+  world OLD/previous activation B pose for v1 `episode_000014_transition_04` and
+  `episode_000044_transition_04`, nominal/calibrated, three resets, goal or 8-second timeout.
+  Case 14 position RMS was 6.7107 -> 1.4488 cm; calibrated goal 3/3 at 5.1 s. Case 44
+  was 21.8004 -> 17.3218 cm; calibrated goal 3/3 at 7.5 s, but maximum deviation worsened
+  27.0405 -> 37.3327 cm. Different goal/timeout durations are explicit. Original online
+  Hospital history, velocity, contact state and PI integral were not restored; this is
+  a reset-state flat-ground comparison, not full reproduction of the original episodes.
+- **Rotation engineering fixtures:** Four fixed v=0 commands (omega -1.5/-0.3/+0.3/+1.5
+  rad/s), two modes, three repetitions; 0.5 s initial stop, 2 s active, 0.5 s final stop.
+  Last-0.5-second measured omega for nominal -> calibrated was
+  -0.619708 -> -2.535843, -0.057984 -> -0.435329, +0.096252 -> +0.456467,
+  +0.483088 -> +2.411332 rad/s. Active omega RMS error increased in three of four
+  conditions; -0.3 improved slightly. Active-end root XY displacement was respectively
+  12.4049 -> 29.9874, 3.5858 -> 11.4288, 2.8033 -> 10.9512, 11.6122 -> 10.2176 cm.
+  The last condition had a larger calibrated peak displacement despite smaller end
+  displacement (11.6122 -> 17.0959 cm). These are simulator engineering checks with
+  synthetic commands, not reconciliation research evidence or real-robot evidence.
+  Correction on/off does not isolate feedforward vs P/I/limits or uniquely identify the
+  physical cause of original case 44. It does not invalidate all DATA-02 recordings.
+- **Figures and GUI:** Validating new summarizer generated and visually inspected
+  `plots/saved_old_comparison.png`, `plots/rotation_response_and_drift.png` and
+  `plots/comparison.json` with three-run means/min/max/std and raw/plot hashes. Repetition
+  metrics agree at reported precision. Ran the existing S-curve GUI at real-time factor
+  0.5 with `--no-hold`; output is the 66-trial run's
+  `gui_metadata/controlled-20260913T063329Z/`. Visually inspected `final_viewport.png`:
+  Jackal, full blue reference, orange-red nominal and green calibrated paths are visible.
+  GUI's 1081 nominal and 397 calibrated world-pose rows exactly equal headless repetition
+  00 (maximum absolute difference 0). `gui_validation.json` records comparisons, source
+  hashes, display semantics and visual review. GUI is a separate diagnostic physics run,
+  excluded from the 102 quantitative trials; report includes the command to keep it open.
+- **Data integrity and clocks:** Raw telemetry/poses/controller states, derived metrics,
+  and plots are separate under ignored `data/`. No raw recording is committed. Source
+  hashes for both DATA-02 cases were verified after running; no source was overwritten.
+  World X/Y metres, CCW yaw radians about +Z, no additional transform; cm plots use m*100.
+  Physics 1/60 s, control 0.1 s, row zero is settled observation; each later row describes
+  its ending execution interval. Feedback uses the previous complete control interval.
+  Protocol/metadata record source activation/observation/switch times and UTC execution
+  times; no new inference or readiness event and no invented waypoint timing.
+- **Validation and incomplete attempt:** Related tests passed 27; full suite passed
+  `468 passed in 20.12s`; compileall, launcher `bash -n`, whitespace checks, the existing
+  66-trial validator and all 36 additional trial/raw-hash validations passed. First
+  additional output `controller-current-20260913T062219Z/` stopped on missing required
+  diagnostic metadata after its first nominal trial. It was preserved as incomplete,
+  excluded from results, and fixed by supplying the existing validators' semantic fields
+  before the exclusive `-r2` rerun. Runner emits an explicit failure/completion marker
+  because Isaac shutdown can obscure an exception's exit status.
