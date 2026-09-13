@@ -199,3 +199,63 @@ as “skid steer caused the OLD gap” is supported without controlled follow-up
 The result is one outcome-selected development/stress case in simulation. It is neither a
 new optimization result nor evidence of benchmark, real-robot, obstacle-avoidance, selector,
 or generalization performance.
+
+## Archived failure demonstration
+
+For presenting the exact 2026-09-07 observation above, use:
+
+```bash
+./scripts/isaac/run_exp02b_failure_demo.sh
+```
+
+This separate saved-record viewer uses
+`data/exp02b_gui_diagnosis/exp02b-gui-case-high-omega-k3-raw-k-20260907T-final/`.
+It replays the 89 recorded world SE(2) poses over 12 wall seconds, with a brief introduction
+hold, and stops at `B_reproduced` before the historical exact reset. **Restart OLD replay**
+starts the presentation again; **Pause / Resume** freezes or resumes its presentation clock.
+Close the Isaac window to exit. `--duration 20` slows playback further; `--no-hold` is for
+one-pass automated capture only. This viewer does not perform new controller, wheel, or physics
+execution. The robot mesh's body pose is a rendering of recorded SE(2); wheel rotation, roll,
+pitch, and vertical motion are not reconstructed. The displayed robot height is explicitly
+0.15 m. No new failure, candidate, or optimization is generated.
+
+Blue is the complete planned OLD polyline; cyan is the growing recorded actual OLD history.
+Both curves are raised to the **same** 0.72 m visualization height so their apparent separation
+does not arise from different draw heights. Their world XY is unchanged and unscaled. The
+yellow segment joins the current actual XY to its nearest point on the OLD polyline. The red
+saved-B point and smaller cyan reproduced-B point are distinct logical markers at coincident
+XY; saved reproduction error is zero. FRESH and post-switch trajectories are omitted from this
+OLD-only explanation. The explicit stop before reset must not be described as a complete
+navigation episode or as a new physical execution.
+
+The panel distinguishes full-record summary statistics from the current ending-interval sample.
+The full OLD record is 1.466666743 saved seconds, with 88 measured intervals after pre-interval
+row zero. The plot uses original simulation seconds, not stretched presentation seconds:
+
+- nearest-OLD spatial RMS: `0.06460064998428094 m`;
+- mean commanded omega: `0.7553427249409104 rad/s`;
+- mean measured omega: `0.13919805112548234 rad/s`;
+- angular command-versus-measured RMSE: `0.6398929921141342 rad/s`.
+
+The config `configs/exp02b_failure_demo.yaml` freezes SHA-256 for all six archived diagnostic
+files. The loader also verifies original trial/config hashes, exact CSV-versus-NPY poses,
+finite increasing time, and ending-interval body-velocity reconstruction. It recomputes the
+saved spatial, body, and wheel summary metrics at `1e-12` absolute tolerance before launching.
+The display uses the last saved sample at or before mapped time; no pose interpolation or
+synthetic trajectory is introduced. Original observation/readiness/execution timestamps and
+the independent diagnostic replay clock are retained separately in the capture manifest.
+
+Each invocation exclusively creates `data/exp02b_failure_demo/<UTC>/`, with a standalone
+`old_evidence.png`, start/motion/pre-reset viewport images, and a `capture_manifest.json`
+identifying source hashes, renderer/helper/launcher hashes, camera/world coordinates, units,
+visual Z, playback settings, captured saved samples, and the absence of physical re-execution.
+Generated artifacts remain ignored. The original diagnostic and all frozen experiments are
+read-only inputs.
+
+Suggested explanation to the professor:
+
+> The blue curve is the planned OLD reference and cyan is the robot's recorded path. During
+> this OLD interval the commanded angular velocity averaged 0.755 rad/s, but measured angular
+> velocity averaged 0.139 rad/s. The spatial RMS distance was 6.46 cm. We stop before the exact
+> boundary reset; these observations show an execution mismatch, not a uniquely established
+> skid-steer or contact cause.

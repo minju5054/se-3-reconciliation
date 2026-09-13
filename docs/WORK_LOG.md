@@ -1974,3 +1974,50 @@ This file is append-only. Add each completed task at the bottom.
   instruction success, correspondence quality, or generalization. The user's unrelated changes to
   `configs/stage0_jackal_controller_validation.yaml` and
   `configs/stage0_lightnav_single_chunk.yaml` remain untouched and unstaged.
+
+
+## 2026-09-13T04:59:56+00:00 — EXP-02B archived OLD failure presentation
+
+- **Request and starting state:** From fetched `main` / `origin/main` at
+  `095f985c66874bd502f056a74e49006f10dca59d`, created a professor-facing GUI for the exact
+  archived high-angular case (`k=3`, `raw_k`) with OLD spatial RMS 6.46 cm and mean
+  commanded/measured omega 0.755/0.139 rad/s. The two unrelated Stage 0 config edits remain
+  untouched and excluded from the commit.
+- **Evidence integrity:** The presentation config freezes all six original diagnostic hashes.
+  Its pure loader also checks the original EXP-01B source/config hash chain, CSV/NPY pose
+  identity, strictly increasing saved time, wrapped ending-interval body velocities, and
+  recomputed spatial/body/wheel metrics to absolute tolerance `1e-12`. Exact values reproduced:
+  spatial RMS `0.06460064998428094 m`, commanded omega mean `0.7553427249409104 rad/s`,
+  measured omega mean `0.13919805112548234 rad/s`. Rechecked all input hashes after capture.
+- **Presentation:** Added `run_exp02b_failure_demo.sh`, an independent saved-record Isaac viewer,
+  a small read-only evidence/timing helper, fixed source/presentation config, and 11 tests.
+  Reuses the existing DebugDraw helpers and official Jackal asset. Replays 89 recorded world
+  SE(2) poses (88 ending intervals, 1.466666743 saved seconds) over 12 wall seconds, with
+  restart and pause/resume buttons. Blue OLD and cyan actual share visual Z=0.72 m and retain
+  exact world XY. Recorded SE(2) supplies body position/yaw; wheel rotation, roll/pitch, and
+  vertical dynamics are not reconstructed. Display Z=0.15 m is explicitly visual.
+- **Scope and clocks:** The presentation stops at B_reproduced before exact reset and displays
+  no post-switch actual. No inference, controller, optimization, or physics re-execution is
+  performed. Rendering initializes once, then the timeline is paused and its simulation clock
+  is asserted constant. Original observation/readiness/execution timestamps, diagnostic clock,
+  source frames/units, identity XY transform, and display-time mapping are recorded separately.
+  No waypoint timestamps or interpolated poses are invented. The initial spatial gap is about
+  15.24 cm and the final gap is 4.66 cm; the displayed 6.46 cm is full-interval RMS, not evidence
+  that deviation continually grows. The physical root cause remains unresolved.
+- **Actual GUI validation:** Final output:
+  `data/exp02b_failure_demo/20260913T045548.871626Z/`. Inspected the moving Jackal, growing cyan
+  trail, planned blue OLD, nested saved/reproduced-B markers, full-record statistics, original
+  simulation-time plots, current ending-interval telemetry, and pre-reset hold. Explicit docking
+  fixes the hidden floating panel; the editor's property/content panels are hidden for space.
+  Clicked Restart, Pause, and Resume in the real GUI; pause and resume both reported saved
+  index 15, while the body/time display held and then progressed. Saved start/motion/final
+  viewport PNGs, standalone plot, hash manifest, and an unmodified XComposite capture of only
+  the Isaac window (`presentation_window.png`). `gui_validation.json` records the review.
+- **Checks:** Full pytest `458 passed in 21.22s`. An initial sandboxed run had 456 passes and
+  two existing local-socket PermissionErrors; rerunning with permitted local Unix sockets
+  passed all 458. New helper tests cover unequal-interval playback, no future/interpolated
+  samples, invalid clocks, wrapped yaw-rate reconstruction, immutable arrays, telemetry/pose
+  mismatch, and hash/summary tampering. Compileall, launcher `bash -n`, and whitespace checks
+  passed. No original experiment output or user config was overwritten. Generated outputs
+  remain under the ignored `data/` tree. README and diagnosis documentation include the command,
+  legend, source contract, and explanation for the professor.

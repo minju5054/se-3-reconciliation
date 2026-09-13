@@ -1,0 +1,18 @@
+# Presentation of archived measurements, not a new physics experiment.
+source_run: data/exp02b_gui_diagnosis/exp02b-gui-case-high-omega-k3-raw-k-20260907T-final
+source_sha256:
+  diagnosis_summary.json: 800994ddb0d46e7fb1182afe49d87333f11bd576455126360732bb4ed8d0e145
+  metadata.json: 2b265aa507c1002401003c32a8c37a30e40c4bcaea1c70fa443c815bfb6f3d9f
+  old_replay_actual.npy: a46a946b19a5bf69f52e5f6c77abf86fb097a61eb206dd2385105eec8dab3082
+  old_replay_telemetry.csv: cb656314e0d81a40f3198fb15398a48e8957a13be1a00f8c79988045df8ce48e
+  post_switch_actual.npy: a4130086537d1c32d42759fec9ae774c121081c3e937bd9863b4d6dac3997c38
+  post_switch_telemetry.csv: 2a26a17e9256a4299e69c093f97b5b86987a228e96f0a913b5243c7cb66e9b9b
+presentation:
+  duration_wall_s: 12.0
+  intro_hold_wall_s: 3.0
+  output_root: data/exp02b_failure_demo
+  # Explicit world-frame camera; metres. No SE(2) transform or XY scaling.
+  camera_eye_world_m: [0.4, 6.6, 2.5]
+  camera_target_world_m: [0.4, 8.0, 0.25]
+  path_visual_z_m: 0.72
+  robot_display_z_m: 0.15

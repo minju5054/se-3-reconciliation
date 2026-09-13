@@ -149,6 +149,17 @@ git diff --check
 Synthetic fixtures are tests and mechanism demonstrations only. They are never experimental
 evidence.
 
+Show the archived EXP-02B OLD execution mismatch (6.460 cm spatial RMS, mean commanded/measured
+omega 0.75534/0.13920 rad/s) with the moving Jackal, telemetry chart, pause, and replay buttons:
+
+```bash
+./scripts/isaac/run_exp02b_failure_demo.sh
+```
+
+The 12-second presentation replays exact saved poses and stops before the boundary reset. It
+does not rerun physics. See [the failure demonstration](docs/EXP_02B_GUI_DIAGNOSIS.md#archived-failure-demonstration)
+for the legend, evidence checks, and presentation meaning.
+
 Run the persistent Stage 0-G2 GUI with the stationary Jackal and frozen prediction:
 
 ```bash
