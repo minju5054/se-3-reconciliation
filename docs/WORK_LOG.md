@@ -2474,3 +2474,47 @@ This file is append-only. Add each completed task at the bottom.
   source/movie links and exactly ten page-specific scripts checked; formula/units/CI and metric
   semantics reviewed; source PDF remains unchanged. Documentation-only change needs no new
   simulation or implementation tests. Reviewed unstaged/staged changes and diff whitespace.
+
+### 2026-09-13 — Slide 2: matched Exp02B-R live GUI videos
+
+- User requested GUI evidence matching high-delta-omega k=3 (RAW 1.428 to graph
+  2.209 rad/s desired jump) and benign k=0 (0.0044 to 0.2410 m/s), showing the
+  residual execution mismatch after controller correction. Inspected Git status,
+  branch and remotes first; preserved unrelated user camera/playback YAML edits.
+- Located the exact frozen Exp02B-R primary and independently checked control-time
+  comparison metrics. For Case B graph, desired/measured yaw-rate RMSE improved
+  1.182479 to 0.481616 rad/s; first desired-command degradation remains invariant.
+  Kept this separate from initial OLD mean desired/measured rates and from spatial
+  error, which includes the initial B-to-candidate gap.
+- Added optional presentation capture to the existing calibrated GUI loop plus a
+  read/render-only helper. Uses the same candidates, OLD replay, exact B reset,
+  restored wheel target, zero PI integral, first OLD feedback and 2 s physics loop.
+  Shows planned OLD, static nominal OLD actual, full FRESH, both candidate paths,
+  live corrected motion, first desired jumps, comparable residual RMSE, and reset
+  scope. Only lidar draw flags are suppressed; sensor/dynamics remain active.
+- Created four final recordings under
+  `data/exp02b_presentation/slide02-20260913/recordings_final/`. All 121 physical
+  pose samples per run exactly equal the frozen primary. All four replay gates
+  and first-command invariants passed. Each of 41 window captures validates against
+  measured pose/physics index; paused render verifies unchanged physics clock.
+  Derived provenance stores raw input/code hashes, frames, source observation/ready/
+  usable timing, source anchoring, world axes/units, and display-only Z/camera.
+- Added strict video encoder: verifies input/frame hashes, measured pose equality,
+  timing and identical paired cameras before encoding. Seven fully decoded MP4s:
+  four individual, two 13 s RAW/graph comparisons, and a 26 s B-then-C presentation
+  movie. Each case has 2 s initial still, 2 s physics at 4x slow motion, 3 s final
+  hold. Added a Korean local HTML viewing page. Original PNGs are unchanged;
+  videos use aspect-preserving resize/H264 and duplicate rendered states only.
+- Retained preliminary panel-hidden/panel-clipped captures separately, excluded
+  from final encoding. Visually checked final panel/case/legend and both encoded
+  comparison midpoints; extracted start/middle/end QA frames. Recomputed all four
+  control-time RMSE values equal primary CSV within 1e-12. Existing 27-branch
+  strict validator passed; 47 relevant tests passed with automatic third-party
+  pytest plugin loading disabled (ROS plugin discovery otherwise lacks `lark`).
+- Added `docs/EXP_02B_SLIDE02_GUI_VIDEOS.md` with exact media links, per-case
+  metrics/semantics, provenance/reproduction, slide wording and Korean script;
+  linked from the earlier full-deck review. Input PDF/PPTX not edited. No new
+  controller tuning, optimization, synthetic research evidence or raw overwrite.
+- Browser policy rejected automatic opening of the local file URL. Did not work
+  around it; deliver local MP4/HTML links and distinguish FFmpeg verification from
+  browser playback. No browser playback verification claimed.

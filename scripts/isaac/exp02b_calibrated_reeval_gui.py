@@ -31,6 +31,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--real-time-factor", type=float)
     parser.add_argument("--no-hold", action="store_true")
     parser.add_argument("--headless", action="store_true")
+    parser.add_argument("--record-video", type=Path, help="new directory for live presentation frames")
     return parser.parse_args()
 
 
@@ -39,7 +40,9 @@ ARGS = parse_args()
 from isaacsim import SimulationApp
 
 
-SIMULATION_APP = SimulationApp({"headless": ARGS.headless})
+if ARGS.record_video and ARGS.headless:
+    raise ValueError("presentation recording requires a visible Isaac window")
+SIMULATION_APP = SimulationApp({"headless": ARGS.headless, "width": 1700, "height": 1000})
 
 import numpy as np
 import omni.usd
@@ -184,11 +187,19 @@ def main() -> None:
     for box in exp01b_config["scene"]["static_boxes"]:
         add_static_box(f"/World/{box['id']}", box["center"], box["size"], box["color"])
     runtime.world.reset()
+    recorder = None
+    if ARGS.record_video:
+        from exp02b_presentation_video import PresentationRecording
+        recorder = PresentationRecording(ARGS.record_video.resolve(), run, source, branch,
+                                         snapshot, runtime)
     visual = config["gui"]["visualization"]
     draw = _debug_draw.acquire_debug_draw_interface()
     calibrated_actual: list[np.ndarray] = []
 
     def redraw() -> None:
+        if recorder is not None:
+            recorder.redraw(calibrated_actual)
+            return
         draw.clear_lines()
         draw.clear_points()
         z = float(visual["z_offset_m"])
@@ -215,12 +226,18 @@ def main() -> None:
         target=[float(center[0]), float(center[1]), 0.0],
         camera_prim_path="/OmniverseKit_Persp",
     )
+    if recorder is not None:
+        recorder.set_camera()
     redraw()
-    print(
+    if recorder is not None:
+        print("[EXP-02B-R presentation] BLUE=planned OLD, CYAN=saved nominal OLD, GREY=RAW, "
+              "ORANGE=graph, GREEN=calibrated live; YELLOW=B, PINK=raw F_k, WHITE=active entry", flush=True)
+    else:
+        print(
         "[EXP-02B-R GUI] BLUE=candidate, GREEN=calibrated actual, ORANGE=historical nominal actual, "
         "GREY=raw full FRESH; YELLOW=B_saved, CYAN=candidate X_k, MAGENTA=raw F_k",
-        flush=True,
-    )
+            flush=True,
+        )
     print(f"EXP02B_R_GUI_PHASE=SETTLING case={ARGS.case} k={ARGS.k} method={ARGS.method}", flush=True)
     initial = np.asarray(source.source_metadata["initial_pose_se2"], dtype=np.float64)
     runtime.reset(initial, float(config["simulation"]["settling_duration_s"]))
@@ -289,10 +306,16 @@ def main() -> None:
     for control_index in range(control_count):
         desired = np.asarray([command.linear_velocity_mps, command.angular_velocity_rps])
         executed, target_runtime, state = runtime.apply(desired, "calibrated", correction, float(measured[1]))
+        if recorder is not None and control_index == 0:
+            recorder.frame(calibrated_actual, desired, executed, measured)
         start = calibrated_actual[-1].copy()
         for _ in range(runtime.physics_steps):
             runtime.step()
             calibrated_actual.append(se2_from_world_pose(runtime.robot))
+            if recorder is not None and (len(calibrated_actual) - 1) % recorder.stride == 0:
+                interval = (len(calibrated_actual) - 1 - control_index * runtime.physics_steps) * runtime.physics_dt
+                recorder.frame(calibrated_actual, desired, executed,
+                               body_interval_motion(start, calibrated_actual[-1], interval))
         measured = body_interval_motion(start, calibrated_actual[-1], runtime.control_dt)
         command = follower.forward(calibrated_actual[-1])
         target = canonical_wheel_values(target_runtime, runtime.wheels)
@@ -321,14 +344,17 @@ def main() -> None:
     runtime.stop()
     runtime.world.pause()
     print("EXP02B_R_GUI_PHASE=FINISHED", flush=True)
-    output = run / "gui_metadata" / datetime.now(timezone.utc).strftime(
+    output = ARGS.record_video.resolve() if ARGS.record_video else run / "gui_metadata" / datetime.now(timezone.utc).strftime(
         f"{ARGS.case}-k{ARGS.k}-{ARGS.method}-%Y%m%dT%H%M%SZ"
     )
-    output.mkdir(parents=True, exist_ok=False)
+    if recorder is None:
+        output.mkdir(parents=True, exist_ok=False)
     np.save(output / "candidate.npy", candidate_trajectory)
     np.save(output / "historical_nominal_actual.npy", historical_actual)
     np.save(output / "calibrated_actual.npy", np.asarray(calibrated_actual))
     np.save(output / "raw_full_fresh.npy", raw_fresh)
+    if recorder is not None:
+        recorder.finish(calibrated_actual, telemetry_rows, gate, invariant)
     viewport = capture(output) if not ARGS.headless else None
     write_json_exclusive(
         output / "metadata.json",
@@ -348,7 +374,11 @@ def main() -> None:
             "calibrated_controller_state_at_switch": "RESET",
             "old_final_measured_v_omega": old_measured.tolist(),
             "phases": ["SETTLING", "OLD_REPLAY", "EXACT_RESET", "CALIBRATED_CONTROLLER_RESET", "POST_SWITCH_EXECUTION", "FINISHED"],
-            "legend": {
+            "legend": ({
+                "blue": "planned OLD", "cyan": "saved nominal OLD actual", "grey": "raw FRESH",
+                "orange": "graph candidate", "green": "calibrated live actual",
+                "yellow_marker": "B_saved", "pink_marker": "raw F_k", "white_marker": "active entry",
+            } if recorder is not None else {
                 "blue": "same frozen candidate trajectory",
                 "green": "calibrated actual post-switch",
                 "orange": "historical nominal post-switch actual",
@@ -356,7 +386,7 @@ def main() -> None:
                 "yellow_marker": "B_saved",
                 "cyan_marker": "candidate first pose X_k",
                 "magenta_marker": "raw F_k",
-            },
+            }),
             "telemetry": telemetry_rows,
             "real_time_factor": factor,
             "physics_paused_during_exact_reset_hold": True,
