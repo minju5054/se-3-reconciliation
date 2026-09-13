@@ -2560,3 +2560,48 @@ This file is append-only. Add each completed task at the bottom.
   scope, exact factor comparisons, coordinate/timing semantics, reproduction and a
   Korean professor-facing script; linked it from the existing deck review's page 3.
   Did not edit the source PDF/PPTX or implement any future research stage.
+
+### 2026-09-14 — Final slide narrative and controller/trajectory provenance corrections
+
+- Re-read all 10 rendered pages of the updated `Downloads/연구 .pdf` (SHA-256
+  `4e61052ef6ff92c07e1c847b4094703571e2e0f3cdf88b3f13032b43a9d03c1b`).
+  Added `docs/EXP_02D_FINAL_PRESENTATION_SCRIPT_20260914.md`: direct answers to
+  the five provenance/mechanism questions, concrete slide text corrections,
+  a complete Korean 10-page spoken script, video cues and traceable evidence.
+- Corrected the slide-2 chronology: the shown 6.46-cm / 0.755-versus-0.139-rad/s
+  OLD record precedes execution calibration; the saved-record viewer does not
+  reconstruct wheel/contact dynamics. Exp02B-R is the evidence for improved
+  angular execution with unchanged adverse first desired commands. Linked the
+  already-created calibrated B/C videos; no new simulation or recording.
+- Audited source DATA-02 14/04, 24/02 and 44/04 through the existing hash-validating
+  active-OLD loader and nearest-polyline helper. Saved processing code, helper/input
+  hashes, coordinate/unit/timing conventions and output separately under ignored
+  `data/exp02d_presentation/final-talk-20260914/`. Original 14/44 OLD arrays exactly
+  equal the flat-ground OFF/ON replay references. Distinct environment, reset state,
+  original history and execution windows explain why the measured curves differ.
+- Confirmed slide-5 turning paths proceed right to left. Original 14/04 instantaneous
+  OLD distance is 1.345 -> 8.193 -> 0.363 cm; final nearest-reference yaw error is
+  still 8.854 degrees. Original 44/04 commands zero translation throughout and its
+  distance grows from 3.917 to 17.652 cm. Distinguished these observations from an
+  isolated causal attribution to PI, contact or inertia. No coordinates transformed
+  or source poses changed; no new SE(2) or timing convention introduced.
+- Reused the 660-command R1 audit to distinguish objective D from follower terminal
+  yaw alignment, the 8-cm mode boundary, and low-level execution correction. Same
+  controller with different approach states can exhibit different terminal cycling;
+  M3's selected-case improvement does not validate the controller globally.
+- Kept physical threshold contact unassigned: current S2 evidence is cart-front
+  stalled motion with rotating wheels, not an identified doorstep-contact trace.
+  Requested the video/time asynchronously; the narrative remains explicit about
+  the unconfirmed physical cause. Noted slide 8's red-X video placeholder and
+  corrected slide 9's overly dismissive conclusion without claiming broad Exp02D
+  superiority over RAW.
+- Verified the upstream official LightNav MuJoCo README's TurtleBot kinematic-mode
+  statement and limited that comparison to the documented robot mode. Preserved
+  development-only/duplicate-data, reset-execution, own-endpoint and post-hoc R1
+  selection limitations in the final script.
+- Validation: 47 relevant existing geometry, saved-failure, active-OLD, follower,
+  controller-check and turning-search tests passed. Checked all 18 document links,
+  all 10 script sections and unchanged PDF hash. Audit output SHA-256:
+  `d6c05f3944dca7aa53ba1d68317e4a0e1d2d6efe9a6849871fd6aef7ccdaf664`.
+  Reviewed changes and whitespace; only the new script document and this log are
+  included. Preserved the user's unrelated camera and playback YAML changes.
