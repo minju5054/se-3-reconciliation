@@ -2350,3 +2350,47 @@ This file is append-only. Add each completed task at the bottom.
   Targeted suite 62 passed; final whole suite **506 passed in 20.22 s** with local sockets
   allowed and unrelated ROS pytest plugin autoload disabled. Compileall, bash syntax,
   report links and diff checks passed. All datasets/frames/movies remain ignored by Git.
+
+## 2026-09-13 — explain tracking gates, terminal rotations and data recollection scope
+
+- User asked who set the gates, how yaw error is computed, why only M1 circles near its
+  endpoint despite a shared controller, whether controller changes require fresh data, and
+  whether a simplified TurtleBot is a valid research platform. Read-only diagnosis; no new
+  physical trial, objective/controller/LightNav modification, or raw-data overwrite.
+- Started at `62950e5` on main; inspected status/remotes and preserved both unrelated Stage0
+  configuration edits. Located gate history at Stage0B `a5d88ee` / Stage0E `dd9ec20`; these
+  are internal engineering criteria. Did not infer direct user authorship of the values from
+  Git's author identity. Checked spatial segment projection, wrapped waypoint-yaw interpolation,
+  whole-physics-sample RMS and worst-repeat gate semantics in existing implementation.
+- Reconstructed all 660 original follower commands across 9 R1 confirmation trials using
+  saved control-boundary articulation-root world XY/yaw, unchanged source follower settings,
+  1/60-s physics / .1-s control conventions. All match saved desired commands at 1e-12 absolute
+  tolerance. Derived script/configuration/input and processor hashes plus full phase rows saved
+  separately under `data/exp02d_turning_search/exp02d-turning-search-20260913/audit/terminal_tracking_followup/`.
+  Run command: `.venv/bin/python data/exp02d_turning_search/exp02d-turning-search-20260913/audit/terminal_tracking_followup/diagnose.py`.
+  Output creation is exclusive; preserve existing `diagnosis.json` when rerunning.
+- M1 first approach had distance .0807252 m at 6.1 s, .0797196 m at physics-only 6.1667 s,
+  and .0800006 m at control-boundary 6.2 s. The 10-Hz follower missed the brief 8-cm radius
+  crossing, specifically an opportunity to enter terminal yaw, not full goal completion
+  (yaw was still out of tolerance). At 8.2 s M1 entered terminal yaw with 103.1-degree yaw
+  error, left the position radius at 8.7 s, resumed forward approach at 9.3 s, and finally
+  completed at 13.2 s. M3 entered terminal yaw at 4.0 s with 6.44-degree error, ended 4.1 s.
+  Explained path/state/controller interaction and unlatched terminal mode, not a proven
+  unique physical/contact/PI cause. Shared controller does not imply shared commands/state.
+- Data guidance: preserve prior frozen observations and inference for fixed-input comparisons;
+  rerun all methods with the same new controller for physical claims. New online-system claims
+  need a separately collected cohort because actual OLD, B, image history and FRESH can change.
+  If follower/lookahead changes, recompute the dependent q/command-jump analysis, not just wheel
+  executions. Existing data remain evidence for their historical controller version.
+- Upstream local LightNav `a645828d` README and simulation code explicitly use custom simplified
+  TurtleBot geometry and direct kinematic pose integration without motors/gravity/contact
+  dynamics. Checked current official public MuJoCo README, which retains kinematic TurtleBot
+  and separately distinguishes dynamic MicroDuck. Sources: https://github.com/lightorigins/LightNav-0/tree/main/mujoco_demo
+  and https://amrl.cs.umass.edu/papers/icra2019_skid_steer_kinematics.pdf . Explain simulated
+  robot validity within stated assumptions; avoid presenting kinematic obstacle passage as
+  collision-free physical navigation or attributing all current faults to choosing Jackal.
+- Appended detailed endpoint diagnosis to the curved-case report. Validation: existing follower,
+  closed-loop metrics/timing and spatial-diagnosis tests **21 passed in 0.09 s** via
+  `env PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q tests/test_trajectory_follower.py tests/test_closed_loop_execution_validation.py tests/test_exp02b_diagnosis.py`.
+  No implementation changed; new diagnostic replay uses real recorded poses, not synthetic
+  experimental evidence. Reviewed diff and whitespace before focused documentation commit.
