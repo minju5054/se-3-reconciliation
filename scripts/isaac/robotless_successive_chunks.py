@@ -47,7 +47,7 @@ from reconciliation.robotless_successive_chunks import (
 )
 from reconciliation.se2 import relative_pose
 from robotless_runtime import (
-    actual_pose, camera_metadata, git_output, runtime_scene, set_agent_pose,
+    actual_pose, camera_metadata, capture_observation, git_output, runtime_scene, set_agent_pose, stopped_time,
     viewport_capture,
 )
 
@@ -61,53 +61,6 @@ def source_hashes(config_path: Path) -> dict:
         ROOT / "src/reconciliation/se2.py", config_path,
     ]
     return {str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path): sha256_file(path) for path in paths}
-
-
-def stopped_time() -> dict:
-    timeline = omni.timeline.get_timeline_interface()
-    if timeline.is_playing() or timeline.get_current_time() != 0.0:
-        raise RuntimeError("Robotless successive capture requires a stopped timeline at zero")
-    return make_observation_time(float(timeline.get_current_time()))
-
-
-def capture_observation(config: dict, run: Path, agent, camera, annotator, pose: np.ndarray, seq: int) -> tuple[dict, dict]:
-    before = actual_pose(agent)
-    camera_before = camera_metadata(camera, agent, config)
-    started = stopped_time()
-    rep.orchestrator.step(rt_subframes=int(config["capture"]["render_subframes"]), delta_time=0.0, pause_timeline=True)
-    rgba = np.asarray(annotator.get_data())
-    observed = stopped_time()
-    after = actual_pose(agent)
-    camera_after = camera_metadata(camera, agent, config)
-    width, height = int(config["camera"]["resolution_width"]), int(config["camera"]["resolution_height"])
-    if rgba.shape != (height, width, 4) or rgba.dtype != np.uint8:
-        raise RuntimeError(f"Invalid actual renderer output at seq {seq}: {rgba.shape} {rgba.dtype}")
-    if not np.array_equal(before, after) or not np.allclose(after, pose, rtol=0, atol=1e-7):
-        raise RuntimeError(f"Logical agent pose changed during observation {seq}, or its assignment failed")
-    if camera_before != camera_after:
-        raise RuntimeError("Camera changed during static capture")
-    rgb = np.ascontiguousarray(rgba[:, :, :3])
-    if float(rgb.std()) < 1.0:
-        raise RuntimeError(f"Actual RGB {seq} appears blank")
-    relative = f"raw/observation_{seq:03d}.jpg"
-    with (run / relative).open("xb") as stream:
-        Image.fromarray(rgb).save(stream, format="JPEG", quality=int(config["capture"]["jpeg_quality"]))
-    observation = {
-        "observation_id": f"observation_{seq:03d}", "seq": seq,
-        "label": ("OLD", "FRESH")[seq], "observation_time": observed,
-        "capture_started_time": started, "agent_pose_world": after.tolist(),
-        "agent_pose_before_capture": before.tolist(), "agent_pose_after_capture": after.tolist(),
-        "camera": camera_after, "instruction": config["instruction"],
-        "rgb": {"path": relative, "sha256": sha256_file(run / relative),
-                "resolution_width_height": [width, height], "dtype": "uint8", "channels": "RGB"},
-    }
-    validation = {
-        "seq": seq, "observation_id": observation["observation_id"], "label": observation["label"],
-        "logical_agent_static_during_capture": True, "rgb_captured": True,
-        "rgb_shape_hwc": list(rgb.shape), "rgb_standard_deviation": float(rgb.std()),
-        "camera_basis_checks": camera_after["basis_checks"], "timeline_time_s": observed["simulation_time_s"],
-    }
-    return observation, validation
 
 
 def capture(config: dict, run: Path, config_path: Path) -> None:

@@ -7,6 +7,8 @@ here is separate from LightNav.
 
 ## Current research state
 
+The frozen 30-episode Hospital screening bank produced 30 valid successive LightNav pairs with 16 distinct raw pairs; episode and duplicate-aware distributions include both small and larger handoff geometry differences. See the [screening report](docs/ROBOTLESS_LIGHTNAV_HANDOFF_SCREENING.md) for full distributions, deterministic Isaac representatives and interpretation limits.
+
 Projection-based robotless handoff characterization now measures continuous closest position, cross-track distance, tangent-direction mismatch, pose-yaw mismatch, and arc-length progress on the fixed FRESH trajectory. The four prescribed conditions passed numerical and actual Isaac visualization checks; see the [projection report](docs/ROBOTLESS_PROJECTION_HANDOFF_GEOMETRY.md) for values and interpretation limits.
 
 Controlled robotless staleness characterization now measures a moving boundary against one fixed, observation-anchored FRESH trajectory from the saved run. In the prescribed conditions, entry distance decreases then increases while polyline distance decreases; see the [characterization report](docs/ROBOTLESS_CONTROLLED_STALENESS_CHARACTERIZATION.md) for values and interpretation limits.

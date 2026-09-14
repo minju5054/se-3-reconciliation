@@ -3077,3 +3077,99 @@ This file is append-only. Add each completed task at the bottom.
   `stage0: characterize projection-based handoff geometry` and normal
   origin/main push. Final SHA, changed files and integrity checks are retained
   in the ignored run's git_completion.json and evidence_manifest.json.
+
+### 2026-09-14 — Frozen 30-episode robotless LightNav handoff screening
+
+- Started from reviewed/fetched origin/main and HEAD
+  dff29251d670544445b95f180e7e162a687c78ed; read required repository rules and
+  successive/controlled/projection reports before edits. Preserved and excluded
+  the existing user changes in stage0_jackal_controller_validation.yaml and
+  stage0_lightnav_single_chunk.yaml. No external LightNav code was modified.
+- Inspected actual Hospital RGBs and instance-aware mesh bounds before inference.
+  Rejected a stair landing, unsuitable doorway views and a blank candidate during
+  preparation; retained exploratory partial outputs/logs. Reviewed all 60 final
+  draft views before freezing six episodes each of straight, left_turn,
+  right_turn, doorway and route_choice. Doorway views sample one actual doorway;
+  contexts are not random or exhaustive Hospital samples. No prior model outputs
+  or metrics determined the bank.
+- Frozen manifest SHA256:
+  139ce7ad6c212584a0e9d680d81b9dbe12e3be3d6ae7ae0f19bc8df2bd800e33,
+  UTC 2026-09-14T10:31:41.272991Z. All 30 IDs, instructions, categories, R0,
+  local displacement [.30,0,0] and R1 were fixed before inference. No episode
+  replacement, reattempt or post-freeze bank change occurred.
+- Actual run: data/robotless_handoff_screening/20260914T101519Z. One Isaac 6.0.1
+  process loaded Hospital once and captured all 60 actual inputs. Inventory:
+  1936 prims, 126 collisions, no robot/articulation/rigid-body/physics scenes.
+  Timeline 0 s stayed stopped; camera height .65 m, offset [.09,0,.65], 480x270
+  RGB, HFOV112.2 degrees. Explicit camera transforms, axes and clock events
+  preserve world +Z-up metres and agent +X forward/+Y left conventions.
+- Each episode used a new connection -> login -> reset -> next0 -> next1 ->
+  disconnect. All 30 distinct connection IDs have server history steps 1/2,
+  constant per-session instructions, no reconnect/reset between requests.
+  Attempted30, valid30, invalid0; each category6/6/0. Actual arrays all10x3;
+  arbitrary and unequal lengths are supported by the reused pure/client code.
+  Each OLD/FRESH world array uses its own observation pose; raw arrays and
+  response/protocol records are preserved without reanchoring or integration.
+- Capture completed 10:32:14.637535Z, readiness confirmed 10:34:44.735361Z,
+  inference ran 10:35:11.646661Z–10:37:31.009062Z. Actual 60-request RTT min/
+  median/max188.823081/191.677229/204.301606ms is separate from controlled tau,
+  batch time and null execution time. Server was stopped using task-owned PID
+  identity checks. Official clean source c6f40e3220edbf7011e4f17eaf2c865416737d4d
+  and all16 checkpoint files (bytes/size/mtime) remain unchanged.
+- Reused unchanged controlled and projection modules: R_obs=R1, v=.25m/s,
+  omega0, tau[0,.2,.5,1]s. B is a controlled body-forward boundary-motion
+  surrogate, not actual OLD execution. All120 rows retain continuous Q, segment,
+  alpha, e_perp, progress, incoming/tangent direction and interpolated pose yaw.
+  All actual metrics available/finite; e_perp minus prior d_poly exactly0.
+- Unique raw OLD10, FRESH12, ordered pair16. Dominant pair
+  ba08a84e10338fde6293933a29ada67e3ae60911221e8fba7a38801bd2a83398
+  occurs5/30 (16.67%), episodes001–005. Exact immutable NPY hashes, no rounding.
+  Saved120 transition rows and64 pair-by-tau rows. Quantiles use linear
+  percentiles; unique-pair view equally weights16 within-pair medians, not a
+  deployment-frequency estimate. No threshold/score/bootstrap was introduced.
+- At tau1, episode e_perp min/median/p75/p90/max metres:
+  [.000004623906,.000139966676,.246076792084,.249249800269,.249942118396].
+  Absolute direction degrees: [.0002712076,.0099158173,22.70354806,
+  72.66672581,75.07027687]; absolute yaw degrees: [.0002923673,.0649809645,
+  49.45571102,72.50458223,73.08835067]. Normalized progress median.0727130982.
+  Equal-pair tau1 medians e_perp.000202451429m, direction.0496788879deg,
+  yaw.108662183deg, progress.0728523063. Full four-tau/four-metric summaries
+  and all grouping members are in the report and generated JSON/CSV.
+- Deterministic tau1 max e_perp selects006 (.249942118396m); max absolute
+  direction/yaw both select016 (75.07027687/73.08835067deg); nearest median
+  e_perp selects027 (.000123017761m; target.000139966676m). Exact ties use
+  lowestID. Episode006's winning segment is16.8 micrometres long; its tangent
+  is the local short-segment direction, not the later visible turning path.
+  No smoothing, alternate tangent, threshold or source change was applied.
+- Actual representative rendering completed10:39:45.223329Z, one scene load,
+  three deduplicated representatives, six inspected overview/detail PNGs.
+  Blue OLD, magenta FRESH, redR_obs, yellowB/incoming, whiteQ, greenB-Q,
+  cyan tangent, orange pose yaw. Prior display-height layers and unchanged
+  XY/angles retained; no scaling or hidden scene geometry. Partial OLD context
+  at016 overview and unresolved tiny027 separation are explicitly documented.
+- Created/inspected four distributions, two exact-coordinate scatters, pair
+  multiplicity and supplemental4x4 episode-ID panels. Required plots retain
+  overlapping duplicate points; panels expose all480 raw values distinctly.
+  First supplemental layout was archived before correcting title/legend overlap.
+  All14 final images and60 actual RGB hashes are bound to visual_review.json.
+- Moved capture_observation/stopped_time verbatim into shared robotless_runtime;
+  independent AST check confirms identical functions. Added immutable bank,
+  collection, descriptive aggregation and strict audit code plus47 tests.
+  A PIL PNG verify-after-decode error was fixed and regression-tested before
+  final validation; it did not modify actual captures or metrics.
+- Final full required host suite:958 passed in37.74s. Compileall, launcher syntax,
+  whitespace checks passed. Synthetic/mock tests are tests only. Actual runtime
+  validator reports no missing artifacts/failures. Independent scalar audit:
+  3340 comparisons, max difference1.4210854715202004e-14, all120 conditions and
+  160 summary quantiles checked. All131 previous experiment files and processing
+  phase hashes verified unchanged. Evidence and logs remain outside Git.
+- Added ROBOTLESS_LIGHTNAV_HANDOFF_SCREENING.md and a two-sentence success-only
+  README update. The bank contains repeated larger geometry differences alongside
+  near-zero medians; this does not establish natural/robot frequency, actual
+  latency failures, navigation success, reconciliation necessity or graph benefit.
+  No graph/correspondence/rigid correction/controller/weight/gate was implemented.
+- Decision: ROBOTLESS_LIGHTNAV_HANDOFF_SCREENING_VALIDATED. Review final diff and
+  staged scope; use one focused commit "stage0: screen LightNav handoff geometry
+  across transitions" and normal origin/main push. Final SHA and exact changed
+  files are recorded after completion in ignored git_completion.json; evidence
+  inventory and source hashes are retained in evidence_manifest.json.
