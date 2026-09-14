@@ -1,0 +1,26 @@
+stage: robotless-controlled-staleness
+schema_version: 1
+source_run: data/robotless_successive_chunks/20260914T073030Z
+motion:
+  model: constant_body_forward_translation_only
+  v_mps: 0.25
+  omega_radps: 0.0
+  tau_s: [0.0, 0.2, 0.5, 1.0]
+  tau_semantics: controlled_simulation_variable_not_measured_LightNav_RTT
+visualization:
+  old_color_rgba: [0.05, 0.25, 1.0, 1.0]
+  fresh_color_rgba: [1.0, 0.0, 0.85, 1.0]
+  motion_color_rgba: [0.25, 1.0, 0.35, 1.0]
+  # Ordered exactly like tau_s: R_obs=B(0), B(.2), B(.5), B(1).
+  boundary_colors_rgba: [[1.0, 0.9, 0.0, 1.0], [0.0, 1.0, 1.0, 1.0], [1.0, 0.45, 0.0, 1.0], [1.0, 0.1, 0.1, 1.0]]
+  boundary_color_names: [yellow, cyan, orange, red]
+  trajectory_z_m: 0.12
+  boundary_z_m: 0.16
+  line_width: 5.0
+  point_size: 11.0
+  boundary_tick_half_length_m: 0.035
+  overview_eye_agent_offset_m: [-1.2, -0.9, 1.7]
+  overview_target_agent_offset_m: [0.45, 0.0, 0.10]
+plots:
+  dpi: 160
+  figsize_inches: [8.0, 6.0]

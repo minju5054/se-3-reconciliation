@@ -2886,3 +2886,110 @@ This file is append-only. Add each completed task at the bottom.
   caches and unrelated user edits are excluded. Final SHA is retained in the
   ignored run's git_completion.json; report commit identity is available with
   `git log -1 -- docs/ROBOTLESS_ISAAC_LIGHTNAV_SUCCESSIVE_CHUNKS.md`.
+
+### 2026-09-14 — Controlled robotless FRESH staleness characterization
+
+- User requested controlled boundary motion against the existing fixed raw
+  FRESH world path, using the prior successive run and no new inference.
+  Inspected status/branch/remotes, repository rules, README, work log and prior
+  successive report. Fetch succeeded; starting HEAD and origin/main both
+  `913bf235806b769cfe81cbef233be66a7b1be7a8` on main. Preserved both existing
+  Stage0 YAML edits and all prior experiment records.
+- Existing successive validator passed before generation for source
+  `data/robotless_successive_chunks/20260914T073030Z/`. Snapshotted hashes of
+  all 54 source-run files. OLD raw SHA-256 `928cbb69...48d6ce`, FRESH raw
+  `cc0b2169...3a491d`, OLD world `c2398298...81c42f`, FRESH world
+  `2c44792f...e1cd37`; complete values are in source.json and the new report.
+  Source arrays remain in place, read-only, with no copies modified or raw
+  outputs overwritten. The source observation and inference timestamps retain
+  their earlier meanings; historical RTT was not used as actual motion time.
+- Added a versioned config, pure translation/Log/segment metrics, immutable
+  frozen-source loader, analysis/plot pipeline, complete artifact validator,
+  passive Isaac viewer/launcher and two test modules. Reused existing SE(2),
+  immutable writers, successive validator, shared robotless scene/camera and
+  DebugDraw helpers. Existing successive implementation was not changed.
+  The small pure XY segment helper avoids historical controller imports.
+- R_obs is source R1 `[19,27,1.5707963267948963]`, captured at
+  2026-09-14T07:36:52.886816Z. Config froze v=0.25 m/s, omega=0 and tau
+  `[0,.2,.5,1]` s. B=R_obs*[v*tau,0,0] is a controlled kinematic surrogate.
+  Agent +X forward/+Y left/+Z up, world +Z up, metres/radians and CCW yaw are
+  explicit. Tau is separate from host UTC, monotonic timestamps, stopped Isaac
+  time and model timing. No sleeping for tau, actual OLD following or execution
+  timestamp is introduced; actual execution and new readiness events are null.
+- Actual generated B poses have x=19, yaw=1.5707963267948963 and y values
+  `[27,27.05,27.125,27.25]`. B(0) exactly equals R_obs; expected translations
+  `[0,.05,.125,.25]` m pass tolerance. Relative-pose lateral roundoff is about
+  5.4e-16 to 6.1e-16 m and is retained. Yaw change is zero for all conditions.
+  Every condition references the identical source FRESH world SHA; no reanchor,
+  OLD-endpoint anchoring, correction, alignment or extra path row is applied.
+- Metrics preserve ordinary Delta_B, ordinary B^-1*F0, true Log(B^-1*F0)
+  components and their translation norms separately. Point-to-polyline distance
+  uses clamped segment projections, not nearest-waypoint selection. Singleton
+  and duplicate-point cases are defined, and the observation-to-entry display
+  connector is excluded from the measured polyline.
+- Actual d_entry metres at tau `[0,.2,.5,1]`:
+  `[.15041923073719915,.10041923591990491,.025419281923138855,.09958079539452004]`.
+  Actual d_poly metres:
+  `[.15041923073719915,.10041923591990491,.025419281923138855,.00016925731416884778]`.
+  Signed Delta_d_entry:
+  `[0,-.04999999481729424,-.12499994881406029,-.05083843534267911]`;
+  Delta_d_poly:
+  `[0,-.04999999481729424,-.12499994881406029,-.15024997342303031]`.
+  Both baseline increments are exactly zero. No metric exceeds its tau=0
+  baseline in the prescribed conditions. Entry distance decreases then rises
+  after B passes F0; polyline distance continues decreasing. At tau=1 the
+  nearest point is inside segment 0, fraction .6622355452892925. This result
+  was retained without changing source, speed or delay conditions.
+- Independent scalar sin/cos, half-angle Log and segment-projection audit
+  agrees within 5.1e-15, with no project geometry helper used. Full Log residual
+  components and closest-point coordinates/fractions are saved in JSON/CSV.
+  Tau=0 is pre-motion boundary-to-FRESH geometry, not by itself a quantitative
+  OLD/FRESH pairwise trajectory discrepancy; OLD remains context only.
+- Actual Isaac 6.0.1 static view succeeded, timestamp
+  2026-09-14T08:30:39.130250Z, stopped timeline 0.0 s. Hospital inventory is
+  1936 prims, 126 collision prims, zero robot paths/articulations/rigid bodies/
+  physics scenes. One magenta FRESH and blue OLD path, yellow R_obs=B(0), cyan
+  B(.2), orange B(.5), red B(1), and green controlled path are simultaneously
+  visible. Display-only heights .12/.16 m are documented; XY/yaw unchanged,
+  no scaling or scene hiding. The viewer independently loads source geometry
+  and checks B without reading metrics files. It does not animate an agent.
+- Actual viewport PNG SHA-256
+  `024085934e4b671aa4cfd3f8584f762ab24dbf1959f0ac7cfcb2631b59bd1e92`.
+  Both metric plots read the saved metrics and show absolute distance, tau=0
+  baseline and signed changes. Inspected all three images and recorded a
+  hash-bound visual_review.json. Complete artifact validator returns
+  `ROBOTLESS_CONTROLLED_STALENESS_VALIDATED` with no missing artifacts/failures.
+- New pure tests: 84 passed in 4.54 s. Full sandbox command
+  `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest` returned
+  848 passed / 2 failed in 24.43 s; both failures are existing Unix-socket
+  tests at sendall/bind with PermissionError. Four host full-suite requests
+  did not execute because automatic approval review was at capacity; no review
+  rejection was bypassed. The restricted sandbox run was the safer alternative.
+  This is not claimed as a fully passing 850-test suite. Compileall and launcher
+  shell syntax pass; full diff/whitespace review is part of final Git checks.
+- Evidence is ignored `data/robotless_controlled_staleness/20260914T082941Z/`:
+  source manifest/validation, frozen config, boundaries, JSON/CSV metrics,
+  plots/manifests, actual Isaac screenshot/metadata, explicit review, independent
+  scalar audit, execution/source snapshots and logs. All 54 source files and
+  both user-edited YAML hashes remain unchanged. No new LightNav invocation,
+  external source/checkpoint change, robot, controller or system installation.
+  Isaac DLSS/readback/plugin-release warnings and Matplotlib's temporary-cache
+  warning are retained; actual analysis and Isaac processes exited successfully.
+- Added ROBOTLESS_CONTROLLED_STALENESS_CHARACTERIZATION.md and the success-only
+  two-sentence README note. This single saved-output characterization does not
+  establish actual latency causation, actual OLD execution, need for graph/rigid
+  correction, navigation success or controller improvement. Submillimetre
+  geometric distance is not physical accuracy. No graph optimization, rigid
+  reconciliation, correspondence or objective-weight tuning was implemented.
+- Runtime decision: `ROBOTLESS_CONTROLLED_STALENESS_VALIDATED`. Requested focused
+  commit message is `stage0: characterize robotless controlled handoff staleness`;
+  generated data, external source, models, environments, caches and unrelated
+  edits are excluded. Final Git completion/remaining execution limits are
+  recorded separately in the ignored run's git_completion.json.
+- Final follow-up: the fifth identical host full-suite request succeeded after
+  staged-scope and sandbox socket-failure checks. Result: **850 passed in
+  24.70 s**. This resolves the two sandbox-only failures and supersedes the
+  earlier temporary host-test limitation above. No code or runtime source
+  changed after the passing tests. Reviewed 12-file staged scope and whitespace,
+  confirmed append-only log and excluded source/evidence/unrelated changes;
+  proceeding with the single requested commit and normal origin/main push.
