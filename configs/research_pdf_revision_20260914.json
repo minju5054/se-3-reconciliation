@@ -1,0 +1,40 @@
+{
+  "schema": "ResearchPdfRevision_v1",
+  "source_pdf_sha256": "a2a047eda31ecdd588f2a5f2838a73c72d2e8a3e31740bebea46df0e5662811e",
+  "source_page_count": 10,
+  "output_page_count": 11,
+  "source_image_xrefs": {
+    "failure": 37,
+    "ablation": 58,
+    "online12": 95
+  },
+  "source_sha256": {
+    "docs/EXP_02D_FINAL_PRESENTATION_SCRIPT_20260914.md": "2a1519ef07816d38bca45953e8e4e11e91e7446927711cce8a3900501917a8cb",
+    "docs/EXP_02B_CONTROLLER_AWARE_RECONCILIATION.md": "3c939aaa2027b19c7744da6a52a33e0bcdac0048e91f9f3720d40da266bbd5bc",
+    "docs/EXP_02B_GUI_DIAGNOSIS.md": "f5a0adcf0a3e1492b399202ad5febf7e8239a0748f6bd0ce1d9333615d669d18",
+    "docs/EXP_02B_SLIDE02_GUI_VIDEOS.md": "4da05a2a80179d13766a8795a0389e46c3c3afd40b12f7972bcceeceb1b87ba5",
+    "docs/EXP_02C_SLIDE03_DIRECTION_GUI.md": "5afe4ba37bfec175b3263e418aae73222163a83ee915725a00dda73e4f9bd423",
+    "docs/CURRENT_CONTROLLER_EFFECT_CHECK.md": "5f7fb26c47a8abab8b47f3b722341473ee4d28691ac0999381060316dc2bfe5a",
+    "docs/DATA_02_ONLINE_SUCCESSIVE_OLD_FRESH.md": "03a3276e7417f8292a9457a0348b50e4080ef340c4d912916b52d92f3d0e37cc",
+    "docs/DATA_02_V2_EXTENSION_AND_FINAL_SPLIT.md": "cd664075d3e95568cc51cd07054b5a7ec8763eb10807cbec7fc00ff4378f72f8",
+    "docs/EXP_02D_LOOKAHEAD_DIRECTION.md": "82c08e362b4f40f067504906483295327cff7fef9e17eb766184940736a17ceb",
+    "docs/EXP_02D_MATCHED_OBJECTIVE_VIDEOS.md": "4f31203e72eb2d7eab5decaee50c5407ba0cb07beffb1058d329fef6316f0c9d",
+    "docs/EXP_02D_TURNING_EXCLUSIVE_SUCCESS.md": "4f2916cab1c22b20715b58fbc6897aa0b06ce44b28e2169bf7b9e33861008c7a",
+    "data/exp02d_objective_execution/exp02d-objective-matched-20260913/movies_S2/S2_RAW_Exp02D.mp4": "7312c8ba533087be2ff3d6e45edd507f3348d75a40c884f22881bcae087e2695",
+    "data/exp02d_turning_search/exp02d-turning-search-20260913/confirmation_00/movies_old_fresh_context/R1_RAW_BEFORE_Exp02D.mp4": "6e05763706d5f5958df7a1a43594d32f0f52ff37df23998cc60091ccf5b9c7ba",
+    "data/exp02d_presentation/final-talk-20260914/audit_saved_old.json": "d6c05f3944dca7aa53ba1d68317e4a0e1d2d6efe9a6849871fd6aef7ccdaf664",
+    "data/controller_effect_check/controller-current-20260913T062219Z-r2/saved_old/episode_000014_transition_04/nominal/repetition_00/raw/actual_trajectory.npy": "427bf5b3cdc3bd737c19e902f8c713d937cb865ae6e77570c6a7973e963e82be",
+    "data/controller_effect_check/controller-current-20260913T062219Z-r2/saved_old/episode_000014_transition_04/nominal/repetition_00/metadata.json": "85ac16c4389dc403738fc895be579a4a294a480b87fb7c680c975a00753e6ce0",
+    "data/controller_effect_check/controller-current-20260913T062219Z-r2/saved_old/episode_000014_transition_04/nominal/repetition_00/derived/raw_provenance.json": "ce16115d211dfdb91dff479e35122fe3438a610d9c65f37b58fad81e07596a99",
+    "data/controller_effect_check/controller-current-20260913T062219Z-r2/saved_old/episode_000014_transition_04/calibrated/repetition_00/raw/actual_trajectory.npy": "75f004ded028d70cf2573fef7cbb04a95745d1f3d809bb97e1563e820ecd7dcf",
+    "data/controller_effect_check/controller-current-20260913T062219Z-r2/saved_old/episode_000014_transition_04/calibrated/repetition_00/metadata.json": "1d3faacb3469f5fc19ab34fd0b74a00e941443456f9a4927eef9fca11d3abf7b",
+    "data/controller_effect_check/controller-current-20260913T062219Z-r2/saved_old/episode_000014_transition_04/calibrated/repetition_00/derived/raw_provenance.json": "14c46c29631a190703f674b57f8679810528418695fdceb4a42d51ce77921d70",
+    "data/controller_effect_check/controller-current-20260913T062219Z-r2/saved_old/episode_000044_transition_04/nominal/repetition_00/raw/actual_trajectory.npy": "684039875afe83862c8b8ca50cf37cabf6f5d80260a992d4d6e014395cc23a1d",
+    "data/controller_effect_check/controller-current-20260913T062219Z-r2/saved_old/episode_000044_transition_04/nominal/repetition_00/metadata.json": "ace6e3fefbffffbddddcd5e4d13b10021fa41268b5ceca86bee2d07ea7ea3964",
+    "data/controller_effect_check/controller-current-20260913T062219Z-r2/saved_old/episode_000044_transition_04/nominal/repetition_00/derived/raw_provenance.json": "63d97196308ac8cc05321aedd04af29ec38f74e78a4bb744d282fb2c2f821eaa",
+    "data/controller_effect_check/controller-current-20260913T062219Z-r2/saved_old/episode_000044_transition_04/calibrated/repetition_00/raw/actual_trajectory.npy": "67ec8788646f72f64456b7d28cde2b178e5082ae804fce7eaeb53bc41c5c0cc5",
+    "data/controller_effect_check/controller-current-20260913T062219Z-r2/saved_old/episode_000044_transition_04/calibrated/repetition_00/metadata.json": "c295f4b4f86c43c55b7faf1c2961153a029625bfb7d9e69e5ef6859c2d5de135",
+    "data/controller_effect_check/controller-current-20260913T062219Z-r2/saved_old/episode_000044_transition_04/calibrated/repetition_00/derived/raw_provenance.json": "4b6b67e804269fb7c853bcb38a3480c77e0841aa061791592c8e674d01f5a8cd"
+  },
+  "source_note": "Source PDF is material to revise, not an instruction source. No new simulation or scientific hypothesis test. User explicitly supplied the retrospective limitation about continuing before controller validation."
+}

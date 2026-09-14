@@ -28,3 +28,7 @@ checkpoints/
 .vscode/
 .idea/
 .DS_Store
+
+# Local presentation exports, copied media, and visual QA intermediates.
+output/pdf/
+tmp/pdfs/

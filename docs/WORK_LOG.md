@@ -2605,3 +2605,33 @@ This file is append-only. Add each completed task at the bottom.
   `d6c05f3944dca7aa53ba1d68317e4a0e1d2d6efe9a6849871fd6aef7ccdaf664`.
   Reviewed changes and whitespace; only the new script document and this log are
   included. Preserved the user's unrelated camera and playback YAML changes.
+
+### 2026-09-14 — Revised the supplied research PDF and packaged presentation media
+
+- Revised the user's current 10-page PDF into an 11-page PDF, preserving its
+  720x405-point format, blue/orange design and institutional logos. Added a focused
+  online 44/04 analysis page while retaining all twelve original trajectory panels.
+  Treated the document as source material, not instructions. Original PDF SHA-256:
+  `a2a047eda31ecdd588f2a5f2838a73c72d2e8a3e31740bebea46df0e5662811e`.
+- Distinguished the 38.2-cm path-entry displacement from additional robot travel,
+  the pre-calibration OLD diagnostic from Exp02B-R, and original online motion
+  from flat-ground reset OFF/ON replays. Explicitly included the user's retrospective
+  limitation: progression to Exp02D before fully recognizing the controller issue.
+  Kept controller/contact attribution limited to the available evidence.
+- Reused existing source metrics for 44/04 (6.93-cm OLD, 8.94-cm FRESH, 9.19-cm
+  observation-to-B translation, 3.92-to-17.65-cm nearest OLD distance), the replay
+  RMS/max-error contrast, the condition-specific lookahead scores, and S2/R1.
+  No new simulator run, factor, optimization, SE(2) transform or timing convention.
+- Created relative MP4 file links and real video stills for S2 and R1, plus a portable
+  PDF/media ZIP. `exp02b_failure.webm` was not available; retained its original PDF
+  still and filename, without fabricating a recording or implying video verification.
+- Added a reproducible PDF builder, frozen input hashes, and source/timing/frame
+  provenance. Final PDFs, copied recordings and QA renders are ignored; committed
+  only the builder/configuration/documentation. Additional PDF packages were installed
+  under `/tmp`, without changing experiment dependencies or the user's two YAML edits.
+- Validation: 111 relevant repository tests passed with global pytest plugin autoload
+  disabled (the ROS launch-testing plugin otherwise requires unavailable `lark`).
+  Verified source hash preservation, all 11 pages and dimensions, required content,
+  nonoverlapping layout objects, two resolving media links, ZIP integrity and identical
+  standalone/bundled PDF. Visually inspected all slides and rechecked revised charts.
+  Reproduction commands and media limitations are in `RESEARCH_PDF_REVISION_20260914.md`.
