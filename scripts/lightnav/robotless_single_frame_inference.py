@@ -68,11 +68,15 @@ def response_data(raw: str | bytes, expected_action: str) -> dict[str, Any]:
     return data
 
 
-def parse_prediction(raw: str | bytes, resolution: list[int]) -> tuple[np.ndarray, dict]:
+def parse_prediction(
+    raw: str | bytes, resolution: list[int], expected_seq: int = 0
+) -> tuple[np.ndarray, dict]:
     """Parse only the pinned official nested action protocol, without reshaping."""
     data = response_data(raw, "next")
-    if type(data.get("seq")) is not int or data["seq"] != 0:
-        raise ValueError("prediction sequence does not match the only request, seq=0")
+    if type(expected_seq) is not int or expected_seq < 0:
+        raise ValueError("expected sequence must be a nonnegative integer")
+    if type(data.get("seq")) is not int or data["seq"] != expected_seq:
+        raise ValueError(f"prediction sequence does not match request, seq={expected_seq}")
     actions = data.get("actions")
     if not isinstance(actions, dict) or "actions" not in actions:
         raise ValueError("prediction must contain data.actions.actions")

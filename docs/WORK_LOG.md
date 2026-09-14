@@ -2787,3 +2787,102 @@ This file is append-only. Add each completed task at the bottom.
   evidence, models, upstream source, caches, environments and unrelated user
   changes are excluded. Commit identity: `git log -1 --
   docs/ROBOTLESS_ISAAC_LIGHTNAV_SINGLE_CHUNK.md` after this entry is committed.
+
+### 2026-09-14 — Robotless successive OLD/FRESH LightNav interface validation
+
+- User requested two static Isaac observations at deterministically related
+  logical poses and exactly two successive predictions in one LightNav session,
+  each transformed by its own observation pose. Inspected status, branch,
+  remotes, repository rules, README/work log and the prior single-chunk report.
+  Starting HEAD was `1572ea407bc26b6cc5ff94f967ed12316de729e3` on main. The first
+  two host fetch requests and a GPU inventory request did not execute because
+  automatic approval review was at capacity. The later successful fetch before
+  runtime confirmed origin/main at the same SHA; host GPU access then succeeded.
+  Access attempts are retained in run logs; no review rejection was bypassed.
+- Reused the single-chunk schema, immutable writers, response decoder, checkpoint
+  audit, SE(2) utilities and DebugDraw helpers. Extracted shared scene/camera/pose
+  readback into `scripts/isaac/robotless_runtime.py`; retained the previous CLI
+  behavior. Added successive config, capture/viewer and launchers, one-session
+  client, task-owned external server start/stop helper, pure coordinate/timing
+  helpers, artifact validator and tests. Parser's default seq=0 is preserved,
+  with an explicit expected-sequence argument for seq=1. No external source was
+  vendored or modified and no environment/package was installed.
+- Config froze R0 `[19,26.7,pi/2]`, local Delta `[0.30,0,0]`, the established
+  Hospital scene, and instruction "At the end of the hallway, turn left into the
+  cross corridor." Agent +X forward/+Y left/+Z up, yaw CCW, metres/radians.
+  One Isaac 6.0.1 process captured RGB0, directly assigned R1=R0*Delta, captured
+  RGB1, then exited. Actual R0 `[19,26.7,1.5707963267948963]`, R1
+  `[19,27.0,1.5707963267948963]`; local displacement
+  `[0.3000000000000007,5.430501542237711e-16,0]`, world XY `[0,0.3000000000000007]`.
+  No trajectory following or inference occurred during assignment/capture.
+- Both actual 480x270 JPEGs were visually inspected and show distinct nearby
+  Hospital corridor views. Capture UTCs were 07:36:52.753173Z and
+  07:36:52.886816Z on 2026-09-14; assignment was bracketed at
+  07:36:52.758446Z / 07:36:52.758774Z. Host monotonic timestamps, observation IDs,
+  poses, camera matrices, RGB hashes and instruction are explicit. Timeline
+  stayed stopped at 0.0 s. Camera is unchanged locally: `[0.09,0,0.65]` m,
+  USD image-right/up/optical-forward -> agent -Y/+Z/+X; HFOV 112.1999983 degrees,
+  fx 161.2733123 / fy 161.2733097. Scene inventory: 1936 prims, 126 collision
+  prims, zero robot-named paths, articulations, rigid bodies or physics scenes.
+- Official source remained clean at `c6f40e3220edbf7011e4f17eaf2c865416737d4d`;
+  checkpoint revision `7221d418bfff55cfcbadd09f7a26aaab81e1f8a6`, model SHA-256
+  `ffc4a925378a881afa761865048eb8d07c55cacf5eaf66548b6641c39f67af18`.
+  Task-owned PID 3616889 ran external lightnav-serve with vllm_local; READY
+  logged at 07:37:59.763Z. Its built-in synthetic startup warm-up is not one of
+  the two actual observation requests and is not experimental evidence.
+- Actual client connection `e7399440-1437-4834-a3d4-31d0ff871488` performed
+  login=1, reset=1, next=2 with seq=[0,1], reconnect=0 and retry=0. Original JPEG
+  bytes and constant instruction were sent; eight exact wire envelopes were
+  retained. Response history actions.step progressed 1 -> 2. OLD/FRESH both
+  returned finite `(10,3)`, stop=false. Request/response UTCs were
+  07:38:26.576888Z / 07:38:26.777008Z for OLD and
+  07:38:26.777476Z / 07:38:26.970064Z for FRESH. Monotonic RTTs 200.128384 ms and
+  192.592501 ms are records only, not motion/switch/model-only timings or a
+  latency experiment. Execution time and waypoint time base are null.
+- Raw cumulative local rows remain unchanged, with arbitrary nonempty N
+  supported. OLD uses only R0; FRESH uses only R1. OLD first local row
+  `[0.0005890281172469258,-0.000056214201322291046,0.3125922977924347]`
+  maps to `[19.000056214201322,26.700589028117246,1.8833886245873313]`;
+  FRESH `[0.150419220328331,0.00005595880429609679,0.0006009606295265257]`
+  maps to `[18.999944041195704,27.15041922032833,1.571397287424423]`.
+  Independent scalar sin/cos/yaw-wrap recomputation reproduced all 20 world
+  rows exactly (maximum absolute difference 0.0); raw NPY values match responses.
+- Stopped only the verified task-owned server before Isaac visualization.
+  Actual 1280x720 viewport shows blue OLD, magenta FRESH, yellow R0, orange R1,
+  green displacement and all 10 headings per chunk together. Visually reviewed
+  image hash `fd93fe548fb068603c32ff754f3d2dd612d95d65d65f171c71e3f72ea7f0e08d`
+  is bound by explicit visual_review.json. No scene hiding, geometry scaling,
+  robot mesh or dynamics execution was used. Old and new --view-only --no-hold
+  Isaac replays both succeeded, without additional inference/evidence writes.
+- Evidence is ignored `data/robotless_successive_chunks/20260914T073030Z/`:
+  raw RGB/response/chunks/protocol, separate own-anchor world arrays, frozen
+  config, capture/inference/visual metadata and hashes, process/checkpoint
+  provenance, exact executed source snapshots, logs, screenshot and validation.
+  All source/config snapshots match the executed implementation; final staged
+  whitespace review removed extra EOF blank lines from the shared runtime
+  helper without rewriting the snapshots. Checkpoint hashes,
+  sizes and mtimes remain unchanged; every historical single-chunk manifest
+  file and both preexisting user-modified Stage0 YAML hashes remain unchanged.
+- Validation: 136 new pure Python cases cover composition, distinct anchors,
+  arbitrary/unequal N, raw preservation, invalid values, clock conventions,
+  exact mock session, server endpoint/provenance and mutated/missing artifact rejection.
+  Host command `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest`
+  completed 766 passed in 20.83 s. Compileall, launcher shell syntax and diff
+  whitespace checks passed. Actual capture, two-prediction client, simultaneous
+  visualization and both replay smoke commands exited successfully. Independent
+  read-only artifact review returned validated with no missing files/failures.
+- Added ROBOTLESS_ISAAC_LIGHTNAV_SUCCESSIVE_CHUNKS.md and the success-only
+  two-sentence README note. Preserved prior reports and all historical claims.
+  Runtime logs retain Isaac DLSS/readback/plugin-release warnings, upstream
+  CUDA/seed/chunked-prefill warnings and NCCL teardown warning after SIGTERM.
+  Remote scene assets are not recursively content-pinned; logical camera height
+  differs from the official demo. This single interface run establishes no
+  latency causation, correspondence, reconciliation benefit, navigation success
+  or closed-loop improvement. No controller, asynchronous OLD execution, B,
+  correspondence, rigid correction or graph optimization was implemented.
+- Decision: `ROBOTLESS_SUCCESSIVE_CHUNKS_VALIDATED`. Reviewed focused diff and
+  staged scope; one commit on main followed by normal push to origin/main.
+  Generated data, source snapshots, model files, upstream source, environments,
+  caches and unrelated user edits are excluded. Final SHA is retained in the
+  ignored run's git_completion.json; report commit identity is available with
+  `git log -1 -- docs/ROBOTLESS_ISAAC_LIGHTNAV_SUCCESSIVE_CHUNKS.md`.
