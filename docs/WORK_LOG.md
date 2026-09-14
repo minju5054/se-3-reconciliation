@@ -2635,3 +2635,73 @@ This file is append-only. Add each completed task at the bottom.
   nonoverlapping layout objects, two resolving media links, ZIP integrity and identical
   standalone/bundled PDF. Visually inspected all slides and rechecked revised charts.
   Reproduction commands and media limitations are in `RESEARCH_PDF_REVISION_20260914.md`.
+
+### 2026-09-14 — Reproduce the official LightNav MuJoCo TurtleBot reference
+
+- User requested reproduction/validation only, starting again from the authors'
+  released pipeline. Inspected status, branch, remotes, fetched origin, and read
+  AGENTS/README/complete work log. Started at `66f890eb81247c2cbaa9760ad33d54add35cf275`
+  on main; fetched origin/main remained the reviewed `6b5781752ffa89d5e823700a68e07b1492dcca2a`.
+  Retained the existing local presentation commit, both unrelated Stage0 YAML edits,
+  every historical research result, and all local generated data.
+- Created fresh external `/home/gpuadmin/Workspace/external/LightNav-0-official-demo`,
+  pinned cleanly to `c6f40e3220edbf7011e4f17eaf2c865416737d4d`. Inspected official
+  installation/deployment/Blackwell guidance and the complete default demo path.
+  No upstream source, scene, camera, robot, MPC, timing, or web protocol was changed.
+  Previous LightNav source/environment was not used or modified.
+- Phase A: official `uv sync --extra dev`, isolated Python 3.11.16, MuJoCo 3.11.0,
+  CasADi 3.7.2, aiohttp 3.14.3. Initial plain pytest failed before collection through
+  inherited ROS Python-path plugin discovery (`ModuleNotFoundError: yaml`). Removing
+  inherited PYTHONPATH/LD_LIBRARY_PATH only for child processes yielded 27/27 passes.
+  Default GLFW rendering on DISPLAY=:1 worked; no EGL or driver workaround needed.
+  Verified all 2,236 bundled asset sizes/hashes (65,457,963 bytes), XML closure,
+  manifest and load for ProcTHOR val_2 ceiling, MolmoSpaces revision `c89e1f5...`.
+- Simulator HTTP health and both 480x270 cameras passed. Official /ws manual drive
+  at 0.2 m/s moved x=6.5 to 6.702 m, y=13.8/yaw=0 unchanged; reset returned exactly
+  to (6.5,13.8,0.033,0). Confirmed source-defined simplified differential-drive
+  TurtleBot geometry, 0.033-m wheels/0.160-m track, body camera (0.090,0,0.165) m,
+  vertical FOV 79.865 degrees, and kinematic qpos integration rather than wheel-contact
+  dynamics. No ROS/Isaac requirement in the default runtime.
+- Phase B: created a separate fresh root Python 3.11 environment and installed only
+  official vLLM/video extras. Torch 2.10.0+cu128, vLLM 0.19.1, Transformers 5.8.0,
+  CUTLASS DSL 4.5.2 ran on RTX 5060 Ti capability 12.0 with default bf16/CUDA graphs.
+  No research GPU override, quantization, system Python/CUDA/driver change or global pip.
+  Validated the existing checkpoint read-only against official HF API metadata:
+  all files match historical `7221d418...`; all inference files also match current
+  main `826dc5fbfa37afa8293d2e336d329b6ffc0bfb64`, whose only change is a WeChat image.
+  Decoder resolved automatically. Model/decoder/config hashes are saved; checkpoint
+  sizes and mtimes remained unchanged. No model download or replacement.
+- Official server on port 8050 loaded, warmed up in 519 ms and reported READY at
+  06:07:58.631 UTC. Official one-frame CLI succeeded; a documented minimal protocol
+  check saved a raw finite (10,3) response, stop=false, 195.091-ms server latency.
+  GPU observations: initial desktop 1,075 MiB used; server ready 13,278 MiB used;
+  both processes after autonomous STOP 14,865 MiB used. These are snapshots, not peaks.
+- Phase C used exact UI default instruction, predeclared once: "move forward, then
+  go to the trashcan on the right". Official direct client/server and MPC consumed
+  26 finite (10,3) result updates in 6.848662 s, ending on model STOP. Client latency
+  208.297-295.363 ms; 59 distinct finite accepted solve durations 2.690-6.756 ms;
+  all commands finite, no VLN/schema/capture/MPC error. Robot moved from official
+  spawn to (9.3378515,11.1757109,0.033,-0.9599451), net XY displacement 3.865268 m.
+  Saved raw public status, health initial/mid/final, camera images and process logs.
+- Public sequence is outgoing count, not result ID: observed 2..26 at the first
+  25 result updates, then zero on STOP. Accepted results pass the unmodified client's
+  exact response-sequence check. One extra in-flight inference after STOP is excluded
+  from the 26 consumed results. Public API exposes neither literal IPOPT status nor
+  matched capture pose; report those observability limits explicitly. Source path and
+  empty capture error establish exercised official capture-time alignment, with no
+  added research instrumentation or external coordinate transformation.
+- Both processes remained alive after acceptance, then were deliberately terminated.
+  Retained upstream deprecation/seed/chunked-prefill/autotune warnings and the NCCL
+  teardown warning after SIGTERM. System Python remains 3.12.3 and driver 595.84;
+  GPU memory returned to 1,084 MiB. External Git status remains clean.
+- Evidence is ignored under `data/reference_reproduction/lightnav_official_mujoco/20260914T060141Z/`.
+  Added the reproduction report and a small README reference note; this append-only
+  entry preserves all historical claims. Decision: `OFFICIAL_LIGHTNAV_MUJOCO_DEMO_REPRODUCED`.
+  This validates execution only, not navigation success, collision safety, physical
+  robot dynamics, Jackal equivalence or reconciliation. Passive OLD/FRESH work remains
+  a separate next task and was not implemented.
+- Validation: final official suite 27 passed in 16.67 s; full research suite
+  `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest` 512 passed in 20.27 s;
+  `.venv/bin/python -m compileall src scripts tests` and diff whitespace checks passed.
+  Reviewed documentation-only diff/staged scope; no external source, model, scene
+  asset, raw evidence, temporary client, or virtual environment included.

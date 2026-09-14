@@ -7,6 +7,10 @@ here is separate from LightNav.
 
 ## Current research state
 
+New reference reproduction: the unmodified official LightNav MuJoCo TurtleBot
+pipeline ran successfully on this machine. See the [reproduction report](docs/OFFICIAL_LIGHTNAV_MUJOCO_DEMO_REPRODUCTION.md)
+for provenance, runtime evidence, and claim limits; historical research below is retained.
+
 - DATA-02 now includes the immutable 84-episode v1 cohort and an independently predeclared
   168-episode v2 extension, both collected by persistent LightNav and actual wheel-driven Jackal
   execution. The reference-only union contains 1,479 attempted transitions, 959
