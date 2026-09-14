@@ -2993,3 +2993,87 @@ This file is append-only. Add each completed task at the bottom.
   changed after the passing tests. Reviewed 12-file staged scope and whitespace,
   confirmed append-only log and excluded source/evidence/unrelated changes;
   proceeding with the single requested commit and normal origin/main push.
+
+### 2026-09-14 — Projection-based robotless handoff geometry
+
+- Read the task, repository rules, README, work log and controlled-staleness
+  report. Inspected branch/status/remotes and fetched origin successfully.
+  Starting HEAD and origin/main were both
+  `b27ed41c2d5525b1bd686b082a9b160f09a26941`. Preserved the two existing user
+  edits in stage0_jackal_controller_validation.yaml and
+  stage0_lightnav_single_chunk.yaml; neither is included in this task.
+- The existing controlled-source validator passed before creating outputs.
+  Source is data/robotless_controlled_staleness/20260914T082941Z, transitively
+  data/robotless_successive_chunks/20260914T073030Z. All 37 controlled and 54
+  successive files, including exact file inventories, stayed unchanged. The
+  original FRESH raw/world hashes remain cc0b2169...a491d and
+  2c44792f...1cd37 (full SHA-256 values in source.json and the report).
+- Added a focused projection module reusing point_to_polyline and wrap_angle,
+  frozen-source artifact loader, JSON/CSV/plot pipeline, fail-closed validator,
+  Isaac overview/detail viewer, launcher, versioned config and tests. Existing
+  source/shared code was not changed. No new LightNav inference, external
+  repository modification, model collection, controller or dynamics occurred.
+- Directly reused R_obs=[19,27,1.5707963267948963], fixed 10x3 FRESH world and
+  saved B at tau=[0,.2,.5,1]. B.xy values are [19,27], [19,27.05],
+  [19,27.125], [19,27.25]. v=.25 m/s and omega=0 remain the source configuration.
+  Incoming direction means configured controlled body-forward motion direction,
+  not actual robot velocity or OLD command. Tau is controlled delay. Original
+  observation UTC 2026-09-14T07:36:52.886816Z is retained; actual execution and
+  new-inference readiness are null. World metres, +Z up and CCW radians are
+  explicit; no trajectory reanchoring or hidden coordinate transform occurs.
+- All four closest projections use segment 0. Tau 0/.2/.5 use alpha=0 and
+  Q=[18.999944041195704,27.15041922032833], an endpoint. Tau 1 uses computed
+  alpha=.6622355452892925 and Q=[18.999830742795382,27.24999980742662], interior.
+  e_perp metres are [.15041923073719915,.10041923591990491,
+  .025419281923138855,.00016925731416884778], exactly equal to previous d_poly.
+  The validator enforces 1e-12 m numerical consistency; no quality gate exists.
+- s_Q is [0,0,0,.09958065155122688] m; normalized progress is
+  [0,0,0,.07348676826459853]. Total XY arc length is 1.3550827435038912 m.
+  All tangents are available. phi_in=1.5707963267948963 rad;
+  phi_F=1.5719340822022043 rad; signed e_dir=.0011377554073082052 rad,
+  absolute .0651885829569481 deg in every condition. The first three theta_Q
+  values are 1.571397287424423 rad, signed e_yaw=.0006009606295265257 rad
+  (absolute .03443250772539497 deg). Tau 1 theta_Q=1.573384062807186 rad,
+  signed e_yaw=.0025877360122894544 rad (absolute .14826635199819946 deg).
+  Tangent and pose yaw remain separate. No adverse source selection or
+  threshold-based classification was introduced.
+- Degenerate segments are points for distance; a degenerate winner has null
+  tangent/direction with an explicit reason. Shortest-angle pose interpolation
+  uses the first endpoint at alpha=0. Zero total arc length is rejected. Exact
+  ties select the lowest segment index. Arbitrary N is supported; source arrays
+  are preserved. Previous d_entry/d_poly are references, not a weighted score.
+- Actual run: data/robotless_projection_handoff/20260914T095303Z. Analysis was
+  created at 2026-09-14T09:53:03.396461Z; Isaac capture completed at
+  2026-09-14T09:54:09.603053Z. Actual Isaac 6.0.1 loaded the same Hospital:
+  1936 prims, 126 collision prims, zero robots/articulations/rigid bodies/physics
+  scenes. Agent R_obs and stopped timeline 0 s stayed fixed.
+- Inspected the actual overview, four tau detail PNGs and four saved-metric
+  plots. Magenta is fixed FRESH, blue OLD context, yellow B/incoming, white Q,
+  green B-Q, cyan tangent, orange interpolated pose yaw. Arrows use display Z
+  layers .16/.22/.28 m and unchanged XY/angles; stems show common XY origins.
+  Paths use .12 m; B/Q/connectors .13 m. No angular magnification, scaling or
+  scene hiding. The tiny tau=1 gap and sub-degree residuals are not quantitatively
+  resolvable in screenshots. All nine image hashes and these limits are bound
+  to visual_review.json. Every plot axis says controlled delay.
+- Complete actual artifact validation passed with no missing artifacts or
+  failures. Independent scalar arithmetic without project geometry helpers
+  agrees within 2.7755575615628914e-17 and confirms all 91 source files plus
+  13 processing-code snapshots. Unit fixtures/mock renderers remain tests only.
+- New tests: 61 passed in 9.92 s. Full host command
+  `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest`:
+  **911 passed in 33.66 s**. Compileall and launcher syntax passed. First
+  Isaac host request was rejected because automatic approval review was at
+  capacity; scope/source checks preceded the successful identical retry.
+  No bypass occurred or runtime limitation remains. Runtime warnings for
+  DLSS/readback/plugin release and the temporary Matplotlib cache are retained.
+- Added ROBOTLESS_PROJECTION_HANDOFF_GEOMETRY.md and the success-only two-sentence
+  README note. Raw/source data, generated metrics, screenshots, plots, snapshots
+  and logs remain outside Git. The result supports consistent descriptive
+  geometry, not optimal correspondence, reconciliation need, latency causality,
+  navigation quality or closed-loop improvement. No graph/rigid/controller,
+  objective weight, threshold gate or future research stage was implemented.
+- Decision: `ROBOTLESS_PROJECTION_HANDOFF_GEOMETRY_VALIDATED`. Reviewed task
+  scope, numerical/visual evidence and whitespace; use the focused commit
+  `stage0: characterize projection-based handoff geometry` and normal
+  origin/main push. Final SHA, changed files and integrity checks are retained
+  in the ignored run's git_completion.json and evidence_manifest.json.

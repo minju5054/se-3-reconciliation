@@ -7,6 +7,8 @@ here is separate from LightNav.
 
 ## Current research state
 
+Projection-based robotless handoff characterization now measures continuous closest position, cross-track distance, tangent-direction mismatch, pose-yaw mismatch, and arc-length progress on the fixed FRESH trajectory. The four prescribed conditions passed numerical and actual Isaac visualization checks; see the [projection report](docs/ROBOTLESS_PROJECTION_HANDOFF_GEOMETRY.md) for values and interpretation limits.
+
 Controlled robotless staleness characterization now measures a moving boundary against one fixed, observation-anchored FRESH trajectory from the saved run. In the prescribed conditions, entry distance decreases then increases while polyline distance decreases; see the [characterization report](docs/ROBOTLESS_CONTROLLED_STALENESS_CHARACTERIZATION.md) for values and interpretation limits.
 
 Robotless successive interface validation now succeeds: one LightNav session returns OLD/FRESH from two Isaac observations, and each chunk is displayed in the world frame using its own observation pose. See the [successive-chunk report](docs/ROBOTLESS_ISAAC_LIGHTNAV_SUCCESSIVE_CHUNKS.md) for actual runtime evidence and scope limits.

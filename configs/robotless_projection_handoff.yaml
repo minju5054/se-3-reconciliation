@@ -1,0 +1,32 @@
+stage: robotless-projection-handoff-geometry
+schema_version: 1
+source_run: data/robotless_controlled_staleness/20260914T082941Z
+numerical_validation:
+  previous_d_poly_atol_m: 1.0e-12
+visualization:
+  old_color: [0.05, 0.25, 1.0, 1.0]
+  fresh_color: [1.0, 0.0, 0.85, 1.0]
+  boundary_color: [1.0, 0.9, 0.0, 1.0]
+  projection_color: [1.0, 1.0, 1.0, 1.0]
+  connector_color: [0.3, 1.0, 0.4, 1.0]
+  incoming_color: [1.0, 0.9, 0.0, 1.0]
+  tangent_color: [0.0, 1.0, 1.0, 1.0]
+  pose_yaw_color: [1.0, 0.45, 0.0, 1.0]
+  path_z_m: 0.12
+  # Height layers separate nearly coincident arrows without changing XY/direction.
+  incoming_z_m: 0.16
+  tangent_z_m: 0.22
+  pose_yaw_z_m: 0.28
+  incoming_length_m: 0.12
+  tangent_length_m: 0.18
+  pose_yaw_length_m: 0.15
+  arrowhead_length_m: 0.025
+  line_width: 4.0
+  point_size: 10.0
+  overview_eye_local_m: [-1.2, -0.9, 1.7]
+  overview_target_local_m: [0.45, 0.0, 0.10]
+  detail_eye_local_m: [-0.45, -0.48, 0.95]
+  detail_target_local_m: [0.13, 0.0, 0.15]
+plots:
+  dpi: 160
+  figsize_inches: [7.5, 4.3]
