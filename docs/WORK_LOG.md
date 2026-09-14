@@ -2705,3 +2705,85 @@ This file is append-only. Add each completed task at the bottom.
   `.venv/bin/python -m compileall src scripts tests` and diff whitespace checks passed.
   Reviewed documentation-only diff/staged scope; no external source, model, scene
   asset, raw evidence, temporary client, or virtual environment included.
+
+### 2026-09-14 — Robotless Isaac RGB and LightNav single-chunk interface validation
+
+- User requested exactly one static observation and one actual LightNav chunk,
+  without a robot model, controller, motion, asynchronous navigation, OLD/FRESH,
+  correspondence or graph optimization. Inspected Git status/branch/remotes and
+  fetched origin; starting HEAD and origin/main both
+  `7c34b05a9f8852bb8ea9878926d9f85e65141f3d`. Read repository rules, README/work-log
+  context and the official reproduction report. Preserved both existing modified
+  Stage0 YAML files, all historical records and generated data.
+- Added versioned robotless config, pure schema/SE(2)/timestamp helpers, an Isaac
+  capture/visualization CLI, a thin isolated synchronous WebSocket client, an
+  offline artifact validator and tests. Reused only the existing pure SE(2)
+  transform and passive DebugDraw utilities; no robot/controller runtime import.
+  Exclusive creation preserves raw JPEG, complete wire response and local NPY.
+  Derived world NPY identifies the exact observation pose, inputs and config.
+- Logical agent `/World/LogicalAgent` is +X forward/+Y left/+Z up with positive
+  CCW yaw; child Camera explicitly maps USD right/up/negative-Z optical-forward
+  into agent -Y/+Z/+X. Camera is 480x270, requested 112.2-degree HFOV, translation
+  `[0.09,0,0.65]` m. Fixed a pre-runtime mm-versus-USD-camera-unit mismatch through
+  explicit conversion; actual sensor horizontal aperture 20.9549993 mm,
+  focal 7.0405878 mm, HFOV 112.1999983 / VFOV 79.8646136, fx 161.2733123 / fy 161.2733097.
+  Camera 0.65 m logical height is a declared difference from the official demo.
+- Actual Isaac 6.0.1 loaded the established Hospital asset with no robot added.
+  Inventory 1936 prims, 126 collision prims, zero robot-named paths, articulations,
+  rigid bodies or physics scenes. Agent observation pose
+  `[19,26.7,1.5707963267948963]` was unchanged before/after capture and visualization.
+  Timeline stayed stopped at 0.0 s. Capture UTC 2026-09-14T07:04:42.401007Z; host
+  monotonic timestamp and render-start/readback bracket recorded separately.
+  Inspected actual 480x270 RGB with Hospital floor, corridor, doors and lights.
+- Reused clean external LightNav official-demo source
+  `c6f40e3220edbf7011e4f17eaf2c865416737d4d` and existing checkpoint snapshot
+  `7221d418bfff55cfcbadd09f7a26aaab81e1f8a6`. All model/decoder/config file hashes
+  matched pinned expectations; full checkpoint hashes/sizes/mtimes and upstream
+  Git cleanliness were unchanged after runtime. Model SHA-256 `ffc4a925...67af18`.
+  No external source, checkpoint, environment, Isaac installation or system
+  package was changed. Server ran in external Python 3.11 environment after Isaac
+  capture exited, with explicit PID/argv/checkpoint/readiness provenance.
+- Fixed instruction before capture: "At the end of the hallway, turn left into
+  the cross corridor." Official login/reset/one next(seq0) used original JPEG
+  bytes; complete six-envelope protocol retained. Actual response was finite
+  `(10,3)`, stop=false, exact raw NPY equals nested wire actions. First local row
+  `[0.0005890281172469258,-0.000056214201322291046,0.3125922977924347]`
+  maps using only observation pose to
+  `[19.000056214201322,26.700589028117246,1.8833886245873313]`.
+  Independent scalar SE(2) recomputation matches all saved world values exactly.
+  No latency analysis or waypoint timing assigned; execution time is null.
+- Stopped only the task-owned LightNav server after the single inference and
+  released GPU memory before Isaac visualization. Actual three viewport PNGs
+  show origin/forward/left, synthetic yaw0/yaw90 fixture directions, cyan actual
+  world trajectory and all 10 yellow waypoint headings. Visually inspected all
+  images and bound explicit visual_review.json to their hashes. Synthetic
+  fixtures are coordinate tests only, not experimental evidence. No geometry
+  scaling, scene hiding, motion or dynamics execution occurred.
+- Added --view-only for repeatable immutable replay. Review then tightened replay
+  input-hash checks and rejected unsupported nonmetre/non-Z-up scene config.
+  Final --view-only --no-hold Isaac smoke passed. Exact capture and inference/
+  initial-visualization research source snapshots are preserved with phase hashes;
+  later replay guards did not rewrite raw or initial evidence artifacts.
+- Evidence: ignored `data/robotless_single_chunk/20260914T065832Z/`, including
+  raw/derived arrays, RGB, protocol, config/metadata, source manifests, server
+  logs/process provenance, viewport images, explicit visual review and validation.
+  Added detailed ROBOTLESS_ISAAC_LIGHTNAV_SINGLE_CHUNK.md and the success-only
+  short README note; append-only log preserves all historical claims.
+- Validation: core SE(2)/schema and timing cases, mock client/protocol and offline
+  failure/mutation cases add 118 tests. First full sandbox run 628 passed / 2 blocked
+  by existing Unix-socket IPC PermissionError. Required host run with
+  `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest`: 630 passed, 20.07 s.
+  `.venv/bin/python -m compileall src scripts tests`, both launcher bash syntax
+  checks, full artifact validator and diff whitespace checks passed. Isaac
+  capture, evidence visualization and final replay each exited successfully.
+- Retained benign Isaac DLSS/readback/render-variable/shutdown warnings and
+  upstream processor/CUDA/seed/chunked-prefill warnings. Official server emitted
+  its NCCL teardown warning after deliberate SIGTERM. No runtime crash. Scene
+  asset URL/version family is recorded, but remote asset closure is not vendored
+  or recursively content-pinned. This validates a static interface only, not
+  navigation success, controller behavior, latency or moving-agent performance.
+- Decision: `ROBOTLESS_SINGLE_CHUNK_VALIDATED`. Reviewed focused implementation
+  and staged diff; one commit on main, then normal push to origin/main. Generated
+  evidence, models, upstream source, caches, environments and unrelated user
+  changes are excluded. Commit identity: `git log -1 --
+  docs/ROBOTLESS_ISAAC_LIGHTNAV_SINGLE_CHUNK.md` after this entry is committed.

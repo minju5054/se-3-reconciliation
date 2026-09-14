@@ -1,0 +1,65 @@
+stage: robotless-lightnav-single-chunk
+schema_version: 1
+paths:
+  lightnav_checkout: ../external/LightNav-0-official-demo
+  checkpoint_path: ../external/LightNav-0/checkpoints/LightNav-0
+  output_root: data/robotless_single_chunk
+lightnav:
+  expected_git_sha: c6f40e3220edbf7011e4f17eaf2c865416737d4d
+  checkpoint_identifier: LightOriginsHQ/LightNav-0
+  checkpoint_revision: 7221d418bfff55cfcbadd09f7a26aaab81e1f8a6
+  server_url: ws://127.0.0.1:8050
+  checkpoint_sha256:
+    action_tokenizer/codebook_l0.npy: daaea83b3ae4637a042d1f61b34a687870d735ef709689e02c1e43d39aab6e16
+    action_tokenizer/codebook_l1.npy: dfde603f96b333cda4c676613ac2f772cec3906a8dbbb7a7415bfeb4aa04e4bf
+    action_tokenizer/codebook_l2.npy: 2a7b186159bc9375997535008028930efe09c9b239a522639aff6febfac6c51c
+    action_tokenizer/manifest.json: 00d77ae028edf59e0ce68b49122dd0a60da527f48508f5ee335a580993a12864
+    config.json: 0e047b5e9ae7981cf0066e74d8b655a2f49d7d7965c25fca386f9eea80b63e58
+    eval_config.json: 7f475edbef4a13d2db99fa12eff5e9dedf48916969ec777f75e6e85e2a492b57
+    model-00001-of-00001.safetensors: ffc4a925378a881afa761865048eb8d07c55cacf5eaf66548b6641c39f67af18
+    model.safetensors.index.json: d725f1a587bde70cdf16ae5e1e672ff13cada2740c11baf13fbcff49dd7e00b1
+    processor_config.json: ac89ec99ea773dc28f5b217edec5947120071ad5b9edcd48d3843ecc63b9877e
+    tokenizer_config.json: 8e8e879bfe8a52ececc118c9b80a48240ab35ff01a8be88d9a071df7ee7c4803
+instruction: At the end of the hallway, turn left into the cross corridor.
+agent:
+  prim_path: /World/LogicalAgent
+  pose_world: [19.0, 26.7, 1.5707963267948966]
+  z_m: 0.0
+scene:
+  family: isaac_hospital_6_0_1
+  asset_relative_path: /Isaac/Environments/Hospital/hospital.usd
+  reference_prim_path: /World/Hospital
+  stage_units_in_meters: 1.0
+  up_axis: Z
+  lighting: authored_hospital_lights
+camera:
+  prim_path: /World/LogicalAgent/Camera
+  relative_translation_m: [0.09, 0.0, 0.65]
+  # Column-vector rotation: USD camera +X right, +Y up, -Z optical forward
+  # maps to logical agent -Y, +Z, +X respectively. This is a proper rotation.
+  rotation_agent_from_camera: [[0.0, 0.0, -1.0], [-1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]
+  resolution_width: 480
+  resolution_height: 270
+  horizontal_fov_deg: 112.2
+  horizontal_aperture_mm: 20.955
+  clipping_range_m: [0.05, 100.0]
+  reference_semantics: official_demo_camera_axes_and_resolution_and_approximate_fov
+  height_choice: logical_camera_height_0.65m_is_explicitly_not_official_body_offset_0.165m
+capture:
+  warmup_updates: 60
+  render_subframes: 8
+  jpeg_quality: 95
+visualization:
+  z_offset_m: 0.12
+  origin_color_rgba: [1.0, 0.0, 1.0, 1.0]
+  forward_color_rgba: [0.0, 1.0, 0.1, 1.0]
+  left_color_rgba: [1.0, 0.15, 0.1, 1.0]
+  trajectory_color_rgba: [0.05, 0.85, 1.0, 1.0]
+  heading_color_rgba: [1.0, 0.82, 0.1, 1.0]
+  line_width: 7.0
+  point_size: 14.0
+  heading_length_m: 0.22
+  overview_eye_agent_offset_m: [-1.8, -0.8, 2.0]
+  overview_target_agent_offset_m: [1.0, 0.0, 0.1]
+  fixture_eye_world_offset_m: [0.45, -0.7, 2.3]
+  fixture_target_world_offset_m: [0.1, 0.2, 0.0]

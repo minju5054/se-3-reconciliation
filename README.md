@@ -7,6 +7,12 @@ here is separate from LightNav.
 
 ## Current research state
 
+Robotless static interface validation now succeeds: Isaac captures one RGB image
+from a logical SE(2) agent, isolated official LightNav returns one chunk, and
+Isaac displays its observation-anchored world trajectory. See the
+[robotless single-chunk report](docs/ROBOTLESS_ISAAC_LIGHTNAV_SINGLE_CHUNK.md)
+for coordinate checks and evidence; this does not validate navigation or motion.
+
 New reference reproduction: the unmodified official LightNav MuJoCo TurtleBot
 pipeline ran successfully on this machine. See the [reproduction report](docs/OFFICIAL_LIGHTNAV_MUJOCO_DEMO_REPRODUCTION.md)
 for provenance, runtime evidence, and claim limits; historical research below is retained.
