@@ -3469,3 +3469,67 @@ This file is append-only. Add each completed task at the bottom.
   "gui: demonstrate OLD-FRESH handoff disagreement", and normally push origin
   main. Final SHA recorded in ignored git_completion.json; generated media/raw
   evidence and external/model/environment data excluded from Git.
+
+## 2026-09-15 — Genuine online robotless collector implementation and freeze
+
+- User requested actual new live RGB → successive official LightNav predictions →
+  fixed official MPC → finite-rate logical SE(2) execution, all60 frozen Hospital
+  episodes, immutable per-event data/PNG coverage, validation and saved replay.
+  Starting HEAD and fetched origin/main were both
+  e56c0fe320309c2c4ffd8488fb3abdac42da8bfe. Preserved unrelated user edits in the two
+  stage0 config files; hashes remain48b4d635… and0b0aed65… respectively.
+- Implemented isolated serial LightNav JSONL worker, full-episode SlowFast history
+  reconstruction, read-only official asynchronous MPC worker, exact unicycle
+  executor, clock/activation journals, bounded JPEG writer, frozen30×2 schedule,
+  resume/raw hash checks, every-event plots, independent full-stream validator,
+  live collection GUI and separately labelled recorded-sample replay GUI.
+- Official source remains clean at c6f40e3220edbf7011e4f17eaf2c865416737d4d;
+  checkpoint revision7221d418bfff55cfcbadd09f7a26aaab81e1f8a6 and all10 configured
+  file hashes verified. Persistent warmed GPU server started under
+  data/robotless_online_handoffs_v1/smoke_20260915_01, with source-supported
+  gpu_memory_utilization=.55, unchanged bf16 model/history. Upstream explicitly
+  reserves2.29GiB KV cache and warns that this overrides fraction-based profiling;
+  actual GPU process/memory coexistence is recorded, rather than inferred from
+  the fraction. Isaac and CPU/model environments remain separate and unmodified.
+- Technical preparations are retained individually, without replacing conditions
+  based on geometry: smoke01 refused a changed source hash before acquisition;
+  smoke02 exposed inherited CUDA library path contamination, fixed by the existing
+  clean-environment launcher pattern; smoke03 caught render-triggered extra
+  physics; smoke04 caught a second timeline-commit physics tick through independent
+  stream reconstruction. Neither03nor04 qualifies as valid online execution.
+- Native playSimulations guards now prevent automatic render/timeline physics;
+  only explicit World physics steps advance execution. Every loop checks the
+  previous recorded clock; exact resolved float32 dt drives integration.
+  Smoke05 validated3handoffs but visual review found renderer-wide DebugDraw in
+  model RGB. Subsequent captures clear annotations before rendering and copy RGB
+  before restoring the display. Smoke06/07 inputs were individually inspected
+  clean. Earlier technical records and images remain preserved.
+- Smoke08 adds strict10Hz solve submission (no off-grid install solve):3moving
+  successive handoffs,316states/315integrations, zero reconstruction error,
+  41accepted fixed-grid solves,2stale results rejected,21real captures,4predictions,
+  6/6required160dpi event PNGs. Exact client-inflight updates are11/11/11; capture
+  counts1/0/1 reflect capture deadlines, not a stopped executor. Timing-valid2/3;
+  history-full0 in this short smoke. Request-to-ready-seen coarse timing is stored
+  separately from exact request-to-client-receipt timing and never silently mixed.
+- Recorded replay verification in
+  data/robotless_online_replay/smoke_20260915_07_replay02 inspected4actual application
+  PNGs and callback/sample selection, preserved all source hashes, and performed no
+  inference/integration. A first roof-occluded overview is retained as partial
+  visual evidence; orthographic below-ceiling framing fixes display geometry only.
+- Full host pytest after implementation:1286passed in42.40s. Earlier sandbox-only
+  suite exposed expected Unix-socket permission failures; rerun on host passed.
+  Final display-only framing receives actual Isaac smoke09 plus compile/bash/diff
+  checks. Synthetic fixtures and CPU solver smoke remain software checks, not
+  experimental evidence. All primary episodes and final counts are still pending
+  at this implementation commit and will be appended after collection.
+- No graph, rigid correction, correspondence optimizer, controller tuning, robot
+  dynamics, prompt search, external source edits, generated-data commit or deletion.
+  Review implementation/staged diff, commit the collector, freeze the full60
+  schedule with its SHA/source snapshots, then execute every frozen episode.
+- Final live GUI display check (smoke10) also shows the actual green executed path,
+  blue active reference and clean latest saved JPEG. Display refresh now follows
+  RGB readback, uses guarded file URIs, and settles before swapchain capture.
+  This corrects a display-phase/asset-loading issue without changing physics,
+  MPC settings, instructions or prediction inputs. Smoke09/10 and their final
+  validation remain separate immutable technical evidence. Primary acquisition
+  uses the same collector headless to reduce viewport overhead.

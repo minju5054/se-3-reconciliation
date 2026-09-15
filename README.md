@@ -7,6 +7,8 @@ here is separate from LightNav.
 
 ## Current research state
 
+A genuine [online robotless handoff collector](docs/ROBOTLESS_ONLINE_HANDOFF_DATASET_V1.md) now connects live Isaac RGB, persistent official LightNav, the read-only official MPC and 60 Hz logical SE(2) integration. Technical smoke has demonstrated successive command activations; primary collection results are recorded separately after the frozen 60-episode run.
+
 Persistent GUI evidence is available for challenging and benign [OLD-consistent OLD/FRESH handoffs](docs/ROBOTLESS_OLD_FRESH_PROBLEM_GUI.md).
 
 Five frozen diagnostic cases now have genuine successive LightNav predictions from OLD-consistent spatial observation poses, with exact planning-OLD reproduction in every final session. Direction and yaw disagreement remains in some cases, and local versus windowed tangents differ in others; see the [OLD-consistent observation pilot](docs/ROBOTLESS_OLD_CONSISTENT_OBSERVATION_PILOT.md) for actual Isaac evidence and interpretation limits.
