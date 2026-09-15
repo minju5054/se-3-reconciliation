@@ -7,6 +7,8 @@ here is separate from LightNav.
 
 ## Current research state
 
+Persistent GUI evidence is available for challenging and benign [OLD-consistent OLD/FRESH handoffs](docs/ROBOTLESS_OLD_FRESH_PROBLEM_GUI.md).
+
 Five frozen diagnostic cases now have genuine successive LightNav predictions from OLD-consistent spatial observation poses, with exact planning-OLD reproduction in every final session. Direction and yaw disagreement remains in some cases, and local versus windowed tangents differ in others; see the [OLD-consistent observation pilot](docs/ROBOTLESS_OLD_CONSISTENT_OBSERVATION_PILOT.md) for actual Isaac evidence and interpretation limits.
 
 The frozen Hospital bank now compares straight and OLD-conditioned counterfactual continuation while preserving both raw predictions and separating local from windowed direction diagnostics. Some residuals decrease substantially while others remain or increase; see the [OLD-conditioned report](docs/ROBOTLESS_OLD_CONDITIONED_HANDOFF.md) for paired distributions, anchor limitations and actual Isaac evidence.

@@ -1,0 +1,24 @@
+schema_version: 1
+source_run: data/robotless_old_consistent_observation/20260915T043415Z
+episode_ids: [episode_006, episode_016, episode_027]
+default_case: episode_006
+display_playback_only: true
+display_timeline_s: {old_motion_end: 3.0, fresh_reveal: 4.0, comparison_end: 8.0}
+old_arc_advance_m: 0.30
+tangent_window_m: 0.10
+display_geometry:
+  xy_scale: 1.0
+  angular_magnification: 1.0
+  path_z_m: 0.12
+  annotation_z_m: 0.15
+  local_arrow_length_m: 0.24
+  window_arrow_length_m: 0.34
+  boundary_yaw_arrow_length_m: 0.18
+  overview_eye_R0_frame_m: [-2.3, -1.6, 2.7]
+  overview_target_R0_frame_m: [0.3, 0.0, 0.12]
+  handoff_eye_above_B_m: 1.6
+  handoff_target_z_m: 0.15
+source_frames: 'OLD at saved R0; FRESH at actual saved R1; T_world_observation, column vectors'
+world_axes_units: 'Isaac fixed world XY; +Z up; metres; yaw/direction CCW radians'
+execution_time: null
+new_lightnav_inference_count: 0

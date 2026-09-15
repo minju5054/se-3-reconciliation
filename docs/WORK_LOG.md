@@ -3387,3 +3387,85 @@ This file is append-only. Add each completed task at the bottom.
   LightNav observations" and normal origin/main push. Final SHA/changed files
   recorded in ignored git_completion.json; generated RGB/raw arrays/screenshots,
   model weights, external code and environments remain uncommitted.
+
+## 2026-09-15 — Persistent saved OLD/FRESH handoff problem GUI
+
+- Request: demonstrate the actual saved OLD-consistent handoff geometry in an
+  interactive Isaac GUI; no new inference, robot execution or reconciliation.
+  Read AGENTS, README, prior work log and the OLD-consistent pilot report. Fetched
+  origin before edits. Starting HEAD/origin/main were both
+  e7f2f6a295f8937b0d5fcd3f823a08cfb283d3a3 on main. The two preexisting user
+  controller/single-chunk configuration edits retain their task-start hashes.
+- Primary source is robotless_old_consistent_observation/20260915T043415Z.
+  Existing validator passed before implementation and during final validation.
+  Independently compared all 208 source files against the task-start file set,
+  sizes and SHA-256 values: unchanged. No source raw/derived/RGB/metadata writes,
+  LightNav modifications, new inference, checkpoint changes or synthetic fallback.
+- Added a pure geometry/state module, a frozen-source gate and evidence helper,
+  explicit display configuration, Isaac GUI/launcher, fail-closed GUI validator,
+  43 pure/mock contract tests and ROBOTLESS_OLD_FRESH_PROBLEM_GUI.md. README gets
+  one short success sentence. Allowed cases remain exactly 006, 016 and 027.
+- Reconstructed the augmented path [R0, OLD] directly from source arrays, with
+  the connector included once and the pilot's shortest-angle/arc convention.
+  Reconstructed B at 0.30 m equals saved R1_old exactly; marker starts exactly
+  at R0 and ends exactly at B. Checked OLD/FRESH raw-to-world transforms using
+  each actual saved observation pose. No FRESH re-anchoring or source scaling.
+- Reconstructed closest FRESH projection, local tangents, centered/truncated
+  0.10 m window tangents and shortest-angle FRESH pose yaw independently of the
+  saved metrics lists. Compared every reconstructed metric/diagnostic field.
+  Panel values are loaded from saved metrics, never hardcoded research truth.
+  Cross-track/local/window/yaw (m/deg/deg/deg):
+  006 .0000352404667 / 90.1106542623 / 89.9246318737 / 72.0005279288;
+  016 .000462856647 / 90.5206495380 / 90.1390083079 / 72.0666613149;
+  027 .151385084978 / .00682017277 / .00577342531 / .00361765864.
+  027 is labeled BENIGN DIRECTION / YAW REFERENCE and its ahead-of-anchor first
+  spatial reference is explained, without failure/success classification.
+- GUI controls: all three case buttons; Replay OLD, Pause at Handoff, Reveal
+  FRESH, Replay Full, Reset, RGB1 toggle, local/window overlay toggle, Overview
+  Camera and Handoff Camera. Case switching resets marker/reveal/window state.
+  Display-only timeline is 3 s motion, 1 s pause, 4 s static comparison; default
+  hold remains open after eight seconds. Label visibly states OLD-CONSISTENT
+  SPATIAL SURROGATE REPLAY. Original observation/request/readiness timestamps
+  remain separate from host display/capture timestamps; execution time is null.
+- Actual Isaac 6.0.1 loaded Hospital once: 1,936 prims, 126 authored collision
+  prims, no rigid bodies, physics scenes, articulations or robot-named paths.
+  Timeline stayed stopped at zero. Only a logical Xform/camera and DebugDraw
+  marker/lines were used. Source XY/headings remain unscaled; display Z layers
+  and annotation lengths/colors, both camera transforms and UI DPI are recorded.
+- Retained three ignored layout trials. Initial inherited widget margins and
+  desktop DPI clipped the lower/right panel. Removed cascading margins and
+  fixed UI DPI/dock width. Final full application screenshots show every case
+  button, all metrics/legend and real RGB1 together. The no-hold trial exited
+  after its documented observation period. No scene geometry was hidden.
+- Primary GUI evidence: robotless_old_consistent_problem_gui/20260915T064814Z.
+  Produced six required before/after screenshots plus three window overlays and
+  three overviews, each with source OLD/FRESH/metrics hashes, camera/reveal state,
+  timestamp, research SHA and geometry audit. All 12 images manually inspected;
+  027 after also inspected at original resolution. White Q can overlap B in the
+  two tiny-distance cases; its distance is never visually enlarged.
+- Actual renderer exercised the same callbacks used by every button for all
+  three cases. Verified replay/reset/case changes, exact endpoint, automatic
+  handoff/reveal order, RGB/window toggles and both cameras. Validator checked
+  1,974 actual display marker samples. Persistent run rendered 1,248 updates
+  over 12.030951 s after readiness and remained after the full replay. The primary
+  tool-owned process later ended with exit143 after about340 s; this does not
+  establish the cause of closure. A separate terminal-owned persistent GUI was
+  launched at gui_native_controls to remain independent of tool lifetimes.
+  Optional XTest native mouse checks did not establish interaction while other
+  desktop windows were foreground; no native mouse success is claimed. The
+  actual Isaac callback/control checks and screenshot review are the evidence.
+- The separate terminal GUI also passed its twelve-second observation and later
+  closed after about268 s; the final integrity audit records its process absent.
+  Do not claim an open window at delivery or successful native mouse testing.
+- Final GUI validator: ROBOTLESS_OLD_FRESH_PROBLEM_GUI_VALIDATED, zero failures;
+  208 unchanged source files, 12 inspected screenshots, exact saved geometry.
+  Full host pytest: 1,087 passed in42.18 s, including43 new pure/mock tests.
+  Compileall, launcher bash syntax, source/config preservation and diff checks
+  passed. Synthetic tests remain software checks, not research evidence.
+- Claims remain trajectory-level and descriptive. No robot failure, collision,
+  executability, graph necessity/improvement, general LightNav defect or natural
+  deployment frequency claim. No graph/rigid/correspondence/factor/controller/
+  dynamics implementation. Review diff/staged diff, make one focused commit
+  "gui: demonstrate OLD-FRESH handoff disagreement", and normally push origin
+  main. Final SHA recorded in ignored git_completion.json; generated media/raw
+  evidence and external/model/environment data excluded from Git.
