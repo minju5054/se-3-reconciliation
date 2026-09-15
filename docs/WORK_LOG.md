@@ -3173,3 +3173,103 @@ This file is append-only. Add each completed task at the bottom.
   across transitions" and normal origin/main push. Final SHA and exact changed
   files are recorded after completion in ignored git_completion.json; evidence
   inventory and source hashes are retained in evidence_manifest.json.
+
+### 2026-09-15 — Straight versus OLD-conditioned robotless continuation
+
+- Read the requested task and repository context; fetched origin and confirmed
+  HEAD/origin/main at 653b9e7fc9cb69c4899e6ea40460b73e3b1ffd4d. Preserved the
+  existing user changes in stage0_jackal_controller_validation.yaml and
+  stage0_lightnav_single_chunk.yaml, excluding both from this task.
+- Existing full screening validator passed before analysis. Source remains
+  data/robotless_handoff_screening/20260914T101519Z, with manifest SHA256
+  139ce7ad6c212584a0e9d680d81b9dbe12e3be3d6ae7ae0f19bc8df2bd800e33. All 805
+  source files and their exact filename sets/hashes remain unchanged, including
+  raw/world OLD/FRESH, observation RGBs, manifest and prior straight metrics.
+  Retained all 30 episodes and 16 raw pair groups; no new LightNav inference.
+- Added a separate pure continuation module, versioned config, source inventory,
+  analysis/CSV/plot pipeline, strict validator, passive Isaac viewer/launcher and
+  45 synthetic/mock tests. Reused existing projection, SE(2), screening validator,
+  statistics/CSV helpers and Hospital runtime without modifying their code.
+- Project R_obs=R1 onto OLD, interpolate A_obs yaw on the shortest angle, then
+  use T_align=T_Robs*inverse(T_Aobs). Derived B_old=T_align*A(s_obs+v*tau),
+  v=.25 m/s and tau=[0,.2,.5,1] s. Alignment reconstructs R_obs within 1e-10;
+  every B_old(0) is stored exactly as R_obs. Raw OLD/FRESH are never corrected
+  or reanchored. No intrinsic waypoint times or execution events are invented.
+- Arc interpolation retains the projection winner at tau0; positive advance
+  uses the lowest nonzero segment ending at an exact arc vertex. A requested
+  advance beyond remaining OLD arc is explicitly OLD_CONTINUATION_EXHAUSTED,
+  with null boundary/metrics and reason; equality is available. All actual
+  four-tau conditions have available30/exhausted0. Zero-length local tangent
+  and inadequate windows are unavailable rather than invented.
+- Incoming direction uses aligned OLD geometric tangent, separately from
+  boundary pose yaw. The unchanged FRESH projection helper's yaw(B)-referenced
+  direction is explicitly labelled as a nested reference; e_dir_old uses OLD
+  tangent. At tau0 distance/yaw match the old baseline exactly, but incoming
+  direction can differ even without boundary movement.
+- Added independent .10 m centered/truncated arc-window headings for OLD and
+  FRESH. Span/chord <=1e-12 m has an explicit numerical-unavailability reason,
+  not a quality gate. No actual window is unavailable. Both local and windowed
+  angles, endpoints, progress, lengths and signed/absolute residuals are saved.
+- Actual analysis run: data/robotless_old_conditioned_handoff/20260915T021149Z.
+  Metrics created02:11:50.650263Z, analysis completed02:11:51.425757Z. Saved
+  all120 condition rows,30 anchor records,64 pair-by-tau rows, full straight
+  source rows, three critical cases and deterministic representative rules.
+  Paired differences are new minus straight, not improvement scores. Equal-pair
+  weighting applies separately to within-pair metric and difference medians.
+- Observation-to-OLD distance min/median/p75/p90/max metres:
+  [.000004282498,.204967663787,.297879647610,.299709538721,.304539649340].
+  Equal-pair anchor median .274437464538 m. These substantial reference gaps
+  limit the physical interpretation of the aligned counterfactual surrogate.
+- At tau1, episode OLD e_perp median/p90/max .024881749682/.237100970001/
+  .249179908167 m; absolute local direction5.855378936/58.094540422/
+  71.979693128 deg; window5.855378936/73.620286826/90.048458326 deg;
+  yaw5.935945186/55.786457627/65.380212090 deg. Equal-pair OLD medians:
+  e_perp.074990471923m, local/window17.941417256deg, yaw17.763997710deg.
+  Full four-tau min/median/p75/p90/max and paired distributions are documented.
+- Critical006 at tau1: straight distance/direction/yaw .249942118396m/
+  16.714214866deg/35.997091341deg -> OLD .212648297698m/58.094540422deg/
+  55.786457627deg, window58.095782617deg, anchor gap.297879647610m.
+  New FRESH winning segment is .150304m, unlike the previous16.8um winner.
+- Critical016: .240664039602m/75.070276873deg/73.088350669deg ->
+  .100689723653m/24.314049156deg/23.903135711deg, window24.314049156deg,
+  anchor gap.304539649340m. Critical027 remains numerically small:
+  .000123017761m/.127546213deg/.230980648deg -> .000143424485m/
+  .141972515deg/.247030663deg; window.141972515deg, anchor gap.150036565970m.
+- Deterministic reps: required006/016, maximum OLD distance013 (.249179908167m),
+  maximum OLD local direction007 (71.979693128deg), largest absolute paired
+  direction change016 (-50.756227717deg). Unique IDs006/007/013/016. No case
+  added or selected manually. Case013's local26.291492253deg versus window
+  88.385630106deg reflects a .000272335m FRESH winning segment; windowing does
+  not uniformly decrease residuals. No threshold-based A/B/C/D classifier.
+- Actual Isaac6.0.1 rendered eight final overview/detail PNGs with Hospital
+  inventory1936 prims/126 collision prims, no robot/articulation/rigid body/
+  physics scene, stopped timeline0. One scene load per rendering process.
+  Initial views are archived under preparation/initial_marker_overlap; final
+  views completed02:15:35.826541Z after only marker height/stem changes exposed
+  coincident points. Raw XY, all angles, metrics and source files unchanged.
+- Blue rawOLD, magenta rawFRESH, green aligned future, redR_obs, lavender OLD
+  projection/gap, yellow straightB, orange OLD-conditionedB/incoming tangent,
+  white FRESHQ/connector and cyan FRESH tangent. Display heights/stems are
+  documented; no geometry scaling, angle magnification or hidden scene objects.
+  Inspected all eight final screenshots and five plots. Paired plots retain
+  each raw episode at its own ID position. All13 image hashes bind visual review.
+- Actual artifact validator passes with no missing files/failures. Independent
+  scalar audit verified120 conditions,400 quantiles and805 source files:
+  2950 comparisons, max difference1.0177969578251123e-13. No project geometry
+  functions were imported by that audit. Synthetic tests are tests only.
+- Required full host suite:1003 passed in40.07s. Compileall, shell syntax and
+  whitespace checks passed. The synthetic world-yaw test was moved away from
+  an exact equidistant segment bisector, where floating-point tie winners may
+  change; no production projection rule was changed. Corruption tests cover
+  source/config/metrics/grouping/selection/plots and visual evidence guards.
+- Added ROBOTLESS_OLD_CONDITIONED_HANDOFF.md and two success-state README
+  sentences. Results support partial straight-surrogate influence, with residual
+  local/window differences remaining under the specified OLD-conditioned
+  construction. They do not establish actual execution, latency failures,
+  correspondence correctness, reconciliation necessity, graph superiority or
+  navigation improvement. No graph, rigid correction of raw model outputs,
+  correspondence factor, weight, gate, controller or dynamics was implemented.
+- Decision: ROBOTLESS_OLD_CONDITIONED_HANDOFF_VALIDATED. Review diff and staged
+  scope, then make the single focused commit "stage0: compare OLD-conditioned
+  handoff continuation" and normal origin/main push. Final SHA and changed-file
+  list belong to ignored git_completion.json; generated evidence stays untracked.

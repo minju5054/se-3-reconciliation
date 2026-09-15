@@ -1,0 +1,40 @@
+schema_version: 1
+stage: robotless-old-conditioned-handoff
+source_run: data/robotless_handoff_screening/20260914T101519Z
+motion:
+  v_mps: 0.25
+  tau_s: [0.0, 0.2, 0.5, 1.0]
+tangent_window_m: 0.10
+numerical_validation:
+  minimum_window_span_m: 1.0e-12
+  minimum_window_chord_m: 1.0e-12
+  anchor_atol: 1.0e-10
+conventions:
+  alignment: T_align = T_world_Robs * inverse(T_world_Aobs)
+  continuation: B_old(tau) = T_align * A(s_old_obs + v*tau)
+  zero_delay: reuse projected OLD reference; B_old(0) is R_obs after alignment check
+  arc_vertex_tie: lowest nonzero segment ending at that progress; zero-delay uses projection winner
+  zero_length_segments: no arc duration; local tangent unavailable for a degenerate winner
+  exhaustion: requested advance greater than remaining OLD length is unavailable; no endpoint clamp
+  frames: world +Z up, metres, CCW yaw in radians; column vectors, T_target_source
+  timing: controlled spatial advance; no intrinsic waypoint timestamps or actual execution
+  statistics: linear percentiles; equal weight per within-pair median
+  representative_tie: lowest episode_id on exact ties
+visualization:
+  path_z_m: 0.12
+  aligned_z_m: 0.17
+  incoming_z_m: 0.23
+  fresh_tangent_z_m: 0.29
+  arrow_length_m: 0.18
+  arrowhead_length_m: 0.025
+  line_width: 4.0
+  point_size: 14.0
+  old_color: [0.05, 0.25, 1.0, 1.0]
+  fresh_color: [1.0, 0.0, 0.85, 1.0]
+  aligned_color: [0.15, 0.9, 0.3, 1.0]
+  observation_color: [1.0, 0.05, 0.05, 1.0]
+  old_projection_color: [0.65, 0.65, 1.0, 1.0]
+  straight_color: [1.0, 0.9, 0.0, 1.0]
+  old_boundary_color: [1.0, 0.45, 0.0, 1.0]
+  fresh_projection_color: [1.0, 1.0, 1.0, 1.0]
+  fresh_tangent_color: [0.0, 1.0, 1.0, 1.0]

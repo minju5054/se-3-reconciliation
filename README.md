@@ -7,6 +7,8 @@ here is separate from LightNav.
 
 ## Current research state
 
+The frozen Hospital bank now compares straight and OLD-conditioned counterfactual continuation while preserving both raw predictions and separating local from windowed direction diagnostics. Some residuals decrease substantially while others remain or increase; see the [OLD-conditioned report](docs/ROBOTLESS_OLD_CONDITIONED_HANDOFF.md) for paired distributions, anchor limitations and actual Isaac evidence.
+
 The frozen 30-episode Hospital screening bank produced 30 valid successive LightNav pairs with 16 distinct raw pairs; episode and duplicate-aware distributions include both small and larger handoff geometry differences. See the [screening report](docs/ROBOTLESS_LIGHTNAV_HANDOFF_SCREENING.md) for full distributions, deterministic Isaac representatives and interpretation limits.
 
 Projection-based robotless handoff characterization now measures continuous closest position, cross-track distance, tangent-direction mismatch, pose-yaw mismatch, and arc-length progress on the fixed FRESH trajectory. The four prescribed conditions passed numerical and actual Isaac visualization checks; see the [projection report](docs/ROBOTLESS_PROJECTION_HANDOFF_GEOMETRY.md) for values and interpretation limits.
