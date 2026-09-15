@@ -7,7 +7,7 @@ here is separate from LightNav.
 
 ## Current research state
 
-A genuine [online robotless handoff collector](docs/ROBOTLESS_ONLINE_HANDOFF_DATASET_V1.md) now connects live Isaac RGB, persistent official LightNav, the read-only official MPC and 60 Hz logical SE(2) integration. Technical smoke has demonstrated successive command activations; primary collection results are recorded separately after the frozen 60-episode run.
+The [genuine online robotless handoff dataset](docs/ROBOTLESS_ONLINE_HANDOFF_DATASET_V1.md) completed all 60 frozen Hospital episodes with live Isaac RGB, persistent official LightNav, the read-only official MPC and 60 Hz logical SE(2) integration. It preserves 881 actual handoffs (880 moving, one stationary), 59 STOP attempts, 4,639 live frames and all 1,762 required valid-event trajectory PNGs. Every valid event has measured inference/execution/capture overlap and post-switch execution. Local pacing passes in 838/881 events and nominal history-full coverage is 246/881; collision validity remains unknown. The [local image index](data/robotless_online_handoffs_v1/primary_20260915T091900Z/index.html) links every event and episode.
 
 Persistent GUI evidence is available for challenging and benign [OLD-consistent OLD/FRESH handoffs](docs/ROBOTLESS_OLD_FRESH_PROBLEM_GUI.md).
 

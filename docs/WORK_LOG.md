@@ -3533,3 +3533,87 @@ This file is append-only. Add each completed task at the bottom.
   MPC settings, instructions or prediction inputs. Smoke09/10 and their final
   validation remain separate immutable technical evidence. Primary acquisition
   uses the same collector headless to reduce viewport overhead.
+
+
+## 2026-09-15 — Genuine online robotless primary collection and results
+
+- Collector freeze commit eed5f2c68f9bfc2b62d70a00a6d784647c32a971 was pushed before
+  primary acquisition, following starting SHA e56c0fe320309c2c4ffd8488fb3abdac42da8bfe.
+  Run data/robotless_online_handoffs_v1/primary_20260915T091900Z froze all 30 Hospital
+  conditions × two repeats before inference. Schedule SHA-256 d5c3238100b13dfb25350b90b7ed13a70dd5d55e5545edf7cfe8dcc317a19081;
+  config SHA-256 adc70b2f8d68b6228cda69b0a44e4de0c1753252601d6df50ef17e3fbf95e049.
+  Only prior R0/instructions/category metadata were reused. All RGB and predictions
+  were newly acquired in one uninterrupted session per episode.
+- Executed every one of the 60 frozen episodes; collector exited 0 with
+  COLLECTION_SCHEDULE_FINISHED. No replacements or count/residual-based early
+  stopping. Terminal outcomes: 59 MODEL_STOP, one predeclared 40-attempt limit.
+  Requested 1,000 predictions: 60 initial C0 plus 940 handoff attempts. Retained
+  881 actual valid activations (880 moving, one stationary) and 59 STOP attempts;
+  no model/protocol/controller/technical-error episodes occurred.
+- Saved 4,639 live JPEGs: 4,537 delivered frames, 3,537 buffer-only uploads and 102
+  explicitly indexed unsent terminal tails. Saved 69,125 states and 69,065 applied
+  command integrations. All observed raw outputs were 10×3; arbitrary-N support
+  remains software-tested. No raw array, old evidence or user change was overwritten.
+- All 881 valid events have 10–43 exact client-inflight updates, 1–3 overlapping
+  captures, newly solved official MPC commands and actual FRESH execution afterward.
+  Full stream audit reconstructs all 69,065 integrations with zero error, verifies
+  10,740 accepted fixed-grid 10 Hz submissions, first FRESH pre-integration B/P,
+  current generation and successive FRESH→OLD lineage. Translation-threshold moving
+  count is 804 plus 76 rotation-dominant events; stationary episode_000_repeat_01 /
+  handoff_020 retains 27 inflight updates, two captures and 1.3333 s post-switch.
+- Exact client-inflight pacing passes 838/881; 18 RTF values fall below 0.8 and 25
+  exceed 1.2, with no inflight stall above the 0.25 s ceiling. Median RTT 0.3801 s,
+  observation→ready-seen 0.4667 sim s, observation→actual switch 0.5667 sim s,
+  matched-sample RTF 1.0010 (range 0.6092–1.6248), translation 0.2000 m and actual
+  FRESH lifetime 1.1333 sim s. Whole-episode RTF 0.9795–1.0000 does not erase local
+  pacing limits. Raw request-seen→ready-seen flags pass 554/881; 334 flags differ
+  from the separately derived exact interval and both definitions remain explicit.
+- Full-episode SlowFast nominal 64 is not a ring. Valid FRESH delivered histories
+  range 8–205 (median 36); 246/881 satisfy nominal history_full. Reconstructed
+  selected unique frames / processor slots range 8–82 for valid FRESH events.
+  All 60 sessions preserve chronological frames, exact JPEG bytes, actions.step,
+  capture anchors and source-pinned sampler reconstruction without future leakage.
+- Official bf16 LightNav and Isaac coexisted on RTX 5060 Ti 16 GB; a saved snapshot
+  records 15,796/16,311 MiB total, model 13,062 MiB and Isaac 1,959 MiB. No OOM,
+  model reload, reduced history, quantization or environment/source changes. The
+  source-supported 0.55 memory fraction is not a cap when upstream explicitly
+  reserves 2,457,600,000 KV bytes. Task-owned server was identity-checked and stopped
+  after all 60 episodes; the primary Isaac process also exited.
+- After collection, three disjoint 20-episode plotting shards used the frozen
+  functions and source hashes, followed by canonical whole-run aggregation. Saved
+  1,762/1,762 valid-event PNGs plus 118 STOP diagnostics; no unplottable attempts.
+  Added 60 overviews, 60 timelines, 99 contact sheets, all-event HTML/index CSV and
+  aggregate distributions. All 3,041 index links resolve; 19 images directly reviewed
+  with fixed category-first selection and separate stationary/STOP examples.
+  Archived orchestration source, commands and hashes under logs/postprocessing.
+- Raw valid-event diversity: OLD 145, FRESH 151, ordered pairs 357; dominant pair
+  178/881 (20.20%). Episode medians and ordered-pair medians are weighted separately.
+  No case was filtered for residual size; this is a dependent formulation-development
+  corpus, with unknown collision validity and incomplete nominal-history coverage.
+- Actual primary recorded replay in data/robotless_online_replay/primary_20260915T091900Z_replay01
+  passed renderer/callback and four-screenshot checks, preserving all 97 source
+  hashes. Displayed states 0/128/158 use saved records; no new inference/integration.
+  It exits after verification. Final smoke10 live GUI PNG is independently hashed
+  and archived by link; its end-of-execution nature and asynchronous null screenshot
+  sidecar are explicit. Replay displays raw coarse timing flags, explaining the
+  first pictured event's false flag versus the exact plot's true pacing flag.
+- Full no-plot validator passed all 60 episodes, with errors=[] and causal_valid=true.
+  Final pytest passed 1,286 tests in 44.44 s on the host; compileall and both new
+  launcher bash syntax checks passed. Final external audit rehashed all 16 checkpoint
+  files against startup and verified all 10 configured hashes; pinned upstream
+  checkout remains clean. All 14 frozen collector source hashes and unrelated
+  user config hashes remain unchanged. Full PNG validation and final Git completion
+  are recorded in the following entry/bullets.
+- Final full PNG validator also exited 0: valid=true, causal_valid=true,
+  schedule_complete=true, errors=[], 60 episode validation records and 1,762 valid
+  PNGs. Root validation SHA-256 a525bf52748573d13ceaaa71d31e763feacbe8fef362c27e98d07f4e4b10c1e2.
+  Final status ROBOTLESS_ONLINE_HANDOFF_DATASET_COLLECTED_WITH_LIMITATIONS: 43 local
+  pacing limits and 635 below nominal history-full length; no runtime blocker.
+- Updated README and the full dataset report with actual counts, timing-window
+  distinctions, raw diversity and weighting, image paths, exact commands, smoke
+  and primary replay evidence, interpretation limits and verification. Independent
+  documentation review recomputed counts and checked all headline claims/paths.
+  Reviewed final diff and staged diff; commit only these three documentation files
+  and normally push main. Final commit/push SHA is recorded in the ignored run
+  git_completion.json. Generated media/raw data, external source, model weights,
+  environments and unrelated user changes are excluded from the commit.
