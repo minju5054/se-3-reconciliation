@@ -3273,3 +3273,117 @@ This file is append-only. Add each completed task at the bottom.
   scope, then make the single focused commit "stage0: compare OLD-conditioned
   handoff continuation" and normal origin/main push. Final SHA and changed-file
   list belong to ignored git_completion.json; generated evidence stays untracked.
+
+### 2026-09-15 — OLD-consistent successive LightNav observation pilot
+
+- User requested exactly five predeclared diagnostic cases:006/007/013/016/027,
+  new RGB1 at 0.30m progress on augmented [R0,OLD], a genuine final two-request
+  session per case and exact planning-OLD reproduction. Inspected Git status,
+  branch/remotes, repository rules, README/work log and source reports; fetched
+  origin. Starting HEAD and origin/main both
+  e4bd9c7f6db924296e5cc846c8b5ee8920cb574b. Two preexisting user edits in the
+  Jackal controller and single-chunk configs remain unchanged and unstaged.
+- Existing complete screening and OLD-conditioned validators passed before
+  freeze. Source data/robotless_handoff_screening/20260914T101519Z/ contains805
+  unchanged files; selection provenance data/robotless_old_conditioned_handoff/
+  20260915T021149Z/ contains57 unchanged files. All filename sets, byte sizes and
+  SHA-256 inventories are retained. Source manifest SHA remains
+  139ce7ad6c212584a0e9d680d81b9dbe12e3be3d6ae7ae0f19bc8df2bd800e33.
+- Run data/robotless_old_consistent_observation/20260915T043415Z/ froze all five
+  cases at04:34:17.521940Z, before any new capture/request. Manifest SHA:
+  68befb7f528506bf943302af5141ef20156fdcbf6dcb059ff2daa0da276bba69.
+  No cases were added, dropped or replaced based on outputs.
+- New pure module reuses validated arc interpolation, window tangent, projection,
+  SE(2), raw-array and timing contracts. R0->O0 is one explicitly labeled
+  simulation-side connector. Position follows XY arc and yaw shortest-angle
+  interpolation. Exact vertices choose the lowest positive-length incoming
+  segment; zero XY lengths add no arc duration. Insufficient total length is
+  OLD_ARC_INSUFFICIENT with no boundary/clamp and no replacement. Actual count0.
+- Actual R1_old values (metres, CCW radians):
+  006 [18.710926912316218,25.62945182412973,-2.888158697503187];
+  007 [18.910926912316217,25.929451824129732,-2.888158697503187];
+  013 [18.910937798831576,27.822310518751237,-2.883387755840796];
+  016 [-30.47716428062784,6.618931652499262,-1.832251344570172];
+  027 [9.340230623990633,7.050027578056358,2.6178131640565683].
+  Augmented total lengths .703098439937/.703098439937/.868045444645/
+  .748497832744/1.353815826371m; segments6/6/5/6/2, alpha .923852056834/
+  .923852056834/.989179303420/.935434686394/.993224509029.
+- Initial capture pass retained four RGB1s and a027 pose tolerance failure.
+  The shared float32 USD Euler representation has a calculated -1.1470309e-7
+  rad rounding error at027, beyond the unchanged1e-7 tolerance. Preserved that
+  pass under preparation/capture_float32_yaw. The pilot now assigns double USD
+  matrices (column-to-row transpose explicit); final capture passed all five
+  with exactly zero saved pose readback error. This was before new inference.
+- Final RGB1 batch completed04:36:20.030977Z in one Isaac6.0.1 process/scene load.
+  Source RGB0 was copied byte-for-byte, never recaptured; original observation
+  metadata and timestamp retained unchanged. Camera intrinsics and local
+  extrinsics match source:480x270, HFOV112.2deg, translation[.09,0,.65]m;
+  agent+Xforward,+Yleft,+Zup. Actual world/agent camera matrices and all hashes
+  saved. Inventory1936prims/126collision,0robots/articulations/rigid bodies/
+  physics scenes, stopped timeline0. Direct spatial assignment, no execution.
+- One client startup failed at import before any request because the isolated
+  client lacks Matplotlib. Made validator imports lazy; no environment/package
+  change. Preserved failure log. Final inference batch04:40:26.415444Z to
+  04:40:49.907020Z used five independent connect/login/reset/next0/next1/
+  disconnect sessions, unchanged instruction within each. No reset/reconnect/
+  retry between requests. All history steps1->2, float64(10,3), stop=false.
+- Source OLD versus final OLD: all five exact shape/dtype/value/deterministic
+  NPY hash matches; PLANNING_OLD_REPRODUCED5, PLANNING_OLD_MISMATCH0. Valid5,
+  invalid0. Source RGB0/raw/world OLD and prior metrics untouched. Final FRESH
+  is anchored only at its own actual R1_old; OLD is anchored only at originalR0.
+  Full raw hash table, old/fixed/new poses and relative SE(2) transforms in report.
+- Primary tau=0 only, B=plannedR1_old exactly. No extra0.25m motion or latency
+  condition. Geometric incoming OLD tangent is separate from pose yaw. Retain
+  both local and0.10m centered/truncated window diagnostics. Prior tau0 saved
+  direction uses yaw(fixedR1), so paired direction changes include this explicit
+  incoming-reference change as well as the observation protocol. Never paired
+  previous tau1 against new tau0; former is selection/context only.
+- New e_perp/local/window/yaw residuals (m/deg/deg/deg), all cases:
+  006 .000035240467/90.110654262/89.924631874/72.000527929;
+  007 .000110123546/1.182352010/74.506081545/18.025794710;
+  013 .000310137952/.552479068/74.538388537/17.997232567;
+  016 .000462856647/90.520649538/90.139008308/72.066661315;
+  027 .151385084978/.006820173/.005773425/.003617659.
+  Previous tau0 baselines and new-minus-old differences saved for every case.
+- The006/016 FRESH winning segments are .150304/.150026m; both local/window
+  differences remain about90deg. In007/013 the FRESH winners are58.1/224.8um,
+  giving small local differences while0.10m windows expose about74.5deg. No
+  threshold-based category or weighted score. At tau0 the four turn cases have
+  small spatial distances in both protocols; no causal comparison with prior
+  tau1 spatial residuals is asserted.027 direction/yaw is small but immediate
+  cross-track .1514m reflects an ahead-of-observation FRESH start.
+- Actual Isaac saved-geometry overview for all five, final images inspected
+  alongside all five RGB1s. Initial013 far FRESH tail was cropped; wider trial
+  occluded007. Both full trial sets preserved separately, including black image.
+  Final007 uses its clear closer view; others use wider framing. No scene hiding,
+  XY scaling or angular magnification. BlueOLD/magentaFRESH/yellowR0/lavender
+  fixedR1/green augmented advance/orangeR1_old=B andOLDtangent/whiteQ/cyanFRESH
+  tangent. Only display Z layers/stems differ. Exact camera offsets recorded.
+- Research source versions retained by hash under processing_source_history
+  where import/CSV/viewport changes occurred after earlier phases. Final code
+  snapshots retained too. A post-freeze CSV change ensures invalid-first-row
+  results keep all columns; it changes no planning geometry or metrics.
+- Final actual validator passed with five distinct final sessions, no missing
+  artifacts/failures and862 unchanged frozen input files. Independent scalar
+  audit imports no project geometry helpers:380 values checked, max difference
+  1.1102230246251565e-16; every requested/actual new pose and OLD array exact.
+  Source/selection validators passed again. All16 checkpoint files rehashed
+  with unchanged bytes/sizes/mtimes; official LightNav clean at
+  c6f40e3220edbf7011e4f17eaf2c865416737d4d. Stopped only task-owned server.
+- Full host pytest:1044 passed in40.57s, including41 new pure/mock tests;
+  compileall, launcher bash syntax and diff checks passed. Earlier1040-test
+  pass preceded extra provenance corruption tests. Synthetic tests are not
+  research evidence. New report ROBOTLESS_OLD_CONSISTENT_OBSERVATION_PILOT.md
+  includes all five rows, timings, failures and interpretation; README gains
+  two sentences only after actual runtime validation success.
+- Interpretation: OLD-consistent observations do not uniformly remove direction/
+  yaw disagreement, and local tangent can understate the window-scale difference.
+  This five-case pilot establishes genuine successive predictions at spatial
+  surrogates, not actual robot/controller execution, latency failure, correct
+  correspondence, graph necessity/superiority or navigation improvement. No graph,
+  rigid reconciliation, factor weights, gates, controller or dynamics added.
+- Decision: ROBOTLESS_OLD_CONSISTENT_OBSERVATION_PILOT_VALIDATED. Review complete
+  diff and staged diff, then one focused commit "stage0: validate OLD-consistent
+  LightNav observations" and normal origin/main push. Final SHA/changed files
+  recorded in ignored git_completion.json; generated RGB/raw arrays/screenshots,
+  model weights, external code and environments remain uncommitted.

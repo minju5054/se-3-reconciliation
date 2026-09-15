@@ -1,0 +1,20 @@
+schema_version: 1
+stage: robotless-old-consistent-observation
+source_run: data/robotless_handoff_screening/20260914T101519Z
+selection_run: data/robotless_old_conditioned_handoff/20260915T021149Z
+episode_ids: [episode_006, episode_007, episode_013, episode_016, episode_027]
+delta_s_obs_m: 0.30
+primary_tau_s: 0.0
+tangent_window_m: 0.10
+pose_readback_atol: 1.0e-7
+conventions:
+  augmented_path: '[R0, O0, ..., O(N-1)]; R0->O0 is a simulation-side spatial connector'
+  interpolation: XY arc length; shortest-angle endpoint yaw; zero XY lengths have no arc duration
+  exact_vertex: lowest positive-length segment ending at target progress
+  insufficient: OLD_ARC_INSUFFICIENT; never clamp or replace
+  reproducibility: exact shape, dtype, values and deterministic NPY array hash; mismatch invalidates primary metrics
+  fresh_anchor: actual R1_old observation pose readback, within 1e-7 of the planned pose
+  primary_boundary: planned R1_old exactly; tau=0, no added spatial advance
+  direction_comparison: previous saved yaw-axis incoming versus new augmented OLD geometric tangent; both definitions explicit
+  frames: world metres, right-handed Z up, CCW yaw radians; column vectors T_target_source
+  timing: no intrinsic waypoint time; capture/readiness host clocks explicit; actual execution null
