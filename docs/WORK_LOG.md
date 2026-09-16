@@ -3617,3 +3617,46 @@ This file is append-only. Add each completed task at the bottom.
   and normally push main. Final commit/push SHA is recorded in the ignored run
   git_completion.json. Generated media/raw data, external source, model weights,
   environments and unrelated user changes are excluded from the commit.
+
+
+## 2026-09-16 — Straightness and challenging-geometry follow-up
+
+- User asked how much of the online trajectory dataset is straight and whether
+  difficult trajectories exist. Reanalysed all 881 valid FRESH events without new
+  inference, source mutation or relabelling. The first previously linked example
+  is straight; it was an order-based example, not a difficulty representative.
+- Added a read-only reproducible trajectory-mix analyzer with explicit capture-local
+  yaw/forward conventions, saved-row-only XY, minimum 5 cm motion, chord/arc .995,
+  angle sensitivity 1/5/10/15 degrees, and separate actual execution classification.
+  At 5 degrees: raw straight447/881 (50.74%), executed segments591/881 (67.08%).
+  Equal-episode raw fraction48.30%; raw duplicate removal gives12/151 (7.95%).
+  Short and rotation-only paths remain in the denominator, not called straight.
+- Actual active-command composition uses |v|>=.05m/s and |omega|<=5deg/s, stored
+  simulation durations and actual state displacement: straight65.67% time/76.27%
+  distance; turning translation21.29% time; low-translation rotation5.58%; low
+  motion7.47%. Includes initial OLD but excludes67.62s bootstrap; FRESH lifetime
+  statistics separately exclude initial OLD. No intrinsic waypoint time assumed.
+- Raw accumulated yaw >30/60/90deg occurs161/66/12 times; actual FRESH yaw travel
+  exceeds those thresholds103/33/8 times. B-to-FRESH distance >10cm in138/881,
+  >20cm in17/881. Direction maxima with near-zero incoming or tangent motion are
+  explicitly flagged as poor hard-case examples, never deleted. All10 local
+  angle>60deg cases use raw segments<=7.6mm; the largest164.37deg has7.57nm incoming
+  displacement. The separately declared stable window subset has689 events.
+- Inspected existing world/zoom plots for episode008repeat01/handoff013 (26.26cm,
+  49.99deg window mismatch), episode013repeat01/handoff024 (27.91cm,36.54deg), and
+  episode014repeat01/handoff025 (endpoint gap20.92cm,32.73deg). First two have
+  substantial incoming motion and interior projection; all are timing-valid with
+  unique raw ordered pairs. These measurements do not prove navigation failure.
+- Derived outputs live separately at
+  data/robotless_online_handoff_shape_analysis/primary_20260915T091900Z_v1,
+  with2,884 input hashes, processing hash, configuration, per-event measurements,
+  supplementary geometry-tail audit and test log. Original dataset and images
+  remain unchanged. Independent analysis reproduced every headline fraction.
+- Added13 synthetic software tests for raw preservation, no inserted XY origin,
+  observation-local reorientation, yaw wrapping, pure rotation, chord/arc, command
+  units, unequal recorded time weights, bootstrap exclusion and overwrite refusal.
+  Focused87tests passed; full host suite1,299passed in42.76s. Synthetic checks are
+  not runtime evidence. Compileall/diff checks and final/staged diff reviewed.
+- Append the documented definitions, sensitivity, weighting and representative
+  paths to the dataset report. Commit the analyzer, tests and two documentation
+  files, then normally push main; preserve both unrelated user configuration edits.

@@ -466,3 +466,96 @@ separate final technical smoke, while the full primary is headless. No physical
 robot, navigation-success, collision-safety or reconciliation-method claim follows.
 Generated raw data, images, external source, checkpoint and environments remain
 outside Git; only implementation, tests, configuration and documentation are committed.
+
+## Follow-up: straight motion and challenging geometry (2026-09-16)
+
+The first event previously linked as an example is nearly straight. It was chosen
+by episode/event order, not as a representative of the full difficulty range.
+Analysis of all 881 valid FRESH events distinguishes raw chunk shape, actual
+execution segments and time/distance spent executing individual commands.
+These descriptive thresholds are new analysis settings, not original labels or
+an assessment of navigation success, physical difficulty or graph necessity.
+
+For the primary raw straight-ahead criterion, the saved waypoint XY path must
+have arc length at least 0.05 m and chord/arc at least 0.995. Accumulated wrapped
+pose-yaw change from capture-local yaw 0 through all waypoints must be at most
+5°, and every XY segment longer than 0.1 mm must point within 5° of capture-local
+forward +x. XY uses only the saved rows; no origin segment is added. A straight
+line facing a new heading is therefore distinguishable from continuing straight
+ahead. Model waypoint time remains unknown.
+
+An actual FRESH execution segment extends from its activation B to the next
+activation or termination, using its existing recorded metrics. It is classified
+straight when it travels at least 0.05 m, chord/arc is at least 0.995 and accumulated
+absolute yaw change is at most the selected angle. Raw and actual paths are not
+substituted for each other.
+
+| Angle tolerance | Raw straight-ahead chunks / 881 | Actual straight execution segments / 881 |
+|---|---:|---:|
+| 1° | 439 (49.83%) | 535 (60.73%) |
+| 5° | 447 (50.74%) | 591 (67.08%) |
+| 10° | 457 (51.87%) | 637 (72.30%) |
+| 15° | 476 (54.03%) | 676 (76.73%) |
+
+At 5°, equal weighting of the 60 episode-specific raw straight fractions gives
+48.30%. Removing raw FRESH byte-identical repetitions leaves only 12/151 (7.95%)
+distinct paths classified straight. The 447 straight occurrences thus contain
+substantial repetition; unique-path weighting describes diversity, not occurrence
+frequency. Twenty-six raw chunks have less than 5 cm of within-path XY motion
+and are not called straight translation.
+
+For execution-time composition, bootstrap commands with no active reference are
+excluded; initial C0 and all subsequent active references are included. A tick
+is straight translation when `|v| >= 0.05 m/s` and `|omega| <= 5 degrees/s`.
+Turning translation exceeds that angular-speed threshold while translating;
+low-translation rotation exceeds it with `|v| < 0.05 m/s`. Remaining ticks are
+low motion. Time comes from adjacent saved simulation timestamps. Distance is
+the sum of actual state-to-state XY displacements, not command-times-RTT.
+
+| Active execution classification | Simulation time share | Actual XY distance share |
+|---|---:|---:|
+| Straight translation | 65.67% | 76.27% |
+| Turning while translating | 21.29% | 23.69% |
+| Rotation with low translation | 5.58% | 0.02% |
+| Low motion | 7.47% | 0.02% |
+
+Large rotations and larger handoff gaps exist. Raw accumulated yaw exceeds 30°
+in 161/881 chunks (18.27%), 60° in 66 (7.49%) and 90° in 12 (1.36%). Actual
+post-switch execution yaw travel exceeds those thresholds in 103, 33 and 8 events.
+B-to-FRESH-polyline distance exceeds 10 cm in 138/881 events (15.66%) and 20 cm
+in 17 (1.93%). These are descriptive measurements, not difficulty cutoffs.
+
+Direction requires special care: the largest local-angle value, 164.37°, uses
+an incoming chord of only 7.57 nm. All ten local-angle cases above 60° have a
+selected raw segment no longer than 7.6 mm. They remain in the dataset but are
+poor examples of large, well-supported direction changes. In the explicitly
+separate subset with incoming chord at least 5 cm and window chord at least
+2 cm, 12/689 events exceed 30° window direction difference and four exceed 60°.
+No source metric or event was removed or relabelled.
+
+Two visually inspected, timing-valid examples with substantial incoming motion:
+
+| Episode / event | B-to-FRESH distance | Incoming/window direction difference | B/FRESH pose-yaw difference |
+|---|---:|---:|---:|
+| `episode_008_repeat_01/handoff_013` | 26.26 cm | 49.99° | 56.29° |
+| `episode_013_repeat_01/handoff_024` | 27.91 cm | 36.54° | 36.19° |
+
+Both have incoming execution chords about 18.6 cm, a 10 cm FRESH tangent window,
+interior projection and a raw ordered pair occurring once. Existing world and
+zoom PNGs are under the corresponding primary episode's `handoffs/<event>/plots/`.
+For a large actual rotation, `episode_014_repeat_01/handoff_026` has raw accumulated
+yaw 130.19° and actual post-switch yaw travel about 121.92° over 1.45 sim seconds.
+
+The unchanged primary is the source. New derived outputs are separately stored at
+`data/robotless_online_handoff_shape_analysis/primary_20260915T091900Z_v1/`:
+`summary.json`, `events.json`, `provenance.json` and `geometry_tails.json`.
+The provenance binds all inputs, processing source hash, frame conventions and
+thresholds. `geometry_tails.json` is a supplementary audit of existing event
+metrics with strict thresholds and raw-pair median grouping explicitly recorded
+in that file. Reproduce the trajectory-mix outputs into a new output directory:
+
+```bash
+.venv/bin/python scripts/analyze_robotless_online_trajectory_mix.py \
+  data/robotless_online_handoffs_v1/primary_20260915T091900Z \
+  data/robotless_online_handoff_shape_analysis/NEW_OUTPUT_DIRECTORY
+```
