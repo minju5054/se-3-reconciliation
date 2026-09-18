@@ -1,0 +1,26 @@
+schema_version: 1
+experiment: GP-SE2-DIAG-02
+starting_git_sha: 311bf75c2d499a6de907580ce491ebcab875e847
+primary_run: data/robotless_gp_se2_01/primary_20260918T054000Z
+previous_diagnostic: data/robotless_gp_se2_diag_01/diagnostic_20260918T071302Z
+actual_case_id: episode_001_repeat_01/handoff_002
+methods: [M2_GP_NO_OBSTACLE, M3_GP_CONSTRAINED]
+derivative_modes: [FD_BASELINE, SUPPLIED_JAC]
+initializations: [I0_FRESH, I1_DECEL]
+strategy: CPU JAX 0.7.2 float64 forward AD plus analytic original environment derivatives
+formulation: immutable original GPProblem.evaluate, config and physical acceptance
+solve_order:
+  - [M2_GP_NO_OBSTACLE, FD_BASELINE, I0_FRESH]
+  - [M2_GP_NO_OBSTACLE, SUPPLIED_JAC, I0_FRESH]
+  - [M2_GP_NO_OBSTACLE, SUPPLIED_JAC, I1_DECEL]
+  - [M2_GP_NO_OBSTACLE, FD_BASELINE, I1_DECEL]
+  - [M3_GP_CONSTRAINED, FD_BASELINE, I0_FRESH]
+  - [M3_GP_CONSTRAINED, SUPPLIED_JAC, I0_FRESH]
+  - [M3_GP_CONSTRAINED, SUPPLIED_JAC, I1_DECEL]
+  - [M3_GP_CONSTRAINED, FD_BASELINE, I1_DECEL]
+primary_timing: prepared functions; 30 seconds per solve, cold setup separate
+max_iterations: 200
+blas_threads: 1
+new_rollout: false
+new_inference: false
+overwrite: false

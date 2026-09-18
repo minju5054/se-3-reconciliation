@@ -3858,3 +3858,39 @@ This file is append-only. Add each completed task at the bottom.
   actual seed or evidence of better execution. Verified derivatives are the one
   proposed next element; no second remedy was implemented. Final focused commit
   and normal push are recorded in the new run's git_completion.json.
+
+## 2026-09-19 — GP-SE2-DIAG-02 implementation and pre-comparison verification
+
+- Started from reviewed main 311bf75c2d499a6de907580ce491ebcab875e847, matching
+  fetched origin/main. Preserved both unrelated Stage 0 config edits, all 37,984
+  retained historical files, the 256-file DIAG-01 run and 63 checkpoint-tree files.
+- Prepared the fixed episode_001_repeat_01/handoff_002 and verified exact saved
+  FRESH/deceleration vectors for both M2/M3; no seed fitting or original input
+  change. Environment copy/export provenance and every original hash are checked.
+  Three preparation-only technical errors are preserved: copy-vs-directory identity,
+  a primary-only GUI mesh index, and a missing new seed output directory. No solve
+  occurred during these corrections; original files were never written.
+- Added CPU JAX 0.7.2 float64 AD for the original right-local chart, full GP
+  acceleration/objective/motion/goal formulas and analytical original environment
+  derivatives, with all three supplied SLSQP callbacks. Both modes retain the
+  original GPProblem primal/cache, callback selection, physical conditions and
+  independent full checker. No numerical finite-difference fallback is used.
+- Frozen derivative protocol and 20 exact points before checking; 10 receive full
+  150-column central differences and all receive fixed multi-step directional
+  probes where meaningful. The smooth checks passed without changing tolerances.
+  Exact relative Log cuts exposed an unsupported objective derivative: pre-guard
+  attempts remain saved, and the provider now rejects such cuts explicitly before
+  any actual comparison. Final authoritative verification is separate from the
+  preserved pre-guard summary. Synthetic checks remain correctness diagnostics.
+- Actual comparison is gated on the final authoritative verification and a source
+  freeze, then exactly eight sequential starts with identical 30-second/200-iteration
+  budgets. Cold setup and optional post-solve optimality diagnostics are separate.
+  Implementation commit and measured comparison/final validation are recorded in
+  subsequent append-only entries and local run provenance; no navigation claim.
+- Final pre-solve gate: attempt_03, 19 supported states verified and the exact
+  Log-cut state explicitly rejected; 1,360,500 coordinate entries compared with
+  no exclusions, maximum primal error 1.39e-12 and maximum required scaled
+  derivative error 0.17417 (<1). Original protocol/points/tolerances unchanged.
+  Initial full suite: 1,620 passed/19 skips (69.06 s); subsequent focused suites
+  cover the final wrap guard (37 provider tests), validator (13), and plotting (4).
+  Compileall and diff checks pass before implementation freeze.
