@@ -3710,3 +3710,40 @@ This file is append-only. Add each completed task at the bottom.
   test accounts for the total changing from 1,299 to 1,300. Tests ran with bytecode
   and pytest cache writes disabled. No production source was changed. Final
   commit/push and audit hashes are recorded in the ignored cleanup directory.
+
+## 2026-09-18 — GP-SE2-01 pre-primary implementation and environment freeze
+
+- User explicitly authorized this offline GP-SE(2) formulation pilot, including
+  actual optimization, unchanged official MPC comparisons, independent collision
+  checks, complete images and actual Isaac GUI replay. Started from main
+  ada33e145a412899ef5d33b05e9757fe4a780db7, matching fetched origin/main; preserved
+  both unrelated Stage 0 configuration edits.
+- Revalidated all 881/60 source events/episodes and 1,762 PNGs; rehashed all
+  36,684 retained data files without changes. No inference, new collection,
+  external LightNav source/checkpoint edit or deleted legacy-data assumption.
+- Implemented locally linear SE(2) GP prior/interpolation, right-Jacobian math,
+  constrained rigid/GP methods, immutable reference preparation, frozen-state
+  official MPC rollout, direct geometry evaluation, failure-first aggregation,
+  full plots/validator and Hospital comparison replay. M2/M3 differ only by
+  obstacle inequalities. Added independent math, environment, formulation,
+  timing, execution, corruption/coverage and failure-accounting tests.
+- Validated actual Hospital export retry04 after preserving technical retries:
+  2,058 meshes; correct transforms/instances/height clipping, solid interiors,
+  thin walls and real doorway retained; unresolved 5.471 m² interiors excluded.
+  Direct geometry is separate from conservative 0.05 m optimizer grid. All 13
+  actual environment checks pass, with actual scene screenshots and 293 layer
+  hashes. Historical per-layer byte identity is unavailable beyond same URL/config.
+- Fixed pre-primary small-angle Exp/Log cancellation using existing series through
+  1e-4 rad and independent matrix-exponential regression tests. Verified paper
+  interpolation body velocity uses forward J_r, with finite-difference identities.
+  Synthetic numerical qualification is explicitly separate from dataset evidence.
+- Froze common radius/margin/height, 3 s horizon, goal/dwell, two identical starts,
+  200 iterations/30 s per start, design weights and deterministic scarce-group-first
+  selection rules. Environment screen finds only one defensible shortcut-sensitive
+  corner passage; no threshold relaxation or outcome-driven case replacement.
+  Implementation freeze precedes all primary optimizer/new rollout results.
+- Pre-freeze full host suite passed 1,430 tests, with 18 explicit absent-historical-
+  corpus skips, in 46.08 s. The preceding sandbox run had only two Unix-socket
+  permission failures; no implementation workaround or test suppression was used.
+  Compileall, both launcher syntax checks and staged diff checks passed. Final
+  review additionally tests nested rollout-hash coverage before committing.

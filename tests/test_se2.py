@@ -1,10 +1,14 @@
 import numpy as np
+import pytest
+from scipy.linalg import expm
 
 from reconciliation.se2 import (
     compose_poses,
     inverse_pose,
     local_trajectory_to_world,
     relative_pose,
+    se2_exp,
+    se2_log,
     wrap_angle,
 )
 
@@ -40,3 +44,14 @@ def test_compose_broadcasts_over_arbitrary_horizon() -> None:
     local = np.zeros((24, 3))
     world = local_trajectory_to_world(np.array([1.0, 2.0, 0.3]), local)
     assert world.shape == (24, 3)
+
+
+@pytest.mark.parametrize("omega", [0., 1e-9, -4e-7, 4e-7, 9.999e-5, 1.001e-4])
+def test_small_angle_exp_matches_matrix_exponential_and_log(omega) -> None:
+    tangent = np.array([.8, -.2, omega])
+    matrix = expm([[0., -omega, tangent[0]],
+                   [omega, 0., tangent[1]], [0., 0., 0.]])
+    expected = np.array([matrix[0, 2], matrix[1, 2],
+                         np.arctan2(matrix[1, 0], matrix[0, 0])])
+    np.testing.assert_allclose(se2_exp(tangent), expected, rtol=0, atol=4e-13)
+    np.testing.assert_allclose(se2_log(expected), tangent, rtol=0, atol=4e-13)

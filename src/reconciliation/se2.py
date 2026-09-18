@@ -74,7 +74,10 @@ def se2_exp(tangent: ArrayLike) -> FloatArray:
 
     value = _poses(tangent, "tangent")
     omega = value[..., 2]
-    small = np.abs(omega) < 1e-8
+    # Avoid cancellation in (1-cos(omega))/omega at small but nonzero angles.
+    # The retained Taylor orders remain accurate well below machine precision
+    # at this threshold, including derivatives used by the Lie-group GP.
+    small = np.abs(omega) < 1e-4
     omega2 = omega * omega
     a = np.where(
         small,
@@ -96,7 +99,7 @@ def se2_log(pose: ArrayLike) -> FloatArray:
 
     value = _poses(pose, "pose")
     omega = np.asarray(wrap_angle(value[..., 2]), dtype=np.float64)
-    small = np.abs(omega) < 1e-8
+    small = np.abs(omega) < 1e-4
     omega2 = omega * omega
     a = np.where(
         small,

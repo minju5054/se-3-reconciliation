@@ -1,0 +1,103 @@
+schema_version: 1
+experiment: GP-SE2-01
+source_run: data/robotless_online_handoffs_v1/primary_20260915T091900Z
+shape_analysis: data/robotless_online_handoff_shape_analysis/primary_20260915T091900Z_v1
+source_collector_git_sha: eed5f2c68f9bfc2b62d70a00a6d784647c32a971
+starting_git_sha: ada33e145a412899ef5d33b05e9757fe4a780db7
+intrinsic_model_waypoint_dt_s: null
+frame:
+  world: fixed Isaac Hospital world, metres, Z up, yaw radians CCW
+  local: capture-agent x forward, y left, z up
+  perturbation: right-local X <- X Exp(delta)
+  body_twist: vee(X^-1 dX/dt)
+footprint:
+  radius_m: 0.20
+  required_clearance_m: 0.05
+  ground_relative_height_band_m: [0.05, 0.65]
+  meaning: evaluation volume assumption, not a physical robot specification
+reference:
+  suffix_start: official weighted-pose nearest row plus one, clamped at final row
+  first_time_s: 0.1
+  final_time_s: 3.0
+  timing: uniform row order; shortest-angle yaw and linear XY interpolation
+  single_row: constant future pose
+  output_dt_s: 0.1
+  insert_boundary_into_raw: false
+selection:
+  target_per_group: 3
+  group_order: [D_OBSTACLE_ROUTE, C_LARGE_MISMATCH, B_SMALL_TURN, A_SMALL_STRAIGHT]
+  tie_break: prefer unused episode, then unused ordered raw pair, then named priority, then lexical episode/event
+  priority_events:
+    - episode_008_repeat_01/handoff_013
+    - episode_013_repeat_01/handoff_024
+    - episode_014_repeat_01/handoff_026
+  timing_definition: exact client request-to-receipt matched-state RTF in [0.8,1.2], maximum enclosed loop stall <=0.25 s, actual execution/capture overlap and post-switch execution
+  small_position_gap_m: 0.02
+  small_window_direction_deg: 5.0
+  small_pose_yaw_deg: 5.0
+  turn_raw_accumulated_yaw_deg: 15.0
+  large_position_gap_m: 0.10
+  large_window_direction_deg: 30.0
+  minimum_incoming_chord_m: 0.05
+  minimum_fresh_window_chord_m: 0.02
+  raw_straight_angle_deg: 5.0
+  raw_straight_minimum_arc_m: 0.05
+  raw_straight_minimum_chord_over_arc: 0.995
+  raw_collision_cases: diagnostic only, never primary
+  replace_cases_after_outcomes: false
+formulation:
+  horizon_s: 3.0
+  support_dt_s: 0.1
+  qc_diag: [1.0, 1.0, 1.0]
+  fresh_std: [0.10, 0.10, 0.17453292519943295]
+  lambda_fresh: 1.0
+  entry_weight: 1.0
+  v_max: 0.8
+  w_max: 3.0
+  a_v_max: 2.0
+  a_w_max: 5.0
+  goal_position_tolerance: 0.15
+  goal_yaw_tolerance: 0.2617993877991494
+  required_clearance: 0.05
+  max_iterations: 200
+  wall_time_s: 30.0
+  ftol: 1.0e-7
+  equality_tolerance: 1.0e-5
+  inequality_tolerance: 1.0e-5
+  dense_dt_s: 0.01
+  initializations: 2
+  random_seed: 0
+rollout:
+  horizon_s: 3.0
+  control_hz: 10
+  integration_hz: 60
+  initial_previous_control_policy: recorded previous_command supplied to historical first-FRESH solve
+  initial_physical_command: actual last command applied before B, separately preserved
+  schedule: idealized synchronous solve at B and t=0.1,...,2.9; no simulated compute delay
+  failure_policy: official poll zero-command behavior, failed solve explicitly fails validity
+  collision_policy: record first overlap and continue without collision-triggered stopping
+  dynamics: exact constant-command unicycle, no articulation or physical collision response
+evaluation:
+  maximum_time_step_s: 0.01
+  gp_initial_query_step_s: 0.005
+  gp_refinement_minimum_step_s: 0.00125
+  gp_refinement_clearance_trigger_m: 0.10
+  terminal_goal_dwell_s: 0.20
+  motion_numeric_tolerance: 1.0e-5
+  gate_crossing_tolerance_m: 1.0e-6
+  gate_direction: negative-to-positive normal crossing through finite segment; grazing excluded
+  gate_order: first strict directed crossings must occur in frozen order
+  motion_acceleration_convention: control-grid differences including u_minus to first command over 0.1 s; not actuator acceleration
+  unknown_workspace: fails primary success, never free space
+  continuous_collision_claim: false
+  nominal_clearance_borderline: unknown within geometry/query error
+plots:
+  dpi: 160
+  aspect: equal
+  coordinate_scaling: false
+  same_axes_across_methods: true
+  gui_label: OFFLINE COUNTERFACTUAL HANDOFF COMPARISON
+software:
+  numerical_solver: scipy 1.18.1
+  geometry: shapely 2.1.2
+  numpy: 2.5.2
