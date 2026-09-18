@@ -178,11 +178,21 @@ def _axes(rows=1, *, height=None):
 def _finish_axis(ax, xlabel, ylabel, *, log=False):
     ax.set(xlabel=xlabel, ylabel=ylabel)
     if log:
-        lower, upper = ax.get_ylim()
-        # Narrow positive objective ranges need readable linear ticks; the
-        # default symlog locator can otherwise leave the axis without labels.
-        if not (0 < lower < upper and upper / lower < 10):
+        arrays = [np.asarray(line.get_ydata(orig=False), dtype=float).ravel() for line in ax.get_lines()]
+        values = np.concatenate(arrays) if arrays else np.array([])
+        values = values[np.isfinite(values)]
+        # Autoscale's linear padding can cross zero even when all recorded
+        # objectives are positive. Decide the scale from the actual data,
+        # never from that padding, to avoid invented negative log decades.
+        if len(values) and values.min() > 0:
+            if values.max() / values.min() >= 10:
+                ax.set_yscale("log")
+                margin = (values.max() / values.min()) ** .05
+                ax.set_ylim(values.min() / margin, values.max() * margin)
+        else:
             ax.set_yscale("symlog", linthresh=1e-7)
+            if len(values) and values.min() >= 0:
+                ax.set_ylim(bottom=0.)
     handles, _ = ax.get_legend_handles_labels()
     if handles:
         ax.legend(fontsize=7, loc="best")
@@ -197,7 +207,7 @@ def save_plot(fig, path, title, numeric, sources, *, dpi=160):
     path.parent.mkdir(parents=True, exist_ok=True)
     fig.suptitle(title, fontsize=12)
     fig.text(.012, .012, "GP-SE2-DIAG-02 | saved optimization diagnostics | no execution | missing values stay unavailable", fontsize=8)
-    fig.tight_layout(rect=(0, .04, 1, .93))
+    fig.tight_layout(rect=(0, getattr(fig, "_diag02_bottom_margin", .04), 1, .93))
     fig.savefig(path, dpi=dpi)
     plt.close(fig)
     write(path.with_suffix(".json"), dict(image=path.name, image_sha256=file_sha256(path), dpi=dpi,
@@ -290,7 +300,8 @@ def plot_method(run, method, cells, loaded, snapshot, *, dpi=160):
                 for sign in (-1, 1): axes[row, col].axhline(sign * limit, color="#b22222", ls=":")
                 _finish_axis(axes[row, col], "time after fixed B [s]", labels[row], log=name == "lateral")
         save(fig, name, numeric, "Saved GP interpolation only; dashed final status labelled, solid selected only if full accepted; knot-side acceleration dots")
-    fig, axes = _axes(height=8)
+    fig, axes = _axes(height=9.2)
+    fig._diag02_bottom_margin = .27
     raw = np.asarray(snapshot["F_native"])
     all_xy = [raw[:, :2], np.asarray(snapshot["context"]["B_world"])[None, :2]]
     for trace in traces.values():
@@ -317,6 +328,9 @@ def plot_method(run, method, cells, loaded, snapshot, *, dpi=160):
         ax.scatter(*np.asarray(snapshot["goal_route"]["goal_world"])[:2], c="black", marker="*", label="original goal", zorder=9)
         ax.set(xlim=(lo[0], hi[0]), ylim=(lo[1], hi[1]), aspect="equal")
         _finish_axis(ax, "world X [m]", "world Y [m]")
+        handles, labels = ax.get_legend_handles_labels()
+        ax.get_legend().remove()
+        fig.legend(handles, labels, loc="lower center", bbox_to_anchor=(.27 if col == 0 else .75, .065), fontsize=7)
     save(fig, "world_xy", numeric, "Same environment and metre scale; seed/final/accepted references, no execution or physical safety claim")
     fig, axes = _axes(); numeric = {}
     count_keys = ("objective_evaluations", "equality_evaluations", "inequality_evaluations")
@@ -330,6 +344,9 @@ def plot_method(run, method, cells, loaded, snapshot, *, dpi=160):
             axes[0, col].bar(np.arange(len(labels)) + (index - .5) * .36, counts, width=.36, label=mode, color=COLORS[mode])
         axes[0, col].set_xticks(np.arange(len(labels)), labels, rotation=35, ha="right")
         _finish_axis(axes[0, col], "recorded function / derivative calls", "count", log=True)
+        # Counts are nonnegative integers; sub-count decades carry no data.
+        axes[0, col].set_yscale("symlog", linthresh=1.)
+        axes[0, col].set_ylim(bottom=0.)
     save(fig, "evaluation_counts", numeric, "Measured counts include finite-difference probes; zero derivative callbacks in baseline is a recorded zero")
     fig, axes = _axes(height=7); numeric = {}
     for col, seed in enumerate(SEEDS):

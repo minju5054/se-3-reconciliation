@@ -84,8 +84,14 @@ def fixture(tmp_path):
     return tmp_path, dict(problem=p, environment=HospitalEnvironment(LineString([(.3, -.5), (.3, .5)]), box(-1., -1., 1., 1.)))
 
 
-def test_all_eighteen_plots_provenance_dpi_eight_cells_links_bundle_and_overwrite(fixture):
+def test_all_eighteen_plots_provenance_dpi_eight_cells_links_bundle_and_overwrite(fixture, monkeypatch):
     run, loaded = fixture
+    original_save = plots.save_plot
+    def checked_save(fig, path, *args, **kwargs):
+        if Path(path).stem == "evaluation_counts":
+            assert all(ax.yaxis._scale.linthresh == 1. and ax.get_ylim()[0] == 0. for ax in fig.axes)
+        return original_save(fig, path, *args, **kwargs)
+    monkeypatch.setattr(plots, "save_plot", checked_save)
     result = plots.generate(run, loaded=loaded)
     assert result["plot_count"] == 18 and result["comparison_cell_count"] == 8
     manifest = plots.read(run / "plot_manifest.json")
@@ -164,3 +170,18 @@ def test_disjoint_profile_excludes_nested_and_separate_clocks(fixture):
     record["solver_result"]["profiling"]["evaluate_inclusive_seconds"] = 2.
     with pytest.raises(ValueError, match="overlap"):
         plots.disjoint_profile(record)
+
+
+def test_nonnegative_plot_axes_do_not_invent_negative_symlog_decades():
+    fig, axes = plots.plt.subplots(1, 3)
+    axes[0].plot([0., 1.], [16., .17])
+    assert axes[0].get_ylim()[0] < 0.  # Default linear padding caused the defect.
+    plots._finish_axis(axes[0], "time", "objective", log=True)
+    assert axes[0].get_yscale() == "log" and axes[0].get_ylim()[0] > 0.
+    axes[1].plot([0., 1.], [.02, 0.])
+    plots._finish_axis(axes[1], "time", "nonnegative violation", log=True)
+    assert axes[1].get_yscale() == "symlog" and axes[1].get_ylim()[0] == 0.
+    axes[2].plot([0., 1.], [-.02, .01])
+    plots._finish_axis(axes[2], "time", "signed lateral", log=True)
+    assert axes[2].get_yscale() == "symlog" and axes[2].get_ylim()[0] < 0.
+    plots.plt.close(fig)

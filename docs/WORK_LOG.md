@@ -3903,3 +3903,78 @@ This file is append-only. Add each completed task at the bottom.
   commit fixes publication and the unsupported-cut coverage-table label before
   any actual solve. The comparison freeze additionally requires source-hash
   agreement with the checked provider and declared publication-only correction.
+
+## 2026-09-19 — GP-SE2-DIAG-02 frozen comparison and reporting
+
+- Implementation commits 06983f7 and 298f81e precede all actual starts; the latter
+  is the authoritative comparison implementation. Executed exactly eight fixed
+  starts sequentially once, with the same saved FRESH/deceleration arrays,
+  150-variable chart, original primal evaluator/cache, SLSQP settings, physical
+  constraints, callback selection and full acceptance. No inference, environment
+  export, hard-case solve, MPC execution, new seed, weights or restoration.
+- All four FD starts time out at 30 s: I0 retains no candidate; I1 retains its
+  initial full-feasible seed unchanged. All four supplied-Jacobian starts
+  converge in 1.744–2.129 s with changed full-feasible candidates. Both I0 starts
+  recover feasibility. Both I1 starts decrease the original objective from
+  3.963365592 to 0.194335067, raw reduction 3.769030525 (95.0967%). Changed I1
+  support poses reach 0.272962 m displacement; body-speed change reaches
+  0.366138 m/s. Final terminal speed remains nonzero because no original terminal
+  stop constraint exists. This is numerical optimization evidence on one benign
+  event, not navigation or execution evidence.
+- Original dense/direct-geometry checks and the independent 6,018-time offset
+  grid accept all four supplied final/selected candidates, including M2 obstacle
+  checks. Max lateral velocity is 3.60e-8 m/s, max linear acceleration 1.094 m/s²,
+  goal position error below 4.23e-5 m and minimum footprint clearance 1.326945 m.
+  All four FD final iterates remain infeasible, including M2 I1's lower-cost
+  iterate; no invalid lower-cost candidate replaces the selected seed.
+- Prepared solve time falls 92.90–94.19%, objective calls 94.20–95.02%, and
+  original primal cache misses 98.02–98.31%. Derivative AD/analytic geometry
+  overhead, compilation, environment load, seed preparation, dense/full checking
+  and optional optimality diagnostics are separately reported. Supplied cold
+  setup + solve + checks totals 4.899–10.664 s; full-feasible history checking
+  costs up to 7.657 s and is not hidden in solve time. Timing is one observation
+  per cell, not a repeated runtime distribution.
+- Local constrained stationarity diagnostics improve from 1.830836 at I1 to
+  0.000104895 at the supplied I1 final, while I0 final is 0.00640364. Fixed initial
+  speed bound row 90 has zero derivative and explains final active rank 30/31.
+  Internal QP multipliers and these mixed-unit residuals do not certify a global
+  or exact nonlinear optimum. Unsupported exact relative Log/goal-yaw cuts are
+  explicitly rejected; no nonsmooth or invalid-domain derivative branch was
+  encountered in the four actual supplied starts.
+- Saved 18 figures with exact numeric/hash sidecars, all eight outcomes in the
+  index, and a 74-file 7,616,326-byte review ZIP. Two presentation attempts and
+  the minimal bundle remain preserved. Corrections only change axes/legend;
+  all 18 numeric payloads and 40 numerical per-start files remain unchanged.
+  The compact review excludes raw RGB/datasets, environment, weights, external
+  source and full solver vectors. Independent scientific review passes 224
+  checks, including unchanged seeds/boundaries/configs and identical supplied
+  M2/M3 vectors for each initialization; these are not independent events.
+- Operational GP_SE2_DIAG_02_COMPLETED_WITH_LIMITATIONS; derivative validation
+  VERIFIED_WITH_DECLARED_BRANCH_LIMITATIONS. Supplied outcomes: infeasible
+  starts recovered, feasible seeds improved, convergence with full feasibility,
+  no unchanged-seed return, lower compute cost. The single proposed next
+  experiment applies the unchanged provider/settings to predeclared existing
+  hard cases; it is not performed in this task.
+- Final reporting-source full suite: 1,650 passed, 19 explicit skips, 70.11 s;
+  compileall and diff checks pass. Preserved the sandboxed attempt with 1,648
+  passes and two existing local-IPC PermissionErrors; the same suite passes with
+  UNIX sockets permitted, without source changes or relaxed tests. Earlier
+  implementation/full-suite logs remain separate. No actual solve was rerun.
+- Final source/artifact freeze contains 794 files. Independent validation passes
+  48,785 checks with zero errors, reconstructing all eight starts, original
+  primal/full acceptance, derivative error arithmetic, multiplier diagnostics,
+  all figure numbers and the strict review ZIP allowlist without optimization.
+  The authoritative report is the new run's validation.json; the separate CLI
+  duration was not instrumented. Final rehash preserves 37,984 historical,
+  256 previous-diagnostic and 64 external files, external Git state and both
+  unrelated user config edits. Original numerical/acceptance source is unchanged.
+  Final reporting commit and normal push are recorded in git_completion.json;
+  generated data/ZIP/PNG and external/environment files are not staged.
+- The staged diff check first included two new reporting helpers and found
+  excess EOF newlines. Removed only those newlines, verified identical Python
+  ASTs, and preserved the first PASS/source freeze/manifest under
+  verification/pre_whitespace_correction with old/new hashes. Final compilation
+  and staged diff checks pass. The unchanged independent validator passes
+  48,889 checks, zero errors, against 846 final artifacts; its whole-run audit
+  takes 48.21 s measured externally. No numerical code, optimization result,
+  acceptance, figure or review ZIP changes and no optimizer rerun occurred.
