@@ -308,7 +308,8 @@ def validate_run(run,gui_validation=None):
                 if env is not None:
                     u=frozen['u_minus'];p=evaluate_plan(method,candidate,solver,common,frozen['B_world'],[u[0],0,u[1]],goal_route,env,cfg)
                     checks.require(equivalent(plan,p),f'{mlabel}: independently recomputed plan differs')
-                rows.append(dict(case_id=label,method=method,candidate_found=exists,plan_valid=plan['plan_valid'],primary_success=metrics['primary_success'],failure_reasons=metrics['failure_reasons'],rollout_metrics=metrics))
+                rows.append(dict(case_id=label,method=method,candidate_found=exists,plan_valid=plan['plan_valid'],primary_success=metrics['primary_success'],failure_reasons=metrics['failure_reasons'],
+                    optimizer_wall_s=solver['total_optimization_and_check_wall_s'],deformation=plan.get('deformation'),rollout_metrics=metrics))
                 image_count+=validate_images(run,target,method,checks)
         with checks.section(f'{label}: ablation fairness'):
             m2,m3=methods['M2_GP_NO_OBSTACLE'],methods['M3_GP_CONSTRAINED']
@@ -324,7 +325,7 @@ def validate_run(run,gui_validation=None):
         lookup={(r['case_id'],r['method']):r for r in rows}
         for row in saved:
             matched=lookup[(row['case_id'],row['method'])]
-            for key in ('candidate_found','plan_valid','primary_success','failure_reasons','rollout_metrics'):
+            for key in ('candidate_found','plan_valid','primary_success','failure_reasons','optimizer_wall_s','deformation','rollout_metrics'):
                 checks.require(equivalent(row[key],matched[key]),f"aggregate differs: {row['case_id']}/{row['method']}/{key}")
         recomputed=comparisons(rows);summary=read(run/'aggregate/summary.json')
         for key,value in recomputed.items():checks.require(equivalent(value,summary[key]),f'aggregate comparison mismatch: {key}')

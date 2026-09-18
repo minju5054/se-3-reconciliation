@@ -105,10 +105,11 @@ def frozen_run(tmp_path,monkeypatch):
     write(mpc/'summary.json',{'source_files_preserved':True,'official_source_unchanged':True})
     for method in METHODS:
         folder=case/'methods'/method;folder.mkdir(parents=True)
-        candidate=(native if method=='M0_NATIVE' else common) if method in METHODS[:2] else None
+        candidate=(native if method=='M0_NATIVE' else common+[0.,.01,0.] if method=='M1_RIGID' else common) if method in METHODS[:3] else None
         solver={'method':method,'candidate_world':candidate,'status':'REFERENCE_AVAILABLE' if candidate is not None else 'NO_FEASIBLE_CANDIDATE_FOUND',
-                'attempts':[],'config':problem.config,'infeasibility_proven':False,'support_poses':None,'support_twists':None}
-        if candidate is None:
+                'attempts':[],'config':problem.config,'infeasibility_proven':False,'support_poses':None,'support_twists':None,
+                'total_optimization_and_check_wall_s':.12345 if method=='M1_RIGID' else .005}
+        if method not in METHODS[:2]:
             solver['attempts']=[{'initialization':i['name'],'initial_vector':problem.vector(i['poses'],i['twists']),
                 'initial_support_poses':i['poses'],'initial_support_twists':i['twists'],'random_seed':0} for i in starts]
         write(folder/'solver_result.json',solver);write(folder/'constraint_report.json',None)
@@ -128,7 +129,8 @@ def frozen_run(tmp_path,monkeypatch):
         write(plotdir/'plot_provenance.json',{'config_sha256':validator.digest(run/'config_snapshot.yaml'),
             'source_sha256':validator.digest(run/'source.json'),'metrics_sha256':validator.digest(folder/'metrics.json'),'images':records(plotdir)})
         rows.append({'case_id':selected['case_id'],'method':method,'candidate_found':candidate is not None,'plan_valid':plan['plan_valid'],
-                     'primary_success':metrics['primary_success'],'failure_reasons':metrics['failure_reasons'],'rollout_metrics':metrics})
+                     'primary_success':metrics['primary_success'],'failure_reasons':metrics['failure_reasons'],
+                     'optimizer_wall_s':solver['total_optimization_and_check_wall_s'],'deformation':plan.get('deformation'),'rollout_metrics':metrics})
     write(run/'aggregate/method_results.json',rows);summary=comparisons(rows);summary['selected_cases']=1;write(run/'aggregate/summary.json',summary)
     write(run/'optimization_completion.json',{'all_selected_cases_attempted':True});write(run/'evaluation_completion.json',{'all_cases_methods_evaluated':True,'mpc_output':str(mpc),'mpc_output_summary_sha256':validator.digest(mpc/'summary.json')})
     write(mpc/'output_hashes.json',{'files':records(mpc)})
@@ -242,3 +244,23 @@ def test_nested_rollout_hash_manifest_is_in_outer_method_coverage(frozen_run):
     write(mpc/'output_hashes.json',{'files':[r for r in records(mpc) if r['path']!='output_hashes.json']})
     result=validator.validate_run(frozen_run)
     assert result['valid'],result['errors']
+
+
+def test_paired_metrics_receive_saved_nonzero_optimizer_time_and_rigid_deformation(frozen_run,monkeypatch):
+    captured=[];original=validator.comparisons
+    def capture(rows):
+        captured.extend(deepcopy(rows))
+        return original(rows)
+    monkeypatch.setattr(validator,'comparisons',capture)
+    result=validator.validate_run(frozen_run)
+    assert result['valid'],result['errors']
+    rigid=next(row for row in captured if row['method']=='M1_RIGID')
+    assert rigid['optimizer_wall_s']==pytest.approx(.12345)
+    assert rigid['deformation']['uniform_mahalanobis_mean']>0.009
+    assert rigid['deformation']['mean_translation_m']==pytest.approx(.01)
+    expected=json.loads((frozen_run/'aggregate/summary.json').read_text())['paired_metrics']
+    actual=original(captured)['paired_metrics']
+    assert actual==expected
+    assert actual[0]['optimization_and_check_wall_s_baseline']==pytest.approx(.005)
+    assert actual[0]['optimization_and_check_wall_s_method']==pytest.approx(.005)
+    assert actual[0]['fresh_deformation_method'] is not None

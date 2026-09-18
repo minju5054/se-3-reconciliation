@@ -3747,3 +3747,46 @@ This file is append-only. Add each completed task at the bottom.
   permission failures; no implementation workaround or test suppression was used.
   Compileall, both launcher syntax checks and staged diff checks passed. Final
   review additionally tests nested rollout-hash coverage before committing.
+
+## 2026-09-18 — GP-SE2-01 primary comparison and actual GUI completion
+
+- Froze implementation at 25d65ffab091c8155a1ace4ddef89a2a5739e911 and primary
+  data/robotless_gp_se2_01/primary_20260918T054000Z before optimization. From
+  881 events, 730 were eligible; selected ten distinct episodes/raw pairs:
+  A3/B3/C3/D1. No relaxed thresholds, post-outcome replacements or new inference.
+- Executed all 50 case/method attempts with 60 actual solver starts. Rigid generated
+  ten candidates (eight independently plan-valid); both GP methods generated none.
+  M2's 20 starts timed out; M3 had 19 timeouts and one solver failure. M2/M3 starts
+  and configuration match in float64 bytes. Saved latest GP iterates violate dense
+  nonholonomic/acceleration checks; this is finite-budget numerical failure, not
+  an infeasibility proof. No RAW fallback or method-specific rerun was allowed.
+- Ran unchanged official MPC on 30 independent accepted references, 900 solves,
+  zero controller failures. All ten historical solve audits and every held-command
+  state reconstruction reproduced exactly. Actual primary successes: native 6,
+  adapter 7, rigid 7, M2 0, M3 0. M3 loses six native and seven adapter successes
+  through no-candidate availability; GP paired-success secondary metrics are N/A.
+  D native violates 0.05 m clearance and the usable gate; adapter/rigid pass.
+- Saved all 460 required 160 dpi method plots, ten common overlays and linked
+  index, retaining failures and separate prediction/execution traces. Actual Isaac
+  verified 15 screenshots for regression/D/benign representatives and every
+  method, plus reset/play/end/next callbacks and saved USD pose readback. GUI is
+  explicitly OFFLINE COUNTERFACTUAL; no new solves/inference/states during replay.
+- The first post-primary validator had one bookkeeping mismatch: reconstructed
+  paired rows omitted already-saved optimizer wall time and deformation. Preserved
+  its error report and archived code; fixed only the validator and a regression
+  test in distinct verification_20260918T060500Z. No numeric primary or MPC rerun;
+  all 1,097 method/result hashes remain unchanged. Corrected independent validation
+  passes 42,512 checks, all 50 method records/460 images/943 links and actual GUI.
+- Final preservation rehashed all 36,684 retained data files and all 63 checkpoint
+  tree files with no changes. External LightNav remains clean and pinned, original
+  validation unchanged, and both user configuration edits unchanged/uncommitted.
+- Final host suite: 1,432 passed, 18 explicit absent-historical-corpus skips in
+  49.22 s. Compileall, launcher syntax, diff/staged-diff checks and representative
+  image inspections pass. Documentation includes every case/method failure,
+  regressions before paired metrics, compute times, exact commands and correction.
+- Operational GP_SE2_01_COMPLETED_WITH_LIMITATIONS; research interpretation
+  NO_ADDITIONAL_BENEFIT_OBSERVED under this frozen formulation/budget. The final
+  interpretation is appended separately from the preserved pre-GUI summary flags.
+  Initial implementation push was rejected by automatic approval review; read-only
+  verification established PUBLIC origin minju5054/se-3-reconciliation and ADMIN
+  permission. Final normal-push handling is recorded in ignored git_completion.json.
