@@ -3790,3 +3790,71 @@ This file is append-only. Add each completed task at the bottom.
   Initial implementation push was rejected by automatic approval review; read-only
   verification established PUBLIC origin minju5054/se-3-reconciliation and ADMIN
   permission. Final normal-push handling is recorded in ignored git_completion.json.
+
+## 2026-09-18 — GP-SE2-DIAG-01 feasibility diagnosis and single-seed recovery
+
+- User explicitly requested a bounded diagnosis of the 40 historical GP failures,
+  3-second known-feasible/perturbed fixtures, one fixed actual event and one
+  evidence-selected change without physical acceptance relaxation. Started from
+  main f0cd9de405f4b03cd6871ffdffd1dffeb74475c8, matching fetched origin/main.
+  Preserved the two unrelated Stage 0 config edits. Historical numerical core
+  remains byte-identical to the 25d65ff implementation freeze.
+- Created data/robotless_gp_se2_diag_01/diagnostic_20260918T071302Z with original
+  source/config hashes and per-phase diagnostic source snapshots. Before/after
+  hashes match all 37,984 retained historical files and 63 checkpoint-tree files;
+  external LightNav/MPC remains clean/pinned. Independently reloaded the fixed
+  event from raw context, execution, commands and controller logs. No inference,
+  collection, environment export, controller change or new MPC execution.
+- Audited all 40 saved attempts before new optimization. All latest and all
+  initial vectors are COLLOCATION_INFEASIBLE; collocation-pass/dense-fail count
+  is zero. Reproduced 80/80 saved reports. Terminations remain 39 TIMEOUT and one
+  SOLVER_FAILURE. Missing intermediate/history evidence remains unknown. Lateral
+  midpoint failures and linear-acceleration knot-side failures occur in all 40;
+  only 2/20 M3 latest iterates violate obstacle constraints.
+- Independently verified S0/S1/S2 3-second GP reconstruction to roundoff. S3 has
+  small nonzero reconstruction error but passes the original tolerance. The
+  prescribed blind-spot interpolant passes support/midpoint lateral checks but
+  reaches 0.00023094 m/s between them against 1e-5 tolerance. This synthetic
+  example is separate from the actual rejection counts.
+- Ran six 150-variable synthetic solves with original 30-second budgets. S0/S1
+  known seeds are returned unchanged; S2 known seed improves while feasible.
+  All three perturbed seeds recover original dense feasibility; only S2 perturbed
+  converges, while S0/S1 perturbed time out with retained feasible callbacks.
+  Synthetic results are solver diagnostics, not research performance evidence.
+- Reproduced M2/M3 on episode_001_repeat_01/handoff_002 using both exact original
+  starts: four timeouts, no candidate. Recorded actual callback histories, unique
+  vectors/function calls and disjoint timing components. Environment queries,
+  including M2 workspace queries, account for about 61–62% of baseline solve
+  time. Instrumentation defers heavy callback validation; original selection and
+  acceptance are preserved and timing differences disclosed.
+- Froze decision.json before the one allowed B variant. Changed only the second
+  seed to X=B Exp((t-t²/(2T))*actual_initial_twist), T=3 s; no parameter fitting,
+  RAW seed, objective/derivative/constraint/tolerance/horizon change. Kept first
+  seed and both 200-iteration/30-second budgets; charged seed creation inside
+  the corresponding budget. Both M2/M3 return the same full feasible initial
+  seed unchanged, objective improvement zero. All four variant solves time out.
+  Full original dense/direct-geometry acceptance and 6,018 additional query times
+  pass: lateral9.12e-12 m/s, peak linear acceleration0.266667 m/s², original goal
+  position error0.026316 m and minimum footprint clearance1.326945 m.
+- Saved 26 PNGs with numeric/hash provenance, separated synthetic/actual plots,
+  and a 23-member 2.66 MB review ZIP without raw RGB/data/checkpoints. Actual XY
+  context/zoom displays Hospital geometry, original OLD/FRESH/B and accepted or
+  rejected GP curves; no execution trace is invented. A 243-file scientific
+  manifest freezes all results and phase snapshots.
+- First independent validation found 14 validator metadata errors: six short vs
+  qualified initialization labels and eight relative vs absolute source paths.
+  Preserved root validation.json. Corrected only validator comparisons with 14
+  new regression cases; verification/validation.json passes 47,216 checks with
+  zero errors. All 243 scientific hashes remain unchanged; no optimizer/MPC rerun.
+  Archived corrected validator/test and exact scope in verification/.
+- Final full suite passes 1,534 tests with 19 explicit skips in 51.11 s; 18 skips
+  are retired historical corpora and one excludes S3 from an exact-reproduction
+  assertion already covered by its dedicated error test. Compileall and diff
+  checks pass. Tracked report retains key numbers, limitations, correction and
+  reproduction commands without requiring local images.
+- Operational GP_SE2_DIAG_01_COMPLETED_WITH_LIMITATIONS; diagnosis
+  PARTIALLY_LOCALIZED; actual-event FULL_FEASIBLE_CANDIDATE_FOUND. The candidate
+  is a retained feasible initialization, not solver recovery from an infeasible
+  actual seed or evidence of better execution. Verified derivatives are the one
+  proposed next element; no second remedy was implemented. Final focused commit
+  and normal push are recorded in the new run's git_completion.json.

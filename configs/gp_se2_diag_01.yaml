@@ -1,0 +1,28 @@
+schema_version: 1
+experiment: GP-SE2-DIAG-01
+primary_run: data/robotless_gp_se2_01/primary_20260918T054000Z
+verification_run: data/robotless_gp_se2_01/verification_20260918T060500Z
+environment_export: data/robotless_gp_se2_01/environment_technical_20260918_retry04
+historical_numerical_git_sha: 25d65ffab091c8155a1ace4ddef89a2a5739e911
+starting_git_sha: f0cd9de405f4b03cd6871ffdffd1dffeb74475c8
+actual_case_id: episode_001_repeat_01/handoff_002
+methods: [M2_GP_NO_OBSTACLE, M3_GP_CONSTRAINED]
+formulation_source: immutable primary config_snapshot.yaml; no overrides
+blas_threads: 1
+synthetic:
+  horizon_s: 3.0
+  support_dt_s: 0.1
+  perturbation_seed: 20260918
+  translation_scale_m: 0.01
+  yaw_scale_deg: 0.5
+  linear_speed_scale_m_s: 0.02
+  angular_speed_scale_rad_s: 0.02
+  performance_evidence: false
+additional_check:
+  maximum_step_s: 0.001
+  offset_fraction: 0.371
+  continuous_time_proof: false
+variant_selection: after saved-failure audit, fixtures and actual baseline; exactly one change
+new_mpc_rollouts: false
+new_inference: false
+overwrite: false
