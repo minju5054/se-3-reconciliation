@@ -8,6 +8,7 @@ from reconciliation.gp_se2_diag02_validation import (
     PROTOCOL, ConstantEnvironmentDerivatives, _branch_signature, _smooth_rows,
     constraint_families, error_report, freeze_points, freeze_protocol, validate_point,
     validate_unsupported_cut, file_sha256,
+    publish_validation_gate,
 )
 from reconciliation.gp_se2_diag_fixtures import make_fixture_problem
 
@@ -155,3 +156,27 @@ def test_exact_cut_requires_specific_unsupported_failure_without_fallback(tmp_pa
     assert report['correctly_rejected'] == (failure_kind == 'correct_cut')
     assert not report['supported_derivative_domain']
     assert report['primal_reports'] == []
+
+
+def test_gate_publisher_keeps_requested_filename_when_iterating_source_files(tmp_path):
+    from pathlib import Path
+    import reconciliation.gp_se2_diag02_validation as module
+    attempt = tmp_path/'attempt'; attempt.mkdir()
+    for filename in ('protocol.json', 'point_manifest.json', 'protocol_addendum_01.json'):
+        (tmp_path/filename).write_text('{}\n')
+    source_file = Path(module.__file__).parent/'se2.py'
+    source = dict(source_sha256={'se2.py': file_sha256(source_file)},
+                  protocol_sha256=file_sha256(tmp_path/'protocol.json'),
+                  point_manifest_sha256=file_sha256(tmp_path/'point_manifest.json'),
+                  protocol_addendum_sha256=file_sha256(tmp_path/'protocol_addendum_01.json'))
+    (attempt/'source.json').write_text(json.dumps(source))
+    (attempt/'summary.json').write_text(json.dumps(dict(valid=True, actual_solver_authorized_by_this_gate=True,
+        supported_points_validated=19, unsupported_points_correctly_rejected=1)))
+    row = dict(compared_elements=1, maximum_absolute_error=0., maximum_scaled_error=0., excluded_elements=0)
+    (attempt/'point.json').write_text(json.dumps(dict(primal_reports=[row], coordinate_reports=[row], directional=[])))
+    publish_validation_gate(tmp_path, 'attempt', filename='explicit_gate.json')
+    assert (tmp_path/'explicit_gate.json').is_file()
+    assert not (tmp_path/'se2.py').exists()
+    assert not (tmp_path/'authoritative_validation.json').exists()
+    with pytest.raises(FileExistsError):
+        publish_validation_gate(tmp_path, 'attempt', filename='explicit_gate.json')

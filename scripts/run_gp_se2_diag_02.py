@@ -157,6 +157,11 @@ def freeze(run):
     cfg,src=settings(run)
     validation=read(run/'derivative_checks/authoritative_validation.json')
     if not validation.get('valid',False):raise ValueError('full derivative verification must pass before freeze')
+    publication={r['source']:r['current_sha256'] for r in validation.get('publication_only_source_corrections',[])}
+    for name,h in validation['checked_source_sha256'].items():
+        expected=publication.get(name,h)
+        if digest(ROOT/'src/reconciliation'/name)!=expected:
+            raise ValueError('derivative verification source drift: '+name)
     versions=dict(python=sys.version,numpy=np.__version__,scipy=scipy.__version__,jax=jax.__version__,
         jaxlib=jaxlib.__version__,shapely=shapely.__version__,devices=[str(d) for d in jax.devices()],
         jax_enable_x64=bool(jax.config.jax_enable_x64),slsqp_source_path=inspect.getfile(slsqp),
@@ -374,7 +379,7 @@ def aggregate(run):
     for path in sorted(attempt.glob('*.json')):
         item=read(path)
         if 'name' not in item:continue
-        if item.get('expected_unsupported_rejected') or item.get('unsupported_expected'):
+        if item.get('expected_runtime_rejection') and item.get('correctly_rejected'):
             coverage.append(dict(point=item['name'],kind='explicit unsupported cut rejection',family='relative_log_wrap_cut',passed=item['valid']))
         for kind in ('primal_reports','coordinate_reports'):
             for r in item.get(kind,[]):coverage.append(dict(point=item['name'],kind=kind,**r))

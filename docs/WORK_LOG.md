@@ -3894,3 +3894,12 @@ This file is append-only. Add each completed task at the bottom.
   Initial full suite: 1,620 passed/19 skips (69.06 s); subsequent focused suites
   cover the final wrap guard (37 provider tests), validator (13), and plotting (4).
   Compileall and diff checks pass before implementation freeze.
+- The first comparison-freeze command stopped before any solve because the gate
+  publisher shadowed its output filename with a source-loop variable. Preserved
+  the valid JSON written under derivative_checks/se2.py, corrected only the
+  publication function, and added an exact-filename regression test (14 validator
+  tests pass). AST comparison proves every numerical validation node unchanged;
+  the authoritative gate records old/new publisher hashes. A small follow-up
+  commit fixes publication and the unsupported-cut coverage-table label before
+  any actual solve. The comparison freeze additionally requires source-hash
+  agreement with the checked provider and declared publication-only correction.
