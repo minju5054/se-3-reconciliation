@@ -31,12 +31,20 @@ def config() -> dict:
     return yaml.safe_load((ROOT / "configs/stage0g3_moving_history_qualification.yaml").read_text())
 
 
-def test_frozen_g2_control_path_hash_and_primary_run_are_required(config: dict) -> None:
+def test_frozen_g2_control_path_and_hash_are_required(config: dict) -> None:
     validate_config(config, ROOT)
     assert sha256_file(ROOT / config["frozen_control"]["config_path"]) == EXPECTED_G2_CONFIG_SHA256
-    assert (ROOT / config["frozen_control"]["primary_run"]).is_dir()
     changed = copy.deepcopy(config); changed["frozen_control"]["expected_config_sha256"] = "0" * 64
     with pytest.raises(ValueError, match="SHA"): validate_config(changed, ROOT)
+
+
+def test_frozen_g2_primary_run_when_local_data_exist(config: dict) -> None:
+    primary_run = ROOT / config["frozen_control"]["primary_run"]
+    corpus_root = primary_run.parent
+    if not corpus_root.exists() and not corpus_root.is_symlink():
+        pytest.skip("ignored historical Stage 0-G2 primary corpus is not present")
+    # An existing qualification corpus with a missing primary run must fail.
+    assert primary_run.is_dir()
 
 
 def test_g3_paired_metrics_and_qualification_thresholds_are_frozen(config: dict) -> None:

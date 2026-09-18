@@ -220,7 +220,13 @@ def test_historical_m1_residual_and_output_are_production_identical():
 def test_exp02c_benign_historical_m4_still_matches_frozen_candidate():
     with (ROOT / "configs/exp02b_controller_aware.yaml").open(encoding="utf-8") as stream:
         exp02b = yaml.safe_load(stream)
-    source = ROOT / exp02b["paths"]["source_root"] / exp02b["frozen_source_cases"][
+    source_root = ROOT / exp02b["paths"]["source_root"]
+    frozen_root = ROOT / "data/exp02b/exp02b-controller-aware-20260906T150400Z"
+    # Skip only a wholly absent optional corpus, never a partially restored run.
+    if all(not path.exists() and not path.is_symlink() for path in (source_root, frozen_root)):
+        pytest.skip("ignored historical EXP-01B/EXP-02B corpus is not present")
+    assert source_root.is_dir() and frozen_root.is_dir()
+    source = source_root / exp02b["frozen_source_cases"][
         "case_benign_delayed"
     ]["relative_trial_path"]
     inputs = transition_input(load_source_case("case_benign_delayed", source), 0)
@@ -231,9 +237,7 @@ def test_exp02c_benign_historical_m4_still_matches_frozen_candidate():
         SolverConfig(**graph_config()["solver"]),
     )
     frozen = np.load(
-        ROOT
-        / "data/exp02b/exp02b-controller-aware-20260906T150400Z"
-        / "case_benign_delayed/k_0/graph/candidate.npy",
+        frozen_root / "case_benign_delayed/k_0/graph/candidate.npy",
         allow_pickle=False,
     )
     difference = result.candidate - frozen

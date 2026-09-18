@@ -158,16 +158,22 @@ def test_v4_residual_vector_matches_production_transition_problem():
 def test_v4_matches_frozen_historical_candidates(case, k):
     with (ROOT / "configs/exp02b_controller_aware.yaml").open() as stream:
         config = yaml.safe_load(stream)
-    trial = ROOT / config["paths"]["source_root"] / config["frozen_source_cases"][case]["relative_trial_path"]
+    source_root = ROOT / config["paths"]["source_root"]
+    frozen_root = ROOT / "data/exp02b/exp02b-controller-aware-20260906T150400Z"
+    # Skip only a wholly absent optional corpus, never a partially restored run.
+    if all(not path.exists() and not path.is_symlink() for path in (source_root, frozen_root)):
+        pytest.skip("ignored historical EXP-01B/EXP-02B corpus is not present")
+    assert source_root.is_dir() and frozen_root.is_dir()
+    trial = source_root / config["frozen_source_cases"][case]["relative_trial_path"]
     inputs = transition_input(load_source_case(case, trial), k)
     result = solve_variant(problem(inputs, "V4_FULL_CURRENT_M4"), inputs.selected_suffix, solver())
     frozen = np.load(
-        ROOT / "data/exp02b/exp02b-controller-aware-20260906T150400Z" / case / f"k_{k}/graph/candidate.npy",
+        frozen_root / case / f"k_{k}/graph/candidate.npy",
         allow_pickle=False,
     )
     with (ROOT / "configs/exp02b_calibrated_reeval.yaml").open() as stream:
         manifest = yaml.safe_load(stream)
-    frozen_path = ROOT / "data/exp02b/exp02b-controller-aware-20260906T150400Z" / case / f"k_{k}/graph/candidate.npy"
+    frozen_path = frozen_root / case / f"k_{k}/graph/candidate.npy"
     assert sha256_file(frozen_path) == manifest["candidate_sha256"][case][f"k_{k}"]["graph"]
     difference = result.optimized - frozen
     assert np.max(np.linalg.norm(difference[:, :2], axis=1)) <= 1e-9

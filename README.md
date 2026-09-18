@@ -29,33 +29,43 @@ Isaac displays its observation-anchored world trajectory. See the
 [robotless single-chunk report](docs/ROBOTLESS_ISAAC_LIGHTNAV_SINGLE_CHUNK.md)
 for coordinate checks and evidence; this does not validate navigation or motion.
 
-New reference reproduction: the unmodified official LightNav MuJoCo TurtleBot
-pipeline ran successfully on this machine. See the [reproduction report](docs/OFFICIAL_LIGHTNAV_MUJOCO_DEMO_REPRODUCTION.md)
-for provenance, runtime evidence, and claim limits; historical research below is retained.
+The unmodified official LightNav MuJoCo TurtleBot pipeline also ran successfully on this
+machine as a separate reference reproduction. Its evidence remains in
+`data/reference_reproduction/`; see the [reproduction report](docs/OFFICIAL_LIGHTNAV_MUJOCO_DEMO_REPRODUCTION.md)
+for provenance, runtime evidence, and claim limits.
 
-- DATA-02 now includes the immutable 84-episode v1 cohort and an independently predeclared
+## Historical research findings
+
+The following Jackal, Stage 0, EXP and DATA-02 findings are historical. On 2026-09-18,
+the user explicitly approved deleting their previous local raw and derived runs, including
+final runs unrelated to the current robotless research. Their tracked source, configurations,
+tests and reports remain, but the old data paths in those reports are no longer present
+locally. See the [2026-09-18 cleanup audit](docs/REPOSITORY_CLEANUP_AUDIT_20260918.md)
+for the exact deletion and preservation boundaries.
+
+- DATA-02 comprised the immutable 84-episode v1 cohort and an independently predeclared
   168-episode v2 extension, both collected by persistent LightNav and actual wheel-driven Jackal
-  execution. The reference-only union contains 1,479 attempted transitions, 959
-  `ELIGIBLE_MOVING` contexts, and 191 unique ordered raw pairs. However, one pair occupies
-  593/959 contexts and creates a 920-transition connected component. Duplicate domination and
-  isolated-split feasibility therefore fail. The exact historical decision remains
-  `DATA02_COMBINED_DIVERSITY_INSUFFICIENT`. EXP-02D uses the complete immutable union only as a
+  execution. The reference-only union contained 1,479 attempted transitions, 959
+  `ELIGIBLE_MOVING` contexts, and 191 unique ordered raw pairs. One pair occupied
+  593/959 contexts and created a 920-transition connected component. Duplicate domination and
+  isolated-split feasibility therefore failed. The exact historical decision remains
+  `DATA02_COMBINED_DIVERSITY_INSUFFICIENT`. EXP-02D used the complete immutable union only as a
   development corpus for mechanism/formulation analysis, never as an independent final test set.
 - Stage 0-G3 compared the frozen Stage 0-G2 stationary histories with 30 paired scripted moving
   Jackal histories ending at the same observation poses. Moving history changed 16/30 raw outputs
   but did not qualify left/right/doorway-or-detour behavior. That historical failure remains
-  unchanged; DATA-02 is the later explicit research decision to collect the target context rather
+  unchanged; DATA-02 was the later explicit research decision to collect the target context rather
   than another indirect qualification stage.
 - The execution-platform investigation prompted by feedback item 1 is complete through the
-  frozen Stage 0-D/E/F and EXP-02B-R evidence. This does not claim that the platform is
+  Stage 0-D/E/F and EXP-02B-R reports. This does not claim that the platform is
   generally validated beyond the observed LightNav execution envelope.
-- EXP-02C attributes the principal current-M4 failure to the incoming-direction transition
-  factor. EXP-02D keeps historical M4 intact and freezes one isolated redesign: its new M3 points
+- EXP-02C attributed the principal M4 failure to the incoming-direction transition
+  factor. EXP-02D kept historical M4 intact and froze one isolated redesign: its M3 points
   the direction factor at the raw follower lookahead `F_q` rather than nearest entry `F_k`.
 - The EXP-01B-derived DATA-01 bank is retired from primary formulation use. Its dedicated
-  generated bank and pipeline are removed, while the independent frozen EXP-01B source
-  evidence is preserved.
-- DATA-02 is coverage-oriented and descriptive. It does not estimate natural deployment
+  generated bank and pipeline were removed earlier; the independent EXP-01B local source
+  evidence was also deleted in the 2026-09-18 cleanup. Its historical reports remain.
+- DATA-02 was coverage-oriented and descriptive. Its reports do not estimate natural deployment
   frequencies, validate instruction satisfaction, or evaluate any reconciliation formulation.
 - EXP-02D completed its development-only primary over all 959 reconstructable transitions. Its
   pair-balanced mean `J_cmd` is RAW `1.3936`, historical M4 `0.9179`, no-direction `1.2085`, and
@@ -64,77 +74,103 @@ for provenance, runtime evidence, and claim limits; historical research below is
   offline and were not physically executed. See the dedicated report for the important benign,
   intermediate, challenging, and failure-regime qualifications.
 
-## System boundaries
+## Current system boundaries
 
-The execution stack keeps four levels distinct:
+The current online collector uses a logical SE(2) agent in the Isaac Hospital scene:
 
-1. LightNav output: untimed spatial `N x 3 [x, y, yaw]` waypoint reference.
-2. `TrajectoryFollower` output: desired body command `[v, omega]`.
-3. differential/execution controller output: left/right targets mapped to four Jackal wheels.
-4. Isaac Jackal measurement: actual pose, body motion, and wheel velocity.
+1. Isaac captures live RGB at nominal 4 Hz from the agent's recorded pose.
+2. Persistent official LightNav returns untimed spatial `N x 3 [x, y, yaw]` references.
+3. The read-only official `MpcTracker` computes body commands `[v, omega]` at 10 Hz.
+4. The research executor integrates those commands kinematically at nominal 60 Hz using the
+   exact constant-command unicycle update and records every actual state.
 
-Isaac Sim 6.0.1 is the simulator, ROS 2 Jazzy is the robotics middleware, and LightNav-0 is
-the upstream navigation-VLA baseline. Do not install or modify LightNav inside this repository.
-ROS 2 continues to use the machine's system Python; repository tests use the local Python 3.12
-`.venv`.
+The first newly computed FRESH command's actual application defines the handoff boundary.
+OLD commands continue while inference or the new MPC solve is pending. Isaac advances the
+simulation clock; the logical agent's pose is assigned from that recorded integration.
+There is no robot mesh, articulation, wheel controller or physical collision response in this
+collector. Collision validity remains unknown. The historical `TrajectoryFollower` and Jackal
+wheel-execution stack remain in source for their historical protocols.
 
-LightNav waypoint rows have no intrinsic timestamps. Any time assignment is an explicit
-experiment/controller convention and must not be presented as model timing. A local waypoint
-is transformed only with the robot pose captured at that chunk's observation event:
+Isaac Sim 6.0.1, the official LightNav model server and official MPC worker run in separate
+existing environments. The current robotless collector does not require ROS 2. The machine's
+ROS 2 Jazzy installation continues to use system Python; repository tests use the local Python
+3.12 `.venv`. Do not install or modify LightNav inside this repository.
+
+LightNav waypoint rows have no intrinsic timestamps. The MPC's 0.1 s horizon step is a
+controller convention. Each cumulative local waypoint is transformed with the logical agent
+pose recorded at that chunk's own RGB observation:
 
 ```text
-T_world_waypoint = T_world_robot_at_observation * T_robot_waypoint
+T_world_waypoint = T_world_agent_at_observation * T_agent_waypoint
 ```
 
-Coordinate frames, units, observation/readiness/execution events, transforms, and source hashes
-must remain explicit. Raw VLA outputs are never overwritten.
+World and agent coordinates use metres, Z up, local x forward, local y left and CCW yaw in
+radians. Observation, readiness, installation and command-activation timestamps, transforms
+and source hashes remain explicit. Raw VLA outputs are never overwritten. Saved GUI replay
+uses recorded samples and performs no new inference or execution.
 
-## Frozen evidence retained locally
+## Evidence retained locally
 
-Generated experiment data are ignored by Git, but the following primary paths are preserved on
-this machine because current claims and provenance depend on them:
+Generated data are ignored by Git. The 2026-09-18 cleanup preserves all `data/robotless*`
+roots and `data/reference_reproduction/`, including these current sources and derivatives:
 
 | Evidence | Local path |
 |---|---|
-| Redesigned controlled-latency EXP-01B source | `data/exp01b_redesign/exp01b-controlled-primary-20260906T-frozen/` |
-| Controller-level EXP-02B | `data/exp02b/exp02b-controller-aware-20260906T150400Z/` |
-| Execution calibration Stage 0-D | `data/stage0/execution_calibration/stage0d-20260907T102700Z/` |
-| Closed-loop validation Stage 0-E | `data/stage0/closed_loop_execution_validation/stage0e-20260908T021433Z/` |
-| LightNav envelope Stage 0-F | `data/stage0/lightnav_execution_envelope/stage0f-20260908T043300Z/` |
-| Calibrated EXP-02B re-evaluation | `data/exp02b_calibrated_reeval/exp02b-r-20260908T054233Z/` |
-| Current-M4 factor isolation EXP-02C | `data/exp02c_factor_isolation/exp02c-factor-isolation-20260908T133000Z/` |
-| Jackal domain-scene qualification Stage 0-G2 | `data/stage0/lightnav_scene_qualification_g2/20260909T_stage0g2_primary_r3/` |
-| Moving-history qualification Stage 0-G3 | `data/stage0/lightnav_moving_history_qualification/20260909T_stage0g3_primary_r6/` |
-| Online-successive DATA-02 v1 primary | `data/data02_online_successive_v1/data02-online-successive-primary-v1/` |
-| Independent DATA-02 v2 extension | `data/data02_online_successive_v2/data02-online-successive-extension-v2/` |
-| Reference-only DATA-02 v1+v2 assessment | `data/data02_combined_v1_v2/data02-combined-v1-v2-final/` |
-| EXP-02D lookahead-direction development primary | `data/exp02d_lookahead_direction/exp02d-lookahead-primary-20260910T171139Z/` |
+| Genuine online primary, raw streams and event plots | `data/robotless_online_handoffs_v1/primary_20260915T091900Z/` |
+| Online technical runs and server provenance | `data/robotless_online_handoffs_v1/` |
+| Primary recorded GUI replay | `data/robotless_online_replay/primary_20260915T091900Z_replay01/` |
+| Online trajectory-shape analysis | `data/robotless_online_handoff_shape_analysis/primary_20260915T091900Z_v1/` |
+| Frozen 30-condition screening bank | `data/robotless_handoff_screening/20260914T101519Z/` |
+| OLD-conditioned comparison | `data/robotless_old_conditioned_handoff/20260915T021149Z/` |
+| OLD-consistent observation pilot | `data/robotless_old_consistent_observation/20260915T043415Z/` |
+| OLD/FRESH problem GUI evidence | `data/robotless_old_consistent_problem_gui/20260915T064814Z/` |
+| Controlled staleness and projection characterization | `data/robotless_controlled_staleness/`, `data/robotless_projection_handoff/` |
+| Single- and successive-chunk interface validation | `data/robotless_single_chunk/`, `data/robotless_successive_chunks/` |
+| Separate official MuJoCo reference reproduction | `data/reference_reproduction/lightnav_official_mujoco/20260914T060141Z/` |
 
-These are not a new formulation dataset. The complete keep/archive/delete dependency audit is
-in [the 2026-09-09 cleanup audit](docs/REPOSITORY_CLEANUP_AUDIT_20260909.md).
+Previous local runs under `data/exp01*`, `data/exp02*`, `data/data02_*`, `data/stage0/`
+and `data/controller_effect_check/` were deleted with user authorization. Their historical
+reports and tracked reproducers remain, including code that current robotless tools import.
+Those historical raw paths cannot be replayed or revalidated from this checkout's local data.
+
+The [2026-09-18 cleanup audit](docs/REPOSITORY_CLEANUP_AUDIT_20260918.md) records the current
+preservation boundary and supersedes the local-retention decisions in the
+[2026-09-09 audit](docs/REPOSITORY_CLEANUP_AUDIT_20260909.md).
 
 ## Documentation map
 
-Detailed protocols, commands, schemas, observed results, and claim limitations live in `docs/`:
+Detailed protocols, commands, schemas, observed results, and claim limitations live in `docs/`.
+Historical report commands that refer to deleted runs require their original inputs; retaining
+source code does not mean those raw inputs remain locally available.
 
-- Platform: [Stage 0 Jackal](docs/STAGE_00_JACKAL_TRAJECTORY.md),
+- Current robotless collection: [online dataset and runtime](docs/ROBOTLESS_ONLINE_HANDOFF_DATASET_V1.md),
+  [OLD/FRESH GUI](docs/ROBOTLESS_OLD_FRESH_PROBLEM_GUI.md),
+  [OLD-consistent observations](docs/ROBOTLESS_OLD_CONSISTENT_OBSERVATION_PILOT.md),
+  [OLD-conditioned comparison](docs/ROBOTLESS_OLD_CONDITIONED_HANDOFF.md), and
+  [Hospital screening](docs/ROBOTLESS_LIGHTNAV_HANDOFF_SCREENING.md).
+- Current interface and geometry: [single chunk](docs/ROBOTLESS_ISAAC_LIGHTNAV_SINGLE_CHUNK.md),
+  [successive chunks](docs/ROBOTLESS_ISAAC_LIGHTNAV_SUCCESSIVE_CHUNKS.md),
+  [controlled staleness](docs/ROBOTLESS_CONTROLLED_STALENESS_CHARACTERIZATION.md), and
+  [projection geometry](docs/ROBOTLESS_PROJECTION_HANDOFF_GEOMETRY.md).
+- Separate reference: [official LightNav MuJoCo reproduction](docs/OFFICIAL_LIGHTNAV_MUJOCO_DEMO_REPRODUCTION.md).
+- Historical platform: [Stage 0 Jackal](docs/STAGE_00_JACKAL_TRAJECTORY.md),
   [controller validation](docs/STAGE_00_CONTROLLER_VALIDATION.md),
   [single-chunk LightNav](docs/STAGE_00_LIGHTNAV_SINGLE_CHUNK.md),
   [execution calibration](docs/STAGE_00_EXECUTION_LAYER_CALIBRATION.md),
   [closed-loop validation](docs/STAGE_00_CLOSED_LOOP_EXECUTION_VALIDATION.md),
   [LightNav execution envelope](docs/STAGE_00_LIGHTNAV_EXECUTION_ENVELOPE.md), and
   [current controller effect check, 2026-09-13](docs/CURRENT_CONTROLLER_EFFECT_CHECK.md).
-- LightNav qualification: [Stage 0-G2 Jackal domain scene](docs/STAGE_00G2_JACKAL_DOMAIN_SCENE_QUALIFICATION.md)
+- Historical LightNav qualification: [Stage 0-G2 Jackal domain scene](docs/STAGE_00G2_JACKAL_DOMAIN_SCENE_QUALIFICATION.md)
   and [Stage 0-G3 moving egocentric history](docs/STAGE_00G3_MOVING_HISTORY_QUALIFICATION.md).
-- Dataset collection: [DATA-02 online-successive OLD/FRESH v1](docs/DATA_02_ONLINE_SUCCESSIVE_OLD_FRESH.md),
+- Historical dataset collection: [DATA-02 online-successive OLD/FRESH v1](docs/DATA_02_ONLINE_SUCCESSIVE_OLD_FRESH.md),
   [v2 extension/final combined assessment](docs/DATA_02_V2_EXTENSION_AND_FINAL_SPLIT.md), and
   [saved high-motion GUI demo](docs/DATA_02_HIGH_MOTION_GUI_DEMO.md).
-- Transition characterization: [EXP-01](docs/EXPERIMENT_01.md),
+- Historical transition characterization: [EXP-01](docs/EXPERIMENT_01.md),
   [EXP-01A](docs/EXP_01A_LIGHTNAV_LATENCY.md),
   [EXP-01B](docs/EXP_01B_ONLINE_RAW_SWITCH.md),
   [EXP-01B extension](docs/EXP_01B_EXTENSION.md), and
   [redesigned controlled latency](docs/EXP_01B_REDESIGNED_CONTROLLED_LATENCY.md).
-- Reconciliation: [EXP-02 pilot](docs/EXP_02_ORACLE_GRAPH.md),
+- Historical reconciliation: [EXP-02 pilot](docs/EXP_02_ORACLE_GRAPH.md),
   [EXP-02A](docs/EXP_02A_SPATIAL_ENTRY_RECONCILIATION.md),
   [EXP-02B](docs/EXP_02B_CONTROLLER_AWARE_RECONCILIATION.md),
   [EXP-02B GUI diagnosis](docs/EXP_02B_GUI_DIAGNOSIS.md),
@@ -154,7 +190,8 @@ Keep the repositories separate:
 ~/Workspace/
 ├── se-3-reconciliation/       # this repository, Python 3.12 .venv
 └── external/
-    └── LightNav-0/            # upstream checkout, Python 3.11 .venv
+    ├── LightNav-0-official-demo/  # pinned upstream source and separate model/MPC environments
+    └── LightNav-0/               # external checkpoint storage
 ```
 
 Reproduce the research test environment without changing system Python, ROS 2, CUDA, Isaac
@@ -179,110 +216,23 @@ git diff --check
 Synthetic fixtures are tests and mechanism demonstrations only. They are never experimental
 evidence.
 
-Show the archived EXP-02B OLD execution mismatch (6.460 cm spatial RMS, mean commanded/measured
-omega 0.75534/0.13920 rad/s) with the moving Jackal, telemetry chart, pause, and replay buttons:
+Validate the retained online primary and inspect its recorded GUI:
 
 ```bash
-./scripts/isaac/run_exp02b_failure_demo.sh
+.venv/bin/python scripts/validate_robotless_online_handoffs.py \
+  data/robotless_online_handoffs_v1/primary_20260915T091900Z
+bash scripts/launch_robotless_online_replay.sh \
+  --run data/robotless_online_handoffs_v1/primary_20260915T091900Z \
+  --episode episode_000_repeat_00
 ```
 
-The 12-second presentation replays exact saved poses and stops before the boundary reset. It
-does not rerun physics. See [the failure demonstration](docs/EXP_02B_GUI_DIAGNOSIS.md#archived-failure-demonstration)
-for the legend, evidence checks, and presentation meaning.
+The replay is labelled `RECORDED ONLINE EPISODE REPLAY` and displays saved states and RGB.
+Blue is OLD, magenta is FRESH, green is actual execution during inference, orange is actual
+post-switch execution, and yellow marks the current state and handoff boundary. Play/pause,
+reset, handoff selection and speed controls operate only on the saved stream. The GUI remains
+open until closed; `--verify --no-hold` runs its verification sequence and exits, writing to a
+new replay output directory.
 
-Run the persistent Stage 0-G2 GUI with the stationary Jackal and frozen prediction:
-
-```bash
-./scripts/isaac/run_stage0g2_jackal_domain_scene_qualification.sh \
-  data/stage0/lightnav_scene_qualification_g2/20260909T_stage0g2_primary_r3 \
-  --mode gui --scenario G2_Q3_DOORWAY --variant V0
-```
-
-The GUI is inference-only: cyan is the observation-anchored LightNav path, yellow marks decoded
-headings, and Jackal remains stationary. Close Isaac Sim to end the persistent view.
-
-Replay the Stage 0-G3 scripted moving history with the official Jackal visibly moving at 4 Hz:
-
-```bash
-./scripts/isaac/run_stage0g3_moving_history_qualification.sh \
-  data/stage0/lightnav_moving_history_qualification/20260909T_stage0g3_primary_r6 \
-  --mode gui --scenario G2_Q1_LEFT_TURN --variant V1
-```
-
-The GUI persists and repeats until Isaac Sim is closed. Green is the scripted history, magenta is
-the G3 prediction, cyan is the paired G2 prediction, and yellow is the shared final observation.
-The moving Jackal is a direct-pose `SCRIPTED HISTORY REPLAY`, not controller execution.
-
-Replay a saved DATA-02 transition with the official Jackal visibly moving along its recorded
-wheel-driven execution history (this performs no LightNav inference):
-
-For the 15-second professor-facing high-motion replay, run:
-
-```bash
-./scripts/isaac/run_data02_high_motion_demo.sh
-```
-
-The default is deterministically selected from hash-verified immutable v1/v2 data. Green now
-contains only the exact current-OLD active interval: the previous switch boundary (or earliest
-bootstrap telemetry) through the selected `B`, with every telemetry row belonging to the displayed
-OLD. No previous-chunk or post-switch actual path is shown. It uses no LightNav inference,
-controller command, physics re-execution, or spatial motion scaling. Saved adjacent poses are
-interpolated only for smooth display; add `--show-rgb` for the observation inset and `--no-hold`
-for automated capture.
-
-The completed EXP-02D primary was generated from clean corrected protocol commit
-`f25fda2877bcfda8a599b739c252ab174d62f5b9` and validates with:
-
-```bash
-.venv/bin/python scripts/validate_exp02d_lookahead_direction.py \
-  data/exp02d_lookahead_direction/exp02d-lookahead-primary-20260910T171139Z
-```
-
-Replay an available deterministic representative with the saved-motion GUI:
-
-```bash
-./scripts/isaac/run_exp02d_success_failure_gui.sh \
-  --run data/exp02d_lookahead_direction/exp02d-lookahead-primary-20260910T171139Z \
-  --case S1
-```
-
-Use `--case S2` for the challenging success and `--case F1` for the predeclared turning failure
-candidate; `F2` is honestly `F2_NOT_AVAILABLE`. Phase A moves the official Jackal mesh through
-saved current-OLD-only poses. At `B` it stops; Phase B reveals RAW/M1/M3 (and optional M2 via
-`--show-m2`) as offline candidates. None is executed. The camera preserves the full Jackal and
-unscaled evidence inside the Hospital; when a scene-safe view or very short candidate geometry
-cannot occupy the requested 65--80% of the viewport, the capture manifest records that framing
-constraint rather than scaling the trajectories.
-
-The scientific saved-transition replay remains available separately:
-
-```bash
-./scripts/isaac/run_data02_online_successive.sh \
-  --replay-run data/data02_online_successive_v1/data02-online-successive-primary-v1 \
-  --episode episode_000014 --transition 4 --gui
-```
-
-Blue is OLD, magenta is raw observation-anchored FRESH, green is recorded actual motion, and
-yellow/orange/red mark the FRESH observation/P/B poses. Close Isaac Sim to end the persistent
-replay.
-
-Replay the challenging v2 representative and exit automatically after capture:
-
-```bash
-./scripts/isaac/run_data02_v2_online_successive.sh \
-  --replay-run data/data02_online_successive_v2/data02-online-successive-extension-v2 \
-  --episode episode_000061 --transition 4 --gui --no-hold
-```
-
-Build and validate the immutable reference-only v1+v2 assessment:
-
-```bash
-.venv/bin/python scripts/build_data02_combined.py \
-  --v1-run data/data02_online_successive_v1/data02-online-successive-primary-v1 \
-  --v2-run data/data02_online_successive_v2/data02-online-successive-extension-v2 \
-  --output data/data02_combined_v1_v2/data02-combined-v1-v2-final
-.venv/bin/python scripts/plot_data02_combined.py \
-  data/data02_combined_v1_v2/data02-combined-v1-v2-final
-.venv/bin/python scripts/validate_data02_combined.py \
-  data/data02_combined_v1_v2/data02-combined-v1-v2-final
-```
+Historical Jackal, EXP and DATA-02 launch and validation commands remain in their linked
+reports and scripts. Their previous local inputs were deleted in the 2026-09-18 cleanup;
+those demonstrations are no longer available from the removed data paths.

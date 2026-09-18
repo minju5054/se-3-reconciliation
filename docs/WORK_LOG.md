@@ -3660,3 +3660,53 @@ This file is append-only. Add each completed task at the bottom.
 - Append the documented definitions, sensitivity, weighting and representative
   paths to the dataset report. Commit the analyzer, tests and two documentation
   files, then normally push main; preserve both unrelated user configuration edits.
+
+
+## 2026-09-18 — Retire unrelated legacy generated research records
+
+- User requested removal of old files/folders unrelated to current robotless
+  research, then explicitly approved deleting previous final raw Jackal, EXP and
+  DATA-02 records after being told that they were not recoverable from Git.
+  Inspected branch/status/remotes first: main at
+  5ea2bbf6008fe8133e06b5c2a7bafd8b0be175ac, with two unrelated configuration edits.
+- Audited current data references, shared-code imports and presentation captures.
+  Kept all robotless_* roots and the official reference reproduction, including
+  primary 881-event evidence, trajectory-shape analysis, replay, smoke01 server
+  provenance, smoke10 GUI evidence and predecessor robotless research. Retained
+  all tracked source/configuration/tests/reports because historical names do not
+  establish that current code no longer imports their shared modules.
+- Deleted the explicit 37-target allowlist: 26 legacy roots under data/exp01*,
+  exp02*, data02_*, stage0 and controller_effect_check; output/pdf and tmp/pdfs;
+  two generated synthetic result files; seven Python/pytest cache roots. Removed
+  91,181 regular files, 3,392 symlinks and 18,893 directories, then the two empty
+  output/tmp parents. Removed allocation was 8,695,209,984 bytes (8.70 GB).
+  The original GUI/physics captures and final PDF/video package were deliberately
+  retired historical evidence, not mislabeled as regenerable caches.
+- Wrote per-file deletion/preservation inventories with hashes, exact sizes,
+  metadata and symlink targets to ignored data/cleanup_audits/20260918_robotless_scope.
+  A one-off allowlisted script rejected tracked targets/unknown roots and checked
+  complete inventories before deletion; it did not follow nested symlinks. All
+  36,684 retained data files (2,504,027,893 content bytes) matched SHA-256 and
+  filesystem metadata afterward. Both user configuration hashes are unchanged.
+- Full read-only online validation including PNG checks exited 0, matching the
+  preserved original validation JSON: valid/causal/schedule complete, 60 episodes,
+  881 valid handoffs, 1,762 valid-event PNGs, errors=[]. Existing timing/history
+  limitations remain unchanged. Independent post-deletion checks passed all
+  2,884 analysis input hashes, the processing-source hash, 97 replay input hashes
+  and 3,041 HTML index links. No inference, simulation or raw regeneration ran.
+- The initial full suite reported 1,281 passed, seven skipped and 11 failures
+  from removed historical corpora. Adjusted only three test files to explicitly
+  skip those absent-corpus comparisons while retaining mathematical tests and
+  always-running G2 configuration/hash/negative checks. Partial corpus restoration
+  still fails rather than hiding missing/corrupt records. Focused checks passed
+  50 tests and skipped 11. Original failure and follow-up logs are retained.
+- Updated README to explain the current robotless runtime, retained evidence and
+  unavailable legacy recordings. Added the dated cleanup audit, superseding the
+  old local-retention decision without rewriting historical work-log entries.
+  External LightNav source/weights, simulator installations and environments were
+  untouched. The commit excludes ignored data and the two user config edits.
+- Final full host suite passed 1,282 tests, with 18 historical-corpus-dependent
+  skips and no failures, in 34.84 seconds. The additional separate G2 availability
+  test accounts for the total changing from 1,299 to 1,300. Tests ran with bytecode
+  and pytest cache writes disabled. No production source was changed. Final
+  commit/push and audit hashes are recorded in the ignored cleanup directory.
