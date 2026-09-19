@@ -25,10 +25,12 @@ from reconciliation.se2 import wrap_angle
 from robotless_online_replay import overview_aperture
 
 LABEL = "OFFLINE COUNTERFACTUAL HANDOFF COMPARISON"
+HARD_LABEL = "OFFLINE COUNTERFACTUAL HARD-HANDOFF COMPARISON"
 METHODS = ("M0_NATIVE", "M0_ADAPTER", "M1_RIGID", "M2_GP_NO_OBSTACLE", "M3_GP_CONSTRAINED")
 COLORS = {"old": (.15, .38, 1., 1.), "fresh": (1., .05, .7, 1.),
     "candidate": (.05, .95, .95, 1.), "execution": (1., .5, .02, 1.),
     "boundary": (1., .9, .1, 1.), "goal": (.1, 1., .2, 1.),
+    "past": (.25, .25, .25, 1.), "seed": (.65, .35, .95, 1.),
     "margin": (1., 1., 1., 1.), "gate": (.7, .25, 1., 1.), "workspace": (.65, .65, .65, 1.)}
 
 
@@ -87,6 +89,13 @@ class SavedComparison:
         self.source_run = source.resolve() if source.is_absolute() else (ROOT/source).resolve()
         self.scene_config = self.read_yaml(self.source_run/"config_snapshot.yaml", external=True)
         manifest = self.read_json(self.run/"case_manifest.json")
+        protocol_path = self.run/"protocol.json"
+        protocol = self.read_json(protocol_path) if protocol_path.is_file() else {}
+        self.hard_transfer = protocol.get("experiment") == "GP-SE2-02"
+        self.methods = METHODS + ("SEED_ONLY",) if self.hard_transfer else METHODS
+        self.label = HARD_LABEL if self.hard_transfer else LABEL
+        self.runtime_status = ("GP_SE2_02_COMPARISON_REPLAY_RUNTIME_VALIDATED" if self.hard_transfer
+                               else "GP_SE2_01_COMPARISON_REPLAY_RUNTIME_VALIDATED")
         self.cases = []
         for row in manifest["selected"]:
             directory = _inside(self.run/"cases"/row["case_directory"], self.run/"cases")
@@ -97,7 +106,7 @@ class SavedComparison:
             if goal.shape != (3,) or boundary.shape != (3,) or not np.isfinite([goal, boundary]).all():
                 raise ValueError("invalid frozen goal/boundary")
             methods = {}
-            for name in METHODS:
+            for name in self.methods:
                 folder = directory/"methods"/name
                 metrics = self.read_json(folder/"metrics.json")
                 candidate_path, rollout_path = folder/"candidate_world.npy", folder/"rollout/rollout.json"
@@ -129,6 +138,13 @@ class SavedComparison:
             case = {"manifest": row, "directory": directory, "context": context, "goal_route": goal_route,
                 "old": _poses(context["old_world"], "OLD"), "fresh": _poses(context["fresh_world"], "FRESH"),
                 "B": boundary, "goal": goal, "gates": [gate_segment(g) for g in goal_route.get("gates", [])], "methods": methods}
+            past_path = directory/"actual_past_execution.json"
+            case["past"] = None
+            if past_path.is_file():
+                past = self.read_json(past_path)
+                case["past"] = _poses(past["poses_world"], "recorded past")
+                if not np.array_equal(case["past"][-1], boundary):
+                    raise ValueError("recorded past does not end at exact B")
             self.cases.append(case)
         if not self.cases:
             raise ValueError("no selected cases available for replay")
@@ -139,9 +155,21 @@ class SavedComparison:
             if (self.run/filename).is_file():
                 self.record(self.run/filename)
         render_geometry = self.run/"environment/geometry/render_geometry.json"
+        external_geometry = False
+        if self.hard_transfer and not render_geometry.is_file():
+            source = self.read_json(self.run/"source.json")
+            environment = Path(source["environment_path"])
+            environment = environment if environment.is_absolute() else ROOT/environment
+            render_geometry = environment/"geometry/render_geometry.json"
+            external_geometry = True
         self.workspace_rings = []
         if render_geometry.is_file():
-            geometry = self.read_json(render_geometry)
+            if external_geometry:
+                # Only the explicit provenance environment is allowed externally.
+                self.record(render_geometry)
+                geometry = json.loads(render_geometry.read_text())
+            else:
+                geometry = self.read_json(render_geometry)
             for ring in geometry.get("workspace_polygons", []):
                 ring = np.asarray(ring, float)
                 if ring.ndim != 2 or ring.shape[1:] != (2,) or len(ring) < 4 or not np.isfinite(ring).all() or not np.array_equal(ring[0], ring[-1]):
@@ -173,13 +201,25 @@ class SavedComparison:
 
     @property
     def method_name(self):
-        return METHODS[self.method_index]
+        return self.methods[self.method_index]
 
     @property
     def method(self):
         return self.case["methods"][self.method_name]
 
     def select_representatives(self):
+        if self.hard_transfer:
+            required = (("BENIGN_CONTROL", "episode_001_repeat_01/handoff_002"),
+                        ("HARD_POSITION_AND_DIRECTION", "episode_013_repeat_01/handoff_024"))
+            indices, report = [], []
+            for role, case_id in required:
+                matches = [i for i,c in enumerate(self.cases) if c["manifest"]["case_id"] == case_id]
+                if not matches:
+                    raise ValueError("required fixed hard-transfer GUI case missing: " + case_id)
+                indices.append(matches[0])
+                report.append({"reason": role, "available": True, "selected_case_id": case_id,
+                               "selection_rule": "user-fixed benign and first hard case; independent of outcomes"})
+            return indices, report
         predicates = (
             ("RAW_success_to_M3_failure", lambda c: c["methods"]["M0_NATIVE"]["metrics"].get("primary_success") is True
                 and c["methods"]["M3_GP_CONSTRAINED"]["metrics"].get("primary_success") is not True),
@@ -207,7 +247,7 @@ class SavedComparison:
                 raise ValueError("unknown case index")
             self.case_index = case_index
         if method_index is not None:
-            if not 0 <= method_index < len(METHODS):
+            if not 0 <= method_index < len(self.methods):
                 raise ValueError("unknown method index")
             self.method_index = method_index
         self.reset()
@@ -233,6 +273,8 @@ class SavedComparison:
     def overview_geometry(self):
         case = self.case
         arrays = [case["old"], case["fresh"], np.array([case["B"], case["goal"]])]
+        if case.get("past") is not None:
+            arrays.append(case["past"])
         for method in case["methods"].values():
             arrays.extend(method[k] for k in ("candidate", "poses") if method[k] is not None)
         arrays.extend(np.column_stack([gate, np.zeros(2)]) for gate in case["gates"])
@@ -255,11 +297,11 @@ class ComparisonGui:
         self.actions, self.samples, self.captures = [], [], []
         self.clock = time.monotonic()
         carb.settings.get_settings().set_float("/app/window/dpiScaleOverride", 1.)
-        self.panel = ui.Window(LABEL, width=700, height=1000)
+        self.panel = ui.Window(saved.label, width=700, height=1000)
         with self.panel.frame:
             with ui.VStack(spacing=7):
                 ui.Label("OFFLINE COUNTERFACTUAL", height=32, style={"font_size": 26})
-                ui.Label("HANDOFF COMPARISON", height=32, style={"font_size": 26})
+                ui.Label("HARD-HANDOFF COMPARISON" if saved.hard_transfer else "HANDOFF COMPARISON", height=32, style={"font_size": 26})
                 ui.Label("Saved 3 s idealized synchronous MPC outcomes.", height=25)
                 ui.Label("Display only: no new inference, solve or execution.", height=25)
                 with ui.HStack(height=38):
@@ -272,11 +314,19 @@ class ComparisonGui:
                 self.method_label = ui.Label("", height=92, word_wrap=True, style={"font_size": 20})
                 self.metrics_label = ui.Label("", height=155, word_wrap=True, style={"font_size": 17})
                 self.state_label = ui.Label("", height=98, word_wrap=True, style={"font_size": 16})
-                for legend in ("BLUE: original OLD prediction", "MAGENTA: original FRESH prediction",
-                               "CYAN: this method candidate reference", "ORANGE: this method saved execution",
-                               "YELLOW: B and sampled footprint", "WHITE RING: required clearance margin",
-                               "GREEN: common goal / tolerance", "PURPLE: frozen directed passage gates",
-                               "GRAY: evaluated workspace boundary (where visible)"):
+                legends = ("BLUE: original OLD prediction", "MAGENTA: original FRESH prediction",
+                           "CYAN: this method candidate reference", "ORANGE: this method saved execution",
+                           "YELLOW: B and sampled footprint", "WHITE RING: required clearance margin",
+                           "GREEN: common goal / tolerance", "PURPLE: frozen directed passage gates",
+                           "GRAY: evaluated workspace boundary (where visible)")
+                if saved.hard_transfer:
+                    legends = ("BLUE: original OLD prediction", "MAGENTA: original FRESH prediction",
+                               "CYAN: candidate reference; PURPLE: SEED_ONLY",
+                               "DARK GRAY: recorded actual past through B", "ORANGE: saved counterfactual execution",
+                               "YELLOW: B / footprint; WHITE: clearance margin",
+                               "GREEN: original goal and tolerance",
+                               "GRAY: evaluated workspace boundary")
+                for legend in legends:
                     ui.Label(legend, height=25, style={"font_size": 17})
                 ui.Label("Same world coordinates and camera scale for all methods.", height=45, word_wrap=True)
                 ui.Label("Static Hospital geometry; circular evaluation footprint only.\nNo physical robot safety claim.", height=55, word_wrap=True)
@@ -305,7 +355,7 @@ class ComparisonGui:
         elif name == "End":
             saved.seek_end()
         elif name == "Next Method":
-            saved.select(method_index=(saved.method_index+1)%len(METHODS))
+            saved.select(method_index=(saved.method_index+1)%len(saved.methods))
         elif name == "Next Case":
             saved.select(case_index=(saved.case_index+1)%len(saved.cases))
             self.set_camera()
@@ -360,10 +410,12 @@ class ComparisonGui:
             end = [pose[0]+length*np.cos(pose[2]), pose[1]+length*np.sin(pose[2])]
             path([pose[:2], end], color, 4., .17)
 
+        if case.get("past") is not None:
+            path(case["past"], "past", 4.)
         path(case["old"], "old", 3.)
         path(case["fresh"], "fresh", 4.)
         if method["candidate"] is not None:
-            path(method["candidate"], "candidate", 5., .16)
+            path(method["candidate"], "seed" if saved.method_name == "SEED_ONLY" else "candidate", 5., .16)
         if method["poses"] is not None:
             path(method["poses"][:saved.index+1], "execution", 7., .18)
         self.draw.draw_points([[*map(float, case["B"][:2]), .19]], [COLORS["boundary"]], [12.])
@@ -390,6 +442,12 @@ class ComparisonGui:
         metrics = method["metrics"]
         reasons = metrics.get("failure_reasons", metrics.get("failures", metrics.get("status", "See saved metrics")))
         self.metrics_label.text = f'PRIMARY LOCAL SUCCESS: {metrics.get("primary_success", "UNKNOWN")}\nSaved outcome: {str(reasons)[:260]}\nSafety / goal / route use identical frozen evaluation.'
+        if saved.hard_transfer:
+            reasons = metrics.get("termination_reasons", reasons)
+            self.metrics_label.text = (f'PLAN VALID: {metrics.get("plan_valid", "UNKNOWN")} | '
+                f'LOCAL SUCCESS: {metrics.get("primary_success", "UNKNOWN")}\n'
+                f'Diagnostic invalid-plan rollout: {metrics.get("diagnostic_rollout_plan_invalid", False)}\n'
+                f'Saved outcome: {str(reasons)[:210]}')
         sample_time = None if method["times"] is None else float(method["times"][saved.index])
         self.state_label.text = ("NO EXECUTION SAMPLES; boundary marker only.\n" if sample_time is None else
             f'Saved t={sample_time:.3f} s / {method["times"][-1]:.3f} s; sample {saved.index}\n') + f'{"PLAYING" if saved.playing else "PAUSED"}; world metres / yaw radians\nDisplay wall time is not counterfactual simulation time.'
@@ -431,7 +489,7 @@ class ComparisonGui:
         else:
             raise RuntimeError("Isaac application screenshot unavailable")
         method = self.saved.method
-        sidecar = {"label": LABEL, "case_id": self.saved.case["manifest"]["case_id"], "method": self.saved.method_name,
+        sidecar = {"label": self.saved.label, "case_id": self.saved.case["manifest"]["case_id"], "method": self.saved.method_name,
             "image_sha256": file_hash(path), "experiment_run": str(self.saved.run), "source_dataset_run": str(self.saved.source_run),
             "config_sha256": self.saved.sources[self.saved.run/"config_snapshot.yaml"],
             "metric_path": str(method["metric_path"]), "metric_sha256": file_hash(method["metric_path"]),
@@ -449,7 +507,7 @@ class ComparisonGui:
         for case_index in self.saved.representative_indices:
             self.saved.select(case_index=case_index, method_index=0)
             self.set_camera()
-            for method_index, method in enumerate(METHODS):
+            for method_index, method in enumerate(self.saved.methods):
                 self.saved.select(method_index=method_index)
                 self.refresh()
                 self.action("End")
@@ -472,11 +530,11 @@ class ComparisonGui:
         self.set_camera()
         self.action("End")
         self.saved.verify_unchanged()
-        expected = len(self.saved.representative_indices)*len(METHODS)
+        expected = len(self.saved.representative_indices)*len(self.saved.methods)
         if len(self.captures) != expected:
             raise ValueError("representative/method screenshot coverage incomplete")
-        dump_new(self.output/"runtime_validation.json", {"status": "GP_SE2_01_COMPARISON_REPLAY_RUNTIME_VALIDATED",
-            "label": LABEL, "experiment_run": str(self.saved.run), "scene": self.scene,
+        dump_new(self.output/"runtime_validation.json", {"status": self.saved.runtime_status,
+            "label": self.saved.label, "experiment_run": str(self.saved.run), "scene": self.scene,
             "representatives": self.saved.representative_report, "expected_screenshot_count": expected,
             "captures": self.captures, "controls": self.actions, "displayed_saved_samples": self.samples,
             "source_hashes": [{"path": str(p), "sha256": h} for p, h in self.saved.sources.items()],
@@ -484,7 +542,7 @@ class ComparisonGui:
             "new_mpc_solves": 0, "generated_execution_states": 0,
             "sampling": "last saved 60Hz state at or before replay time; no interpolation or integration",
             "verification_method": "actual Isaac renderer and same callbacks as GUI controls; no OS mouse-click claim"})
-        print(f"GP_SE2_01_COMPARISON_REPLAY_RUNTIME_VALIDATED {self.output}", flush=True)
+        print(f"{self.saved.runtime_status} {self.output}", flush=True)
 
 
 def main():

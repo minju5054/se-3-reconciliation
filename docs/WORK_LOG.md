@@ -3978,3 +3978,36 @@ This file is append-only. Add each completed task at the bottom.
   48,889 checks, zero errors, against 846 final artifacts; its whole-run audit
   takes 48.21 s measured externally. No numerical code, optimization result,
   acceptance, figure or review ZIP changes and no optimizer rerun occurred.
+
+## 2026-09-19 — GP-SE2-02 implementation and transfer preparation
+
+- Started from reviewed main 1462e81d9c8ebba04466a07d10898284d0fccf2e, matching
+  fetched origin/main. Preserved both unrelated user config edits; rehashed
+  37,984 historical, 256 DIAG-01, 851 DIAG-02 and 64 external files. Resolved the
+  four prescribed cases through the original manifest and reused the validated
+  environment copy/export. All four have zero required gates; no case replacement.
+- Added a separate fixed-case runner/protocol, evaluation wrapper and plots,
+  with only an optional backward-compatible GP02 schema/SEED_ONLY extension to
+  existing Isaac replay. Original GP mathematics, supplied derivative provider,
+  SLSQP harness, full checker, reference preparation and official MPC stay
+  unchanged. Copied original configuration and input contexts/arrays exactly.
+  Physical u_minus and controller memory remain distinct, particularly the
+  straight hard case's 0.8 versus 0.619266 m/s values.
+- Froze 32 derivative-transfer points before evaluation: each case/method/seed
+  and a deterministic perturbation. All pass using original DIAG-02 criteria;
+  maximum primal difference 4.89e-12 and required scaled derivative error 0.157844.
+  Required smooth directional comparisons number 170,686; two finite stencils
+  crossing an obstacle-grid cell boundary are classified separately. No provider
+  changes, fallback, new seed, or outcome-based case selection.
+- Initial full checks: every I0 is infeasible; I1 is valid only for benign and
+  invalid in all three hard cases. These inputs are retained, not fitted. The
+  next primary phase contains 16 GP starts and eight original rigid starts,
+  followed by original-policy independent MPC counterfactuals. No actual primary
+  optimization or rollout has occurred at this implementation entry.
+- Pre-primary full regression suite passes 1,723 tests with 19 existing skips in
+  73.35 s; compileall and diff checks pass. Independent saved-transfer audit
+  passes 1,935 checks. The two excluded obstacle stencils are duplicate support
+  rows crossing from grid cell [1345,578] to [1345,579]; the finest h=2e-6 probes
+  stay in the original branch and pass. Reporting-only artifact validators are
+  explicitly outside the execution-source freeze and will be archived separately;
+  no frozen execution code may change during primary.

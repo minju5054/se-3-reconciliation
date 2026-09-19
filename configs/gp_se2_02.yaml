@@ -1,0 +1,32 @@
+schema_version: 1
+experiment: GP-SE2-02
+starting_git_sha: 1462e81d9c8ebba04466a07d10898284d0fccf2e
+primary_run: data/robotless_gp_se2_01/primary_20260918T054000Z
+previous_diag01: data/robotless_gp_se2_diag_01/diagnostic_20260918T071302Z
+previous_diag02: data/robotless_gp_se2_diag_02/diagnostic_20260918T163000Z
+cases:
+  - case_id: episode_001_repeat_01/handoff_002
+    role: BENIGN_CONTROL
+  - case_id: episode_013_repeat_01/handoff_024
+    role: HARD_POSITION_AND_DIRECTION
+  - case_id: episode_014_repeat_01/handoff_026
+    role: HARD_LARGE_TURN
+  - case_id: episode_000_repeat_01/handoff_019
+    role: HARD_POSITION_STRAIGHT
+methods: [M0_NATIVE, M0_ADAPTER, M1_RIGID, M2_GP_NO_OBSTACLE, M3_GP_CONSTRAINED, SEED_ONLY]
+gp_initializations: [I0_FRESH, I1_DECEL]
+execution_order: case list order; M1 original identity/alignment, M2 I0/I1, M3 I0/I1; no concurrent solves
+formulation_source: original primary config_snapshot.yaml, byte-identical; no overrides
+gp_provider: unchanged DIAG02 CPU float64 JAX plus analytic environment derivatives
+prepared_solve_seconds_per_gp_start: 30.0
+max_iterations: 200
+blas_threads: 1
+candidate_selection: minimum original objective among per-start dense-feasible retained candidates, then initialization index; full-invalid selection is not substituted
+rollout_policy: native/adapter/rigid original GP01 policy; GP and SEED_ONLY require independent full acceptance
+scope: diagnostic transfer on existing development corpus; not held out or frequency estimation
+required_gates: unsupported; retain case and every scheduled start in ledger
+new_inference: false
+new_environment_export: false
+solver_retry: false
+new_initialization: false
+gui_label: OFFLINE COUNTERFACTUAL HARD-HANDOFF COMPARISON
