@@ -4206,3 +4206,28 @@ This file is append-only. Add each completed task at the bottom.
   FIXED_GEOMETRY_MATCHED_NEAREST_SELECTION_COMMAND_OUTCOME. Execution success
   is limited to these fixed offline events. Final report SHA and normal push
   are recorded in ignored git_completion.json; generated artifacts stay local.
+
+## 2026-09-19 — GP-SE2-REF-03 source-only cohort and execution freeze
+
+- Started at reviewed main 22c655ea421c77c1bc7bd7c70da5fec7c9ae7620,
+  fetched origin and preserved both unrelated local configuration edits.
+  Reused the authoritative online/GP01/GP02/REF01/REF02 results and validated
+  environment. No historical arrays, figures, source or external MPC changed.
+- Authenticated all 881 source records and original eligibility. Of 730
+  eligible records, the 10-event prior-selection union leaves 720 additional
+  eligible. O/R/P/S pools contain 35/16/95/378 flagged records, with overlap
+  recorded. Frozen greedy diversity/hash selection chooses six per group,
+  all 24 in distinct episodes and ordered raw pairs, without shortfalls.
+- Added exactly the two REF02 reproduction controls and original route-sensitive
+  obstacle stress. All original state/frame/physical-command/controller-memory,
+  goal, gate and reference inputs are preserved. B/C share byte-identical dense
+  arrays and lineage. Independent prepared-input audit passed 594 checks.
+- REF02 selector, rollout and numerical/evaluation core remain hash-pinned.
+  New REF03 code only selects the source cohort, runs the existing per-instance
+  wrapper and aggregates/plots/validates saved records. No GP/rigid/VLA, tuning,
+  reanchoring, extra horizon, failure filtering or scientific retry is allowed.
+- Primary primary_20260919T141000Z is prepared for 27 events / 81 rollouts /
+  2,430 MPC solves / 1,620 selector-only calls, still unexecuted at this entry.
+  Per case the order is A, B/C probes on current-A solve input poses, then B, C.
+  Related pre-execution tests: 155 passed; compileall and diff checks pass.
+  Documentation records frozen rules and pending outcomes before first solve.

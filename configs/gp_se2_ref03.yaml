@@ -1,0 +1,53 @@
+experiment: GP-SE2-REF-03
+starting_git_sha: 22c655ea421c77c1bc7bd7c70da5fec7c9ae7620
+sources:
+  online: data/robotless_online_handoffs_v1/primary_20260915T091900Z
+  GP01: data/robotless_gp_se2_01/primary_20260918T054000Z
+  GP02: data/robotless_gp_se2_02/primary_20260919T024000Z
+  REF01: data/robotless_gp_se2_ref_01/primary_20260919T062000Z
+  REF02: data/robotless_gp_se2_ref_02/primary_20260919T081000Z
+methods:
+- A_NATIVE
+- B_DENSE_ROW_STEP
+- C_DENSE_SOURCE_PROGRESS
+group_order:
+- O_OBSTACLE_NEAR
+- R_LARGE_ROTATION
+- P_LARGE_MISMATCH
+- S_BENIGN_STRAIGHT
+target_per_group: 6
+selector:
+  source_progress_stride: 1.0
+  searchsorted_side: left
+  search_tolerance: 0.0
+rollout:
+  horizon_s: 3.0
+  control_hz: 10.0
+  integration_hz: 60.0
+mpc:
+  HORIZON: 5
+  MPC_DT_S: 0.1
+  CONTROL_RATE_HZ: 10.0
+  Q_WEIGHTS:
+  - 10.0
+  - 10.0
+  - 1.0
+blas_threads: 1
+new_VLA_updates: false
+gp_or_rigid_optimization: false
+retry: false
+gui_runtime: false
+representative_policy: all new C safety/route regressions first; then first hash-ordered
+  recovery and first hash-ordered unchanged case in each additional stratum; known
+  controls always; full event index retained
+frozen_core_sha256:
+  src/reconciliation/gp_se2_ref02_reference.py: ecda9ccff4df3b6815dab50acecb5c83c724f6f56f1ac4a926292befc8bd14a9
+  src/reconciliation/gp_se2_ref02_rollout.py: cefa1109e7f35db1403faa74dcfa4d76ac5b0753a30a51e6022ed5a133d8d3fa
+  src/reconciliation/gp_se2_ref02_evaluation.py: 07cb05fe5bb1b54958e9fdd582d34df90652ee9d6992c80355244ed49fb0c9a2
+  src/reconciliation/gp_se2_ref01_reference.py: 35256e9eccf12437c4780712270eabf868c4aa75c951823be46df11cfe515390
+  src/reconciliation/gp_se2_reference.py: c8b396d20ee6108d467e9f7ce07024e687112bcaa6ac700a4df97c871f8e9bff
+  src/reconciliation/gp_se2_rollout.py: ec97d632f9258090fb3b8ed77de94ad886ef5625a502094e0da84c4bd41b1358
+  src/reconciliation/gp_se2_evaluation.py: ba711187af9b349a94dc7280575f7a329f102b5d958b4d9516b9ade51179dc09
+  src/reconciliation/online_mpc_adapter.py: fd6ab46d98e68bd8dfff2e96b9ebdf66b27b1531632ea53c888024245025362a
+  src/reconciliation/se2.py: 1a72740eeef3af6594ec4dc428e9a8aff67cc4f31f3712161787b690b966cde1
+  src/reconciliation/robotless_online.py: af9876567ee3ec29c05dcc386252656f5b35b6f9aa8a77a1acf62cccb8e0918f
