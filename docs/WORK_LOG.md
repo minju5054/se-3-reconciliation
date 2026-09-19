@@ -4153,3 +4153,56 @@ This file is append-only. Add each completed task at the bottom.
   until implementation commit and code/input freeze. Pre-execution relevant
   tests: 151 passed in 1.73 s; compile and diff checks pass. No expected C success
   assertion; failures and missing metrics remain valid scientific outcomes.
+
+## 2026-09-19 — GP-SE2-REF-02 fixed-input execution and report
+
+- Froze execution at 1801da1603439182bb95ed38d706fe776ab88e92. Performed the
+  planned 180 selector-only matched probes, then six independent primary
+  rollouts/180 MPC solves once in the fixed large-turn/benign A/B/C order.
+  No other MPC solve, retry, GP/rigid optimization or VLA update occurred.
+  All four A/B baselines reproduce REF-01 references, commands, predictions,
+  states and compared metrics bitwise. Both B/C installed dense arrays and
+  lineage bytes remain identical; all 60 paired nearest/cost probes agree.
+- Large-turn A/B/C success is PASS/FAIL/PASS; yaw errors are
+  0.332938812/38.827543097/0.255007664 deg, goal times 1.67/N/A/1.58 s.
+  B fails original yaw/dwell, while C passes every original condition.
+  Matched final-goal inclusion B/C is 1.8/0.9 s; actual closed-loop inclusion
+  is N/A/0.9 s. Targets already differ at t=0; significant actual commands
+  diverge at 0.3 s. Actual solver arguments match the audited selected rows.
+- Benign A/B/C all pass; goal times 1.28/2.59/1.28 s. C's linear command TV
+  increases over B (0.539192505 to 0.799988233 m/s), with motion still valid.
+  All six have valid footprint/clearance/workspace/motion/route and no solver
+  failure. Minima are 0.302121251 m (large turn), 1.326944970 m (benign).
+  No safety/motion regression. This is fixed-event selector recovery; no
+  sampling invariance, GP improvement or general navigation claim.
+- Preserved discrete source-progress overshoot: maximum 0.241379310 and
+  0.206896552 original-row units. C does not reproduce Native targets exactly.
+  Original goals, 3 s horizon, integration, controller calculation, source
+  environment and all evaluation tolerances are unchanged.
+- Measured 180 MPC solves total 0.705236 s inside the 1.319402 s worker process;
+  selector-only probes take 0.147308 s inside that same worker. Preparation,
+  worker, environment load and evaluation subtotal is 8.299599 s, excluding
+  reporting/tests. Nested times are not added together. No online latency claim.
+- Saved all six methods, 22 figures/sidecars and the primary 6,467,042-byte ZIP.
+  Two frozen input tables had overlapping headings; retained them and created
+  additive presentation_20260919T_ref02 with two corrected layouts and twenty
+  byte-identical figures, exact unchanged numbers and no new numerical run.
+  Its ZIP is 6,500,087 bytes. Independent presentation checks: 1,017 PASS,
+  plus separate 340-check source/ZIP/numeric audit. No Isaac GUI run.
+- Independent primary preflight passed 1,061,371 checks with zero errors;
+  only final preservation and artifact-manifest checks were deferred. The
+  final authoritative validator and full-suite result are recorded below.
+  Report: docs/GP_SE2_REF_02_SOURCE_PROGRESS_LOOKAHEAD.md. Next single study:
+  predeclared additional existing-hand-off B/C transfer with the same selector
+  and acceptance frozen; no tuning or GP-deformation generalization assumed.
+- Final required suite: 1,972 passed / 19 existing skips in 93.89 s, with no
+  REF-02 skip. Compileall and diff checks pass; no shell launcher changed.
+  Authoritative primary validation: 1,102,800 checks PASS, zero errors/deferred
+  checks, 8.058177 s and zero new MPC solves. All 41,033 source/result hashes,
+  both unrelated user config hashes and the official checkout are preserved.
+  Operational GP_SE2_REF_02_COMPLETED; baseline/fixed-input/nearest/selection/
+  large-turn recovery/benign-preservation flags true, new safety-or-motion
+  regression false. Mechanism level is
+  FIXED_GEOMETRY_MATCHED_NEAREST_SELECTION_COMMAND_OUTCOME. Execution success
+  is limited to these fixed offline events. Final report SHA and normal push
+  are recorded in ignored git_completion.json; generated artifacts stay local.
