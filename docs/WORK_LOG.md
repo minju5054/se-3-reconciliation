@@ -4231,3 +4231,58 @@ This file is append-only. Add each completed task at the bottom.
   Per case the order is A, B/C probes on current-A solve input poses, then B, C.
   Related pre-execution tests: 155 passed; compileall and diff checks pass.
   Documentation records frozen rules and pending outcomes before first solve.
+
+## 2026-09-19 — GP-SE2-REF-03 frozen transfer execution and regression report
+
+- Execution frozen at 343f1d2e57753e2ff99c4197c9f9bd20f6b2e5e7. Completed all
+  81 independent rollouts, 2,430 primary MPC solves and 1,620 selector-only
+  calls once, with zero technical method failures, missing results or retries.
+  Per-case order remains A/current-A B-C probes/B/C. All 810 same-state pairs
+  preserve nearest/progress/costs exactly; 481 change selected targets.
+- Regression first: known obstacle stress episode_017_repeat_00/handoff_007
+  changes from B success to C clearance and route failure. B/C minimum edge
+  clearance is 0.063068847/0.036086666 m; C crosses outside the original gate
+  interval. A also fails original clearance/route. No footprint overlap occurs.
+- Additional O/R/P/S A/B/C success counts are 6/6/6, 5/4/5, 6/5/6, 6/6/6.
+  Overall additional counts are 23/21/23: 21 all-success, two A/C-only successes,
+  one all-fail. Additional success-to-failure counts are zero, but C introduces
+  a motion reason relative to B on episode_014_repeat_00/handoff_029: physical
+  initial angular acceleration 5.088190932 > 5 rad/s². A has the same source-
+  memory-associated violation; B instead fails yaw/dwell. Original physical
+  predicate remains unchanged and the event remains a full failure.
+- Additional recoveries: episode_009_repeat_01/handoff_007 fixes B yaw/dwell
+  failure; episode_018_repeat_01/handoff_006 fixes late goal entry with only
+  0.18 s final dwell. Both goal-horizon inclusion and actual command records
+  support the selection mechanism. No additional success beyond Native was
+  observed. Controls are separate; all eight prescribed historical comparisons
+  (six REF02 A/B/C and two GP01 stress A/B) reproduce bitwise.
+- Among 21 jointly successful additional B/C pairs, mean C-minus-B goal time
+  is -0.816667 s, linear/angular command TV +0.059418 m/s/+0.148864 rad/s,
+  and minimum clearance -0.001202 m. Do not pool failed pairs or known controls;
+  source episode/pair memberships and equal-weight summaries are retained.
+- Preparation/worker/evaluation subtotal is 29.138591 s. Official MPC solves
+  sum to 8.178146 s and selector probes to 1.307833 s inside the 14.964786 s
+  worker process; inclusive times are not double-counted. No online claim.
+- Saved all 193 primary figures with numeric/hash sidecars and a 12,134,883-byte
+  review ZIP containing 76 PNGs and every 27 case overlay. Static diagnostics,
+  no GUI run. Visual audit found correct data/axes and some clipped long
+  boundary-zoom titles; original images are retained and the limitation disclosed.
+  Additional-only aggregate figures do not replace the separate stress report.
+- The first reporting validator preflight used obsolete planned-count request
+  field names; preserved its failed report. Corrected only validator lookup.
+  Preflight v2 passed 7,519,948 checks, zero errors, with final preservation/
+  manifest/ZIP deferred. This is not a numerical rerun or authoritative result.
+- Full required pytest: 2,102 passed / 19 existing skips in 104.88 s; no REF03
+  skip. Detailed final validation and Git completion are recorded below.
+  Research interpretation: MIXED_TRANSFER_WITH_REGRESSIONS. Next single task:
+  audit the known stress's selected targets, MPC predictions and executed swept
+  path at the original directed gate before proposing any selector modification.
+  GP continuous-time feasibility and GP-deformed-path applicability remain open.
+- Final authoritative validation: 7,565,567 PASS, zero errors/deferred checks,
+  20.689802 s, no new MPC/GP solves. It verifies all 193 plots and compact ZIP.
+  All 41,505 historical file hashes, both unrelated user config hashes and the
+  official checkout are preserved. Compileall and diff check pass; no launcher
+  changed. Operational GP_SE2_REF_03_COMPLETED; scientific interpretation
+  MIXED_TRANSFER_WITH_REGRESSIONS. Execution-stage pending-review metadata is
+  preserved and explicitly points to the completed research_interpretation.json.
+  Final report SHA/normal push are recorded in ignored git_completion.json.

@@ -278,7 +278,7 @@ def validate(run,*,write_output=True,output=None,require_finalized=True):
         audit.same(mpc['request_sha256'],digest(run/'mpc_request.json'),'actual request hash')
         audit.same(read(run/'mpc_output/request.json'),read(run/'mpc_request.json'),'actual worker request')
         audit.same(read(run/'mpc_request.json')['frozen_case_order'],[c['case_id'] for c in cases],'worker ordered cases')
-        for key,value in [('planned_rollouts',3*count),('planned_primary_mpc_solves',90*count),('planned_selector_probes',60*count)]:
+        for key,value in [('planned_rollouts',3*count),('primary_mpc_solves',90*count),('selector_probes',60*count)]:
             audit.same(read(run/'mpc_request.json')[key],value,'request planned count '+key)
         for path,h in mpc['implementation_sha256'].items():audit.same(digest(path),h,'worker actual implementation '+path)
         for row in read(run/'mpc_output/output_hashes.json')['files']:
