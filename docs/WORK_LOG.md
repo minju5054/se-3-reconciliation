@@ -4011,3 +4011,59 @@ This file is append-only. Add each completed task at the bottom.
   stay in the original branch and pass. Reporting-only artifact validators are
   explicitly outside the execution-source freeze and will be archived separately;
   no frozen execution code may change during primary.
+
+### 2026-09-19 — GP-SE2-02 fixed primary results and review
+
+- Ran primary_20260919T024000Z once from experiment commit
+  bd273b22ed9ddcb35a3f2eadcf550895adee46b9: all 16 GP starts and eight original
+  rigid starts, sequentially, with unchanged provider/formulation/config/acceptance.
+  All four cases passed derivative transfer; none required gates or FD fallback.
+  Twelve GP starts converge, five retain full-valid candidates, four have valid
+  final iterates. Hard position/direction converges but fails between-point motion;
+  large-turn M2/I1 retains valid callback_0115 while its final is invalid; all four
+  straight starts fail SLSQP (iteration/LSQ/incompatible-inequality termination).
+  No timeout, retries, extra seed or outcome-driven policy change occurred.
+- Ran 16 fresh official-MPC counterfactuals (480 controller solves), preserving
+  physical u_minus, controller memory, capture-frame inverse and 60 Hz integration.
+  All six methods succeed on benign. Hard native succeeds once; adapter/rigid/M2/M3/
+  seed-only have zero hard successes. Large-turn native-success → M2 yaw/dwell
+  failure and M3 candidate-unavailable regression; no native-failure → GP-success.
+  Hard candidate/plan availability is M2 1/3 and M3 0/3. Three invalid hard seeds
+  are not executed. Two original-policy rigid diagnostic rollouts are plan-invalid
+  due to endpoint errors just above 0.15 m. No collision, clearance, workspace or
+  controller failure occurred among performed rollouts. Straight baseline motion
+  violations preserve the recorded physical-speed/controller-memory discrepancy.
+- GP prepared solves total 47.133004 s; compilation/warmup 12.263738 s; cold GP
+  start costs including checks 80.712326 s. Entire optimization phase 87.411890 s,
+  isolated MPC batch 2.239165 s, outcome evaluation 0.880615 s. These nested costs
+  are reported separately and make no online-latency claim. Numerical objective
+  improvement on benign is separate from the NO_ADDITIONAL_EXECUTION_BENEFIT result.
+- Produced 48 frozen-source plots and four reporting-only full-time feasible-history
+  supplements. Original autoscaled graphs remain preserved; supplemental early-N/A
+  intervals and common axes are explicit. Actual Isaac replay validates 12 renderer
+  captures for benign/first hard, all four cases selectable, zero new inference,
+  optimization or execution during playback. Captures live in separate
+  gui_primary_20260919T024000Z, not the original experiment or dataset.
+- Added independent artifact/transfer validators, reporting matrix/cost aggregation
+  and compact completion packaging. Original interim summary remains unchanged.
+  Failed first validator preflight (heterogeneous/JSON CSV bookkeeping), initial
+  cost-label report and first supplemental legend rendering are retained; only
+  reporting/checker presentation was corrected, never primary scientific results.
+  Corrected numerical/report preflight passes 17,720 checks; final package audit
+  follows artifact freeze. Full pytest passes 1,767 with 19 existing skips in
+  84.78 s; compileall and diff checks pass. No shell launcher changed.
+- Documented all 24 start/method outcomes, controls, regression and compute costs
+  in GP_SE2_02_HARD_HANDOFF_TRANSFER.md; README now reflects actual execution.
+  Next single experiment proposed: isolate native/common reference preparation
+  on the same large-turn event with unchanged MPC and original goal. Not executed.
+- Final authoritative artifact audit: validation.json PASS, 64,135 checks, zero
+  errors, 1,202 hashed artifacts in 53.854036 s. It independently verifies all
+  numerical starts/outcomes, 52 plots, 12 actual renderer captures, 88-file final
+  review ZIP and preservation. All 39,155 original/historical/diagnostic/external
+  file hashes and both unrelated user configuration hashes match before/after.
+  Review ZIP is 37,664,656 bytes, SHA256
+  90f27aa197a95e17d8a8d4f39bf3d679afe2cd61382d92481582f703e348dae1.
+  Final status GP_SE2_02_COMPLETED; numerical hard availability M2 1/3, M3 0/3;
+  execution NO_ADDITIONAL_EXECUTION_BENEFIT. Generated artifacts remain ignored;
+  only scoped code/tests/docs are committed. Exact final Git and push confirmation
+  follow in local git_completion.json, excluded from the artifact-manifest cycle.
