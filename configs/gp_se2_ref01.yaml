@@ -1,0 +1,34 @@
+schema_version: 1
+experiment: GP-SE2-REF-01
+starting_git_sha: 47668b868e84173fab4516ab7d5edb65ef75b841
+primary_source: data/robotless_gp_se2_02/primary_20260919T024000Z
+reference_source: data/robotless_gp_se2_01/primary_20260918T054000Z
+cases:
+  - case_id: episode_014_repeat_01/handoff_026
+    role: PRIMARY_LARGE_TURN
+  - case_id: episode_001_repeat_01/handoff_002
+    role: BENIGN_CONTROL
+variants: [R00_NATIVE, R10_SUFFIX_ONLY, R01_RESAMPLE_ONLY, R11_CURRENT_ADAPTER]
+execution_order: all matched-state probes before all independent rollouts; case order then variant order; once sequentially
+rollout: {horizon_s: 3.0, control_hz: 10.0, integration_hz: 60.0}
+reference: {first_time_s: 0.1, final_time_s: 3.0, output_dt_s: 0.1}
+mpc: {HORIZON: 5, MPC_DT_S: 0.1, CONTROL_RATE_HZ: 10.0}
+reproduction:
+  selected_pose_atol: 1.0e-12
+  command_atol: 1.0e-6
+  state_atol: 1.0e-6
+  endpoint_metric_atol: 1.0e-6
+  rtol: 0.0
+  indices: exact
+  success_flags: exact
+  reason: selected poses use original selection_audit tolerance; commands use original historical audit tolerance; accumulated states and endpoint metrics use a predeclared micro-unit diagnostic tolerance, separate from unchanged physical acceptance
+descriptive_effect_floor: 1.0e-6
+effect_floor_meaning: native metric units; numerical observation flag only, not significance or practical benefit
+blas_threads: 1
+new_vla_inference: false
+new_data_collection: false
+gp_or_rigid_optimization: false
+controller_modified: false
+retry: false
+scope: two fixed dependent development-corpus events; descriptive factor isolation, not population inference
+gui: optional_not_required_static_evidence_primary

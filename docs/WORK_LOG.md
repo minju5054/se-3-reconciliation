@@ -4067,3 +4067,26 @@ This file is append-only. Add each completed task at the bottom.
   execution NO_ADDITIONAL_EXECUTION_BENEFIT. Generated artifacts remain ignored;
   only scoped code/tests/docs are committed. Exact final Git and push confirmation
   follow in local git_completion.json, excluded from the artifact-manifest cycle.
+
+## 2026-09-19 — GP-SE2-REF-01 factor-isolation implementation
+
+- Started from reviewed/fetched main 47668b868e84173fab4516ab7d5edb65ef75b841.
+  Preserved unrelated Stage 0 config edits and immutable GP-SE2-02/01 sources,
+  results/images, original environment and official external MPC. New run is
+  robotless_gp_se2_ref_01/primary_20260919T062000Z; no synthetic replacement.
+- Added separate two-case/four-variant input lineage, selector instrumentation,
+  original-rollout wrapper, evaluation/contrasts, plots and static review package.
+  Large-turn k=1 with row counts 10/9/30/30; benign k=2 with 10/8/30/30. R00 and
+  R11 exactly reproduce source F_native/F_common; suffix applied once only.
+  Original goal/frame, physical command, controller memory and source rows remain
+  unchanged. No GP/rigid optimizer, controller/gain/selector change or new VLA call.
+- Prepared 240 same-state official-selector probes without MPC optimization,
+  followed by eight independent official counterfactual rollouts/240 solves in
+  fixed order, all still pending at this implementation entry. Code/input freeze
+  precedes primary. Reproduction tolerances and descriptive metric floors are
+  fixed beforehand; physical acceptance is unchanged. Static PNG/index evidence
+  is primary; optional GUI is not implemented for this diagnostic.
+- Pre-execution validation: 116 relevant tests passed in 3.91 s; new execution
+  sources compile and git diff --check passes. The official isolated Python
+  imports the worker and the prepared request resolves all eight frozen inputs.
+  Independent artifact checker is separate from the frozen execution provider.
