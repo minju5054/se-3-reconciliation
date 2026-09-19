@@ -4090,3 +4090,44 @@ This file is append-only. Add each completed task at the bottom.
   sources compile and git diff --check passes. The official isolated Python
   imports the worker and the prepared request resolves all eight frozen inputs.
   Independent artifact checker is separate from the frozen execution provider.
+
+## 2026-09-19 — GP-SE2-REF-01 actual factor isolation and report
+
+- Froze implementation 48a8b47267b0d31bf1794e9dbba6a47ff10619f2 and all inputs,
+  then completed the prescribed 240 same-state selector probes and eight
+  independent rollouts/240 official MPC solves exactly once. No numerical retry,
+  extra solve, GP/rigid optimization, new inference or controller change occurred.
+  R00/R11 in both cases reproduce all compared original values bitwise, including
+  reference selections, predictions, controller memory, commands and states.
+- Large-turn R00/R10 succeed; R01/R11 fail original yaw/dwell criteria only, with
+  yaw errors 0.332939/0.265866/37.303553/38.827543 deg. Resampling alone suffices to
+  reproduce failure; suffix alone does not. Large-turn yaw-error interaction is
+  +1.591064 deg. Benign all pass, with goal times 1.280/1.280/2.185/2.590 s.
+  All eight pass environment/motion checks and have zero controller failures.
+- Same-state large-turn final-row inclusion is 0.9/0.9/1.7/1.8 s; closed loop is
+  0.9/0.9/N/A/N/A. Final yaw remains in the input, but resampling changes the
+  fixed five-row target window. Stored logs connect different targets to weaker
+  early rotation and incomplete rotation at 3 s. This is fixed-event diagnosis,
+  not population evidence, a GP-feasibility fix or navigation improvement.
+- Saved all 22 required figures/sidecars, static index and 5,081,835-byte review
+  ZIP (SHA256 36138db62462c4ff48c7ffd183e47b45eb43bd297697741b33b18a4008dc0085).
+  Original input-overview annotations were crowded. Preserved those files and
+  added eight readable row/geometry detail figures in separate rendering-only
+  presentation_20260919T063000Z with source/hash audit, no numerical rerun. Its
+  3,683,258-byte input_details.zip passes all member hash/CRC readback checks.
+  No Isaac GUI was run for this optional diagnostic presentation.
+- Preserved the first non-authoritative validator preflight with six checker
+  metadata-key omissions. Corrected only the separately excluded validator;
+  second preflight passes 668,477 checks. Original numerical/code/plot files were
+  unchanged. Initial full pytest has 1,837 passes/19 skips and two sandbox IPC
+  PermissionErrors; the original log remains. Final unrestricted-local-IPC
+  suite and final authoritative artifact check follow below.
+- Final full suite: 1,843 passed, 19 existing skips in 94.27 s with required local
+  IPC allowed. Compileall and diff checks pass. Authoritative validation.json:
+  709,970 checks, zero errors/deferred checks in 8.005008 s. All 40,564 preserved
+  file hashes and both unrelated user config hashes match. Frozen primary source
+  is unchanged; supplemental rendering is separately versioned and validated.
+  Operational GP_SE2_REF_01_COMPLETED; all five diagnostic observation/reproduction
+  flags true, mechanism INPUT_SELECTION_COMMAND_OUTCOME_MEASURED. These are not
+  navigation-improvement flags. Final Git SHA/push recorded in ignored
+  git_completion.json; no generated data or external code enters the commit.
