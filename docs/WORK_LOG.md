@@ -4286,3 +4286,11 @@ This file is append-only. Add each completed task at the bottom.
   MIXED_TRANSFER_WITH_REGRESSIONS. Execution-stage pending-review metadata is
   preserved and explicitly points to the completed research_interpretation.json.
   Final report SHA/normal push are recorded in ignored git_completion.json.
+
+## 2026-09-20 — GP-SE2-REF-04 saved audit implementation freeze
+
+- Started from `fc51724ececc29ad00e1d62b832ce097821d16b7`; fetched origin/main and inspected branch/remotes. Preserved the two existing Stage-0 configuration edits.
+- Added a bounded saved-record audit, direct-geometry helper, runner/validator, static plot/review entry point and tests for the one REF-03 known obstacle stress event.
+- Separated five actual selected targets, six Euler prediction states and exact reconstruction of already applied commands. Original full acceptance and gate geometry stay unchanged; missing future controls and out-of-horizon actual records remain explicit.
+- Froze the <=1 ms swept-segment refinement and representative-interval selection rules before generating the new audit output. New VLA/GP/rigid/MPC solves and new rollout count are zero.
+- Focused tests pass; full repository verification and the numerical report follow in the result entry. No historical output, numerical/selector core or external source is edited.
