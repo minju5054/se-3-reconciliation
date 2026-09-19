@@ -4131,3 +4131,25 @@ This file is append-only. Add each completed task at the bottom.
   flags true, mechanism INPUT_SELECTION_COMMAND_OUTCOME_MEASURED. These are not
   navigation-improvement flags. Final Git SHA/push recorded in ignored
   git_completion.json; no generated data or external code enters the commit.
+
+## 2026-09-19 — GP-SE2-REF-02 fixed-geometry selector implementation
+
+- Started from reviewed/fetched main 9a615cee443848e79fff8805e9a038bbbcb2c341;
+  no duplicate REF-02 implementation existed. Preserved both unrelated user
+  config edits and checked 41,033 prior source/result/environment/figure paths.
+  Authoritative REF-01 validation is the final 709,970-check PASS, not its earlier
+  metadata-checker preflights. New primary_20260919T081000Z has both fixed cases.
+- B/C reference and lineage copies are byte-identical REF-01 R11, float64 30x3.
+  A keeps REF-01 R00. C changes only post-nearest selection: q=min(s_j+h,s_last),
+  strict float64 searchsorted(left), fixed stride 1.0, existing rows only. No new
+  interpolation, suffix recut, GP/rigid solve, VLA call or source modification.
+- Added per-instance selector injection preserving official submit/integration
+  bytecode, _solve/poll/path-installation and delegated MPC calculation. Actual
+  submitted world and controller-local references are captured; C has an
+  independent scan audit, A/B retain the original audit. MPC computation is
+  identical; reference selector differs. No global monkey-patch or vendoring.
+- Prepared exact installed-path matched probes on the same historical Native
+  poses and six once-only rollouts/180 MPC solves. All probes/rollouts pending
+  until implementation commit and code/input freeze. Pre-execution relevant
+  tests: 151 passed in 1.73 s; compile and diff checks pass. No expected C success
+  assertion; failures and missing metrics remain valid scientific outcomes.

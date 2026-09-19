@@ -1,0 +1,23 @@
+schema_version: 1
+experiment: GP-SE2-REF-02
+starting_git_sha: 9a615cee443848e79fff8805e9a038bbbcb2c341
+primary_source: data/robotless_gp_se2_ref_01/primary_20260919T062000Z
+related_source: data/robotless_gp_se2_02/primary_20260919T024000Z
+cases:
+  - {case_id: episode_014_repeat_01/handoff_026, role: PRIMARY_LARGE_TURN}
+  - {case_id: episode_001_repeat_01/handoff_002, role: BENIGN_CONTROL}
+methods: [A_NATIVE, B_DENSE_ROW_STEP, C_DENSE_SOURCE_PROGRESS]
+source_variants: {A_NATIVE: R00_NATIVE, B_DENSE_ROW_STEP: R11_CURRENT_ADAPTER, C_DENSE_SOURCE_PROGRESS: R11_CURRENT_ADAPTER}
+selector: {source_progress_stride: 1.0, searchsorted_side: left, search_tolerance: 0.0, round_nearest_progress: false, accumulate_overshoot: false, interpolate_targets: false, progress_memory: false}
+rollout: {horizon_s: 3.0, control_hz: 10.0, integration_hz: 60.0}
+mpc: {HORIZON: 5, MPC_DT_S: 0.1, CONTROL_RATE_HZ: 10.0, Q_WEIGHTS: [10.0, 10.0, 1.0]}
+probe_times_s: [0.0, 1.0, 2.0]
+execution_order: all 180 same-state probes, then case order and method A/B/C once sequentially
+blas_threads: 1
+new_vla_inference: false
+gp_or_rigid_optimization: false
+new_reference_interpolation: false
+retry: false
+command_divergence_atol: 1.0e-6
+scope: two fixed development-corpus events; offline selector intervention, not online or general navigation
+gui: optional_not_run_static_evidence_primary
