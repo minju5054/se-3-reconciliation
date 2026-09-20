@@ -4322,3 +4322,15 @@ This file is append-only. Add each completed task at the bottom.
 - Seven static figures, tables, index and compact ZIP are saved. Additive `presentation_20260920T011000Z/` corrects only crowded worst-interval labels and clipped-excess wording; all seven numeric payloads and six copied PNG/sidecars are unchanged. Preferred ZIP is 11,443,730 bytes, SHA-256 `4f36945b1c3cefa23f581a2a39d94a9c062f4ba96a210f7e3d01c27cd292f56a`. No GUI runtime was launched.
 - Operational `GP_SE2_DIAG_03_COMPLETED_WITH_LIMITATIONS`: finite sampling and shared primitive algebraic checks are explicit limitations. New VLA/GP/rigid/MPC solves, rollouts and Isaac runtime are all zero. Proposed next single experiment is bounded quarter-point constraint refinement under unchanged physical tolerances; feasible solve recovery and execution benefit are not claimed or attempted here.
 - Final verification: 2,225 passed / 19 existing skips in 119.71 s; no DIAG03 test skip. Compileall and diff checks pass, no shell launcher changed. Primary saved-record validator and additive presentation validator both pass with zero errors. Official MPC source hash and clean pinned checkout are confirmed unchanged. Normal current-branch report commit/push and final SHA are recorded in ignored `git_completion.json`; only code/tests/docs are committed.
+
+## 2026-09-20 — GP-SE2-DIAG-04 implementation and protocol freeze
+
+- Added a separate original/quarter motion constraint view and supplied-Jacobian
+  extension; historical GP math/evaluator/provider/full checker remain unchanged.
+- Froze ten paired starts using original GP-SE2-02 seed files: hard M2/M3 ×
+  I0/I1 × G0/G1 and benign M3/I1 × G0/G1. No MPC/rollout/VLA/GUI is planned.
+- Added original-prefix parity, extra-row derivatives, 15-point actual derivative
+  gate, dense-first retention, post-solve rank diagnostics, plots and saved-record
+  validation. Extra equalities/inequalities are 60/480; environmental rows unchanged.
+- Preserved the two unrelated Stage-0 configuration edits. This entry records
+  implementation only; actual verification and solve outcomes will be appended.
