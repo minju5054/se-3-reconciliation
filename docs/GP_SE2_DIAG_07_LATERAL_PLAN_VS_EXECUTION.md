@@ -142,3 +142,222 @@ authorized by this experiment.
 At protocol commit: preparation, five original plan gates, exact deduplication,
 two actual historical audits and 56 relevant implementation tests pass. Primary
 counterfactuals have not yet run. Results will be appended after the frozen run.
+
+## Completed result
+
+Execution/freeze SHA: `666fd14ac6fa2ba14b8467e1e889cd9faec76760`.
+Operational status: **GP_SE2_DIAG_07_COMPLETED_WITH_LIMITATIONS**.
+Research interpretation: **LATERAL_INVALID_REFERENCES_EXECUTION_FAIL**.
+Benign control: **BENIGN_EXECUTION_PRESERVED**.
+
+All five planned unique reference conditions ran once in order, through five
+independent official tracker instances. Four hard references are close but not
+byte-identical and therefore were not merged. There are 150 primary MPC solves
+plus two separate historical-audit solves: **152 total**. No new GP/rigid solve,
+VLA inference, RGB capture, online episode or Isaac GUI runtime occurred. There
+was no retry, reference edit, acceptance change or scientific code change after
+freeze. All primary solves have zero controller numerical failures.
+
+| New reference | Full plan | Full execution | Final position m | Absolute yaw deg | Goal time s | Achieved final dwell s | Original execution failure |
+|---|---|---|---:|---:|---:|---:|---|
+| Hard M2/I0 | FAIL: lateral only | FAIL | 0.169928611 | 2.965731 | N/A | 0 | goal position; dwell |
+| Hard M2/I1 | FAIL: lateral only | FAIL | 0.169928028 | 2.965885 | N/A | 0 | goal position; dwell |
+| Hard M3/I0 | FAIL: lateral only | FAIL | 0.169931910 | 2.965717 | N/A | 0 | goal position; dwell |
+| Hard M3/I1 | FAIL: lateral only | FAIL | 0.169929155 | 2.966142 | N/A | 0 | goal position; dwell |
+| Benign M3/I1 | PASS | PASS | 0.016353398 | 0.003229 | 2.595 | 0.405 | none |
+
+Hard full-plan rejection remains unchanged; the original selected hard
+candidate remains N/A in DIAG-06. The raw unchanged execution evaluator reports
+`goal_failure`; the separate diagnostic taxonomy records both
+`EXECUTION_GOAL_FAILURE` and `EXECUTION_DWELL_FAILURE`. All four hard trajectories
+never enter the original simultaneous goal region in the fixed 3 s; even their
+minimum sampled position error is 0.169820–0.169824 m, above 0.15 m. Terminal yaw
+passes the original 15 degree bound. This is fixed-horizon failure, not evidence
+that the reference could never reach a goal under a different experiment.
+
+Every execution passes required clearance, known workspace, route and actual
+command motion constraints. No physical overlap occurs. Minimum footprint-edge
+clearance is 1.84301915 m for the four hard conditions and 1.32694497 m for benign,
+well above the unchanged 0.05 m plus original uncertainty/curve allowance.
+The original route is preserved; these two events have no required finite gate,
+so route pass must not be described as a demonstrated gate traversal.
+
+| Reference | First [v, omega] | Delta from physical u_minus | Final [v, omega] | Max abs dv/dt m/s² | Max abs domega/dt rad/s² | Linear / angular command TV |
+|---|---|---|---|---:|---:|---|
+| Hard M2/I0 | [0.699766429, 0.484304733] | [-0.100233571, 0.499999964] | [0.031529151, -0.194956383] | 1.999999947 | 4.999999638 | 2.307564 / 3.199355 |
+| Hard M2/I1 | [0.699766008, 0.484304733] | [-0.100233992, 0.499999964] | [0.031525577, -0.194950931] | 1.999999947 | 4.999999638 | 2.307557 / 3.199336 |
+| Hard M3/I0 | [0.699765890, 0.484304733] | [-0.100234110, 0.499999964] | [0.031521040, -0.194959589] | 1.999999947 | 4.999999638 | 2.307571 / 3.199351 |
+| Hard M3/I1 | [0.699766265, 0.484304733] | [-0.100233735, 0.499999964] | [0.031539773, -0.194947854] | 1.999999947 | 4.999999638 | 2.307556 / 3.199332 |
+| Benign M3/I1 | [0.799999995, 0.000035977] | [-0.000000005, 0.000150721] | [0.265133879, -0.000005161] | 1.999998719 | 0.001507208 | 0.608655 / 0.000428 |
+
+Commands are m/s and rad/s; total variations are m/s and rad/s. Command-grid
+acceleration includes the first step from physical u_minus, not an inferred GP
+velocity. Hard applied speed ranges approximately 0.013843–0.717057 m/s and
+max abs omega is about 0.989997 rad/s. Benign applied speed ranges
+0.265134–0.8 m/s. The actual lateral command dimension is **nonexistent**.
+No measured executed-vy channel is manufactured.
+
+## Selection, prediction and goal-margin observations
+
+All 150 actual selected five-row references, 150 saved six-pose MPC predictions,
+900 held integration commands and 905 states are retained. The independent audit
+reconstructs every integration state exactly and checks actual target indices,
+XY, periodic yaw, input state and controller-memory chain. No nearest-progress
+backward jump occurs in any of the five executions.
+
+For each hard execution:
+
+- A selected target inside the original goal region first appears at 1.9 s.
+- The final GP reference row first enters the five-row horizon at 2.7 s and
+  stays in the selected horizon thereafter. The final GP row is not literally
+  the raw FRESH goal, so these are different diagnostics.
+- The GP plan endpoint position error is 0.133143–0.133146 m, inside the original
+  0.15 m region. It has only approximately 0.01685 m of radial goal margin.
+- The actual final state is approximately 0.038461 m from that GP endpoint,
+  leaving the actual original-goal distance near 0.16993 m. These distances are
+  not collinear scalar quantities and must not simply be summed.
+- Saved prediction polylines have minimum footprint-edge clearance at least
+  1.84132786 m; no unsafe inside-corner prediction is observed here.
+- Initial physical command and recorded controller memory happen to be equal:
+  [0.8, -0.015695230803144968]. They were independently loaded, not forced equal.
+  No memory-discrepancy explanation is supported for this event.
+
+Benign first goal-region target inclusion is 2.1 s, final-reference-row inclusion
+2.5 s and original goal entry 2.595 s. Plan endpoint error is about 0.000039737 m,
+leaving substantially more original-goal position margin. Benign final tracking
+distance to its final reference is about 0.016390 m. Its original physical speed
+and controller memory are also equal; the source values were preserved.
+
+These measurements associate the hard failure with a limited goal margin and a
+remaining endpoint tracking displacement under this row selector. They do not
+prove a unique cause, do not establish that a different selector would recover
+it, and do not isolate a causal effect of v_y. Targets did reach the original
+goal region, so “the goal was never in the MPC horizon” is not supported. Final
+yaw is small enough to pass, so this is not the large-turn yaw regression from
+REF-01. Saved prediction tails remain predictions and are not executed traces.
+
+## Historical context — not new rollouts
+
+The same hard event's GP-SE2-02 original baseline records and configuration are
+hash-verified context only:
+
+| Historical method | Original full execution | Position m | Yaw deg | Spatial plan |
+|---|---|---:|---:|---|
+| M0_NATIVE | FAIL: goal | 0.209819705 | 0.129967 | valid |
+| M0_ADAPTER | FAIL: goal | 0.204503995 | 0.271836 | valid |
+| M1_RIGID | FAIL: goal | 0.327621052 | 7.969731 | invalid diagnostic rollout |
+
+The new hard G3 references have smaller terminal position error than these
+historical records, but still fail the unchanged success predicate. This is not
+a new paired RAW/GP causal comparison or navigation improvement. No baseline
+was rerun; historical wall times are not paired compute comparisons.
+
+## Computation and artifact verification
+
+Measured preparation is 8.577 s, including source rehashing and 1.178 s of five
+plan rechecks (nested, not additional). Historical-audit worker phase is 0.102 s.
+The primary worker phase is 0.794 s; its five rollout durations sum to 0.529 s,
+including 0.492 s of official MPC solve time. These are nested timings and are
+not summed as independent costs. Evaluation stage is 0.328 s; original full
+execution-check calls sum to 0.162 s. Process startup/import and report/validation
+costs are separate from these measured worker phases. None advances simulation.
+
+| Reference | Rollout wall s | Official MPC solve total s | Full execution evaluation s |
+|---|---:|---:|---:|
+| Hard M2/I0 | 0.139545 | 0.131007 | 0.038141 |
+| Hard M2/I1 | 0.102514 | 0.095124 | 0.030302 |
+| Hard M3/I0 | 0.101430 | 0.093972 | 0.030118 |
+| Hard M3/I1 | 0.100127 | 0.092689 | 0.030565 |
+| Benign M3/I1 | 0.085260 | 0.078913 | 0.033158 |
+
+The frozen saved-record validator independently recomputed all scientific
+plan/execution results and record checks. Its only error was
+`artifact hash plot_console.log`: the plotter inventoried its redirected stdout
+while empty and then wrote its final summary. The initial failed validator,
+original hash inventory and complete log are preserved unchanged. This is a
+report metadata error, not a failed execution or altered acceptance.
+
+The separate `finalize_gp_se2_diag07_review.py` accepts only that exact log-prefix
+case, rejects any other scientific/source error, rechecks all five full plans,
+all five executions/integration/selection streams, every numeric plot sidecar
+and ZIP member, then writes the authoritative result:
+
+`verification/validation.json`: **valid=true, errors=[]**.
+
+`verification/reporting_completion.json` records the empty-prefix/final-log
+hashes and the exact supersession scope; `verification/output_hashes.json` binds
+the completed logs and all outputs. The original `validation.json` is not the
+final authority. Validation performs zero new MPC/GP/rollout operations.
+The first validator took 10.478 s and final independent completion check 9.615 s.
+
+Initial five-row multi-panel images had overlapping status/title text. A separate
+per-reference presentation preserves all original files and uses identical
+numeric data, clearer labels and goal-region circles. All 50 new readable PNGs
+have independently checked numeric/hash sidecars. Representative world and goal
+plots were visually inspected at original image resolution. No GUI was run.
+
+Preferred evidence:
+
+- `presentation/index.html`: all five conditions and all 50 readable figures.
+- `review_bundle_readable.zip`: self-contained index, 50 figures, sidecars,
+  result tables, source/config/reference identity and limitations (7,042,036 B).
+- `aggregate/plan_vs_execution.csv`: distinct plan and execution rows.
+- `aggregate/execution_outcomes.csv`, `command_metrics.csv`, `selection_metrics.csv`.
+- `rollouts/ref_00` through `ref_04`: complete actual commands, states,
+  selections, predictions, original evaluation and diagnostic geometry.
+- `verification/validation.json`: final saved-record authority.
+
+Reporting-only commands, after the unchanged once-only execution:
+
+```bash
+MPLCONFIGDIR=/tmp/gp_diag07_mpl .venv/bin/python scripts/present_gp_se2_diag07.py --run data/robotless_gp_se2_diag_07/primary_20260920T103000Z
+MPLCONFIGDIR=/tmp/gp_diag07_mpl .venv/bin/python scripts/finalize_gp_se2_diag07_review.py --run data/robotless_gp_se2_diag_07/primary_20260920T103000Z
+```
+
+## Interpretation and next single uncertainty
+
+**No execution-success counterexample to the strict lateral criterion was
+observed.** All four unique lateral-invalid hard references also failed execution
+at original goal position/dwell, while the plan-valid benign control succeeded.
+This does **not** show that nonzero planned v_y caused failure or that the strict
+plan criterion is necessary. It supplies no permission to relax the 1e-5 lateral
+threshold. Hard plans remain invalid and unavailable for deployment.
+
+The next single uncertainty is whether sufficient **plan endpoint margin inside
+the unchanged original goal region**, with this fixed MPC/selector and execution
+predicate, changes this hard goal/dwell failure. A later bounded comparison can
+vary only that planning margin and preserve the original lateral acceptance;
+any remaining lateral-invalid references must remain explicitly diagnostic.
+This is a proposal, not an implemented constraint, new solve or horizon extension.
+It would address the measured 1.685 cm plan-goal margin versus roughly 3.846 cm
+final tracking displacement before claiming that lateral relaxation helps.
+The hard/soft/structural lateral-design choice remains unresolved.
+
+## Final repository checks and complete runtime accounting
+
+Full required command: **2,350 passed, 19 existing skips in 163.35 s**.
+The first sandbox full run had two existing Unix-domain IPC permission failures
+(2,345 passed, 19 skipped); the required command was repeated with local IPC
+permission, without changing code or experimental results. All 32 new DIAG-07
+implementation/reporting tests pass. `compileall src scripts tests` and
+`git diff --check` pass. No shell launcher changed. Existing skips concern absent
+historical ignored corpora and one declared representation fixture.
+
+Complete actual-MPC accounting includes a pre-existing integration test that
+calls the official historical audit for `episode_008_repeat_01/handoff_013`.
+It ran once in the 56-test relevant set, once in the first full suite and once
+in the IPC-enabled full suite. These are **three additional test-only historical
+solves**, no counterfactuals and no new experimental conditions. They are not
+included in the frozen experiment's 152 solves. Therefore the task-wide actual
+MPC call count is **155 = 150 primary + 2 protocol historical audits + 3 existing
+regression-test historical audits**. All three test invocations passed; pytest
+retention removed the first temporary audit directory, while the two full-suite
+audit records are preserved separately with their test provenance. No new audit
+was run to replace that temporary test artifact. The primary five reference
+records/rollouts and two protocol audit records are complete.
+
+The frozen `aggregate/summary.json` runtime total of 152 is the experimental
+schedule, not this task-wide total including legacy runtime tests. Final
+completion metadata preserves both counts, final/report SHA, normal push status
+and test/source hashes. Code/tests/docs only are committed; all generated data,
+figures and ZIPs stay ignored, with the two unrelated config edits untouched.

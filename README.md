@@ -260,3 +260,11 @@ new replay output directory.
 Historical Jackal, EXP and DATA-02 launch and validation commands remain in their linked
 reports and scripts. Their previous local inputs were deleted in the 2026-09-18 cleanup;
 those demonstrations are no longer available from the removed data paths.
+
+GP-SE2-DIAG-07 completed a fixed-reference offline execution diagnostic:
+four unique lateral-only-invalid G3 hard references all passed actual motion,
+clearance/workspace/route checks but failed the original 3 s goal position/dwell;
+the full-valid benign control succeeded. No execution-success counterexample to
+the strict plan lateral criterion was observed, and no lateral causal claim or
+tolerance change follows. See
+[plan vs execution report](docs/GP_SE2_DIAG_07_LATERAL_PLAN_VS_EXECUTION.md).

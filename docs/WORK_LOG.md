@@ -4476,3 +4476,40 @@ Two historical solves in the existing pinned official MPC environment pass.
 56 relevant tests pass (including 29 new DIAG-07 checks); no primary rollout yet.
 Frozen intended primary: five rollouts / 150 solves, no retry or GP/VLA/GUI.
 Protocol and commands: docs/GP_SE2_DIAG_07_LATERAL_PLAN_VS_EXECUTION.md.
+
+## 2026-09-20 — GP-SE2-DIAG-07 fixed-reference execution result
+
+- Frozen execution SHA: 666fd14ac6fa2ba14b8467e1e889cd9faec76760. Five exact
+  unique references ran once: four hard G3 latest plans, one optimized benign
+  control. 150 primary MPC solves + 2 historical audits = 152 total. No new
+  GP/rigid/VLA/RGB/GUI/online runtime or retry; no frozen scientific code change.
+- Hard plans remain lateral-only invalid, deployment_candidate=false. All four
+  executions fail original goal position/dwell (position ~0.16993 m >0.15 m,
+  yaw ~2.966 degrees passes); safety/workspace/route and actual command motion
+  pass. Benign full plan and execution pass (0.0163534 m, goal entry 2.595 s).
+- Interpretation LATERAL_INVALID_REFERENCES_EXECUTION_FAIL: no execution-success
+  counterexample observed, not evidence that planned v_y caused the failures.
+  Actual unicycle [v,omega] has no lateral command channel. Goal-region targets
+  appear at 1.9 s; final GP row at 2.7 s. Plan endpoint has ~1.685 cm original-goal
+  margin, with ~3.846 cm final tracking displacement. No unsafe saved prediction.
+- Source inventory preserves 30,937 transitive files, original checker/core/MPC,
+  environment, inputs and unrelated Stage-0 config edits. Historical baselines
+  remain context only; no historical rollout was rerun.
+- Original saved-record validator's only failure was the plotter's redirected
+  stdout hash (empty at inventory time, final summary written afterward).
+  Preserved the failed validator, manifest and complete log. New isolated report
+  completion rejects all other errors and recomputes plans/executions/sidecars;
+  verification/validation.json is valid=true and authoritative. Zero new solves.
+- Added separate per-reference presentation for overlapping original titles:
+  50 readable figures, presentation/index.html and review_bundle_readable.zip.
+  All numbers/source hashes preserved. No GUI. Protocol, complete tables,
+  commands, compute, limitations and next single planning-margin uncertainty are
+  in docs/GP_SE2_DIAG_07_LATERAL_PLAN_VS_EXECUTION.md.
+- Final required tests: 2,350 passed / 19 existing skips (163.35 s), compileall
+  and diff checks pass. An initial sandbox run's two existing local IPC errors
+  were resolved by the same full command with IPC permission, not a code change.
+  Three existing test-only official historical audits also ran (relevant set +
+  two full suites); task-wide actual MPC count is 155, distinguished from the
+  frozen experiment's 150 primary + 2 protocol audits. No extra rollout or
+  experimental condition; no GP/VLA/GUI runtime. Temporary pytest retention
+  removed the first test-only audit artifact; both full-suite audits are retained.
