@@ -4463,3 +4463,16 @@ adaptive round, retry, controller/VLA/MPC/rollout/GUI is authorized here.
   not another recursive witness round or an automatic tolerance relaxation.
   Only code/tests/docs are committed and normally pushed; data and user edits
   remain excluded. Final SHA/push completion is recorded in the ignored run.
+
+## 2026-09-20 — GP-SE2-DIAG-07 execution protocol freeze
+
+Starting main f454a3de86a18160ec182cccab3f4857f1b92bf0, equal to fetched origin/main.
+Implemented an isolated fixed-reference official-MPC diagnostic, without changing
+GP/selector/controller/acceptance code. Source verification checks 30,937 files
+and preserves two unrelated Stage-0 config edits. All five G3 latest support
+reconstructions and full checks reproduce literally: hard four fail lateral only,
+benign optimized latest passes. Five exact unique references, no aliases merged.
+Two historical solves in the existing pinned official MPC environment pass.
+56 relevant tests pass (including 29 new DIAG-07 checks); no primary rollout yet.
+Frozen intended primary: five rollouts / 150 solves, no retry or GP/VLA/GUI.
+Protocol and commands: docs/GP_SE2_DIAG_07_LATERAL_PLAN_VS_EXECUTION.md.
