@@ -119,5 +119,191 @@ Installed versions are used without upgrades.
 
 ## Execution and results
 
-Pending the frozen actual-point derivative gate and ten primary solves.
-No experimental success is claimed by implementation unit tests.
+Execution revision: `e3776fa30a161ff361ba5f1d321a8caa788e729d`.
+Primary: `data/robotless_gp_se2_diag_04/primary_20260920T015400Z/`.
+All ten planned starts called SLSQP exactly once. New VLA/MPC solves, rollout
+and GUI runtime counts are all zero. No retries, fallback or support changes.
+The final source check preserves 1,431 source/core/artifact files and separately
+checks the unrelated user edits and new frozen inputs. Original configuration
+SHA256 is `15f3f1580f13d437cff0bf88fba59b8526b209e070692bfaab8367f2784863f6`.
+All five G0/G1 seed pairs are byte-identical, including the original B/twist.
+Installed versions: NumPy 2.5.2, SciPy 1.18.1, JAX/jaxlib 0.7.2, Shapely 2.1.2,
+Matplotlib 3.11.1. All actual dimensions match the frozen table above.
+
+All 15 actual verification records passed with declared branch limitations.
+Maximum primal absolute error was 3.142e-12 for original rows and 1.573e-12 for
+quarter rows. At the two required FD steps, maximum scaled errors were
+0.1023800 (original) and 0.04303835 (quarter), against the frozen bound 1.
+Maximum absolute directional errors were 3.490e-6 and 1.745e-6 respectively;
+linear-acceleration rows dominate. Base value/gradient/Jacobian parity is
+literal-exact. Added shapes are 60×150 and 480×150. At coarse h=2e-4, one
+obstacle directional element crossed a geometry branch and was characterized
+separately (closest one-sided scaled error 0.004208). Neither required finer
+step excluded any element; quarter rows excluded none. No unsupported wrap
+cuts occurred. Roundoff grows at the smallest FD step; there is no claim of
+monotonically decreasing error.
+
+| Case / method / seed | Grid | SLSQP termination (status) | Iterations | Latest grid / dense / full | Selected full | Latest objective | Solve s |
+|---|---|---|---:|---|---|---:|---:|
+| Hard M2/I0 | G0 | CONVERGED (0) | 140 | PASS / FAIL / FAIL | none | 16.34333351 | 2.369 |
+| Hard M2/I0 | G1 | incompatible inequalities (4) | 64 | FAIL / FAIL / FAIL | none | 2301.643253 | 2.533 |
+| Hard M2/I1 | G0 | CONVERGED (0) | 144 | PASS / FAIL / FAIL | none | 16.34333353 | 2.430 |
+| Hard M2/I1 | G1 | incompatible inequalities (4) | 1 | FAIL / FAIL / FAIL | none | 128.3616025 | 0.172 |
+| Hard M3/I0 | G0 | CONVERGED (0) | 140 | PASS / FAIL / FAIL | none | 16.34333351 | 2.681 |
+| Hard M3/I0 | G1 | positive directional derivative (8) | 32 | FAIL / FAIL / FAIL | none | 2798.211333 | 1.196 |
+| Hard M3/I1 | G0 | CONVERGED (0) | 142 | PASS / FAIL / FAIL | none | 16.34333350 | 2.739 |
+| Hard M3/I1 | G1 | incompatible inequalities (4) | 1 | FAIL / FAIL / FAIL | none | 128.3616025 | 0.184 |
+| Benign M3/I1 | G0 | CONVERGED (0) | 121 | PASS / PASS / PASS | PASS | 0.1943350671 | 2.022 |
+| Benign M3/I1 | G1 | singular C matrix in LSQ (6) | 1 | PASS / PASS / PASS | PASS, unchanged seed | 3.963365592 | 0.014 |
+
+All five new G0 latest vectors, iterations, termination and candidate
+availability reproduce GP-SE2-02 literally; maximum chart difference is zero.
+Thus disabling the inner profiling hooks did not alter these numerical results.
+Historical wall time is not used as the paired baseline.
+
+Hard full-candidate recovery is **0/4 paired starts on one event**. There were
+no timeouts. Solver messages 4/6/8 describe local SLSQP termination and do not
+prove that the nonlinear physical problem has no feasible solution. Hard G1/I1
+latest vectors equal their invalid seeds; they have no selected candidate, so
+`returned_initial_unchanged` is false for the return rather than a claim that
+those latest vectors changed. Their motion is valid but their original goal
+is not. Benign G1 selects `callback_0001`, a byte-identical copy of the known
+full-valid seed; the lexical tie-break selects that label rather than `initial`.
+This is seed preservation with failed convergence, not new optimization gain.
+Benign G0 selects `callback_0121`, equal to latest, and lowers the seed objective
+from 3.963365592 to 0.1943350671. No terminal zero-velocity requirement is added.
+
+## Motion failure and rank interpretation
+
+Every final was checked over all 30 intervals and the original independent
+full grid, including both knot sides. The four G0 hard results retain the
+DIAG-03 pattern: lateral maximum 1.30140e-4–1.30196e-4 m/s at 0.479 s,
+minimum forward speed −0.00304177–−0.00303663 m/s at 0.478 s, and linear
+acceleration about −2.000078366 m/s² at 0.029 s. Original tolerances are 1e-5;
+these remain rejected off-collocation violations.
+
+G1/I0 failures are not successful paths with only a new tiny interior defect:
+these latest vectors already fail their own solver grid. M2/M3 lateral maxima
+are 4.73044/4.79179 m/s at 0.050371 s. Maximum absolute linear acceleration
+is 36.68689 m/s² at the 0.1 s right knot side, interval 1 (M2) and 13.06023 m/s² at t=0 (M3);
+angular acceleration is 315.8623/388.9641 rad/s² at t=0. M2 minimum forward
+speed is −0.586993 m/s. G1/I1 stays at the goal-invalid deceleration seed,
+with maximum |a_x|=0.2666667 m/s² and negligible lateral velocity.
+Environment/workspace/route checks pass for these latest curves, but this does
+not restore their motion/goal validity. No hard result is classified
+REFINED_GRID_PASS_FULL_FAIL: all hard G1 final grids already fail. Complete
+extrema, knot sides and observed violation brackets are in each
+`solves/<id>/motion_analysis.json` and `aggregate/motion_extrema.csv`.
+
+G0 equality Jacobians have rank 30/30 at every frozen raw/scaled cutoff.
+For G1:
+
+- Benign seed and unchanged final have numerical rank 60/90 at machine and
+  all relative cutoffs; raw smallest/largest singular values are approximately
+  4.33e-17/44.00165.
+- Hard deceleration seed has machine rank 76 raw / 80 scaled; relative
+  cutoffs 1e-10 through 1e-6 give 60 for both. At 1e-12 they give 60/63.
+  This is threshold-sensitive numerical rank, not exact algebraic rank 60.
+- Hard FRESH seed has machine rank 90, raw condition number about 2.69e10,
+  and raw cutoff ranks 90/88/70/64. Column-scaled condition number is 1.49e10
+  and cutoff ranks 90/89/75/65. G1/I0 final machine rank is 90; relative
+  1e-6 ranks remain 89 (M2 raw) and 88 (M3 raw).
+
+There are no individually near-zero equality rows at the frozen 1e-12 row-norm
+threshold. Dependencies involve combinations of rows. These findings support
+local equality dependence/conditioning as a limitation and are consistent with
+the benign singular-LSQ exit. They do not fully identify the hard I0 failures,
+prove infeasibility, or justify silently removing equations. No rank diagnostic
+changed the solver, seed, tolerances or equality array.
+
+## Compute and evidence
+
+| Measured stage / count | Five G0 starts | Five G1 starts |
+|---|---:|---:|
+| Prepared solve, s | 12.2417 | 4.0987 |
+| Compilation / first warmup, s | 4.0629 | 6.6274 |
+| Candidate post-check, s | 13.3151 | 1.3607 |
+| Input/provider setup + warmup + solve + post-check, s | 30.0027 | 12.3281 |
+| Objective calls / primal cache misses | 1925 / 1925 | 297 / 297 |
+| Equality + inequality calls | 3860 | 604 |
+| Gradient/Jacobian calls | 2061 | 285 |
+
+G1 has lower aggregate solve time because of early failed exits; this is not
+an efficiency win. M2/I0 G1 individually takes longer than its G0 counterpart.
+Each primary provider is constructed/warmed for its own case/method/grid;
+measured compilation/warmup costs are retained, including possible JAX cache
+reuse. No unnecessary quarter graph is built for G0. Post-solve rank providers
+are reused by case/method (three sets) and their 4.6577 s setup/warmup is separate
+from the 0.1696 s derivative-query/SVD work. No scaling is passed to SLSQP.
+
+The ten-start execution phase costs 52.6522 s including environment loading
+(0.0378 s), checks, serialization and orchestration; sum of the ten per-start
+cold measurements is 42.3308 s. Derivative validation costs 7.5015 s. Analysis
+through rank/interval tables costs 12.1508 s, containing the rank costs above;
+these overlapping measurements must not be summed as independent costs.
+Primary plot/package creation spans approximately 16.14 s based on saved
+artifact timestamps. Independent saved-record validation costs 33.0037 s.
+From protocol freeze 01:53:51.994705 UTC to primary validation output
+01:56:59.683340 UTC, offline elapsed is 187.689 s, including between-command
+orchestration gaps. It excludes software development, full tests and the later
+presentation-only rendering. This was never a cold end-to-end 30 s experiment.
+
+Primary artifact validation passes, with 24,699 checks and zero errors. It
+recalculates the original checker and G1 extras, candidate selection, raw/scaled
+rank diagnostics, saved traces, aggregate tables, figure data and ZIP hashes.
+The final full suite, including presentation tests, reports 2,281 passed /
+19 skipped in 149.62 s; skips are existing
+unavailable historical datasets or an explicitly inexact fixture. New targeted
+DIAG-04 implementation tests report 53 passed and presentation tests 3 passed.
+Compileall and git diff --check pass; no shell launcher was changed. Tests are implementation evidence,
+not research outcomes.
+
+All ten primary PNGs were visually inspected. A separate reporting-only
+presentation fixes long residual labels, overlaid legends and N/A elapsed axes,
+and makes small signed violations visible beside large invalid G1 excursions.
+It does not overwrite the frozen primary, alter numbers, or rerun optimization.
+The first presentation `presentation_20260920T020000Z` is retained as an
+intermediate; the final `presentation_20260920T020100Z` also shortens the objective
+label and removes crowded acceleration ticks. Only rendering was repeated.
+Preferred figures/index/review ZIP:
+`data/robotless_gp_se2_diag_04/presentation_20260920T020100Z/`.
+The final presentation passes 46 preservation/numeric checks; all ten final
+PNGs were visually inspected and exactly retain the primary plotted numbers.
+Its ZIP is 16,718,474 bytes (SHA256
+`78a8f93d7bd5343694c86a3cc00767b0b3fbe843b282ff74e63679656e4459eb`).
+Primary records, derivative reports and tables remain in
+`data/robotless_gp_se2_diag_04/primary_20260920T015400Z/`.
+
+Reproduction commands (each phase requires a fresh/not-yet-started output;
+these document the already completed primary, not permission to overwrite it):
+
+```bash
+.venv/bin/python scripts/run_gp_se2_diag04.py prepare --run data/robotless_gp_se2_diag_04/primary_20260920T015400Z
+.venv/bin/python scripts/run_gp_se2_diag04.py derivatives --run data/robotless_gp_se2_diag_04/primary_20260920T015400Z
+.venv/bin/python scripts/run_gp_se2_diag04.py solve --run data/robotless_gp_se2_diag_04/primary_20260920T015400Z
+.venv/bin/python scripts/run_gp_se2_diag04.py analyze --run data/robotless_gp_se2_diag_04/primary_20260920T015400Z
+.venv/bin/python scripts/run_gp_se2_diag04.py validate --run data/robotless_gp_se2_diag_04/primary_20260920T015400Z
+.venv/bin/python scripts/present_gp_se2_diag04.py --primary data/robotless_gp_se2_diag_04/primary_20260920T015400Z --output data/robotless_gp_se2_diag_04/presentation_20260920T020100Z
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest
+.venv/bin/python -m compileall src scripts tests
+git diff --check
+```
+
+## Outcome and next single experiment
+
+Operational: **GP_SE2_DIAG_04_COMPLETED_WITH_LIMITATIONS**.
+Numerical: **NO_FEASIBILITY_RECOVERY**. Hard full-candidate availability stays
+zero for both grids. Benign feasibility is preserved by retaining its seed;
+G1 convergence and objective improvement are not preserved. Interpolation,
+source, acceptance or derivative mismatch was not observed. Finite full-grid
+checks remain sampled verification, not continuous-time proof. There is no
+MPC execution, navigation or real-robot safety claim.
+
+The next single bounded comparison proposed is an **added-inequality-only
+ablation**: retain original midpoint lateral equalities and add the same
+quarter motion inequalities, keeping the original full lateral checker,
+initializations, budget and all physical thresholds. This isolates whether the
+extra lateral equality rows drive the numerical regression. It does not claim
+that removing their enforcement will recover full feasibility; between-point
+lateral rejection remains possible and must remain a failure. No such new
+solve or equality change was performed in this task.

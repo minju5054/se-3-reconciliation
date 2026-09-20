@@ -4334,3 +4334,36 @@ This file is append-only. Add each completed task at the bottom.
   validation. Extra equalities/inequalities are 60/480; environmental rows unchanged.
 - Preserved the two unrelated Stage-0 configuration edits. This entry records
   implementation only; actual verification and solve outcomes will be appended.
+
+## 2026-09-20 — GP-SE2-DIAG-04 completed with no feasibility recovery
+
+- Execution revision `e3776fa30a161ff361ba5f1d321a8caa788e729d`; primary
+  `data/robotless_gp_se2_diag_04/primary_20260920T015400Z/`.
+- All 15 frozen actual derivative records passed the unchanged tolerance gate;
+  original primal/Jacobian prefixes are literal-exact. Added rows are 60 lateral
+  equalities and 480 motion inequalities; original environment/goal rows remain.
+- Completed exactly ten new sequential GP/SLSQP starts, no retries. All five G0
+  latest vectors are bitwise equal to GP-SE2-02. Hard G0 converges but fails the
+  original full motion checks. Hard G1 recovers zero of four paired starts.
+  G1/I0 exits with status 4 or 8 and invalid motion; G1/I1 stops at its goal-invalid
+  seed. Benign G1 exits with status 6 and retains the original full-valid seed,
+  without objective improvement; G0 benign converges to objective 0.1943351.
+- Post-solve equality spectra expose local row dependence/conditioning: benign
+  G1 seed is rank 60/90 at every frozen cutoff; hard ranks are cutoff-sensitive.
+  This is not an infeasibility proof and did not trigger row removal or tuning.
+- Primary saved-record validator passes (24,699 checks); source/core/config/seed,
+  official MPC and unrelated Stage-0 edits remain unchanged. New VLA/MPC solve,
+  rollout and GUI counts are zero. Prepared solve total 16.3404 s; compile/warmup
+  10.6903 s; candidate post-check 14.6758 s. Early G1 failures are not a speed win.
+- Added isolated presentation-only rendering and tests; final review output is
+  `data/robotless_gp_se2_diag_04/presentation_20260920T020100Z/`. All ten PNGs were
+  visually reviewed and all plotted numbers match primary exactly (46 checks).
+  Intermediate T020000Z is preserved; no numerical records or solves were redone.
+- Operational `GP_SE2_DIAG_04_COMPLETED_WITH_LIMITATIONS`; numerical
+  `NO_FEASIBILITY_RECOVERY`. Next single proposed comparison is quarter motion
+  inequalities with original midpoint lateral equalities and unchanged full
+  lateral acceptance, to isolate the additional equality effect. Not executed.
+- Final validation: full pytest 2,281 passed / 19 existing skips in 149.62 s;
+  targeted implementation 53 passed, presentation 3 passed; compileall and
+  `git diff --check` passed. No shell launcher changed. Final normal commit/push
+  contains only code/tests/docs; generated artifacts and user config edits excluded.
