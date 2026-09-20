@@ -4420,3 +4420,46 @@ adaptive round, retry, controller/VLA/MPC/rollout/GUI is authorized here.
   are literal-exact. New implementation tests: 18 passed; related unchanged
   DIAG-04/05 tests: 65 passed. Source preparation pins 1,806 files and three
   witness rows. Implementation/protocol commit precedes all five G3 solves.
+
+## 2026-09-20 — GP-SE2-DIAG-06 non-lateral sampled gap closed
+
+- Freeze/execution SHA `ca53a0744a98a5bbce1d153b5d056273d21b4fb1`; sole
+  numerical primary `data/robotless_gp_se2_diag_06/primary_20260920T083200Z/`.
+  Exactly five new G3 starts, all status 0 (141/144/143/140/122 iterations),
+  no retry or historical reoptimization. Equality stays 30 rows; inequalities
+  are 1296 M2 / 1386 M3. All 15 derivative records pass literal G2-prefix
+  parity and unchanged multi-step tests. One three-row union is shared by all.
+- Hard full-valid recovery remains 0/4. All three frozen witness sites repair;
+  no above-allowance speed/acceleration pocket is observed on the entire
+  original full/supplemental grid or either knot side. Lateral alone remains
+  invalid: max |v_y|=1.217865e-4..1.218883e-4 m/s at .479 s versus 1e-5.
+  Tiny nominal negative speed (-5.332e-6..-4.974e-6 m/s) and acceleration excess
+  (about 9.2826e-6 m/s²) remain inside the original 1e-5 numeric allowance.
+  No physical/numerical threshold is relaxed; finite sampling is not proof.
+- Benign selects callback_0122, full-valid and changed from its seed;
+  J=3.963365592→0.1943350667. Equality rank remains 30/30 at every available
+  initial/latest/selected vector. No VLA/MPC/rollout/GUI was executed.
+- Prepared solve total 17.384706 s; cold per-start sums 39.535801 s; five-start
+  stage elapsed 46.776123 s. Source preparation, derivative gate, analysis,
+  reporting and independent validation costs are separate in the report.
+- The frozen runner's first aggregate CSV write failed because aggregate/
+  was not created. Saved all numerical/analysis records and failed console
+  log unchanged. Added a narrowly scoped report-completion helper: directory
+  creation, saved aggregation and rendering only, no reanalysis/reoptimization.
+  The frozen execution code hash remains unchanged. Ten PNGs with numeric/hash
+  sidecars and static index are complete and visually reviewed.
+- Authoritative saved validator passes: 23,270 checks, no errors, 50.953056 s.
+  All 1,806 original/core/config/environment/result hashes and both unrelated
+  Stage-0 user edits remain unchanged. Compact review ZIP contains all ten
+  original PNGs, tables and links/hashes for full curve sidecars; 3,014,569 bytes,
+  SHA256 ac050e8bf88af22d55eaf6e601b6e33b4363ea1e6c6dbb8c4bbb99e66743ee3e.
+  Original complete-sidecar ZIP remains preserved; compact package validator passes.
+- Full pytest with local IPC access: 2318 passed / 19 existing skips, 159.34 s.
+  The initial sandbox run's two existing Unix-socket permission failures are
+  separately preserved. Compileall/diff checks pass; no launcher changed.
+- Operational GP_SE2_DIAG_06_COMPLETED_WITH_LIMITATIONS; research interpretation
+  NONLATERAL_GAP_CLOSED_LATERAL_REMAINS. Next single uncertainty is plan-level
+  lateral hard-feasibility semantics at the fixed pose-reference MPC interface,
+  not another recursive witness round or an automatic tolerance relaxation.
+  Only code/tests/docs are committed and normally pushed; data and user edits
+  remain excluded. Final SHA/push completion is recorded in the ignored run.
