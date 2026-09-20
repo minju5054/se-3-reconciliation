@@ -4534,3 +4534,52 @@ docs/GP_SE2_DIAG_08_ENDPOINT_MARGIN_EXECUTION.md. No historical solve/rollout
 reoptimization, VLA/RGB/GUI or online collection is included.
 Pre-freeze relevant set: 84 passed (32 new DIAG-08 tests); compile and diff checks
 pass. No actual MPC or primary GP invocation in these implementation tests.
+
+## 2026-09-21 — GP-SE2-DIAG-08 result and preserved technical completion
+
+- Numerical freeze SHA 5e2da93927196fb65cb5a260b2f0c40adbf7cc0d. Exactly five
+  original-seed G4 solves, no retry; all status 0, grid pass. Hard retained/full
+  candidates 0/4: lateral plus negative forward speed fail original full checks.
+  New minima at .482 s are -1.688e-5 to -1.773e-5 m/s, beyond unchanged 1e-5
+  allowance; frozen .480 s witness passes. Benign stays full-valid and optimized.
+- Endpoint radius reaches .11 within original squared solver allowance. Strict
+  predeclared nominal check records 4.7e-12–7.6e-11 m excess for hard; independent
+  speed failure blocks all four even apart from this numerical boundary issue.
+  Hard G4 execution/tracking/recovery N/A, not four failed executed trajectories.
+- Exactly one eligible unique benign reference newly executed: 30 primary MPC
+  solves + one protocol historical audit. Original goal/dwell/safety/motion pass;
+  final position .01635339835 m, yaw .00322856 deg, sampled dwell .405 s. Reference,
+  states, commands and selections reproduce G3 literally; historical G3 not rerun.
+- First MPC worker import pulled absent SciPy into official MPC venv and failed
+  before any actual call. Logs preserved. Added import-isolated bridge/worker;
+  no environment edits or GP rerun. Separate runtime_20260920T153000Z with
+  pre-call code hashes and explicit parent output links; actual additive runtime
+  was uncommitted at execution, now included in report commit. Gate/parity/import
+  tests pass. Numerical G4 source and original failed worker remain unchanged.
+- Initial saved-record validator recomputes all numerical checks, but four
+  descriptive reason-list comparisons fail due its += shared-list mutation.
+  Preserved root validation.json and source. Additive completion admits only
+  those exact errors, verifies nonmutating reason parity and rechecks execution,
+  source/figures. verification/validation.json is authoritative, valid=true.
+- Preserves 31,457 source/core/environment/historical files and both unrelated
+  configs. 79 retained source labels checked. Prepared solve sum 20.298129 s;
+  cold per-start sums 44.058008 s; no compilation/validation hidden in budget.
+- Full tests: 2,393 passed / 19 existing skips (177.34 s), plus two later report
+  regression tests. Full suite includes one actual historical MPC audit, saved
+  before temporary retention. Task total actual MPC calls=32, distinct from
+  30 primary + one protocol audit. GP=5; no VLA/RGB/GUI/online or historical rerun.
+- 50 comparison PNGs + one explanatory speed-gap PNG, numeric/source sidecars,
+  all-condition index and compact ZIP. No fabricated hard execution. README
+  Current research state now includes verified DIAG-08 and DIAG-07 results.
+- Operational GP_SE2_DIAG_08_COMPLETED_WITH_LIMITATIONS. Interpretation
+  ENDPOINT_RESERVE_NOT_PLAN_FEASIBLE, not solver failure or infeasibility proof.
+  Next proposed single test: fixed 11 cm reserve plus one predeclared speed
+  witness at .482 s, unchanged tolerances/interface, checking for relocation.
+  No such additional refinement is implemented in this task.
+Visual QA covers all ten plot types and the speed-gap panel. Added five readable
+tracking-panel copies to wrap a clipped legend, with exact numeric sidecar parity;
+original images remain unchanged. Final packet: 51 figures + 5 readable copies.
+Final new-task regression set: 45 passed in 8.58 s (no real MPC); compileall/diff
+checks pass. Review ZIP is 5,631,435 bytes, 144 members, validated byte-for-byte,
+SHA256 d5960adf4dcc879ac3d5beb6df2f5fbeb1d7843a4bc02ce42fea2a0c9f1c2900.
+Pre-commit verification again preserves all frozen GP/runtime/source hashes.
