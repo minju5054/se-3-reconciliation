@@ -4513,3 +4513,24 @@ Protocol and commands: docs/GP_SE2_DIAG_07_LATERAL_PLAN_VS_EXECUTION.md.
   frozen experiment's 150 primary + 2 protocol audits. No extra rollout or
   experimental condition; no GP/VLA/GUI runtime. Temporary pytest retention
   removed the first test-only audit artifact; both full-suite audits are retained.
+
+## 2026-09-21 — GP-SE2-DIAG-08 implementation/protocol freeze
+
+Starting main 1fa1e1e83074218b44456e4a00c64947a2591760 matches fetched origin.
+Added isolated G4 endpoint-margin view: G3 plus one .11²-distance² row; fixed
+.04 m reserve, unchanged original .15 m execution criterion and all other core.
+Reuses original AD goal-position Jacobian (constant radius derivative is zero).
+15 actual seed/G3-latest/fixed-perturbation gates pass; all primal/Jacobian
+prefixes literal, M2/M3 dimensions 150/30/1297 and 150/30/1387. Maximum endpoint
+primal error 6.4393e-15, fine directional error 2.1746e-9. Preserves 31,457 source,
+core, environment and historical files plus two unrelated config edits.
+Source authority explicitly uses DIAG-07 verification/validation.json.
+Nominal endpoint <=.11 admission is separately frozen from the unchanged 1e-5
+m² solver-grid allowance. Execution always uses saved latest poses[1:], with
+original retention separately reported; lateral-only invalid stays diagnostic.
+No primary solve yet. Exactly five original-seed G4 starts, no retry or margin
+search, then only eligible exact-unique official-MPC rollouts. Detailed protocol:
+docs/GP_SE2_DIAG_08_ENDPOINT_MARGIN_EXECUTION.md. No historical solve/rollout
+reoptimization, VLA/RGB/GUI or online collection is included.
+Pre-freeze relevant set: 84 passed (32 new DIAG-08 tests); compile and diff checks
+pass. No actual MPC or primary GP invocation in these implementation tests.
