@@ -4401,3 +4401,22 @@ pass. No solve was retried and no further refinement was implemented. The next
 single uncertainty is whether interval-extremum motion-inequality enforcement
 can remove residual speed/acceleration failures without changing lateral
 acceptance. User Stage-0 config edits remain untouched and unstaged.
+
+## 2026-09-20 — GP-SE2-DIAG-06 frozen witness refinement implementation
+
+Started from `f86adffc4d54ae09a3581f557a9fc3eb77c07ed4`; inspected status,
+branch/remotes and fetched origin. Both unrelated Stage-0 edits are preserved.
+Added separate witness extraction, G3 value/Jacobian composition, runner,
+static plotting and tests. Historical DIAG-04/05 numerical files are unchanged.
+Source precheck finds 12 hard G2 violating motion runs and a three-row common
+union on the unchanged 6,041 interval-side sample trace. No lateral witness or
+extra equality; all five G3 starts use original saved seed bytes and the same
+union. The unchanged full checker and retention policy remain authoritative.
+Derivative verification must pass before the single five-start primary; no
+adaptive round, retry, controller/VLA/MPC/rollout/GUI is authorized here.
+
+- Before primary optimization, all 15 actual derivative records pass at the
+  unchanged multi-step tolerances; equality and all G2 primal/Jacobian prefixes
+  are literal-exact. New implementation tests: 18 passed; related unchanged
+  DIAG-04/05 tests: 65 passed. Source preparation pins 1,806 files and three
+  witness rows. Implementation/protocol commit precedes all five G3 solves.
