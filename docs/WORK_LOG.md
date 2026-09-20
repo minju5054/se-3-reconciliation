@@ -4378,3 +4378,26 @@ ten DIAG-04 G0/G1 results remain historical. Synthetic parity, directional,
 retention, rank, taxonomy, hash/no-retry and rendering tests pass (17 tests).
 Actual derivative verification and five-start execution are pending this freeze.
 No historical numerical files or user Stage-0 config edits were changed.
+
+## 2026-09-20 — GP-SE2-DIAG-05 completed with limitations
+
+Execution revision `b84d81598591eb3fc9ba017a0c251cc59bc528df`; sole primary
+`data/robotless_gp_se2_diag_05/primary_20260920T064500Z/`. All fifteen frozen
+actual derivative records pass, with literal G0 equality/base-prefix parity.
+Exactly five new G2 starts ran once; G0/G1 remain historical. All five converge
+with SLSQP status 0. Hard full recovery is 0/4: each grid-valid final fails
+between-point lateral velocity, negative forward speed and linear acceleration.
+The smaller residual inequalities are still failures at unchanged tolerance;
+this is not a lateral-only result. Benign selects a new full-valid candidate,
+J=3.963365592→0.1943350668. Equality Jacobians retain rank 30/30 and literal G0
+identity at initial/latest/selected. Interpretation: MIXED_INEQUALITY_ONLY_RESULT.
+Prepared solve cost totals 17.204 s; no VLA/MPC/rollout/GUI was executed.
+
+Original/core/environment and 1,605 preserved source hashes remain unchanged.
+Authoritative saved validator passes (22,025 checks); ten PNGs, numeric/hash
+sidecars, static index and 21,794,527-byte review ZIP were generated and visually
+reviewed. Full suite: 2298 passed, 19 existing skips; compileall and diff-check
+pass. No solve was retried and no further refinement was implemented. The next
+single uncertainty is whether interval-extremum motion-inequality enforcement
+can remove residual speed/acceleration failures without changing lateral
+acceptance. User Stage-0 config edits remain untouched and unstaged.
