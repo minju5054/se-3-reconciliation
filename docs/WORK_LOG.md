@@ -4691,3 +4691,43 @@ local socket access. Latest focused ATTACH suite:21 passed. Compileall and
 whitespace checks pass. Full suite's one historical official-MPC audit is saved
 separately in preflight/repository_test_historical_MPC_audit.json; zero primary
 MPC/GP calls before the freeze commit. No scientific retry occurred.
+
+### GP-SE2-ATTACH-01 — frozen duration comparison completed (2026-09-21)
+
+Pre-primary implementation c540533bdf72b0a7ea31b19fd1c0819697a5596e was pushed
+before14 scheduled GP starts. No source replacement or retry. Six fixed external
+T conditions retain one exact common reference and original acceptance. M3
+retains I1/callback_0117; M4 T=1.4 retains I0/callback_0114. Later final iterates
+fail original between-point speed checks and remain recorded. T=.4/.6/.8 fail
+solver grid and physical/tube checks; T=1.0 converges and passes original full
+acceptance but exceeds the strict nominal tube by5.55e-12–1.69e-11m. No tolerance
+change or execution of that invalid result. T=1.2 also retains speed/tube failures.
+
+Four independent actual counterfactuals /120 primary official-MPC solves:
+Native/Adapter/M3/M4(1.4) all pass original safety/motion/goal/dwell. Sustained
+original-FRESH attachment .155/.155/.165/.170s; GP planned attachment .203/.278s.
+M4 is slower to attach/reach goal, with lower linear command TV and slightly
+higher angular TV. Minimum clearances all about.098m. One valid transition is
+positive constructibility evidence with a trade-off, not attachment-speed or
+navigation improvement. Shortest TESTED full-valid condition1.4s is not optimal
+or a robust lower physical feasibility bound, especially given T1.0 roundoff.
+
+Source limitation is explicit: selected B nearly stopped, raw OLD/FRESH identical
+in local frame, world curves aligned. Existing e_perp .1412m is a finite-polyline
+endpoint gap; infinite-line perpendicular error only1.12e-5m. Large lateral
+mismatch with moving B remains the single largest uncertainty; not implemented.
+
+Prepared solve total103.403s across14 starts; optimization phase143.872s including
+warmup/check/serialization; official primary MPC total.433468s. Simulation time
+is separate. No new LightNav, Isaac GUI, reveal or controller changes. Complete
+881-event ledger and73 unique retained GP vectors independently revalidated;
+artifact valid. Frozen input/core/environment/JOIN-01 hashes still match.
+
+Full final suite2441 passed/19 skipped,168.22s with local IPC access; compileall
+and diff checks pass. Two repository-test historical MPC audits (one pre-primary,
+one final) are separately preserved; not counted as primary rollouts. Static
+primary plots preserved. A separate reporting-only review_v2 fixes legend/spacing,
+with no numerical rerun or overwrite. Authoritative review:
+data/robotless_gp_se2_attach_01/primary_20260921T103000Z/review_v2/index.html
+and review_bundle_v2.zip. Operational COMPLETED_WITH_LIMITATIONS; original
+physical acceptance, source records and unrelated Stage-0 edits preserved.
