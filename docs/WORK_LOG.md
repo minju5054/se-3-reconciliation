@@ -4843,3 +4843,56 @@ lighting causality to the current image. H32 uses the exact H16 terminal images.
 No new history collection, MPC execution, GP/rigid/reconciliation, or optional
 receding-horizon rollout. Later-chunk recovery remains untested. Pre-prediction
 code/config/input freeze and normal push precede all diagnostic model calls.
+
+### JOIN-SOURCE-03 — bounded diagnosis completed (2026-09-22 KST)
+
+Execution revision1904bd2031ffa14cf86399ffdd1277a49bd4cc92 was committed and pushed
+before the first new diagnostic prediction. Run remains
+`data/robotless_join_source_03/cause_20260921T153120Z/`. All seven frozen conditions
+completed once, each OFF/ON/sham in independent official sessions. No retry,
+threshold change, new controller, avoidance policy or reconciliation occurred.
+
+LIGHTING_CONTRIBUTES_BUT_NOT_SUFFICIENT. Same-pose terminal-image relighting
+increases mean sRGB-code luma12.271445→77.479331 and cart median12.2006→81.3702,
+with matching protected scene/camera geometry and instance pixels. Core ON minimum
+edge clearance improves−.20→−.111383570m, but both first unsafe segments are row2→3.
+BRIGHT shortens the nearly straight path rather than producing a safe detour.
+First returned points remain safe; the claim that this core path starts inside
+the cart is not supported. Stored history remains authentic DARK RGB, so the
+lighting intervention concerns the terminal image only.
+
+Target-pose ON minimum−.080925625m still fails, although29,221 shelf pixels are
+visible in the renderer. All21 model responses retain target-visible=false and
+OPOS not_visible. H32 at the identical final JPEG worsens clearance to−.20m.
+Near/medium/far ON minima are−.20/−.192836088/−.20m. Near visibly curves right but
+collides before clearing the cart; all three remain unsafe. OFF/sham are literally
+equal in every condition. These observations weaken a short-history, distance-only
+or random-sham explanation within the tested range; target grounding versus
+upstream spatial/action generation remains NOT_ISOLATED. Root cause remains
+UNRESOLVED_AFTER_BOUNDED_DIAGNOSIS. H64, all-bright history and later chunks were
+not tested. No optimization-ready online source, new B or traversal was obtained.
+
+Official MPC clean-source/hash/settings match six historical lineages and current
+import. New scientific calls:21 model predictions,363 buffer-only restores; server
+startup warmup1 is synthetic and separate. Terminal RTT sum6.781750s, worker sum
+37.372727s, startup17.261760s and server lifetime118.809556s are nested and not
+additive. Diagnostic MPC/GP/rigid/rollout calls0. Existing full-suite historical
+MPC test calls1 (.041430s), exact saved command/reference parity, separately
+preserved. Server stopped cleanly using its recorded identity.
+
+Frozen reporter's GeometryCollection drawing failure and partial review remain
+preserved. A new presentation-only adapter handles that type and writes review_v2;
+original scientific source, arrays, summary and validator remain unchanged.
+Authoritative validation_v2 passes2019 checks, including1899 preserved historical,
+core and unrelated-user-file hashes. Additional review validator checks all210
+rows, three paired figures and ZIP member bytes, without inference. All21 final
+figures were visually inspected. Root index.html and review_bundle_final.zip
+(5,302,134 bytes) link actual RGB, lighting/history/distance comparisons, pointing,
+clearance and evidence matrix with numeric/hash sidecars.
+
+Full suite2536 passed/19 skipped (174.14s); final SOURCE03/presentation tests23
+passed. compileall and diff checks pass; no shell launcher changed. README and
+JOIN_SOURCE_03_BRIGHT_CAUSE.md record every completed condition, source hashes,
+exact commands and interpretation limits. Previous JOIN01/SOURCE02/ATTACH01 and
+both unrelated Stage0 configuration edits remain preserved. Stop at upstream
+diagnosis; no next experiment implemented.
