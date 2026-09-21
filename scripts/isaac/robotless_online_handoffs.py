@@ -205,7 +205,7 @@ def make_event_context(ep,result,old,ready_state,installed_stamp,history_contrac
          'no_added_inference_or_activation_delay':True,'collision_validity':'unknown'}}
 
 
-def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model,mpc,panel,model_ready,mpc_ready):
+def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model,mpc,panel,model_ready,mpc_ready,*,intervention=None):
     from robotless_runtime import actual_pose,camera_metadata
     from robotless_old_consistent_observation import set_precise_agent_pose
     import omni.replicator.core as rep
@@ -302,6 +302,8 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
             if len(frames)+len(encoder_pending)>=config['online']['capture_queue_capacity']:
                 terminal='TECHNICAL_INVALID';terminal_reason='bounded capture queue overflow; no silent drop';break
             if tick % capture_stride==0:
+                if intervention is not None:
+                    intervention.before_capture(ep, pose.copy(), st.copy(), activation.active, last_activation)
                 # DebugDraw is renderer-wide: remove display lines before model RGB.
                 if panel:panel.draw.clear_lines();panel.draw.clear_points()
                 before_clock=float(world.current_time); before_pose=actual_pose(agent)
@@ -325,6 +327,8 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
                     'bootstrap':first_activation is None,'stationary':prior is None or bool(np.linalg.norm(np.asarray(prior['pose_world'])-pose)<1e-10),
                     'transmission_status':'CAPTURED_NOT_SENT','wire_seq':None}
                 encoder_pending.append(encoder.submit(encode_frame,ep,rgb[:,:,:3].copy(),frame,config['capture']['jpeg_quality']))
+                if intervention is not None:
+                    intervention.after_capture(ep, frame.copy())
             # Flush older queued frames as buffer-only before predicting the latest available one.
             active_age=None if last_activation is None else sim-last_activation
             can_predict=(activation.active is not None and activation.installed==activation.active and
@@ -333,6 +337,8 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
                 sim-first_activation<config['online']['maximum_active_sim_s']-config['online']['postroll_sim_s'])
             if not wire_busy and frames:
                 predict=(predictions==0 and history_count==3) or (can_predict and len(frames)==1)
+                if predict and predictions>0 and intervention is not None:
+                    predict=intervention.allow_fresh(frames[0])
                 frame=frames.popleft();outstanding_frame=frame
                 if predict:
                     chunk_id=f'chunk_{predictions:03d}';predictions+=1;pending_prediction=chunk_id

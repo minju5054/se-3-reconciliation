@@ -4583,3 +4583,31 @@ Final new-task regression set: 45 passed in 8.58 s (no real MPC); compileall/dif
 checks pass. Review ZIP is 5,631,435 bytes, 144 members, validated byte-for-byte,
 SHA256 d5960adf4dcc879ac3d5beb6df2f5fbeb1d7843a4bc02ce42fea2a0c9f1c2900.
 Pre-commit verification again preserves all frozen GP/runtime/source hashes.
+
+## 2026-09-21 GP-SE2-JOIN-01 pre-primary freeze
+
+- Freshly fetched main/starting HEAD 7864ab26bf0c16be0b8575338c6c269874246a34.
+  Read the current GP01/DIAG07/DIAG08 results and acquisition/reference/MPC path.
+  Preserve both unrelated Stage-0 YAML edits; no historical numerical core,
+  external source/checkpoint or environment changes.
+- New research line: controlled static obstacle reveal, genuine official OLD and
+  FRESH, continued OLD during request, application-time B; no synthetic source.
+  Three ordered source-only placements (1.5/1.3/1.1m actual OLD arc) and strict
+  source qualification are frozen before inference. No qualifying source means
+  no method comparison, rather than an invented avoidance path.
+- Add explicit optional collector intervention (default None), runtime box and
+  actual semantic visibility records; separate original Hospital + exact box
+  optimization distance and independent geometry checker. GPU verified through
+  isolated read-only host query; no runtime dependency/driver modifications.
+- M4 reuses original GP chart/prior/motion/goal and supplied Jacobians; post-join
+  original-FRESH cost, <=30 time/index choices, four support tube sites, original
+  two seeds and solver budget. No DIAG06 witnesses or DIAG08 endpoint reserve.
+  Add original-FRESH forward projection and sampled .30s attachment metric,
+  exclusive provenance/qualification/solve/rollout/plot/validation entry points.
+- Focused synthetic tests cover correspondence/frames/variable N/no fallback,
+  sustained join/forward projection, exact primitive geometry, unchanged base
+  constraints and verified changed-cost/tube derivatives. Tests are not primary
+  evidence. Relevant regression suite also includes one explicitly historical
+  official-MPC reproducibility audit, separate from primary execution counts.
+- This entry is pre-primary: no JOIN01 source/result or claimed recovery yet.
+  Infrastructure commit precedes the first actual obstacle-reveal attempt.

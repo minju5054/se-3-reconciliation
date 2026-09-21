@@ -1,0 +1,56 @@
+experiment: GP-SE2-JOIN-01
+collection_base: configs/robotless_online_handoffs.yaml
+formulation_base: configs/gp_se2_01.yaml
+environment: data/robotless_gp_se2_01/environment_technical_20260918_retry04
+initial_pose_world: [19.2, 26.0, -1.5707963267948966]
+instruction: Continue straight down the hallway. Avoid obstacles and keep going.
+placements:
+  - {id: placement_01, distance_along_old_m: 1.5, dimensions_m: [0.30, 0.60, 0.90]}
+  - {id: placement_02, distance_along_old_m: 1.3, dimensions_m: [0.30, 0.50, 0.90]}
+  - {id: placement_03, distance_along_old_m: 1.1, dimensions_m: [0.30, 0.40, 0.90]}
+reveal:
+  minimum_old_active_s: 0.10
+  timing: first 4Hz capture tick at least 0.10s after actual OLD activation
+  placement_basis: arc from actual OLD observation pose along actual OLD polyline; never extrapolate beyond OLD
+  color_rgb: [0.85, 0.18, 0.06]
+  minimum_visible_pixels: 20
+qualification:
+  minimum_cross_track_m: 0.20
+  minimum_yaw_difference_deg: 20.0
+  minimum_remaining_arc_m: 0.60
+  minimum_remaining_rows: 4
+  minimum_chord_over_arc: 0.60
+  minimum_translation_segment_m: 0.000001
+  maximum_overlap_loop_stall_s: 0.25
+  inflight_rtf_range: [0.8, 1.2]
+  require_goal_beyond_box_front: true
+  self_intersections: reject
+  required_gate_if_detected: preserve and report unsupported by current derivative provider; never remove
+methods: [M0_NATIVE, M0_ADAPTER, M1_RIGID, M3_CURRENT_GP, M4_JOIN_GP]
+gp:
+  generic_mapping: original GPProblem plus verified supplied Jacobians; no DIAG04 quarter rows, DIAG06 witnesses or DIAG08 reserve
+  seeds: [original_fresh_initialization, fixed_same_curvature_deceleration]
+  max_iterations: 200
+  ftol: 0.0000001
+  prepared_budget_s_per_start: 30.0
+  single_thread_blas: true
+join:
+  times_s: [0.4, 0.6, 0.8, 1.0, 1.2, 1.4]
+  original_index_offsets: [0, 1, 2, 3, 4]
+  position_m: 0.10
+  yaw_deg: 15.0
+  sustained_s: 0.30
+  search: all time/index candidates, two identical baseline seeds each, once; no early exit by optimizer outcome
+  selection: full-valid first; lexicographic time/objective/original-index/initialization/source-label
+  tube: join support and next three supports; independent nominal direct-distance/yaw check
+  derivative_gate: original DIAG02 primal/directional tolerances, steps and deterministic directions; no fallback
+evaluation:
+  rollout_horizon_s: 3.0
+  projection: closest clamped point on original XY polyline restricted to previous fractional progress or later; lexical exact ties
+  initial_projection_progress: 0.0
+  planned_metric: GP continuous interpolant at 1ms plus original offset/support grid; raw/rigid reference-only has no physical clock, so N/A
+  executed_metric: exact held-command samples including 60Hz states and <=5ms queries; sampled dwell only
+  no_join_auc: pre-join AUC N/A; full-window AUC separately retained
+  baseline_plan_invalid: raw/adapter/rigid spatial-invalid references may have diagnostic rollouts as in GP-SE2-01; status kept explicit
+  invalid_gp: no rollout, no fallback
+label: OFFLINE SINGLE-HANDOFF COUNTERFACTUAL
