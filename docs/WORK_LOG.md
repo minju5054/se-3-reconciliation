@@ -4819,3 +4819,27 @@ the frozen producer's contracts. Eight focused validator tests pass in addition
 to the full suite. No source/model/MPC rerun occurred. review_bundle_final.zip
 (1,841,152 bytes) adds protocol/counts/authoritative audits to the same review_v2
 figures. It excludes the full dataset, environment and checkpoint.
+
+### JOIN-SOURCE-03 — MPC provenance and bright-input protocol (2026-09-22 KST)
+
+Fresh origin/main matches97ba41aab0ec846f9e6ddc0fc913dc3277cccb2e. Preserve the
+SOURCE02/JOIN01/ATTACH01 evidence and both unrelated Stage0 config edits.
+Six historical provenance chains plus current official module import match the
+pinned MPC file/settings; no tracker/solve is needed for this audit. REF selectors
+remain offline per-instance experiments, not the online collector default.
+
+Actual Hospital technical renders add one fixed neutral downward ceiling fill,
+without touching original USD/lights/materials/camera. Mean sRGB-code luma rises
+12.271445→77.479331, cart median12.2006→81.3702; unchanged instance pixels and
+protected geometry. No model outcome was used to choose brightness. The first
+technical snapshot's timeline-settling failure is preserved; setup rendering
+resolves it before the same strict synchronization check, not by loosening it.
+
+Freeze maximum7 independent-session A/B/A' conditions/21 terminal predictions:
+core DARK/BRIGHT H16, conditional clearly visible target pose H16, same-pose H32,
+then same-core near/medium/far cart distances. Existing authentic chronological
+DARK histories are preserved, with only terminal RGB re-rendered; this limits
+lighting causality to the current image. H32 uses the exact H16 terminal images.
+No new history collection, MPC execution, GP/rigid/reconciliation, or optional
+receding-horizon rollout. Later-chunk recovery remains untested. Pre-prediction
+code/config/input freeze and normal push precede all diagnostic model calls.

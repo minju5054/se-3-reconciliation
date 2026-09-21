@@ -1,0 +1,89 @@
+experiment: JOIN-SOURCE-03-BRIGHT-CAUSE
+base_config: configs/robotless_online_handoffs.yaml
+historical_run: data/robotless_join_source_02/source_20260921T112111Z
+environment: data/robotless_gp_se2_01/environment_technical_20260918_retry04
+source:
+  condition: location_01__placement_01__H16
+  instruction: Go to the tall blue shelving unit and stop.
+  target_prim: /World/Hospital/SM_Shelf_06f7
+  target_xy: [17.75401523624705, 21.276376579961557]
+lighting:
+  dark: unchanged authored Hospital lights
+  bright: add one neutral white ceiling fill; original lights unchanged
+  prim: /World/JOINSource03Fill
+  type: RectLight
+  intensity: 1000.0
+  exposure: 0.0
+  color: [1.0, 1.0, 1.0]
+  normalize: false
+  width_m: 4.0
+  height_m: 10.0
+  translation_world_m: [19.2, 24.0, 2.6]
+  emission: local -Z, ceiling downward; no rotation
+  renderer: RayTracedLighting
+  anti_aliasing: 0
+  image_postprocessing: forbidden
+brightness_acceptance:
+  minimum_mean_gain: 20.0
+  minimum_median_gain: 15.0
+  maximum_saturated_fraction: 0.05
+  minimum_instance_pixels: 20
+  minimum_cart_median: 45.0
+  maximum_crop_saturated_fraction: 0.10
+comparison:
+  geometric_equivalence_xy_m: 0.000001
+  geometric_equivalence_yaw_rad: 0.000001
+  material_clearance_gain_m: 0.02
+  minimum_interior_lateral_m: 0.20
+  minimum_reliable_direction_or_yaw_deg: 20.0
+  required_edge_clearance_m: 0.05
+  footprint_radius_m: 0.20
+  stop_is_safe_bypass: false
+core:
+  history: exact 15 preceding SOURCE02 JPEGs; terminal RGB is re-rendered
+  lighting_intervention: current RGB only; preceding authentic DARK history remains byte-identical
+  conditions: [core_dark_H16, core_bright_H16]
+  branches: [A, B, SHAM]
+  independent_sessions: true
+target:
+  condition: target_bright_H16
+  if: core BRIGHT does not recover meaningful safe response
+  terminal_source: location_01 actual capture frame_000032
+  pose_rule: exact last of 33 original live captures; no camera rotation or synthetic history
+  cart_rule: same mesh and orientation, center 0.9830290731378802m along recorded heading
+  gate: renderer target >=20px in both off/on; cart on >=20px; safe pose and at least one free side passage
+  limitation: new pose and cart-to-target geometry; association diagnostic, not isolated neural grounding causality
+history:
+  condition: target_bright_H32
+  if: target H16 unsafe or target visibility unavailable
+  terminal_source: same frame_000032 pose as target H16
+  counts: [16, 32]
+  suffix: actual source capture prefix through frame_000032, last H-1 frames plus same terminal render
+  unavailable: no cloning, no new acquisition for filling count
+  H64: unavailable in preserved 33-frame bank; not acquired
+  limitation: session positions and SlowFast sampling change; history remains authentic DARK RGB
+distance:
+  if: core BRIGHT remains unsafe; run after target/history records regardless their outcomes
+  pose_history_target: exact core BRIGHT H16
+  conditions: [distance_near_H16, distance_medium_H16, distance_far_H16]
+  center_arc_m: [0.70, 0.90, 1.10]
+  geometry_source: original SOURCE02 off A path with placement-only observation connector
+  freeze_before_new_output: true
+  gate: cart mesh rear extent inside original off path; off path blocked; safe observation; >=20cart pixels; valid side passage
+  no_new_prediction_for_placement: true
+receding_horizon:
+  enabled: false
+  reason: optional closed-loop stage not performed; isolate saved-history terminal factors first, later-chunk recovery remains untested
+generation_environment:
+  VLN_EVAL_TEMPERATURE: '0'
+  VLN_EVAL_TOP_P: '1'
+  VLN_EVAL_TOP_K: '0'
+  VLN_EVAL_TRAJ_TOP1: '0'
+budget:
+  maximum_terminal_predictions: 21
+  maximum_conditions: 7
+  new_MPC_solves: 0
+  new_GP_rigid_reconciliation_solves: 0
+  new_closed_loop_rollouts: 0
+  retry_count: 0
+scope: DEVELOPMENT COUNTERFACTUAL INPUT DIAGNOSTIC; not an online handoff
