@@ -1,0 +1,54 @@
+experiment: GP_SE2_ATTACH_01_FIXED_CORRESPONDENCE_DURATION
+source_run: data/robotless_online_handoffs_v1/primary_20260915T091900Z
+original_run: data/robotless_gp_se2_01/primary_20260918T054000Z
+source_inventory_run: data/robotless_gp_se2_ref_03/primary_20260919T141000Z
+source_selection:
+  order: lexical_sha256_then_case_id
+  hash_prefix: 'ATTACH01-v1:'
+  maximum_fresh_edge_clearance_m: 0.20
+  minimum_e_perp_m: 0.10
+  minimum_direction_or_yaw_deg: 20.0
+  require_original_gp01_eligibility: true
+  require_moving_handoff: true
+  require_no_gate_known_route: true
+  require_raw_suffix_and_prepared_clearance: true
+  minimum_suffix_rows: 2
+  minimum_suffix_xy_arc_m: 0.000001
+  minimum_original_xy_segment_m: 0.000001
+  projection_geometry: simple_original_XY_no_zero_segments
+  yaw_reliability: finite_original_projected_pose_yaw_on_nondegenerate_simple_geometry
+  direction_reliability: unchanged_incoming_0.05m_window_0.02m_chord_checks
+duration_conditions_s: [0.4, 0.6, 0.8, 1.0, 1.2, 1.4]
+attachment:
+  position_m: 0.10
+  yaw_deg: 15.0
+  duration_s: 0.30
+  tube_offsets_s: [0.0, 0.1, 0.2, 0.3]
+  correspondence: unchanged_prepare_reference_once_shared_float64_F_common
+  reference_row_for_support_k: k_minus_1
+  intrinsic_LightNav_waypoint_dt_s: null
+methods: [M0_NATIVE, M0_ADAPTER, M3_CURRENT_GP, M4_FIXED_ATTACH_T]
+solver:
+  backend: existing_supplied_Jacobian_CPU_float64_SLSQP
+  initializations: [original_FRESH, fixed_same_curvature_deceleration]
+  starts_per_condition: 2
+  prepared_budget_per_start_s: 30.0
+  max_iterations: 200
+  ftol: 0.0000001
+  retries: 0
+  generic_formulation: original_midpoint_lateral_and_u_0_0.5_1_motion
+execution:
+  label: OFFLINE_SINGLE_HANDOFF_COUNTERFACTUAL
+  official_selector: unchanged_nearest_plus_one_consecutive_rows
+  gp_execution_requires: original_full_acceptance_and_nominal_attachment_tube
+  simulation_horizon_s: 3.0
+  control_hz: 10
+  integration_hz: 60
+  fallback: none
+scope:
+  new_inference: false
+  new_obstacle_reveal: false
+  correspondence_optimization: false
+  duration_optimization: false
+  new_selector: false
+  next_experiment: false

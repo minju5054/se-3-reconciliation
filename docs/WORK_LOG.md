@@ -4663,3 +4663,31 @@ Pre-commit verification again preserves all frozen GP/runtime/source hashes.
   The one remaining prerequisite to this frozen comparison is a genuine safe,
   obstacle-responsive FRESH under a separately declared upstream observation
   protocol with validated visibility measurement. No next experiment implemented.
+
+### GP-SE2-ATTACH-01 — source-only and pre-primary protocol (2026-09-21)
+
+Freshly fetched origin/main equals44e204499cb18855de2236780a4244903cd35d8a.
+Preserved JOIN-01 and both unrelated Stage-0 config edits. New scope fixes
+correspondence and treats T as an external condition, with no acquisition or
+join-index/time search. Source-only full881 ledger has9 eligible events; the
+predeclared ATTACH01-v1 hash order selects episode_021_repeat_01/handoff_003.
+Original suffix/prepared clearance .09842650/.09842521m, e_perp .14120145m.
+Record is moving under original collector displacement criterion but B velocity
+is nearly zero; raw local OLD/FRESH identical, different observation transforms.
+These limitations are preserved without replacing the selected source.
+
+Fixed common value hash c67a128205a70383fbc9b89fdb21bd3d0d377287e571e52204f855500e6f3a7f.
+Six external durations .4,.6,.8,1,1.2,1.4; original support k→common row k−1.
+M4 masks only preservation before T and appends12 nominal tube inequalities.
+Original30 equalities/903 inequality prefix and full checker remain unchanged.
+14 seed/condition derivative gates pass; no GP optimization/MPC primary yet.
+Pre-primary implementation must be committed/pushed before frozen14-start run.
+Protocol/source ledger: data/robotless_gp_se2_attach_01/primary_20260921T103000Z/.
+Details: docs/GP_SE2_ATTACH_01_FIXED_CORRESPONDENCE_DURATION.md.
+
+Pre-primary verification: full suite 2436 passed/19 skipped; two existing IPC
+socket tests were blocked by sandbox permissions and then passed unchanged with
+local socket access. Latest focused ATTACH suite:21 passed. Compileall and
+whitespace checks pass. Full suite's one historical official-MPC audit is saved
+separately in preflight/repository_test_historical_MPC_audit.json; zero primary
+MPC/GP calls before the freeze commit. No scientific retry occurred.
