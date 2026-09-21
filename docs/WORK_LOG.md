@@ -4731,3 +4731,34 @@ with no numerical rerun or overwrite. Authoritative review:
 data/robotless_gp_se2_attach_01/primary_20260921T103000Z/review_v2/index.html
 and review_bundle_v2.zip. Operational COMPLETED_WITH_LIMITATIONS; original
 physical acceptance, source records and unrelated Stage-0 edits preserved.
+
+### JOIN-SOURCE-02 — pre-development source protocol (2026-09-21)
+
+Fresh fetch confirms fb181dbf4553aa91b4c864f2c61c6fea71ba2cc4. Preserve JOIN-01,
+ATTACH-01, original Hospital/export/LightNav/MPC and both Stage-0 user edits.
+New source-only line: bounded paired obstacle-off/on/sham development, then only
+if qualified a separately frozen three-episode online confirmation. No GP/rigid,
+correspondence choice, attachment-duration sweep or downstream comparison.
+
+Actual Isaac inspection of two declared poses confirms target shelf/doors.
+Existing natural cart internal-reference mesh parity passes; same-product
+instance-ID off/on/off pixels0/14682/0 at identical camera/pose/time. Original
+semantic-label failure is not interpreted as invisible input. Actual mesh slab
+projection area .270833411m²; no box replacement (AABB overfills .351985296m²).
+Render presence and direct-oracle occupancy are separate explicit records.
+
+Read-only official contract audit retains source c6f40e3/checkpoint7221d418,
+task vln/vlnce, actual camera, unmodified frame preprocessing/RVQ/SlowFast.
+Object-target instructions fit official Prompt Guide. History is genuine live
+approach, no copied frames to fill counts; development suffixes end at latest
+activated OLD observation and paired render stays fixed there. At most80 live
+captures/location allow16/32/64 delivered suffixes when available. Two geometry-
+only prop placements per location use short cart axis and .60s latency design
+reserve. Empty placement/history remains unavailable; no threshold change.
+
+Run data/robotless_join_source_02/source_20260921T112111Z. Technical preflight
+has zero model/MPC calls. Full repository tests2500 passed/19 skipped172.67s;
+latest67 focused tests pass. One historical official-MPC test audit is separate
+from source acquisition. Compileall/diff checks pass. All524 initial preserved
+hashes match. Development protocol/code freeze precedes first actual model
+source request; commit and normal push required by runtime verifier.

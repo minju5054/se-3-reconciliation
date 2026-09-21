@@ -1,0 +1,78 @@
+experiment: JOIN-SOURCE-02
+base_config: configs/robotless_online_handoffs.yaml
+environment: data/robotless_gp_se2_01/environment_technical_20260918_retry04
+scope: genuine source discovery only; zero GP/rigid/reconciliation
+locations:
+  - id: location_01
+    initial_pose_world: [19.2, 28.0, -1.5707963267948966]
+    instruction: Go to the tall blue shelving unit and stop.
+    target_prim: /World/Hospital/SM_Shelf_06f7
+    target_xy: [17.75401523624705, 21.276376579961557]
+    target_evidence: technical_preflight/inspect/location_01.json
+  - id: location_02
+    initial_pose_world: [19.2, 24.0, -1.5707963267948966]
+    instruction: Go to the double doors at the end of the hallway and stop.
+    target_prim: /World/Hospital/Geo_M_DobleDoor6
+    target_xy: [18.930000368578682, -4.200920593862463]
+    target_evidence: technical_preflight/inspect/location_02.json
+prop:
+  source_prim: /World/Hospital/SM_SupplyCart_02a7
+  runtime_prim: /World/JOINSource02Obstacle
+  scale: 1.0
+  orientation: original cart local +Y (short .4558m extent) follows local OLD tangent; no scaling
+  geometry: actual cloned mesh; original slab projection and unknown-interior policy; no bounding-box oracle
+  height_band_m: [0.05, 0.65]
+  footprint_radius_m: 0.20
+  required_edge_clearance_m: 0.05
+history:
+  counts: [16, 32, 64]
+  maximum_live_frames: 80
+  source: actual official LightNav/MPC normal approach, one bank per location
+  end_if_target_distance_m: 2.0
+  suffix_policy: truncate bank at latest activated OLD observation, take last H prefix frames; replace only terminal with same-pose actual off/on render; identical preceding bytes, no future frames
+  unavailable: insufficient authentic frames; no padding or additional stalled captures
+placements:
+  - {id: placement_01, usable_remaining_arc_fraction: 0.35}
+  - {id: placement_02, usable_remaining_arc_fraction: 0.65}
+placement_design:
+  latency_estimate_s: 0.60
+  speed_estimate_mps: 0.80
+  reserve: speed*latency + forward obstacle half-extent + footprint + clearance
+  far_limit: OLD endpoint minus forward obstacle half-extent minus footprint/clearance
+  no_extrapolation: true
+  no_feasible_interval: PLACEMENT_UNAVAILABLE
+  lateral_passage: at least one actual mesh-oracle lateral corridor probe must be valid
+  guarantee: design estimate only; every actual step independently guarded
+development:
+  order: location then placement then delivered history 16/32/64
+  branches: [A, B, SHAM]
+  maximum_conditions: 12
+  maximum_terminal_predictions: 36
+  independent_sessions: true
+  sham: identical actual off JPEG in independent session
+  stop: first complete SAFE_BYPASS_CANDIDATE; otherwise frozen budget only
+generation_environment:
+  VLN_EVAL_TEMPERATURE: '0'
+  VLN_EVAL_TOP_P: '1'
+  VLN_EVAL_TOP_K: '0'
+  VLN_EVAL_TRAJ_TOP1: '0'
+qualification:
+  minimum_instance_pixels: 20
+  minimum_interior_lateral_m: 0.20
+  minimum_reliable_direction_or_yaw_deg: 20.0
+  minimum_tangent_chord_m: 0.02
+  influence: obstacle center +/- forward half-extent plus 0.50 m
+  bypass: endpoint beyond obstacle rear plane by radius + required clearance and positive target progress
+  whole_raw_reference: true
+  connector_assumption: separately recorded; never part of model-returned polyline
+confirmation:
+  episodes: 3
+  same_session_old_fresh: true
+  first_post_reveal_prediction_only: true
+  post_switch_roll_s: 0.10
+  minimum_physical_v_minus_mps: 0.20
+  minimum_observation_to_B_translation_m: 0.02
+  inflight_rtf: [0.8, 1.2]
+  maximum_loop_stall_s: 0.25
+  oracle_abort: before unsafe next held-command interval; no avoidance/teleport/fallback
+  reveal_trigger: selected history count reached, active OLD age >=0.10s, moving command, geometry/latency reserve valid
