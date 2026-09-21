@@ -4762,3 +4762,60 @@ latest67 focused tests pass. One historical official-MPC test audit is separate
 from source acquisition. Compileall/diff checks pass. All524 initial preserved
 hashes match. Development protocol/code freeze precedes first actual model
 source request; commit and normal push required by runtime verifier.
+
+### JOIN-SOURCE-02 — bounded source screening result (2026-09-21)
+
+Pre-development code/protocol 3e082228f666ba2a0aad758a7de37693c54cb420 was pushed
+before actual source execution. Run source_20260921T112111Z records all 12 declared
+conditions. Two location01 H16 conditions completed independent-session A/B/A';
+both were CHANGED_BUT_UNSAFE. Six entries lacked authentic H32/H64 history; four
+others lacked the frozen geometry/latency placement reserve. No replacement,
+extra condition, model setting change or threshold relaxation occurred.
+
+Both off/sham arrays are identical. Both on arrays differ from off and equal each
+other. Interior lateral separation is 0.006775 m, reliable yaw difference 31.046266
+degrees, and returned arc length changes from 1.356219 to 0.848790 m. On raw paths
+overlap the actual cart (-0.20 m footprint-edge clearance). Off/sham are safe without
+the cart (0.935417 m) and unsafe with it. On endpoints remain 0.487315/0.508862 m
+before the bypass plane. Off/on instance pixels are 0/15779 and 0/15194. Paired
+JPEG/wire parity and actual mesh/environment checks pass. Target-visible=false,
+STOP=false; pointing/token changes do not identify a decoder/perception cause.
+
+Live history captured 33/59 frames, with 28/56 usable causal prefixes. Location01
+ended at the target-approach boundary. Location02's oracle abort preceded unsafe
+integration: last actual edge clearance 0.050146128 m, proposed endpoint 0.047051410 m.
+No collision, teleport or fallback occurred. Original resolved-dt updates reproduce
+481+871 applied steps exactly; one attempted command remains unapplied. The abort
+concerns an original Hospital MopSet, not the development runtime cart.
+
+Actual model predictions: 28 = 22 history + 6 screening; synthetic startup warmup 1
+is separate. Buffer-only requests: 159 = 69 history + 90 screening. MPC submitted
+205 attempts, with 204 saved completions and one unknown result; observed solve
+sum 0.802302 s. Sixteen stale results remain recorded. One late location01 result
+is in location02's journal; accounting uses its own episode/solve identity. History
+RTT sum 7.146927 s and server latency 7.041935 s overlap. Screening elapsed 12.554 s;
+server startup 17.012 s and lifetime 148.204 s are separate. Two historical MPC
+test calls are not source evidence. GP/rigid/reconciliation calls remain zero.
+
+NO_QUALIFYING_DEVELOPMENT_SCENARIO: 0 of 3 planned confirmations attempted, with
+all three ledger entries N/A. Zero qualifying online sources; no downstream source
+bundle. No further acquisition or optimization was implemented. Limits: H16 only,
+two placements 2.15 cm apart, uncertain target recognition, no online/traversal claim.
+
+Full suite: 2508 passed, 19 skipped in 171.95 s; compileall and diff checks pass.
+Saved-only validation preserves scientific failures. Supplementary geometry audit
+v1's ideal 1/60 clock mismatch is preserved; authoritative v2 uses the original
+float32-resolved dt and passes 58/58 checks. Review v1 is preserved; a new layout-only
+wrapper moves the world legend without changing frozen report code or numbers.
+Final review_v2/index.html and review_bundle_v2.zip contain actual RGB, pointing,
+whole-path geometry, all conditions and numeric/hash sidecars. Exact source/status
+information is in JOIN_SOURCE_02_OBSTACLE_RESPONSE.md. Historical raw/core files
+and unrelated user configs remain unchanged.
+
+Authoritative saved validation_v2.json passes all 1507 checks. The initial checker
+attempt's string-ID schema error and validation.json's inclusive/exclusive bbox
+mismatch are preserved; only the new saved-record validator was corrected to
+the frozen producer's contracts. Eight focused validator tests pass in addition
+to the full suite. No source/model/MPC rerun occurred. review_bundle_final.zip
+(1,841,152 bytes) adds protocol/counts/authoritative audits to the same review_v2
+figures. It excludes the full dataset, environment and checkpoint.
