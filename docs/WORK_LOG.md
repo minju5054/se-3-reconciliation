@@ -4611,3 +4611,55 @@ Pre-commit verification again preserves all frozen GP/runtime/source hashes.
   official-MPC reproducibility audit, separate from primary execution counts.
 - This entry is pre-primary: no JOIN01 source/result or claimed recovery yet.
   Infrastructure commit precedes the first actual obstacle-reveal attempt.
+
+## 2026-09-21 GP-SE2-JOIN-01 actual obstacle-reveal outcome
+
+- Execution freeze 0de41faebe9a9bb662b0f6773123e4c6975a8d1e; run
+  data/robotless_gp_se2_join_01/primary_20260921T083025Z/.
+  Actual Hospital Isaac + pinned persistent official LightNav ran all three
+  predeclared placements once. Six real outputs (3 OLD/3 FRESH), 22 RGB frames,
+  source MPC solve results 9/7/7. Recorded physical commands/states, observation,
+  request/receipt/ready/application clocks and observation-anchored raw/world
+  arrays remain immutable. Runtime box pose/dimensions/UTC/USD matrix preserved.
+- Qualified=0/3. All B points remain valid (clearance .686667/.653333/.463333m),
+  but original FRESH remains nearly straight and intersects each box (reference
+  footprint clearance -.2m; not an actual executed collision). Cross-track
+  disagreement .000160226/.000047310/.000047310m. No safe future FRESH exists
+  under the frozen checks. Therefore no GP/rigid solve or common-B method
+  rollout is performed, no M4 time/index or measured join is reported, no
+  fourth placement or synthetic replacement. All five method ledger rows are N/A.
+- Request RTT .290080/.216171/.199467s, FRESH observation-to-B translation
+  .293333/.266667/.256667m. B follows continued OLD execution, not a reanchor.
+  P01 inflight RTF1.903869 fails the frozen timing gate; P02/P03 pass.
+- Visibility limitation: same-camera masks report only BACKGROUND/UNLABELLED.
+  Visual inspection confirms the orange box in all triggering FRESH RGBs and
+  its absence in OLD. Six wire images decode byte-identically to the saved
+  triggering RGB, with matching hashes/response sequences. Do not interpret
+  zero semantic pixels as absence of obstacle in the input. Preserve visibility
+  gate failure; all three independently fail safety/disagreement anyway.
+- Initial artifact validator incorrectly includes pre-OLD stationary bootstrap
+  in the 'OLD during FRESH inference' predicate. Preserve root validation.json
+  (3 errors); additive completion admits only those exact errors, rechecks all
+  source manifests/qualification/plot values and the actual inflight-to-B OLD
+  commands. verification/validation.json is authoritative valid=true. No
+  scientific result or frozen numerical/acquisition source is changed.
+- Final tests: 2,420 passed, 19 existing skips, 168.48s. New reporting tests cover
+  bootstrap exclusion and missing/wrong chunk rejection. Compileall src/scripts/
+  tests, shell bash -n, git diff --check, all 513 frozen source/env/config hashes,
+  image numeric parity and review ZIP byte checks pass. Four historical real
+  MPC test audits from the relevant/full test invocations are separately saved;
+  total task recorded MPC calls=27 (23 source +4 tests), comparison calls=0.
+  Source MPC reported solve wall sum .136773794s; optimizer cost N/A. Service
+  warmup is separately logged and not counted as an OLD/FRESH prediction.
+- Static review/index.html contains qualification table, actual before/after
+  RGB links, all three source overlays and summary figure. All four PNGs visually
+  inspected. review_bundle.zip=370,820 bytes/27 members, SHA256
+  66d916183f7469b5d336a0f66b676c8161b8c8c95cd729b9ef446df82ca96bea.
+  No fabricated GP/execution comparison trace or comparison GUI. Large/raw data,
+  generated figures/ZIP and external assets remain untracked. Server shut down
+  through recorded process-identity check; unrelated Stage-0 edits preserved.
+- Operational GP_SE2_JOIN_01_COMPLETED_WITH_LIMITATIONS; research interpretation
+  UPSTREAM_QUALIFICATION_FAILURE / NO_QUALIFYING_OBSTACLE_REVEAL_HANDOFF.
+  The one remaining prerequisite to this frozen comparison is a genuine safe,
+  obstacle-responsive FRESH under a separately declared upstream observation
+  protocol with validated visibility measurement. No next experiment implemented.
