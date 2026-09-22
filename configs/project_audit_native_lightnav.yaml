@@ -1,0 +1,58 @@
+experiment: PROJECT_AUDIT_01
+mode: SAVED_ONLY_AND_SOURCE_ONLY
+source_scan_config: configs/genuine_source_moving_mismatch_scan.yaml
+saved_loss_config: configs/saved_handoff_execution_loss.yaml
+corpus: data/robotless_online_handoffs_v1/primary_20260915T091900Z
+source_scan: data/genuine_source_moving_mismatch/scan_20260922T073107Z
+historical_loss: data/saved_handoff_execution_loss/audit_20260922T091708Z
+families:
+  JOIN01: data/robotless_gp_se2_join_01/primary_20260921T083025Z
+  SOURCE02: data/robotless_join_source_02/source_20260921T112111Z
+  SOURCE03: data/robotless_join_source_03/cause_20260921T153120Z
+  SOURCE04: data/robotless_join_source_04/persistence_20260922T050237Z
+external_checkout: /home/gpuadmin/Workspace/external/LightNav-0-official-demo
+checkpoint: /home/gpuadmin/Workspace/external/LightNav-0/checkpoints/LightNav-0
+matching:
+  frozen_before_new_outcome_computation: true
+  acknowledged_prior_knowledge: published_13_case_losses_and_prior_baseline_reports
+  hard_cases: unchanged_13_source_scan_candidates
+  control_pool: original_entire_raw_safe_and_B_safe_and_observed_prefix_safe
+  same_source_category: true
+  exclude_same_episode: true
+  low_lateral_max_m: 0.05
+  low_pose_yaw_max_deg: 10.0
+  low_reliable_direction_max_deg: 10.0
+  require_reliable_direction: true
+  speed_caliper_mps: 0.10
+  lifetime_caliper_s: 0.25
+  raw_yaw_variation_caliper_deg: 20.0
+  raw_tangent_variation_caliper_deg: 20.0
+  raw_arc_caliper_m: 0.40
+  order: lexicographic_absolute_differences_yaw_tangent_speed_lifetime_arc_then_case_id
+  controls_per_case: 1
+  with_replacement: true
+  no_caliper_relaxation_or_outcome_based_fallback: true
+  interpretation: descriptive_association_not_causal_effect_or_IID_trials
+attachment:
+  implementation: unchanged_handoff_execution_loss_attachment_loss
+  position_m: 0.10
+  yaw_deg: 15.0
+  dwell_s: 0.30
+  common_steps: 54
+  growth_reporting_floor_m: 0.000001
+  first_growth_window_s: 0.30
+  reference_end: next_applied_chunk_command_excluded_or_episode_end_explicit
+  no_padding_no_time_rescaling: true
+sequence:
+  episodes: all_7_episodes_containing_original_13
+  representative: episode_013_repeat_01/handoff_024
+  neighborhood: 2
+  compare_old_and_new_error_at_identical_boundary_pose: true
+  endpoint_completion_after_replacement: not_a_failure_metric
+policy:
+  model_MPC_optimizer_simulator_calls: 0
+  raw_writes: forbidden
+  output_creation: exclusive
+  intrinsic_LightNav_waypoint_dt_s: null
+  frames: world_metres_Z_up_CCW_radians_local_x_forward_y_left
+  anchoring: observation_pose_only

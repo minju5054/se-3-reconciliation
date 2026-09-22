@@ -5087,3 +5087,88 @@ Audit/plot/recomputation2.155s. Saved-only validator independently reproduces
 all metrics/geometry/commands, source hashes, CSV and plotted numbers.
 Relevant tests138 passed; compileall/diff checks passed; no real model/MPC test
 calls. Source/core/history and unrelated Stage0 config edits preserved.
+
+## 2026-09-22 — PROJECT-AUDIT-01 native LightNav and reconciliation
+
+User requested a SAVED-ONLY + SOURCE-ONLY audit of unsafe native obstacle
+FRESH generation and whether successive-chunk reconciliation has a defensible
+research contribution. Started on main at freshly fetched origin/main
+6b6cb01d8d44b890dbd60845e139f86de74874ac. The unrelated two Stage0 config edits
+remain unchanged and excluded from staging. No new scientific model, MPC,
+optimizer, simulator or rollout call; no controller/model/formulation change.
+
+Native is explicitly scoped to official inference/RVQ/MPC inside the custom
+robotless Isaac scheduler/camera/SE2 integration harness, not the entire official
+robot deployment. Direct external checkout verification is clean at
+c6f40e3220edbf7011e4f17eaf2c865416737d4d. Sixteen checkpoint files match all five
+historical launch manifests, revision 7221d418bfff55cfcbadd09f7a26aaab81e1f8a6.
+Official MPC SHA256 remains
+2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1.
+Scoped hashes/diffs span original eed5f2c, JOIN01, SOURCE02, SOURCE03/04 and
+current HEAD; online model/MPC workers and adapter remain unchanged. Original
+inherited generation environment is incompletely archived, a stated limitation.
+
+Authoritative output:
+data/project_audit_native_lightnav/audit_20260922T_project01_v3/.
+42 token/response/raw/observation-anchored-world traces reproduce. JOIN01's three
+raw/suffix clearances are -.2m while B edge clearances are .687/.653/.463m;
+obs-to-B travel .293/.267/.257m cannot cause an already unsafe observation-anchored
+model output. No dynamic detour impossibility is inferred. SOURCE02–04 geometry
+and paired/persistence input checks reproduce; brightness/persistence change
+severity without a bypass. Internal neural cause remains unresolved. Raw
+generation, later attachment, reference preparation and MPC safety are separated.
+
+Unchanged source scan reproduces all881 rows; original13 metric/geometry results
+reproduce literally. New frozen outcome-independent feature matching yields8
+pairs from4 hard episodes and6 controls,5 unmatched, without caliper relaxation.
+Paired first54-interval position-AUC difference is +.152209m s (also episode-equal).
+This is retrospective association, not causal/IID or held-out inference; source
+selection conditions on mismatch, route intent is unobserved and realized lifetime
+can be post-treatment. Prior published outcomes and control reuse are disclosed.
+
+Safe entire raw FRESH:765 events/60 episodes,637 inside tube at B,740 sampled
+sustained attachments. Original13:1 attachment,7 no entry,4 right-censored dwell,
+1 transient; all13 saved executions safe. Broad safe-raw post-execution clearance
+passes758/765, with7 exceptions retained. Most reported tiny initial growth is
+not practically large (median .0000216m). Full7-episode sequences cover189 handoffs;
+hard013/01/024 jumps OLD/new error .022870→.279113m at identical B, then the next
+FRESH starts .000352m away. Among12 available next handoffs,10 start in the tube
+and11 attach. No endpoint completion test is extended past actual replacement.
+
+Audited Native/Adapter/Rigid/GP/REF01–04/DIAG01–08/M4 evidence and primary RTC,
+TIC-VLA, AsyncVLA, ACT, Apollo stitching, reference-governor and GP/Lie-group
+literature. Current optimization has no demonstrated moving-hard attachment
+benefit; M4's selected nearly stationary example reduces linear TV but attaches
+later. Existing selector/preparation explanations and absent simple-splice
+comparison prevent a necessity claim. Primary verdict PROMISING_BUT_UNPROVEN.
+Exactly one next method-comparison experiment is proposed, not run.
+
+Deliverables: comprehensive report
+docs/PROJECT_AUDIT_NATIVE_LIGHTNAV_AND_RECONCILIATION.md; frozen matching YAML;
+saved-only core/report/validator scripts; tested audit metrics; six CSV matrices,
+event/episode metrics, integrity report, HTML index and14 scientific figures with
+numeric/source-hash sidecars. Geometry uses equal XY axes. Figures explicitly
+separate host and simulator clocks and original-FRESH attachment from optimized
+path agreement. Historical docs and all raw/derived experiments are preserved.
+Two partial audit attempts remain: acquisition-only worker_exit_code comparison
+and duplicate end_reason serialization were corrected without scientific calls
+or outcome/threshold changes. The v3 end reasons agree before merging.
+
+Validation: core before/after12,073 input hashes; complete audit12,425 checks,
+zero failures,14 figures/6 tables. Independent original corpus validator passes
+60 episodes/881 valid handoffs. SOURCE02/03/04 validators pass1,507/2,019/4,686
+checks. Focused final audit/SE2/timing/loss tests70 passed. Full regression before
+three final audit tests:2,619 passed,19 existing fixture/diagnostic skips,1
+deliberately deselected real-official-MPC test,2 AF_UNIX permission failures.
+Those exact2 IPC tests pass outside sandbox restriction (2 passed). With the
+three additional passing audit tests, all2,624 exercised tests pass;2,644 total
+tests collected. Synthetic solver fixtures are software validation only.
+Compileall and diff whitespace checks pass. Exact logs are retained in the run's
+metrics/test_logs directory. No numerical/controller code was altered.
+
+Core README/WORK_LOG hashes describe the initial 6b6cb01 source snapshot; this
+required append is the sole later change to an already-manifested documentary
+input. Prefix preservation and final source/test hashes are recorded separately
+in completion evidence. New report/validator files have their own hashes.
+One focused code/config/test/doc commit and normal push are recorded after Git
+completion in the ignored run's git_completion.json; no force push/history rewrite.
