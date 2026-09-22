@@ -7,6 +7,14 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [source-only moving/mismatch scan](docs/GENUINE_SOURCE_MOVING_MISMATCH_SCAN.md)
+finds 13 of 881 genuine handoffs with safe original FRESH/common geometry,
+physical v−>0.20m/s, observation-to-B travel≥0.02m, and substantial lateral or
+orientation mismatch. Eleven have interior FRESH projections; two have nearly
+exhausted endpoint geometry. None also satisfies the prior retained-suffix
+obstacle-near criterion (edge clearance≤0.20m). This is an input inventory, not
+new inference, optimization, execution, or evidence of reconciliation benefit.
+
 The [JOIN-SOURCE-04 persistence/affordance diagnosis](docs/JOIN_SOURCE_04_PERSISTENCE_AFFORDANCE.md) completed seven independent terminal predictions using the same 16 moving poses, all re-rendered BRIGHT, with the cart present in the final 0/1/2/4/8 frames. K2/K4/K8 improved minimum clearance versus K1 by 3.19–6.23 cm, but every ON raw path still overlapped the cart at the same early segment; no bypass source was obtained. Both shams matched exactly. All ON APOS were bottom-clamped, so a precise free-space direction or affordance/action mismatch remains unidentifiable. This is a counterfactual input-history diagnostic, with no online execution or reconciliation. See the [complete static review](data/robotless_join_source_04/persistence_20260922T050237Z/index_final.html).
 
 The [JOIN-SOURCE-03 bright Hospital diagnosis](docs/JOIN_SOURCE_03_BRIGHT_CAUSE.md) completed seven frozen OFF/ON/SHAM conditions (21 terminal predictions). Actual scene lighting increased mean image luma from 12.27 to 77.48; the core ON path's minimum edge clearance improved from −0.2000 to −0.1114 m, but every ON path still overlapped the cart. H32 and the tested cart distances did not recover a safe detour. Official MPC provenance matches, and no diagnostic MPC execution occurred. **Lighting contributes but is insufficient; the internal failure cause remains unresolved.** The intervention changed the terminal RGB while retaining authentic dark history. No new online handoff or optimization-ready source was obtained. See the [actual RGB and paired static review](data/robotless_join_source_03/cause_20260921T153120Z/index.html).

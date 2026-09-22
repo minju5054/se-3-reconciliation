@@ -1,0 +1,24 @@
+experiment: GENUINE_SOURCE_MOVING_MISMATCH_SCAN
+source_run: data/robotless_online_handoffs_v1/primary_20260915T091900Z
+original_run: data/robotless_gp_se2_01/primary_20260918T054000Z
+source_inventory_run: data/robotless_gp_se2_ref_03/primary_20260919T141000Z
+reuse_source_policy: configs/gp_se2_attach_01.yaml
+thresholds:
+  forward_speed_strictly_greater_mps: 0.20
+  observation_to_boundary_minimum_arc_m: 0.02
+  minimum_lateral_gap_m: 0.10
+  minimum_direction_or_pose_yaw_deg: 20.0
+  minimum_incoming_chord_m: 0.05
+  minimum_projection_window_chord_m: 0.02
+  obstacle_sensitive_maximum_suffix_clearance_m: 0.20
+policy:
+  safety: original_entire_FRESH_and_unchanged_prepared_reference_and_B
+  future_only_safety_reported_separately: true
+  mismatch: lateral_normal_component_OR_reliable_incoming_direction_OR_pose_yaw
+  endpoint_along_track_gap_alone_does_not_qualify: true
+  no_gate_and_obstacle_sensitive_are_separate_subsets: true
+  all_original_records_retained: true
+  order: lexical_sha256_MOVING_SOURCE_v1_case_id
+  historical_optimizer_or_rollout_outcomes_used: false
+  select_case_for_next_experiment: false
+  new_inference_optimization_MPC_rollout_GUI_calls: 0

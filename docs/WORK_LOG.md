@@ -4977,3 +4977,32 @@ included:29 passed. Historical raw/results and unrelated Stage0 changes untouche
 
 Expanded saved-viewer regression check: 42 passed, including comparison-replay
 tests; compileall and git diff --check passed. These checks made no model/MPC calls.
+
+### Genuine source-only moving/mismatch inventory, 2026-09-22
+
+User requested existing-corpus evidence only. Fetched main/starting HEAD
+3a2734ba10ec07e7fc1b3d9cd9056ff8cc838f4f; unrelated Stage0 edits preserved.
+Protocol fixes physical v_minus>.20m/s, obs-to-B travel>=.02m and lateral>=.10m
+or reliable direction/pose-yaw>=20deg. Full raw FRESH/common/B and recorded
+pre-B geometry use original .20m footprint/.05m clearance/direct Hospital
+checker. Endpoint distance is separated into normal/along-track components.
+
+881 records ->680 base ->673 whole-FRESH safe ->670 past-safe ->548 moving
+->13 mismatched candidates,7 episodes/13 ordered raw pairs/10 distinct FRESH.
+11 interior projections;8 lateral AND orientation (7 interior). Two endpoint
+cases have nearly exhausted raw progress. All13 have changed raw OLD/FRESH.
+Zero meet the previous retained-suffix obstacle-near<=.20m criterion. Full raw
+paths of008/01/023 and014/01/025 are near obstacles (.1313/.1306m), but their
+retained suffixes are .2335/.4341m. These scopes are reported separately.
+No automatic next-experiment case choice or correspondence/plan was produced.
+
+Final output data/genuine_source_moving_mismatch/scan_20260922T073107Z
+contains complete ledger CSV/JSON, source/config hashes, static index and seven
+PNG/numeric sidecars. Earlier saved-input passes retained; adding B clearance
+and moving legends outside axes did not change predicates or candidate IDs.
+All calculations use saved source; new VLA/GP/rigid/MPC/rollout/GUI calls zero.
+
+Final scan wall time 14.700s; saved-only validator recomputes all881
+records and verifies 3920 source hashes, CSV and plot numbers.
+Relevant tests134 passed(4.26s), no real model/controller calls; compileall and
+diff checks passed. Raw/core/environment/previous results remain unchanged.
