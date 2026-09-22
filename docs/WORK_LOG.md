@@ -4918,3 +4918,44 @@ read declared IDs/scope from protocol, verify import in actual external Python,
 and add regression test. New050237 run reuses the exact32 bank files with no
 rerender, K/threshold/settings change or response-driven retry. Freeze/push again
 before the first actual scientific prediction; no external environment changes.
+
+### JOIN-SOURCE-04 completed bounded diagnosis, 2026-09-22
+
+Pushed corrected freeze7682acd before7 scientific predictions in050237 run.
+All premodelK0/1/2/4/8 available; all32 paired BRIGHT frames preserved, exact
+SOURCE03 cart/camera/target/instruction and clean official source/checkpoint.
+Seven independent sessions each delivered15 buffer-only frames then1 prediction:
+105 buffer restores,7 terminal calls,0 diagnostic MPC/GP/rigid/online rollouts.
+The original044703 pre-request failure and all its logs remain preserved.
+
+K1 clearance-.143249985m, K2-.080954592m, K4/K8-.111383570m: all overlap; gain
+.062295392/.031866415m, nonmonotonic, same first unsafe segment2/row3. Max lateral
+<=.006376111m. Improvement is shorter near-straight extent, not bypass. K0 was
+safe OFF(.935417382m) and blocked under hypotheticalON(-.2m). Both shams exact;
+K4/K8 action tokens/arrays identical. AllON APOS bottom-clamped; [235,265] for
+K1/K2/K4, [245,265] forK8. Raster hits floor, but nominal-ground footprint proxies
+remain unsafe; censored points establish no clear-side or direction mismatch.
+Target visible=false/OPOS not_visible persists despite rendered shelf pixels.
+
+Result PERSISTENCE_IMPROVES_BUT_REMAINS_UNSAFE; APOS
+AFFORDANCE_REMAINS_AMBIGUOUS_DUE_TO_CLAMPING. Persistence contributes but does
+not resolve failure; target grounding vs spatial/action realization remains
+unisolated. No promising safe bypass or moving online source. Stop after diagnosis.
+
+TerminalRTT sum2.326373s; worker sum32.142204s; corrected server startup16.761073s,
+lifetime106.828761s; renderer187.221508s. Two separate synthetic startup warmups
+(287/277ms), including failed run. Full-suite historical MPC1 solve(.043629s)
+reproduces saved command/reference exactly and is not SOURCE04 evidence.
+
+Full tests2564 passed/19 skipped(169.38s), focused147 before freeze, corrected58.
+Saved validator4686 checks valid; review validator295 checks valid, including
+prior failure hashes, actual calls, CSV, ZIP bytes. Frozen analysis preserved;
+report-only finalizer adds full-range APOS proxy geometry and compact index.
+All12 static figures visually inspected, raw input images never annotated.
+Output050237/index_final.html and review_bundle_final.zip. Source/core/environment
+and unrelated Stage0 configs preserved; no external source/dependency change.
+
+Final SOURCE04 saved-only recheck validation_final.json passes after the full
+suite; final focused regressions148 passed(2.26s), compileall/diff pass. Both
+unrelated Stage0 config bytes match original preserved hashes. Final review ZIP
+9,416,422bytes,12 PNGs with numeric/source sidecars; only code/docs are committed.
