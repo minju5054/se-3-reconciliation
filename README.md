@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [JOIN-SOURCE-05 instruction diagnostic](docs/JOIN_SOURCE_05_INSTRUCTION_AVOIDANCE.md)
+reused SOURCE04 RGB bytes for12 new predictions with two explicit cart-avoidance
+instructions. K0 trajectories stayed identical to the historical straight path.
+Six of eight non-sham cart-ON outputs passed raw clearance, including one STOP;
+the five safe non-STOP outputs were short forward chunks ending before the cart. No lateral bypass
+was generated (all new ON lateral magnitudes below1.1mm). Frozen classification
+is **INCONCLUSIVE: safe shortening/STOP, no bypass recovery**. Both shams match.
+No rendering, MPC, online handoff or reconciliation ran; see the
+[saved review](data/robotless_join_source_05/instruction_20260922T125204Z/index_final.html).
+
 The [saved execution loss audit](docs/SAVED_HANDOFF_EXECUTION_LOSS.md) measures
 the 13 screened native handoffs after B. Position error initially grows before
 convergence; the hard013/01/024 case averages34.4cm separation over the common

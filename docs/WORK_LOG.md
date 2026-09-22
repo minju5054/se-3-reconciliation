@@ -5217,3 +5217,51 @@ and acceptance are unchanged. External worker import preflight passes.
 New exclusive run instruction_20260922T125204Z; all12 original conditions remain
 scheduled with zero prior scientific responses. Relevant171 tests pass, including
 same-boot parity and cross-boot preservation. No result-driven retry or tuning.
+
+## 2026-09-22 — JOIN-SOURCE-05 completed: safe shortening, no lateral bypass
+
+Pushed execution freeze51d6d39d33600bfa24fbdc78178b5de55ac885d8 ran exactly12
+terminal scientific predictions /180 buffer restores in independent official
+sessions. Historical I0 was not rerun. SOURCE04's32 JPEGs and all masks/depth
+match their frozen hashes; all192 next payloads match historical inputs after
+removing only instruction. Actual server argv/environment confirm VLN,
+temperature0/top_p1/top_k0/traj_top1=0 and the pinned source/checkpoint. Current
+request clocks remain separate from unmodified historical capture clocks.
+SOURCE04's full inherited process environment is unavailable historically.
+
+K0 trajectories are literally identical across I0/I1/I2; both K1 shams match
+raw arrays/text exactly. Six of eight non-sham cart-ON conditions pass original
+raw-path clearance, including I2_K8 STOP. The five safe non-STOP conditions are
+short forward chunks ending before the cart; all new ON lateral magnitudes
+are below1.1mm. I1_K1/K2 remain unsafe; I1_K4/K8 and I2_K1/K2/K4 are safe-short.
+No lateral detour or complete bypass was generated. Frozen safe-non-detour
+classification: INCONCLUSIVE, with both INSTRUCTION_EFFECT_INCONCLUSIVE.
+This does not mean measurements are missing or that safety never improved.
+No bypass-qualified source for subsequent online confirmation was obtained.
+No inference-driven threshold/input change or additional prediction followed.
+
+Counterfactual-only run:
+data/robotless_join_source_05/instruction_20260922T125204Z/.
+All earlier pre-image failures remain in instruction_20260922T103000Z,
+with zero next/prediction requests; no scientific-output retry. Total task
+sessions24, scientific predictions12, buffer requests180, separately counted
+synthetic server warmups2. Scientific terminal RTT sum3.961543s; schedule start
+to last session close62.158958s. Nested timing fields must not be summed.
+MPC/GP/rigid/reconciliation/render/rollout calls0. Tests/validators model calls0.
+Both official server processes were stopped; external source/checkpoint unchanged.
+
+Saved-only validator passes219 checks; SOURCE04 revalidation passes4686.
+Presentation completion validates13 PNGs with numeric/source sidecars and final
+ZIP members. K0 actual OFF safety is clearly separated from hypothetical ON
+clearance. Final HTML/ZIP: index_final.html / review_bundle_final.zip. All figures
+were visually inspected; raw RGB/checkpoint/environment are excluded from ZIP.
+Final focused SOURCE02–05/history/SE2 tests193 pass(2.57s); compileall and diff
+whitespace checks pass. No actual model/controller calls in tests. Detailed
+commands/results and timing provenance are in the report and ignored run.
+
+README records the bounded result; the new report includes every historical/new
+condition, APOS/action tokens, source/call identity, safe-short versus bypass
+interpretation and remaining next-chunk/internal-mechanism uncertainty. No
+online confirmation or optimization was added. Two unrelated Stage0 edits
+remain hash-preserved and excluded from staging. Final Git completion is saved
+in the ignored run after focused result commit and normal push.

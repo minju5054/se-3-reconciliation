@@ -133,3 +133,187 @@ when its same-boot condition holds; a separate test exercises reversed clock
 epochs. First15 empty buffers/terminal instruction and all model inputs remain
 unchanged. This technical correction is committed/pushed before any scientific
 prediction, with a new exclusive run; no response-driven retry or tuning.
+
+## Completed result
+
+**No lateral bypass was generated.** Explicit wording produced a different,
+useful response type: safe short forward chunks and, in I2_K8, STOP. Neither
+must be labelled successful obstacle traversal or a bypass source. The frozen
+classification is **INCONCLUSIVE** (both instructions:
+`INSTRUCTION_EFFECT_INCONCLUSIVE`), specifically the predeclared **safe
+non-detour** branch. Coverage is complete and measurements are conclusive:
+six of eight non-sham ON arrays pass raw geometry, including one STOP; zero
+qualify as visual-conditioned lateral detours. The outcome does not fit
+"all remain unsafe" or "no safety gain", and the taxonomy was not changed.
+
+Scientific run: `data/robotless_join_source_05/instruction_20260922T125204Z/`.
+Execution freeze, pushed before all12 predictions:
+`51d6d39d33600bfa24fbdc78178b5de55ac885d8`.
+Initial/failed pre-image freeze: `230e3934600737aad2099b5ac2488f1bf281bfab`.
+Starting SHA: `dd138d72adb80a05019d40b2f8f57d651de23d54`.
+Final report commit is recorded in local `git_completion.json` after push.
+
+### Input and model identity
+
+All32 historical JPEGs and their32 masks/32 depths match SOURCE04 hashes.
+The32 paired bank images were not rerendered or enhanced. All12 conditions
+preserve exact16 frame IDs, chronology, original capture values and poses.
+**All192 scientific `next` payloads reproduce SOURCE04 literally after removing
+only the instruction field; first15 instruction strings are empty and the
+terminal one equals exactly I1/I2.** Independent session/login identities and
+current request clocks intentionally differ. Historical I0 is not rerun.
+
+`generation_actual.json` records live `/proc` argv/environment: task vln,
+temperature0, top_p1, top_k0, traj_top1=0, CUDA_VISIBLE_DEVICES=0. Scientific
+argv (apart from ready-file path), pinned source and all16 checkpoint files
+match SOURCE04. The source revision/checkpoint specified above are unchanged.
+Formal exactness covers saved scientific inputs and declared generation;
+SOURCE04 did not archive every historical inherited environment variable, so
+complete retrospective process-state equivalence cannot be certified.
+
+### Every historical/new condition
+
+Clearance is footprint-edge metres; required>=.05m, radius.20m. Negative values
+are physical footprint overlap under the original checker, not exact signed
+mesh penetration depth. K0's **actual scene is OFF and safe**; its ON column
+is explicitly hypothetical. Max lateral is in **millimetres**, yaw in degrees.
+Arc starts at first returned row, not the observation connector. All returned
+arrays happened to contain10 rows; code and tests retain generic N.
+
+| Condition | Safe actual scene | Safe cart ON | Min edge m (ON) | Max lateral mm | Raw arc m | Final yaw deg | STOP |
+|---|---|---|---:|---:|---:|---:|---|
+| I0_K0 | true | false | -.200000 | .393 | 1.356219 | .0384 | false |
+| I0_K1 | false | false | -.143250 | 6.376 | .565197 | -.1703 | false |
+| I0_K2 | false | false | -.080955 | .214 | .510888 | -.0406 | false |
+| I0_K4 | false | false | -.111384 | 5.876 | .545469 | -17.0145 | false |
+| I0_K8 | false | false | -.111384 | 5.876 | .545469 | -17.0145 | false |
+| I1_K0 | true | false | -.200000 | .393 | 1.356219 | .0384 | false |
+| I1_K1 | false | false | -.080955 | .214 | .510888 | -.0406 | false |
+| I1_K1_SHAM | false | false | -.080955 | .214 | .510888 | -.0406 | false |
+| I1_K2 | false | false | -.080955 | .214 | .510888 | -.0406 | false |
+| I1_K4 | true | true | .275466 | .748 | .133174 | -.1909 | false |
+| I1_K8 | true | true | .275466 | .748 | .133174 | -.1909 | false |
+| I2_K0 | true | false | -.200000 | .393 | 1.356219 | .0384 | false |
+| I2_K1 | true | true | .275466 | .748 | .133174 | -.1909 | false |
+| I2_K1_SHAM | true | true | .275466 | .748 | .133174 | -.1909 | false |
+| I2_K2 | true | true | .186459 | .678 | .258962 | -.4270 | false |
+| I2_K4 | true | true | .469362 | 1.035 | .073596 | .0858 | false |
+| I2_K8 | true | true | .575890 | .000 | .000000 | .0000 | true |
+
+Both K1 shams match their corresponding original **raw array and raw text
+literally**. All scientific conditions completed on their first image/prediction
+attempt. There was no scientific-output retry, threshold change or next K.
+
+### Mechanism supported by the paired records
+
+K0 trajectories are literally identical across I0/I1/I2 (action codes0/30/85).
+Mentioning the cart without a visible cart does not induce a lateral turn in
+this control. Pointing/OPOS tokens do change, reinforcing that equal/different
+pointing alone cannot stand in for trajectory evidence.
+
+With cart visible, the instruction affects returned travel extent:
+
+- I1_K1 gains.062295m minimum clearance over I0_K1 but remains unsafe;
+  I1_K2 is literally I0_K2's trajectory, with no clearance change.
+- I1_K4/K8 gain.386850m and terminate about.300m forward of observation,
+  still.450645m before the cart front plane. They are short, nearly straight
+  and safe, not bypasses. I2_K1 produces exactly this same array.
+- I2_K2 gains.267413m; I2_K4 gains.580746m and ends only.098573m forward,
+  .651929m before the cart front plane. I2_K8 gains.687273m by emitting the
+  official explicit STOP response, decoded to ten unchanged zero poses (no motion).
+
+No new ON path has max lateral>=.0011m, let alone the frozen.20m criterion.
+No returned path reaches the cart rear plane in a safe lateral detour.
+SOURCE04 influence-region lateral/yaw tests are below threshold or N/A when
+the shortened/STOP path no longer supplies a reliable interior comparison.
+The short outputs' changed endpoints are not counted as lateral evidence.
+Thus visual cart presence matters beyond text alone for **shortening/STOP**,
+but the strong visual-conditioned safe-detour test fails in every condition.
+This is not `INSTRUCTION_ONLY_STEERING`: the OFF controls do not turn.
+
+### APOS and raw token trace
+
+| Condition | APOS px | Clamped/state | RVQ l0/l1/l2 |
+|---|---|---|---|
+| I1_K0 | [235,165] | false/point | 0/30/85 |
+| I1_K1 / sham / K2 | [235,265] | true/point | 64/217/220 |
+| I1_K4 | [235,265] | true/point | 4/253/124 |
+| I1_K8 | [245,265] | true/point | 4/253/124 |
+| I2_K0 | [245,165] | false/point | 0/30/85 |
+| I2_K1 / sham | [245,265] | true/point | 4/253/124 |
+| I2_K2 | [245,265] | true/point | 205/224/215 |
+| I2_K4 | [235,265] | true/point | 43/93/65 |
+| I2_K8 | N/A | false/stop | 6/122/174 |
+
+All non-STOP ON APOS remain bottom-clamped and therefore censored. Their
+reported pixels lie outside the cart mask but within its horizontal span;
+saved raster first hits are floor. Boundary ground proxies are not exact
+model metric targets or proof of free passage. Same coarse APOS can accompany
+unsafe and safe-short action arrays. OPOS/visible are preserved but no shelf
+grounding comparison is valid under the changed hallway goal semantics.
+
+### What this establishes and leaves unresolved
+
+The entire **instruction intervention** changed the model's geometry under
+byte-identical visual history and recovered raw clearance in several conditions.
+It did **not** produce a collision-free lateral bypass. Saying the old failure
+was simply caused by not requesting avoidance is not supported as a sufficient
+explanation for missing bypass behavior. Conversely, saying explicit wording
+has no effect or never produces safe raw geometry is contradicted by this run.
+Only two goal/wording variants and one frozen counterfactual scene were tested.
+
+There is **no bypass-qualified source for later moving online confirmation**.
+Five unique-condition non-STOP short safe chunks are preserved as observations,
+plus one STOP. They are not relabelled unsafe, but they do not provide the
+intended safe route past the cart. Internal recognition/spatial reasoning/action
+causes remain unobserved. Whether subsequent chunks would progressively bypass
+the cart is untested; no further calls, online B or reconciliation are added.
+
+### Calls, compute, validation and review
+
+| Scope | Actual count/time |
+|---|---:|
+| Scientific terminal predictions | 12 |
+| Buffer-only requests | 180 |
+| Completed scientific sessions | 12 |
+| Earlier failed sessions / image requests | 12 / 0 |
+| Official synthetic server warmups, both runs | 2 |
+| New render / MPC / GP / rigid / rollout / reconciliation | 0 / 0 / 0 / 0 / 0 / 0 |
+| Actual model/MPC calls in tests or validators | 0 |
+| Terminal RTT sum | 3.961543s |
+| Scientific schedule start to last session close | 62.158958s |
+| Successful-run server startup / lifetime | 16.511266s / 132.615513s |
+| Earlier server startup / lifetime | 18.522993s / 121.615387s |
+
+RTT is nested in these wall times; they must not be summed. SOURCE05's local
+worker wall timer excludes audited checkpoint/source bootstrap (sum5.084114s),
+whereas SOURCE04 included it; those fields are not directly comparable.
+`aggregate/timing_detail.json` retains original start/close clock keys and hashes.
+
+Final relevant SOURCE02–05, history, acquisition and SE2 tests: 193 passed
+(2.57s), including the safe-short/STOP regression; no real model/MPC calls. Compileall and diff whitespace checks pass. Authoritative
+saved-only validator passes219 checks, rechecking full preserved source hashes,
+all192 payloads, original geometry/APOS, arrays/transforms, summary/CSV and PNG
+numeric sidecars. SOURCE04 authoritative revalidation passes4686 checks.
+`validation_completion.json` additionally checks failed-run preservation and
+clarified presentation; no new inference. Scientific outcomes do not drive
+artifact validation PASS/FAIL.
+
+The original 12 figures remain unchanged. A presentation-only finalizer adds
+one response table to distinguish actual OFF safety from hypothetical ON,
+and actual output change from the frozen meaningful-detour threshold. Numerical
+records/classification remain unchanged. All 13 PNGs have source/numeric sidecars;
+raw RGB, checkpoint and environment are excluded from the review ZIP.
+
+Review: `index_final.html`, `review_bundle_final.zip` under the scientific run.
+Primary plots: `review/trajectory_K1.png`, `trajectory_K4.png`,
+`clearance_vs_K.png`, `response_geometry_clarified.png`.
+Finalizer command, after the original reporter and validator:
+
+```bash
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/source05_mpl .venv/bin/python \
+  scripts/finalize_join_source05.py --run data/robotless_join_source_05/instruction_20260922T125204Z
+```
+
+Operational work is complete. Primary scientific classification: **INCONCLUSIVE**
+— safe shortening/STOP observed; safe lateral bypass not recovered.
