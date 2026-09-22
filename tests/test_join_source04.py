@@ -140,3 +140,12 @@ def test_no_model_controller_optimization_imports_in_evaluator():
     forbidden={'minimize','solve_gp','MpcTracker','integrate_unicycle','Session','predict'}
     names={n.id for n in ast.walk(tree) if isinstance(n,ast.Name)}
     assert not names.intersection(forbidden)
+
+
+def test_prediction_worker_does_not_import_evaluator_dependencies():
+    import ast
+    root=Path(__file__).resolve().parents[1]
+    tree=ast.parse((root/'scripts/lightnav/join_source04_predict.py').read_text())
+    imports=[n.module or '' for n in ast.walk(tree) if isinstance(n,ast.ImportFrom)]
+    assert 'reconciliation.join_source04' not in imports # Shapely belongs to research venv only
+    assert 'online_lightnav_worker' in imports

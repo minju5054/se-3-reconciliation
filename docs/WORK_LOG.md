@@ -4909,3 +4909,12 @@ camera and source hashes are frozen before independent-session predictions.
 Clamped APOS is censored; depth/instance first-hit and nominal-ground ray are
 explicit evaluator proxies, never model inputs or exact intended waypoints.
 Maximum7 terminal predictions; no retry, online execution or next-stage work.
+
+SOURCE04 pre-request technical correction: pushed freeze5f06f07 attempted seven
+worker processes, all failing at import before any session/model request because
+the official venv has no Shapely. Preserve the entire044703 run and its one
+separate synthetic server warmup. Remove only the worker's evaluator dependency,
+read declared IDs/scope from protocol, verify import in actual external Python,
+and add regression test. New050237 run reuses the exact32 bank files with no
+rerender, K/threshold/settings change or response-driven retry. Freeze/push again
+before the first actual scientific prediction; no external environment changes.

@@ -7,7 +7,8 @@ HISTORY**, not a genuine executed obstacle-reveal episode. No MPC, GP, rigid,
 reconciliation, online confirmation or traversal is part of this experiment.
 
 Starting/fetched main: `24a020971a7b30989812d5690a91b361388ae6a4`.
-Run: `data/robotless_join_source_04/persistence_20260922T044703Z/`.
+Scientific run: `data/robotless_join_source_04/persistence_20260922T050237Z/`.
+Original bank/failed pre-request run: `persistence_20260922T044703Z/`.
 Both unrelated Stage0 config edits and SOURCE02/03 raw/results remain preserved.
 
 ## Frozen scenario and inputs
@@ -116,3 +117,20 @@ execution SHA, all outcomes, calls, checks and figures are appended after that
 bounded run. Saved-only validator rechecks raw/world/wire, masks, source hashes,
 all K inputs, classifications and figure numbers without inference. Synthetic
 fixtures are implementation tests only.
+
+## Pre-request technical correction
+
+First pushed freeze `5f06f07d337af0196f7144b5906be40c13dc2acb` exposed an
+import-only worker error in the external LightNav venv: importing the research
+evaluator pulled in Shapely, which that environment does not contain. All seven
+process attempts ended before a session/request; scientific predictions and
+buffer calls were0. The server performed one separate synthetic startup warmup
+and was stopped. All logs/ledger/code freeze remain in the original run.
+
+The worker now reads the allowed IDs/scope from the already-frozen protocol
+without importing the evaluator. External interpreter import-only smoke passed
+without calls; a regression test guards this dependency boundary. No dependency
+installation, model/environment modification, threshold/input/K change or
+scientific-output retry. A new run preserves byte-identical32-frame bank files
+as immutable hardlinks and separately hashes all failed-run artifacts. This
+correction is committed/pushed before the first actual scientific prediction.
