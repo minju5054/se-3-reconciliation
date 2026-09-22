@@ -157,3 +157,47 @@ Stage0 config edits remain unchanged.
 Relevant tests: 134 passed in 4.26s; no real model/controller calls. Saved-only
 validation passes on all 881 records and verifies 3,920 source hashes, code,
 CSV and figure numbers. Compileall and git diff --check pass.
+
+## Saved-source Isaac GUI, requested 2026-09-22
+
+`scripts/isaac/genuine_source_scan_gui.py` displays all 13 qualifying sources
+in their unchanged Hospital world coordinates. The default display is
+`episode_008_repeat_01/handoff_023` for visual inspection only, not selection
+for a new optimization experiment. Previous/Next and the dropdown expose all
+13, including the two endpoint caveats. The original observation JPEG is shown
+without edits. Source records, raw/world observation anchors and the exact
+prepared-reference value hashes are verified before display.
+
+Blue is original OLD, pink original FRESH, orange actual recorded execution
+from FRESH observation to B, green observation pose, yellow actual B. White
+footprint is .20m and the outer margin is .25m. Optional cyan overlays the
+unchanged common reference without offset. The GUI also shows physical speed,
+travel, lateral/direction/yaw differences, full/suffix/B clearances and remaining
+raw arc. No optimized connecting path is fabricated. `Replay saved OLD to B`
+selects recorded samples only, stops at B, and runs no integrator/controller.
+
+The renderer uses a display-only neutral RectLight (intensity1000, exposure0,
+white,8x8m,z2.6m above the selected view) and annotation z1.35m for visibility.
+World XY/yaw and historical input JPEG remain unchanged; this lighting is not
+a new scientific observation. Physics is stopped; no new model/GP/MPC/rollout.
+
+Actual screenshot and source/numeric sidecar:
+`data/genuine_source_moving_mismatch_gui/view_20260922T081500Z/source_inventory_gui.png`.
+The directory is a unique identifier; actual capture UTC is in its JSON sidecar.
+The viewer rendered successfully and was visually checked. It remains open
+until closed by the user. No external source or original USD was modified.
+
+```bash
+env -u LD_LIBRARY_PATH -u PYTHONPATH -u CUDA_HOME -u CUDA_PATH \
+  -u ROS_DISTRO -u ROS_VERSION -u ROS_PYTHON_VERSION -u AMENT_PREFIX_PATH \
+  -u CMAKE_PREFIX_PATH -u COLCON_PREFIX_PATH -u RMW_IMPLEMENTATION \
+  OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONUNBUFFERED=1 \
+  /home/gpuadmin/isaacsim/python.sh scripts/isaac/genuine_source_scan_gui.py \
+  --run data/genuine_source_moving_mismatch/scan_20260922T073107Z \
+  --output data/genuine_source_moving_mismatch_gui/NEW_UNIQUE_VIEW_ID
+```
+
+The saved-only loader authenticates all13 cases and104 display input files.
+Focused GUI/replay tests:26 passed, including generic N, original observation
+anchors, common byte hashes, saved-sample time selection and no solver/physics
+calls. All synthetic fixtures are implementation tests only.

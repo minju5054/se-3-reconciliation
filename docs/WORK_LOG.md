@@ -5006,3 +5006,22 @@ Final scan wall time 14.700s; saved-only validator recomputes all881
 records and verifies 3920 source hashes, CSV and plot numbers.
 Relevant tests134 passed(4.26s), no real model/controller calls; compileall and
 diff checks passed. Raw/core/environment/previous results remain unchanged.
+
+### Genuine source inventory Isaac GUI, 2026-09-22
+
+User requested GUI presentation of the source-only scan. Added a saved-only
+viewer with all13 candidate cases, original observation JPEG, raw OLD/FRESH,
+optional unchanged common reference and recorded observation-to-B playback.
+Default display008/01/023 is a visual example, not a new experiment selection.
+The GUI shows physical speed, travel, mismatches, full/suffix/B clearance,
+projection location and raw arc remaining; endpoint caveats are preserved.
+
+Actual Isaac screenshot visually inspected at
+`data/genuine_source_moving_mismatch_gui/view_20260922T081500Z/source_inventory_gui.png`.
+WorldXY/yaw unchanged; explicitly declared display-only neutral fill and raised
+annotations improve visibility without altering the original input JPEG or USD.
+13 cases/104 display files authenticated, plus original scan input/core hashes.
+No new VLA/GP/MPC/rollout or physics/integration; replay selects saved states only.
+GUI process verified running after capture; left available for user interaction.
+Focused26 tests passed, compileall/diff checked. Prior results and unrelated
+Stage0 edits preserved. Only viewer/tests/docs are tracked.
