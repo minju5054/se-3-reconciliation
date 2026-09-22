@@ -5197,3 +5197,23 @@ run directory suffix is an identifier; actual host event clocks are recorded
 separately. Focused SOURCE02–05 geometry/history/protocol tests168 pass(2.26s),
 with no real model/MPC calls. Compileall and diff whitespace checks pass.
 This commit freezes infrastructure, not a positive scientific result.
+
+### SOURCE05 pre-image technical correction
+
+Pushed freeze230e393 opened12 sessions in instruction_20260922T103000Z, but
+all failed before the first image request: the live history guard compared
+historical SOURCE04 capture monotonic values with a different current host
+clock epoch. Scientific predictions0, buffer requests0; one official synthetic
+server warmup. Every attempt and error is retained and hashed in the new run.
+The server was identity-checked and stopped normally.
+
+A SOURCE05-only saved-history adapter authenticates exact frozen frames and
+preserves the original sequence/sampler/state machine, replacing only the
+invalid cross-boot age comparison. Source capture values remain unchanged;
+real request/receipt clocks and RTT remain current; no clock rebasing or fake
+capture timestamp. Both domains and N/A capture-to-request age are recorded.
+Official model/source, existing online worker, RGB, instructions, K, settings
+and acceptance are unchanged. External worker import preflight passes.
+New exclusive run instruction_20260922T125204Z; all12 original conditions remain
+scheduled with zero prior scientific responses. Relevant171 tests pass, including
+same-boot parity and cross-boot preservation. No result-driven retry or tuning.

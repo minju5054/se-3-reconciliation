@@ -84,6 +84,7 @@ def freeze(run):
     paths = ['src/reconciliation/join_source05.py', 'scripts/run_join_source05.py',
              'scripts/report_join_source05.py', 'scripts/validate_join_source05.py',
              'configs/join_source_05_instruction_avoidance.yaml', 'tests/test_join_source05.py',
+             'src/reconciliation/join_source05_history.py', 'scripts/lightnav/join_source05_predict.py',
              'scripts/lightnav/join_source04_predict.py', 'scripts/lightnav/join_source02_paired.py',
              'scripts/online_lightnav_worker.py', 'scripts/lightnav/robotless_online_server.py',
              'scripts/lightnav/robotless_successive_server.py', 'src/reconciliation/online_history.py',
@@ -101,6 +102,10 @@ def verify(run, pushed=False):
     for group in (f['source_sha256'], f['input_sha256'], read(run/'source.json')['preserved']):
         for p,h in group.items():
             if sha(ROOT/p) != h: raise ValueError('frozen file changed: '+p)
+    correction=run/'technical_correction.json'
+    if correction.exists():
+        for p,h in read(correction)['previous_artifact_sha256'].items():
+            if sha(p)!=h:raise ValueError('failed pre-request evidence changed: '+p)
     if pushed:
         if git('rev-parse', 'HEAD') != git('rev-parse', '@{upstream}'): raise ValueError('push freeze first')
         if git('status', '--porcelain', '--', *f['source_sha256']): raise ValueError('uncommitted frozen implementation')
@@ -178,7 +183,7 @@ def execute(run):
     for cid in ORDER:
         log=run/'logs'/f'{cid}.log'
         with log.open('x') as f:
-            p=subprocess.run([str(python),str(ROOT/'scripts/lightnav/join_source04_predict.py'),'--run',str(run),'--condition',cid],stdout=f,stderr=subprocess.STDOUT,cwd=ROOT)
+            p=subprocess.run([str(python),str(ROOT/'scripts/lightnav/join_source05_predict.py'),'--run',str(run),'--condition',cid],stdout=f,stderr=subprocess.STDOUT,cwd=ROOT)
         row=dict(condition=cid,status='TECHNICAL_ERROR' if p.returncode else 'COMPLETED',returncode=p.returncode)
         if not p.returncode:save(run/'predictions'/cid/'evaluation.json',evaluate(run,cid))
         ledger.append(row);save(run/'aggregate/ledger_steps'/f'{len(ledger):02}.json',row);print(row,flush=True)

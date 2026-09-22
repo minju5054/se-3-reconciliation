@@ -135,3 +135,41 @@ def test_no_hidden_model_render_execution_in_saved_evaluator():
     names={n.id for n in ast.walk(tree) if isinstance(n,ast.Name)}
     assert not names.intersection({'Session','MpcTracker','integrate_unicycle','minimize','solve_gp','SimulationApp'})
     assert GENERATION==dict(VLN_EVAL_TEMPERATURE='0',VLN_EVAL_TOP_P='1',VLN_EVAL_TOP_K='0',VLN_EVAL_TRAJ_TOP1='0')
+
+
+def test_saved_replay_cross_boot_clock_preserves_source_and_official_history():
+    from reconciliation.join_source05_history import SavedReplayHistory
+    from reconciliation.online_history import SessionHistory
+    from test_online_history import frame,contract
+    frames=[frame(i,capture_monotonic_ns=10**15+i*250_000_000) for i in range(16)]
+    c=contract(64,'ring');h=SavedReplayHistory(INSTRUCTIONS['I1'],c,None,frames)
+    original=SessionHistory(INSTRUCTIONS['I1'],c,None)
+    for x in (h,original):x.login();x.reset()
+    for i,f in enumerate(frames):
+        a=h.begin(f,predict=i==15,send_monotonic_ns=100+i)
+        b=original.begin(f,predict=i==15,send_monotonic_ns=f['capture_monotonic_ns']+100)
+        assert a['frame']==b['frame'] and a['frame']['capture_monotonic_ns']==f['capture_monotonic_ns']
+        assert a['send_monotonic_ns']==100+i
+        aa=h.complete(i,server_actions_step=16 if i==15 else None)
+        bb=original.complete(i,server_actions_step=16 if i==15 else None)
+        clock=aa.pop('clock_semantics');assert not clock['cross_boot_subtraction_performed']
+        assert aa==bb
+    assert h.prediction_count==1 and h.next_seq==16
+
+
+def test_saved_replay_refuses_new_frames_and_extra_predictions():
+    from reconciliation.join_source05_history import SavedReplayHistory
+    from test_online_history import frame,contract
+    frames=[frame(i) for i in range(16)]
+    h=SavedReplayHistory(INSTRUCTIONS['I1'],contract(64,'ring'),None,frames);h.login();h.reset()
+    with pytest.raises(ValueError):h.begin(frames[0],predict=True,send_monotonic_ns=10)
+    changed=deepcopy(frames[0]);changed['pose_world'][0]+=1
+    with pytest.raises(ValueError):h.begin(changed,predict=False,send_monotonic_ns=10)
+
+
+def test_replay_worker_has_no_research_geometry_dependency():
+    p=Path(__file__).resolve().parents[1]/'scripts/lightnav/join_source05_predict.py'
+    tree=ast.parse(p.read_text())
+    modules=[n.module or '' for n in ast.walk(tree) if isinstance(n,ast.ImportFrom)]
+    assert 'reconciliation.join_source05' not in modules
+    assert 'online_lightnav_worker' in modules

@@ -45,6 +45,8 @@ def validate(run):
         close=read(out/'session_close.json');sessions.append(close['connection_id'])
         check('no_retry:'+cid,close['retry_count']==close['reconnect_count']==0 and close['connection_count']==close['wire_reset_count']==close['wire_login_count']==1)
         check('input16:'+cid,len(frames)==16 and [f['sha256'] for f in frames]==[f['sha256'] for f in m['frames']])
+        clock=read(out/'clock_domains.json');check('separate_clock_domains:'+cid,clock['no_clock_rebasing'] and clock['source_capture_values_preserved'] and clock['capture_request_age_s'] is None)
+        check('capture_clocks_preserved:'+cid,[f['capture_monotonic_ns'] for f in frames]==[f['capture_monotonic_ns'] for f in m['frames']])
         check('no_overwritten_source:'+cid,result['source_unchanged'] and result['checkpoint_stat_unchanged'])
     check('independent_sessions',len(sessions)==len(set(sessions)))
     check('bounded_calls',calls<=12 and buffer<=180)

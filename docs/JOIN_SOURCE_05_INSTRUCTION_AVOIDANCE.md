@@ -108,3 +108,28 @@ git diff --check
 
 No prediction results are claimed in this pre-execution protocol. Final saved
 results, calls, limitations and Git identities are appended after the fixed run.
+
+## Technical pre-image correction, before scientific outputs
+
+Initial freeze `230e3934600737aad2099b5ac2488f1bf281bfab` was pushed. Run
+`instruction_20260922T103000Z` opened12 independent sessions but sent **zero
+images / zero buffer requests / zero scientific predictions**. All workers
+failed on `future frame cannot enter request history`: SOURCE04 historical
+capture monotonic values belong to an earlier host-clock domain and exceed
+the current host monotonic reading. The original online same-boot guard is
+correct for live acquisition, but is inapplicable to cross-boot saved replay.
+The official server did one separately counted synthetic startup warmup.
+Every failed log/result, original freeze and source hash remains preserved.
+
+A SOURCE05-only `SavedReplayHistory` adapter retains the original history state
+machine, sequence and official sampler. It authenticates each pre-frozen frame
+identity/bytes/pose/source timestamps instead of comparing capture and request
+monotonic values across host clocks. It never rebases or fabricates capture or
+send timestamps. Snapshot fields explicitly label the two domains; capture-to-
+request age is N/A. Actual send/receipt and RTT retain the current real clock.
+The existing online worker, external source and SOURCE04 are not modified.
+Unit parity checks match the original state machine's frame/order/sampler output
+when its same-boot condition holds; a separate test exercises reversed clock
+epochs. First15 empty buffers/terminal instruction and all model inputs remain
+unchanged. This technical correction is committed/pushed before any scientific
+prediction, with a new exclusive run; no response-driven retry or tuning.
