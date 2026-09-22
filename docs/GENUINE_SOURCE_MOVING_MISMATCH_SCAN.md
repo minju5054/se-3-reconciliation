@@ -201,3 +201,73 @@ The saved-only loader authenticates all13 cases and104 display input files.
 Focused GUI/replay tests:26 passed, including generic N, original observation
 anchors, common byte hashes, saved-sample time selection and no solver/physics
 calls. All synthetic fixtures are implementation tests only.
+
+## Actual post-switch execution in the GUI (2026-09-22)
+
+The preceding inventory view ended at B. That display choice must not be read
+as evidence that FRESH was never executed. The original genuine corpus has
+actual first-FRESH command applications and subsequent logical-SE(2) execution
+for all 881 activated handoffs. SOURCE03/04's paused prediction diagnostics are
+separate experiments; they did not execute their obstacle-on futures.
+
+The opt-in `--include-post-switch` viewer mode now authenticates the recorded
+commands and displays the complete lifetime of each of the 13 FRESH references.
+Blue/pink remain OLD/FRESH predictions; orange is saved observation-to-B OLD
+execution; cyan is actual saved FRESH execution after B. Green marks observation,
+yellow B, white the current sampled state. The final cyan state precedes the
+next reference's first command; that next command is excluded. The optional
+prepared common reference is violet and was not installed by this online source
+collector. World XY/yaw and observation anchors are unchanged.
+
+The actual Isaac GUI rendered three illustrative cases (not a new selection
+cohort or performance ranking). All 13 remain available in the case dropdown.
+
+| Source | B→FRESH nearest distance | B pose-yaw error | Recorded FRESH duration / steps | End→same FRESH distance | End pose-yaw error |
+|---|---:|---:|---:|---:|---:|
+| episode_013_repeat_01/handoff_024 | .279113 m | 36.18598 deg | 1.550000 s / 93 | .182382 m | 8.35201 deg |
+| episode_008_repeat_01/handoff_023 | .184683 m | 22.09812 deg | 1.500000 s / 90 | .115583 m | 2.64926 deg |
+| episode_001_repeat_01/handoff_013 | .127644 m | 14.99966 deg | 1.250000 s / 75 | .077264 m | 6.32837 deg |
+
+Distances above are nearest original-polyline distances, not necessarily normal
+components or forward-only sustained-attachment errors. They show measured
+reference/state mismatch and remaining tracking error. They do not alone prove
+full execution failure, obstacle collision, or an optimization benefit. Actual
+state stays continuous under the recorded held-command integration; a reference
+change does not teleport the agent. For 013/01/024 the first applied FRESH command
+changes v by -.200000 m/s and omega by +.500000 rad/s. This is a measured command
+change, not by itself an acceleration-limit failure.
+
+Evidence:
+`data/genuine_source_moving_mismatch_gui/post_switch_20260922T085623Z/`.
+`source_inventory_gui.png` shows 013/01/024; the other PNG names contain full
+case IDs. Each JSON sidecar preserves actual state samples, command identities,
+original metric reconstruction and source hashes. `recorded_execution_summary.csv`
+covers all 13; `validation.json` checks 111 display input files, 1,011 historical
+FRESH-applied integration steps, five original scalar metrics per case to 1e-12, and all
+three screenshot sidecars. New model/GP/MPC/rollout calls: zero. The screenshots
+were visually inspected. The 20cm/+5cm rings are reference sizes, not a fresh
+collision validation of these post-switch paths.
+
+Reproduce with the same environment-clearing Isaac command above, plus:
+
+```bash
+--include-post-switch --case episode_013_repeat_01/handoff_024 \
+--capture-case episode_008_repeat_01/handoff_023 \
+--capture-case episode_001_repeat_01/handoff_013
+```
+
+Use a new `--output` directory. The dropdown selects any of the 13 cases;
+`Replay saved OLD + FRESH`, `Show B`, and `Show saved end` operate on saved
+samples only (scroll the panel to see playback controls). Relevant source,
+recorded replay and timing tests: 91 passed; compileall and diff whitespace check
+passed. Historical source/controller/selector code was not changed.
+
+For a future reconciliation comparison, the necessary reference is unchanged
+native LightNav FRESH plus the pinned official MPC (no reconciliation). A rigid
+correction is a separate geometric baseline, and the existing suffix/resampling
+adapter is a separate preparation ablation. The optimized method must use the
+same source event, B, command memory, environment and execution settings. LightNav
+is the shared upstream generator, not a competing model to retrain here. Baseline
+comparison should establish sustained attachment, motion/safety and compute
+effects; visual path separation alone does not establish a failure or superiority.
+No such new comparison was run as part of this GUI request.

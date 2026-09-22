@@ -5025,3 +5025,31 @@ No new VLA/GP/MPC/rollout or physics/integration; replay selects saved states on
 GUI process verified running after capture; left available for user interaction.
 Focused26 tests passed, compileall/diff checked. Prior results and unrelated
 Stage0 edits preserved. Only viewer/tests/docs are tracked.
+
+### Recorded FRESH post-switch GUI clarification, 2026-09-22
+
+Fetched main and started at f716522a697e06ec3924434d40f0b806d6295929.
+User asked to see rotation/chunk-transition mismatch and whether FRESH was ever
+executed. Added opt-in post-switch playback to the existing inventory GUI.
+The genuine corpus already contains actual FRESH execution; the preceding
+inventory display stopped at B and obscured that distinction. SOURCE03/04
+remain prediction-only counterfactual diagnostics, not online traversal.
+
+Authenticated all13 original FRESH command lifetimes (1,011 historical applied
+steps) and111 display source files. Next-chunk commands are excluded at each
+endpoint. Original B/timing/command-change metrics reproduce to1e-12. Actual
+Isaac screenshots of013/01/024,008/01/023 and001/01/013 were visually inspected;
+their remaining same-FRESH distances are .182382/.115583/.077264m at the next
+activation. These are descriptive tracking errors, not sustained-attachment or
+full safety/failure classifications. No new source event or outcome was chosen
+for optimization. No model/GP/MPC/rollout calls or state integration were made.
+
+Evidence: data/genuine_source_moving_mismatch_gui/post_switch_20260922T085623Z/
+contains three PNGs and numeric/source sidecars, all13-row execution summary,
+saved-only validation, scene/runtime provenance. GUI dropdown and replay
+controls expose the original OLD-to-B and subsequent FRESH execution. Added
+tests for next-reference exclusion, exact B, missing/mixed lineage and saved
+sample playback. Relevant source/timing/replay tests91 passed; compileall and
+diff check passed. All raw/core/environment/external sources and unrelated
+Stage0 edits preserved. Clarified native no-reconciliation, adapter preparation
+and rigid comparison roles in the source report; no new comparison implemented.

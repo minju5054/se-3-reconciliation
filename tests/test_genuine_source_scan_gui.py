@@ -71,3 +71,35 @@ def test_no_controller_optimizer_physics_or_integrator_calls():
             if isinstance(n.func,ast.Name):names.add(n.func.id)
             if isinstance(n.func,ast.Attribute):names.add(n.func.attr)
     assert not names.intersection({'integrate_unicycle','counterfactual_rollout','solve_gp','solve_rigid','MpcTracker','Session','simulate','step_physics'})
+
+
+def test_fresh_lifetime_excludes_next_chunk_command_and_preserves_B():
+    from test_online_handoff_analysis import canonical_fixture
+    context,execution,commands,old,fresh=canonical_fixture()
+    result=gui.recorded_fresh_lifetime(context,execution,commands,old,fresh)
+    assert result['state_ids']==[12,14,16,18]
+    assert len(result['commands'])==3
+    assert {r['chunk_id'] for r in result['commands']}=={'chunk_001'}
+    assert commands[9]['chunk_id']=='chunk_002'
+    np.testing.assert_array_equal(result['poses'][0],context['B'])
+    assert not result['poses'].flags.writeable
+    assert result['times'][-1]-result['times'][0]==pytest.approx(.3)
+
+
+@pytest.mark.parametrize('failure',['mixed_chunk','wrong_B','missing_lifetime'])
+def test_fresh_lifetime_rejects_wrong_lineage_and_no_fallback(failure):
+    from test_online_handoff_analysis import canonical_fixture
+    context,execution,commands,old,fresh=canonical_fixture()
+    if failure=='mixed_chunk':commands[7]['chunk_id']='different'
+    elif failure=='wrong_B':context['B'][0]+=.1
+    else:context['post_switch_end_state_id']=context['switch_state_id']
+    with pytest.raises(ValueError):gui.recorded_fresh_lifetime(context,execution,commands,old,fresh)
+
+
+def test_post_switch_replay_uses_recorded_samples_after_B():
+    s=gui.SavedSources.__new__(gui.SavedSources)
+    s.cases=[dict(past=np.zeros((2,3)),times=np.array([0,.1]),
+                  display_poses=np.zeros((4,3)),display_times=np.array([0,.1,.2,.3]))]
+    s.select(0);assert s.sample==3
+    s.playing=True;s.seek(.25);assert s.sample==2 and s.playing
+    s.seek(.31);assert s.sample==3 and not s.playing

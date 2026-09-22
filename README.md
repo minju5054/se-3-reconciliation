@@ -14,6 +14,10 @@ orientation mismatch. Eleven have interior FRESH projections; two have nearly
 exhausted endpoint geometry. None also satisfies the prior retained-suffix
 obstacle-near criterion (edge clearance≤0.20m). This is an input inventory, not
 new inference, optimization, execution, or evidence of reconciliation benefit.
+The saved Isaac viewer can also replay each case's original **post-switch FRESH
+execution** through the next chunk activation; the corpus was not plan-only.
+Reference mismatch and remaining tracking error are not automatically execution
+failure or evidence that optimization would improve the result.
 
 The [JOIN-SOURCE-04 persistence/affordance diagnosis](docs/JOIN_SOURCE_04_PERSISTENCE_AFFORDANCE.md) completed seven independent terminal predictions using the same 16 moving poses, all re-rendered BRIGHT, with the cart present in the final 0/1/2/4/8 frames. K2/K4/K8 improved minimum clearance versus K1 by 3.19–6.23 cm, but every ON raw path still overlapped the cart at the same early segment; no bypass source was obtained. Both shams matched exactly. All ON APOS were bottom-clamped, so a precise free-space direction or affordance/action mismatch remains unidentifiable. This is a counterfactual input-history diagnostic, with no online execution or reconciliation. See the [complete static review](data/robotless_join_source_04/persistence_20260922T050237Z/index_final.html).
 

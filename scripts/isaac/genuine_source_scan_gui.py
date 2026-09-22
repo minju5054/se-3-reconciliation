@@ -17,8 +17,10 @@ import numpy as np
 import yaml
 from reconciliation.gp_se2_reference import prepare_reference
 from reconciliation.se2 import local_trajectory_to_world,wrap_angle
+from reconciliation.online_handoff_analysis import metrics_from_records,projection_at_boundary
 
 LABEL='SAVED SOURCE INSPECTION - NO RECONCILIATION / NEW EXECUTION'
+POST_LABEL='RECORDED ONLINE HANDOFF - OLD AND FRESH ACTUALLY EXECUTED'
 
 
 def read(path):return json.loads(Path(path).read_text())
@@ -28,9 +30,32 @@ def save(path,value):
     with Path(path).open('x') as f:json.dump(value,f,indent=2,allow_nan=False)
 
 
+def recorded_fresh_lifetime(context,execution,commands,old,fresh):
+    """Authenticate the original reference lifetime; its last state is not a new step.
+
+    A command attached to state i produced state i+1. The next chunk's command
+    at the endpoint is excluded. Projection errors are geometric diagnostics,
+    not a sustained-attachment or safety evaluation.
+    """
+    metrics=metrics_from_records(context,execution,commands,old,fresh)
+    begin,end=metrics['post_switch_execution']['stream_rows_inclusive']
+    if end<=begin:raise ValueError('no saved FRESH execution; no fallback')
+    rows=execution[begin:end+1]
+    post=np.array([[float(r[k]) for k in ('x','y','yaw')] for r in rows])
+    times=np.array([float(r['sim_time_s']) for r in rows])
+    if not np.array_equal(post[0],context['B']) or np.any(np.diff(times)<=0):raise ValueError('invalid FRESH lifetime/B')
+    by_id={int(r['application_state_id']):r for r in commands}
+    applied=[by_id[int(r['state_id'])] for r in rows[:-1]]
+    if any(r['chunk_id']!=context['fresh_chunk_id'] for r in applied):raise ValueError('mixed FRESH command identities')
+    post.flags.writeable=False;times.flags.writeable=False
+    return dict(poses=post,times=times,state_ids=[int(r['state_id']) for r in rows],commands=applied,
+        metrics=metrics,start_projection=projection_at_boundary(post[0],fresh),
+        end_projection=projection_at_boundary(post[-1],fresh))
+
+
 class SavedSources:
-    def __init__(self,run):
-        self.run=Path(run).resolve();self.hashes={}
+    def __init__(self,run,include_post_switch=False):
+        self.run=Path(run).resolve();self.hashes={};self.include_post_switch=include_post_switch
         for name in ('validation.json','source.json','summary.json','ledger.json','protocol.yaml'):
             self.record(self.run/name)
         if not read(self.run/'validation.json')['valid']:raise ValueError('source scan not valid')
@@ -47,7 +72,7 @@ class SavedSources:
             if not row['flags']['candidate']:raise ValueError('candidate summary/ledger mismatch')
             self.cases.append(self.load_case(row))
         if not self.cases:raise ValueError('no saved qualifying sources')
-        self.index=0;self.sample=len(self.case['past'])-1;self.playing=False
+        self.index=0;self.sample=len(self.case['display_poses'])-1;self.playing=False
 
     def record(self,path):
         path=Path(path).resolve();self.hashes[str(path)]=sha(path)
@@ -66,23 +91,33 @@ class SavedSources:
         common.flags.writeable=False;arrays['common']=common
         ep=Path(row['source_paths']['context']).parents[2]
         with self.record(ep/'execution.csv').open() as f:
-            states=[r for r in csv.DictReader(f) if c['obs_state_id']<=int(r['state_id'])<=c['switch_state_id']]
+            execution=list(csv.DictReader(f))
+        states=[r for r in execution if c['obs_state_id']<=int(r['state_id'])<=c['switch_state_id']]
         past=np.array([[float(r[k]) for k in ('x','y','yaw')] for r in states]);times=np.array([float(r['sim_time_s']) for r in states])
         if len(past)<2 or np.any(np.diff(times)<=0) or not np.array_equal(past[0],c['R_obs']) or not np.array_equal(past[-1],c['B']):raise ValueError('saved observation/B execution differs')
         meta=read(self.record(ep/'chunks'/c['fresh_chunk_id']/'metadata.json'));obs=meta['observation'];rgb=self.record(ep/obs['path'])
         if sha(rgb)!=obs['sha256'] or obs['pose_world']!=c['R_obs']:raise ValueError('saved observation image differs')
         past.flags.writeable=False;times.flags.writeable=False
-        return dict(row=row,context=c,**arrays,past=past,times=times-times[0],rgb=str(rgb))
+        result=dict(row=row,context=c,**arrays,past=past,times=times-times[0],rgb=str(rgb),
+                    display_poses=past,display_times=times-times[0],post=None)
+        if getattr(self,'include_post_switch',False):
+            with self.record(ep/'commands.csv').open() as f:commands=list(csv.DictReader(f))
+            post=recorded_fresh_lifetime(c,execution,commands,arrays['old'],arrays['fresh'])
+            result.update(post=post,display_poses=np.vstack([past,post['poses'][1:]]),
+                          display_times=np.r_[times,post['times'][1:]]-times[0])
+        result['display_poses'].flags.writeable=False;result['display_times'].flags.writeable=False
+        return result
 
     @property
     def case(self):return self.cases[self.index]
 
     def select(self,index):
-        self.index=int(index)%len(self.cases);self.sample=len(self.case['past'])-1;self.playing=False
+        self.index=int(index)%len(self.cases);self.sample=len(self.case.get('display_poses',self.case['past']))-1;self.playing=False
 
     def seek(self,elapsed):
-        self.sample=max(0,min(len(self.case['past'])-1,int(np.searchsorted(self.case['times'],elapsed,side='right')-1)))
-        if elapsed>=self.case['times'][-1]:self.playing=False
+        times=self.case.get('display_times',self.case['times'])
+        self.sample=max(0,min(len(times)-1,int(np.searchsorted(times,elapsed,side='right')-1)))
+        if elapsed>=times[-1]:self.playing=False
 
 
 class Gui:
@@ -104,28 +139,29 @@ class Gui:
                 with ui.VStack(spacing=5):
                     ui.Label('GENUINE MOVING HANDOFF SOURCES',height=30,style={'font_size':22})
                     ui.Label('13 / 881 qualify; 11 interior, 2 endpoint cases',height=26,style={'font_size':19})
-                    ui.Label(LABEL,height=35,word_wrap=True,style={'font_size':16})
+                    ui.Label(POST_LABEL if saved.include_post_switch else LABEL,height=35,word_wrap=True,style={'font_size':16})
                     self.case_label=ui.Label('',height=34,style={'font_size':18})
                     self.combo=ui.ComboBox(saved.index,*saved.ids,height=30)
                     self.combo.model.add_item_changed_fn(lambda model,item:self.change(model.get_item_value_model().as_int))
                     with ui.HStack(height=30):
                         ui.Button('Previous case',clicked_fn=lambda:self.set_combo(saved.index-1))
                         ui.Button('Next case',clicked_fn=lambda:self.set_combo(saved.index+1))
-                    self.metrics=ui.Label('',height=155,word_wrap=True,style={'font_size':17})
-                    ui.Label('BLUE: original OLD prediction\nPINK: original FRESH prediction\nORANGE: recorded OLD execution, observation to B\nGREEN: FRESH observation; YELLOW: actual B\nWHITE: 20cm footprint; outer ring: +5cm clearance',height=112,style={'font_size':17})
+                    self.metrics=ui.Label('',height=220 if saved.include_post_switch else 155,word_wrap=True,style={'font_size':17})
+                    ui.Label('BLUE: original OLD prediction\nPINK: original FRESH prediction\nORANGE: recorded OLD execution, observation to B\nCYAN: recorded FRESH execution after B (when enabled)\nGREEN: observation; YELLOW: actual B; WHITE: current pose',height=112,style={'font_size':17})
                     with ui.HStack(height=28):
-                        ui.Label('Show unchanged prepared FRESH (cyan)',width=430)
+                        ui.Label('Show prepared FRESH (violet; NOT installed online)',width=480)
                         check=ui.CheckBox();check.model.add_value_changed_fn(lambda m:self.toggle_common(m.as_bool))
                     ui.Label('Original saved FRESH observation RGB:',height=24)
-                    self.image=ui.Image(saved.case['rgb'],height=210,fill_policy=ui.FillPolicy.PRESERVE_ASPECT_FIT)
+                    self.image=ui.Image(saved.case['rgb'],height=165 if saved.include_post_switch else 210,fill_policy=ui.FillPolicy.PRESERVE_ASPECT_FIT)
                     self.time_label=ui.Label('',height=30,style={'font_size':17})
                     with ui.HStack(height=30):
-                        ui.Button('Replay saved OLD to B',clicked_fn=self.play)
-                        ui.Button('Show B',clicked_fn=self.end)
+                        ui.Button('Replay saved OLD + FRESH' if saved.include_post_switch else 'Replay saved OLD to B',clicked_fn=self.play)
+                        ui.Button('Show B',clicked_fn=self.boundary)
+                        ui.Button('Show saved end',clicked_fn=self.end)
                     with ui.HStack(height=30):
                         ui.Button('Overhead',clicked_fn=self.overhead)
                         ui.Button('Capture',clicked_fn=lambda:self.capture('manual_'+str(time.monotonic_ns())))
-                    ui.Label('No optimized transition exists in this source scan.\nGeometric source validity does not prove B-to-FRESH feasibility.\nWorld XY metres, yaw radians; FRESH is not re-anchored.\nOverlay z=1.35m and neutral fill are display only.\nPast replay selects saved samples; no integration/physics.',height=112,word_wrap=True,style={'font_size':15})
+                    ui.Label('Reference mismatch is not automatically execution failure.\nCyan ends at next chunk application; not a 3s counterfactual.\nWorld XY metres; FRESH stays observation-anchored.\n20cm footprint / outer +5cm; overlay z=1.35m, fill display only.\nReplay selects saved samples; no new inference/MPC/physics.',height=112,word_wrap=True,style={'font_size':15})
         for _ in range(4):app.update()
         w=ui.Workspace.get_window('Stage')
         if w:self.panel.dock_in(w,ui.DockPosition.SAME)
@@ -144,6 +180,8 @@ class Gui:
     def play(self):
         self.saved.sample=0;self.saved.playing=True;self.clock=time.monotonic();self.refresh()
     def end(self):
+        self.saved.playing=False;self.saved.sample=len(self.saved.case['display_poses'])-1;self.refresh()
+    def boundary(self):
         self.saved.playing=False;self.saved.sample=len(self.saved.case['past'])-1;self.refresh()
     def tick(self):
         if self.saved.playing:self.saved.seek(time.monotonic()-self.clock);self.refresh()
@@ -153,7 +191,7 @@ class Gui:
         from isaacsim.core.utils.viewports import set_camera_view
         from omni.kit.viewport.utility import get_active_viewport
         from robotless_online_replay import overview_aperture
-        c=self.saved.case;points=np.vstack([c['old'],c['fresh'],c['past']]);res=get_active_viewport().resolution
+        c=self.saved.case;points=np.vstack([c['old'],c['fresh'],c['display_poses']]);res=get_active_viewport().resolution
         center,span=overview_aperture(points,float(res[0])/res[1])
         set_camera_view(eye=[*center,2.4],target=[*center,.1],camera_prim_path='/OmniverseKit_Persp')
         cam=UsdGeom.Camera(self.stage.GetPrimAtPath('/OmniverseKit_Persp'));cam.CreateProjectionAttr(UsdGeom.Tokens.orthographic)
@@ -162,7 +200,7 @@ class Gui:
 
     def refresh(self):
         from robotless_old_consistent_observation import set_precise_agent_pose
-        s=self.saved;c=s.case;r=c['row'];m=r['mismatch'];v=r['motion'];b=np.array(c['context']['B']);p=c['past'][s.sample]
+        s=self.saved;c=s.case;r=c['row'];m=r['mismatch'];v=r['motion'];b=np.array(c['context']['B']);p=c['display_poses'][s.sample]
         set_precise_agent_pose(self.agent,p,z_m=s.config['agent']['z_m'])
         self.draw.clear_lines();self.draw.clear_points()
         def line(points,color,width=4):
@@ -173,8 +211,12 @@ class Gui:
         line(c['old'],blue,4);line(c['fresh'],pink,5)
         for p0 in c['fresh']:
             point(p0,pink,6);line([p0[:2],p0[:2]+.08*np.array([np.cos(p0[2]),np.sin(p0[2])])],pink,2)
-        if self.show_common:line(c['common'],(0.,1.,1.,1.),2)
+        if self.show_common:line(c['common'],(.6,.3,1.,1.),2)
         line(c['past'][:s.sample+1],orange,6);point(c['context']['R_obs'],green,12);point(b,yellow,14)
+        if c['post'] is not None:
+            count=max(0,s.sample-len(c['past'])+2)
+            line(c['post']['poses'][:count],(0.,1.,1.,1.),7)
+        point(p,(1.,1.,1.,1.),10)
         line([b[:2],b[:2]+.22*np.array([np.cos(b[2]),np.sin(b[2])])],yellow,4)
         angle=np.linspace(0,2*np.pi,65)
         for radius,color in [(.20,(1.,1.,1.,1.)),(.25,(.6,.6,.6,1.))]:line(p[:2]+radius*np.column_stack([np.cos(angle),np.sin(angle)]),color,2)
@@ -185,8 +227,14 @@ class Gui:
             f'Clearance raw / future suffix: {r["entire_raw_environment"]["minimum_clearance_m"]:.3f} / {r["raw_suffix_clearance_m"]:.3f} m\n'
             f'B clearance: {r["boundary_environment"]["clearance_m"]:.3f} m; required: 0.050 m\n'
             f'Projection: {proj["projection_location"]}; raw arc after Q: {remaining:.3f} m\n'
-            f'Future clearance <=0.20m: {r["flags"]["candidate_obstacle_sensitive"]}; GP/MPC outcome: NOT TESTED')
-        self.time_label.text=f'Saved OLD playback: {c["times"][s.sample]:.3f} / {c["times"][-1]:.3f}s (ends at B)'
+            f'Future clearance <=0.20m: {r["flags"]["candidate_obstacle_sensitive"]}')
+        if c['post'] is not None:
+            d=c['post'];x=d['metrics']
+            self.metrics.text+=(f'\nActual FRESH: {x["post_switch_execution_duration_s"]:.3f}s / {len(d["commands"])} applied steps'
+                f'\nFirst-command change: dv={x["delta_v_mps"]:+.3f} m/s; dw={x["delta_omega_radps"]:+.3f} rad/s'
+                f'\nNearest FRESH distance B -> end: {d["start_projection"]["e_perp_m"]:.3f} -> {d["end_projection"]["e_perp_m"]:.3f}m')
+        mode='FRESH' if s.sample>=len(c['past'])-1 and c['post'] is not None else 'OLD'
+        self.time_label.text=f'Saved {mode}: obs+{c["display_times"][s.sample]:.3f}s; B at +{c["times"][-1]:.3f}s'
 
     def capture(self,name):
         import omni.kit.renderer.capture as capture
@@ -201,23 +249,35 @@ class Gui:
         else:raise RuntimeError('GUI capture failed')
         for p,h in self.saved.hashes.items():
             if sha(p)!=h:raise ValueError('source changed during GUI display')
-        save(path.with_suffix('.json'),dict(label=LABEL,capture_utc=datetime.now(timezone.utc).isoformat(),png_sha256=sha(path),
+        post=self.saved.case['post']
+        post_sidecar=None if post is None else {k:(v.tolist() if isinstance(v,np.ndarray) else v) for k,v in post.items()}
+        save(path.with_suffix('.json'),dict(label=POST_LABEL if post is not None else LABEL,capture_utc=datetime.now(timezone.utc).isoformat(),png_sha256=sha(path),
             case_id=self.saved.ids[self.saved.index],record=self.saved.case['row'],camera=self.camera,
-            saved_sample=self.saved.sample,display_overlay_z_m=1.35,source_hashes=self.saved.hashes,new_model_GP_MPC_rollout_calls=0))
+            saved_sample=self.saved.sample,post_switch=post_sidecar,display_overlay_z_m=1.35,source_hashes=self.saved.hashes,new_model_GP_MPC_rollout_calls=0))
         print('GENUINE_SOURCE_GUI_READY '+str(path),flush=True)
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--run',type=Path,required=True);parser.add_argument('--output',type=Path,required=True)
-    parser.add_argument('--case',default='episode_008_repeat_01/handoff_023');parser.add_argument('--no-hold',action='store_true');a=parser.parse_args()
-    saved=SavedSources(a.run);saved.select(saved.ids.index(a.case));out=a.output.resolve()
+    parser.add_argument('--case',default='episode_008_repeat_01/handoff_023');parser.add_argument('--no-hold',action='store_true')
+    parser.add_argument('--include-post-switch',action='store_true',help='Show original recorded FRESH execution up to next chunk')
+    parser.add_argument('--capture-case',action='append',default=[],help='Additional saved cases to capture; no new execution')
+    a=parser.parse_args()
+    saved=SavedSources(a.run,a.include_post_switch);saved.select(saved.ids.index(a.case));out=a.output.resolve()
+    for case_id in a.capture_case:
+        if case_id not in saved.ids:raise ValueError('case outside saved inventory: '+case_id)
     if out.is_relative_to(a.run.resolve()):raise ValueError('display output must be separate from source scan')
     out.mkdir(parents=True,exist_ok=False)
     from isaacsim import SimulationApp
     app=SimulationApp(dict(headless=False,window_width=1900,window_height=1100,width=1200,height=1000,renderer='RayTracedLighting',anti_aliasing=0))
     try:
         gui=Gui(saved,app,out);gui.capture('source_inventory_gui')
-        save(out/'runtime.json',dict(pid=__import__('os').getpid(),label=LABEL,candidate_ids=saved.ids,viewer_source_sha256=sha(__file__),initial_case=a.case,source_run=str(a.run.resolve()),new_model_GP_MPC_rollout_calls=0))
+        for case_id in a.capture_case:
+            gui.set_combo(saved.ids.index(case_id));gui.end();gui.capture(case_id.replace('/','__'))
+        gui.set_combo(saved.ids.index(a.case));gui.end()
+        save(out/'runtime.json',dict(pid=__import__('os').getpid(),label=POST_LABEL if a.include_post_switch else LABEL,
+            include_post_switch=a.include_post_switch,candidate_ids=saved.ids,viewer_source_sha256=sha(__file__),initial_case=a.case,
+            source_run=str(a.run.resolve()),new_model_GP_MPC_rollout_calls=0))
         while app.is_running() and not a.no_hold:gui.tick();app.update();time.sleep(.02)
     finally:app.close()
 
