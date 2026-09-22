@@ -5053,3 +5053,37 @@ sample playback. Relevant source/timing/replay tests91 passed; compileall and
 diff check passed. All raw/core/environment/external sources and unrelated
 Stage0 edits preserved. Clarified native no-reconciliation, adapter preparation
 and rigid comparison roles in the source report; no new comparison implemented.
+
+### Saved native handoff execution loss audit, 2026-09-22
+
+User asked what actual loss the proposed optimization should reduce. Started
+and fetched main at cb45aa91f1e81c141257671b4f265362d9ecc04a. Audited all13
+previously screened sources without new selection or model/GP/rigid/MPC/rollout
+calls. Protocol preserves original .10m/15deg/.30s sampled sustained-join
+semantics and forward-only original-FRESH projection. A common54 saved steps
+(nominal.9s) permits equal-exposure error-area and command-TV descriptions;
+full reference lifetimes and endpoint caveats remain separate.
+
+One sustained join observed; seven never enter, four enter too late for full
+dwell before next switch, one enters then exits. Interior-only11 counts are
+1/5/4/1 respectively. No N/A is changed to3s or full navigation failure.
+Hard013/01/024 distance grows .279113->.376956m at.500000s; common-window
+mean.343891m and AUC.309502m s quantify post-boundary cost. All13 post-switch
+paths pass direct swept clearance with the original held-arc bound. One
+nominal10Hz dv flag in008/01/023 is accompanied by source evidence of .2s
+application spacing and an intermediate computed-but-unapplied command; it
+is not attributed to optimizer or physical dynamics failure.
+
+Generic GP objective and ATTACH masked objective were read, not changed.
+They constrain/score plans, not actual MPC attachment cost. Report distinguishes
+fixed B offset, subsequent tracking loss, secondary command costs, hard safety
+requirements, and unproven task/navigation benefit. No new formulation added.
+
+Final saved-only output data/saved_handoff_execution_loss/audit_20260922T091708Z/
+contains all13 records/CSV, summary, source/protocol/core hashes, three PNGs
+with numeric sidecars, index and validation. Initial091255 pass retained; final
+adds censoring and timing explanation without changing any previous CSV value.
+Audit/plot/recomputation2.155s. Saved-only validator independently reproduces
+all metrics/geometry/commands, source hashes, CSV and plotted numbers.
+Relevant tests138 passed; compileall/diff checks passed; no real model/MPC test
+calls. Source/core/history and unrelated Stage0 config edits preserved.

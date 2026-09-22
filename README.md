@@ -7,6 +7,15 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [saved execution loss audit](docs/SAVED_HANDOFF_EXECUTION_LOSS.md) measures
+the 13 screened native handoffs after B. Position error initially grows before
+convergence; the hard013/01/024 case averages34.4cm separation over the common
+first0.9s. One sampled0.30s attachment is observed, four are dwell-censored by
+the next chunk, one enters then exits, and seven never enter during observation.
+All13 recorded post-switch paths pass the reused clearance checker. This is
+evidence of local tracking/attachment cost, not population failure frequency,
+collision prevention, or demonstrated optimization benefit.
+
 The [source-only moving/mismatch scan](docs/GENUINE_SOURCE_MOVING_MISMATCH_SCAN.md)
 finds 13 of 881 genuine handoffs with safe original FRESH/common geometry,
 physical v−>0.20m/s, observation-to-B travel≥0.02m, and substantial lateral or

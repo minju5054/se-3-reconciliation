@@ -1,0 +1,28 @@
+experiment: SAVED_HANDOFF_EXECUTION_LOSS_AUDIT
+source_scan: data/genuine_source_moving_mismatch/scan_20260922T073107Z
+cohort: all_13_frozen_candidates_no_new_selection
+attachment_definition: unchanged_gp_se2_join01_sustained_join
+position_threshold_m: 0.10
+yaw_threshold_deg: 15.0
+sampled_dwell_s: 0.30
+primary_observation: B_to_next_reference_application_state
+common_window_integration_steps: 54
+common_window_nominal_s: 0.9
+common_window_policy: first_54_recorded_intervals_actual_timestamps_no_resampling
+command_grid_hz: 10.0
+motion_limits:
+  v_max_mps: 0.8
+  omega_max_radps: 3.0
+  nominal_grid_a_v_max_mps2: 2.0
+  nominal_grid_a_omega_max_radps2: 5.0
+  numeric_tolerance: 0.00001
+footprint_radius_m: 0.20
+required_clearance_m: 0.05
+policy:
+  no_join: null_right_censored_at_next_reference_not_3s_failure
+  endpoint_cases: preserved_separate_from_11_interior_cases
+  initial_gap: fixed_boundary_condition_not_directly_optimizable
+  no_arbitrary_weighted_score: true
+  no_new_model_optimizer_MPC_rollout: true
+  no_new_correspondence_method: true
+  no_goal_success_reclassification: true
