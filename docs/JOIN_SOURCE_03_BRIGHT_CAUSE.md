@@ -376,3 +376,41 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q \
 .venv/bin/python -m compileall src scripts tests
 git diff --check
 ```
+
+## Saved curved-FRESH GUI, requested 2026-09-22
+
+A separate display-only Isaac viewer now opens the completed
+`distance_near_H16` result. This does not rerun or modify SOURCE03. The actual
+Hospital, BRIGHT light and near-cart mesh match the saved manifest/triangles.
+The UI shows the exact triggering RGB, red original obstacle-ON prediction and
+blue same-pose obstacle-OFF prediction. These are paired predictions, not an
+executed OLD/FRESH handoff. Yellow is the observation pose, not moving B.
+
+The rightward local endpoint is[1.287630,-.552365]m with yaw-.890956rad
+(-51.049deg). The path turns but reaches footprint overlap before clearing the
+cart; saved minimum edge clearance is-.20m, required+.05m. The initial GUI
+selects unsafe row1 (zero-based), with saved point clearance-.0102m. Previous/
+Next row buttons inspect saved prediction footprints, not time or robot motion.
+
+DebugDraw preserves original worldXY and yaw, lifting all annotation lines to
+z=1.35m solely so the top view shows the path across the cart. This is not a
+physical 3D trajectory. White/gray circles show.20m footprint/.25m total margin.
+No interpolation, integration, physics, model, MPC or GP call occurs. The GUI
+capture and source hashes are outside the historical run at:
+`data/robotless_join_source_03_gui/view_20260922T052500Z/curved_fresh_gui.png`.
+The view-directory name is an identifier; actual capture UTC comes from the
+separate `capture_metadata.json`, not from the directory suffix.
+
+```bash
+env -u LD_LIBRARY_PATH -u PYTHONPATH -u CUDA_HOME -u CUDA_PATH \
+  -u ROS_DISTRO -u ROS_VERSION -u ROS_PYTHON_VERSION -u AMENT_PREFIX_PATH \
+  -u CMAKE_PREFIX_PATH -u COLCON_PREFIX_PATH -u RMW_IMPLEMENTATION \
+  OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONUNBUFFERED=1 \
+  /home/gpuadmin/isaacsim/python.sh scripts/isaac/join_source03_saved_gui.py \
+  --run data/robotless_join_source_03/cause_20260921T153120Z \
+  --output data/robotless_join_source_03_gui/NEW_UNIQUE_VIEW_ID
+```
+
+Output creation is exclusive. The first actual GUI session rendered successfully,
+was visually checked, then exited normally (exit0); the saved screenshot remains.
+A new invocation opens an interactive viewer until its window is closed.

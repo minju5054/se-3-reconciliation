@@ -4959,3 +4959,21 @@ Final SOURCE04 saved-only recheck validation_final.json passes after the full
 suite; final focused regressions148 passed(2.26s), compileall/diff pass. Both
 unrelated Stage0 config bytes match original preserved hashes. Final review ZIP
 9,416,422bytes,12 PNGs with numeric/source sidecars; only code/docs are committed.
+
+### SOURCE03 curved FRESH saved GUI, 2026-09-22
+
+On user request, added a small saved-only Isaac display for distance_near_H16.
+It reconstructs the exact saved Hospital/cart/BRIGHT scene, shows original ON
+RGB and raw world paths, and provides previous/next prediction-row footprint
+inspection. RedON bends right to local lateral-.552365m/yaw-.890956rad, but saved
+clearance remains unsafe. No movingB, new inference, MPC/GP, physics or rollout.
+WorldXY unchanged; annotations raised toz1.35m for visibility only, explicitly
+recorded. Actual renderer screenshot visually checked with source-hash sidecar
+under data/robotless_join_source_03_gui/view_20260922T052500Z. The GUI exited
+normally after display/capture; screenshot and relaunch command preserved.
+Six focused loader tests cover arbitraryN, observation anchoring, read-only data,
+invalid-source rejection and no solver calls. SOURCE03/presentation regressions
+included:29 passed. Historical raw/results and unrelated Stage0 changes untouched.
+
+Expanded saved-viewer regression check: 42 passed, including comparison-replay
+tests; compileall and git diff --check passed. These checks made no model/MPC calls.
