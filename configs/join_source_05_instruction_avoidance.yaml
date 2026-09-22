@@ -1,0 +1,37 @@
+experiment: JOIN-SOURCE-05-INSTRUCTION-AVOIDANCE
+source04_run: data/robotless_join_source_04/persistence_20260922T050237Z
+scope: COUNTERFACTUAL MOVING-POSE HISTORY; terminal-instruction intervention; never executed
+instructions:
+  I0: Go to the tall blue shelving unit and stop.
+  I1: Avoid the supply cart and continue straight down the hallway.
+  I2: Avoid the supply cart and continue to the end of the hallway.
+H: 16
+K_set: [0, 1, 2, 4, 8]
+order: [I1_K0, I1_K1, I1_K1_SHAM, I1_K2, I1_K4, I1_K8, I2_K0, I2_K1, I2_K1_SHAM, I2_K2, I2_K4, I2_K8]
+generation_environment:
+  VLN_EVAL_TEMPERATURE: '0'
+  VLN_EVAL_TOP_P: '1'
+  VLN_EVAL_TOP_K: '0'
+  VLN_EVAL_TRAJ_TOP1: '0'
+physical: {footprint_radius_m: 0.20, required_edge_clearance_m: 0.05}
+comparison:
+  material_clearance_gain_m: 0.02
+  equivalent_xy_m: 0.000001
+  equivalent_yaw_rad: 0.000001
+  minimum_interior_lateral_m: 0.20
+  minimum_reliable_direction_or_yaw_deg: 20.0
+  minimum_chord_m: 0.02
+decision:
+  safe: unchanged whole raw-polyline checker including original uncertainty and workspace; STOP is not detour
+  lateral_detour: meaningful SOURCE04 influence-region difference from same-instruction K0 AND max absolute local lateral >=.20m AND endpoint forward progress >0 AND entire path safe AND not STOP
+  text_only_steering: K0 already has >=.20m lateral and same broad side, and no meaningful influence-region difference in every lateral ON condition
+  full_bypass: safe lateral detour plus endpoint beyond actual cart rear plane; safe partial path is reported separately
+  precedence: incomplete/sham variation -> inconclusive; visual safe detour -> recovery; text-only steering -> text-only; no safe ON and any historical clearance gain >=.02m -> improves; equivalent -> no effect; otherwise changes or inconclusive safe non-detour
+  goal_semantics: I1/I2 replace shelf goal with hallway instruction; no target-grounding improvement claim
+  no_intrinsic_waypoint_timestamps: true
+budget:
+  maximum_scientific_predictions: 12
+  buffer_only_if_complete: 180
+  retry_count: 0
+  I0_reruns: 0
+  render_MPC_GP_rigid_reconciliation_rollout: 0

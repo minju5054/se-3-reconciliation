@@ -5172,3 +5172,28 @@ input. Prefix preservation and final source/test hashes are recorded separately
 in completion evidence. New report/validator files have their own hashes.
 One focused code/config/test/doc commit and normal push are recorded after Git
 completion in the ignored run's git_completion.json; no force push/history rewrite.
+
+## 2026-09-22 — JOIN-SOURCE-05 pre-prediction instruction freeze
+
+Started/fetched main dd138d72adb80a05019d40b2f8f57d651de23d54. New bounded
+instruction-only counterfactual diagnostic reuses SOURCE04's immutable all-BRIGHT
+32-frame bank and all historical I0 outputs. Complete SOURCE04 saved validator
+passes; all JPEG/mask/depth hashes and original K premodel gates pass. No new
+render or scientific model call before this freeze. Two unrelated Stage0 edits
+are hash-preserved and excluded from staging.
+
+Exact I1/I2 and twelve ordered independent sessions (K0/1/1-sham/2/4/8 each)
+are frozen. First15 requests remain empty-instruction; comparison against
+historical wire payloads permits only final instruction to differ. Existing
+SOURCE04 worker, geometry/APOS helpers and official model files are unchanged.
+New code records actual official-server process generation environment/argv and
+checkpoint parity before predictions. I0 is not rerun. Shams, K0 text control,
+whole raw swept clearance, partial versus complete bypass and goal-semantics
+limitations are explicit. No B, MPC, GP, rigid, traversal or next-stage work.
+
+Implementation protocol: docs/JOIN_SOURCE_05_INSTRUCTION_AVOIDANCE.md.
+Prepared run: data/robotless_join_source_05/instruction_20260922T103000Z/;
+run directory suffix is an identifier; actual host event clocks are recorded
+separately. Focused SOURCE02–05 geometry/history/protocol tests168 pass(2.26s),
+with no real model/MPC calls. Compileall and diff whitespace checks pass.
+This commit freezes infrastructure, not a positive scientific result.
