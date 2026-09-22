@@ -4896,3 +4896,16 @@ JOIN_SOURCE_03_BRIGHT_CAUSE.md record every completed condition, source hashes,
 exact commands and interpretation limits. Previous JOIN01/SOURCE02/ATTACH01 and
 both unrelated Stage0 configuration edits remain preserved. Stop at upstream
 diagnosis; no next experiment implemented.
+
+### JOIN-SOURCE-04 pre-prediction protocol, 2026-09-22
+
+Fetched main24a0209 and preserved the two unrelated Stage0 config edits. Read
+SOURCE02/03 source/protocol/history/official pointing and RVQ decode paths.
+Added a separate fixed H16/K0,1,2,4,8 persistence diagnostic. Re-rendered exact
+SOURCE03 moving-pose lineage in Isaac as32 all-BRIGHT OFF/ON frames with the
+same natural cart mesh/transform and camera. No model/MPC/GP call during capture.
+Cart visibility671..15779pixels; final RGB visually checked. Frame/pair geometry,
+camera and source hashes are frozen before independent-session predictions.
+Clamped APOS is censored; depth/instance first-hit and nominal-ground ray are
+explicit evaluator proxies, never model inputs or exact intended waypoints.
+Maximum7 terminal predictions; no retry, online execution or next-stage work.

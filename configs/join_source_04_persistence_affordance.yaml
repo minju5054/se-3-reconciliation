@@ -1,0 +1,45 @@
+experiment: JOIN-SOURCE-04-PERSISTENCE-AFFORDANCE
+source03_run: data/robotless_join_source_03/cause_20260921T153120Z
+source03_condition: core_bright_H16
+scope: COUNTERFACTUAL MOVING-POSE HISTORY; not an executed obstacle-reveal episode
+instruction: Go to the tall blue shelving unit and stop.
+H: 16
+K_set: [0, 1, 2, 4, 8]
+order: [K0_OFF, K0_OFF_SHAM, K1, K1_SHAM, K2, K4, K8]
+conditions: {K0_OFF: 0, K0_OFF_SHAM: 0, K1: 1, K1_SHAM: 1, K2: 2, K4: 4, K8: 8}
+lighting: literal SOURCE03 BRIGHT profile; rerender all sixteen poses
+cart: exact SOURCE03 core world mesh and transform, never moved
+camera_pose_atol: 0.000000000001
+minimum_cart_pixels: 20
+premodel_nonoverlap: original oracle cart footprint edge clearance >= 0m; full environment status separately saved
+required_edge_clearance_m: 0.05
+footprint_radius_m: 0.20
+material_clearance_gain_m: 0.02
+equivalent_xy_m: 0.000001
+equivalent_yaw_rad: 0.000001
+direction:
+  minimum_chord_m: 0.02
+  minimum_interior_lateral_m: 0.20
+  minimum_angle_deg: 20.0
+apos:
+  pixel_semantics: official client-image token cell center; clamped coordinates are censored
+  sample_rule: floor pixel for depth/instance lookup, raster center at (x+.5,y+.5) for first-hit XYZ; separate reported-point ray and subpixel offset
+  ray: exact saved USD pinhole intrinsics/extrinsics; +X right,+Y up,-Z forward
+  first_hit: same-product Isaac distance_to_camera and instance-ID raster first surface; pixel-sampled, not exact analytic raycast
+  ground: nominal world z=0; forward intersection only, otherwise N/A
+  free_side: unclamped, rendered first hit is floor, ground oracle clearance valid, lateral beyond actual cart extent plus .25m, bearing >=20deg
+  clamped_agreement: always APOS_OBSTACLE_DIRECTED_OR_AMBIGUOUS; boundary ray proxy cannot establish a clear side
+  trajectory_side: largest absolute returned lateral displacement >=.20m; else reliable initial chord bearing >=20deg; otherwise ambiguous
+decision:
+  sham: K0 and K1 literal input equality required; output inequivalence makes persistence attribution inconclusive
+  recovery: K1 unsafe and any K>1 entire raw path clearance-valid, non-STOP, target progress positive
+  improvement: no recovery; any K>1 gain >=.02m OR first unsafe segment moves >=1 later with no earlier worse segment minimum
+  changes: no recovery/improvement; any K>1 geometrically inequivalent to K1
+  systematic: report number of improving conditions and monotonicity separately; one improvement is not a systematic trend
+  unavailable: no replacement; missing K1 or shams => inconclusive; incomplete K>1 coverage explicitly limits interpretation
+budget:
+  maximum_scientific_predictions: 7
+  buffer_only_if_all_valid: 105
+  retry_count: 0
+  new_MPC_GP_rigid_reconciliation_rollout: 0
+generation: literal SOURCE03 config and environment; no model overrides
