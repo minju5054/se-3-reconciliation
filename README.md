@@ -19,6 +19,12 @@ bypass sources. No reconciliation ran. See the
 [saved static review](data/robotless_join_online_02/primary_20260923T001500Z/review/index.html)
 and the report's interactive Isaac replay command.
 
+A [saved STOP-cause audit](docs/JOIN_ONLINE_02_STOP_CAUSE_AUDIT.md) confirms
+explicit native STOP action codes. In both ON stop frames the target-point
+OPOS cell lies entirely on the cart, whereas prior OPOS centres do not.
+This supports a target-grounding hypothesis but does not separate target
+confusion from occlusion/blocked-route stopping. No new inference or execution.
+
 The [JOIN-SOURCE-05 instruction diagnostic](docs/JOIN_SOURCE_05_INSTRUCTION_AVOIDANCE.md)
 reused SOURCE04 RGB bytes for12 new predictions with two explicit cart-avoidance
 instructions. K0 trajectories stayed identical to the historical straight path.

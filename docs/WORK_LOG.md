@@ -5311,3 +5311,28 @@ actual saved-only Isaac GUI verified and left open at ON00 C5, evidence in
 chunk slider/previous/next, play/pause, untouched RGB, OLD/FRESH/B and numeric
 fields are present. Outcome **PROGRESSIVE_SHORTENING_OR_STOP**, with pacing and
 last-unapplied-solve record limitations; no next experiment implemented.
+
+## 2026-09-23 — Saved JOIN-ONLINE-02 STOP/target-point cause audit
+
+Fetched origin/main and HEAD both `ababf8518f5365a30b42bd1596cc3e8de66ddc25`.
+Preserved the two unrelated Stage0 changes. Added a saved-only auditor/tests
+and report, no changes to collector/model/MPC or historical artifacts.
+Rechecked all55 responses,14 ON,4 STOP, raw/wire/anchor/mask hashes and source.
+All STOP responses carry explicit RVQ tuple[6,122,174]; APOS also indicates STOP.
+Official demo and research collector terminate on this signal. Actual STOP
+wire chunk contains10 zero rows, correcting an earlier report's single-row
+description without changing raw data.
+
+New observation: both ON C6 OPOS cells are100% cart pixels, centre(235,155);
+none of12 earlier ON OPOS centres hits cart. Pre-STOP APOS samples hit floor,
+approach image bottom, then become STOP. This supports a target-grounding
+hypothesis but cannot distinguish target confusion from occlusion/blocked-route
+stopping. OFF final OPOS hits a wet-floor sign/floor, so actual hallway-end
+completion is also unverified. Original timing limitations remain.
+
+Output `data/robotless_join_online_02_stop_audit/audit_20260923_final/`;
+two visually checked figures, numeric/hash sidecars, HTML and55-record ledger.
+Initial layout-only output preserved separately. New and original saved-only
+validators PASS,95 relevant tests PASS,compileall/diff checks PASS. All new
+model/MPC/GP/render/rollout calls0. A destination-grounding contrast is proposed
+only; no future experiment or avoidance/reconciliation policy implemented.
