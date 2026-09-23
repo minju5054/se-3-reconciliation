@@ -5422,3 +5422,17 @@ PASS; all 1482 primary files and unrelated edits retain their hashes. Analysis
 8.792487 s, validation 20.168549 s. 310 relevant tests PASS (17 new synthetic checker
 tests; IPC uses local socket fixtures, no real model/MPC), compileall and diff
 checks PASS. Report: `docs/JOIN_ONLINE_03_TURNBACK_VISIBILITY_AUDIT.md`.
+
+### 2026-09-23 — HANDOFF-DELAY-ATTRIBUTION-01 pre-execution freeze
+
+Fetched main718a726; preserve two unrelated Stage0 config edits. Added a bounded
+saved-source 2×2 diagnostic for the frozen13 plus ONLINE03 ON C1–C4 (eight).
+All21 source state packages reconstructed; all84 conditions available. Reference
+interface is prepared-reference plus frozen REF02 selector, not selector-only.
+Actual B-time controller memory differs from legacy pre-FRESH input memory in all
+21 sources; preserve this explicitly and retain first-step motion failures.
+Primary54 intervals/.90000004694s, maximum756 MPC solves, VLA/GP/Isaac0. Source-only
+preparation corrected the authoritative saved-loss path from retained development
+091255 to final091708 before scientific execution; old preparation retained.
+Added exclusive outputs, immutable source/code hashes, no-retry loop, safety abort,
+saved-only validation and static figures. Scientific execution awaits freeze push.

@@ -1,0 +1,48 @@
+experiment: HANDOFF-DELAY-ATTRIBUTION-01
+scan_run: data/genuine_source_moving_mismatch/scan_20260922T073107Z
+online_run: data/robotless_join_online_03/primary_20260923T031300Z
+saved_loss_run: data/saved_handoff_execution_loss/audit_20260922T091708Z
+corpus_run: data/robotless_online_handoffs_v1/primary_20260915T091900Z
+checkout: /home/gpuadmin/Workspace/external/LightNav-0-official-demo
+mpc_python: /home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python
+mpc_sha256: 2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1
+conditions: [DELAYED_NATIVE, DELAYED_LOOKAHEAD, LATENCY_FREE_NATIVE, LATENCY_FREE_LOOKAHEAD]
+lookahead_semantics: PREPARED_REFERENCE_PLUS_SOURCE_PROGRESS_SELECTOR
+common_reference: prepare_at_B_once_keep_identical_in_both_initial_states
+initial_state_policy: actual_worker_memory_at_each_host_cut_separate_from_physical_incoming_command
+memory_policy: accepted_poll_update_bracket_worker_result_to_Isaac_receipt_tightened_by_submit_snapshot
+memory_ambiguity: UNAVAILABLE_no_reset_no_B_memory_copy
+B_memory_caveat: actual_B_memory_can_already_include_first_FRESH_result_unlike_legacy_pre_FRESH_solve_input
+future_pending_computation: not_replayed_synchronous_counterfactual_starts_fresh_tracker_at_each_cut
+exposure: first_54_intervals_float32_1_over_60_exact_held_command
+integration_steps: 54
+solve_every_steps: 6
+command_grid_hz: 10.0
+footprint_radius_m: 0.20
+required_clearance_m: 0.05
+position_threshold_m: 0.10
+yaw_threshold_deg: 15.0
+sampled_dwell_s: 0.30
+motion_limits:
+  v_max_mps: 0.8
+  omega_max_radps: 3.0
+  nominal_grid_a_v_max_mps2: 2.0
+  nominal_grid_a_omega_max_radps2: 5.0
+  numeric_tolerance: 0.00001
+safety: original_join_online02_abort_only_guard_next_nominal_control_hold_and_each_integration_step
+abort_metrics: partial_saved_diagnostics_only_primary_equal_exposure_metrics_NA
+failure_policy: original_official_poll_zero_command_on_solver_failure_continue_unless_guard_aborts
+representatives:
+  - episode_013_repeat_01/handoff_024
+  - episode_008_repeat_01/handoff_023
+  - episode_001_repeat_01/handoff_013
+  - ON_REPEAT_00/C1
+scientific_VLA_calls: 0
+GP_rigid_graph_calls: 0
+retry: false
+secondary_lifetime_rollouts: false
+interpretation:
+  allowed: [DELAY_SENSITIVITY_REMAINS_AFTER_REFERENCE_INTERFACE_CORRECTION, REFERENCE_INTERFACE_EXPLAINS_MOST_OBSERVED_COST, MIXED_ATTRIBUTION, INSUFFICIENT_ORACLE_COVERAGE]
+  no_automatic_scalar_classification: true
+  report_all_signed_differences: true
+  forbidden: [recoverable_maximum_cost, graph_benefit, population_effect, obstacle_transition_success, online_improvement]
