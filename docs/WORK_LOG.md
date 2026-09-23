@@ -5449,3 +5449,39 @@ bridge, plus durable request/response journal and close-error preservation.
 No source/core/threshold/initial-state semantics changed. Added a subprocess
 native-print regression test without CasADi. A separate pushed correction and new
 unique run will execute the same full frozen schedule; the failed attempt remains.
+
+### 2026-09-23 — HANDOFF-DELAY-ATTRIBUTION-01 completed with limitations
+
+Corrected/pushed freeze b9d44afd65676d97c890eea99e224af4db60c322; authoritative
+run `data/handoff_delay_attribution_01/primary_20260923T055300Z/`. All21 source
+handoffs and84 conditions available, all84×54 intervals completed with756 saved
+MPC solves. VLA/GP/rigid/graph/RGB/Isaac0. Zero abort, controller failure,
+overlap or unknown workspace; minimum conservative clearance.119760m genuine13,
+.493842m ONLINE03. Original source, preparation/selector/MPC/evaluation cores and
+unrelated Stage0 edits preserve their hashes.
+
+Genuine13 native/prepared+SP mean position delay gaps.130656/.124985m·s
+(episode-equal.136697/.127858); positive13/13 and12/13. Sampled attachments
+DN/DL/FN/FL=1/1/13/11. ONLINE03 gaps−.010531/−.014327m·s; all8 attach in every
+condition. Reference comparison includes preparation and cannot be selector-only.
+All26 genuine delayed trajectories violate original physical command-grid
+acceleration at interval0 because actual post-poll B memory already contains the
+historical first FRESH result; a new synchronous solve advances from that memory.
+No later violation. ONLINE03 delayed motion failures1native/3prepared+SP; none
+in Oracle. These failures are retained, not reclassified or repaired.
+
+Interpretation MIXED_ATTRIBUTION: genuine state-package delay sensitivity remains,
+ONLINE03 is already easy, and memory/application-phase effects prevent a clean
+position-delay attribution or motion-valid performance claim. No recoverable
+maximum, graph necessity/benefit, obstacle bypass, population or deployment claim.
+Report provides all21 event tables, episode-equal/cohort-separated results, Path1/
+Path2 decision support,27 PNGs/numeric sidecars, static index, complete review ZIP
+and small Git-readable84-row numeric summary. Main loop7.883226s, summed solver
+wall2.571845s. Primary saved-only validator PASS7.526908s; final reporting validator
+PASS, source authoritative validators PASS. Final suite2719 passed/19 skipped,
+compileall and diff checks PASS. Two full suites each ran the existing one-solve
+historical reproduction test: total MPC requests756primary+1failed IPC+2tests=759.
+This corrects the early focused-preflight zero-real-test-MPC annotation; scientific
+VLA remains0. Failed first IPC run and prior source-only preparation remain intact.
+No next-stage implementation. Largest uncertainty: reducible same-B attachment
+cost under a motion-admissible controller-memory/application boundary.

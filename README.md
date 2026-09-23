@@ -7,6 +7,17 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [handoff delay attribution diagnostic](docs/HANDOFF_DELAY_ATTRIBUTION_01.md)
+completed84 offline four-condition rollouts on the frozen13 mismatch sources
+and eight ONLINE03 onset transitions, with no new VLA or reconciliation.
+Genuine13 retains a mean delayed-minus-latency-free position AUC gap of.124985m·s
+under fixed prepared-reference+REF02 consumption; ONLINE03 attaches in every
+condition and has mean gap−.014327m·s. Actual B-time memory differs from physical
+u_minus, and all26 genuine delayed rollouts violate first-step motion limits.
+The result is **MIXED_ATTRIBUTION**, with local clearance preserved; it is neither
+a recoverable-cost bound nor graph-optimization evidence. See the
+[static review](data/handoff_delay_attribution_01/primary_20260923T055300Z/index.html).
+
 The [JOIN-ONLINE-03 destination-first instruction rerun](docs/JOIN_ONLINE_03_DESTINATION_INSTRUCTION.md)
 completed four new native online OFF/ON episodes with the user's exact wording.
 Both cart-ON repeats produced a larger lateral response and continued instead
