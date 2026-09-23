@@ -43,8 +43,8 @@ class Viewer:
                 self.rgb_label=ui.Label('',height=55,word_wrap=True)
                 ui.Label('Unmodified saved triggering RGB. Cart OFF world has no runtime cart.\nWorld view: equal XY metres, orthographic.',height=42,word_wrap=True)
         for _ in range(6):app.update()
-        stagewindow=ui.Workspace.get_window('Stage')
-        if stagewindow:self.panel.dock_in(stagewindow,ui.DockPosition.SAME)
+        viewportwindow=ui.Workspace.get_window('Viewport')
+        if viewportwindow:self.panel.dock_in(viewportwindow,ui.DockPosition.LEFT,.30)
         for name in ['Property','Content','Console','Stage','Render Settings']:
             w=ui.Workspace.get_window(name)
             if w:w.visible=False
@@ -138,6 +138,8 @@ class Viewer:
     def verify(self):
         for i,e in enumerate(ORDER):
             self.select_episode(i);self.choose(len(self.rows)-1);self.camera();self.capture(e)
+            if e.startswith('ON_'):
+                self.choose(max(0,len(self.rows)-2));self.capture(e+'_last_applied_chunk')
             self.s.seek_row(0);self.play();start=time.monotonic()
             while time.monotonic()-start<.35:self.tick()
             if len(self.s.times)>1:assert self.s.index>0
@@ -146,7 +148,7 @@ class Viewer:
         save(self.output/'runtime_validation.json',dict(valid=True,label=LABEL,actions=self.actions,displayed_saved_samples=self.samples,
             episodes=ORDER,actual_Isaac_renderer=True,OS_mouse_interaction_tested=False,source_JPEG_unchanged=True,
             new_model_calls=0,new_MPC_calls=0,new_execution_states=0))
-        self.select_episode(1);self.choose(len(self.rows)-1)
+        self.select_episode(1);self.choose(max(0,len(self.rows)-2))
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--run',type=Path,required=True);p.add_argument('--output',type=Path,required=True)

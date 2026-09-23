@@ -116,3 +116,13 @@ def test_replay_uses_only_saved_samples_and_never_writes_model_rgb():
     source=(ROOT/'scripts/isaac/join_online02_replay.py').read_text()
     for forbidden in ['integrate_unicycle(','.send(','.submit(','.solve(','.predict(']:assert forbidden not in source
     assert 'SavedEpisode(' in source and 'source_url' in source
+
+def test_saved_off_match_serializes_as_boolean(monkeypatch,tmp_path):
+    import analyze_join_online02 as audit
+    def episode(run,e):
+        return dict(summary=dict(episode=e,outcome='NATURAL_MODEL_STOP_BEFORE_BYPASS'),rows=[dict(
+            episode=e,chunk_id='chunk_000',classification='STRAIGHT_OR_BASELINE',t_obs=1.,received_before_end=True,
+            observation_longitudinal_m=-4.,observation=[0.,0.,0.])])
+    monkeypatch.setattr(audit,'analyze_episode',episode)
+    result=audit.analyze(tmp_path)
+    assert all(type(r['matched']) is bool for r in result['OFF_matches'])

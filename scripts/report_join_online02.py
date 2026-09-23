@@ -41,7 +41,9 @@ def presentation(run):
         ax.plot(poses[:,0],poses[:,1],color='#424242',lw=2.5,label='actually executed')
         ax.scatter(*poses[0,:2],marker='s',c='green',label='initial state')
         ax.scatter(*poses[-1,:2],marker='x',c='red',label='last applied state')
-        ax.set_title(eid+'\n'+ep['summary']['outcome'],fontsize=10);ax.legend(fontsize=8)
+        ax.set_title(eid+'\n'+ep['summary']['outcome'],fontsize=10)
+        ax.set_xlim(scenario['center_xy'][0]-1.6,scenario['center_xy'][0]+1.6)
+        ax.legend(fontsize=8,loc='upper left',bbox_to_anchor=(1.02,1))
         if eid.startswith('OFF'):ax.text(.02,.02,'Cart outline: hypothetical only; absent during OFF',transform=ax.transAxes,fontsize=8)
         finish(fig,eid+'_world',dict(rows=rows,execution=poses.tolist(),summary=ep['summary']))
         # Every original trigger plus actual raw world polyline, paginated, no cherry picking.
@@ -56,7 +58,8 @@ def presentation(run):
                     if r['B'] is not None:b.scatter(*r['B'][:2],c='black',marker='x',label='B')
                     b.set_title(r['classification']+f"; edge={r['raw_geometry']['whole']['minimum_clearance_m']:.3f}m",fontsize=9)
                 else:b.set_title('N/A: technical unavailable')
-                b.legend(fontsize=7)
+                b.set_xlim(scenario['center_xy'][0]-1.6,scenario['center_xy'][0]+1.6)
+                b.legend(fontsize=7,loc='upper left',bbox_to_anchor=(1.02,1))
             finish(fig,f'{eid}_chunks_{page:02}',subset)
         for kind,key in [('first_onset','first_onset'),('first_bypass','first_bypass')]:
             event=ep['summary'][key]
@@ -103,7 +106,11 @@ def presentation(run):
             values=[r['episode'],r['display_id'],r['classification'],fmt(r['t_obs'])+' / '+fmt(r['t_apply']),fmt((r.get('raw_geometry') or {}).get('whole',{}).get('minimum_clearance_m')),fmt(r.get('raw_arc_m')),fmt(r.get('max_lateral_m'))]
             table+='<tr>'+''.join('<td>'+html.escape(v)+'</td>' for v in values)+'</tr>'
     table+='</table>'
-    text='<html><meta charset="utf-8"><style>body{font-family:sans-serif;margin:30px}img{max-width:100%}td,th{border:1px solid #aaa;padding:5px}table{border-collapse:collapse}</style><h1>JOIN-ONLINE-02</h1><p>ACTUAL ONLINE EXECUTION / saved diagnostic presentation. Cart OFF outlines are hypothetical. No GP or reconciliation.</p><h2>'+result['overall']+'</h2>'+table
+    timing=[dict(episode=ep['summary']['episode'],whole_RTF=ep['summary']['episode_rtf'],maximum_loop_stall_s=ep['summary']['max_loop_stall_s'],prediction_RTF=[r.get('inflight_rtf') for r in ep['rows']]) for ep in episodes]
+    save(out/'timing_and_calls.json',dict(timing=timing,calls=read(run/'aggregate/call_counts.json'),source_hashes=source))
+    text='<html><meta charset="utf-8"><style>body{font-family:sans-serif;margin:30px}img{max-width:100%}td,th{border:1px solid #aaa;padding:5px}table{border-collapse:collapse}</style><h1>JOIN-ONLINE-02</h1><p>ACTUAL ONLINE EXECUTION / saved diagnostic presentation. Cart OFF outlines are hypothetical. No GP or reconciliation.</p><h2>'+result['overall']+'</h2>'
+    text+='<p>Timing limitation: whole-episode RTF is distinct from request-local RTF. See <a href="timing_and_calls.json">all measured timing and call counts</a>. No timing-qualified source is claimed. A model STOP ends acquisition; no post-STOP traversal is invented.</p>'
+    text+='<p>The frozen SAFE_SHORTEN category additionally requires a spatial influence/arc gate. Measured shortening can occur while that label remains STRAIGHT_OR_BASELINE; thresholds were not changed after results. First onset/full-bypass N/A remain N/A.</p>'+table
     for ep in episodes:
         if not ep['summary']['first_onset']:text+='<p>'+ep['summary']['episode']+': first bypass-onset N/A.</p>'
         if not ep['summary']['first_bypass']:text+='<p>'+ep['summary']['episode']+': first full bypass N/A.</p>'
@@ -111,7 +118,7 @@ def presentation(run):
     (out/'index.html').write_text(text)
     save(out/'plot_manifest.json',dict(figures=[dict(name=n,png_sha256=sha(out/(n+'.png')),sidecar_sha256=sha(out/(n+'.json'))) for n in entries],source_hashes=source))
     with zipfile.ZipFile(run/'review_bundle.zip','x',zipfile.ZIP_DEFLATED) as z:
-        for p in [*sorted(out.glob('*')),run/'aggregate/chunks.csv',run/'protocol.json',run/'source.json',run/'scenario.json',run/'config_snapshot.yaml']:
+        for p in [*sorted(out.glob('*')),run/'aggregate/chunks.csv',run/'aggregate/call_counts.json',run/'protocol.json',run/'source.json',run/'scenario.json',run/'config_snapshot.yaml']:
             z.write(p,p.relative_to(run))
     print(out/'index.html')
 if __name__=='__main__':

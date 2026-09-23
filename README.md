@@ -7,6 +7,18 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [JOIN-ONLINE-02 far-approach audit](docs/JOIN_ONLINE_02_FAR_APPROACH.md)
+ran four genuine native online OFF/ON episodes from the frozen 5 m start.
+Both cart-ON repeats generated seven responses: forward chunks shortened from
+1.356 m to 1.056 m to 0.511 m, then native STOP. Neither generated a lateral
+bypass or triggered the oracle command-abort guard; actual minimum edge
+clearance stayed about 0.355 m. OFF continued beyond the absent cart location.
+All ON request-local RTF checks exceed the prior 1.2 upper bound, so these are
+recorded behavior observations with pacing limitations, not timing-qualified
+bypass sources. No reconciliation ran. See the
+[saved static review](data/robotless_join_online_02/primary_20260923T001500Z/review/index.html)
+and the report's interactive Isaac replay command.
+
 The [JOIN-SOURCE-05 instruction diagnostic](docs/JOIN_SOURCE_05_INSTRUCTION_AVOIDANCE.md)
 reused SOURCE04 RGB bytes for12 new predictions with two explicit cart-avoidance
 instructions. K0 trajectories stayed identical to the historical straight path.

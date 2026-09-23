@@ -5,13 +5,13 @@ from pathlib import Path
 import numpy as np,yaml
 ROOT=Path(__file__).resolve().parents[1];sys.path[:0]=[str(ROOT/'src'),str(ROOT/'scripts')]
 from run_join_online02 import read,save,sha,verify,environments
-from analyze_join_online02 import analyze,csvread,jsonlines,pose_rows
+from analyze_join_online02 import analyze,call_counts,csvread,jsonlines,pose_rows
 from validate_robotless_online_handoffs import validate_episode,equal_record
 from reconciliation.online_history import history_contract
 from reconciliation.join_online02 import ORDER,INSTRUCTION,ABORT,guard_check
 
 def validate(run):
-    verify(run);cfg=yaml.safe_load((run/'config_snapshot.yaml').read_text())
+    verify(run,reporting=True);cfg=yaml.safe_load((run/'config_snapshot.yaml').read_text())
     contract,sampler=history_contract((ROOT/cfg['paths']['lightnav_checkout']).resolve(),(ROOT/cfg['paths']['checkpoint_path']).resolve())
     assert read(run/'schedule_completion.json')['no_retry']
     assert [x['episode'] for x in read(run/'schedule_completion.json')['episodes']]==ORDER
@@ -52,12 +52,17 @@ def validate(run):
             assert v['state_id']==frame['rendered_state_id'] and v['sim_time_s']==frame['capture_sim_time_s']
             assert v['cart_transform']==read(run/'scenario.json')['prop']['wrapper_matrix_column']
             if not meta['cart_present']:assert v['instance']['visible_pixels']==0
-            mask=np.load(ep/v['mask_path'])['mask'];ids=v['instance'].get('instance_ids',v['instance'].get('ids'))
+            mask=np.load(ep/v['mask_path'])['mask'];ids=v['instance']['matched_instance_ids']
             assert sha(ep/v['mask_path'])==v['mask_sha256'] and mask.ndim==2
+            prefix=read(run/'scenario.json')['prop']['runtime_prim']
+            expected_ids=[int(k) for k,label in v['instance']['idToLabels'].items() if str(label).startswith(prefix)]
+            assert sorted(ids)==sorted(expected_ids)
+            assert int(np.isin(mask,ids).sum())==v['instance']['visible_pixels']
         report.update(guard_queries=len(guards),abort_command_unapplied=meta['status']==ABORT,visibility_frames=len(visibility))
         reports.append(report)
     # Session IDs must be new: raw login responses also remain in each manifest.
-    responses=[read(run/'episodes'/e/'session_open.json') for e in ORDER]
+    assert len({s['connection_id'] for s in sessions})==4
+    equal_record(read(run/'aggregate/call_counts.json'),call_counts(run),'actual call counts')
     replayed=analyze(run);saved=read(run/'aggregate/analysis.json');equal_record(saved,replayed,'all saved analysis')
     plot=read(run/'review/plot_manifest.json')
     for p,h in plot['source_hashes'].items():assert sha(p)==h

@@ -127,7 +127,7 @@ def analyze(run):
         nearest=min(off,key=lambda o:abs(o['observation_longitudinal_m']-r['observation_longitudinal_m']),default=None)
         distance=None if nearest is None else abs(nearest['observation_longitudinal_m']-r['observation_longitudinal_m'])
         angle=None if nearest is None else abs(float(wrap_angle(nearest['observation'][2]-r['observation'][2])))
-        valid=distance is not None and distance<=.25 and angle<=np.deg2rad(20.)
+        valid=bool(distance is not None and distance<=.25 and angle<=np.deg2rad(20.))
         match.append(dict(ON=r['episode']+'/'+r['chunk_id'],OFF=None if not valid else nearest['episode']+'/'+nearest['chunk_id'],
             longitudinal_gap_m=distance,yaw_gap_rad=angle,matched=valid,
             reason='descriptive nearest longitudinal match <=.25m and heading<=20deg' if valid else 'no comparable observed OFF pose; no forced index match'))
@@ -138,9 +138,31 @@ def analyze(run):
     if overall=='EPISODE_LIMIT_BEFORE_CONCLUSION':overall='INCONCLUSIVE'
     return dict(episodes=data,OFF_matches=match,selected_source=chosen,overall=overall)
 
+def call_counts(run):
+    """Count accepted solves and late cross-episode records by unique solve ID."""
+    events=[r for e in ORDER for r in jsonlines(run/'episodes'/e/'controller/events.jsonl')]
+    submitted={r['solve_id']:r for r in events if r.get('status')=='submitted'}
+    solved={r['solve_id']:r for r in events if r.get('type')=='solve_result'}
+    requests=[read(p) for e in ORDER for p in sorted((run/'episodes'/e/'requests').glob('seq_*_metadata.json'))]
+    scientific=sum(r['kind']=='prediction' for r in requests)
+    start=read(run/'execution_start.json')['at']['host_monotonic_s'];end=read(run/'schedule_completion.json')['end']['host_monotonic_s']
+    return dict(scientific_terminal_predictions=scientific,
+        buffer_only_requests=len(requests)-scientific,
+        model_terminal_RTT_sum_s=sum(r.get('client_rtt_s') or 0 for r in requests if r['kind']=='prediction'),
+        server_warmup_calls=(run/'logs/server.log').read_text().count('warmup done in'),
+        MPC_accepted_submissions=len(submitted),MPC_saved_solve_results=len(solved),
+        MPC_missing_result_ids=sorted(submitted.keys()-solved.keys()),
+        MPC_saved_solve_time_s=sum(r.get('official_solve_ms',0) for r in solved.values())/1000,
+        MPC_complete_wall_time_available=not bool(submitted.keys()-solved.keys()),
+        collection_wall_s_including_Isaac_startup=end-start,
+        source_episodes=4,new_GP_or_rigid_experiment_solves=0,new_reconciliation_calls=0,
+        technical_MPC_import_without_solve=1,
+        focused_test_real_model_calls=0,focused_test_real_MPC_calls=0,
+        note='One initial model-server synthetic warmup is technical, not source evidence. Accepted MPC submits and saved result coverage are distinct.')
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--run',type=Path,required=True);a=p.parse_args();run=a.run.resolve()
-    result=analyze(run);save(run/'aggregate/analysis.json',result)
+    result=analyze(run);save(run/'aggregate/analysis.json',result);save(run/'aggregate/call_counts.json',call_counts(run))
     rows=[r for ep in result['episodes'] for r in ep['rows']]
     fields=['episode','chunk_id','classification','t_obs','t_ready','t_apply','observation_cart_center_distance_m','B_cart_edge_clearance_m',
         'observation_to_B_travel_m','raw_arc_m','max_lateral_m','final_yaw_relative_hallway_rad','endpoint_from_front_m','endpoint_from_rear_m',

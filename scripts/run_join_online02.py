@@ -85,11 +85,17 @@ def freeze(run):
     save(run/'freeze.json',dict(preparation_sha=git('rev-parse','HEAD'),source_sha256={str(p.relative_to(ROOT)):sha(p) for p in files},
         input_sha256={str(p):sha(p) for p in run.rglob('*') if p.is_file()},scientific_episodes=ORDER))
 
-def verify(run,pushed=False):
+def verify(run,pushed=False,reporting=False):
     f=read(run/'freeze.json')
+    revisions=read(run/'reporting_revisions.json')['files'] if reporting else {}
+    allowed={'scripts/analyze_join_online02.py','scripts/report_join_online02.py',
+        'scripts/validate_join_online02.py','scripts/isaac/join_online02_replay.py','scripts/run_join_online02.py','tests/test_join_online02.py'}
     for group in [f['source_sha256'],f['input_sha256'],read(run/'source.json')['preserved']]:
         for p,h in group.items():
-            if sha(ROOT/p)!=h:raise ValueError('frozen source/input changed: '+p)
+            if sha(ROOT/p)!=h:
+                revision=revisions.get(p,{})
+                if not (reporting and not pushed and p in allowed and revision.get('frozen_sha256')==h and revision.get('current_sha256')==sha(ROOT/p)):
+                    raise ValueError('frozen source/input changed: '+p)
     if pushed:
         assert git('rev-parse','HEAD')==git('rev-parse','@{upstream}'),'push pre-primary freeze first'
         assert not git('status','--porcelain','--',*f['source_sha256']),'dirty scientific code'

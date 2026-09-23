@@ -5278,3 +5278,36 @@ existing collector, saved-only analysis/validator/static report and Isaac replay
 Four independent OFF/ON repeats, native scheduler, classification and source
 selection are frozen before scientific execution. No GP/reconciliation.
 See `docs/JOIN_ONLINE_02_FAR_APPROACH.md` for exact protocol and commands.
+
+## 2026-09-23 — JOIN-ONLINE-02 actual successive chunks and saved replay
+
+After normal push of freeze `f3170c76042e9a2fd62dfa515f74723a7fbeaafd`, executed
+OFF00→ON00→OFF01→ON01 once. Actual LightNav responses20/7/21/7; applied chunks
+19/6/20/6. All episodes ended by MODEL_STOP, no oracle abort. ON raw arrays match
+bitwise across repeats: near-straight1.356m chunks →1.056m →.511m →STOP, with no
+bypass onset/full bypass. Actual ON minimum edge clearance .355180979/.354753227m.
+The frozen spatial SAFE_SHORTEN label does not cover the .510854m C5; this is
+explicitly reported without threshold tuning. OFF references would intersect
+hypothetical cart ON, but actual OFF execution passes cart-OFF geometry.
+
+55 terminal predictions,183 buffer requests and one separate server warmup.
+557 official MPC submissions;556 unique saved result records,2.342283712s saved
+solve time (one final unapplied completion timing unavailable). Four-episode
+acquisition including Isaac startup83.422505s. No GP/rigid/reconciliation
+experimental solve. All14 ON request-local RTF checks are1.34–1.39, above prior
+1.2 gate; ON loop maxima.2548/.2574s also exceed.25s. Thus no timing-qualified
+bypass source is claimed. No moving bypass candidate exists.
+
+Saved-only validator passes raw/wire/history/anchor/selection/memory/applied
+command/exact states, direct guard, visibility and plots. Reporting-only bool
+serialization, call-accounting and figure/GUI layout fixes retain frozen code,
+failed-development logs and derived versions; no scientific retry. Final
+relevant test set276 passed, compileall/diff checks pass. An overbroad full-suite
+run was interrupted in unrelated diagnostic fixtures and is not claimed complete.
+
+Static index/review ZIP in `data/robotless_join_online_02/primary_20260923T001500Z/`;
+actual saved-only Isaac GUI verified and left open at ON00 C5, evidence in
+`data/robotless_join_online_02/replay_20260923_final/`. Four-episode dropdown,
+chunk slider/previous/next, play/pause, untouched RGB, OLD/FRESH/B and numeric
+fields are present. Outcome **PROGRESSIVE_SHORTENING_OR_STOP**, with pacing and
+last-unapplied-solve record limitations; no next experiment implemented.
