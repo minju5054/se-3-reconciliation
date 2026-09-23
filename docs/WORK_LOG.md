@@ -5336,3 +5336,16 @@ Initial layout-only output preserved separately. New and original saved-only
 validators PASS,95 relevant tests PASS,compileall/diff checks PASS. All new
 model/MPC/GP/render/rollout calls0. A destination-grounding contrast is proposed
 only; no future experiment or avoidance/reconciliation policy implemented.
+
+## 2026-09-23 — JOIN-ONLINE-03 destination-first instruction freeze
+
+User requested an actual rerun with exactly: "Go to the far end of the hallway.
+Pass around the supply cart without touching it, and stop only when you reach
+the end of the hallway." Fetched HEAD/origin main68ebd7e; two unrelated Stage0
+edits preserved. New config/wrapper reuse ONLINE02's exact resolved settings,
+saved5m start/scenario/side geometry, original collector/checkers and official
+LightNav/MPC. Only instruction and experiment label differ. Four fresh online
+OFF00/ON00/OFF01/ON01 episodes, same budgets/guard/STOP rules, no retry or tuning.
+New live histories may diverge, so not an identical-input terminal contrast.
+Pre-primary tests100 pass. See JOIN_ONLINE_03_DESTINATION_INSTRUCTION.md and
+new run primary_20260923T031300Z; historical outputs remain immutable.

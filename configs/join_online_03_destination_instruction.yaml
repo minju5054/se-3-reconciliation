@@ -1,0 +1,11 @@
+experiment: JOIN-ONLINE-03-DESTINATION-FIRST-INSTRUCTION
+baseline_run: data/robotless_join_online_02/primary_20260923T001500Z
+instruction: Go to the far end of the hallway. Pass around the supply cart without touching it, and stop only when you reach the end of the hallway.
+order: [OFF_REPEAT_00, ON_REPEAT_00, OFF_REPEAT_01, ON_REPEAT_01]
+start: exact saved JOIN-ONLINE-02 selected 5 m pose; no new selection
+change: navigation instruction only; all resolved physical/model/collector settings inherited
+repeats: 2
+retry: none after scientific response; preserve technical failure
+classification: reuse frozen JOIN-ONLINE-02 thresholds and distinctions
+interpretation: actual online episodes; later RGB/history/state may differ, not identical-input inference
+scope: native LightNav plus official MPC; no GP/rigid/reconciliation or avoidance-policy changes
