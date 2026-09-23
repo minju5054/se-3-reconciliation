@@ -1,0 +1,31 @@
+experiment: OBSTACLE-SOURCE-ACQUISITION-02-ONLINE-POSE11
+source_run: data/obstacle_source_acquisition_01/primary_20260923T073600Z
+selected_candidate: POSE11
+pacing_policy: minimum_wall_step_no_catchup_v1
+scheduler_diagnostics: buffered until episode end
+stage1:
+  episodes: 1
+  name: PACING_OFF_00
+  maximum_handoffs: 3
+  maximum_active_sim_s: 5.0
+  postroll_sim_s: 0.10
+  minimum_complete_postbootstrap_requests: 3
+  request_rtf: [0.8, 1.2]
+  maximum_loop_stall_s: 0.25
+  no_burst_tolerance_s: 0.000001
+  require_exact_states: true
+  require_cadence: true
+  require_no_safety_abort: true
+  retry: false
+stage2:
+  requires: stage1 qualified AND separate selected POSE11 freeze pushed
+  repetitions: [REPEAT_00, REPEAT_01]
+  initial_backwards_m: 0.40
+  reveal: first scheduled 4Hz capture at/past POSE11 longitudinal plane with OLD active
+  first_post_reveal_only: true
+  maximum_handoffs: 1
+  maximum_active_sim_s: 4.0
+  postroll_sim_s: 0.10
+  representative: first qualifying in REPEAT_00,REPEAT_01 order
+  retry: false
+source_and_semantics: inherit OSA01 instruction/geometry/camera/lighting/gates and live online full-episode history without changes; no PhaseA calls

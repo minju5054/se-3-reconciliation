@@ -5534,3 +5534,23 @@ model/MPC/optimizer test calls; compileall/diff PASS. Four pair figures inspecte
 Raw/derived remain ignored; tracked summary/report provide all candidates and
 pacing limits. Largest uncertainty: genuine sudden-reveal reproduction with a
 timing-qualified moving B. No next-stage work.
+
+### 2026-09-23 — OSA02 saved pacing diagnosis and pre-qualification correction
+
+Fetched main1b8f94e; preserved unrelated Stage0 edits and OSA01/earlier raw results.
+New exclusive run `data/obstacle_source_acquisition_02/primary_20260923T090000Z/`.
+OSA01 authoritative validator passes before collector change. Saved C1–C3 show
+~74–75ms deadline debt after ~83ms render and 2–3ms fast outer iterations inside
+request windows, explaining localRTF1.378–1.393 despite wholeRTF.99925. Each loop
+integrates one step; historical sleep itself was not measured. Old code copied
+and hashed; no previous result overwritten.
+
+Opt-in minimum-wall-step scheduler rebases after actual completed step, never
+repays blocking debt by burst integration. Absolute remains default. Fixed
+simulationdt60Hz/capture15ticks/control6ticks, official MPC/history/pose/activation
+semantics unchanged. Buffered diagnostics record deadline/sleep/capture/IPC/guard
+and actual step coverage. Predeclared one OFF technical episode; all3 postbootstrap
+RTFs must pass[.8,1.2], stall<=.25, exactstates/cadence/guard/no-burst. Failure stops;
+no performance retry. POSE11/instruction/cart remain immutable, PhaseA0. Conditional
+2 sudden-reveal repetitions only after pass and another pushed selected freeze.
+No model/MPC/optimizer calls during this implementation/saved diagnosis stage.

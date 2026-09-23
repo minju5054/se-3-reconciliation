@@ -234,7 +234,10 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
     origin=float(world.current_time); host_origin=time.monotonic()
     dt=float(np.float32(config['execution']['simulation_dt_s'])); capture_stride=round(config['execution']['integration_hz']/config['execution']['capture_hz'])
     control_stride=round(config['execution']['integration_hz']/config['execution']['control_hz'])
-    pacer=AbsolutePacer(host_origin,origin,config['execution']['target_rtf'],config['online']['rtf_deadline_tolerance_s'])
+    from reconciliation.online_pacing import make_pacer
+    pacing_policy=config['execution'].get('pacing_policy','absolute')
+    pacer=make_pacer(pacing_policy,host_origin,origin,config['execution']['target_rtf'],config['online']['rtf_deadline_tolerance_s'])
+    scheduler_rows=[] if config['online'].get('scheduler_diagnostics',False) else None
     journal=Journal(ep); encoder=ThreadPoolExecutor(max_workers=1,thread_name_prefix='jpeg-writer')
     encoder_pending=deque(); frames=deque(); allframes=[]; states=[]; commands=[]; contexts=[]; chunks={}
     activation=CommandActivation(config['execution']['command_hold_timeout_s'])
@@ -249,10 +252,22 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
     try:
         while app.is_running():
             now=time.monotonic(); sim=float(world.current_time); elapsed=sim-origin
+            diagnostic=None
+            if scheduler_rows is not None:
+                diagnostic=dict(start_state_id=tick,loop_start_host_s=now,simulation_start_s=sim,
+                    prior_completion_host_s=st['host_monotonic_s'],
+                    intended_wall_deadline_s=now+pacer.remaining(sim+dt,now),
+                    deadline_error_at_start_s=-pacer.remaining(sim+dt,now),
+                    inference_in_flight_at_start=pending_prediction is not None,
+                    sim_steps=0,capture_happened=False,render_readback_s=None,
+                    mpc_received=[],model_received=[],mpc_submitted=False,wire_request_kind=None)
+                scheduler_rows.append(diagnostic)
             if sim!=st['sim_time_s']:raise RuntimeError(f'uncommanded between-loop clock step {st["sim_time_s"]}->{sim}')
             if now-host_origin>config['online']['maximum_episode_host_s']:
                 terminal='EXECUTOR_STALLED';terminal_reason='maximum episode host duration';break
+            poll_start=time.monotonic() if diagnostic is not None else None
             for message in mpc.drain():
+                if diagnostic is not None:diagnostic['mpc_received'].append({k:message.get(k) for k in ('type','op','status','solve_id')})
                 message['seen_in_isaac']=stamp(sim,elapsed);journal.write('controller/events.jsonl',message)
                 if message.get('type') in ('fatal','worker_exit','error') or message.get('status') in ('controller_error','error'):
                     terminal='CONTROLLER_ERROR';terminal_reason=str(message);stopping='error';break
@@ -264,7 +279,10 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
                         last_result_s=sim
                     else: journal.write('controller/root_rejections.jsonl',message)
             if stopping=='error':break
+            if diagnostic is not None:diagnostic['mpc_poll_wall_s']=time.monotonic()-poll_start
+            poll_start=time.monotonic() if diagnostic is not None else None
             for message in model.drain():
+                if diagnostic is not None:diagnostic['model_received'].append({k:message.get(k) for k in ('type','kind','status','chunk_id')})
                 if message.get('type') in ('fatal','worker_exit','error'):
                     terminal='PROTOCOL_ERROR';terminal_reason=str(message);stopping='error';break
                 if message.get('type')=='request_sent':
@@ -295,6 +313,7 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
                 # The next fixed 10Hz control tick submits this reference.
                 # This natural scheduling delay is preserved in t_install/t_switch.
             if stopping=='error':break
+            if diagnostic is not None:diagnostic['model_poll_wall_s']=time.monotonic()-poll_start
             # Immutable encoded frames become available chronologically.
             while encoder_pending and encoder_pending[0].done():
                 frame=encoder_pending.popleft().result();frames.append(frame);allframes.append(frame);last_frame=frame
@@ -302,6 +321,7 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
             if len(frames)+len(encoder_pending)>=config['online']['capture_queue_capacity']:
                 terminal='TECHNICAL_INVALID';terminal_reason='bounded capture queue overflow; no silent drop';break
             if tick % capture_stride==0:
+                capture_start=time.monotonic() if diagnostic is not None else None
                 if intervention is not None:
                     intervention.before_capture(ep, pose.copy(), st.copy(), activation.active, last_activation)
                 # DebugDraw is renderer-wide: remove display lines before model RGB.
@@ -329,6 +349,9 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
                 encoder_pending.append(encoder.submit(encode_frame,ep,rgb[:,:,:3].copy(),frame,config['capture']['jpeg_quality']))
                 if intervention is not None:
                     intervention.after_capture(ep, frame.copy())
+                if diagnostic is not None:
+                    diagnostic.update(capture_happened=True,capture_total_wall_s=time.monotonic()-capture_start,
+                        render_readback_s=(frame['readback_finished_host']['host_monotonic_ns']-frame['capture_monotonic_ns'])/1e9)
             # Flush older queued frames as buffer-only before predicting the latest available one.
             active_age=None if last_activation is None else sim-last_activation
             can_predict=(activation.active is not None and activation.installed==activation.active and
@@ -345,9 +368,11 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
                     model.send('frame',frame=frame,predict=True,chunk_id=chunk_id)
                 else:model.send('frame',frame=frame,predict=False)
                 wire_busy=True
+                if diagnostic is not None:diagnostic['wire_request_kind']='prediction' if predict else 'buffer_only'
             if activation.installed is not None and tick%control_stride==0:
                 mpc.send('submit',solve_id=f'{ep.name}_solve_{solve_counter:06d}',pose=pose.tolist(),input_state_id=st['state_id'],
                     input_sim_time_s=sim,input_host_monotonic_s=time.monotonic());solve_counter+=1
+                if diagnostic is not None:diagnostic['mpc_submitted']=True
             if command_guard is None:
                 command,event=activation.apply(st,states[-2] if len(states)>1 else None,commands[-1] if commands else None)
             else:
@@ -355,7 +380,9 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
                 # Preview identity so an unapplied command cannot create B.
                 from reconciliation.join_online02 import preview_activation
                 proposal,command,event=preview_activation(activation,st,states[-2] if len(states)>1 else None,commands[-1] if commands else None)
+                guard_start=time.monotonic() if diagnostic is not None else None
                 decision=command_guard(pose.copy(),command,dt)
+                if diagnostic is not None:diagnostic['guard_wall_s']=time.monotonic()-guard_start
                 journal.write('guard.jsonl',decision)
                 if not decision['safe']:
                     terminal='SAFETY_ABORT_BEFORE_UNSAFE_COMMAND'
@@ -384,6 +411,7 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
             if activation.active and last_result_s is not None and sim-last_result_s>config['online']['controller_stall_sim_s']:
                 terminal='CONTROLLER_ERROR';terminal_reason='no current controller result within fixed stall timeout';break
             commands.append(command);journal.write('commands.csv',command)
+            integrate_start=time.monotonic() if diagnostic is not None else None
             nextpose=integrate_unicycle(pose,[command['v_mps'],command['omega_radps']],dt)
             set_precise_agent_pose(agent,nextpose,z_m=config['agent']['z_m'])
             world.step(render=False)
@@ -392,14 +420,25 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
             # completed physics clock once per tick, without a second dynamics step.
             sync_timeline(new_sim)
             if not np.isclose(new_sim-sim,dt,atol=1e-9,rtol=0):raise RuntimeError(f'Isaac simulation step {new_sim-sim} != {dt}')
-            wait=pacer.remaining(new_sim,time.monotonic())
+            before_sleep=time.monotonic()
+            wait=pacer.remaining(new_sim,before_sleep)
             if wait>0:time.sleep(wait)
+            after_sleep=time.monotonic()
+            if diagnostic is not None:
+                diagnostic.update(integration_and_USD_wall_s=before_sleep-integrate_start,
+                    pre_sleep_host_s=before_sleep,deadline_error_before_sleep_s=-wait,
+                    sleep_requested_s=max(0.,wait),slept_duration_s=after_sleep-before_sleep if wait>0 else 0.,
+                    sim_steps=1,end_state_id=tick+1,simulation_end_s=new_sim)
             pose=actual_pose(agent)
             if not np.allclose(nextpose,pose,atol=1e-10,rtol=0):raise RuntimeError('applied unicycle state disagrees with USD readback')
             tick+=1
             st={'state_id':tick,'tick':tick,**stamp(new_sim,new_sim-origin),'x':float(pose[0]),'y':float(pose[1]),'yaw':float(pose[2]),
                 'incoming_command_id':command['command_id'],'active_reference_version':command['reference_version'],'active_chunk_id':command['chunk_id'],
                 'isaac_timeline_time_s':float(omni.timeline.get_timeline_interface().get_current_time())}
+            if diagnostic is not None:
+                diagnostic.update(completion_host_s=st['host_monotonic_s'],
+                    wall_step_s=st['host_monotonic_s']-diagnostic['prior_completion_host_s'],
+                    inference_in_flight_at_end=pending_prediction is not None)
             states.append(st);journal.write('execution.csv',st)
             timing=pacer.observe(new_sim,st['host_monotonic_s']);stall=st['host_monotonic_s']-loop_previous_host;loop_previous_host=st['host_monotonic_s']
             journal.write('loop.jsonl',{'state_id':tick,'sim_time_s':new_sim,'host_monotonic_s':st['host_monotonic_s'],
@@ -444,6 +483,10 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
                 if wire_busy:time.sleep(.01)
         model.send('close');closed=model.await_type('closed',timeout=20)
         journal.close()
+        if scheduler_rows is not None:
+            # No scheduler JSON encoding/file flush in the timing-critical loop.
+            with (ep/'scheduler.jsonl').open('x') as stream:
+                for row in scheduler_rows:stream.write(json.dumps(row,allow_nan=False)+'\n')
     # Preserve an installed response even if no corresponding command activated.
     if current_context and current_context.get('switch_state_id') is None and not any(c is current_context for c in contexts):
         current_context.update(status=terminal if terminal in ('CONTROLLER_ERROR','MODEL_ERROR','PROTOCOL_ERROR','TECHNICAL_INVALID','EXECUTOR_STALLED','SCENE_INVALID') else 'TECHNICAL_INVALID',error='installed response never activated: '+terminal_reason)
