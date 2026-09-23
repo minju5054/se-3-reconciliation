@@ -5663,3 +5663,18 @@ under data/obstacle_source_acquisition_03/primary_20260923T085200Z/. Small track
 summary docs/results/obstacle_source_acquisition_03.json. Raw/generated remain
 ignored; two Stage0 edits untouched. Remaining uncertainty: actual same-B
 transition execution and reconciliation benefit, not tested or implemented.
+
+## 2026-09-23 — OSA03_NATIVE_CONTINUATION_01 pre-primary freeze
+
+- Fetched origin/main and started at565e40a586e5f8081339c44d8f2949c5abffce9a;
+  both unrelated Stage0 configs preserved/excluded. REPEAT_00 is the only rollout.
+- Saved-only OSA03 validator, sealed hashes and B/command phase audited. Btick92,
+  next historical submit96/application97, saved end98, first new submit102.
+  u_minus differs from first-FRESH command and memory; no re-solve at B.
+- Added small asynchronous official-worker continuation wrapper, saved-result
+  prefix replay, existing exact integration/guard/evaluator, numeric/hash plots
+  and saved validator. Six historical intervals reproduce with zero pose error.
+- Official installation/restoration preflight disables solve:0 MPC/0 VLA calls.
+  Protocol freezes one nominal3s continuation with fixed raw FRESH, source clock,
+  original nearest/+1, abort-only safety and original .10m/15deg/.30s attachment.
+  No reconciliation implementation or future-stage work. Results pending.

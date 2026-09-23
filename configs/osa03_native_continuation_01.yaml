@@ -1,0 +1,40 @@
+experiment: OSA03_NATIVE_CONTINUATION_01
+source_run: data/obstacle_source_acquisition_03/primary_20260923T085200Z
+representative: REPEAT_00
+source_classification: QUALIFIED_GENUINE_OBSTRUCTED_OLD_HANDOFF_SOURCE
+maximum_rollouts: 1
+retry: false
+prefix_policy: replay saved accepted results at actual application ticks; independently integrate states and audit selections; no numerical re-solve of historical results
+phase_policy: preserve absolute source control ticks modulo 6; no solve at B; first new solve after complete saved prefix
+live_policy: original online worker asynchronous submit/poll IPC and CommandActivation; NoCatchupPacer; no render or VLA
+observation_cap_nominal_s: 3.0
+integration_steps: 180
+integration_dt_policy: source resolved float32 1/60; 180 steps = 3.0000001564621925 s
+control_stride: 6
+prefix_pose_atol: 1.0e-10
+selection_atol: 1.0e-12
+command_parity: literal
+command_hold_timeout_s: 0.5
+controller_stall_sim_s: 2.0
+command_grid_hz: 10.0
+position_threshold_m: 0.10
+yaw_threshold_deg: 15.0
+sampled_dwell_s: 0.30
+endpoint_tolerance: same .10m / 15deg tube about original final pose; descriptor only
+turn_command_diagnostic_epsilon_radps: 1.0e-6
+near_zero_command_diagnostic_epsilon: 1.0e-3
+footprint_radius_m: 0.20
+required_clearance_m: 0.05
+motion_limits:
+  v_max_mps: 0.8
+  omega_max_radps: 3.0
+  nominal_grid_a_v_max_mps2: 2.0
+  nominal_grid_a_omega_max_radps2: 5.0
+  numeric_tolerance: 0.00001
+windows_steps: [18, 54, 180]
+safety: original join_online02.guard_check; nominal .1s for new command, next source dt for held; abort before application
+failure: original CommandActivation timeout; controller_error or no result for 2s terminates; no recovery/retry
+reference: original raw N rows installed at original FRESH observation; no resampling/selector injection
+classification: [NATIVE_CONTINUATION_SAFE_SUSTAINED_ATTACHMENT, NATIVE_CONTINUATION_SAFE_NO_SUSTAINED_ATTACHMENT, NATIVE_CONTINUATION_SAFETY_ABORT, NATIVE_CONTINUATION_CONTROLLER_FAILURE, NATIVE_PREFIX_REPLAY_INVALID, SOURCE_CONTROLLER_PHASE_UNRESOLVED]
+figures: [world, attachment, commands, progress, clearance, selections]
+no_calls: [LightNav, RGB, Isaac, GP, rigid, graph, splice, reconciliation, REF02, Oracle]
