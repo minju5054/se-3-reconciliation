@@ -1,0 +1,51 @@
+experiment: OBSTACLE-SOURCE-ACQUISITION-01
+source04_run: data/robotless_join_source_04/persistence_20260922T050237Z
+online03_run: data/robotless_join_online_03/primary_20260923T031300Z
+candidate_bank_indices: [10, 11, 12, 13]
+history_frames: 8
+candidate_order: [POSE10, POSE11, POSE12, POSE13]
+branches: ['OFF', 'ON']
+execute_all_candidates: true
+selection: first qualifying in frozen candidate order
+side_rule: valid passage with larger swept minimum clearance; exact tie RIGHT
+instructions:
+  RIGHT: Go to the far end of the hallway. If the path is blocked, pass the supply cart on your right without touching it. Continue straight after passing it and stop at the end of the hallway.
+  LEFT: Go to the far end of the hallway. If the path is blocked, pass the supply cart on your left without touching it. Continue straight after passing it and stop at the end of the hallway.
+generation_environment:
+  VLN_EVAL_TEMPERATURE: '0'
+  VLN_EVAL_TOP_P: '1'
+  VLN_EVAL_TOP_K: '0'
+  VLN_EVAL_TRAJ_TOP1: '0'
+gates:
+  footprint_radius_m: 0.20
+  required_clearance_m: 0.05
+  visible_pixels: 20
+  lateral_m: 0.10
+  angle_deg: 20.0
+  reliable_chord_m: 0.02
+  remaining_rows: 4
+  remaining_arc_m: 0.60
+  interaction_before_front_m: 0.50
+  moving_v_mps: 0.20
+  observation_B_travel_m: 0.02
+  request_rtf: [0.8, 1.2]
+  maximum_loop_stall_s: 0.25
+phase0:
+  technical_episodes: 1
+  start: original ONLINE03 5m OFF start
+  maximum_handoffs: 3
+  maximum_active_sim_s: 5.0
+  postroll_sim_s: 0.10
+  qualification: every complete request-local inflight interval passes; >=3 post-bootstrap requests; max episode loop stall passes
+  real_model_calls: at most 4 technical predictions plus server startup warmup
+  retry: none in this protocol
+phaseB:
+  repetitions: 2
+  initial_pose_rule: selected observation pose translated 0.40m backwards along hallway; yaw unchanged
+  reveal_rule: first scheduled 4Hz capture at or beyond selected observation longitudinal plane while OLD active
+  first_post_reveal_only: true
+  maximum_handoffs: 1
+  maximum_active_sim_s: 4.0
+  postroll_sim_s: 0.10
+  requires: selected PhaseA plus qualified Phase0; separate pushed selected-candidate freeze
+scope: source only; no GP/rigid/reconciliation; no reference correction; no scientific retry

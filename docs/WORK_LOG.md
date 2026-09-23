@@ -5485,3 +5485,19 @@ This corrects the early focused-preflight zero-real-test-MPC annotation; scienti
 VLA remains0. Failed first IPC run and prior source-only preparation remain intact.
 No next-stage implementation. Largest uncertainty: reducible same-B attachment
 cost under a motion-admissible controller-memory/application boundary.
+
+### 2026-09-23 — OBSTACLE-SOURCE-ACQUISITION-01 pre-prediction protocol
+
+Fetched main1cfffed; preserve two unrelated Stage0 edits and every historical
+source. New source-only experiment: exact saved BRIGHT frame pairs at four
+geometry-selected SOURCE04 poses, H8, terminal-only cart reveal, one explicit
+RIGHT instruction selected from existing direct mesh passage probes. Eight
+independent terminal predictions; all four pairs run once, first qualified in
+frozen order selected. No optimizer/GP/rigid or method comparison. Separate
+short real OFF technical pacing episode (up to4 predictions, official MPC),
+unchanged4/10/60Hz collector; [.8,1.2] request-local RTF/.25s stall gate blocks
+conditional online acquisition. Two genuine sudden-reveal repeats only after
+both gates and a second pushed selected-source freeze. Preparation073500 failed
+on YAML OFF/ON boolean enum before any call; corrected quoting/test and preserved
+it, using new exclusive073600. Actual inputs and source validators pass; no new
+scientific prediction at this protocol-writing stage.
