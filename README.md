@@ -18,6 +18,8 @@ new live histories, not identical RGB. Official LightNav/MPC were unchanged,
 and no reconciliation ran. See the
 [saved review](data/robotless_join_online_03/primary_20260923T031300Z/index.html).
 
+A [saved turn-back audit](docs/JOIN_ONLINE_03_TURNBACK_VISIBILITY_AUDIT.md) finds that cart pixels increase at C4→C5 and remain present in every reconstructed sampled-history frame in both ON repeats, despite unsafe inward raw paths. Simple visual-evidence loss is not supported as a sufficient explanation; internal memory/grounding causes remain unresolved, with no new inference or execution.
+
 The [JOIN-ONLINE-02 far-approach audit](docs/JOIN_ONLINE_02_FAR_APPROACH.md)
 ran four genuine native online OFF/ON episodes from the frozen 5 m start.
 Both cart-ON repeats generated seven responses: forward chunks shortened from

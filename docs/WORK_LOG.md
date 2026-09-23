@@ -5377,3 +5377,48 @@ index.html/instruction_review_bundle.zip preserved under the new run, visually
 checked. New report distinguishes changed behavior from successful avoidance
 and different live histories from identical-input inference. Both unrelated
 Stage0 configuration edits preserved. No follow-up experiment implemented.
+
+## 2026-09-23 — JOIN-ONLINE-03 saved turn-back visual/history audit
+
+Fetched origin/main and starting HEAD both
+`0dc3e80677e4cf13d5bf16068e8bb2acc6173433`. Preserved both unrelated Stage0
+config edits and all historical artifacts. Audited ON_REPEAT_00/01 C0–C6:
+14 chunks, 56 unique captures, 224 reconstructed sampled-image slots across
+requests. Exact wire JPEGs, source/checkpoint/sampler, observation transforms,
+camera/mask/cart render-state provenance, pointing/raw arrays and original
+clearance/classifications agree. No new model/MPC/GP/rigid calls, rollouts,
+scientific renders or reconciliation.
+
+C4→C5 current cart pixels grow 2375→8576 and 2668→8162. Every sampled frame
+remains cart-visible: 20/20→24/24→28/28 for C4/C5/C6; latest preceding visible
+frame remains 0.25 s old. Preceding-only pixel sums also increase. C6 cart is
+partially clipped but occupies about 20–22% of current RGB. Official sampler
+IDs are source-reconstructed from wire-confirmed history, not internal server
+telemetry; original pixel area is not model attention or post-pooling salience.
+
+C5 contains inward internal path segments in both repetitions; endpoint shifts
+toward hallway/cart centre by 0.116083/0.109080 m, final yaw changes +33.410/+17.217
+degrees, and raw minimum clearance falls 0.494527/0.452860 m. Repeat01 C5 retains
+positive 0.005718 m clearance but violates the required 0.05 m; other late failures
+include raw overlap. C5/C6 APOS/OPOS centres hit floor outside cart mask/bbox,
+not cart. Actual original guard prevents unsafe execution; no collision is
+newly executed or reclassified.
+
+Interpretation: **CART_EVIDENCE_REMAINS_STRONG_DURING_TURNBACK**. Simple loss of
+available visual evidence is not a sufficient explanation. No memory-loss,
+grounding or decoder cause is established. Route-side persistence/action
+generation remains unisolated; no next-stage implementation.
+
+Authoritative output:
+`data/robotless_join_online_03_turnback_audit/audit_20260923T044600Z_r02/`.
+Seven reviewed figures with numeric/source sidecars, full ledgers, static index
+and review ZIP. First derived directory remains preserved with a development
+validator failure: optional absent OPOS CSV fields were blank. Explicit N/A
+serialization and a focused regression fixture fix the representation; all
+measurements are unchanged. No scientific retry.
+
+New saved-only validator and original authoritative JOIN-ONLINE-03 validator
+PASS; all 1482 primary files and unrelated edits retain their hashes. Analysis
+8.792487 s, validation 20.168549 s. 310 relevant tests PASS (17 new synthetic checker
+tests; IPC uses local socket fixtures, no real model/MPC), compileall and diff
+checks PASS. Report: `docs/JOIN_ONLINE_03_TURNBACK_VISIBILITY_AUDIT.md`.
