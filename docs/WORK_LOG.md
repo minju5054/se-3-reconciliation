@@ -5572,3 +5572,34 @@ Both repetitions required, no outcome-driven replacement. B physical command and
 actual memory-at-cut independently reconstructed; geometry/RTF gates unchanged.
 Separate pushed PhaseB freeze required before these two live acquisitions. No
 source outcome yet; no optimization or method comparison.120 focused tests pass.
+
+### 2026-09-23 — OSA02 two frozen genuine repetitions, final source NOT QUALIFIED
+
+PhaseB freeze de6ab7a pushed before exactly REPEAT_00/01, no retry. POSE11 minus
+.40m start, same instruction/cart/camera/BRIGHT, no PhaseA rerun. Both reveal first
+eligible live frame, continue actual OLD, apply safe turning FRESH at moving B.
+Raw FRESH hash equals historical POSE11_ON; world clearance .157818823/.149120888m,
+local LEFT .584514499m despite RIGHT instruction, arc1.348502485m; no complete
+bypass. Travel .293333349m, physical incoming speed.8m/s; B clearances1.029186438/
+1.019186906m. Incoming omega~.000014 rad/s differs from controller memory~.500014
+rad/s at application; both preserved with solve/application identities.
+Remaining8rows/1.047797574m. FRESHRTF .991010591/.990905369, stalls.192278178/
+.169465806s, no catch-up or safety abort, .10s postroll only.
+
+Only frozen OLD obstruction gate fails in both: actual OLD generated fartherback
+has1.351820588m finite arc and +.273958726m hypothetical-cart edge clearance.
+It ends before cart; cannot substitute PhaseA OFF anchoring, extrapolate it, or
+loosen criterion. Final ONLINE_POSE11_SOURCE_NOT_QUALIFIED, representative null,
+qualified0/2 and source bundle entries empty. Safe FRESH/movingB measured facts
+are preserved separately; no accepted obstacle-induced source claim.
+
+Calls total8terminal (4technical/4scientific),28buffers,1separate serverwarmup;
+56MPCaccepted/56saved, summedsolverwall.300798942s; all optimizer/GP/rigid/graph/
+splice/reconciliation0. Collectorwall16.078964879s technical/15.538959193s online,
+excluding Isaac startup; server stopped. No real model/MPC tests/validator calls.
+Independent saved episode recomputation, source/CSV/JSON/plot/ZIP checks PASS;
+519 relevant tests PASS6.79s; compileall/diff PASS. Eight static PNGs+sidecars/index/
+reviewZIP at `data/obstacle_source_acquisition_02/primary_20260923T090000Z/`.
+1,722 preserved source hashes and unrelated Stage0 edits unchanged. Raw remains
+ignored. Remaining uncertainty: jointly obtain an actually obstructed finite OLD
+and safe turning FRESH/movingB under a separate frozen acquisition; not implemented.

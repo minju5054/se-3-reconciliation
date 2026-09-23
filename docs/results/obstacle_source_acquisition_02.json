@@ -1,0 +1,387 @@
+{
+  "run": "data/obstacle_source_acquisition_02/primary_20260923T090000Z",
+  "summary": {
+    "classification": "ONLINE_POSE11_SOURCE_NOT_QUALIFIED",
+    "representative": null,
+    "qualified_count": 0,
+    "starting_sha": "1b8f94e737ac477291936eef01777e13b571c5f1",
+    "technical_execution_sha": "e539a03f300c2ec070e52040831795c837ce35b8",
+    "PhaseB_execution_sha": "de6ab7a00b5588f847eae464efc609264f9f4687",
+    "PhaseA_rerun": false,
+    "phase0": {
+      "qualified": true,
+      "checks": {
+        "requests_RTF_and_stall": true,
+        "scheduler": true,
+        "state_reconstruction": true,
+        "no_safety_abort": true,
+        "normal_completion": true,
+        "three_activated_handoffs": true
+      },
+      "timing_gate": {
+        "qualified": true,
+        "request_rtfs": [
+          0.9906773575625534,
+          0.9909527737684339,
+          0.9897397852428339
+        ],
+        "max_loop_stall_s": 0.2106150589970639,
+        "minimum_requests": 3,
+        "thresholds": {
+          "rtf": [
+            0.8,
+            1.2
+          ],
+          "stall_s": 0.25
+        }
+      },
+      "classification": "PACING_QUALIFIED_PENDING_PHASEB_FREEZE"
+    },
+    "phase0_requests": [
+      {
+        "chunk_id": "chunk_000",
+        "client_RTT_s": 0.580370095,
+        "request_local_RTF": 0.8541392276443123,
+        "measured_burst_steps": 0,
+        "maximum_consecutive_no_sleep_steps": 1
+      },
+      {
+        "chunk_id": "chunk_001",
+        "client_RTT_s": 0.278702692,
+        "request_local_RTF": 0.9906773575280863,
+        "measured_burst_steps": 0,
+        "maximum_consecutive_no_sleep_steps": 0
+      },
+      {
+        "chunk_id": "chunk_002",
+        "client_RTT_s": 0.293023314,
+        "request_local_RTF": 0.9909527737739549,
+        "measured_burst_steps": 0,
+        "maximum_consecutive_no_sleep_steps": 0
+      },
+      {
+        "chunk_id": "chunk_003",
+        "client_RTT_s": 0.306310637,
+        "request_local_RTF": 0.9897397852578554,
+        "measured_burst_steps": 0,
+        "maximum_consecutive_no_sleep_steps": 0
+      }
+    ],
+    "phase0_whole_RTF": 0.7217687109444952,
+    "phase0_min_wall_step_s": 0.016774260002421215,
+    "phase0_integration": {
+      "state_count": 266,
+      "integration_count": 265,
+      "command_count": 265,
+      "maximum_pose_reconstruction_error": 0.0
+    },
+    "phaseB": [
+      {
+        "episode_id": "REPEAT_00",
+        "qualified": false,
+        "gates": {
+          "raw_behavior": false,
+          "OLD_pre_reveal": true,
+          "FRESH_first_post_reveal": true,
+          "OLD_continued": true,
+          "cart_visible": true,
+          "moving_B": true,
+          "B_clearance": true,
+          "editable_future": true,
+          "controller_memory": true,
+          "timing": true,
+          "scheduler": true
+        },
+        "failure_reasons": [
+          "raw_behavior"
+        ],
+        "raw_failure_reasons": [
+          "B_OBSTACLE_RELEVANT"
+        ],
+        "OLD_clearance_before_reveal_m": 1.024957035398175,
+        "OLD_hypothetical_cart_on_clearance_m": 0.273958725538466,
+        "OLD_arc_m": 1.351820588145103,
+        "OLD_max_lateral_m": 3.947936875192681e-06,
+        "OLD_stop": false,
+        "FRESH_clearance_m": 0.1578188228474534,
+        "FRESH_arc_m": 1.3485024847018776,
+        "FRESH_stop": false,
+        "FRESH_lateral_m": 0.5845144987106323,
+        "FRESH_max_yaw_deg": 29.9190869988235,
+        "FRESH_forward_progress_m": 1.2105294445730235,
+        "mismatch_interior_m": 0.5335502601585279,
+        "mismatch_reliable_tangent_deg": 19.60391199069619,
+        "mismatch_reliable_yaw_deg": 19.40494939369859,
+        "observation_pose": [
+          19.203053060494565,
+          24.370001308084724,
+          -1.568975136412886
+        ],
+        "B": [
+          19.20358778270297,
+          24.07666844683044,
+          -1.568971117917399
+        ],
+        "u_minus": [
+          0.8,
+          1.4019208269887136e-05
+        ],
+        "controller_previous_control": [
+          0.8,
+          0.5000140282874762
+        ],
+        "observation_B_travel_m": 0.2933333486318641,
+        "B_clearance_m": 1.0291864376214659,
+        "future": {
+          "nearest_index": 2,
+          "remaining_rows": 8,
+          "remaining_arc_m": 1.047797573542247
+        },
+        "RTF": 0.9910105905425416,
+        "max_loop_stall_s": 0.19227817800128832,
+        "client_RTT_s": 0.265254772,
+        "observation_sim_s": 1.7833334263414145,
+        "ready_seen_sim_s": 2.0500001069158316,
+        "install_sim_s": 2.0500001069158316,
+        "switch_sim_s": 2.150000112131238,
+        "observation_switch_sim_s": 0.36666668578982353,
+        "observation_request_host_s": 0.10186016399529763,
+        "observation_switch_host_s": 0.583065077997162,
+        "all_timing_fields": {
+          "t_obs": {
+            "sim_time_s": 1.7833334263414145,
+            "episode_time_s": 1.7500000912696123,
+            "host_monotonic_ns": 78208945924463,
+            "host_monotonic_s": 78208.945924463,
+            "host_utc": "2026-09-23T08:14:45.832344+00:00"
+          },
+          "t_request": {
+            "host_monotonic_ns": 78209047784627,
+            "host_monotonic_s": 78209.047784627,
+            "host_utc": "2026-09-23T08:14:45.934201Z"
+          },
+          "t_ready_host": {
+            "host_monotonic_ns": 78209313039399,
+            "host_monotonic_s": 78209.313039399,
+            "host_utc": "2026-09-23T08:14:46.199444Z"
+          },
+          "t_ready_seen_sim": {
+            "sim_time_s": 2.0500001069158316,
+            "episode_time_s": 2.0166667718440294,
+            "host_monotonic_s": 78209.42582681,
+            "host_monotonic_ns": 78209425826810,
+            "host_utc": "2026-09-23T08:14:46.312246+00:00"
+          },
+          "t_install": {
+            "host_monotonic_ns": 78209426351291,
+            "host_monotonic_s": 78209.426351291,
+            "host_utc": "2026-09-23T08:14:46.312770+00:00",
+            "sim_time_s": 2.0500001069158316,
+            "episode_time_s": 2.0166667718440294
+          },
+          "t_switch": {
+            "host_monotonic_ns": 78209528989541,
+            "host_monotonic_s": 78209.528989541,
+            "host_utc": "2026-09-23T08:14:46.415409+00:00",
+            "sim_time_s": 2.150000112131238,
+            "episode_time_s": 2.116666777059436
+          }
+        },
+        "cart_pixels": 4111,
+        "safety_abort": false,
+        "termination": "ATTEMPT_LIMIT",
+        "actual_prefix_clearance_lower_bound_m": 0.9492322516673665,
+        "complete_bypass": false,
+        "calls": {
+          "terminal_predictions": 2,
+          "buffers": 7,
+          "MPC_submissions": 12,
+          "MPC_saved_results": 12,
+          "missing_MPC_results": [],
+          "saved_MPC_wall_s": 0.09525617897452321,
+          "terminal_RTT_sum_s": 0.49360820800000005,
+          "GP_rigid_reconciliation": 0
+        },
+        "OLD_raw_sha256": "6d53cfff6ca770055ca6563548fc80b6696e2336fd4343f35c2c4e01da1bd5ae",
+        "FRESH_raw_sha256": "6893d5f9791c076037216647bba1b589050787cf703640d9440298b33490dfe2"
+      },
+      {
+        "episode_id": "REPEAT_01",
+        "qualified": false,
+        "gates": {
+          "raw_behavior": false,
+          "OLD_pre_reveal": true,
+          "FRESH_first_post_reveal": true,
+          "OLD_continued": true,
+          "cart_visible": true,
+          "moving_B": true,
+          "B_clearance": true,
+          "editable_future": true,
+          "controller_memory": true,
+          "timing": true,
+          "scheduler": true
+        },
+        "failure_reasons": [
+          "raw_behavior"
+        ],
+        "raw_failure_reasons": [
+          "B_OBSTACLE_RELEVANT"
+        ],
+        "OLD_clearance_before_reveal_m": 1.024957035398175,
+        "OLD_hypothetical_cart_on_clearance_m": 0.273958725538466,
+        "OLD_arc_m": 1.351820588145103,
+        "OLD_max_lateral_m": 3.947936875192681e-06,
+        "OLD_stop": false,
+        "FRESH_clearance_m": 0.14912088756633213,
+        "FRESH_arc_m": 1.3485024847018776,
+        "FRESH_stop": false,
+        "FRESH_lateral_m": 0.5845144987106323,
+        "FRESH_max_yaw_deg": 29.9190869988235,
+        "FRESH_forward_progress_m": 1.210529437783976,
+        "mismatch_interior_m": 0.5302579062746948,
+        "mismatch_reliable_tangent_deg": 19.603912656838407,
+        "mismatch_reliable_yaw_deg": 19.661915949618784,
+        "observation_pose": [
+          19.20307124974652,
+          24.360001323620036,
+          -1.5689751247865056
+        ],
+        "B": [
+          19.20360598068249,
+          24.06666846238167,
+          -1.5689710699553299
+        ],
+        "u_minus": [
+          0.8,
+          1.412082965312196e-05
+        ],
+        "controller_previous_control": [
+          0.8,
+          0.5000141299088592
+        ],
+        "observation_B_travel_m": 0.29333334863185767,
+        "B_clearance_m": 1.0191869060322387,
+        "future": {
+          "nearest_index": 2,
+          "remaining_rows": 8,
+          "remaining_arc_m": 1.0477975735422456
+        },
+        "RTF": 0.9909053686961015,
+        "max_loop_stall_s": 0.16946580600051675,
+        "client_RTT_s": 0.249977953,
+        "observation_sim_s": 1.7833334263414145,
+        "ready_seen_sim_s": 2.0500001069158316,
+        "install_sim_s": 2.0500001069158316,
+        "switch_sim_s": 2.150000112131238,
+        "observation_switch_sim_s": 0.36666668578982353,
+        "observation_request_host_s": 0.0904774390073726,
+        "observation_switch_host_s": 0.5981810240045888,
+        "all_timing_fields": {
+          "t_obs": {
+            "sim_time_s": 1.7833334263414145,
+            "episode_time_s": 1.7500000912696123,
+            "host_monotonic_ns": 78212274316474,
+            "host_monotonic_s": 78212.274316474,
+            "host_utc": "2026-09-23T08:14:49.160736+00:00"
+          },
+          "t_request": {
+            "host_monotonic_ns": 78212364793913,
+            "host_monotonic_s": 78212.364793913,
+            "host_utc": "2026-09-23T08:14:49.251205Z"
+          },
+          "t_ready_host": {
+            "host_monotonic_ns": 78212614771866,
+            "host_monotonic_s": 78212.614771866,
+            "host_utc": "2026-09-23T08:14:49.501176Z"
+          },
+          "t_ready_seen_sim": {
+            "sim_time_s": 2.0500001069158316,
+            "episode_time_s": 2.0166667718440294,
+            "host_monotonic_s": 78212.768769378,
+            "host_monotonic_ns": 78212768769378,
+            "host_utc": "2026-09-23T08:14:49.655188+00:00"
+          },
+          "t_install": {
+            "host_monotonic_ns": 78212769286124,
+            "host_monotonic_s": 78212.769286124,
+            "host_utc": "2026-09-23T08:14:49.655705+00:00",
+            "sim_time_s": 2.0500001069158316,
+            "episode_time_s": 2.0166667718440294
+          },
+          "t_switch": {
+            "host_monotonic_ns": 78212872497498,
+            "host_monotonic_s": 78212.872497498,
+            "host_utc": "2026-09-23T08:14:49.758917+00:00",
+            "sim_time_s": 2.150000112131238,
+            "episode_time_s": 2.116666777059436
+          }
+        },
+        "cart_pixels": 3986,
+        "safety_abort": false,
+        "termination": "ATTEMPT_LIMIT",
+        "actual_prefix_clearance_lower_bound_m": 0.9392329846054571,
+        "complete_bypass": false,
+        "calls": {
+          "terminal_predictions": 2,
+          "buffers": 7,
+          "MPC_submissions": 13,
+          "MPC_saved_results": 13,
+          "missing_MPC_results": [],
+          "saved_MPC_wall_s": 0.05121714901179075,
+          "terminal_RTT_sum_s": 0.46728256,
+          "GP_rigid_reconciliation": 0
+        },
+        "OLD_raw_sha256": "6d53cfff6ca770055ca6563548fc80b6696e2336fd4343f35c2c4e01da1bd5ae",
+        "FRESH_raw_sha256": "6893d5f9791c076037216647bba1b589050787cf703640d9440298b33490dfe2"
+      }
+    ],
+    "calls": {
+      "technical_predictions": 4,
+      "scientific_online_predictions": 4,
+      "PhaseA_predictions": 0,
+      "technical_buffers": 14,
+      "online_buffers": 14,
+      "server_synthetic_warmup_calls": 1,
+      "MPC_accepted": 56,
+      "MPC_saved": 56,
+      "MPC_saved_wall_s": 0.30079894194204826,
+      "GP": 0,
+      "rigid": 0,
+      "graph": 0,
+      "splice": 0,
+      "reconciliation": 0,
+      "report_and_validator_new_calls": 0,
+      "regression_real_calls": 0
+    },
+    "phase0_wall_s_excluding_Isaac_startup": 16.07896487900871,
+    "PhaseB_wall_s_excluding_Isaac_startup": 15.538959192999755,
+    "remaining_uncertainty": "Whether a genuine OLD whose finite stored future is actually obstructed can coexist with this safe-FRESH moving-B response under separately frozen acquisition conditions.",
+    "scope": "safe turning raw FRESH and moving B observed twice, but OLD obstruction gate fails; no accepted obstacle-induced representative source"
+  },
+  "historical_array_identity": {
+    "historical_raw_path": "data/obstacle_source_acquisition_01/primary_20260923T073600Z/phaseA/POSE11_ON/chunks/terminal/raw_local.npy",
+    "sha256": "6893d5f9791c076037216647bba1b589050787cf703640d9440298b33490dfe2",
+    "new_FRESH_equal": {
+      "REPEAT_00": true,
+      "REPEAT_01": true
+    }
+  },
+  "saved_validation": {
+    "valid": true,
+    "saved_episode_recomputation": true,
+    "raw_world_plot_parity": true,
+    "CSV_JSON_parity": true,
+    "source_hashes_preserved": true,
+    "ZIP_byte_parity": true,
+    "classification": "ONLINE_POSE11_SOURCE_NOT_QUALIFIED",
+    "qualified_count": 0,
+    "real_model_MPC_optimizer_calls": 0,
+    "validator_sha256": "755ed477202d2bb1bbdb898dc551466dccf5afca2e99a919bebe29122b93f1d0",
+    "source_validation_sha256": "1ceda4f04fc245c7430a11214c38838e62f457950155ecb3025294867f734eec",
+    "summary_sha256": "63b7b8b87b762e5ec7e9a5d8549f26d2a966475aa3f8df6b10467ce46434657e"
+  },
+  "tests": {
+    "relevant_passed": 519,
+    "real_model_MPC_calls": 0
+  }
+}

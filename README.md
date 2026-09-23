@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [POSE11 online acquisition and pacing correction](docs/OBSTACLE_SOURCE_ACQUISITION_02_ONLINE_POSE11.md)
+passed request-local timing after removing catch-up bursts. Both frozen online
+repetitions produced safe turning FRESH (.157819 / .149121 m edge clearance) and
+moving B (.293333 m observation-to-application travel). However, both actual OLD
+paths ended before the cart and remained safe with it (+.273959 m); the required
+OLD-obstruction gate failed. Result: **ONLINE_POSE11_SOURCE_NOT_QUALIFIED**, accepted
+representatives0/2. No retries, PhaseA rerun or reconciliation. Whole-episode wall
+throughput remains limited by rendering. See the
+[saved review](data/obstacle_source_acquisition_02/primary_20260923T090000Z/index.html).
+
 The [bounded obstacle source acquisition](docs/OBSTACLE_SOURCE_ACQUISITION_01.md)
 found two qualifying safe local OFF/ON prediction pairs among four frozen
 geometries, using one exact side instruction and unchanged saved BRIGHT inputs.
