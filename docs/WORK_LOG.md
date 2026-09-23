@@ -5349,3 +5349,31 @@ OFF00/ON00/OFF01/ON01 episodes, same budgets/guard/STOP rules, no retry or tunin
 New live histories may diverge, so not an identical-input terminal contrast.
 Pre-primary tests100 pass. See JOIN_ONLINE_03_DESTINATION_INSTRUCTION.md and
 new run primary_20260923T031300Z; historical outputs remain immutable.
+
+## 2026-09-23 — JOIN-ONLINE-03 completed instruction rerun
+
+Executed the four frozen episodes once after pushed freeze1bd1be8. The requested
+destination-first wording produces partial lateral response in both ON repeats,
+but no complete bypass. Unlike historical native STOP, both now end at the
+unchanged oracle pre-command guard. Actual minimum edge clearances .0532953 /
+.0537319 m remain valid; proposed next-step lower bounds .0424345 / .0462442 m
+would violate .05 m and those commands are unapplied. ON C5/C6 raw paths are
+unsafe; positive-but-insufficient clearance is distinguished from overlap.
+OFF continues past the absent cart region, then emits STOP; hallway-end arrival
+has no independent oracle. No GP/rigid/reconciliation or controller changes.
+
+All43 terminal predictions,136 buffer requests,1 technical model warmup and
+409 accepted MPC submissions preserved;408 saved completions,1 final unapplied
+completion unavailable. Saved MPC time1.679291s is a lower bound; terminal RTT
+sum15.402936s, collection68.147044s including Isaac startup. All14 ON local RTFs
+exceed1.2 and ON maximum stalls exceed.25s; no timing-qualified bypass source.
+Existing source_bundle retains early safe moving onset only, not full bypass.
+
+Saved-only validator passes all4streams, exact integration, guard reconstruction,
+raw/wire/source hashes and numeric figure parity. 293 relevant tests pass:
+initial sandbox2IPCpermission failures resolved by same9testmodule with local
+socketpermission, no model calls. Compileall/diff check pass. Static figures,
+index.html/instruction_review_bundle.zip preserved under the new run, visually
+checked. New report distinguishes changed behavior from successful avoidance
+and different live histories from identical-input inference. Both unrelated
+Stage0 configuration edits preserved. No follow-up experiment implemented.

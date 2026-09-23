@@ -7,6 +7,17 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [JOIN-ONLINE-03 destination-first instruction rerun](docs/JOIN_ONLINE_03_DESTINATION_INSTRUCTION.md)
+completed four new native online OFF/ON episodes with the user's exact wording.
+Both cart-ON repeats produced a larger lateral response and continued instead
+of STOP, but later raw futures were unsafe. The unchanged oracle guard halted
+before required clearance would fall below .05 m; actual minimum edge clearance
+was .05330 / .05373 m. No collision was executed and no complete bypass source
+was obtained. Request-local pacing limitations remain; this comparison uses
+new live histories, not identical RGB. Official LightNav/MPC were unchanged,
+and no reconciliation ran. See the
+[saved review](data/robotless_join_online_03/primary_20260923T031300Z/index.html).
+
 The [JOIN-ONLINE-02 far-approach audit](docs/JOIN_ONLINE_02_FAR_APPROACH.md)
 ran four genuine native online OFF/ON episodes from the frozen 5 m start.
 Both cart-ON repeats generated seven responses: forward chunks shortened from
