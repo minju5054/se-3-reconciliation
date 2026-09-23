@@ -1,0 +1,17 @@
+experiment: OBSTACLE_SOURCE_ACQUISITION_03
+source_run: data/obstacle_source_acquisition_02/primary_20260923T090000Z
+selected_candidate: POSE11
+initial_pose: exact authoritative selected_pose11.pose_world; no backward translation
+bootstrap: four new chronological live stationary RGB captures, first three buffer-only, fourth genuine target OLD prediction
+reveal: first scheduled capture strictly after first target OLD command application
+minimum_active_before_prediction_sim_s: 0.0
+request_eligibility_change: removes historical .5s wait to implement explicitly requested first-post-active capture; cadence and scheduler unchanged
+repetitions: [REPEAT_00, REPEAT_01]
+maximum_terminal_predictions_per_episode: 2
+first_post_reveal_only: true
+maximum_active_sim_s: 4.0
+postroll_sim_s: 0.10
+pacing_policy: minimum_wall_step_no_catchup_v1
+representative: first qualifying in fixed repetition order
+retry: false
+scope: genuine source only; no optimization or method comparison

@@ -5603,3 +5603,22 @@ reviewZIP at `data/obstacle_source_acquisition_02/primary_20260923T090000Z/`.
 1,722 preserved source hashes and unrelated Stage0 edits unchanged. Raw remains
 ignored. Remaining uncertainty: jointly obtain an actually obstructed finite OLD
 and safe turning FRESH/movingB under a separate frozen acquisition; not implemented.
+
+### 2026-09-23 — OSA03 pre-scientific exact-POSE11 OLD protocol
+
+Fetched HEAD/origin84b8d80. Preserve OSA01/02 and two unrelated Stage0 edits.
+New exclusive run `data/obstacle_source_acquisition_03/primary_20260923T085200Z/`.
+Target OLD now observed exactly at selected_POSE11, stationary new live bootstrap,
+cart OFF throughout OLD inference. No historical input/output replay. Reveal at
+first normal4Hz capture strictly after actual OLD command application. First
+postreveal frame only; OLD continues to first FRESH application B. Exactly two
+independent repeats; no retry/PhaseA/pacing search or next-stage optimization.
+
+Unchanged OSA02 collector/scheduler/60-10-4Hz simulation cadence. New config sets
+minimum_active_before_prediction_sim_s .5→0 solely to implement prescribed first
+post-active request; otherwise that frame would be consumed buffer-only. This
+necessary eligibility difference is explicit before inference, not hidden pacing
+or geometry tuning. Exact same instruction/cart/camera/light/model/MPC/thresholds.
+Saved validator adds exact OLD pose, zero pre-OLD motion, true application/reveal
+order and finite OLD nominal obstruction to reused source gates. No extrapolation.
+109 focused tests pass, no live model/MPC calls. Freeze commit/push precedes calls.
