@@ -205,7 +205,7 @@ def make_event_context(ep,result,old,ready_state,installed_stamp,history_contrac
          'no_added_inference_or_activation_delay':True,'collision_validity':'unknown'}}
 
 
-def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model,mpc,panel,model_ready,mpc_ready,*,intervention=None):
+def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model,mpc,panel,model_ready,mpc_ready,*,intervention=None,command_guard=None):
     from robotless_runtime import actual_pose,camera_metadata
     from robotless_old_consistent_observation import set_precise_agent_pose
     import omni.replicator.core as rep
@@ -348,7 +348,23 @@ def collect_episode(spec,run,config,app,world,agent,camera,annotator,scene,model
             if activation.installed is not None and tick%control_stride==0:
                 mpc.send('submit',solve_id=f'{ep.name}_solve_{solve_counter:06d}',pose=pose.tolist(),input_state_id=st['state_id'],
                     input_sim_time_s=sim,input_host_monotonic_s=time.monotonic());solve_counter+=1
-            command,event=activation.apply(st,states[-2] if len(states)>1 else None,commands[-1] if commands else None)
+            if command_guard is None:
+                command,event=activation.apply(st,states[-2] if len(states)>1 else None,commands[-1] if commands else None)
+            else:
+                # Research acquisition abort hook: no command/reference change.
+                # Preview identity so an unapplied command cannot create B.
+                from reconciliation.join_online02 import preview_activation
+                proposal,command,event=preview_activation(activation,st,states[-2] if len(states)>1 else None,commands[-1] if commands else None)
+                decision=command_guard(pose.copy(),command,dt)
+                journal.write('guard.jsonl',decision)
+                if not decision['safe']:
+                    terminal='SAFETY_ABORT_BEFORE_UNSAFE_COMMAND'
+                    terminal_reason='next proposed held-command interval fails frozen direct geometry'
+                    dump_new(ep/'guard_abort.json',dict(decision=decision,state=st,
+                        proposed_activation=event,command_applied=False,active_before_abort=activation.active,
+                        recorded_at=stamp(sim,elapsed)))
+                    break
+                activation=proposal
             applied_stamp=stamp(sim,elapsed);command.update(applied_stamp);command['command_id']=len(commands)
             if event:
                 event['t_switch']=applied_stamp;event['first_fresh_command']=command

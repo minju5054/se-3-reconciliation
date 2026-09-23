@@ -5265,3 +5265,16 @@ interpretation and remaining next-chunk/internal-mechanism uncertainty. No
 online confirmation or optimization was added. Two unrelated Stage0 edits
 remain hash-preserved and excluded from staging. Final Git completion is saved
 in the ignored run after focused result commit and normal push.
+
+## 2026-09-23 — JOIN-ONLINE-02 pre-primary native approach protocol
+
+Fetched origin/main `a02b79750e22cd64b68351992fb82a2ce852141a`; preserved two unrelated
+stage0 config changes. Reused SOURCE04/05 actual cart/BRIGHT/Hospital/camera and
+pinned official MPC. Geometry-only [5,4.5,4] m candidates all pass; frozen R0 is
+5 m from cart. Actual Isaac OFF/ON preflight passes (0/372 cart pixels), exact
+mesh/static layers/camera/state and official controller provenance; zero new
+LightNav predictions/MPC solves. Added optional abort-only command hook to the
+existing collector, saved-only analysis/validator/static report and Isaac replay.
+Four independent OFF/ON repeats, native scheduler, classification and source
+selection are frozen before scientific execution. No GP/reconciliation.
+See `docs/JOIN_ONLINE_02_FAR_APPROACH.md` for exact protocol and commands.

@@ -1,0 +1,32 @@
+experiment: JOIN-ONLINE-02-FAR-APPROACH
+source04_run: data/robotless_join_source_04/persistence_20260922T050237Z
+instruction: Avoid the supply cart and continue to the end of the hallway.
+candidate_center_distances_m: [5.0, 4.5, 4.0]
+order: [OFF_REPEAT_00, ON_REPEAT_00, OFF_REPEAT_01, ON_REPEAT_01]
+maximum_activated_after_C0: 20
+maximum_sim_s_after_C0: 25.0
+generation_environment:
+  VLN_EVAL_TEMPERATURE: '0'
+  VLN_EVAL_TOP_P: '1'
+  VLN_EVAL_TOP_K: '0'
+  VLN_EVAL_TRAJ_TOP1: '0'
+guard:
+  new_command_interval_s: 0.1
+  held_continuation: check every next actual integration step, including timeout
+  radius_m: 0.20
+  required_edge_clearance_m: 0.05
+  abort: SAFETY_ABORT_BEFORE_UNSAFE_COMMAND
+  raw_future_unsafe_aborts: false
+classification:
+  lateral_m: 0.20
+  tangent_deg: 20.0
+  tangent_chord_m: 0.10
+  directional_lateral_minimum_m: 0.02
+  short_arc_m: 0.50
+  obstacle_influence_before_front_m: 0.50
+  rear_margin_m: 0.25
+  visibility_pixels: 20
+  priority: [SAFE_STOP, PAST_OBSTACLE, UNSAFE_INTERSECTING, SAFE_BYPASS, SAFE_BYPASS_ONSET, SAFE_SHORTEN, STRAIGHT_OR_BASELINE]
+candidate_selection: first full bypass then onset in ON_REPEAT_00; then same in ON_REPEAT_01
+technical_retry: no scientific-output retry; pre-scientific technical failure preserved under a new run
+scope: ACTUAL ONLINE EXECUTION; oracle abort only; no reconciliation
