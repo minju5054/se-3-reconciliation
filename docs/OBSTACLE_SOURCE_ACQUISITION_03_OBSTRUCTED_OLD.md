@@ -135,3 +135,143 @@ No reconciliation/complete traversal/general navigation claim is authorized.
 
 Pre-scientific full relevant regression: 532 passed (6.88s), compileall/diff PASS,
 zero real model/MPC calls. OSA02 saved revalidation and inherited source parity PASS.
+
+## Completed frozen acquisition
+
+**QUALIFIED_GENUINE_OBSTRUCTED_OLD_HANDOFF_SOURCE: 2/2 qualified; REPEAT_00 is the representative, REPEAT_01 the replication.** Both fixed repetitions ran once. No PhaseA rerun, pacing trial, retry, additional FRESH or next-stage comparison.
+
+Scientific code/config/tests freeze was committed and pushed as `76352cf89f461df0c47dd2e7bb4011d665df905d` before server startup and acquisition. Result numbers are also tracked in [the small JSON summary](results/obstacle_source_acquisition_03.json). Original OSA01/02 conclusions are unchanged.
+
+### Repository-confirmed facts
+
+All distances below are metres, clearance is footprint-edge clearance (radius .20 m, unchanged required margin .05 m), angular values are degrees unless marked rad/s. OLD obstruction is a hypothetical check of the actual finite returned OLD with the newly revealed cart; it is **not an executed collision**. Both whole raw polylines were checked, with no extrapolation, deleted rows or observer-to-first-waypoint connector.
+
+| Measured quantity | REPEAT_00 | REPEAT_01 |
+|---|---:|---:|
+| OLD raw arc [m] | 1.351820588 | 1.351820588 |
+| OLD OFF minimum edge [m] | 1.117514011 | 1.117514011 |
+| Same finite OLD + cart minimum edge [m] | -0.125215494 | -0.125215494 |
+| FRESH whole raw minimum edge [m] | 0.229486890 | 0.221686301 |
+| FRESH raw arc [m] | 1.353245520 | 1.353245520 |
+| FRESH maximum local +y/LEFT displacement [m] | 0.676244259 | 0.676244259 |
+| FRESH maximum absolute yaw [deg] | 30.000670193 | 30.000670193 |
+| FRESH hallway progress [m] | 1.172444916 | 1.172445022 |
+| OLD→FRESH interior lateral mismatch [m] | 0.717343090 | 0.712353270 |
+| Reliable tangent mismatch [deg] | 29.972302282 | 29.972293322 |
+| Reliable pose-yaw mismatch [deg] | 29.954514014 | 29.955474216 |
+| Observation→B actual travel [m] | 0.213333346 | 0.213333346 |
+| B minimum edge [m] | 1.095851731 | 1.085852164 |
+| Actual acquisition path clearance lower bound [m] | 0.949676819 | 0.939678459 |
+| FRESH request-local RTF | 0.991909419 | 0.991224685 |
+| Maximum loop stall [s] | 0.194015202 | 0.151906103 |
+| FRESH client RTT [s, host] | 0.227037605 | 0.224975173 |
+| Whole-episode RTF (supplemental) | 0.712710743 | 0.733695738 |
+| OLD obstruction | PASS | PASS |
+| FRESH STOP | false | false |
+| Remaining original rows / arc [m] | 9 / 1.202489115 | 9 / 1.202489115 |
+| Cart visible pixels | 3992 | 4220 |
+| Safety abort / catch-up bursts | none / 0 | none / 0 |
+| All frozen source gates | PASS | PASS |
+| Complete bypass | false | false |
+
+Both OLD local-array hashes are identical, and both FRESH local-array hashes are identical; neither equality was enforced. OLD versus FRESH hashes differ. The independent new live sessions have different RGB/observation poses. FRESH world clearance consequently differs despite identical local arrays. Each actual output has N=10; analysis remains generic N, and row indices have no intrinsic time.
+
+```text
+OLD raw npy SHA256: 6d53cfff6ca770055ca6563548fc80b6696e2336fd4343f35c2c4e01da1bd5ae
+FRESH raw npy SHA256: 8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521
+```
+
+**Direction caveat:** the frozen instruction says RIGHT, while the returned local trajectories use +y/LEFT. Neither side compliance nor full instruction completion is claimed. Direction was not retuned or introduced as a new rejection criterion. FRESH endpoints remain .311381/.301381 m before the cart front plane, within the frozen .50 m interaction region; this is a safe turning local future, not a completed bypass.
+
+### Exact boundaries and controller state
+
+Coordinates are Isaac world `[x m, y m, yaw rad]`. Each FRESH remains anchored at its actual observation pose, never at B. Command tuples are `[v m/s, omega rad/s]`.
+
+```text
+REPEAT_00
+OLD observation = [19.20312073159454, 24.423334915767065, -1.5689742328041627]
+FRESH observation = [19.203242163778583, 24.356668352984542, -1.5689752526514715]
+B = [19.203630553052257, 24.14333536015282, -1.5689760264727979]
+physical u_minus = [0.8, -1.5584691584098122e-06]
+controller previous_control at B = [0.8, 0.49999844893907003]
+```
+
+```text
+REPEAT_01
+OLD observation = [19.20312073159454, 24.423334915767065, -1.5689742328041627]
+FRESH observation = [19.203260368199164, 24.346668368545373, -1.5689754090345875]
+B = [19.20364874270168, 24.133335375688848, -1.5689760469373495]
+physical u_minus = [0.8, -1.2790285101476235e-06]
+controller previous_control at B = [0.8, 0.4999987283797167]
+```
+
+At first FRESH application the worker has already accepted the first FRESH solve result, so its memory is approximately `[.8, .5]` while the incoming physical OLD command is `[.8, 0]`. This is the actual asynchronous state, not a reset, correction or assertion that the two are equal. Solve inputs/outputs, accepted-result events and applied identities remain in each episode and the bundle provenance. A future common-B comparison must account for this phase distinction; no such comparison ran here.
+
+### Timing, live history and execution
+
+Three newly captured stationary live frames were buffered before the fourth capture generated genuine OLD. There was no preceding moving chunk. OLD observation was exactly POSE11 in both sessions, with cart OFF throughout inference and zero motion until OLD application. Reveal was the first normal scheduled capture strictly after actual OLD application; the exact resulting JPEG generated the first and only FRESH. FRESH history count was 6 in each session; the full episode captured 7 frames. No historical RGB or model response was replayed.
+
+| Simulation-clock event [s] | REPEAT_00 | REPEAT_01 |
+|---|---:|---:|
+| OLD observation | 0.783333374 | 0.783333374 |
+| OLD first actual application | 1.116666725 | 1.066666722 |
+| Reveal / first FRESH observation | 1.283333400 | 1.283333400 |
+| Reveal minus OLD application | 0.166666675 | 0.216666678 |
+| FRESH ready seen | 1.533333413 | 1.533333413 |
+| FRESH install | 1.533333413 | 1.533333413 |
+| First FRESH application / B | 1.566666748 | 1.566666748 |
+| FRESH observation→B duration | 0.283333348 | 0.283333348 |
+
+| Host-monotonic event [s] | REPEAT_00 | REPEAT_01 |
+|---|---:|---:|
+| FRESH observation | 80643.001066609 | 80645.605106347 |
+| Request sent | 80643.097832803 | 80645.698869603 |
+| Full response receipt | 80643.324870408 | 80645.923844776 |
+| Ready seen | 80643.331957551 | 80645.933387692 |
+| Install | 80643.332427079 | 80645.933752279 |
+| First command application | 80643.452123090 | 80646.047255055 |
+
+Host clocks are not subtracted from simulation clocks. Observation→application is .451056481/.442148708 s on the host clock and .283333348 s on the simulation clock. The request-local RTF criterion passes independently (.991909/.991225); whole-episode RTF is .712711/.733696 because blocking rendering is not repaid by catch-up. No claim of whole-episode real-time throughput. Exact held-command reconstruction has zero stored-pose error in both 99-state / 98-integration records. Capture every15 simulation ticks, MPC every6, 60 Hz integration and the unchanged `minimum_wall_step_no_catchup_v1` scheduler pass.
+
+FRESH was actually applied and only the frozen .10 s postroll was recorded. Both normal terminations are `ATTEMPT_LIMIT`; neither guard aborted. The stopped source episodes do not demonstrate that continuing native tracking would clear the cart.
+
+### Source and compute preservation
+
+Pinned official LightNav source `c6f40e3220edbf7011e4f17eaf2c865416737d4d`, checkpoint revision `7221d418bfff55cfcbadd09f7a26aaab81e1f8a6`, task VLN, actual greedy settings temperature=0/top_p=1/top_k=0/traj_top1=0. Official MPC SHA256 `2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1`. Historical Hospital/cart/camera/BRIGHT provenance is referenced in `source.json`, `acquisition_scene.json`, `workers.json`, and each bundle. 2,123 preserved input/core/external/historical/unrelated-edit hashes revalidated unchanged.
+
+Exactly **4 scientific terminal predictions** (OLD+FRESH per repetition), **10 buffer-only requests**, **1 separately counted synthetic server startup warmup**, and **14 official MPC submissions / 14 saved solves**. MPC summed solve wall time .106523391 s; scientific terminal RTT sum .883671581 s; collector wall 14.792618380 s excludes Isaac startup/server loading. New PhaseA, technical qualification, GP, rigid, graph, splice, reconciliation and test/validator real model/MPC calls are all **0**. The owned server was stopped.
+
+### Validation, figures and sealed source
+
+Independent saved-record recomputation passes every frozen gate, source/input hashes, exact poses/anchors, session/history/wire integrity, reveal/application order, finite OLD obstruction, whole raw FRESH geometry, actual command integration, B/memory, timing, guard and remaining future. The separate report validation also passes bundle raw-byte parity and CSV/JSON/plot/ZIP parity, without new inference or controller calls.
+
+- [Static review](../data/obstacle_source_acquisition_03/primary_20260923T085200Z/index.html)
+- [Representative geometry](../data/obstacle_source_acquisition_03/primary_20260923T085200Z/review/REPEAT_00_world.png)
+- [Live OFF/ON RGB](../data/obstacle_source_acquisition_03/primary_20260923T085200Z/review/REPEAT_00_RGB.png)
+- [Timing](../data/obstacle_source_acquisition_03/primary_20260923T085200Z/review/REPEAT_00_timing.png)
+- [Both repetitions/gates](../data/obstacle_source_acquisition_03/primary_20260923T085200Z/review/qualification_matrix.png)
+- [Review ZIP](../data/obstacle_source_acquisition_03/primary_20260923T085200Z/review_bundle.zip)
+- [Sealed source manifest](../data/obstacle_source_acquisition_03/primary_20260923T085200Z/source_bundle/manifest.json)
+- [Source validation](../data/obstacle_source_acquisition_03/primary_20260923T085200Z/validation.json) / [report validation](../data/obstacle_source_acquisition_03/primary_20260923T085200Z/validation_final.json)
+
+Each repetition has raw OLD/FRESH npy and responses, observation JPEGs, immutable history/request references, observation-anchored world arrays, boundary execution/state/timing, and environment/model provenance with hashes. Seven figures have numeric/hash sidecars. PNG labels/legends were visually inspected. Large/raw/generated artifacts stay local and ignored.
+
+Additional saved-only commands (no scientific rerun):
+
+```bash
+MPLCONFIGDIR=/tmp/osa03_mpl OPENBLAS_NUM_THREADS=1 .venv/bin/python scripts/report_obstacle_source_acquisition03.py --run data/obstacle_source_acquisition_03/primary_20260923T085200Z
+OPENBLAS_NUM_THREADS=1 .venv/bin/python scripts/report_obstacle_source_acquisition03.py --run data/obstacle_source_acquisition_03/primary_20260923T085200Z --validate --output data/obstacle_source_acquisition_03/primary_20260923T085200Z/validation_final.json
+# After initial output creation, validate read-only by omitting --output.
+```
+
+### Research interpretation
+
+The question is answered positively for this frozen scenario in both attempts: the actual straight finite OLD becomes obstructed by sudden cart reveal, the first new raw FRESH is safe/turning/progressing, and it becomes active at a timing-qualified moving B while leaving enough future. This is a **genuine sudden-obstacle local-avoidance moving-B handoff**. REPEAT_00 is selected by the predeclared first-qualified rule, not by visual appearance or best margin.
+
+### Not demonstrated / remaining uncertainty
+
+No complete bypass, end-to-end navigation, broad LightNav obstacle competence, real-robot feasibility, reconciliation benefit or optimizer superiority was established. The principal remaining uncertainty is whether a transition starting at this actual B can execute into the safe original FRESH while preserving safety/motion and reducing handoff cost. That requires a separate common-B experiment; none was implemented or run.
+
+Final relevant regression: **532 passed (7.02 s)**; zero real model/MPC test calls.
+Final `compileall -q src scripts tests` and `git diff --check` PASS. No shell
+launcher changed. Unrelated Stage0 edits are preserved and excluded from staging.

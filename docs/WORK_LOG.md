@@ -5622,3 +5622,44 @@ or geometry tuning. Exact same instruction/cart/camera/light/model/MPC/threshold
 Saved validator adds exact OLD pose, zero pre-OLD motion, true application/reveal
 order and finite OLD nominal obstruction to reused source gates. No extrapolation.
 109 focused tests pass, no live model/MPC calls. Freeze commit/push precedes calls.
+
+### 2026-09-23 — OSA03 qualified genuine obstructed-OLD source, 2/2
+
+Scientific freeze 76352cf was pushed before exactly REPEAT_00/01. Both initialized
+stationary at authoritative POSE11 [19.20312073159454,24.423334915767065,
+-1.5689742328041627], new live bootstrap, genuine OLD with cart OFF. Actual OLD
+application sim1.116666725/1.066666722; first strictly subsequent scheduled4Hz
+capture sim1.283333400 reveals cart and supplies the only FRESH observation.
+No PhaseA rerun/pacing search/retry/POSE12 fallback; OSA02 scheduler unchanged.
+
+Both finite OLD arc1.351820588m, OFF edge1.117514011m, same raw OLD+cart edge
+-.125215494m: the previously missing obstruction gate now passes, without
+extrapolation/connector. FRESH whole edge.229486890/.221686301m, lateral+LEFT
+.676244259m, yaw30.000670deg, arc1.353245520m, hallway progress1.172445m; nonSTOP,
+no trimming. Interior mismatch.717343090/.712353270m. Same local OLD/FRESH hashes
+across independent repeats were observed, not forced; world anchors differ.
+RIGHT wording/localLEFT caveat retained; no complete bypass.
+
+Actual observation→B travel.213333346m, physical incoming v.8m/s; B edge
+1.095851731/1.085852164m. u_minus omega~-1.6e-6/-1.3e-6 versus worker memory
+omega~.49999845/.49999873 at application are separately preserved. Original
+FRESH remains observation-anchored; 9rows/1.202489115m future remains. FRESHRTF
+.991909419/.991224685, maxstall.194015202/.151906103s, burst0; 99states/98 exact
+integrations each, error0. WholeRTF.712711/.733696 supplemental only. Neither
+abort; only.10s FRESH postroll, normal ATTEMPT_LIMIT. All frozen gates PASS.
+
+Classification QUALIFIED_GENUINE_OBSTRUCTED_OLD_HANDOFF_SOURCE; representative
+REPEAT_00, replication REPEAT_01, both sealed in source_bundle. Exactly4scientific
+terminal predictions,10buffers,1separate synthetic serverwarmup;14MPCsubmitted/
+14saved, solverwall.106523391s. RTTsum.883671581s, collectorwall14.792618380s
+excludes Isaac startup. GP/rigid/graph/splice/reconciliation0; no real test or
+validator calls. Owned server stopped. Source acquisition ends here.
+
+Saved-only independent recomputation, raw/bundle/CSV/JSON/plot/ZIP parity PASS;
+2,123 historical/external/core/input/unrelated hashes unchanged. 532 relevant
+regression tests PASS7.02s, compileall/diff PASS. Seven PNGs with numeric/hash
+sidecars visually inspected; static index/reviewZIP and validation_final.json
+under data/obstacle_source_acquisition_03/primary_20260923T085200Z/. Small tracked
+summary docs/results/obstacle_source_acquisition_03.json. Raw/generated remain
+ignored; two Stage0 edits untouched. Remaining uncertainty: actual same-B
+transition execution and reconciliation benefit, not tested or implemented.

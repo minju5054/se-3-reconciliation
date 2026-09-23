@@ -7,6 +7,17 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [exact-POSE11 obstructed-OLD acquisition](docs/OBSTACLE_SOURCE_ACQUISITION_03_OBSTRUCTED_OLD.md)
+qualified both frozen genuine sudden-reveal repetitions. Actual finite OLD is
+safe before reveal (1.117514 m edge clearance) but obstructed by the cart
+(−.125215 m); first post-reveal FRESH is safe (.229487/.221686 m), turns laterally,
+and is applied at moving B after .213333 m of OLD travel. Request-local RTF
+.991909/.991225 and all frozen source gates pass. **REPEAT_00 is the sealed
+representative**, with REPEAT_01 as replication. This is a local-avoidance handoff
+source, not complete bypass or reconciliation evidence; only .10 s FRESH postroll
+ran. No further source search or optimization. See the
+[static review](data/obstacle_source_acquisition_03/primary_20260923T085200Z/index.html).
+
 The [POSE11 online acquisition and pacing correction](docs/OBSTACLE_SOURCE_ACQUISITION_02_ONLINE_POSE11.md)
 passed request-local timing after removing catch-up bursts. Both frozen online
 repetitions produced safe turning FRESH (.157819 / .149121 m edge clearance) and
