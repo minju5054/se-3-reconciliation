@@ -6,7 +6,8 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path[:0]=[str(ROOT/'src'),str(ROOT/'scripts')]
 import numpy as np
 from reconciliation.join_source03 import read,save,sha
-from run_osa03_native_continuation import plain,validate
+from run_osa03_native_continuation import plain
+from validate_osa03_native_continuation import validate
 from run_join_online02 import environments
 from analyze_join_online02 import csvread,pose_rows
 from validate_robotless_online_handoffs import equal_record

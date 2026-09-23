@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [phase-preserving OSA03 Native continuation](docs/OSA03_NATIVE_CONTINUATION_01.md)
+replays REPEAT_00's saved .10s prefix exactly, then tracks its original FRESH with
+29 new official MPC solves and no VLA update. Over nominal3s, distance initially
+rises from.106649m to.214078m; sustained attachment starts at1.466667s near the
+FRESH endpoint. Execution clearance falls from raw-reference.229487m to.133849m
+but remains above.05m, with no abort. Nominal command-grid motion passes; actual
+application spacing exposes a6rad/s² historical angular-command diagnostic.
+This is one safe local Native continuation, not complete bypass or reconciliation
+benefit. See the [static review](data/osa03_native_continuation_01/primary_20260923T103000Z/index.html).
+
 The [exact-POSE11 obstructed-OLD acquisition](docs/OBSTACLE_SOURCE_ACQUISITION_03_OBSTRUCTED_OLD.md)
 qualified both frozen genuine sudden-reveal repetitions. Actual finite OLD is
 safe before reveal (1.117514 m edge clearance) but obstructed by the cart

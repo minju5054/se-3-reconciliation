@@ -5678,3 +5678,26 @@ transition execution and reconciliation benefit, not tested or implemented.
   Protocol freezes one nominal3s continuation with fixed raw FRESH, source clock,
   original nearest/+1, abort-only safety and original .10m/15deg/.30s attachment.
   No reconciliation implementation or future-stage work. Results pending.
+
+## 2026-09-23 — OSA03 Native continuation measured, source/phase preserved
+
+- Pushed execution freeze5d76492653057a8b2e707ac82c54d5a73e53d39b. Exactly one
+  REPEAT_00 continuation ran: six historical integration steps/zero pose error,
+  then29 new asynchronous official MPC solves; no solve atB, no retries.
+- Nominal3s cap reached; no abort/controller error. Initial distance.106649m
+  grows to.214078m at.466667s; sustained attachment1.466667s occurs with.04185m
+  original arc remaining. RawFRESH clearance.229487m vs execution.133849m
+  (curve-adjusted lower bound.133806m), all above unchanged.05m.
+- Nominal10Hz motion passes; actual command-application spacing shows6rad/s²
+  for the second historical FRESH result, versus5 nominal. No continuous physical
+  acceleration claim. Endpoint settles about.0961m from final pose, no full bypass.
+- First validator attempt exposed only pre/post-journal guard-command metadata
+  schema mismatch. Preserved failure; new saved-only authoritative validator
+  permits only3 journal fields to be absent. Original execution/metrics/worker
+  code and all258 source/input hashes unchanged; no scientific rerun.
+- Added six numeric/hash-linked static figures/index/ZIP; visually inspected.
+  Saved validator/figure parity PASS; final relevant suite371 PASS; compileall
+  and diff check PASS. All test/validator real MPC/VLA calls0; scientific VLA,
+  GP/rigid/graph/splice/reconciliation calls0. Unrelated Stage0 edits preserved.
+- Result NATIVE_CONTINUATION_SAFE_SUSTAINED_ATTACHMENT. Same-B improvement remains
+  untested; no subsequent reconciliation factor or comparison implemented.
