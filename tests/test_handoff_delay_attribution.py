@@ -142,3 +142,17 @@ def test_paired_arithmetic_and_missing_equal_exposure():
     assert [g['position_auc_m_s'] for g in gaps]==[2.,2.,1.,1.,0.]
     rows[2]['primary']=None;gaps,_=paired(rows)
     assert gaps[0]['position_auc_m_s'] is None and not gaps[0]['available'] and gaps[4]['position_auc_m_s'] is None
+
+def test_native_stdout_cannot_corrupt_protocol_pipe():
+    """Reproduce native-print framing issue without importing/solving CasADi."""
+    import subprocess
+    code="""
+import sys,os,json
+sys.path.insert(0,'scripts/lightnav')
+from handoff_delay_mpc_worker import protocol_stream
+out=protocol_stream()
+os.write(1,b'NATIVE LIBRARY BANNER\\n')
+print(json.dumps({'ok':True}),file=out,flush=True)
+"""
+    q=subprocess.run([sys.executable,'-c',code],cwd=ROOT,capture_output=True,text=True,check=True)
+    assert json.loads(q.stdout)=={'ok':True} and q.stderr=='NATIVE LIBRARY BANNER\n'

@@ -153,15 +153,17 @@ def verify(run):
 
 class Worker:
     def __init__(self,cfg,log):
-        self.log=log.open('x');self.p=subprocess.Popen([cfg['mpc_python'],str(ROOT/'scripts/lightnav/handoff_delay_mpc_worker.py')],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=self.log,text=True,bufsize=1)
+        self.transcript=log.with_suffix('.jsonl').open('x');self.log=log.open('x');self.p=subprocess.Popen([cfg['mpc_python'],str(ROOT/'scripts/lightnav/handoff_delay_mpc_worker.py')],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=self.log,text=True,bufsize=1)
     def call(self,q):
+        self.transcript.write(json.dumps({'direction':'request','record':q})+'\n');self.transcript.flush()
         self.p.stdin.write(json.dumps(q)+'\n');self.p.stdin.flush();line=self.p.stdout.readline()
+        self.transcript.write(json.dumps({'direction':'response','line':line})+'\n');self.transcript.flush()
         if not line:raise RuntimeError('worker ended: '+str(self.p.poll()))
         r=json.loads(line)
         if not r['ok']:raise RuntimeError(r['error'])
         return r['result']
     def close(self):
-        self.p.stdin.close();self.p.wait(timeout=30);self.log.close()
+        self.p.stdin.close();self.p.wait(timeout=30);self.log.close();self.transcript.close()
 
 def execute(run):
     f=verify(run);assert git('rev-parse','HEAD')==f['execution_sha'];assert git('rev-parse','origin/main')==f['execution_sha']
@@ -197,7 +199,9 @@ def execute(run):
                     else:result['status']='COMPLETED'
                 except Exception:result.update(status='TECHNICAL_FAILURE',reason=traceback.format_exc())
                 finally:
-                    if initialized:worker.call(dict(op='close'))
+                    if initialized:
+                        try:worker.call(dict(op='close'))
+                        except Exception:result['close_error']=traceback.format_exc()
                 result['wall_s']=time.perf_counter()-start;save(path,result)
                 print(e['case_id'],condition,result['status'],len(result['solves']),flush=True)
     finally:worker.close()

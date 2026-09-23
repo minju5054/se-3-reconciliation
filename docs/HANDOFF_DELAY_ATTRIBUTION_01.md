@@ -139,3 +139,20 @@ git diff --check
 Scientific VLA, GP, rigid, graph, Isaac and RGB calls are zero. Synthetic tests are
 implementation checks only. Results and research interpretation will be appended
 after the pushed freeze and one bounded execution.
+
+## Preserved technical failure and correction
+
+Pushed freeze `c823be8b0184a02ba2c61abcabf37ae1f39bc4d2` reached the first MPC
+request in run054600. Native solver stdout contaminated the JSON bridge; close
+parsing then failed before a result file was saved. One solve request was issued,
+zero numerical responses were preserved, and zero state integration steps ran.
+All later conditions were unattempted. `execution_failure.json` preserves this
+limitation. The numerical outcome of that first solve is unavailable.
+
+The correction adopts the exact file-descriptor separation already present in
+`scripts/online_mpc_worker.py`, adds a durable IPC journal, and prevents a close
+error from discarding a collected result. A native-print subprocess regression
+uses no CasADi/model call. It changes no scientific semantics. After a separate
+commit/push, the same84-condition schedule uses a new run
+`data/handoff_delay_attribution_01/primary_20260923T055300Z/`.
+The additional failed request is counted separately from that run's solve count.

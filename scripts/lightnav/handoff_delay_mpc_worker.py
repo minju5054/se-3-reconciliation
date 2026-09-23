@@ -9,7 +9,14 @@ from reconciliation.online_mpc_adapter import load_official
 from reconciliation.gp_se2_rollout import candidate_in_capture_frame
 from reconciliation.gp_se2_ref02_rollout import make_diagnostic_tracker,diagnostic_synchronous_solve,array_sha256
 
+def protocol_stream():
+    """Same native-stdout isolation used by the existing online MPC worker."""
+    stream=os.fdopen(os.dup(sys.stdout.fileno()),'w',buffering=1)
+    os.dup2(sys.stderr.fileno(),sys.stdout.fileno())
+    return stream
+
 def main():
+    protocol_out=protocol_stream()
     tracker=None;module=None;instance_ordinal=0;solve_calls=0
     for line in sys.stdin:
         q=json.loads(line)
@@ -34,8 +41,8 @@ def main():
             elif q['op']=='close':
                 tracker.close();tracker=None;reply={'closed':True}
             else:raise ValueError('unknown operation')
-            print(json.dumps({'ok':True,'result':reply},allow_nan=False),flush=True)
+            print(json.dumps({'ok':True,'result':reply},allow_nan=False),file=protocol_out,flush=True)
         except Exception:
-            print(json.dumps({'ok':False,'error':traceback.format_exc()}),flush=True)
+            print(json.dumps({'ok':False,'error':traceback.format_exc()}),file=protocol_out,flush=True)
     if tracker is not None:tracker.close()
 if __name__=='__main__':main()

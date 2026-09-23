@@ -5436,3 +5436,16 @@ preparation corrected the authoritative saved-loss path from retained developmen
 091255 to final091708 before scientific execution; old preparation retained.
 Added exclusive outputs, immutable source/code hashes, no-retry loop, safety abort,
 saved-only validation and static figures. Scientific execution awaits freeze push.
+
+### 2026-09-23 — HANDOFF delay diagnostic IPC failure before integration
+
+Freeze c823be8 was pushed. Full suite2718 passed/19 skipped. The first scientific
+solve request encountered native CasADi/IPOPT stdout in the new JSON pipe; then
+close parsing also failed. Retained run054600 has one issued MPC call, zero saved
+solve responses and zero integration steps; no result was available for tuning.
+This is a technical failure, not a controller failure or scientific outcome.
+Applied the existing online worker's native-stdout/stderr separation to the new
+bridge, plus durable request/response journal and close-error preservation.
+No source/core/threshold/initial-state semantics changed. Added a subprocess
+native-print regression test without CasADi. A separate pushed correction and new
+unique run will execute the same full frozen schedule; the failed attempt remains.
