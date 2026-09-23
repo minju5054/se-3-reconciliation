@@ -5554,3 +5554,21 @@ RTFs must pass[.8,1.2], stall<=.25, exactstates/cadence/guard/no-burst. Failure 
 no performance retry. POSE11/instruction/cart remain immutable, PhaseA0. Conditional
 2 sudden-reveal repetitions only after pass and another pushed selected freeze.
 No model/MPC/optimizer calls during this implementation/saved diagnosis stage.
+
+### 2026-09-23 — OSA02 technical PASS and conditional PhaseB freeze
+
+Pushed technical e539a03; single qualified OFF episode completed. RequestRTFs
+.990677/.990953/.989740, stall.210615s, zero burst steps, minimumstep.0167743s,
+266states/265 exact integrations (error0),18 captures every15ticks, MPC every6.
+WholeRTF.721769 disclosed: no catch-up means blocking render reduces wall throughput;
+nominal simulation cadence and clocks unchanged, no RTT metric manipulation.
+4technical predictions+14buffers,31MPCaccepted/31saved, one serverwarmup; no retry.
+Original frozen PhaseA not rerun. All source hashes preserved.
+
+Prepared exactly REPEAT_00/01 at fixed POSE11 minus.40m forward, unchanged yaw,
+cart/instruction/camera/BRIGHT/history semantics. Dynamic cart reveal first4Hz
+capture pastplane with OLD active; first postreveal only, queuedpre frames buffered.
+Both repetitions required, no outcome-driven replacement. B physical command and
+actual memory-at-cut independently reconstructed; geometry/RTF gates unchanged.
+Separate pushed PhaseB freeze required before these two live acquisitions. No
+source outcome yet; no optimization or method comparison.120 focused tests pass.

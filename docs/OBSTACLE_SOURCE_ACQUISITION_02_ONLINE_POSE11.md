@@ -134,3 +134,64 @@ this protocol freeze. Actual qualification and conditional acquisition outcome
 will be appended without rewriting historical OSA01.
 
 Pre-qualification regression: 488 tests passed (6.69s), compileall/diff checks pass. No real model/MPC calls from this suite.
+
+## Corrected qualification result and Phase B pre-execution freeze
+
+Pacing correction commit **`e539a03f300c2ec070e52040831795c837ce35b8`** was
+pushed before starting the official server or qualification. Exactly one real
+OFF technical episode completed three post-bootstrap handoffs. Saved validator
+passes; 266 states/265 exact integration intervals, maximum reconstruction error0;
+18 captures at every15 ticks, every controller submission at6-tick cadence.
+No burst step; minimum actual wall step .016774260 s. No safety abort.
+
+| Request | RTT s | Request-local RTF | Gate |
+|---|---:|---:|---|
+| C0 bootstrap | .580370095 | .854139228 | context; within bounds |
+| C1 | .278702692 | .990677358 | PASS |
+| C2 | .293023314 | .990952774 | PASS |
+| C3 | .306310637 | .989739785 | PASS |
+
+Max stall .210615059s PASS. Whole-episode RTF **.721768711** is disclosed:
+blocking render lowers wall throughput once catch-up is disabled. This is not
+60 wall steps per second through blocking calls, nor post-hoc clock correction.
+The nominal 60/10/4 rates refer to the unchanged simulation clock. The original
+request-local metric is unchanged and no bad window is omitted. Native full-
+episode history semantics persist; new actual RGB is not forced to old hashes.
+Technical4 terminal+14 buffer requests;31 MPC submissions/31 saved results;
+saved solve wall .154325614s. One separate official server synthetic warmup.
+PhaseA0. No optimizer. Technical collector wall16.078964879s excluding Isaac
+startup. Original OSA01 files and external MPC/checkpoint remain unchanged.
+
+PhaseB eligibility now established. Separate run-local `phaseB/protocol.json`,
+`episode_schedule.json`, config and freeze bind exactly **REPEAT_00, REPEAT_01**.
+Start `[19.20222765555384,24.823333918784805,-1.5689742328041627]`; plane is original
+POSE11 `[19.20312073159454,24.423334915767065,-1.5689742328041627]`. Same fixed cart
+transform, instruction and nominal scheduling. Only maximum handoffs1/active4s
+replace the qualification limits; .10s postroll is unchanged. No history cap or
+new bootstrap was introduced. The live history may differ from paired H8 and
+its resulting FRESH must independently qualify.
+
+An independent official session/reset and execution state is used per repetition.
+Both run regardless of first scientific outcome. The dynamic cart hook activates
+USD visibility and oracle occupancy before the same scheduled render, records
+both host times/state, and refuses queued pre-reveal or later substitute frames
+as FRESH. All guards remain abort-only. Saved validation independently checks
+reveal plane/cadence, raw/wire/anchor, dynamic guard queries, both clock domains,
+actual physical u_minus versus worker memory at command application, and complete
+raw paths without trimming. B-memory uses the existing conservative memory-at-cut
+helper from the delay audit; ambiguity is unavailable, never reset/copied.
+
+PhaseB adds no model/controller changes to the qualified loop. Original policy,
+thresholds and first-repetition selection are frozen before its first model call.
+The initial synthetic test's broad `qualified` text check incorrectly matched
+the required Phase0 precondition; it was replaced before execution with AST
+verification that the repetition loop contains no early break. No scientific
+outcome or input was involved. Focused120 tests pass, no real model/MPC calls.
+
+```bash
+.venv/bin/python scripts/run_obstacle_source02_online.py --mode prepare --run data/obstacle_source_acquisition_02/primary_20260923T090000Z
+.venv/bin/python scripts/run_obstacle_source02_online.py --mode freeze --run data/obstacle_source_acquisition_02/primary_20260923T090000Z
+# Review, commit, normal push before the two repetitions:
+/home/gpuadmin/isaacsim/python.sh scripts/isaac/obstacle_source02_online.py --run data/obstacle_source_acquisition_02/primary_20260923T090000Z
+.venv/bin/python scripts/validate_obstacle_source02_online.py --run data/obstacle_source_acquisition_02/primary_20260923T090000Z
+```
