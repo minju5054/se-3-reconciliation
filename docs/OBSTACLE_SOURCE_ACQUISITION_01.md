@@ -166,3 +166,183 @@ qualification/selection, and technical state integration/guard. No new solver or
 model call. Figures bind numerical/hash sidecars. Scientific rejection is not
 artifact corruption. Results, actual counts, timing and remaining uncertainty
 will be appended after this fixed schedule.
+
+## Completed outcome
+
+**PACING_BLOCKED_ONLINE_ACQUISITION.** Phase A supplies two qualifying safe
+local-avoidance prediction pairs, but the separately measured collector fails
+request-local pacing. Therefore **zero Phase B repetitions were attempted** and
+**no genuine obstacle-induced moving-B representative source was obtained**.
+This is not an online failure trial or a reconciliation result.
+
+Pushed execution freeze: `9190c70f3b305eab092b853d5aa478f3da5e32a1`.
+Authoritative run: `data/obstacle_source_acquisition_01/primary_20260923T073600Z/`.
+All eight declared scientific terminal requests completed once. The official
+process environment confirms temperature0/top_p1/top_k0/traj_top1=0 and exact
+historical scientific server argv/checkpoint identity. Source/core/geometry and
+the two unrelated user edits retain their hashes. No controller, pacing,
+selector, external LightNav, checkpoint or evaluation threshold was changed.
+
+### Phase 0: actual OFF technical episode
+
+Same native collector, live RGB4Hz, MPC10Hz, exact60Hz held-command integration.
+Four real technical predictions and three post-bootstrap handoffs completed.
+All physical guard checks pass; minimum curve-bounded actual edge clearance
+1.064697433 m, zero safety abort or collision. These OFF technical handoffs are
+not obstacle-response sources.
+
+| Request | Client RTT s | Request-local RTF | Timing gate |
+|---|---:|---:|---|
+| C0 bootstrap | .253778107 | 1.357520585 | outside retained bound; context |
+| C1 | .293739212 | 1.378365284 | FAIL |
+| C2 | .302946885 | 1.393438269 | FAIL |
+| C3 | .308652606 | 1.387401764 | FAIL |
+
+Maximum loop stall .216155667 s passes <=.25 s. Whole-episode RTF .999249833
+does not replace request-local RTF. The local intervals include faster-than-real
+catch-up integration within the absolute-paced acquisition loop. This is a
+saved timing observation, not a new estimate of model latency or a change in
+integration dt. No runtime engineering correction was introduced in this bounded
+protocol; the measured current infrastructure is not qualified for Phase B.
+There was no technical or scientific retry after these results.
+
+The episode saved256 states/255 exact integration intervals,17 new live RGBs,
+13 buffer-only requests,31 accepted MPC submissions and30 saved results.
+`PACING_OFF_00_solve_000031` was accepted near termination without a saved
+completion; no command from that solve was applied. Do not report31 completed
+solves. Recorded MPC solve wall time .154098410 s is a lower bound, not complete
+compute for all submissions. Technical terminal RTT sum1.159116810 s. The
+collector's measured post-SimulationApp-startup wall span is14.618949200 s;
+Isaac initialization time is separate. No cart reveal occurred in this episode.
+
+### Phase A: all four fixed pairs
+
+The cart transform is identical in all candidates; observation poses differ as
+listed above. Included terminal cart pixels are2976/3765/4821/6810; OFF counts0.
+Source04 authoritative validation, unchanged bank SHA256 and same-camera/mask
+state checks pass. Seven preceding OFF frame bytes match exactly within each
+pair. Independent sessions share task/instruction/settings and terminal pose;
+only the terminal JPEG encodes cart presence. No new Phase A render or MPC.
+
+| Candidate | Cart distance m | OFF actual edge m | OFF hypothetical cart-ON edge m | ON whole edge m | ON signed final lateral m | ON XY arc m | Qualifies |
+|---|---:|---:|---:|---:|---:|---:|---|
+| POSE10 | 1.983029 | 1.057500 | +.074073 | +.097559 | +.388397 | 1.354194 | No: OFF not obstructed |
+| POSE11 | 1.783029 | 1.117514 | −.125215 | +.205296 | +.584514 | 1.348502 | Yes |
+| POSE12 | 1.583029 | 1.203975 | −.200000 | +.100168 | +.644361 | 1.352735 | Yes |
+| POSE13 | 1.383029 | 1.125477 | −.200000 | +.725907 | +.000002 | .100066 | No: short/nonturning, insufficient future |
+
+All eight responses are non-STOP and contain10 rows in this runtime; code is
+generic N. Negative hypothetical OFF clearance means the same returned OFF
+path would overlap the newly present cart; no physical collision was executed.
+The −.20m unsigned-distance-minus-radius value is not a penetration estimate.
+All four ON paths pass the unchanged whole-polyline footprint requirement;
+safety alone is insufficient for source qualification.
+
+| Candidate | OFF max lateral m / yaw deg | ON max yaw deg | Interior mismatch m | Reliable tangent difference deg | ON forward progress m | ON end relative to cart front m | Observation-proxy rows / arc m |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| POSE10 | .000004 / .000901 | 15.002604 | .388394 | 14.872723 | 1.308500 | −.296320 | 10 / 1.354194 |
+| POSE11 | .000004 / .000901 | 29.919087 | .608727 | 19.603996 | 1.210529 | −.340224 | 10 / 1.348502 |
+| POSE12 | .024627 / 6.980638 | 30.224079 | .721359 | 28.712400 | 1.188372 | −.162205 | 10 / 1.352735 |
+| POSE13 | .024627 / 6.980638 | .037865 | N/A | N/A | .099836 | −.900609 | 10 / .100066 |
+
+POSE13's endpoint-projection differences are not misreported as lateral response.
+All candidates end before the cart front plane, so **no complete bypass is
+observed**. POSE11/12 nonetheless meet the predeclared local-interaction range,
+positive progress, full safety and future-proxy gates. Their ~1.35m arc is not
+mere truncation compared with OFF. They are raw spatial futures, not proved
+motion-feasible transitions from a moving B.
+
+Frozen first-pass selection is **POSE11**, not the largest mismatch/most
+attractive plot. Gates A–F all pass on POSE11/12. POSE10 fails B only. POSE13
+fails D/E/F. All four were executed as declared before selection; no fifth
+candidate, changed cart, changed side, added instruction or threshold was used.
+
+**Observed side caveat:** POSE10/11/12 ON arrays turn local +y, which is LEFT.
+The exact text says "pass the supply cart on your right". We neither rewrite
+this as a confirmed robot-right bypass nor change the instruction afterward.
+A cart-on-right interpretation and robot-pass-right interpretation are not
+resolved by the token trace. Side compliance was not an extra frozen gate;
+it is not added post hoc to remove otherwise qualifying geometry. Both original
+side probes were clearance-valid, and actual ON whole-path safety is checked
+against the complete Hospital plus cart mesh.
+
+APOS OFF10/11=[245,155], OFF12/13=[255,155], all unclamped. ON10/11/12 are
+[235,165]/[175,185]/[155,185], unclamped; ON13=[245,265], clamped and censored.
+All ON OPOS are not_visible. These observable fields are preserved but do not
+prove internal obstacle recognition, correct intent grounding or decoder cause.
+No sham repeats were declared in this bank; same-input stochastic variability
+was not newly measured despite greedy generation.
+
+### Phase B and source availability
+
+| Frozen repetition | Executed | OLD/FRESH, B, u_minus, memory, travel, RTF/stall | Reason |
+|---|---|---|---|
+| 00 | No | N/A | Phase0 request-local timing gate fails |
+| 01 | No | N/A | Phase0 request-local timing gate fails |
+
+There is no selected online configuration freeze or online source bundle.
+`paired_candidate_bundle/manifest.json` seals POSE11's exact OFF/ON inputs,
+responses, raw/local/world files, scene and hashes only. It explicitly has
+`online_optimization_ready=false`, B/u_minus/controller_memory=null. It must
+not be substituted for a genuine moving handoff. The technical OFF episode's B
+must not be attached to this independently predicted ON path.
+
+### Calls, validation and artifacts
+
+- Scientific Phase A: **8 terminal predictions,56 buffer-only requests,8 saved
+  responses**,36.962635267 s process-loop wall; terminal RTT sum2.159152857 s.
+- Phase0 technical: **4 terminal predictions,13 buffers,31 accepted MPC
+  submissions/30 saved results**, as detailed above.
+- Server: **one separately logged synthetic startup warmup**, not source evidence.
+- PhaseB:0 requests/episodes. Scientific MPC0; optimizer/GP/rigid/reconciliation0.
+  Regression tests call no real model/MPC/optimizer.
+- Prefreeze focused164 pass; additional242 related pass. Final combined relevant
+  suite **480 passed**,6.74 s; compileall and diff checks pass.
+- Original SOURCE04 saved validator passes. Primary `validation.json` and
+  authoritative additive `validation_final.json` pass: all source hashes,
+  eight independent sessions/wire bytes, seven empty buffers/terminal instruction,
+  observation anchors, whole geometry, deterministic selection, technical
+  integration/guard, pacing, CSV/JSON/PNG numerical parity and ZIP bytes.
+  Validation makes zero new inference/solver calls. Timing failure remains failure.
+
+Review: `index_final.html`; four `review/POSE*.png` pair overlays with exact
+numeric/source JSONs; `review_bundle_complete.zip`. Source-only primary tables:
+`aggregate/phaseA.csv`, `aggregate/analysis.json`, `aggregate/completion.json`.
+Small Git-readable summary: `docs/results/obstacle_source_acquisition_01.json`.
+Raw scientific data: `phaseA/POSE*/rgb`, `requests`, `chunks/terminal/raw_local.npy`
+and `response.json`; derived observation-anchored `world.npy` is separate.
+Technical online streams: `phase0/episodes/PACING_OFF_00/`. Unavailable online
+repetitions: `phaseB_availability.json`. Original RGB bank is referenced by hash,
+not re-rendered or edited. No RGB/array/ZIP/environment is committed.
+
+Additive completion command after frozen report/validator:
+
+```bash
+.venv/bin/python scripts/finalize_obstacle_source_acquisition.py --run data/obstacle_source_acquisition_01/primary_20260923T073600Z
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest -q tests/test_join_*.py tests/test_gp_se2_join01*.py tests/test_online_*.py tests/test_robotless_online*.py tests/test_se2.py tests/test_obstacle_source_acquisition.py
+.venv/bin/python -m compileall -q src scripts tests
+git diff --check
+```
+
+### Repository-confirmed facts
+
+One geometry-selected exact instruction and four immutable paired conditions
+produced two all-pass local raw source candidates. POSE11 is first. Current
+actual collector fails request-local pacing; no online sudden-reveal acquisition
+ran. Source/core/thresholds remain unchanged; all failures are retained.
+
+### Research interpretation
+
+A safe, substantial, obstacle-conditioned local response is available under
+these controlled inputs; raw generation is no longer an absolute blocker in
+this tested bank. It is not enough to establish the requested asynchronous
+moving-B source. The single remaining uncertainty is whether this paired
+response survives **genuine sudden reveal with a timing-qualified moving B**.
+No timing fix, online retry or next-stage optimization is implemented here.
+
+### Not demonstrated
+
+Reconciliation benefit, complete obstacle avoidance, graph superiority,
+closed-loop navigation improvement, real-robot feasibility or general LightNav
+obstacle capability. The selected record is a source-only candidate, not the
+requested final online representative source.

@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [bounded obstacle source acquisition](docs/OBSTACLE_SOURCE_ACQUISITION_01.md)
+found two qualifying safe local OFF/ON prediction pairs among four frozen
+geometries, using one exact side instruction and unchanged saved BRIGHT inputs.
+The first candidate has raw ON edge clearance .205296m and lateral change .584514m.
+However, the separately tested native collector fails request-local pacing
+(RTF1.378–1.393), so no genuine sudden-reveal moving-B acquisition ran.
+Result: **PACING_BLOCKED_ONLINE_ACQUISITION**. This is a source-only candidate,
+not complete bypass, an optimization-ready online handoff or reconciliation evidence.
+See the [saved review](data/obstacle_source_acquisition_01/primary_20260923T073600Z/index_final.html).
+
 The [handoff delay attribution diagnostic](docs/HANDOFF_DELAY_ATTRIBUTION_01.md)
 completed84 offline four-condition rollouts on the frozen13 mismatch sources
 and eight ONLINE03 onset transitions, with no new VLA or reconciliation.

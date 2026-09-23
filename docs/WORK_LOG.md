@@ -5501,3 +5501,36 @@ both gates and a second pushed selected-source freeze. Preparation073500 failed
 on YAML OFF/ON boolean enum before any call; corrected quoting/test and preserved
 it, using new exclusive073600. Actual inputs and source validators pass; no new
 scientific prediction at this protocol-writing stage.
+
+### 2026-09-23 — OBSTACLE-SOURCE-ACQUISITION-01 bounded completion
+
+Execution freeze9190c70 pushed before any model request. Run073600 completed
+one separate actual OFF technical pacing episode and all8 independent PhaseA
+OFF/ON predictions. Four source geometries/cart relative distances1.983/1.783/
+1.583/1.383m fixed by existing BRIGHT moving-pose bank, H8, terminal-only cart
+presence difference. Exact RIGHT instruction frozen from direct passage probes.
+No source/controller/threshold edits or retries after outputs.
+
+PhaseA2/4 qualify, firstPOSE11 selected. OFF hypothetical-cart edge−.125215m,
+ON+.205296m, final lateral+.584514m and arc1.348502m. POSE12 also qualifies,
+edge+.100168m/lateral+.644361m. POSE10 OFF remains safe even with cart; POSE13
+shortens to.100066m and fails change/progress/future gates. AllON are raw-safe,
+nonSTOP; no complete bypass. Positive local y is LEFT despite exact cart-on-your-
+RIGHT wording; preserve that distinction, no side-compliance or intent claim.
+
+Technical post-bootstrap requestRTF1.378365/1.393438/1.387402 fails[.8,1.2];
+maxstall.216156s passes. No pacing patch and no PhaseB executed. Final
+PACING_BLOCKED_ONLINE_ACQUISITION, no genuine moving-B representative source.
+Paired candidate bundle is explicitly NOT online/optimization-ready, B/memory
+null; technical OFF B is never borrowed. Both planned online repeats remain N/A.
+
+Scientific8terminal+56buffers; technical4terminal+13buffers; one serverwarmup.
+Technical31MPCaccepted/30saved; finalsolve000031 no saved completion or applied
+command. SavedMPCwall.154098410s lowerbound; PhaseAloop36.962635267s and terminal
+RTTsum2.159152857s; technicalcollector14.618949200s excluding SimulationApp startup.
+ScientificMPC/GP/rigid/reconciliation0. Source and saved-record validators PASS,
+CSV/JSON/PNG/ZIP parity PASS, final480 relevant tests PASS6.74s with zero real
+model/MPC/optimizer test calls; compileall/diff PASS. Four pair figures inspected.
+Raw/derived remain ignored; tracked summary/report provide all candidates and
+pacing limits. Largest uncertainty: genuine sudden-reveal reproduction with a
+timing-qualified moving B. No next-stage work.
