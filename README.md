@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [blind-left-corner source acquisition](docs/BLIND_CORNER_SOURCE_ACQUISITION_01.md)
+qualified one of two geometry candidates and ran it once. A static cart became
+visible through camera motion (12→237 pixels) during genuine turning OLD;
+moving B had v_minus .8 m/s, omega_minus .126377 rad/s, .28 m travel and timing
+PASS. **No qualified source**: finite OLD did not reach the cart, raw FRESH violated
+the existing corner-wall margin (.015055 m versus required .05 m), and the frozen
+cart-region mismatch was unestablished. Actual short execution stayed safe
+(.329437 m minimum). Two terminal predictions, seven MPC solves, no optimizer or
+continuation; no retry. [Static review](data/blind_corner_source_acquisition_01/primary_20260924T054500Z/review/index.html).
+
 The [OSA03 same-FRESH observation-start control](docs/OSA03_FRESH_TRACKABILITY_CONTROL_01.md)
 uses the saved observation command/memory and original absolute control clock.
 With 30 new official MPC solves and zero VLA calls, execution-origin attachment

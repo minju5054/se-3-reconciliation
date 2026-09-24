@@ -59,4 +59,95 @@ Isaac commands unset inherited LD_LIBRARY_PATH/PYTHONPATH/CUDA/ROS/AMENT/CMAKE/C
 
 ## Result
 
-Pending the pushed scientific freeze. No positive source claim is made at preparation.
+Scientific freeze **`ee814f307904b878777fcfa56e5d7629e5837795`**, pushed before server startup. C02 was collected exactly once; no retry, source replacement, placement change, or threshold change. C01 remained excluded. Final classification: **`BLIND_CORNER_LIGHTNAV_SOURCE_NOT_QUALIFIED`**. The original saved-episode validator and new saved-only qualification validator both pass; source qualification itself fails three gates.
+
+### Repository-confirmed facts
+
+| Quantity | C01 | C02 scientific acquisition |
+|---|---|---|
+| Geometry / scientific exposure | Initial occlusion failed; no model/MPC | Geometry passed; one episode |
+| Cart pixels at OLD observation | N/A | 12 (below frozen 20-pixel gate, not absolute zero) |
+| Last hidden → first visible | N/A | frame_000004:12 → frame_000005:237 |
+| OLD raw arc / yaw excursion / reliable tangent excursion | N/A | 1.283276 m / 52.190122° / 49.606466°; turning PASS |
+| OLD whole Hospital+cart edge clearance | N/A | +0.160775 m; **finite OLD not obstructed** |
+| OLD cart-only edge clearance | N/A | +0.740713 m |
+| FRESH whole edge clearance | N/A | +0.015055 m; **.05 m margin FAIL** |
+| FRESH cart-only edge clearance | N/A | +0.512887 m |
+| FRESH STOP / raw N / arc / outgoing-corridor progress | N/A | false / 10 / 1.334217 m / +0.698079 m |
+| Raw max local lateral OLD → FRESH | N/A | .490543 → .607958 m |
+| Required obstacle-region mismatch | N/A | NOT ESTABLISHED: no eligible samples inside frozen influence region; values null, not zero |
+| Physical u_minus at B [v,omega] | N/A | [0.8,0.126377241005012] m/s,rad/s |
+| Controller memory at B | N/A | [0.8,0.6263772407238692] |
+| First FRESH applied command | N/A | [0.8,0.6263772407238692] |
+| Observation→B travel | N/A | .279999892 m |
+| B edge clearance | N/A | .344559064 m |
+| Remaining raw FRESH | N/A | 9 rows / 1.182883277 m |
+| Request-local RTF / maximum loop stall / bursts | N/A | .991361139 / .200494433 s / 0; PASS |
+| Minimum actual executed-prefix clearance / abort | N/A | .329437471 m / none |
+| Qualified source | No scientific attempt | No |
+
+C02 cart actual mesh AABB center is [-22.4956033921,12.1541992894] m (desired root placement center [-22.5,12.15], yaw π/2). Bounds: x[-22.7234950992,-22.2677116850], y[11.7331208076,12.5752777712], z[-.00571508789,.77636878745]. C01 actual center [-26.2041992894,7.7043966079]. Full exact USD wrapper/source transforms are saved in preflight `cart.json`, geometry qualification and `acquisition_scene.json`; the small desired/AABB-center difference comes from rotating the authored mesh, not runtime movement.
+
+Actual FRESH observation:
+`[-24.14613262341616,13.630129709963809,-1.4810420853953086]`.
+Actual B (state/tick97):
+`[-24.10899088959018,13.352648672499399,-1.4121391037170778]`.
+Physical command immediately before observation: [.6000000287643693,.34464029123595447]. Recent .5 s actual yaw change at observation: .0897542414 rad. OLD was active throughout FRESH inference. `u_minus`, accepted worker memory and first-FRESH result are separately reconstructed; their angular difference is .5 rad/s, not silently zeroed.
+
+| Event | Simulation seconds | Host-clock detail |
+|---|---:|---|
+| OLD observation | .783333374 | observation frame_000003; original stationary approach anchor |
+| OLD request / receipt | N/A | 05:53:32.426143Z / 05:53:32.650837Z; RTT .224702777 s |
+| First OLD application | 1.100000057 | actual command activation |
+| Last hidden frame_000004 | 1.033333387 | captured before first OLD activation |
+| First visible FRESH observation frame_000005 | 1.283333400 | 05:53:32.988809Z; state75 |
+| FRESH request / full receipt | N/A | 05:53:33.084475Z / 05:53:33.320030Z; RTT .235566267 s |
+| Ready seen / installed | 1.550000081 / 1.550000081 | 05:53:33.426178Z / 05:53:33.426622Z |
+| First FRESH application B | 1.650000086 | 05:53:33.529264Z |
+| Source termination | 1.750000091 | .100000005 s post-B; ATTEMPT_LIMIT |
+
+Simulation observation→B duration .366666686 s and host observation→application .540454785 s are different clocks/quantities. Request-local RTF uses the unchanged saved first/last in-flight state window, not a mixed-clock division. The inherited metadata human string says “available 1s postroll”; that legacy text is stale: configured .10 s and actual six integration intervals are authoritative. No collector code was edited to conceal this textual limitation.
+
+The cart remains present in renderer and geometry from before the episode reset. 113 runtime static-state checks agree; authored/computed visibility remain `inherited`; full final cart triangles exactly match initial triangles. All seven masks align to the exact RGB render state. The first 12→237 crossing is the exact transmitted FRESH JPEG; no later frame or queue substitution was used. Original inputs/outputs and independent source/checkpoint/MPC hashes are preserved.
+
+Raw OLD file SHA256:
+`e8ee2758e55b29b00b686548bf1bdd7eda93a920d8d3fb39a70164be70606028`.
+Raw FRESH file SHA256:
+`9ca6a1bf23e87af4de6917ce7713b5530d516a65e658652ee5f7b7d1e86dfd5d`.
+World arrays use each chunk's own observation anchor, never B.
+
+A supplemental saved-only direct-mesh check locates the FRESH margin violation at the existing corner wall/trim, `/World/Hospital/Geo_M3_TrimStrateSide3_356/Geo_M3_TrimStrateSide/Geo_M3_TrimStrateSide`. Closest raw-path point [-23.7421354043,12.7035054666]; nearest obstacle [-23.5644306766,12.8246231216]. First margin-violating returned segment is zero-based4. The predicted footprint has .015054543 m edge separation, below .05 m but still above physical overlap. This is **raw future margin failure**, not an executed collision; actual collection stops well before that region. Cart-only clearance is .512886513 m. No scientific gate or frozen evaluator was changed for this supplemental attribution.
+
+FRESH continues left with a larger descriptive arc/net-turn radius proxy (OLD1.482192 m, FRESH2.006756 m); this is not a fitted curvature or a required yaw rate. The raw arrays differ, but the frozen obstacle-interaction mismatch cannot be evaluated because neither raw future reaches its influence window. This absence is retained as null/unestablished, not evidence of zero response or proof that the model understood the cart.
+
+### Compute, artifacts and validation
+
+Scientific terminal predictions: **2** (OLD1+FRESH1); buffer-only image requests: **5**; one server warmup (~282 ms); seven new RGB captures. Scientific terminal RTT sum .460269044 s. Official MPC submissions/results: **7/7**, saved solve wall sum .070488088 s. Acquisition scene/worker/episode wall12.099965 s (Isaac process startup separate). Geometry preflight and implementation tests made **0** model/MPC calls. GP/rigid/splice/graph/reconciliation/Native-continuation/trackability: **0**. No second candidate, retry or hidden prediction.
+
+Authoritative artifacts under the run:
+
+- `geometry_qualification.json`: all two candidates, including C01 rejection.
+- `validation.json`: saved-only original episode and full source checks, with three failed scientific gates explicitly separated from integrity PASS.
+- `candidates/C02/episodes/C02/`: immutable `rgb/`, `chunks/`, requests/wire/history, controller events, applied commands/execution, same-state masks, guard and first-crossing record.
+- `candidates/C02/static_initial.json`, `static_final.json`: constant transform/presence and exact-mesh proof.
+- `source_bundle/manifest.json`: **entries=[]; representative=null**. No qualified bundle exported.
+- `review/index.html`, `review_bundle.zip`: scene/handoff, hidden/visible RGB, timing, plus predicted-footprint wall-clearance diagnosis; numeric/hash sidecars. Scene and handoff are combined in one equal-aspect world figure to avoid duplicating the same source.
+- `artifact_validation.json`: frozen plot-data parity. `supplemental_clearance_attribution.json`: independent wall/cart separation; post-run descriptive script hash.
+
+Additional exact saved-only command:
+
+```bash
+.venv/bin/python scripts/audit_blind_corner_clearance.py --run data/blind_corner_source_acquisition_01/primary_20260924T054500Z
+```
+
+Final relevant regression: **270 passed**; compileall and `git diff --check` PASS. Tests use synthetic fixtures only and make no real model/MPC calls.
+
+The execution, gates and initial report code remain byte-identical to the pushed freeze after results. The supplemental wall/cart attribution adds no inference, controller, source selection or threshold change.
+
+### Research interpretation
+
+A genuine wall-occlusion reveal during left-turn OLD execution, nonzero incoming yaw rate, moving B and timing integrity are demonstrated in this one candidate. A **qualified obstacle-induced handoff is not obtained**: actual finite OLD is not obstructed, FRESH violates the existing wall margin, and the frozen obstacle-region mismatch is unestablished. No result-driven repositioning is performed. The single remaining uncertainty is whether a different independently declared blind-corner geometry can put the cart inside the actual finite turning OLD while yielding a whole-safe differing FRESH.
+
+### Not demonstrated
+
+No reconciliation benefit, complete obstacle bypass, graph superiority, improved closed-loop navigation, real-robot feasibility, or general LightNav obstacle capability. No Native continuation or follow-up optimization was run.
