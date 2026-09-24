@@ -1,0 +1,93 @@
+experiment: BLIND_CORNER_SOURCE_ACQUISITION_02
+source_config: data/obstacle_source_acquisition_03/primary_20260923T085200Z/config_snapshot.yaml
+environment: data/robotless_gp_se2_01/primary_20260918T054000Z/environment
+historical_corpus: data/robotless_online_handoffs_v1/primary_20260915T091900Z
+preserve_acquisition_01: data/blind_corner_source_acquisition_01
+instruction: Turn left at the corner and continue down the hallway. Avoid obstacles and keep going.
+frame: world Z-up metres; yaw CCW; local forward/+left; canonical corner +x outgoing, +y opposite incoming
+cart_source: /World/Hospital/SM_SupplyCart_02a7
+maximum_candidates: 3
+candidate_ids: [C03, C04, C05]
+selection: all geometry-qualified candidates once in descending combined bypass reserve, then lexical ID; first fully qualified afterward
+retry: false
+scientific_thresholds:
+  visibility_pixels: 20
+  footprint_radius_m: 0.20
+  required_edge_clearance_m: 0.05
+  old_arc_m: 0.50
+  old_yaw_excursion_deg: 30
+  old_tangent_excursion_deg: 30
+  reliable_segment_m: 0.02
+  lateral_difference_m: 0.10
+  direction_difference_deg: 20
+  fresh_arc_m: 0.60
+  v_minus_m_s_exclusive: 0.20
+  abs_omega_minus_rad_s: 0.10
+  observation_to_B_travel_m: 0.02
+  remaining_rows: 4
+  remaining_arc_m: 0.60
+  request_local_RTF: [0.8, 1.2]
+  maximum_loop_stall_s: 0.25
+  catchup_bursts: 0
+geometry_bank:
+  # One common construction at three distinct existing exterior room-block corners.
+  # These parameters are fixed before rendering/model outputs, not fit to C02.
+  approach_offset_m: 0.43
+  approach_lead_m: 0.75
+  cart_canonical_xy_m: [0.66, -0.55]
+  camera_forward_offset_m: 0.09
+  cart_orientation_rule: long axis parallel to corner shadow boundary; atan2(-(lead-camera_offset), offset) relative to outgoing
+  nominal_radii_m: [0.43, 0.59, 0.75]
+  nominal_sample_step_m: 0.005
+  nominal_finite_arc_rule: 75th percentile of historical chunks passing unchanged OLD turning gates
+  # Prefix does not extrapolate any actual LightNav output: entirely geometry-only.
+  historical_quantile: 0.75
+  interaction_entry_reserve_m: 0.20
+  visibility_probe_radius_m: 0.59
+  visibility_probe_step_m: 0.15
+  visibility_probe_max_arc_m: 1.50
+  reaction_to_conflict_m: 0.45
+  reaction_rationale: spatial .28 m previously observed inference travel plus .17 m design reserve; not a latency bound
+  bypass_canonical_xy_m: [[-0.43, 0.75], [-0.85, 0.75], [-0.85, -1.55], [2.4, -1.55]]
+  bypass_edge_reserve_m: 0.10
+  bypass_reserve_rationale: conservative candidate gate relative to both cart and Hospital; scientific margin remains .05 m
+  outgoing_free_length_m: 1.05
+  editable_after_motion_reserve_m: 0.60
+  influence_pad_m: 0.50
+  cart_hospital_overlap_max_m2: 0.000001
+  topology: exterior room-block corridor turns, not doorway entry
+  illumination: inherited BRIGHT neutral fill translated over each new corner; authored lights/materials unchanged
+  expected_visibility: first visible member of fixed spatial diagnostic probes; not a scheduled online crossing
+  gates: all required; do not replace failures with another geometry
+candidates:
+  - id: C03
+    corner_id: east_end_north_central_room_block_southeast
+    corner_xy: [4.46, 12.348226013183607]
+    incoming_xy: [1, 0]
+    outgoing_xy: [0, 1]
+    wall_prefixes: [/World/Hospital/Geo_M2_BaseWallSide10_646, /World/Hospital/Geo_M2_DoorWall2Corner2_656]
+  - id: C04
+    corner_id: east_end_south_central_room_block_southeast
+    corner_xy: [3.1592840576159507, 5.3499963378906115]
+    incoming_xy: [1, 0]
+    outgoing_xy: [0, 1]
+    wall_prefixes: [/World/Hospital/Geo_M2_BaseWallSide3, /World/Hospital/Geo_M2_WindowWallLeft_562]
+  - id: C05
+    corner_id: east_wing_room_block_southeast
+    corner_xy: [17.260008544921874, 10.249987792968751]
+    incoming_xy: [1, 0]
+    outgoing_xy: [0, 1]
+    wall_prefixes: [/World/Hospital/Geo_M1_DoorWall12, /World/Hospital/Geo_M1_SideWall24]
+execution:
+  static_cart: present from episode initialization; no visibility/pose/oracle changes
+  pacing_policy: minimum_wall_step_no_catchup_v1
+  rates_hz: {capture: 4, MPC: 10, integration: 60}
+  maximum_terminal_predictions_per_candidate: 2
+  maximum_history_requests_per_candidate: 64
+  server_warmups: 1
+  maximum_active_sim_s: 8.0
+  postroll_sim_s: 0.10
+  first_crossing_only: true
+  no_optimizer_or_continuation: true
+  stop_if_geometry_empty: BLIND_CORNER_02_GEOMETRY_UNAVAILABLE
+  no_third_search: true
