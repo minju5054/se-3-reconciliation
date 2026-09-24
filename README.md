@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [second bounded blind-corner search](docs/BLIND_CORNER_SOURCE_ACQUISITION_02.md)
+geometry-qualified C03 out of three new Hospital corners and ran it once.
+Real static-cart wall occlusion crossed 0→104 pixels; FRESH was whole-path safe
+(.168308 m), moving B/timing passed, but actual finite OLD was not cart-obstructed,
+OLD tangent excursion was 28.34° < 30°, incoming omega was .00734 < .10 rad/s, and
+within-cart-region mismatch was unestablished. **No qualified source**; two
+terminal predictions, seven MPC solves, no optimizer/continuation/retry.
+This concludes the second/final bounded blind-corner search for now.
+[Static review](data/blind_corner_source_acquisition_02/preflight_20260925T014000Z/review/index.html).
+
 The [blind-left-corner source acquisition](docs/BLIND_CORNER_SOURCE_ACQUISITION_01.md)
 qualified one of two geometry candidates and ran it once. A static cart became
 visible through camera motion (12→237 pixels) during genuine turning OLD;
