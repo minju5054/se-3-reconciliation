@@ -5701,3 +5701,7 @@ transition execution and reconciliation benefit, not tested or implemented.
   GP/rigid/graph/splice/reconciliation calls0. Unrelated Stage0 edits preserved.
 - Result NATIVE_CONTINUATION_SAFE_SUSTAINED_ATTACHMENT. Same-B improvement remains
   untested; no subsequent reconciliation factor or comparison implemented.
+
+## 2026-09-24 — OSA03 same-FRESH observation-start control, pre-execution
+
+Fetched origin/main and confirmed `0842f5583d9295b436a47c7da9d26ef6ed054143`. Preserved unrelated stage0 config edits. Read the OSA03 source/Native continuation and delay-attribution contracts. Saved-only OSA03 and B-start authoritative validators pass. Observation tick75 has physical/controller .6000000288 m/s, last OLD result applied tick73, no pending solve, first legal FRESH submit78. New independent tracker restoration/install preflight uses zero numerical solves. Added separate observation-start wrapper, frozen two-origin metrics and signed comparisons; no source or historical code/result edits. Availability-origin 180-step cap leaves execution-origin full3s N/A if incomplete. No scientific execution before protocol commit/push. See `docs/OSA03_FRESH_TRACKABILITY_CONTROL_01.md`.

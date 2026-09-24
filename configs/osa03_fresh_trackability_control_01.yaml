@@ -1,0 +1,32 @@
+experiment: OSA03_FRESH_TRACKABILITY_CONTROL_01
+source_run: data/obstacle_source_acquisition_03/primary_20260923T085200Z
+comparator_run: data/osa03_native_continuation_01/primary_20260923T103000Z
+representative: REPEAT_00
+maximum_new_rollouts: 1
+retry: false
+cap_origin: ORIGINAL_OBSERVATION_AVAILABILITY
+cap_integration_steps: 180
+cap_nominal_s: 3.0
+clock: source resolved float32 1/60, same absolute tick modulo 6
+control_stride: 6
+availability: sealed raw FRESH installed immediately after original observation, before next legal control submit
+state_policy: saved observation incoming physical command and independently reconstructed worker memory; never B memory or zero-reset execution
+pending_policy: official install increments generation; stale OLD result cannot update memory/command; unresolved saved phase blocks execution
+first_legal_tick_policy: if observation is on-grid use same tick only when no OLD submit occurred before observation; otherwise next original grid
+live_policy: original asynchronous official MPC worker; actual receipt-to-application tick; no synchronous off-grid solve
+hold_timeout_s: 0.5
+controller_stall_sim_s: 2.0
+reference: original raw N rows, original observation anchor, no resampling/cropping/lookahead
+metric_config: frozen comparator protocol, reused literally
+origins: [observation_availability, first_FRESH_command_application]
+primary_paired_origin: first_FRESH_command_application
+incomplete_execution_3s: N/A, never extend availability cap or pad a trajectory
+paired_primary_windows: [18, 54]
+paired_full_metrics: report each observed execution horizon explicitly; additionally compare common execution exposure from saved B prefix
+descriptor_min_segment_m: 1.0e-6
+reliable_tangent_chord_m: 0.10
+spatial_curvature: signed three-point XY circumcircle curvature where all segment/chord lengths exceed minimum; rad per metre heading increments separate; no inferred time
+safety: exact unchanged guard and Hospital/cart; radius .20 m, margin .05 m, existing curve allowance
+figures: [world, errors, commands, progress_clearance, paired]
+interpretation: descriptive same-FRESH observation-to-application sensitivity, nonlinear interactions; no additive causal decomposition or recoverable-cost claim
+no_calls: [VLA, RGB, Isaac, GP, rigid, graph, splice, reconciliation, REF02, Oracle_other_than_requested_observation_control]
