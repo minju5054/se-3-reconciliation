@@ -7,6 +7,18 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [OSA03 same-FRESH observation-start control](docs/OSA03_FRESH_TRACKABILITY_CONTROL_01.md)
+uses the saved observation command/memory and original absolute control clock.
+With 30 new official MPC solves and zero VLA calls, execution-origin attachment
+starts at 1.000000 s versus saved B-start 1.466667 s; first .9 s position AUC is
+.100928 versus .168222 m·s. Swept execution clearance is .174906 versus .133806 m,
+both above .05 m. Observation-start still has transient separation and a cold
+first-solve/application-spacing limitation (actual angular jump diagnostic
+10 rad/s² despite nominal-grid pass). This supports bounded same-FRESH state/delay
+sensitivity, not additive attribution or recoverable reconciliation benefit.
+The availability-origin cap is 3 s; execution exposure is 2.883333 s, with complete
+execution-origin 3 s metrics N/A. See the [static paired review](data/osa03_fresh_trackability_control_01/primary_20260924T012000Z/review/index.html).
+
 The [phase-preserving OSA03 Native continuation](docs/OSA03_NATIVE_CONTINUATION_01.md)
 replays REPEAT_00's saved .10s prefix exactly, then tracks its original FRESH with
 29 new official MPC solves and no VLA update. Over nominal3s, distance initially
