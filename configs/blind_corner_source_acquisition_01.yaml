@@ -1,0 +1,65 @@
+experiment: BLIND_CORNER_SOURCE_ACQUISITION_01
+source_config: data/obstacle_source_acquisition_03/primary_20260923T085200Z/config_snapshot.yaml
+environment: data/robotless_gp_se2_01/primary_20260918T054000Z/environment
+instruction: Turn left at the corner and continue down the hallway. Avoid obstacles and keep going.
+frame: world Z-up; metres; yaw CCW; local forward/+left
+candidate_order: [C01, C02]
+selection: run each geometry-qualified candidate once; first fully qualifying in frozen order
+retry: false
+static_cart: present in rendering and oracle from initialization; no episode mutation
+cart_source: /World/Hospital/SM_SupplyCart_02a7
+visibility_pixels: 20
+maximum_history_requests_per_candidate: 64
+maximum_terminal_predictions_per_candidate: 2
+server_warmups: 1
+maximum_active_sim_s: 8.0
+postroll_sim_s: 0.10
+pacing_policy: minimum_wall_step_no_catchup_v1
+rates_hz: {capture: 4, MPC: 10, integration: 60}
+gates:
+  old_arc_m: 0.50
+  old_yaw_excursion_deg: 30
+  old_tangent_excursion_deg: 30
+  reliable_segment_m: 0.02
+  lateral_difference_m: 0.10
+  direction_difference_deg: 20
+  v_minus_m_s: 0.20
+  abs_omega_minus_rad_s: 0.10
+  observation_to_B_travel_m: 0.02
+  remaining_rows: 4
+  remaining_arc_m: 0.60
+  required_edge_clearance_m: 0.05
+  footprint_radius_m: 0.20
+  request_local_RTF: [0.8, 1.2]
+  maximum_loop_stall_s: 0.25
+  catchup_bursts: 0
+geometry_preflight:
+  purpose: diagnostic viewpoints only, no executed trajectory or source evidence
+  reaction_clearance_reserve_m: 0.30
+  cart_mesh_existing_obstacle_overlap_area_max_m2: 0.000001
+  wall_occlusion: actual exported Hospital triangle hit before cart target, inside camera frustum
+  topology: exterior room-block corridor corners; not entering a doorway
+  illumination: original authored lights plus one existing neutral fill profile translated over each corner
+candidates:
+  - id: C01
+    corner_xy: [-24.85053, 8.87288]
+    wall_prefixes: [/World/Hospital/Geo_M2_BaseWallSide9_627, /World/Hospital/Geo_M2_WallDoorCorner3_634]
+    approach_pose: [-24.1, 9.4, 3.141592653589793]
+    incoming_xy: [-1, 0]
+    outgoing_xy: [0, -1]
+    cart_center_xy: [-26.2, 7.7]
+    cart_yaw: 3.141592653589793
+    probe_poses: [[-24.1, 9.4, 3.141592653589793], [-24.6, 9.4, 3.35], [-25.1, 9.35, 3.6], [-25.6, 9.1, 4.0], [-25.9, 8.8, 4.4]]
+    passage_probes: [[[-27.15, 8.6], [-27.15, 6.8]], [[-25.25, 8.6], [-25.25, 6.8]]]
+    fill_translation: [-25.0, 9.0, 2.6]
+  - id: C02
+    corner_xy: [-23.56444, 12.82462]
+    wall_prefixes: [/World/Hospital/Geo_M3_SideWall8, /World/Hospital/Geo_M3_DoorWall7]
+    approach_pose: [-24.15, 13.7, -1.5707963267948966]
+    incoming_xy: [0, -1]
+    outgoing_xy: [1, 0]
+    cart_center_xy: [-22.5, 12.15]
+    cart_yaw: 1.5707963267948966
+    probe_poses: [[-24.15, 13.7, -1.5707963267948966], [-24.15, 13.2, -1.35], [-24.1, 12.7, -1.05], [-23.8, 12.35, -0.6], [-23.5, 12.05, -0.2]]
+    passage_probes: [[[-23.4, 11.2], [-21.6, 11.2]], [[-23.4, 13.1], [-21.6, 13.1]]]
+    fill_translation: [-23.5, 12.0, 2.6]
