@@ -5784,3 +5784,37 @@ Calls:2 scientific terminal+5 buffer requests+1 server warmup;7 official MPC sol
 - Run: `data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/`.
   Detailed protocol/commands: `docs/OSA03_COMMON_B_METHOD_COMPARISON_01.md`.
   Scientific execution is permitted only after this freeze commit is normally pushed.
+
+## 2026-09-26 KST — OSA03 common-B comparison result
+
+- Scientific freeze `8a84b47` was normally pushed before execution. Four independent
+  once-only asynchronous official-MPC rollouts ran in M0/M1/M2/M3 order. No code,
+  reference, threshold, initial state or timing policy changed after scientific output.
+- All references were whole-path safe. M0/M1/M3 completed 180 intervals; M2 rigid
+  stopped before proposed unsafe command at tick187 (95 applied intervals/1.583333416 s).
+  Applied rigid prefix minimum clearance .058965146 m; next-hold proposed lower bound
+  .049527699 m, so command was not applied. No collision/continuation was fabricated.
+- Primary original-FRESH position AUC (.9 s): M0 .169065633, M1 .166853435,
+  M2 .175414845, M3 .167335299 m·s. Sustained attachment: M0 1.466666743,
+  M1 1.500000078, M2 null, M3 1.466666743 s. Execution clearance minima:
+  .133561094/.134208269/.058965146/.135997429 m (M2 shorter exposure).
+- **TIMING_CONFOUNDED_COMMON_B_COMPARISON**: all primary submit ticks matched, but
+  M3 first result applied100 versus99 for M0/M1/M2. Later primary applications matched.
+  No retry or timing correction. M3 does not demonstrate earlier attachment or
+  reference-only superiority. M1/M3 also raised linear command TV .8→1.2 m/s.
+- Historical Native saved-only revalidation PASS. New M0 next-submit/selected rows/
+  first result exactly match, but historical app97/105 versus new99/103 prevents
+  full timing/state parity; documented .3/.9 metric differences without forcing parity.
+- New numerical MPC solves 30/30/16/30 =106; scientific rollouts4. LightNav/RGB/new
+  source/graph/GP=0. Tests/preflight/validators made zero real numerical MPC/VLA calls.
+  No R01/Genuine13, ablation, further optimization or downstream stage.
+- Saved-only source/phase/command/selection/integration/guard/metric/hash validation
+  PASS; eight plots visually inspected; numeric/hash/CSV/JSON sidecars PASS.
+  Exact commands are in `docs/OSA03_COMMON_B_METHOD_COMPARISON_01.md`; final same
+  relevant regression suite: 248 PASS (6.99 s); compileall/diff checks PASS.
+- Artifacts: `data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/`,
+  static `index.html`, `review_bundle.zip`, raw method records and sealed result hashes.
+  Small numeric results tracked in `results/osa03_common_b_method_comparison_01/`.
+- Largest uncertainty: whether the small M3 differences remain under exactly
+  identical actual application timing. This result does not establish proposed
+  superiority, complete bypass, generalization or real-robot benefit.

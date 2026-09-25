@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [OSA03 common-B comparison](docs/OSA03_COMMON_B_METHOD_COMPARISON_01.md)
+ran Native, deterministic SE(2) taper, rigid transport and the frozen Local-SE2
+reference once each with unchanged official MPC. Native/taper/Local-SE2 sustained
+attachment at 1.4667/1.5000/1.4667 s with valid execution margin; rigid was stopped
+before an unsafe command at 1.5833 s. Local-SE2's first new command applied one tick
+later, so the overall result is **TIMING_CONFOUNDED_COMMON_B_COMPARISON** and does
+not establish reference-only improvement or proposed-method superiority. Four
+rollouts/106 MPC solves; no new VLA, RGB or optimization. R01 remains unevaluated.
+[Static execution review](data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/index.html).
+
 The [local discrete SE(2) formulation](docs/LOCAL_SE2_RECONCILIATION_FORMULATION_01.md)
 was implemented and tested with **one saved-only planning solve on OSA03 REPEAT_00**.
 Measured observation→application transport, original relative edges and a downstream
