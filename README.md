@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [local discrete SE(2) formulation](docs/LOCAL_SE2_RECONCILIATION_FORMULATION_01.md)
+was implemented and tested with **one saved-only planning solve on OSA03 REPEAT_00**.
+Measured observation→application transport, original relative edges and a downstream
+original-FRESH anchor reduced the frozen objective 4.551116→0.765264. First-node
+correction .211144 m tapers to endpoint .002187 m; planned whole-path footprint-edge
+clearance remains valid (.227809 m versus raw .229487 m, required .05 m).
+This is planning evidence only: no GP, MPC execution, new LightNav call, baseline
+comparison or demonstrated attachment benefit. REPEAT_01 remains unevaluated.
+[Static planning review](data/local_se2_reconciliation_formulation_01/primary_20260925T013000Z/review/index.html).
+
 The [second bounded blind-corner search](docs/BLIND_CORNER_SOURCE_ACQUISITION_02.md)
 geometry-qualified C03 out of three new Hospital corners and ran it once.
 Real static-cart wall occlusion crossed 0→104 pixels; FRESH was whole-path safe

@@ -1,0 +1,490 @@
+{
+  "result": {
+    "scientific_freeze_sha": "65a16823513709865cb3f3a7c8aa70ee26ccd440",
+    "status": "SAFE_PLANNING_RESULT",
+    "A": [
+      19.203242163778583,
+      24.356668352984542,
+      -1.5689752526514715
+    ],
+    "B": [
+      19.203630553052257,
+      24.14333536015282,
+      -1.5689760264727979
+    ],
+    "log_A_inverse_B": [
+      0.21333334637784984,
+      -2.3811842714752392e-08,
+      -7.738213265717775e-07
+    ],
+    "observation_B_translation_m": 0.2133333463778418,
+    "observation_B_travel_m": 0.2133333463778463,
+    "N": 10,
+    "raw_arc_m": 1.3532455201158953,
+    "initial": {
+      "L": 4.551116373117762,
+      "R": 2.603255149471589e-33,
+      "A": 2.5449246614394744e-28,
+      "total": 4.551116373117762
+    },
+    "final": {
+      "L": 0.34858994256312564,
+      "R": 0.0684801182301627,
+      "A": 0.34819356542157043,
+      "total": 0.7652636262148588
+    },
+    "solver": {
+      "initial_cost": 4.551116373117762,
+      "final_cost": 0.7652636262148587,
+      "iterations": 5,
+      "converged": true,
+      "termination_reason": "cost_tolerance",
+      "cost_history": [
+        4.551116373117762,
+        0.7652638545620951,
+        0.7652636262683986,
+        0.7652636262148813,
+        0.7652636262148587
+      ],
+      "damping_history": [
+        0.001,
+        0.0003,
+        8.999999999999999e-05,
+        2.6999999999999996e-05,
+        0.00026999999999999995
+      ]
+    },
+    "accepted_steps": 4,
+    "rejected_unsafe_steps": 0,
+    "rejected_non_improving_steps": 1,
+    "solve_wall_s": 0.07157542297500186,
+    "diagnostics": {
+      "nodes": [
+        {
+          "j": 0,
+          "s": 0.0,
+          "w_L": 1.0,
+          "w_A": 0.0,
+          "correction_log": [
+            0.20076381696956716,
+            -0.0653887533190556,
+            0.0008834415861072031
+          ],
+          "correction_translation_m": 0.21114402493276993,
+          "correction_yaw_rad": 0.0008834415861072031,
+          "target_log": [
+            -0.002098194741986005,
+            0.0006273343744706644,
+            0.000884215407434219
+          ],
+          "target_translation_m": 0.002189970226439213,
+          "target_yaw_rad": 0.000884215407434219,
+          "world_XY_displacement_m": 0.21114401806645536
+        },
+        {
+          "j": 1,
+          "s": 0.11140358680333719,
+          "w_L": 0.7896035855459743,
+          "w_A": 0.012410759152648684,
+          "correction_log": [
+            0.17780698752472138,
+            -0.10297039163241503,
+            0.0019124708640205768
+          ],
+          "correction_translation_m": 0.20547074333235218,
+          "correction_yaw_rad": 0.0019124708640205768,
+          "target_log": [
+            -0.006841753488014744,
+            0.0038752814788554244,
+            0.0019132446853475926
+          ],
+          "target_translation_m": 0.00786303995482166,
+          "target_yaw_rad": 0.0019132446853475926,
+          "world_XY_displacement_m": 0.20547071201908632
+        },
+        {
+          "j": 2,
+          "s": 0.22261420652390312,
+          "w_L": 0.6043286718984606,
+          "w_A": 0.04955708494626699,
+          "correction_log": [
+            0.16461469657851277,
+            -0.09555270492448628,
+            0.0035366496184323637
+          ],
+          "correction_translation_m": 0.19033737874632445,
+          "correction_yaw_rad": 0.0035366496184323637,
+          "target_log": [
+            -0.01994859346910279,
+            0.011440779899884615,
+            0.0035374234397593796
+          ],
+          "target_translation_m": 0.02299647421047701,
+          "target_yaw_rad": 0.0035374234397593796,
+          "world_XY_displacement_m": 0.19033727954971233
+        },
+        {
+          "j": 3,
+          "s": 0.3339094983675562,
+          "w_L": 0.44367655636496073,
+          "w_A": 0.111495553100073,
+          "correction_log": [
+            0.141420298699657,
+            -0.08224342508439375,
+            0.005161910759269528
+          ],
+          "correction_translation_m": 0.16359609363891453,
+          "correction_yaw_rad": 0.005161910759269528,
+          "target_log": [
+            -0.04306699819210151,
+            0.024881406755397968,
+            0.005162684580596544
+          ],
+          "target_translation_m": 0.04973781997038107,
+          "target_yaw_rad": 0.005162684580596544,
+          "world_XY_displacement_m": 0.16359591201103246
+        },
+        {
+          "j": 4,
+          "s": 0.44532313329324735,
+          "w_L": 0.30766642645962067,
+          "w_A": 0.19831269304611535,
+          "correction_log": [
+            0.10964974450801897,
+            -0.06374166724479942,
+            0.005958452377385459
+          ],
+          "correction_translation_m": 0.12683085828701376,
+          "correction_yaw_rad": 0.005958452377385459,
+          "target_log": [
+            -0.07483013151527064,
+            0.04339621654750278,
+            0.005959226198712475
+          ],
+          "target_translation_m": 0.08650306464646472,
+          "target_yaw_rad": 0.005959226198712475,
+          "world_XY_displacement_m": 0.126830670666446
+        },
+        {
+          "j": 5,
+          "s": 0.5564490170071776,
+          "w_L": 0.196737474513899,
+          "w_A": 0.3096355085282543,
+          "correction_log": [
+            0.07450499849453376,
+            -0.043204889162377295,
+            0.005455459149617425
+          ],
+          "correction_translation_m": 0.08612582219174332,
+          "correction_yaw_rad": 0.005455459149617425,
+          "target_log": [
+            -0.11000126934302888,
+            0.06388755212517896,
+            0.005456232970944441
+          ],
+          "target_translation_m": 0.12720809162008934,
+          "target_yaw_rad": 0.005456232970944441,
+          "world_XY_displacement_m": 0.08612571538846464
+        },
+        {
+          "j": 6,
+          "s": 0.6672355443739888,
+          "w_L": 0.11073218292807557,
+          "w_A": 0.44520327167605317,
+          "correction_log": [
+            0.042891355291662984,
+            -0.02474544165711929,
+            0.0039498819142922414
+          ],
+          "correction_translation_m": 0.049517726538700874,
+          "correction_yaw_rad": 0.0039498819142922414,
+          "target_log": [
+            -0.14168013829039994,
+            0.08223440998051211,
+            0.003950655735619257
+          ],
+          "target_translation_m": 0.16381623781185367,
+          "target_yaw_rad": 0.003950655735619257,
+          "world_XY_displacement_m": 0.04951769434894798
+        },
+        {
+          "j": 7,
+          "s": 0.77806883104882,
+          "w_L": 0.04925344375203722,
+          "w_A": 0.6053911058496771,
+          "correction_log": [
+            0.019886574070657654,
+            -0.011366602033816392,
+            0.00221701049110834
+          ],
+          "correction_translation_m": 0.02290579555621049,
+          "correction_yaw_rad": 0.00221701049110834,
+          "target_log": [
+            -0.16481265709850906,
+            0.0953924871280256,
+            0.002217784312435356
+          ],
+          "target_translation_m": 0.19042830288678533,
+          "target_yaw_rad": 0.002217784312435356,
+          "world_XY_displacement_m": 0.022905790865167554
+        },
+        {
+          "j": 8,
+          "s": 0.888731403809088,
+          "w_L": 0.012380700498296237,
+          "w_A": 0.7898435081164722,
+          "correction_log": [
+            0.006833907780087304,
+            -0.0038456914671393277,
+            0.0009126296742958395
+          ],
+          "correction_translation_m": 0.007841660436869605,
+          "correction_yaw_rad": 0.0009126296742958395,
+          "target_log": [
+            -0.17796605821331102,
+            0.10273897389420183,
+            0.0009134034956228554
+          ],
+          "target_translation_m": 0.20549261454567433,
+          "target_yaw_rad": 0.0009134034956228554,
+          "world_XY_displacement_m": 0.00784166016473276
+        },
+        {
+          "j": 9,
+          "s": 1.0,
+          "w_L": 0.0,
+          "w_A": 1.0,
+          "correction_log": [
+            0.0019235800766968984,
+            -0.0010402267462585424,
+            0.00025668411841506256
+          ],
+          "correction_translation_m": 0.002186831496731488,
+          "correction_yaw_rad": 0.00025668411841506256,
+          "target_log": [
+            -0.1830285515203934,
+            0.1052802756403022,
+            0.0002574579397420784
+          ],
+          "target_translation_m": 0.21114778500034356,
+          "target_yaw_rad": 0.0002574579397420784,
+          "world_XY_displacement_m": 0.0021868314907293233
+        }
+      ],
+      "relative_edges": [
+        [
+          -0.004919274777160624,
+          0.002693304988704364,
+          0.0010290292779133736
+        ],
+        [
+          -0.013103192731065255,
+          0.007284626557256992,
+          0.001624178754411787
+        ],
+        [
+          -0.02310407243211054,
+          0.0129345425971628,
+          0.0016252611408371642
+        ],
+        [
+          -0.03171909007906702,
+          0.017815320421470035,
+          0.0007965416181154872
+        ],
+        [
+          -0.03510161356460357,
+          0.019718310662794607,
+          -0.0005029932277675897
+        ],
+        [
+          -0.03159109914907793,
+          0.017682279855321635,
+          -0.001505577235325184
+        ],
+        [
+          -0.02300842621847869,
+          0.012780556512045831,
+          -0.0017328714231839015
+        ],
+        [
+          -0.013055074895398745,
+          0.007184589666782104,
+          -0.0013043808168125004
+        ],
+        [
+          -0.004914448135695544,
+          0.0026605167220118365,
+          -0.000655945555881221
+        ]
+      ],
+      "relative_translation_RMS_m": 0.026158510086507047,
+      "relative_yaw_RMS_rad": 0.0012748460674805913,
+      "relative_translation_max_m": 0.040260837674261585,
+      "relative_yaw_max_rad": 0.0017328714231839015,
+      "rigid_fit": {
+        "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+        "transform": [
+          2.6469564300931268,
+          -2.0553547373790764,
+          0.1068589617025278
+        ],
+        "translation_RMS_m": 0.06683480285215623,
+        "yaw_RMS_rad": 0.10385318376094387
+      }
+    },
+    "raw_safety": {
+      "minimum_clearance_m": 0.22948689016047874,
+      "Hospital_only_m": 0.7338624037073149,
+      "cart_only_m": 0.22948689016047874,
+      "limiting_geometry": "cart",
+      "limiting_Hospital_mesh": null,
+      "first_minimum_segment": 8,
+      "minimum_segment_fraction": 1.0,
+      "minimum_path_xy": [
+        19.88161991957295,
+        23.185725783431817
+      ],
+      "nearest_obstacle_xy": [
+        19.61594947,
+        22.84826734
+      ],
+      "per_segment_clearance_m": [
+        1.089042383762051,
+        1.0370237161834115,
+        0.8980669867407352,
+        0.7624673352289932,
+        0.6316224704628295,
+        0.5073845797151886,
+        0.39503983311932384,
+        0.30283318934201614,
+        0.22948689016047874
+      ],
+      "workspace_known": true,
+      "clearance_valid": true,
+      "required_edge_clearance_m": 0.05,
+      "footprint_radius_m": 0.2,
+      "numerical_tolerance_m": 1e-07,
+      "query": "full union direct GEOS, no B connector, no time/execution claim"
+    },
+    "optimized_safety": {
+      "minimum_clearance_m": 0.2278092081855581,
+      "Hospital_only_m": 0.7338016067914999,
+      "cart_only_m": 0.2278092081855581,
+      "limiting_geometry": "cart",
+      "limiting_Hospital_mesh": null,
+      "first_minimum_segment": 8,
+      "minimum_segment_fraction": 1.0,
+      "minimum_path_xy": [
+        19.881680721352023,
+        23.183539797358552
+      ],
+      "nearest_obstacle_xy": [
+        19.61594947,
+        22.84826734
+      ],
+      "per_segment_clearance_m": [
+        0.9731214836350206,
+        0.8492881736142639,
+        0.7354812666959725,
+        0.6357433489061664,
+        0.545513146611335,
+        0.4583128470124505,
+        0.3730988027825704,
+        0.29599478793365386,
+        0.2278092081855581
+      ],
+      "workspace_known": true,
+      "clearance_valid": true,
+      "required_edge_clearance_m": 0.05,
+      "footprint_radius_m": 0.2,
+      "numerical_tolerance_m": 1e-07,
+      "query": "full union direct GEOS, no B connector, no time/execution claim"
+    },
+    "calls": {
+      "planning": 1,
+      "LightNav": 0,
+      "MPC": 0,
+      "GP": 0,
+      "actual_execution": 0,
+      "rigid_baseline": 0,
+      "splice": 0
+    },
+    "GP_support_timing": null,
+    "waypoint_intrinsic_timing": null,
+    "scope": "PLANNING ONLY / NO MPC EXECUTION / NO RECONCILIATION PERFORMANCE CLAIM"
+  },
+  "source_run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/obstacle_source_acquisition_03/primary_20260923T085200Z",
+  "source_bundle_hashes": {
+    "qualification.json": "71189f4428cf910e9a417e7940e759d6d035388a0b3ecf70c5206eac335be9b1",
+    "boundary_execution.json": "07fcb3b712eacd3462b01c65075dae2a41ed2542cbf020c0ed4457b4f29af2ab",
+    "state_and_timing.json": "8803b3dc1da1b310ba69f3aea87142e35638c2999dfdadba961740be2a3a6cb3",
+    "environment_and_provenance.json": "72f2ca5cc42a83c6dfb0abc8ec988c470f18879444f4ace999d82c459a346a92",
+    "raw/fresh_lightnav.npy": "8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521",
+    "raw/history_manifest.json": "3096946b37a31a638b0daa00ece313ee466374cb13639b25393ef2fae45c2836",
+    "raw/request_source_manifest.json": "9e47eda25c04a60d9b0720458ec56aee5fbb1eec2ad21fd1346a4eb4f852ac40",
+    "raw/old_response.json": "af775e4818a780cf4441a32d64869fafeda2a1313a7e9f211a2f4d3a044df2fb",
+    "raw/old_observation.jpg": "a660f248bee38e93219de5e4fe463e91b17ccc0699a71c91b9102ed8576940be",
+    "raw/old_lightnav.npy": "6d53cfff6ca770055ca6563548fc80b6696e2336fd4343f35c2c4e01da1bd5ae",
+    "raw/fresh_response.json": "a63ce861705fc1520703ee481db7c82b43973c23a857f0cbcb5192831b5373ec",
+    "raw/fresh_observation.jpg": "0a4744c07088b1095f64361edb96fb203466017c6d4b6e2fb2b78d66dc684afe",
+    "derived/old_world.npy": "1f859cf9e2e4541a0cd3a5ce2db9fbe2d933e13b8342db2df194eb40433c377e",
+    "derived/fresh_world.npy": "9c8ea94f650d823ac3e1ada0a216dc36758432713fd5407cf18324069865bfc4"
+  },
+  "starting_sha": "5fa541a22082942da39f01dc809bab754b40b5c2",
+  "config_sha256": "0db9d8b855de129db9016a268fb5fdfbf27bba0b0a0312c79e5c6bb70864b9a4",
+  "code_sha256": {
+    "src/reconciliation/local_se2_reconciliation.py": "91a64d317354fbc4d10894148bf733281447373aeb96714541a6df846ccb268e",
+    "src/reconciliation/graph_optimizer.py": "7d595cedc49965cf15cc6e701db371bf7d7cc69e6c3a99deffc304a32855b6f7",
+    "src/reconciliation/se2.py": "1a72740eeef3af6594ec4dc428e9a8aff67cc4f31f3712161787b690b966cde1",
+    "src/reconciliation/trajectory.py": "1f9610846b5633d82adbe70508138ecd934f3ad413b779f6ed868266ad1c2bee",
+    "src/reconciliation/gp_se2_environment.py": "aefb92837f1567b97a109bcdd2b43e03fad1e992851a1471c1029f211d404eb7",
+    "src/reconciliation/join_source02_geometry.py": "77ebc0536a7465420f6745a12c43d88914f7e00b89bc466204ad775f18cef60e",
+    "scripts/run_local_se2_reconciliation_formulation01.py": "6cd16baefe5427f553339ad10329faec453dff2a07bd3d56213dd181628f4b21",
+    "scripts/validate_local_se2_reconciliation_formulation01.py": "999186c6c1cb26a138fb44c36f496e176207d5715984ac0d1f205306ba5ca568",
+    "scripts/report_local_se2_reconciliation_formulation01.py": "ae9bb27f96ec894c54f9fad606de396c1f0c5b6f85edd53b0c8ef5b892a3fec4",
+    "scripts/validate_obstacle_source_acquisition03.py": "841fcabce8726294a643e1eb6dcd07856c37545ac92ff47970d246240b6f3ac9",
+    "tests/test_local_se2_reconciliation.py": "2ddbb154b520750688168f5e18f0bb4a1f088392f9d10129c1f320c7fa6c5b2a",
+    "tests/test_local_se2_saved.py": "2bc607c37833039e4c66289ad02c2f830e4b585c786ed68dd25163395e54e18c",
+    "tests/fixtures/local_se2_legacy_solver.json": "75fec9bb036f225dcff206cebec6c571b9d82f45fa94d7073dad1059735eafbf"
+  },
+  "source_manifest_sha256": "85a15e8c52499f8358fbcb6ef13c9045f2e2c3d6b7a926d9d77b085fb8898f05",
+  "result_hashes": {
+    "derived/OLD_executed_prefix.npy": "31f3b177b9404353d07e0b5432710fdfba7c44d5e7a410cd2714a7a3f54a1fbf",
+    "derived/optimized_original_A_local.npy": "b7133196bdcf9ff65e7ed99b4e9f0baf144f1a470ba5d8e139baa48935ce90c0",
+    "derived/optimized_world.npy": "bd459b0343fac1e78e4ac80831f4f99af9b86dd4876a3b0df1b45f41c21ce120",
+    "derived/original_world.npy": "9c8ea94f650d823ac3e1ada0a216dc36758432713fd5407cf18324069865bfc4",
+    "derived/transported_target.npy": "057482c22d9dd489dd37b15c6bf1c64d93e2551b279b6dd969f6f3a48992f28b",
+    "execution_start.json": "8d356d6a2e5c82968aacde73bfa4d4523994c40709dec521b485caaf9c400382",
+    "feasibility_checks.json": "58f8ea6ec46d10b02bbdf0663aeb27aafc8da15f3d00cbf8e7652407dd028d49",
+    "freeze_inputs.json": "ee1ef0c8526b2596cb0bc40ca15d06f2a43674b3b0b73e6394d39b460ec86f8e",
+    "protocol.json": "ad2742b4fb7ece77710450615a32fc4eb16a256acad426ef0b200be6313321f2",
+    "result.json": "cd8e8f9d201e3d890caecbfd4b55ca2cf669052bb77ded1d80adaa12cfa91abb",
+    "solver_trace.json": "30f6aba85dfe3a8b324f424fb6b139c6c8c7ed95cdc220edbb4ac172bb951c43",
+    "source_manifest.json": "85a15e8c52499f8358fbcb6ef13c9045f2e2c3d6b7a926d9d77b085fb8898f05",
+    "source_validation.json": "6735386c1522986bd2215bb1e4f40300c016fa9c1b83c9fc477d9582434627d5"
+  },
+  "validation": {
+    "valid": true,
+    "authoritative_R00_saved_only": true,
+    "original_hashes_unchanged": true,
+    "no_R01_evaluation": true,
+    "independent_equations": true,
+    "right_local_steps": true,
+    "all_accepted_states_feasible": true,
+    "independent_full_union_safety": true,
+    "source_observation_anchor": true,
+    "plot_numeric_hash_parity": true,
+    "accepted_steps": 4,
+    "checked_feasibility_states": 5,
+    "validation_new_LightNav_MPC_GP_planning_execution_calls": 0
+  },
+  "review_manifest_sha256": "30169f93ba6175bab1831d2422ed2cbb6eae87304f56cbbce082c9bee1c7ba83",
+  "environment_versions": {
+    "python": "3.12.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.1",
+    "shapely": "2.1.2",
+    "matplotlib": "3.11.1"
+  }
+}
