@@ -1,0 +1,41 @@
+experiment: LOCAL_SE2_RECONCILIATION_FORMULATION_01
+starting_sha: 5fa541a22082942da39f01dc809bab754b40b5c2
+source_run: data/obstacle_source_acquisition_03/primary_20260923T085200Z
+representative: REPEAT_00
+fresh_sha256: 8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521
+source_classification: QUALIFIED_GENUINE_OBSTRUCTED_OLD_HANDOFF_SOURCE
+initialization: exact_original_FRESH
+transport: B_compose_inverse_A_left_transform
+local_output_frame: original_observation_A
+progress: original_FRESH_cumulative_XY_arc_normalized
+weights: {L: '(1-s)^2', A: 's^2'}
+lambdas: {L: 1.0, R: 1.0, A: 1.0}
+normalization: {translation_m: 0.10, yaw_degrees: 10.0}
+block_reduction: weighted_mean_L_A_and_edge_mean_R
+solver:
+  max_iterations: 80
+  finite_difference_epsilon: 0.000001
+  initial_damping: 0.001
+  damping_increase: 10.0
+  damping_decrease: 0.3
+  maximum_damping: 1000000000000.0
+  gradient_tolerance: 0.000000001
+  step_tolerance: 0.000000001
+  cost_tolerance: 0.000000000001
+safety:
+  footprint_radius_m: 0.20
+  required_edge_clearance_m: 0.05
+  checker: existing_direct_Hospital_plus_cart_swept_polyline
+  numerical_tolerance: unchanged_environment_metadata
+  initial_feasible_required: true
+  improving_unsafe_candidate: reject_and_increase_damping
+  connector_B_to_X0: none
+rigid_fit: closed_form_XY_Procrustes_left_transform_yaw_error_assessed_separately
+scientific_planning_solve_budget: 1
+LightNav_calls: 0
+MPC_calls: 0
+GP_calls: 0
+actual_execution_calls: 0
+waypoint_intrinsic_timing: null
+GP_support_timing: null
+claim: PLANNING_ONLY_NO_MPC_EXECUTION_NO_RECONCILIATION_PERFORMANCE_CLAIM

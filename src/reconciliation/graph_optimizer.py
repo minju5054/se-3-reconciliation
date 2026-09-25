@@ -119,6 +119,9 @@ def solve_least_squares(
     initial_state: ArrayLike,
     residual_function: Callable[[FloatArray], FloatArray],
     config: SolverConfig,
+    *,
+    candidate_feasibility_fn: Callable[[FloatArray], bool] | None = None,
+    iteration_callback: Callable[[dict[str, Any]], None] | None = None,
 ) -> OptimizationResult:
     """Solve a finite SE(2)-trajectory least-squares problem.
 
@@ -127,6 +130,13 @@ def solve_least_squares(
     """
 
     state = validate_se2_trajectory(initial_state, name="initial_state")
+    # Optional acceptance gate; None retains the legacy arithmetic and result schema.
+    if candidate_feasibility_fn is not None and not candidate_feasibility_fn(state.copy()):
+        raise OptimizationError("initial state is infeasible")
+
+    def emit(**record):
+        if iteration_callback is not None:
+            iteration_callback({**record, "state": state.copy()})
 
     def cost_function(candidate: FloatArray) -> float:
         residual = np.asarray(residual_function(candidate), dtype=np.float64)
@@ -141,6 +151,7 @@ def solve_least_squares(
     dampings: list[float] = []
     converged = False
     reason = "maximum_iterations"
+    emit(iteration=0, decision="initial", cost=cost, damping=damping)
 
     for iteration in range(1, config.max_iterations + 1):
         residual = np.asarray(residual_function(state), dtype=np.float64)
@@ -155,6 +166,7 @@ def solve_least_squares(
         if float(np.linalg.norm(gradient, ord=np.inf)) <= config.gradient_tolerance:
             converged = True
             reason = "gradient_tolerance"
+            emit(iteration=iteration, decision=reason, cost=cost, damping=damping, gradient_inf=float(np.linalg.norm(gradient, ord=np.inf)))
             break
         normal = jacobian.T @ jacobian
         dampings.append(damping)
@@ -168,26 +180,38 @@ def solve_least_squares(
         if step_norm <= config.step_tolerance:
             converged = True
             reason = "step_tolerance"
+            emit(iteration=iteration, decision=reason, cost=cost, damping=damping, gradient_inf=float(np.linalg.norm(gradient, ord=np.inf)), step_norm=step_norm)
             break
         candidate = retract_trajectory(state, delta)
         candidate_cost = cost_function(candidate)
-        if candidate_cost < cost:
+        improving = candidate_cost < cost
+        feasible = (bool(candidate_feasibility_fn(candidate.copy()))
+                    if improving and candidate_feasibility_fn is not None else None)
+        before_cost, before_damping = cost, damping
+        record = dict(iteration=iteration, candidate=candidate.copy(), delta=delta.copy(),
+                      candidate_cost=candidate_cost, cost_before=before_cost,
+                      damping_before=before_damping, candidate_feasible=feasible,
+                      gradient_inf=float(np.linalg.norm(gradient, ord=np.inf)), step_norm=step_norm)
+        if improving and feasible is not False:
             decrease = cost - candidate_cost
             state = candidate
             cost = candidate_cost
             costs.append(cost)
             damping = max(np.finfo(np.float64).eps, damping * config.damping_decrease)
+            emit(**record, decision="accepted", cost=cost, damping=damping)
             if decrease <= config.cost_tolerance:
                 converged = True
                 reason = "cost_tolerance"
                 break
         else:
             damping *= config.damping_increase
+            emit(**record, decision="rejected_unsafe" if improving else "rejected_non_improving", cost=cost, damping=damping)
             if damping > config.maximum_damping:
                 raise OptimizationError("damping exceeded maximum without a cost decrease")
     else:
         iteration = config.max_iterations
 
+    emit(iteration=iteration, decision="termination", reason=reason, cost=cost, damping=damping)
     optimized = validate_se2_trajectory(state, name="optimized").copy()
     if not np.all(np.isfinite(optimized)):
         raise OptimizationError("optimized state contains NaN or Inf")
