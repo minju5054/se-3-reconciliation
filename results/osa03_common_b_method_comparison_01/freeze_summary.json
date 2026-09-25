@@ -1,0 +1,1500 @@
+{
+  "run": "data/osa03_common_b_method_comparison_01/primary_20260925T162125Z",
+  "source": {
+    "starting_sha": "f40f3de2dc2d0c114f65212f54c7207ec1d0ac61",
+    "source": "/home/gpuadmin/Workspace/se-3-reconciliation/data/obstacle_source_acquisition_03/primary_20260923T085200Z",
+    "M3_run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/local_se2_reconciliation_formulation_01/primary_20260925T013000Z",
+    "historical_native": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_native_continuation_01/primary_20260923T103000Z",
+    "mpc": {
+      "protocol": "official_mpc_jsonl_v1",
+      "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+      "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+      "external_git_status": "",
+      "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+      "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+      "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+      "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+      "casadi_version": "3.7.2",
+      "numpy_version": "2.4.6",
+      "official_settings": {
+        "CONTROL_RATE_HZ": 10.0,
+        "HORIZON": 5,
+        "MPC_DT_S": 0.1,
+        "WAYPOINT_DT_S": 0.1,
+        "TRACK_V_MAX": 1.5,
+        "OBJNAV_V_MAX": 0.8,
+        "W_MAX": 3.0,
+        "A_MAX_V": 2.0,
+        "A_MAX_W": 5.0,
+        "Q_WEIGHTS": [
+          10.0,
+          10.0,
+          1.0
+        ],
+        "R_WEIGHTS": [
+          0.1,
+          0.1
+        ],
+        "ODOM_MATCH_MAX_GAP_S": 0.3,
+        "ODOM_TIMEOUT_S": 0.5
+      },
+      "effective_linear_velocity_limit_m_s": 0.8,
+      "intrinsic_model_waypoint_dt_s": null,
+      "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+      "world_frame": "metres, +Z up; yaw radians CCW",
+      "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+      "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+      "external_source_modified": false,
+      "tracker_instrumentation": "subclass timestamps super()._solve; no objective, gain, limit, selection, or solve changes",
+      "robot_backend_imported": false
+    },
+    "OLD_sha256": "6d53cfff6ca770055ca6563548fc80b6696e2336fd4343f35c2c4e01da1bd5ae",
+    "FRESH_sha256": "8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521",
+    "M3_world_sha256": "bd459b0343fac1e78e4ac80831f4f99af9b86dd4876a3b0df1b45f41c21ce120",
+    "scope": "R00 and shared scene only; no other-source evaluation",
+    "coordinates": "world metres yaw CCW; body forward/left; all local representations use original observation A",
+    "waypoint_intrinsic_timestamps": null
+  },
+  "references": {
+    "M0_NATIVE": {
+      "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M0_NATIVE_world.npy",
+      "world_sha256": "9c8ea94f650d823ac3e1ada0a216dc36758432713fd5407cf18324069865bfc4",
+      "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M0_NATIVE_local.npy",
+      "local_sha256": "8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521",
+      "safety": {
+        "minimum_clearance_m": 0.22948689016047874,
+        "Hospital_only_m": 0.7338624037073149,
+        "cart_only_m": 0.22948689016047874,
+        "limiting_geometry": "cart",
+        "limiting_Hospital_mesh": null,
+        "first_minimum_segment": 8,
+        "minimum_segment_fraction": 1.0,
+        "minimum_path_xy": [
+          19.88161991957295,
+          23.185725783431817
+        ],
+        "nearest_obstacle_xy": [
+          19.61594947,
+          22.84826734
+        ],
+        "per_segment_clearance_m": [
+          1.089042383762051,
+          1.0370237161834115,
+          0.8980669867407352,
+          0.7624673352289932,
+          0.6316224704628295,
+          0.5073845797151886,
+          0.39503983311932384,
+          0.30283318934201614,
+          0.22948689016047874
+        ],
+        "workspace_known": true,
+        "clearance_valid": true,
+        "required_edge_clearance_m": 0.05,
+        "footprint_radius_m": 0.2,
+        "numerical_tolerance_m": 1e-07,
+        "query": "full union direct GEOS, no B connector, no time/execution claim"
+      },
+      "descriptor": {
+        "first_node_displacement_m": 0.0,
+        "endpoint_displacement_m": 0.0,
+        "per_node_displacement_m": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "per_node_log_correction": [
+          [
+            7.105427357601002e-15,
+            8.881784197001252e-16,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            -1.7763568394002505e-15,
+            0.0
+          ],
+          [
+            0.0,
+            -1.7763568394002505e-15,
+            0.0
+          ],
+          [
+            0.0,
+            1.7763568394002505e-15,
+            0.0
+          ],
+          [
+            0.0,
+            1.7763568394002505e-15,
+            0.0
+          ]
+        ],
+        "relative_edge_log": [
+          [
+            -8.673617379884035e-19,
+            0.0,
+            0.0
+          ],
+          [
+            -9.559891200248832e-18,
+            0.0,
+            0.0
+          ],
+          [
+            -2.4596275484858688e-18,
+            0.0,
+            0.0
+          ],
+          [
+            6.9212774384016865e-18,
+            0.0,
+            0.0
+          ],
+          [
+            5.33807442872168e-18,
+            0.0,
+            0.0
+          ],
+          [
+            -2.7927189122954065e-19,
+            0.0,
+            0.0
+          ],
+          [
+            2.727551452289371e-18,
+            2.752857078576476e-21,
+            0.0
+          ],
+          [
+            6.859426662459259e-18,
+            -3.3881317890172014e-21,
+            0.0
+          ],
+          [
+            2.265151389415211e-18,
+            6.776263578034403e-21,
+            0.0
+          ]
+        ],
+        "relative_translation_RMS_m": 5.1022104518253546e-18,
+        "relative_yaw_RMS_rad": 0.0,
+        "relative_translation_max_m": 9.559891200248832e-18,
+        "relative_yaw_max_rad": 0.0,
+        "rigid_fit": {
+          "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+          "transform": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "translation_RMS_m": 0.0,
+          "yaw_RMS_rad": 0.0
+        }
+      },
+      "status": "REFERENCE_GEOMETRY_SAFE"
+    },
+    "M1_SE2_TAPER": {
+      "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M1_SE2_TAPER_world.npy",
+      "world_sha256": "50c086b767c2f507d381f13526fe3c76585edc39290f4df5c2bc6f1ea4dde23d",
+      "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M1_SE2_TAPER_local.npy",
+      "local_sha256": "6e709a8dd56a2059a6dfff07d3f6fac328ab9f5a2cc42c3ec0f48c18671e6d36",
+      "safety": {
+        "minimum_clearance_m": 0.22948689016047874,
+        "Hospital_only_m": 0.7338624037073149,
+        "cart_only_m": 0.22948689016047874,
+        "limiting_geometry": "cart",
+        "limiting_Hospital_mesh": null,
+        "first_minimum_segment": 8,
+        "minimum_segment_fraction": 1.0,
+        "minimum_path_xy": [
+          19.88161991957295,
+          23.185725783431817
+        ],
+        "nearest_obstacle_xy": [
+          19.61594947,
+          22.84826734
+        ],
+        "per_segment_clearance_m": [
+          0.9890216458983163,
+          0.8733805794954939,
+          0.7568142690094426,
+          0.6442325045390305,
+          0.5370155620632338,
+          0.4370352178434204,
+          0.3497059546774331,
+          0.2821003555069193,
+          0.22948689016047874
+        ],
+        "workspace_known": true,
+        "clearance_valid": true,
+        "required_edge_clearance_m": 0.05,
+        "footprint_radius_m": 0.2,
+        "numerical_tolerance_m": 1e-07,
+        "query": "full union direct GEOS, no B connector, no time/execution claim"
+      },
+      "descriptor": {
+        "first_node_displacement_m": 0.21333334638229443,
+        "endpoint_displacement_m": 0.0,
+        "per_node_displacement_m": [
+          0.21333334638229443,
+          0.18956729822987092,
+          0.16584240335548345,
+          0.14209943215001694,
+          0.1183312014454245,
+          0.09462434468378624,
+          0.07098987109574886,
+          0.04734540932200985,
+          0.023737353729445763,
+          0.0
+        ],
+        "per_node_log_correction": [
+          [
+            0.20289117126550843,
+            -0.06592639305455851,
+            -7.738213270158667e-07
+          ],
+          [
+            0.1641689318161555,
+            -0.094785665501262,
+            -6.876148552770189e-07
+          ],
+          [
+            0.1436236898736765,
+            -0.08292127867919669,
+            -6.01557705870448e-07
+          ],
+          [
+            0.12306887473565449,
+            -0.07103731898556258,
+            -5.154350355418558e-07
+          ],
+          [
+            0.10250317338060444,
+            -0.05912167692500105,
+            -4.2922078868912195e-07
+          ],
+          [
+            0.08196710733238277,
+            -0.047277477961471914,
+            -3.432292099425638e-07
+          ],
+          [
+            0.06148898205768067,
+            -0.03547769558048705,
+            -2.575002326921094e-07
+          ],
+          [
+            0.04101674765952576,
+            -0.023647710149256023,
+            -1.7173507149692568e-07
+          ],
+          [
+            0.02056784177942256,
+            -0.011850141206474525,
+            -8.610201263081763e-08
+          ],
+          [
+            0.0,
+            1.7763568394002505e-15,
+            0.0
+          ]
+        ],
+        "relative_edge_log": [
+          [
+            -0.02058190599735884,
+            0.011883306029098857,
+            8.620647173884777e-08
+          ],
+          [
+            -0.020546400116210912,
+            0.011862484325444605,
+            8.605714985066015e-08
+          ],
+          [
+            -0.02056325123538797,
+            0.011869436854174166,
+            8.612267032859222e-08
+          ],
+          [
+            -0.020589016458447327,
+            0.011875312140243526,
+            8.621424640864461e-08
+          ],
+          [
+            -0.02053578413089056,
+            0.011844752282556008,
+            8.599157874655816e-08
+          ],
+          [
+            -0.02047138953189843,
+            0.011811509991187595,
+            8.572897769454357e-08
+          ],
+          [
+            -0.020483922890613182,
+            0.011809758181167862,
+            8.576516119518374e-08
+          ],
+          [
+            -0.020455819210052132,
+            0.011785599516610932,
+            8.563305886610806e-08
+          ],
+          [
+            -0.020580882167394045,
+            0.011827491636003516,
+            8.610201263081763e-08
+          ]
+        ],
+        "relative_translation_RMS_m": 0.023703804600082992,
+        "relative_yaw_RMS_rad": 8.598039110749118e-08,
+        "relative_translation_max_m": 0.02376826954480343,
+        "relative_yaw_max_rad": 8.621424640864461e-08,
+        "rigid_fit": {
+          "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+          "transform": [
+            2.2409911804289457,
+            -1.7840189789603471,
+            0.09099125833006443
+          ],
+          "translation_RMS_m": 0.05741136251376737,
+          "yaw_RMS_rad": 0.09099164495202315
+        }
+      },
+      "status": "REFERENCE_GEOMETRY_SAFE"
+    },
+    "M2_RIGID_TRANSPORT": {
+      "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M2_RIGID_TRANSPORT_world.npy",
+      "world_sha256": "057482c22d9dd489dd37b15c6bf1c64d93e2551b279b6dd969f6f3a48992f28b",
+      "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M2_RIGID_TRANSPORT_local.npy",
+      "local_sha256": "dd3e9fac6184c31efb8c9cc8209e6a7d31adc3508020c52b61ee25386b5cbdd1",
+      "safety": {
+        "minimum_clearance_m": 0.09144233803505619,
+        "Hospital_only_m": 0.7334753951462856,
+        "cart_only_m": 0.09144233803505619,
+        "limiting_geometry": "cart",
+        "limiting_Hospital_mesh": null,
+        "first_minimum_segment": 8,
+        "minimum_segment_fraction": 0.9173421548768459,
+        "minimum_path_xy": [
+          19.875777647129457,
+          22.983167030161468
+        ],
+        "nearest_obstacle_xy": [
+          19.6234719,
+          22.83728884
+        ],
+        "per_segment_clearance_m": [
+          0.9652586426284717,
+          0.8266493187290236,
+          0.6861065300105245,
+          0.5493295185981943,
+          0.41833568865361465,
+          0.2965253066475959,
+          0.19452006757822493,
+          0.11799697798495767,
+          0.09144233803505619
+        ],
+        "workspace_known": true,
+        "clearance_valid": true,
+        "required_edge_clearance_m": 0.05,
+        "footprint_radius_m": 0.2,
+        "numerical_tolerance_m": 1e-07,
+        "query": "full union direct GEOS, no B connector, no time/execution claim"
+      },
+      "descriptor": {
+        "first_node_displacement_m": 0.21333334638229443,
+        "endpoint_displacement_m": 0.21333386967210705,
+        "per_node_displacement_m": [
+          0.21333334638229443,
+          0.21333340469822049,
+          0.21333346293082936,
+          0.21333352119834117,
+          0.21333357950907167,
+          0.21333363764706,
+          0.21333369563823568,
+          0.21333375363974774,
+          0.21333381153404313,
+          0.21333386967210705
+        ],
+        "per_node_log_correction": [
+          [
+            0.20289117126550843,
+            -0.06592639305455851,
+            -7.738213270158667e-07
+          ],
+          [
+            0.18475083781349969,
+            -0.10666897153036897,
+            -7.738213265717775e-07
+          ],
+          [
+            0.18475214118779645,
+            -0.10666683051720152,
+            -7.738213265717775e-07
+          ],
+          [
+            0.184762993067822,
+            -0.10664814887987702,
+            -7.738213265717775e-07
+          ],
+          [
+            0.18479799597411656,
+            -0.10658760167161298,
+            -7.738213265717775e-07
+          ],
+          [
+            0.18479748771905236,
+            -0.10658859922363388,
+            -7.738213265717775e-07
+          ],
+          [
+            0.18478230176957844,
+            -0.10661503949915609,
+            -7.738213265717775e-07
+          ],
+          [
+            0.18481742719319033,
+            -0.10655425401042348,
+            -7.738213265717775e-07
+          ],
+          [
+            0.1848485779773732,
+            -0.10650032095438451,
+            -7.738213265717775e-07
+          ],
+          [
+            0.1849657753575557,
+            -0.10629676333574277,
+            -7.738213265717775e-07
+          ]
+        ],
+        "relative_edge_log": [
+          [
+            -1.2098828883200243e-14,
+            -5.6031568274050845e-15,
+            4.440892098500626e-16
+          ],
+          [
+            -1.0667700927601752e-14,
+            -1.3044307387479355e-19,
+            4.440892098500626e-16
+          ],
+          [
+            -1.0659877721329509e-14,
+            -7.106511559773484e-15,
+            4.440892098500626e-16
+          ],
+          [
+            -1.0650053394594734e-14,
+            -3.556210230806764e-15,
+            4.440892098500626e-16
+          ],
+          [
+            -1.4205542051761701e-14,
+            -5.329002755564968e-15,
+            4.440892098500626e-16
+          ],
+          [
+            -1.4211640089279218e-14,
+            -3.5506875759906655e-15,
+            4.440892098500626e-16
+          ],
+          [
+            -7.1044560229823275e-15,
+            5.326728472101595e-15,
+            4.440892098500626e-16
+          ],
+          [
+            -1.4203995288539544e-14,
+            -4.1640139686989866e-18,
+            4.440892098500626e-16
+          ],
+          [
+            -1.4198806339889248e-14,
+            -8.897417037075775e-15,
+            4.440892098500626e-16
+          ]
+        ],
+        "relative_translation_RMS_m": 1.3282935552878875e-14,
+        "relative_yaw_RMS_rad": 4.440892098500626e-16,
+        "relative_translation_max_m": 1.6756196806236352e-14,
+        "relative_yaw_max_rad": 4.440892098500626e-16,
+        "rigid_fit": {
+          "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+          "transform": [
+            0.0003695415700093463,
+            -0.21331813294611024,
+            -7.738213266983074e-07
+          ],
+          "translation_RMS_m": 1.9459014222361975e-15,
+          "yaw_RMS_rad": 4.213000162292041e-16
+        }
+      },
+      "status": "REFERENCE_GEOMETRY_SAFE"
+    },
+    "M3_LOCAL_SE2": {
+      "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M3_LOCAL_SE2_world.npy",
+      "world_sha256": "bd459b0343fac1e78e4ac80831f4f99af9b86dd4876a3b0df1b45f41c21ce120",
+      "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M3_LOCAL_SE2_local.npy",
+      "local_sha256": "b7133196bdcf9ff65e7ed99b4e9f0baf144f1a470ba5d8e139baa48935ce90c0",
+      "safety": {
+        "minimum_clearance_m": 0.2278092081855581,
+        "Hospital_only_m": 0.7338016067914999,
+        "cart_only_m": 0.2278092081855581,
+        "limiting_geometry": "cart",
+        "limiting_Hospital_mesh": null,
+        "first_minimum_segment": 8,
+        "minimum_segment_fraction": 1.0,
+        "minimum_path_xy": [
+          19.881680721352023,
+          23.183539797358552
+        ],
+        "nearest_obstacle_xy": [
+          19.61594947,
+          22.84826734
+        ],
+        "per_segment_clearance_m": [
+          0.9731214836350206,
+          0.8492881736142639,
+          0.7354812666959725,
+          0.6357433489061664,
+          0.545513146611335,
+          0.4583128470124505,
+          0.3730988027825704,
+          0.29599478793365386,
+          0.2278092081855581
+        ],
+        "workspace_known": true,
+        "clearance_valid": true,
+        "required_edge_clearance_m": 0.05,
+        "footprint_radius_m": 0.2,
+        "numerical_tolerance_m": 1e-07,
+        "query": "full union direct GEOS, no B connector, no time/execution claim"
+      },
+      "descriptor": {
+        "first_node_displacement_m": 0.21114401806645536,
+        "endpoint_displacement_m": 0.0021868314907293233,
+        "per_node_displacement_m": [
+          0.21114401806645536,
+          0.20547071201908632,
+          0.19033727954971233,
+          0.16359591201103246,
+          0.126830670666446,
+          0.08612571538846464,
+          0.04951769434894798,
+          0.022905790865167554,
+          0.00784166016473276,
+          0.0021868314907293233
+        ],
+        "per_node_log_correction": [
+          [
+            0.20076381696956716,
+            -0.0653887533190556,
+            0.0008834415861072031
+          ],
+          [
+            0.17780698752472138,
+            -0.10297039163241503,
+            0.0019124708640205768
+          ],
+          [
+            0.16461469657851277,
+            -0.09555270492448628,
+            0.0035366496184323637
+          ],
+          [
+            0.141420298699657,
+            -0.08224342508439375,
+            0.005161910759269528
+          ],
+          [
+            0.10964974450801897,
+            -0.06374166724479942,
+            0.005958452377385459
+          ],
+          [
+            0.07450499849453376,
+            -0.043204889162377295,
+            0.005455459149617425
+          ],
+          [
+            0.042891355291662984,
+            -0.02474544165711929,
+            0.0039498819142922414
+          ],
+          [
+            0.019886574070657654,
+            -0.011366602033816392,
+            0.00221701049110834
+          ],
+          [
+            0.006833907780087304,
+            -0.0038456914671393277,
+            0.0009126296742958395
+          ],
+          [
+            0.0019235800766968984,
+            -0.0010402267462585424,
+            0.00025668411841506256
+          ]
+        ],
+        "relative_edge_log": [
+          [
+            -0.004919274777160624,
+            0.002693304988704364,
+            0.0010290292779133736
+          ],
+          [
+            -0.013103192731065255,
+            0.007284626557256992,
+            0.001624178754411787
+          ],
+          [
+            -0.02310407243211054,
+            0.0129345425971628,
+            0.0016252611408371642
+          ],
+          [
+            -0.03171909007906702,
+            0.017815320421470035,
+            0.0007965416181154872
+          ],
+          [
+            -0.03510161356460357,
+            0.019718310662794607,
+            -0.0005029932277675897
+          ],
+          [
+            -0.03159109914907793,
+            0.017682279855321635,
+            -0.001505577235325184
+          ],
+          [
+            -0.02300842621847869,
+            0.012780556512045831,
+            -0.0017328714231839015
+          ],
+          [
+            -0.013055074895398745,
+            0.007184589666782104,
+            -0.0013043808168125004
+          ],
+          [
+            -0.004914448135695544,
+            0.0026605167220118365,
+            -0.000655945555881221
+          ]
+        ],
+        "relative_translation_RMS_m": 0.026158510086507047,
+        "relative_yaw_RMS_rad": 0.0012748460674805913,
+        "relative_translation_max_m": 0.040260837674261585,
+        "relative_yaw_max_rad": 0.0017328714231839015,
+        "rigid_fit": {
+          "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+          "transform": [
+            2.6469564300931268,
+            -2.0553547373790764,
+            0.1068589617025278
+          ],
+          "translation_RMS_m": 0.06683480285215623,
+          "yaw_RMS_rad": 0.10385318376094387
+        }
+      },
+      "status": "REFERENCE_GEOMETRY_SAFE"
+    }
+  },
+  "common_state": {
+    "B": [
+      19.203630553052257,
+      24.14333536015282,
+      -1.5689760264727979
+    ],
+    "B_tick": 92,
+    "B_sim_s": 1.5666667483747005,
+    "u_minus": [
+      0.8,
+      -1.5584691584098122e-06
+    ],
+    "u_B_plus": [
+      0.8,
+      0.49999844893907003
+    ],
+    "u_mem_B": [
+      0.8,
+      0.49999844893907003
+    ],
+    "delta_u_B": [
+      0.0,
+      0.5000000074082285
+    ],
+    "previous_command_application_sim_s": 1.450000075623393,
+    "fresh_capture_pose": [
+      19.203242163778583,
+      24.356668352984542,
+      -1.5689752526514715
+    ],
+    "fresh_chunk_id": "chunk_001",
+    "fresh_version": 1,
+    "original_generation": 3,
+    "integration_dt_s": 0.01666666753590107,
+    "next_submit_after_B": 96
+  },
+  "freeze": {
+    "files": {
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/osa03_common_b_method_comparison_01.yaml": "a616886c12deb996f99ea0d7612e07febab04ba5777392f1b0a61185309a105e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_common_b.py": "f5e18869fc35bf5f9cbfb3cfde8a70560729e69df2e41735ff1e312ad9d4cb49",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/osa03_common_b_mpc_worker.py": "baea2983eaeb315dc87d543d81f2b94759fc00bae02f5117aaedee31da3370c1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_osa03_common_b.py": "c72c2a81a30f8b48285a2f245aa5e109e58f3f7e4ad70278d6ac3c79e36980b5",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_osa03_common_b.py": "32149228e772138b6d6db00eabc2acbdd3ba493df2930d3a7aa4ffca16f5de5d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_osa03_common_b.py": "81e16ad7414c338f866c607c0ef9fcb205be138e02febdbfed4e19ce9cae2ae1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_common_b.py": "071dc866f4ad98f2ba39b6e79926b74c5e4879f79111cce014121e0b87470e69",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_native.py": "070a20c95cb5b89908dbccb52c727d07a35093dc6a3b9a094a88ee0f135131f9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/local_se2_reconciliation.py": "91a64d317354fbc4d10894148bf733281447373aeb96714541a6df846ccb268e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/robotless_online.py": "af9876567ee3ec29c05dcc386252656f5b35b6f9aa8a77a1acf62cccb8e0918f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/online_pacing.py": "73f8cbb4cb4cb3856694789b7dd1be5e4b649f815beeb916d5de7818390b2aa5",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/online_mpc_adapter.py": "fd6ab46d98e68bd8dfff2e96b9ebdf66b27b1531632ea53c888024245025362a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_online02.py": "6073f7304cd9a540d9de02da97ec9c681fe42475271a1d0af8465c4c5d2a75fb",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/se2.py": "1a72740eeef3af6594ec4dc428e9a8aff67cc4f31f3712161787b690b966cde1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/trajectory.py": "1f9610846b5633d82adbe70508138ecd934f3ad413b779f6ed868266ad1c2bee",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_environment.py": "aefb92837f1567b97a109bcdd2b43e03fad1e992851a1471c1029f211d404eb7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_join01.py": "e70bb8aa9e2159691e54ecdaa81fca3c2b036c95a94f55715415abbc745d6e5a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/handoff_execution_loss.py": "2f9951ffb3f426ec643594e5285a66c82c114c2f20b12e12a659fe654413719b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_source02_geometry.py": "77ebc0536a7465420f6745a12c43d88914f7e00b89bc466204ad775f18cef60e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_source02_acquisition.py": "49454f885b79260d529249c62f4f6b0d91448d316a2aa5a2f4294a5d10bee4ba",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/online_mpc_worker.py": "8f99bfb6010a834ebef7bbfdd86474f5c58aa26f42b514bcc9886b7693d32b96",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_native_continuation.py": "406ec514f6fbbe848bee4602f7d3085ff6236fa5b6da1e068729f37d39fbb20e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_join_online02.py": "8fba9c47d277d9a50bee392baaa2fb76bf540631c03d3f65ae8a79a264b8ef7d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_local_se2_reconciliation_formulation01.py": "6cd16baefe5427f553339ad10329faec453dff2a07bd3d56213dd181628f4b21",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/robotless_online_handoffs.py": "c662fc9e97871a716600ac93bd2c3f86a56b2633e296c07567d41e369b0cd512"
+    },
+    "references": {
+      "M0_NATIVE": {
+        "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M0_NATIVE_world.npy",
+        "world_sha256": "9c8ea94f650d823ac3e1ada0a216dc36758432713fd5407cf18324069865bfc4",
+        "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M0_NATIVE_local.npy",
+        "local_sha256": "8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521",
+        "safety": {
+          "minimum_clearance_m": 0.22948689016047874,
+          "Hospital_only_m": 0.7338624037073149,
+          "cart_only_m": 0.22948689016047874,
+          "limiting_geometry": "cart",
+          "limiting_Hospital_mesh": null,
+          "first_minimum_segment": 8,
+          "minimum_segment_fraction": 1.0,
+          "minimum_path_xy": [
+            19.88161991957295,
+            23.185725783431817
+          ],
+          "nearest_obstacle_xy": [
+            19.61594947,
+            22.84826734
+          ],
+          "per_segment_clearance_m": [
+            1.089042383762051,
+            1.0370237161834115,
+            0.8980669867407352,
+            0.7624673352289932,
+            0.6316224704628295,
+            0.5073845797151886,
+            0.39503983311932384,
+            0.30283318934201614,
+            0.22948689016047874
+          ],
+          "workspace_known": true,
+          "clearance_valid": true,
+          "required_edge_clearance_m": 0.05,
+          "footprint_radius_m": 0.2,
+          "numerical_tolerance_m": 1e-07,
+          "query": "full union direct GEOS, no B connector, no time/execution claim"
+        },
+        "descriptor": {
+          "first_node_displacement_m": 0.0,
+          "endpoint_displacement_m": 0.0,
+          "per_node_displacement_m": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "per_node_log_correction": [
+            [
+              7.105427357601002e-15,
+              8.881784197001252e-16,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              -1.7763568394002505e-15,
+              0.0
+            ],
+            [
+              0.0,
+              -1.7763568394002505e-15,
+              0.0
+            ],
+            [
+              0.0,
+              1.7763568394002505e-15,
+              0.0
+            ],
+            [
+              0.0,
+              1.7763568394002505e-15,
+              0.0
+            ]
+          ],
+          "relative_edge_log": [
+            [
+              -8.673617379884035e-19,
+              0.0,
+              0.0
+            ],
+            [
+              -9.559891200248832e-18,
+              0.0,
+              0.0
+            ],
+            [
+              -2.4596275484858688e-18,
+              0.0,
+              0.0
+            ],
+            [
+              6.9212774384016865e-18,
+              0.0,
+              0.0
+            ],
+            [
+              5.33807442872168e-18,
+              0.0,
+              0.0
+            ],
+            [
+              -2.7927189122954065e-19,
+              0.0,
+              0.0
+            ],
+            [
+              2.727551452289371e-18,
+              2.752857078576476e-21,
+              0.0
+            ],
+            [
+              6.859426662459259e-18,
+              -3.3881317890172014e-21,
+              0.0
+            ],
+            [
+              2.265151389415211e-18,
+              6.776263578034403e-21,
+              0.0
+            ]
+          ],
+          "relative_translation_RMS_m": 5.1022104518253546e-18,
+          "relative_yaw_RMS_rad": 0.0,
+          "relative_translation_max_m": 9.559891200248832e-18,
+          "relative_yaw_max_rad": 0.0,
+          "rigid_fit": {
+            "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+            "transform": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "translation_RMS_m": 0.0,
+            "yaw_RMS_rad": 0.0
+          }
+        },
+        "status": "REFERENCE_GEOMETRY_SAFE"
+      },
+      "M1_SE2_TAPER": {
+        "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M1_SE2_TAPER_world.npy",
+        "world_sha256": "50c086b767c2f507d381f13526fe3c76585edc39290f4df5c2bc6f1ea4dde23d",
+        "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M1_SE2_TAPER_local.npy",
+        "local_sha256": "6e709a8dd56a2059a6dfff07d3f6fac328ab9f5a2cc42c3ec0f48c18671e6d36",
+        "safety": {
+          "minimum_clearance_m": 0.22948689016047874,
+          "Hospital_only_m": 0.7338624037073149,
+          "cart_only_m": 0.22948689016047874,
+          "limiting_geometry": "cart",
+          "limiting_Hospital_mesh": null,
+          "first_minimum_segment": 8,
+          "minimum_segment_fraction": 1.0,
+          "minimum_path_xy": [
+            19.88161991957295,
+            23.185725783431817
+          ],
+          "nearest_obstacle_xy": [
+            19.61594947,
+            22.84826734
+          ],
+          "per_segment_clearance_m": [
+            0.9890216458983163,
+            0.8733805794954939,
+            0.7568142690094426,
+            0.6442325045390305,
+            0.5370155620632338,
+            0.4370352178434204,
+            0.3497059546774331,
+            0.2821003555069193,
+            0.22948689016047874
+          ],
+          "workspace_known": true,
+          "clearance_valid": true,
+          "required_edge_clearance_m": 0.05,
+          "footprint_radius_m": 0.2,
+          "numerical_tolerance_m": 1e-07,
+          "query": "full union direct GEOS, no B connector, no time/execution claim"
+        },
+        "descriptor": {
+          "first_node_displacement_m": 0.21333334638229443,
+          "endpoint_displacement_m": 0.0,
+          "per_node_displacement_m": [
+            0.21333334638229443,
+            0.18956729822987092,
+            0.16584240335548345,
+            0.14209943215001694,
+            0.1183312014454245,
+            0.09462434468378624,
+            0.07098987109574886,
+            0.04734540932200985,
+            0.023737353729445763,
+            0.0
+          ],
+          "per_node_log_correction": [
+            [
+              0.20289117126550843,
+              -0.06592639305455851,
+              -7.738213270158667e-07
+            ],
+            [
+              0.1641689318161555,
+              -0.094785665501262,
+              -6.876148552770189e-07
+            ],
+            [
+              0.1436236898736765,
+              -0.08292127867919669,
+              -6.01557705870448e-07
+            ],
+            [
+              0.12306887473565449,
+              -0.07103731898556258,
+              -5.154350355418558e-07
+            ],
+            [
+              0.10250317338060444,
+              -0.05912167692500105,
+              -4.2922078868912195e-07
+            ],
+            [
+              0.08196710733238277,
+              -0.047277477961471914,
+              -3.432292099425638e-07
+            ],
+            [
+              0.06148898205768067,
+              -0.03547769558048705,
+              -2.575002326921094e-07
+            ],
+            [
+              0.04101674765952576,
+              -0.023647710149256023,
+              -1.7173507149692568e-07
+            ],
+            [
+              0.02056784177942256,
+              -0.011850141206474525,
+              -8.610201263081763e-08
+            ],
+            [
+              0.0,
+              1.7763568394002505e-15,
+              0.0
+            ]
+          ],
+          "relative_edge_log": [
+            [
+              -0.02058190599735884,
+              0.011883306029098857,
+              8.620647173884777e-08
+            ],
+            [
+              -0.020546400116210912,
+              0.011862484325444605,
+              8.605714985066015e-08
+            ],
+            [
+              -0.02056325123538797,
+              0.011869436854174166,
+              8.612267032859222e-08
+            ],
+            [
+              -0.020589016458447327,
+              0.011875312140243526,
+              8.621424640864461e-08
+            ],
+            [
+              -0.02053578413089056,
+              0.011844752282556008,
+              8.599157874655816e-08
+            ],
+            [
+              -0.02047138953189843,
+              0.011811509991187595,
+              8.572897769454357e-08
+            ],
+            [
+              -0.020483922890613182,
+              0.011809758181167862,
+              8.576516119518374e-08
+            ],
+            [
+              -0.020455819210052132,
+              0.011785599516610932,
+              8.563305886610806e-08
+            ],
+            [
+              -0.020580882167394045,
+              0.011827491636003516,
+              8.610201263081763e-08
+            ]
+          ],
+          "relative_translation_RMS_m": 0.023703804600082992,
+          "relative_yaw_RMS_rad": 8.598039110749118e-08,
+          "relative_translation_max_m": 0.02376826954480343,
+          "relative_yaw_max_rad": 8.621424640864461e-08,
+          "rigid_fit": {
+            "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+            "transform": [
+              2.2409911804289457,
+              -1.7840189789603471,
+              0.09099125833006443
+            ],
+            "translation_RMS_m": 0.05741136251376737,
+            "yaw_RMS_rad": 0.09099164495202315
+          }
+        },
+        "status": "REFERENCE_GEOMETRY_SAFE"
+      },
+      "M2_RIGID_TRANSPORT": {
+        "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M2_RIGID_TRANSPORT_world.npy",
+        "world_sha256": "057482c22d9dd489dd37b15c6bf1c64d93e2551b279b6dd969f6f3a48992f28b",
+        "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M2_RIGID_TRANSPORT_local.npy",
+        "local_sha256": "dd3e9fac6184c31efb8c9cc8209e6a7d31adc3508020c52b61ee25386b5cbdd1",
+        "safety": {
+          "minimum_clearance_m": 0.09144233803505619,
+          "Hospital_only_m": 0.7334753951462856,
+          "cart_only_m": 0.09144233803505619,
+          "limiting_geometry": "cart",
+          "limiting_Hospital_mesh": null,
+          "first_minimum_segment": 8,
+          "minimum_segment_fraction": 0.9173421548768459,
+          "minimum_path_xy": [
+            19.875777647129457,
+            22.983167030161468
+          ],
+          "nearest_obstacle_xy": [
+            19.6234719,
+            22.83728884
+          ],
+          "per_segment_clearance_m": [
+            0.9652586426284717,
+            0.8266493187290236,
+            0.6861065300105245,
+            0.5493295185981943,
+            0.41833568865361465,
+            0.2965253066475959,
+            0.19452006757822493,
+            0.11799697798495767,
+            0.09144233803505619
+          ],
+          "workspace_known": true,
+          "clearance_valid": true,
+          "required_edge_clearance_m": 0.05,
+          "footprint_radius_m": 0.2,
+          "numerical_tolerance_m": 1e-07,
+          "query": "full union direct GEOS, no B connector, no time/execution claim"
+        },
+        "descriptor": {
+          "first_node_displacement_m": 0.21333334638229443,
+          "endpoint_displacement_m": 0.21333386967210705,
+          "per_node_displacement_m": [
+            0.21333334638229443,
+            0.21333340469822049,
+            0.21333346293082936,
+            0.21333352119834117,
+            0.21333357950907167,
+            0.21333363764706,
+            0.21333369563823568,
+            0.21333375363974774,
+            0.21333381153404313,
+            0.21333386967210705
+          ],
+          "per_node_log_correction": [
+            [
+              0.20289117126550843,
+              -0.06592639305455851,
+              -7.738213270158667e-07
+            ],
+            [
+              0.18475083781349969,
+              -0.10666897153036897,
+              -7.738213265717775e-07
+            ],
+            [
+              0.18475214118779645,
+              -0.10666683051720152,
+              -7.738213265717775e-07
+            ],
+            [
+              0.184762993067822,
+              -0.10664814887987702,
+              -7.738213265717775e-07
+            ],
+            [
+              0.18479799597411656,
+              -0.10658760167161298,
+              -7.738213265717775e-07
+            ],
+            [
+              0.18479748771905236,
+              -0.10658859922363388,
+              -7.738213265717775e-07
+            ],
+            [
+              0.18478230176957844,
+              -0.10661503949915609,
+              -7.738213265717775e-07
+            ],
+            [
+              0.18481742719319033,
+              -0.10655425401042348,
+              -7.738213265717775e-07
+            ],
+            [
+              0.1848485779773732,
+              -0.10650032095438451,
+              -7.738213265717775e-07
+            ],
+            [
+              0.1849657753575557,
+              -0.10629676333574277,
+              -7.738213265717775e-07
+            ]
+          ],
+          "relative_edge_log": [
+            [
+              -1.2098828883200243e-14,
+              -5.6031568274050845e-15,
+              4.440892098500626e-16
+            ],
+            [
+              -1.0667700927601752e-14,
+              -1.3044307387479355e-19,
+              4.440892098500626e-16
+            ],
+            [
+              -1.0659877721329509e-14,
+              -7.106511559773484e-15,
+              4.440892098500626e-16
+            ],
+            [
+              -1.0650053394594734e-14,
+              -3.556210230806764e-15,
+              4.440892098500626e-16
+            ],
+            [
+              -1.4205542051761701e-14,
+              -5.329002755564968e-15,
+              4.440892098500626e-16
+            ],
+            [
+              -1.4211640089279218e-14,
+              -3.5506875759906655e-15,
+              4.440892098500626e-16
+            ],
+            [
+              -7.1044560229823275e-15,
+              5.326728472101595e-15,
+              4.440892098500626e-16
+            ],
+            [
+              -1.4203995288539544e-14,
+              -4.1640139686989866e-18,
+              4.440892098500626e-16
+            ],
+            [
+              -1.4198806339889248e-14,
+              -8.897417037075775e-15,
+              4.440892098500626e-16
+            ]
+          ],
+          "relative_translation_RMS_m": 1.3282935552878875e-14,
+          "relative_yaw_RMS_rad": 4.440892098500626e-16,
+          "relative_translation_max_m": 1.6756196806236352e-14,
+          "relative_yaw_max_rad": 4.440892098500626e-16,
+          "rigid_fit": {
+            "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+            "transform": [
+              0.0003695415700093463,
+              -0.21331813294611024,
+              -7.738213266983074e-07
+            ],
+            "translation_RMS_m": 1.9459014222361975e-15,
+            "yaw_RMS_rad": 4.213000162292041e-16
+          }
+        },
+        "status": "REFERENCE_GEOMETRY_SAFE"
+      },
+      "M3_LOCAL_SE2": {
+        "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M3_LOCAL_SE2_world.npy",
+        "world_sha256": "bd459b0343fac1e78e4ac80831f4f99af9b86dd4876a3b0df1b45f41c21ce120",
+        "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/references/M3_LOCAL_SE2_local.npy",
+        "local_sha256": "b7133196bdcf9ff65e7ed99b4e9f0baf144f1a470ba5d8e139baa48935ce90c0",
+        "safety": {
+          "minimum_clearance_m": 0.2278092081855581,
+          "Hospital_only_m": 0.7338016067914999,
+          "cart_only_m": 0.2278092081855581,
+          "limiting_geometry": "cart",
+          "limiting_Hospital_mesh": null,
+          "first_minimum_segment": 8,
+          "minimum_segment_fraction": 1.0,
+          "minimum_path_xy": [
+            19.881680721352023,
+            23.183539797358552
+          ],
+          "nearest_obstacle_xy": [
+            19.61594947,
+            22.84826734
+          ],
+          "per_segment_clearance_m": [
+            0.9731214836350206,
+            0.8492881736142639,
+            0.7354812666959725,
+            0.6357433489061664,
+            0.545513146611335,
+            0.4583128470124505,
+            0.3730988027825704,
+            0.29599478793365386,
+            0.2278092081855581
+          ],
+          "workspace_known": true,
+          "clearance_valid": true,
+          "required_edge_clearance_m": 0.05,
+          "footprint_radius_m": 0.2,
+          "numerical_tolerance_m": 1e-07,
+          "query": "full union direct GEOS, no B connector, no time/execution claim"
+        },
+        "descriptor": {
+          "first_node_displacement_m": 0.21114401806645536,
+          "endpoint_displacement_m": 0.0021868314907293233,
+          "per_node_displacement_m": [
+            0.21114401806645536,
+            0.20547071201908632,
+            0.19033727954971233,
+            0.16359591201103246,
+            0.126830670666446,
+            0.08612571538846464,
+            0.04951769434894798,
+            0.022905790865167554,
+            0.00784166016473276,
+            0.0021868314907293233
+          ],
+          "per_node_log_correction": [
+            [
+              0.20076381696956716,
+              -0.0653887533190556,
+              0.0008834415861072031
+            ],
+            [
+              0.17780698752472138,
+              -0.10297039163241503,
+              0.0019124708640205768
+            ],
+            [
+              0.16461469657851277,
+              -0.09555270492448628,
+              0.0035366496184323637
+            ],
+            [
+              0.141420298699657,
+              -0.08224342508439375,
+              0.005161910759269528
+            ],
+            [
+              0.10964974450801897,
+              -0.06374166724479942,
+              0.005958452377385459
+            ],
+            [
+              0.07450499849453376,
+              -0.043204889162377295,
+              0.005455459149617425
+            ],
+            [
+              0.042891355291662984,
+              -0.02474544165711929,
+              0.0039498819142922414
+            ],
+            [
+              0.019886574070657654,
+              -0.011366602033816392,
+              0.00221701049110834
+            ],
+            [
+              0.006833907780087304,
+              -0.0038456914671393277,
+              0.0009126296742958395
+            ],
+            [
+              0.0019235800766968984,
+              -0.0010402267462585424,
+              0.00025668411841506256
+            ]
+          ],
+          "relative_edge_log": [
+            [
+              -0.004919274777160624,
+              0.002693304988704364,
+              0.0010290292779133736
+            ],
+            [
+              -0.013103192731065255,
+              0.007284626557256992,
+              0.001624178754411787
+            ],
+            [
+              -0.02310407243211054,
+              0.0129345425971628,
+              0.0016252611408371642
+            ],
+            [
+              -0.03171909007906702,
+              0.017815320421470035,
+              0.0007965416181154872
+            ],
+            [
+              -0.03510161356460357,
+              0.019718310662794607,
+              -0.0005029932277675897
+            ],
+            [
+              -0.03159109914907793,
+              0.017682279855321635,
+              -0.001505577235325184
+            ],
+            [
+              -0.02300842621847869,
+              0.012780556512045831,
+              -0.0017328714231839015
+            ],
+            [
+              -0.013055074895398745,
+              0.007184589666782104,
+              -0.0013043808168125004
+            ],
+            [
+              -0.004914448135695544,
+              0.0026605167220118365,
+              -0.000655945555881221
+            ]
+          ],
+          "relative_translation_RMS_m": 0.026158510086507047,
+          "relative_yaw_RMS_rad": 0.0012748460674805913,
+          "relative_translation_max_m": 0.040260837674261585,
+          "relative_yaw_max_rad": 0.0017328714231839015,
+          "rigid_fit": {
+            "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+            "transform": [
+              2.6469564300931268,
+              -2.0553547373790764,
+              0.1068589617025278
+            ],
+            "translation_RMS_m": 0.06683480285215623,
+            "yaw_RMS_rad": 0.10385318376094387
+          }
+        },
+        "status": "REFERENCE_GEOMETRY_SAFE"
+      }
+    },
+    "maximum_rollouts": 4,
+    "retries": 0
+  },
+  "preflight": {
+    "valid": true,
+    "R00_only": true,
+    "source_phase": true,
+    "saved_prefix_parity": true,
+    "integration_and_guard": true,
+    "metric_recomputation": true,
+    "historical_first_post_B_submit": 96,
+    "historical_first_post_B_application": 97,
+    "new_MPC_calls": 0
+  }
+}

@@ -5756,3 +5756,31 @@ Calls:2 scientific terminal+5 buffer requests+1 server warmup;7 official MPC sol
 - Independent full-union Hospital/cart reference-geometry safety PASS: raw.229486890m→optimized.227809208m minimum, both cart-limited at last segment endpoint; required.05m/.20m radius, original1e-7m tolerance. No B→X0 connector or execution safety assertion. Correction tapers downstream in this result without a monotonicity constraint.
 - Saved-only independent equations/retraction/accepted-state safety/source/hash/frame/CSV/JSON/plot validation PASS; all four planning PNGs visually checked. Relevant regression207 passed/1 missing-historical-corpus skip; compileall/diff-check PASS. Scientific calls: local planning1; LightNav/MPC/GP/actual execution/rigid baseline/splice0; no R01 evaluation. GP support and waypoint timing none. No downstream method experiment implemented.
 - Report and small numeric metadata: `docs/LOCAL_SE2_RECONCILIATION_FORMULATION_01.md` and `_RESULT.json`. Remaining uncertainty: actual common-B execution benefit and no-harm/intent preservation have not been measured.
+
+## 2026-09-26 KST — OSA03 common-B comparison pre-execution freeze
+
+- Fetched `origin/main` and matched starting `f40f3de2dc2d0c114f65212f54c7207ec1d0ac61`.
+  Preserved two unrelated stage0 config edits, no source/external modifications.
+- Added deterministic Native / SE(2) taper / full rigid transport / frozen Local-SE2
+  references. Authenticated only R00 and the frozen M3 artifact; no R01 evaluation,
+  optimization, LightNav, RGB, Isaac or numerical MPC execution yet.
+- Restored one common tick92 B, saved first FRESH command and advanced memory,
+  pre-clock official installation transform, first new submit tick96; no solve at B,
+  no future historical solve replay. Separate fresh tracker per method, no warmup.
+- Pre-execution reference clearances: .229486890/.229486890/.091442338/.227809208 m;
+  all four exceed unchanged .05 m margin. Saved historical Native revalidation and
+  zero-numerical-solve four-tracker initialization preflight PASS.
+- Froze strict primary submit/application timing comparability and null unsafe
+  method handling. Added independent saved-record validator and eight-figure report.
+- Tests: `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q
+  tests/test_osa03_common_b.py tests/test_osa03_native.py
+  tests/test_osa03_native_validation.py tests/test_osa03_trackability.py
+  tests/test_online_mpc_adapter.py tests/test_robotless_online.py
+  tests/test_robotless_online_replay.py tests/test_robotless_online_validator.py
+  tests/test_handoff_execution_loss.py tests/test_join_online02.py tests/test_se2.py
+  tests/test_se2_lie.py tests/test_gp_se2_environment.py` → 248 PASS (7.07 s).
+  Mock end-to-end runner/validator/report test has zero real MPC/VLA/optimizer calls.
+  `compileall` and `git diff --check` PASS.
+- Run: `data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/`.
+  Detailed protocol/commands: `docs/OSA03_COMMON_B_METHOD_COMPARISON_01.md`.
+  Scientific execution is permitted only after this freeze commit is normally pushed.

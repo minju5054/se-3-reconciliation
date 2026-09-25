@@ -1,0 +1,41 @@
+experiment: OSA03_COMMON_B_METHOD_COMPARISON_01
+starting_sha: f40f3de2dc2d0c114f65212f54c7207ec1d0ac61
+source_run: data/obstacle_source_acquisition_03/primary_20260923T085200Z
+representative: REPEAT_00
+OLD_sha256: 6d53cfff6ca770055ca6563548fc80b6696e2336fd4343f35c2c4e01da1bd5ae
+FRESH_sha256: 8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521
+M3_run: data/local_se2_reconciliation_formulation_01/primary_20260925T013000Z
+M3_world_sha256: bd459b0343fac1e78e4ac80831f4f99af9b86dd4876a3b0df1b45f41c21ce120
+historical_native_run: data/osa03_native_continuation_01/primary_20260923T103000Z
+order: [M0_NATIVE, M1_SE2_TAPER, M2_RIGID_TRANSPORT, M3_LOCAL_SE2]
+methods:
+  M0_NATIVE: original observation-anchored FRESH; original raw local bytes
+  M1_SE2_TAPER: Exp((1-s)*Log(B*A^-1))*F; original FRESH cumulative XY arc s
+  M2_RIGID_TRANSPORT: B*A^-1*F; no solve
+  M3_LOCAL_SE2: exact authenticated frozen optimized world array; no solve
+B_tick: 92
+first_submit_tick: 96
+control_stride: 6
+integration_steps: 180
+primary_intervals: 54
+integration_dt_policy: exact source float32 1/60; no arbitrary reset
+common_phase: shared historical first FRESH command and memory; no future historical solve replay
+reference_installation: pre-clock tracker initialization through official observation-A transform; no install at B or during rollout
+maximum_rollouts: 4
+retries: 0
+unsafe_reference: REFERENCE_GEOMETRY_UNSAFE; no execution or fallback
+footprint_radius_m: 0.20
+required_clearance_m: 0.05
+numeric_safety_tolerance: unchanged environment value
+metric_protocol: configs/osa03_native_continuation_01.yaml
+primary_target: original raw world FRESH for every method
+command_hold_timeout_s: 0.5
+controller_stall_sim_s: 2.0
+pacer: minimum_wall_step_no_catchup_v1
+cold_start: separate fresh official tracker per method; no warmup solve
+historical_parity_pose_atol: 1.0e-10
+historical_parity_command_atol: 1.0e-10
+selection_atol: 1.0e-12
+timing_gate: identical attempted/accepted submit ticks and corresponding applications through inclusive B+54; complete exposure required
+classification_priority: [TECHNICAL_EXECUTION_BLOCKED, TIMING_CONFOUNDED_COMMON_B_COMPARISON, REFERENCE_LIMITED_COMMON_B_COMPARISON, COMMON_B_COMPARISON_VALID]
+no_calls: [LightNav, RGB, source_acquisition, graph_optimization, GP, Isaac]
