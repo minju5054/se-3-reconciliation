@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [OSA03 relative-factor ablation](docs/OSA03_RELATIVE_FACTOR_ABLATION_01.md)
+completed one No-relative planning solve and four rollouts under the authenticated
+common-B Native logical application schedule. The timing gate passed. Removing E_R
+changed Full's reference by at most 6.97 mm, reduced original-FRESH .9 s position AUC
+by .003842925 m·s and advanced sustained attachment by .050000003 s, while raising
+linear command TV by .399998408 m/s. All references/executions remained safe; endpoint
+and original progress recovered. This is a one-source offline trade-off, not online
+latency or general factor-necessity evidence. Full defaults remain unchanged.
+[Static review](data/osa03_relative_factor_ablation_01/primary_20260929T050000Z/index.html).
+
 The [OSA03 common-B comparison](docs/OSA03_COMMON_B_METHOD_COMPARISON_01.md)
 ran Native, deterministic SE(2) taper, rigid transport and the frozen Local-SE2
 reference once each with unchanged official MPC. Native/taper/Local-SE2 sustained

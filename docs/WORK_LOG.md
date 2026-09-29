@@ -5838,3 +5838,36 @@ Calls:2 scientific terminal+5 buffer requests+1 server warmup;7 official MPC sol
   freeze; no scientific solve or rollout occurred. Compile/diff checks precede commit.
 - Protocol: `docs/OSA03_RELATIVE_FACTOR_ABLATION_01.md`. One NO_RELATIVE optimization,
   then one eligible rollout each in Native/Taper/Full/No-relative order only after push.
+
+## 2026-09-29 — OSA03 relative-factor ablation completed
+
+- Normally pushed scientific freeze `0b0f4297b79e4ed52bddda20a7090c511a8858eb` before
+  the sole NO_RELATIVE solve and Native/Taper/Full/No-relative rollouts. One planning
+  call, zero Full reconstruction, 30 MPC solves each / 120 total; four 180-step rollouts.
+  LightNav/RGB/Isaac/new source 0, retries 0. Frozen implementation/config unchanged.
+- `TIMING_CONTROLLED_OFFLINE_COMPARISON_VALID`: all four match authenticated M0
+  attempted/accepted submits and application ticks through primary 54 steps and full
+  180 steps, with identical B/physical incoming/held command/memory/generation.
+  Simulation time/state stay fixed during host waits. Native/Taper reproduce their
+  saved common-B state/command arrays exactly; official MPC remains unchanged.
+- No-relative planning: step-tolerance termination at iteration 3, two accepted steps,
+  zero unsafe rejections; E_S=.3459230973, E_A=.3454229571, optimized total=.6913460543.
+  Old R=.0805340071 is diagnostic only. Maximum reference difference from frozen Full
+  .006967255 m; edge translation RMS .028378514 versus .026158510 m; no intersection.
+- Primary No-relative versus Full: .9 s position AUC .166121029 versus .169963954 m·s;
+  attachment 1.433333408 versus 1.483333411 s (three ticks earlier); remaining original
+  arc at join .079104989 versus .032930950 m. Reference clearance .229486890 versus
+  .227809208 m; execution .138784907 versus .133709423 m, all>.05 m; no abort/censoring.
+  Endpoint error .091298626 versus .096335462 m, all final original arc fractions 1.
+- Mixed command result: linear TV 1.199998407 versus .799999999 m/s; angular TV 3.507769359
+  versus 3.539108927 rad/s. Max omega essentially identical. No-relative .3 s yaw AUC
+  slightly higher, .9 s lower. Own-reference metrics remain separate and also improve
+  versus Full. Modest early benefit does not establish general E_R necessity/removal.
+- Saved-only equation/retraction/safety/memory/selection/integration/schedule/metric
+  validation PASS. Nine plots visually inspected; numeric/hash sidecars and CSV parity
+  PASS. Final relevant regression 384 passed/1 missing-historical-corpus skip; compileall
+  and diff checks PASS. Synthetic tests are not experimental evidence.
+- Report with all seven explicit answers and exact commands:
+  `docs/OSA03_RELATIVE_FACTOR_ABLATION_01.md`; small tracked result tables/ledgers under
+  `results/osa03_relative_factor_ablation_01/`; raw/large derivatives remain ignored.
+  No scientific protocol deviation; no future stage implemented. Stage0 edits preserved.
