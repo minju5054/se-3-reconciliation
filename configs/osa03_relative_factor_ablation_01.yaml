@@ -1,0 +1,57 @@
+experiment: OSA03_RELATIVE_FACTOR_ABLATION_01
+label: timing-controlled offline causal reference comparison
+starting_sha: 53af3488809063a8fddf16a9bb9f7f35bd19aa94
+common_B_run: data/osa03_common_b_method_comparison_01/primary_20260925T162125Z
+common_B_result_hashes_sha256: 10f8b55c626961d7c0fd0151fba12fc249471235fca412cb8ae382edc30dd120
+M0_rollout_sha256: 07da7802835d63a75ba6afc82abb81722df0a257ff03526a1452cf46f57895e8
+tracked_common_result: results/osa03_common_b_method_comparison_01/result_summary.json
+tracked_common_result_sha256: 4f40dc51cb2995e3a383512d8bfef35405a25629ba69d560bd7a63053a75a0d8
+order:
+- M0_NATIVE
+- M1_TAPER
+- FULL_LOCAL_SE2
+- NO_RELATIVE
+integration_steps: 180
+primary_intervals: 54
+solver:
+  max_iterations: 80
+  finite_difference_epsilon: 1.0e-06
+  initial_damping: 0.001
+  damping_increase: 10.0
+  damping_decrease: 0.3
+  maximum_damping: 1000000000000.0
+  gradient_tolerance: 1.0e-09
+  step_tolerance: 1.0e-09
+  cost_tolerance: 1.0e-12
+relative_factor:
+  FULL_LOCAL_SE2: true
+  NO_RELATIVE: false
+normalization:
+  translation_m: 0.1
+  yaw_degrees: 10.0
+initialization: original observation-anchored FRESH
+weights:
+  S: (1-s)^2
+  A: s^2
+footprint_radius_m: 0.2
+required_edge_clearance_m: 0.05
+scientific_optimizer_calls: 1
+maximum_rollouts: 4
+retries: 0
+wall_wait_timeout_s: 30.0
+reference_safety: complete polyline; no B connector; unchanged numerical reserve
+execution_safety: existing abort-only command guard
+method_definitions:
+  M0_NATIVE: F
+  M1_TAPER: Exp((1-s) Log(B A^-1)) F
+  FULL_LOCAL_SE2: exact frozen optimized_world.npy; zero reconstruction solves
+  NO_RELATIVE: E_S+E_A with identical LM/safety; R omitted from objective
+waypoint_timestamps: null
+scope_exclusions:
+- new model/RGB/Isaac calls
+- MPC changes
+- new factors
+- new source
+- tuning
+- retries
+metric_target: ORIGINAL FRESH primary; own reference secondary only

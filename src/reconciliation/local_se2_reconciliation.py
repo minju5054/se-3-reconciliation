@@ -63,18 +63,22 @@ class LocalSE2Problem:
                                     relative_pose(x[:-1], x[1:]))),
             A=se2_log(relative_pose(self.fresh, x)))
 
-    def residual_blocks(self, state):
+    def residual_blocks(self, state, *, include_relative=True):
         raw = self.raw_residuals(state)
         s = self.progress
         weights = dict(L=(1-s)**2, R=np.ones(len(s)-1), A=s**2)
+        if not include_relative:
+            del weights['R']
         return {k: raw[k] / self.scales * np.sqrt(w/w.sum())[:, None]
                 for k, w in weights.items()}
 
-    def residual_vector(self, state):
-        return np.concatenate([r.ravel() for r in self.residual_blocks(state).values()])
+    def residual_vector(self, state, *, include_relative=True):
+        """Historical Full default; explicit experiment opt-out removes the R block."""
+        return np.concatenate([r.ravel() for r in self.residual_blocks(
+            state, include_relative=include_relative).values()])
 
-    def costs(self, state):
-        blocks = self.residual_blocks(state)
+    def costs(self, state, *, include_relative=True):
+        blocks = self.residual_blocks(state, include_relative=include_relative)
         out = {k: float(np.sum(r*r)) for k, r in blocks.items()}
         out['total'] = sum(out.values())
         return out

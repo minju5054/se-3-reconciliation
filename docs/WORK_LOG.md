@@ -5818,3 +5818,23 @@ Calls:2 scientific terminal+5 buffer requests+1 server warmup;7 official MPC sol
 - Largest uncertainty: whether the small M3 differences remain under exactly
   identical actual application timing. This result does not establish proposed
   superiority, complete bypass, generalization or real-robot benefit.
+
+## 2026-09-29 — OSA03 relative-factor ablation pre-execution freeze
+
+- Fetched origin/main, inspected latest commit and required repository/source reports;
+  starting HEAD `53af3488809063a8fddf16a9bb9f7f35bd19aa94`. Preserved/excluded both
+  unrelated Stage 0 edits. Historical common-B saved-only validation PASS before edits.
+- Added explicit `include_relative=False` opt-out; default Full residual/cost/solve
+  matches a pre-edit synthetic golden bit-exactly. No other formulation/LM changes.
+- Authenticated R00, frozen Full bytes, common B/memory and actual frozen M0 submit/
+  application schedule. Offline wrapper waits with simulation paused, then releases
+  results at predetermined ticks. Official worker/selection/solve/poll and external
+  source remain unchanged. Previous-control ordering is audited; no future-state solve.
+- Prepared `data/osa03_relative_factor_ablation_01/primary_20260929T050000Z/` with zero
+  scientific calls. Official restoration preflight disables numerical solves and passes.
+  Added saved-only validator, separate own-reference metrics and nine figure sidecars.
+- Focused/historical regression: 384 passed, 1 missing-historical-corpus skip; includes
+  19 new synthetic/saved tests. Initial test fixture path omissions were fixed before
+  freeze; no scientific solve or rollout occurred. Compile/diff checks precede commit.
+- Protocol: `docs/OSA03_RELATIVE_FACTOR_ABLATION_01.md`. One NO_RELATIVE optimization,
+  then one eligible rollout each in Native/Taper/Full/No-relative order only after push.
