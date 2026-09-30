@@ -1,0 +1,62 @@
+experiment: SPATIAL_CORRESPONDENCE_SELECTOR_DIAG_01
+label: saved-only matched-state correspondence and official-selector diagnostic
+starting_sha: 1456e8eabd0e84b37203f54fdf567f53de06cf46
+historical_results:
+  results/state_shift_transport_scale_01/result_summary.json: 04104aa84d36cc15792cd80cfef93ef6fafdaf6810bfb71f143a2532e2880c68
+  results/relative_factor_multisource_01/result_summary.json: d935cdc58661a672cb238085f0c697c5d75d36a5d01ff5709e2782de6b0c5cc7
+official_source: /home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py
+sources:
+- OSA03_R00
+- episode_001_repeat_01/handoff_013
+- episode_008_repeat_01/handoff_023
+- episode_013_repeat_00/handoff_020
+methods: [M0_NATIVE, HALF_TRANSPORT_LOCAL_SE2, FULL_LOCAL_SE2]
+rules: [C0_ROW0, C1_XY_PROJECTION, C2_SE2_PROJECTION, C3_FORWARD_SE2]
+position_scale_m: 0.10
+yaw_scale_deg: 15.0
+candidate_score_tie_absolute_tolerance: 1.0e-12
+progress_sign_tolerance_m: 1.0e-12
+dense_synthetic_score_tolerance: 1.0e-7
+saved_numeric_tolerance: 1.0e-12
+minimizer: analytic quadratic on each segment and wrapped-yaw branch, endpoints included
+tie: earliest original arc within absolute score tolerance
+zero_XY_segment: fail closed; never remove original row identities
+vertex_segment: earlier segment; endpoint uses final segment
+nearest_raw_row: nearest original arc, earliest identity on exact tie; diagnostic only
+primary_intervals: 54
+primary_window: original frozen 54 intervals, both endpoints included; nominal 0.9 s
+matched_pose_source: exact saved Native submit request, bit-identical saved state at that tick
+selector_reference: exact saved restoration.installed_world; no new coordinate transformation
+primary_reset: modified minus Native first H5 original arc at identical pose; negative below -1e-12 m
+source_reset: at least one negative first H5 original arc delta
+systematic_reset: source_reset in at least 3 of 4 sources
+persistent_reset: at least two consecutive matched ticks with negative first H5 arc delta
+worse_execution: Full .9 position AUC > Native + 1e-9, or later/missing attachment when Native attaches
+classification_priority: [TECHNICAL_BLOCKED, TRANSPORT_PROGRESS_RESET_SUPPORTED, CORRESPONDENCE_WITHOUT_RESET, MIXED_CORRESPONDENCE_EFFECT]
+classification_rules:
+  TECHNICAL_BLOCKED: historical authentication, extraction or validation failure
+  TRANSPORT_PROGRESS_RESET_SUPPORTED: Full resets in at least 3 sources and persistent reset coexists with worse Full execution in at least one
+  CORRESPONDENCE_WITHOUT_RESET: all C1/C2/C3 progress positive in all sources; neither Half nor Full resets in at least 3 sources
+  MIXED_CORRESPONDENCE_EFFECT: remaining valid results; show source-dependent amounts and directions
+near_exhausted_endpoint_remaining_m: 0.10
+footprint_radius_m: 0.20
+required_edge_clearance_m: 0.05
+safety: existing direct Hospital/cart checker, unchanged workspace and numerical reserve; diagnostic only
+expected_matched_states: 37
+expected_scientific_selector_queries: 111
+optimizer_calls: 0
+MPC_solves: 0
+rollouts: 0
+LightNav: 0
+RGB: 0
+Isaac: 0
+optional_Genuine13: not performed
+output_metrics:
+- continuous arc/normalized progress, segment/alpha, diagnostic nearest raw identity
+- B position/yaw/tangent gap, remaining original arc, normalized pose score
+- hypothetical connector and original suffix complete-polyline safety
+- identical saved pose, tick/time, nearest row and physical target, H5 identities/physical poses/original arcs
+- first/mean/min/max selected original row and arc, endpoint repetition
+- modified-minus-Native nearest/first/mean row and arc deltas, negative counts/fractions, backward maxima, first differing ticks
+- saved .9 original-FRESH position AUC, sustained attachment and endpoint error; Half-minus-Full context
+final_pngs: [correspondence_world_overview.png, selector_progress_reset.png, correspondence_rule_summary.png]

@@ -1,0 +1,684 @@
+{
+  "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/spatial_correspondence_selector_diag_01/primary_20260930T120000Z",
+  "freeze": {
+    "files": {
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/osa03_common_b_method_comparison_01.yaml": "a616886c12deb996f99ea0d7612e07febab04ba5777392f1b0a61185309a105e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_common_b.py": "f5e18869fc35bf5f9cbfb3cfde8a70560729e69df2e41735ff1e312ad9d4cb49",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/osa03_common_b_mpc_worker.py": "baea2983eaeb315dc87d543d81f2b94759fc00bae02f5117aaedee31da3370c1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_osa03_common_b.py": "c72c2a81a30f8b48285a2f245aa5e109e58f3f7e4ad70278d6ac3c79e36980b5",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_osa03_common_b.py": "32149228e772138b6d6db00eabc2acbdd3ba493df2930d3a7aa4ffca16f5de5d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_osa03_common_b.py": "81e16ad7414c338f866c607c0ef9fcb205be138e02febdbfed4e19ce9cae2ae1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_common_b.py": "071dc866f4ad98f2ba39b6e79926b74c5e4879f79111cce014121e0b87470e69",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_native.py": "070a20c95cb5b89908dbccb52c727d07a35093dc6a3b9a094a88ee0f135131f9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/local_se2_reconciliation.py": "f6286066bdfdb54418ec23b068f526fdb950eee0a16e6142d6ef736aa9662e33",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/robotless_online.py": "af9876567ee3ec29c05dcc386252656f5b35b6f9aa8a77a1acf62cccb8e0918f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/online_pacing.py": "73f8cbb4cb4cb3856694789b7dd1be5e4b649f815beeb916d5de7818390b2aa5",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/online_mpc_adapter.py": "fd6ab46d98e68bd8dfff2e96b9ebdf66b27b1531632ea53c888024245025362a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_online02.py": "6073f7304cd9a540d9de02da97ec9c681fe42475271a1d0af8465c4c5d2a75fb",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/se2.py": "1a72740eeef3af6594ec4dc428e9a8aff67cc4f31f3712161787b690b966cde1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/trajectory.py": "1f9610846b5633d82adbe70508138ecd934f3ad413b779f6ed868266ad1c2bee",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_environment.py": "aefb92837f1567b97a109bcdd2b43e03fad1e992851a1471c1029f211d404eb7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_join01.py": "e70bb8aa9e2159691e54ecdaa81fca3c2b036c95a94f55715415abbc745d6e5a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/handoff_execution_loss.py": "2f9951ffb3f426ec643594e5285a66c82c114c2f20b12e12a659fe654413719b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_source02_geometry.py": "77ebc0536a7465420f6745a12c43d88914f7e00b89bc466204ad775f18cef60e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_source02_acquisition.py": "49454f885b79260d529249c62f4f6b0d91448d316a2aa5a2f4294a5d10bee4ba",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/online_mpc_worker.py": "8f99bfb6010a834ebef7bbfdd86474f5c58aa26f42b514bcc9886b7693d32b96",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_native_continuation.py": "406ec514f6fbbe848bee4602f7d3085ff6236fa5b6da1e068729f37d39fbb20e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_join_online02.py": "8fba9c47d277d9a50bee392baaa2fb76bf540631c03d3f65ae8a79a264b8ef7d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_local_se2_reconciliation_formulation01.py": "6cd16baefe5427f553339ad10329faec453dff2a07bd3d56213dd181628f4b21",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/robotless_online_handoffs.py": "c662fc9e97871a716600ac93bd2c3f86a56b2633e296c07567d41e369b0cd512",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/osa03_relative_factor_ablation_01.yaml": "1b10c9094461b93136ba4ecc4a593123a15a3df6b426707289140c78250150a9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_relative_factor_ablation01.py": "e8ba1e4e0a8cad8ce3d3c97bf8994e1a7768754227792eb098ad7ae4fec7560c",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_relative_ablation.py": "576150eced448dc9a5fb5af9243ae026fbe9c970f077063b665c1806cd5f794b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/graph_optimizer.py": "7d595cedc49965cf15cc6e701db371bf7d7cc69e6c3a99deffc304a32855b6f7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_osa03_relative_factor_ablation01.py": "8de04c06b2dfe599030647c8d198a19868c8ea96395e6439c0899e4654baed54",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_osa03_relative_factor_ablation01.py": "c8852fafba9a0fabc56ba522272cf2fcaeaf85f850e65e48cbfc9bd377c6fdfc",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_osa03_relative_factor_ablation01.py": "569bb85e1cbfdf9e47d82f688f5ae52fd2663c65320d7e55c9dedfae56cc843d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/fixtures/relative_ablation_full_golden.json": "22189534152074c872760b328232a42b90e30095cbf23bc1b6982b1911d66a39",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_relative_factor_replication01.py": "ddd0f0e3297423137da5e2757e9f0308cbe71d47be605532c4091e44483d0643",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_osa03_relative_factor_replication01.py": "4f3ef7ae3244a03cc29eebc51a1114d9831740c5474e396ede9f76b58280f870",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_relative_replication.py": "1236342a042e67c4274db6faf4d4e55ff4625ebb178f756db2237adab184784a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/handoff_delay_attribution.py": "507545af3dfb2ccdd35415facc9555de539780a48508f51c68ddddf7e70eaf21",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/relative_factor_multisource.py": "69d6a4c46f3a3fd9dd3a2631c621e7d48cb1d5ea18c5f5dd8faa03957d08c692",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_relative_factor_multisource01.py": "7f70adfe634f44e6f8fdf182823ffd8a2daa4ed4581e1221d72f37740d0d9a5d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_relative_factor_multisource01.py": "99bdc0f3fe0ad35985db00b08b5c502d21014896b21afae2901eb63b49f47a54",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_relative_factor_multisource01.py": "96cfdeb3d484652b793a0e206704fa550ac4e45da7fe56165c7f2b276f79909e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_relative_factor_multisource01.py": "e5141e7198fef2272cb6a3df7c2c18108a63e3152acefd0c7a7f5d1f2bdd0508",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/relative_factor_multisource_01.yaml": "05f94cdf4f445a2a3e2d85fe31d0d757a0b05f624eb271b9fa6b7d96d62564b0",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/state_shift_transport_scale.py": "823a3150d006ac53bb4d1e0a995f3417a3527596f805b2976540591259726c39",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_state_shift_transport_scale01.py": "d97a5496c9bad1475b28e7d767f62bf4c2d6b3b392918307b34a9778144b5e2f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_state_shift_transport_scale01.py": "0a24c432fcbd44cbbac7da51b458d896cfbe76f5d7321b95809693e54f6d8b0a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_state_shift_transport_scale01.py": "703ccd0b54badcf2edefb21bf5193a0871f9d593e0b328d0aa7af8f80e414263",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_state_shift_transport_scale01.py": "94c00edd0d8bf9b350606c10ed10201aa49a340b0739dc6872b2df640793a129",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/state_shift_transport_scale_01.yaml": "204d7ed5ff21e0e1d94cfddc30de20376e9ec4f1d934150f1ce0429dcde6d1be",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/spatial_correspondence_selector_diag_01.yaml": "e45a21e1d12d8b78e343e801f52c9e9dfd2d44c70fffb1b07f3ac5a0685a3c43",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/spatial_correspondence_selector.py": "e22209d6bd888bd6ee5c5c79f1e8d8037cc31b72b1446784c09cfb5501c89db0",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_spatial_correspondence_selector_diag01.py": "2b04ffeaa4ea6ca5adb27f075d0062c6ab5ae11b6505bd2d6472c9db13eb2670",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_spatial_correspondence_selector_diag01.py": "49ec954b244ff85fcb16f253bd5e93cfdca404b14486ac365915eb491eb1ffaa",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_spatial_correspondence_selector_diag01.py": "28b2d784f53cdc1e5d6f0eebd0294f0139bd79b6a1b5be5b0d647647ea7087ee",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_spatial_correspondence_selector_diag01.py": "ce09477211711790e7548875b4c9ec7a72469b6bc5872a1764e68daad59c19ed"
+    },
+    "inputs": {
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/spatial_correspondence_selector_diag_01/primary_20260930T120000Z/prepared.json": "77f24b979282cf88bf597a45dfa8ae8b2230dd8578e4aaa75706ef5e4d0d7630",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/spatial_correspondence_selector_diag_01/primary_20260930T120000Z/preflight_tests.log": "bc0df2147a33c9e74b1fc38cb2fe27f0fac1449c1e6f84cdbe31662e678a71a8",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/spatial_correspondence_selector_diag_01/primary_20260930T120000Z/preflight_validation.json": "98c0ff1f4295714cfbb9e0317f415deab96cf408fad3abefd26b9273cc49f532",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/spatial_correspondence_selector_diag_01/primary_20260930T120000Z/protocol.json": "befb736b3da5f454f2b86afd37066b31b97525bc7d7826844b3d540564bbe925",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/spatial_correspondence_selector_diag_01/primary_20260930T120000Z/protocol_document.md": "d915c17fd9b2479c711c2a701c81bc9461aebe3628e4ff692f3e1f56ddefacfb"
+    },
+    "historical_inputs": {
+      "/home/gpuadmin/Workspace/se-3-reconciliation/results/state_shift_transport_scale_01/result_summary.json": "04104aa84d36cc15792cd80cfef93ef6fafdaf6810bfb71f143a2532e2880c68",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/result_hashes.json": "b4aa12d3fd3ef8c166e9128e512353115952129b4978a7cb1df814cd481bf2a6",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/results/relative_factor_multisource_01/result_summary.json": "d935cdc58661a672cb238085f0c697c5d75d36a5d01ff5709e2782de6b0c5cc7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/result_hashes.json": "3ed976171c1d6d23bad93824ae21679240773acbf45601b0ce10bac3ba90ebe9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/common_state.json": "0e1ca894e13467e0b5ed334be47e51728ab23a38a874afbe1bee4e378eef6d24",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/references.json": "51024dfb92deab5a44832ca94e3d30e9e4ceb881f514e6c72179b822311aa122",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/source_manifest.json": "b61dd2b9c1cbe98be9299ac1c21212834c687ad249cbf38cc84632d9ed4a3c00",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/recorded_old_to_B.npy": "868ce16ce52578d38d33a89e4171d781fa9beb89f03812d038047af78fe63f07",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/schedule.json": "6db1f0840f3d07089aec065a03d37332bdb37651f16080e9dc2a2adfdc117bfe",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/scenario.json": "63a0d1f907584fd02240b14a1a30bd1f6227beea75bf27344403c9b726163725",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/references/M0_NATIVE_world.npy": "9c8ea94f650d823ac3e1ada0a216dc36758432713fd5407cf18324069865bfc4",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/references/M0_NATIVE_local.npy": "8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/methods/M0_NATIVE/restoration.json": "09eba0382ef49629708c2e8aea444e092b80d95ac324473cfde85117cf0933d6",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/methods/M0_NATIVE/rollout.json": "e4ff6df634de0617b568a8df199d035067e91f83b1a68410926606960527274e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/methods/M0_NATIVE/metrics.json": "7da30e59b242598efeab676d1713b2fe10b89ed44fa741388310b7c7950903e4",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/references/HALF_TRANSPORT_LOCAL_SE2_world.npy": "c792f6dde9f8304a07574a6544b5a0163c105934d26110a5fac745cdcc8c2639",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/references/HALF_TRANSPORT_LOCAL_SE2_local.npy": "cb864e16f8200742ae90577753d7aca8633b279bc5b2d7091ed33f36d18e5464",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/methods/HALF_TRANSPORT_LOCAL_SE2/restoration.json": "71ecbd85c53d397ad90bf1c30a7d5fd3ea92b79aa0f666b23e242d646ce72d75",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/methods/HALF_TRANSPORT_LOCAL_SE2/rollout.json": "199a5aafb3c1e8d0b496842d97cf739ea487543ad92419218f97b688a3016de0",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/methods/HALF_TRANSPORT_LOCAL_SE2/metrics.json": "5ecefc13ab4ffe8ed990297d3154bcefd788c231f3c4c2a698a89691bc66913c",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/references/FULL_LOCAL_SE2_world.npy": "bd459b0343fac1e78e4ac80831f4f99af9b86dd4876a3b0df1b45f41c21ce120",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/references/FULL_LOCAL_SE2_local.npy": "b7133196bdcf9ff65e7ed99b4e9f0baf144f1a470ba5d8e139baa48935ce90c0",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/methods/FULL_LOCAL_SE2/restoration.json": "da4a1d51cf43caae5a00d58aa5eef757243ee60da69b4f216479b79ca725724f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/methods/FULL_LOCAL_SE2/rollout.json": "188ce215bbab12022d659ac963853304fea3ca30e8da6ec98ab40b27c9c6dbf2",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/methods/FULL_LOCAL_SE2/metrics.json": "2d3eae1d4c016fd7d2b997fd0b0290a32923ee47395bef365889561e6db69bae",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/common_state.json": "56f6f645d2db972732366d770bd9bbd8e09bdfb50cd965e3aa66042bc96015fe",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/references.json": "f2487a75f5bf339bb3fce53ffb058333db258dcbdd12a81fc851e54c393c0073",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/source_manifest.json": "97e66563d89a7198a3e27f6ae6efe9f1e39bd55f883f429a4079d21560061e85",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/recorded_old_to_B.npy": "9431945f821847b3777c27d10a367e09be0b7370b925cbc7aca3e8cd1d9652c8",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/schedule.json": "c8c2f58f6a586d21985671b7d94701f899f3414abf9c494bbe594edc8902df94",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/scenario.json": "b79857ef1fe6c14cdd65eb211669bf3f945e4257e96b4d5ba7fdf7162914a61a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/references/M0_NATIVE_world.npy": "8bf03cf08ef9c641edb613953d3173097daa66f1281cc54a98ba1c71d381b129",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/references/M0_NATIVE_local.npy": "82bb298736fd7a1e6289a529e0a973d4def6b3ed6b00b03506ac3694833f3503",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/methods/M0_NATIVE/restoration.json": "cc09449e55af9ada2d7baf841b22685fe00ede1f2ae0b77c74f7c8b4097eabba",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/methods/M0_NATIVE/rollout.json": "1579943fd3bd80c6c85afe49d7f797590054dff25cdcfe9d1a62accd73202584",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/methods/M0_NATIVE/metrics.json": "8bf6976ca6261d69872028eea135bf217a08f58d91e788b3875a5016e3def235",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/references/HALF_TRANSPORT_LOCAL_SE2_world.npy": "9d0fb1846db648281151541f4118da6394325815a15a098c494ea5b417da66ef",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/references/HALF_TRANSPORT_LOCAL_SE2_local.npy": "22d377a21a6ca1bda7c99611cbdd9c19bbecb36b68bbd60496dc6066a52fc4c7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/methods/HALF_TRANSPORT_LOCAL_SE2/restoration.json": "e795587f328cf0d895444fe75e6284769e45a3f107a23625783d8b9eeebbd329",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/methods/HALF_TRANSPORT_LOCAL_SE2/rollout.json": "f1594bcfdadcc64185d01ae39322891acb1acf0e1a922e9429e10e666542b2a7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/methods/HALF_TRANSPORT_LOCAL_SE2/metrics.json": "81700fa6bb749736eeb74f3846b12cb861a596c711e3873058f6b1dc56df10ba",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/references/FULL_LOCAL_SE2_world.npy": "0c4069cee232017af0e36c78d5e2326abd36076abdca954e31096ffc412554c2",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/references/FULL_LOCAL_SE2_local.npy": "f5b58a92cebbc73d143ee8f605b0e4b5b29dc4573e08c7f14bb635b4290e6705",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/methods/FULL_LOCAL_SE2/restoration.json": "0d150a83f0d2b4dd5ddcb8adad8669cb4043d08c4134bc5cdd8066d64d189dbf",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/methods/FULL_LOCAL_SE2/rollout.json": "4f3d168d37946a8945ebf095ea302e1ce1755b877deb247e31de605a34d9427b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/methods/FULL_LOCAL_SE2/metrics.json": "38242a9ded752befe2d551b6894f3faa41422d6496fb01f5f3b7715d95871edb",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/common_state.json": "679e90d730e7ebdfcfe2290ac06b4d480566a0bfd02bf8384b4df46f3ee3cc94",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/references.json": "dbf6a668952bb8ef35ac1840a82417d1bfaf7bf0382bdd29b57561861fb3e695",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/source_manifest.json": "8c81ff8eb16426545f99c0297812165f8b4d19e8a5b1927d6bcbfd61c5136de7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/recorded_old_to_B.npy": "abd4ad04950f1620f3b24525ca32e4046ba9ecf6f569675e8308a965dc2f0720",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/schedule.json": "dc3ade3d6c33bfd654357bb6053a8d26171d8d64b333f5f10963b8cef7583f11",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/scenario.json": "0404f1e53c8fae3f1b689000e65c4b458ec1f31ba92676c4507e5846fce9b59b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/references/M0_NATIVE_world.npy": "9b5c4fe575455d31eeba5942160c944121c14e3b5b85a0f80f33a2626095138b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/references/M0_NATIVE_local.npy": "ba52161d8e7ba1f0619e11cd0b93da29d201e70074d76160d374fe1f6c87517f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/methods/M0_NATIVE/restoration.json": "928bf66b6e0dc45b1a4be2bd32bf678b6e50178acac709ded9c4effbb860c2d1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/methods/M0_NATIVE/rollout.json": "f853c2e8124ddb844fdac3067d0281d63e0274dfb7923bb3814a45e77f0a2567",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/methods/M0_NATIVE/metrics.json": "ed0510702108ed0d469762f083734284a7fa63b05f7f539202cf3ef7f01e1f55",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/references/HALF_TRANSPORT_LOCAL_SE2_world.npy": "ed203f49d4f4ac3429365c99d7c4b49a6c628a486bbd68f82a20bce5958a2334",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/references/HALF_TRANSPORT_LOCAL_SE2_local.npy": "9315109e470c39e896ec03fade60bb80ddb8a43aaf9c9fc7955f229f5b38ebcb",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/methods/HALF_TRANSPORT_LOCAL_SE2/restoration.json": "61f3d8b6dfe8b13782b7ec289be7fdf036a0b0620a059ea226918276366c8538",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/methods/HALF_TRANSPORT_LOCAL_SE2/rollout.json": "ae0052b25a95f2c6e88866334c75fc9f8bcafbc55098862cc75d65925a13a7ca",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/methods/HALF_TRANSPORT_LOCAL_SE2/metrics.json": "ccd7713efc4c6b80f17920ead2ccc723d31a4214011b5d1117805fed982c1979",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/references/FULL_LOCAL_SE2_world.npy": "fd388a63b0fa8c1bf37dc6ec184b1f08a90d1805395c0deb7b9346a7aa6d602b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/references/FULL_LOCAL_SE2_local.npy": "26f91a7fb59edf67a95b1d2e989411c8393fa93e3e54de9a87367882086393cf",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/methods/FULL_LOCAL_SE2/restoration.json": "98ef5354b857d3462626ae5dc1e9d83d48a1c61fe6a01feff64dd957861b2d3c",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/methods/FULL_LOCAL_SE2/rollout.json": "d1d62cd00736ff76df4f49e522ca906c20e65942a189b81425d2de15a5e7f03c",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/methods/FULL_LOCAL_SE2/metrics.json": "631932af57d67a753a98a678eaab60aac6e1f51b7f0f63521cc5a53e8535c693",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/common_state.json": "ac3904a58f1a908b41b73a2bdac421909cd33f746d0f44d85fadf945ac46f8b4",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/references.json": "14327e49c023bee7b14a89a1306ecf8547e8b407a0c3fde0f764502e59cd852d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/source_manifest.json": "88d71ad79628c0934c97cb916e444d8263ceb00c2a4a7cc6a32ec69683be01f8",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/recorded_old_to_B.npy": "db06a709d67c53871c10b11a7cd0b3991c0c0b37b4d28b164e447c752bc35a77",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/schedule.json": "a373d47f22606a5ab32836c7ca52abdf937a5ab099fb65d6ea35a09123c33498",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/scenario.json": "f88b3be6214de69ba9336a16811bf685dc32a6c97c5f286de51e6e2e8f380c3b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/references/M0_NATIVE_world.npy": "78a5d47e41728e0d82851e14507d60354e9afe85dd4557fd7782e970c58e4d36",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/references/M0_NATIVE_local.npy": "f5585ef9f7ff2eeeae9992640a68cf65b6b8510baacf8ff9fd2886aa40df7552",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/methods/M0_NATIVE/restoration.json": "f427885c0849dead91a18be7b8a12aa0da4394c7afc7f74eb0d784f916358dee",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/methods/M0_NATIVE/rollout.json": "557b66e7fe4c9167f8c31f736da8390794d979b8f39c965ccc03b582aa3f96aa",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/methods/M0_NATIVE/metrics.json": "2b6c6a6f416681448e3ab0493a859ca754ce48fbf07ca52601a58ca67700c285",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/references/HALF_TRANSPORT_LOCAL_SE2_world.npy": "b09ef294a8a25ebcb26865d4afeb3a12dced174bf756d9e8e31458a90120a564",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/references/HALF_TRANSPORT_LOCAL_SE2_local.npy": "253e6645ba1ce5d3c87a85405cf9a64e42d548ab9a3bed312aebb37cac66591d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/methods/HALF_TRANSPORT_LOCAL_SE2/restoration.json": "5dea96ca37982a4d0733a00b34b100e591e84da65572c6aa3c05faa21ce3909e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/methods/HALF_TRANSPORT_LOCAL_SE2/rollout.json": "b18d1c320cc5b4189af16ff3bfd2ba402d55b71672d4fbee0211d1d3a263e6dc",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/methods/HALF_TRANSPORT_LOCAL_SE2/metrics.json": "32275e43a836fa1229a91e8ccb911f2114a056d6644515d5da45e9cd469f636f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/references/FULL_LOCAL_SE2_world.npy": "e66214e4c888534914c80a1da5dc24934eff03e65f43f0ac50d10d0943a8d6a4",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/references/FULL_LOCAL_SE2_local.npy": "a0027f68e95ac618f6ccd667cbc6fd5fa2270ffbf1db1fdd34a16b86aa892c48",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/methods/FULL_LOCAL_SE2/restoration.json": "f811daac1a527e67bb3766d5795ad699315b0eaa281f0d68f938c4d654d59f65",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/methods/FULL_LOCAL_SE2/rollout.json": "c1b2a517a9efb11af40ba6df9a93a8427eda92c20dad937c17bdf1f2a77b447d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/methods/FULL_LOCAL_SE2/metrics.json": "66e366c4ba28e875c97f62bff3dea5284a47d291cc6997748e711214f4dde67a"
+    }
+  },
+  "selector": {
+    "source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+    "source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+    "horizon": 5,
+    "weights": [
+      10.0,
+      10.0,
+      1.0
+    ],
+    "functions": {
+      "wrap_angle": {
+        "first_line": 29,
+        "last_line": 30,
+        "source_sha256": "0aaf6f6f3d1aaa4c544fee2b589efd5841da85b29415b9d9dd03ead206cd7877",
+        "ast_sha256": "317df7cf17bdc876bc88ba728dfb0b3ac694068278323c164ea88f0c56394022"
+      },
+      "build_pose_aligned_reference": {
+        "first_line": 92,
+        "last_line": 129,
+        "source_sha256": "6ef909267abc76840c2ae17894b847adc5c6f1f3fb7e346064c3570d83d72ba0",
+        "ast_sha256": "273603b6d3365bf7be1b98f87ded177899ffe93e348ac9cce197fc0874d99b7b"
+      }
+    }
+  },
+  "matched_states": {
+    "OSA03_R00": [
+      {
+        "tick": 96,
+        "solve_id": "M0_NATIVE_NEW_000000",
+        "pose_world": [
+          19.204616420161308,
+          24.090013606205353,
+          -1.5356427948050633
+        ],
+        "sim_time_s": 1.6333334185183048,
+        "time_after_B_s": 0.06666667014360428
+      },
+      {
+        "tick": 102,
+        "solve_id": "M0_NATIVE_NEW_000001",
+        "pose_world": [
+          19.20992345671464,
+          24.01020913693929,
+          -1.460642945723111
+        ],
+        "sim_time_s": 1.7333334237337112,
+        "time_after_B_s": 0.1666666753590107
+      },
+      {
+        "tick": 108,
+        "solve_id": "M0_NATIVE_NEW_000002",
+        "pose_world": [
+          19.22403747161974,
+          23.93153656020097,
+          -1.3189764257084755
+        ],
+        "sim_time_s": 1.8333334289491177,
+        "time_after_B_s": 0.2666666805744171
+      },
+      {
+        "tick": 114,
+        "solve_id": "M0_NATIVE_NEW_000003",
+        "pose_world": [
+          19.249821558071034,
+          23.855889585443308,
+          -1.1649486384983654
+        ],
+        "sim_time_s": 1.933333434164524,
+        "time_after_B_s": 0.36666668578982353
+      },
+      {
+        "tick": 120,
+        "solve_id": "M0_NATIVE_NEW_000004",
+        "pose_world": [
+          19.28603756070565,
+          23.784610177540166,
+          -1.0417235445108908
+        ],
+        "sim_time_s": 2.0333334393799305,
+        "time_after_B_s": 0.46666669100522995
+      },
+      {
+        "tick": 126,
+        "solve_id": "M0_NATIVE_NEW_000005",
+        "pose_world": [
+          19.329406254569047,
+          23.71740999701059,
+          -0.9594142830582175
+        ],
+        "sim_time_s": 2.133333444595337,
+        "time_after_B_s": 0.5666666962206364
+      },
+      {
+        "tick": 132,
+        "solve_id": "M0_NATIVE_NEW_000006",
+        "pose_world": [
+          19.377067674003943,
+          23.653166513771065,
+          -0.9099165851435078
+        ],
+        "sim_time_s": 2.2333334498107433,
+        "time_after_B_s": 0.6666667014360428
+      },
+      {
+        "tick": 138,
+        "solve_id": "M0_NATIVE_NEW_000007",
+        "pose_world": [
+          19.4270399332937,
+          23.59069643771388,
+          -0.8856026189246071
+        ],
+        "sim_time_s": 2.3333334550261497,
+        "time_after_B_s": 0.7666667066514492
+      },
+      {
+        "tick": 144,
+        "solve_id": "M0_NATIVE_NEW_000008",
+        "pose_world": [
+          19.478093939128442,
+          23.529105729613057,
+          -0.8730173904333514
+        ],
+        "sim_time_s": 2.433333460241556,
+        "time_after_B_s": 0.8666667118668556
+      }
+    ],
+    "episode_001_repeat_01/handoff_013": [
+      {
+        "tick": 1002,
+        "solve_id": "M0_NATIVE_NEW_000000",
+        "pose_world": [
+          18.88091559905879,
+          9.807793015222233,
+          -1.4887640776416609
+        ],
+        "sim_time_s": 16.733334206044674,
+        "time_after_B_s": 0.08333333767950535
+      },
+      {
+        "tick": 1008,
+        "solve_id": "M0_NATIVE_NEW_000001",
+        "pose_world": [
+          18.884075946431057,
+          9.727886661111267,
+          -1.580713628274332
+        ],
+        "sim_time_s": 16.83333421126008,
+        "time_after_B_s": 0.18333334289491177
+      },
+      {
+        "tick": 1014,
+        "solve_id": "M0_NATIVE_NEW_000002",
+        "pose_world": [
+          18.879137726783195,
+          9.64807597082661,
+          -1.685164554285207
+        ],
+        "sim_time_s": 16.933334216475487,
+        "time_after_B_s": 0.2833333481103182
+      },
+      {
+        "tick": 1020,
+        "solve_id": "M0_NATIVE_NEW_000003",
+        "pose_world": [
+          18.86688097641195,
+          9.569037131954751,
+          -1.758856541304663
+        ],
+        "sim_time_s": 17.033334221690893,
+        "time_after_B_s": 0.3833333533257246
+      },
+      {
+        "tick": 1026,
+        "solve_id": "M0_NATIVE_NEW_000004",
+        "pose_world": [
+          18.85003402040869,
+          9.490837128525992,
+          -1.8032959835712892
+        ],
+        "sim_time_s": 17.1333342269063,
+        "time_after_B_s": 0.483333358541131
+      },
+      {
+        "tick": 1032,
+        "solve_id": "M0_NATIVE_NEW_000005",
+        "pose_world": [
+          18.830621831522745,
+          9.413229495422348,
+          -1.82557426647596
+        ],
+        "sim_time_s": 17.233334232121706,
+        "time_after_B_s": 0.5833333637565374
+      },
+      {
+        "tick": 1038,
+        "solve_id": "M0_NATIVE_NEW_000006",
+        "pose_world": [
+          18.809958801282022,
+          9.33594447205816,
+          -1.8373566088753828
+        ],
+        "sim_time_s": 17.333334237337112,
+        "time_after_B_s": 0.6833333689719439
+      },
+      {
+        "tick": 1044,
+        "solve_id": "M0_NATIVE_NEW_000007",
+        "pose_world": [
+          18.788698646778155,
+          9.25882118548839,
+          -1.8410960987367495
+        ],
+        "sim_time_s": 17.43333424255252,
+        "time_after_B_s": 0.7833333741873503
+      },
+      {
+        "tick": 1050,
+        "solve_id": "M0_NATIVE_NEW_000008",
+        "pose_world": [
+          18.767300542585478,
+          9.18173602694881,
+          -1.8417496629611023
+        ],
+        "sim_time_s": 17.533334247767925,
+        "time_after_B_s": 0.8833333794027567
+      }
+    ],
+    "episode_008_repeat_01/handoff_023": [
+      {
+        "tick": 1806,
+        "solve_id": "M0_NATIVE_NEW_000000",
+        "pose_world": [
+          17.84115860483165,
+          31.810155537028734,
+          -0.6838866723247516
+        ],
+        "sim_time_s": 30.133334904909134,
+        "time_after_B_s": 0.03333333507180214
+      },
+      {
+        "tick": 1812,
+        "solve_id": "M0_NATIVE_NEW_000001",
+        "pose_world": [
+          17.89467533677304,
+          31.771555297158006,
+          -0.5639384914091585
+        ],
+        "sim_time_s": 30.23333491012454,
+        "time_after_B_s": 0.13333334028720856
+      },
+      {
+        "tick": 1818,
+        "solve_id": "M0_NATIVE_NEW_000002",
+        "pose_world": [
+          17.96394569777695,
+          31.73541913130142,
+          -0.3939903076214719
+        ],
+        "sim_time_s": 30.333334915339947,
+        "time_after_B_s": 0.23333334550261497
+      },
+      {
+        "tick": 1824,
+        "solve_id": "M0_NATIVE_NEW_000003",
+        "pose_world": [
+          18.040290161944082,
+          31.711943074373018,
+          -0.2000481538079102
+        ],
+        "sim_time_s": 30.433334920555353,
+        "time_after_B_s": 0.3333333507180214
+      },
+      {
+        "tick": 1830,
+        "solve_id": "M0_NATIVE_NEW_000004",
+        "pose_world": [
+          18.11966744157844,
+          31.702669660238662,
+          -0.03846925720279204
+        ],
+        "sim_time_s": 30.53333492577076,
+        "time_after_B_s": 0.4333333559334278
+      },
+      {
+        "tick": 1836,
+        "solve_id": "M0_NATIVE_NEW_000005",
+        "pose_world": [
+          18.19958984275609,
+          31.704789616176445,
+          0.08660543492512174
+        ],
+        "sim_time_s": 30.633334930986166,
+        "time_after_B_s": 0.5333333611488342
+      },
+      {
+        "tick": 1842,
+        "solve_id": "M0_NATIVE_NEW_000006",
+        "pose_world": [
+          18.278880269291783,
+          31.71526106412495,
+          0.170044177443331
+        ],
+        "sim_time_s": 30.733334936201572,
+        "time_after_B_s": 0.6333333663642406
+      },
+      {
+        "tick": 1848,
+        "solve_id": "M0_NATIVE_NEW_000007",
+        "pose_world": [
+          18.357260090968843,
+          31.731225785402323,
+          0.228925455165911
+        ],
+        "sim_time_s": 30.83333494141698,
+        "time_after_B_s": 0.7333333715796471
+      },
+      {
+        "tick": 1854,
+        "solve_id": "M0_NATIVE_NEW_000008",
+        "pose_world": [
+          18.434785759297633,
+          31.750951346197102,
+          0.26638970865156386
+        ],
+        "sim_time_s": 30.933334946632385,
+        "time_after_B_s": 0.8333333767950535
+      }
+    ],
+    "episode_013_repeat_00/handoff_020": [
+      {
+        "tick": 1524,
+        "solve_id": "M0_NATIVE_NEW_000000",
+        "pose_world": [
+          19.668567955248744,
+          8.99227202834442,
+          -1.3595769416513406
+        ],
+        "sim_time_s": 25.433334659785032,
+        "time_after_B_s": 0.0
+      },
+      {
+        "tick": 1530,
+        "solve_id": "M0_NATIVE_NEW_000001",
+        "pose_world": [
+          19.680042344044157,
+          8.925176867134407,
+          -1.4475496588114387
+        ],
+        "sim_time_s": 25.53333466500044,
+        "time_after_B_s": 0.10000000521540642
+      },
+      {
+        "tick": 1536,
+        "solve_id": "M0_NATIVE_NEW_000002",
+        "pose_world": [
+          19.683703792146858,
+          8.863579567918839,
+          -1.5855223794643347
+        ],
+        "sim_time_s": 25.633334670215845,
+        "time_after_B_s": 0.20000001043081284
+      },
+      {
+        "tick": 1542,
+        "solve_id": "M0_NATIVE_NEW_000003",
+        "pose_world": [
+          19.675402928815032,
+          8.787477207532728,
+          -1.7734951032631512
+        ],
+        "sim_time_s": 25.73333467543125,
+        "time_after_B_s": 0.30000001564621925
+      },
+      {
+        "tick": 1548,
+        "solve_id": "M0_NATIVE_NEW_000004",
+        "pose_world": [
+          19.65093143589911,
+          8.711488904585368,
+          -1.9954917056165704
+        ],
+        "sim_time_s": 25.833334680646658,
+        "time_after_B_s": 0.40000002086162567
+      },
+      {
+        "tick": 1554,
+        "solve_id": "M0_NATIVE_NEW_000005",
+        "pose_world": [
+          19.61063776671362,
+          8.642534674940539,
+          -2.199998928571364
+        ],
+        "sim_time_s": 25.933334685862064,
+        "time_after_B_s": 0.5000000260770321
+      },
+      {
+        "tick": 1560,
+        "solve_id": "M0_NATIVE_NEW_000006",
+        "pose_world": [
+          19.558429780676544,
+          8.582022578637485,
+          -2.3583798769407758
+        ],
+        "sim_time_s": 26.03333469107747,
+        "time_after_B_s": 0.6000000312924385
+      },
+      {
+        "tick": 1566,
+        "solve_id": "M0_NATIVE_NEW_000007",
+        "pose_world": [
+          19.498310837077373,
+          8.529314408416706,
+          -2.4805338546095648
+        ],
+        "sim_time_s": 26.133334696292877,
+        "time_after_B_s": 0.7000000365078449
+      },
+      {
+        "tick": 1572,
+        "solve_id": "M0_NATIVE_NEW_000008",
+        "pose_world": [
+          19.433128516440267,
+          8.482965712726042,
+          -2.560291451005111
+        ],
+        "sim_time_s": 26.233334701508284,
+        "time_after_B_s": 0.8000000417232513
+      },
+      {
+        "tick": 1578,
+        "solve_id": "M0_NATIVE_NEW_000009",
+        "pose_world": [
+          19.364920220451996,
+          8.44118434889822,
+          -2.6218945094703314
+        ],
+        "sim_time_s": 26.33333470672369,
+        "time_after_B_s": 0.9000000469386578
+      }
+    ]
+  },
+  "references": {
+    "OSA03_R00": {
+      "M0_NATIVE": {
+        "world_sha256": "9c8ea94f650d823ac3e1ada0a216dc36758432713fd5407cf18324069865bfc4",
+        "local_sha256": "8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521",
+        "restoration_sha256": "09eba0382ef49629708c2e8aea444e092b80d95ac324473cfde85117cf0933d6",
+        "installed_vs_saved_max_abs": 2.220446049250313e-16
+      },
+      "HALF_TRANSPORT_LOCAL_SE2": {
+        "world_sha256": "c792f6dde9f8304a07574a6544b5a0163c105934d26110a5fac745cdcc8c2639",
+        "local_sha256": "cb864e16f8200742ae90577753d7aca8633b279bc5b2d7091ed33f36d18e5464",
+        "restoration_sha256": "71ecbd85c53d397ad90bf1c30a7d5fd3ea92b79aa0f666b23e242d646ce72d75",
+        "installed_vs_saved_max_abs": 7.105427357601002e-15
+      },
+      "FULL_LOCAL_SE2": {
+        "world_sha256": "bd459b0343fac1e78e4ac80831f4f99af9b86dd4876a3b0df1b45f41c21ce120",
+        "local_sha256": "b7133196bdcf9ff65e7ed99b4e9f0baf144f1a470ba5d8e139baa48935ce90c0",
+        "restoration_sha256": "da4a1d51cf43caae5a00d58aa5eef757243ee60da69b4f216479b79ca725724f",
+        "installed_vs_saved_max_abs": 7.105427357601002e-15
+      }
+    },
+    "episode_001_repeat_01/handoff_013": {
+      "M0_NATIVE": {
+        "world_sha256": "8bf03cf08ef9c641edb613953d3173097daa66f1281cc54a98ba1c71d381b129",
+        "local_sha256": "82bb298736fd7a1e6289a529e0a973d4def6b3ed6b00b03506ac3694833f3503",
+        "restoration_sha256": "cc09449e55af9ada2d7baf841b22685fe00ede1f2ae0b77c74f7c8b4097eabba",
+        "installed_vs_saved_max_abs": 0.0
+      },
+      "HALF_TRANSPORT_LOCAL_SE2": {
+        "world_sha256": "9d0fb1846db648281151541f4118da6394325815a15a098c494ea5b417da66ef",
+        "local_sha256": "22d377a21a6ca1bda7c99611cbdd9c19bbecb36b68bbd60496dc6066a52fc4c7",
+        "restoration_sha256": "e795587f328cf0d895444fe75e6284769e45a3f107a23625783d8b9eeebbd329",
+        "installed_vs_saved_max_abs": 3.552713678800501e-15
+      },
+      "FULL_LOCAL_SE2": {
+        "world_sha256": "0c4069cee232017af0e36c78d5e2326abd36076abdca954e31096ffc412554c2",
+        "local_sha256": "f5b58a92cebbc73d143ee8f605b0e4b5b29dc4573e08c7f14bb635b4290e6705",
+        "restoration_sha256": "0d150a83f0d2b4dd5ddcb8adad8669cb4043d08c4134bc5cdd8066d64d189dbf",
+        "installed_vs_saved_max_abs": 3.552713678800501e-15
+      }
+    },
+    "episode_008_repeat_01/handoff_023": {
+      "M0_NATIVE": {
+        "world_sha256": "9b5c4fe575455d31eeba5942160c944121c14e3b5b85a0f80f33a2626095138b",
+        "local_sha256": "ba52161d8e7ba1f0619e11cd0b93da29d201e70074d76160d374fe1f6c87517f",
+        "restoration_sha256": "928bf66b6e0dc45b1a4be2bd32bf678b6e50178acac709ded9c4effbb860c2d1",
+        "installed_vs_saved_max_abs": 2.7755575615628914e-17
+      },
+      "HALF_TRANSPORT_LOCAL_SE2": {
+        "world_sha256": "ed203f49d4f4ac3429365c99d7c4b49a6c628a486bbd68f82a20bce5958a2334",
+        "local_sha256": "9315109e470c39e896ec03fade60bb80ddb8a43aaf9c9fc7955f229f5b38ebcb",
+        "restoration_sha256": "61f3d8b6dfe8b13782b7ec289be7fdf036a0b0620a059ea226918276366c8538",
+        "installed_vs_saved_max_abs": 1.7763568394002505e-14
+      },
+      "FULL_LOCAL_SE2": {
+        "world_sha256": "fd388a63b0fa8c1bf37dc6ec184b1f08a90d1805395c0deb7b9346a7aa6d602b",
+        "local_sha256": "26f91a7fb59edf67a95b1d2e989411c8393fa93e3e54de9a87367882086393cf",
+        "restoration_sha256": "98ef5354b857d3462626ae5dc1e9d83d48a1c61fe6a01feff64dd957861b2d3c",
+        "installed_vs_saved_max_abs": 1.7763568394002505e-14
+      }
+    },
+    "episode_013_repeat_00/handoff_020": {
+      "M0_NATIVE": {
+        "world_sha256": "78a5d47e41728e0d82851e14507d60354e9afe85dd4557fd7782e970c58e4d36",
+        "local_sha256": "f5585ef9f7ff2eeeae9992640a68cf65b6b8510baacf8ff9fd2886aa40df7552",
+        "restoration_sha256": "f427885c0849dead91a18be7b8a12aa0da4394c7afc7f74eb0d784f916358dee",
+        "installed_vs_saved_max_abs": 0.0
+      },
+      "HALF_TRANSPORT_LOCAL_SE2": {
+        "world_sha256": "b09ef294a8a25ebcb26865d4afeb3a12dced174bf756d9e8e31458a90120a564",
+        "local_sha256": "253e6645ba1ce5d3c87a85405cf9a64e42d548ab9a3bed312aebb37cac66591d",
+        "restoration_sha256": "5dea96ca37982a4d0733a00b34b100e591e84da65572c6aa3c05faa21ce3909e",
+        "installed_vs_saved_max_abs": 5.329070518200751e-15
+      },
+      "FULL_LOCAL_SE2": {
+        "world_sha256": "e66214e4c888534914c80a1da5dc24934eff03e65f43f0ac50d10d0943a8d6a4",
+        "local_sha256": "a0027f68e95ac618f6ccd667cbc6fd5fa2270ffbf1db1fdd34a16b86aa892c48",
+        "restoration_sha256": "f811daac1a527e67bb3766d5795ad699315b0eaa281f0d68f938c4d654d59f65",
+        "installed_vs_saved_max_abs": 5.329070518200751e-15
+      }
+    }
+  },
+  "historical_validators_passed": true,
+  "expected_selector_queries": 111
+}

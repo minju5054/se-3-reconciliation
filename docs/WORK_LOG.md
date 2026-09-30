@@ -6082,3 +6082,23 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
   scientific code changes after freeze, protocol deviations or result-driven tuning.
   Full metrics, source/transport diagnostics, nine answers and execution commands
   are in docs/STATE_SHIFT_TRANSPORT_SCALE_01.md. README updated conservatively.
+
+## 2026-09-30 — SPATIAL_CORRESPONDENCE_SELECTOR_DIAG_01 protocol freeze
+
+- Fetched origin/main and started at `1456e8eabd0e84b37203f54fdf567f53de06cf46`.
+  Preserved unrelated stage0 configuration edits and GPU plotting script.
+- Authenticated both four-source result ledgers, unchanged Native/Half/Full arrays,
+  original observation anchoring, A/B, and old transport/multisource/R00/R01 saved
+  validators. Prepared exactly 37 saved Native submit poses (9/9/9/10); no new
+  scientific correspondence or official selector query before the pushed freeze.
+- Added isolated untimed C0-C3 analytic segment/branch minimization, pure extraction
+  of the two authenticated official selection functions, matched original-identity
+  progress diagnostics, descriptive connector/suffix checks, solver/runtime guard,
+  saved-only validation and exactly three planned PNGs. No historical module edit.
+- Frozen 111 official queries; zero new optimizer/MPC/rollout/LightNav/RGB/Isaac;
+  source/category/tolerance definitions are in the protocol and YAML.
+- Initial focused tests: 35 passed. Final expanded namespace has 36 cases; relevant
+  regression suite: **537 passed, 1 skipped** in 113.97 s. The skip is the unavailable
+  ignored historical EXP-01B/EXP-02B corpus. Compileall and diff check passed.
+- Reviewed code/config/protocol before freeze. Scientific evaluation follows only
+  after normal push; results will be appended separately.
