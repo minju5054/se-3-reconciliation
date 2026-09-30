@@ -1,0 +1,628 @@
+{
+  "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z",
+  "freeze": {
+    "files": {
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/osa03_common_b_method_comparison_01.yaml": "a616886c12deb996f99ea0d7612e07febab04ba5777392f1b0a61185309a105e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_common_b.py": "f5e18869fc35bf5f9cbfb3cfde8a70560729e69df2e41735ff1e312ad9d4cb49",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/osa03_common_b_mpc_worker.py": "baea2983eaeb315dc87d543d81f2b94759fc00bae02f5117aaedee31da3370c1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_osa03_common_b.py": "c72c2a81a30f8b48285a2f245aa5e109e58f3f7e4ad70278d6ac3c79e36980b5",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_osa03_common_b.py": "32149228e772138b6d6db00eabc2acbdd3ba493df2930d3a7aa4ffca16f5de5d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_osa03_common_b.py": "81e16ad7414c338f866c607c0ef9fcb205be138e02febdbfed4e19ce9cae2ae1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_common_b.py": "071dc866f4ad98f2ba39b6e79926b74c5e4879f79111cce014121e0b87470e69",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_native.py": "070a20c95cb5b89908dbccb52c727d07a35093dc6a3b9a094a88ee0f135131f9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/local_se2_reconciliation.py": "f6286066bdfdb54418ec23b068f526fdb950eee0a16e6142d6ef736aa9662e33",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/robotless_online.py": "af9876567ee3ec29c05dcc386252656f5b35b6f9aa8a77a1acf62cccb8e0918f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/online_pacing.py": "73f8cbb4cb4cb3856694789b7dd1be5e4b649f815beeb916d5de7818390b2aa5",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/online_mpc_adapter.py": "fd6ab46d98e68bd8dfff2e96b9ebdf66b27b1531632ea53c888024245025362a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_online02.py": "6073f7304cd9a540d9de02da97ec9c681fe42475271a1d0af8465c4c5d2a75fb",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/se2.py": "1a72740eeef3af6594ec4dc428e9a8aff67cc4f31f3712161787b690b966cde1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/trajectory.py": "1f9610846b5633d82adbe70508138ecd934f3ad413b779f6ed868266ad1c2bee",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_environment.py": "aefb92837f1567b97a109bcdd2b43e03fad1e992851a1471c1029f211d404eb7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_join01.py": "e70bb8aa9e2159691e54ecdaa81fca3c2b036c95a94f55715415abbc745d6e5a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/handoff_execution_loss.py": "2f9951ffb3f426ec643594e5285a66c82c114c2f20b12e12a659fe654413719b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_source02_geometry.py": "77ebc0536a7465420f6745a12c43d88914f7e00b89bc466204ad775f18cef60e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_source02_acquisition.py": "49454f885b79260d529249c62f4f6b0d91448d316a2aa5a2f4294a5d10bee4ba",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/online_mpc_worker.py": "8f99bfb6010a834ebef7bbfdd86474f5c58aa26f42b514bcc9886b7693d32b96",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_native_continuation.py": "406ec514f6fbbe848bee4602f7d3085ff6236fa5b6da1e068729f37d39fbb20e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_join_online02.py": "8fba9c47d277d9a50bee392baaa2fb76bf540631c03d3f65ae8a79a264b8ef7d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_local_se2_reconciliation_formulation01.py": "6cd16baefe5427f553339ad10329faec453dff2a07bd3d56213dd181628f4b21",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/robotless_online_handoffs.py": "c662fc9e97871a716600ac93bd2c3f86a56b2633e296c07567d41e369b0cd512",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/osa03_relative_factor_ablation_01.yaml": "1b10c9094461b93136ba4ecc4a593123a15a3df6b426707289140c78250150a9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_relative_factor_ablation01.py": "e8ba1e4e0a8cad8ce3d3c97bf8994e1a7768754227792eb098ad7ae4fec7560c",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_relative_ablation.py": "576150eced448dc9a5fb5af9243ae026fbe9c970f077063b665c1806cd5f794b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/graph_optimizer.py": "7d595cedc49965cf15cc6e701db371bf7d7cc69e6c3a99deffc304a32855b6f7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_osa03_relative_factor_ablation01.py": "8de04c06b2dfe599030647c8d198a19868c8ea96395e6439c0899e4654baed54",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_osa03_relative_factor_ablation01.py": "c8852fafba9a0fabc56ba522272cf2fcaeaf85f850e65e48cbfc9bd377c6fdfc",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_osa03_relative_factor_ablation01.py": "569bb85e1cbfdf9e47d82f688f5ae52fd2663c65320d7e55c9dedfae56cc843d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/fixtures/relative_ablation_full_golden.json": "22189534152074c872760b328232a42b90e30095cbf23bc1b6982b1911d66a39",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/osa03_relative_factor_replication_01.yaml": "1cee9c124bd1e71d05b54aa611e2e8f58656630868a01649fe2ab670bd6a83e1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_relative_factor_replication01.py": "ddd0f0e3297423137da5e2757e9f0308cbe71d47be605532c4091e44483d0643",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_relative_replication.py": "1236342a042e67c4274db6faf4d4e55ff4625ebb178f756db2237adab184784a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_osa03_relative_factor_replication01.py": "4f3ef7ae3244a03cc29eebc51a1114d9831740c5474e396ede9f76b58280f870",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_osa03_relative_factor_replication01.py": "64c7ab58428e94463909a26574911e2a7a0fa42c94baa500ae49f00b4c1995a6",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_osa03_relative_factor_replication01.py": "2da1857ece5e1cd762f5b80e82496ec9789249a375766d14ae5f3b1c1017fce3"
+    },
+    "inputs": {
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/pre_execution_checks.json": "7584915d0cc72068af7ba315a7e4f9a2b03c860ccebc351ae1d979577e082a95",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/compatibility.json": "f04a8cbdd68f01fd3fb8d40333f548b9363569502784adb91dddece542575636",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/schedule.json": "6db1f0840f3d07089aec065a03d37332bdb37651f16080e9dc2a2adfdc117bfe",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/controller_phase.json": "1d68b1af7c333f1c8bb498cbfb17a60bea7f4fe231bc4e88a08235aaeb13d771",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/paired_source_facts.json": "91c40b78ec7a11eea71e84b85b314ce5c9c04035699ee28146db7d100669ef68",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/source_revalidation.json": "1a84521035d7283e9e9310cea4f92faf7daad0935d8c773be74a30c3f56eec6e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/metric_protocol.json": "9120d8cb7f3c28beaeac4299d175438fc8e1660f2d9b427e835e409a5d411e31",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/source_manifest.json": "45ba7ca39276456adf22d491c40920780e2ef51906848c4f6ea8adde20e932ae",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/protocol.json": "ce3fa4d5ae71ccdb615cec8c77c14280a6d185edd102c75fbc46dcd34b27938c",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/common_state.json": "bc41e15d2e67103fedab5d6e8f5bce7417eeb0ca572dcc8f1dada7380698ffa4",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/prepared_references.json": "9ea93b6e8780770d570758c866270b217a806d41570d100e4a3c923cc6128cb7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/protocol_document.md": "fe0592c516864e71ccc98a86d3b7ef4c2e5f9b563147f99f9f0b98dc0070d0ef",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/restoration_preflight.json": "e027ed67a5c6a7a289d6ba31c0f3183ece8383bb1391f31e477e157645a34b09",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/references/M1_TAPER_local.npy": "8ad215487228cabd669554a596b4f05e07e7d7f53c536a0360089d5074f1005f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/references/M0_NATIVE_local.npy": "8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/references/M1_TAPER_world.npy": "5b139cd8ef313c7f6182c35bea144c33b15e41f7d0d5c3226eab6167fe79cf72",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_relative_factor_replication_01/primary_20260930T010000Z/references/M0_NATIVE_world.npy": "d6e7339538f9ac8f60b25867494e5b5e15a37cc5712026469c9d90720d6828ab"
+    },
+    "optimizer_calls": 2,
+    "maximum_rollouts": 4,
+    "retries": 0
+  },
+  "common_state": {
+    "B": [
+      19.20364874270168,
+      24.133335375688848,
+      -1.5689760469373495
+    ],
+    "B_tick": 92,
+    "B_sim_s": 1.5666667483747005,
+    "u_minus": [
+      0.8,
+      -1.2790285101476235e-06
+    ],
+    "u_B_plus": [
+      0.8,
+      0.4999987283797167
+    ],
+    "u_mem_B": [
+      0.8,
+      0.4999987283797167
+    ],
+    "delta_u_B": [
+      0.0,
+      0.5000000074082268
+    ],
+    "previous_command_application_sim_s": 1.450000075623393,
+    "fresh_capture_pose": [
+      19.203260368199164,
+      24.346668368545373,
+      -1.5689754090345875
+    ],
+    "fresh_chunk_id": "chunk_001",
+    "fresh_version": 1,
+    "original_generation": 6,
+    "integration_dt_s": 0.01666666753590107,
+    "next_submit_after_B": 96,
+    "first_FRESH_solve": {
+      "type": "solve_result",
+      "episode_id": "REPEAT_01",
+      "chunk_id": "chunk_001",
+      "reference_version": 1,
+      "official_generation": 6,
+      "solve_id": "REPEAT_01_solve_000005",
+      "input_state_id": 90,
+      "input_sim_time_s": 1.5333334133028984,
+      "input_host_monotonic_s": 80646.025658876,
+      "input_pose": [
+        19.2036002013613,
+        24.160001999566347,
+        -1.5689760043030636
+      ],
+      "previous_command": [
+        0.8,
+        -1.2790285101476235e-06
+      ],
+      "submit_host_monotonic_s": 80646.025797992,
+      "result_seen_worker_host_monotonic_s": 80646.033652612,
+      "command": [
+        0.8,
+        0.4999987283797167
+      ],
+      "official_solve_ms": 5.995597006403841,
+      "prediction_world": [
+        [
+          19.2036002013613,
+          24.160001999566347,
+          -1.5689760043030636
+        ],
+        [
+          19.203745827081487,
+          24.080002131415988,
+          -1.518976131465092
+        ],
+        [
+          19.207889587602285,
+          24.00010951995179,
+          -1.4189762584928372
+        ],
+        [
+          19.219988588905498,
+          23.921029722983228,
+          -1.299632425230906
+        ],
+        [
+          19.241416828317252,
+          23.84395293872529,
+          -1.2302885835883448
+        ],
+        [
+          19.26813408659041,
+          23.76854612081613,
+          -1.2109446972430296
+        ]
+      ],
+      "result_generation": 6,
+      "selection": {
+        "nearest_index": 1,
+        "indices": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "reference_world": [
+          [
+            19.354355074174435,
+            24.086035357732662,
+            -1.0453771553076283
+          ],
+          [
+            19.42989069693806,
+            23.955736861401448,
+            -1.04547890043626
+          ],
+          [
+            19.505482387623616,
+            23.82528575981234,
+            -1.0458072028196828
+          ],
+          [
+            19.580850200751527,
+            23.695154983685423,
+            -1.0458024344481007
+          ],
+          [
+            19.656027466964392,
+            23.565444550868143,
+            -1.0456599793470875
+          ]
+        ],
+        "endpoint_repeated": false,
+        "nearest_is_final_row": false,
+        "selection_semantics": "nearest weighted XY/wrapped-yaw pose; next rows; endpoint repetition; sequential yaw unwrap",
+        "index_validation": "independent diagnostic checked against actual official reference"
+      },
+      "solve_start_host_monotonic_s": 80646.025909144,
+      "solve_end_host_monotonic_s": 80646.0319145,
+      "status": "command",
+      "command_available_for_application": true,
+      "seen_in_isaac": {
+        "host_monotonic_ns": 80646044873074,
+        "host_monotonic_s": 80646.044873074,
+        "host_utc": "2026-09-23T08:55:22.931292+00:00",
+        "sim_time_s": 1.5666667483747005,
+        "episode_time_s": 1.5333334133028984
+      },
+      "seen_sim_time_s": 1.5666667483747005
+    }
+  },
+  "schedule": {
+    "primary": {
+      "attempted_submit_ticks": [
+        96,
+        102,
+        108,
+        114,
+        120,
+        126,
+        132,
+        138,
+        144
+      ],
+      "accepted_submit_ticks": [
+        96,
+        102,
+        108,
+        114,
+        120,
+        126,
+        132,
+        138,
+        144
+      ],
+      "applications": [
+        {
+          "submit_tick": 96,
+          "application_tick": 99
+        },
+        {
+          "submit_tick": 102,
+          "application_tick": 103
+        },
+        {
+          "submit_tick": 108,
+          "application_tick": 109
+        },
+        {
+          "submit_tick": 114,
+          "application_tick": 115
+        },
+        {
+          "submit_tick": 120,
+          "application_tick": 121
+        },
+        {
+          "submit_tick": 126,
+          "application_tick": 127
+        },
+        {
+          "submit_tick": 132,
+          "application_tick": 133
+        },
+        {
+          "submit_tick": 138,
+          "application_tick": 139
+        },
+        {
+          "submit_tick": 144,
+          "application_tick": 145
+        }
+      ],
+      "complete_primary_exposure": true,
+      "endpoint_inclusive_absolute_tick": 146
+    },
+    "full": {
+      "attempted_submit_ticks": [
+        96,
+        102,
+        108,
+        114,
+        120,
+        126,
+        132,
+        138,
+        144,
+        150,
+        156,
+        162,
+        168,
+        174,
+        180,
+        186,
+        192,
+        198,
+        204,
+        210,
+        216,
+        222,
+        228,
+        234,
+        240,
+        246,
+        252,
+        258,
+        264,
+        270
+      ],
+      "accepted_submit_ticks": [
+        96,
+        102,
+        108,
+        114,
+        120,
+        126,
+        132,
+        138,
+        144,
+        150,
+        156,
+        162,
+        168,
+        174,
+        180,
+        186,
+        192,
+        198,
+        204,
+        210,
+        216,
+        222,
+        228,
+        234,
+        240,
+        246,
+        252,
+        258,
+        264,
+        270
+      ],
+      "applications": [
+        {
+          "submit_tick": 96,
+          "application_tick": 99
+        },
+        {
+          "submit_tick": 102,
+          "application_tick": 103
+        },
+        {
+          "submit_tick": 108,
+          "application_tick": 109
+        },
+        {
+          "submit_tick": 114,
+          "application_tick": 115
+        },
+        {
+          "submit_tick": 120,
+          "application_tick": 121
+        },
+        {
+          "submit_tick": 126,
+          "application_tick": 127
+        },
+        {
+          "submit_tick": 132,
+          "application_tick": 133
+        },
+        {
+          "submit_tick": 138,
+          "application_tick": 139
+        },
+        {
+          "submit_tick": 144,
+          "application_tick": 145
+        },
+        {
+          "submit_tick": 150,
+          "application_tick": 151
+        },
+        {
+          "submit_tick": 156,
+          "application_tick": 157
+        },
+        {
+          "submit_tick": 162,
+          "application_tick": 163
+        },
+        {
+          "submit_tick": 168,
+          "application_tick": 169
+        },
+        {
+          "submit_tick": 174,
+          "application_tick": 175
+        },
+        {
+          "submit_tick": 180,
+          "application_tick": 181
+        },
+        {
+          "submit_tick": 186,
+          "application_tick": 187
+        },
+        {
+          "submit_tick": 192,
+          "application_tick": 193
+        },
+        {
+          "submit_tick": 198,
+          "application_tick": 199
+        },
+        {
+          "submit_tick": 204,
+          "application_tick": 205
+        },
+        {
+          "submit_tick": 210,
+          "application_tick": 211
+        },
+        {
+          "submit_tick": 216,
+          "application_tick": 217
+        },
+        {
+          "submit_tick": 222,
+          "application_tick": 223
+        },
+        {
+          "submit_tick": 228,
+          "application_tick": 229
+        },
+        {
+          "submit_tick": 234,
+          "application_tick": 235
+        },
+        {
+          "submit_tick": 240,
+          "application_tick": 241
+        },
+        {
+          "submit_tick": 246,
+          "application_tick": 247
+        },
+        {
+          "submit_tick": 252,
+          "application_tick": 253
+        },
+        {
+          "submit_tick": 258,
+          "application_tick": 259
+        },
+        {
+          "submit_tick": 264,
+          "application_tick": 265
+        },
+        {
+          "submit_tick": 270,
+          "application_tick": 271
+        }
+      ],
+      "complete_primary_exposure": true,
+      "endpoint_inclusive_absolute_tick": 272
+    },
+    "pairs": [
+      {
+        "submit_tick": 96,
+        "application_tick": 99
+      },
+      {
+        "submit_tick": 102,
+        "application_tick": 103
+      },
+      {
+        "submit_tick": 108,
+        "application_tick": 109
+      },
+      {
+        "submit_tick": 114,
+        "application_tick": 115
+      },
+      {
+        "submit_tick": 120,
+        "application_tick": 121
+      },
+      {
+        "submit_tick": 126,
+        "application_tick": 127
+      },
+      {
+        "submit_tick": 132,
+        "application_tick": 133
+      },
+      {
+        "submit_tick": 138,
+        "application_tick": 139
+      },
+      {
+        "submit_tick": 144,
+        "application_tick": 145
+      },
+      {
+        "submit_tick": 150,
+        "application_tick": 151
+      },
+      {
+        "submit_tick": 156,
+        "application_tick": 157
+      },
+      {
+        "submit_tick": 162,
+        "application_tick": 163
+      },
+      {
+        "submit_tick": 168,
+        "application_tick": 169
+      },
+      {
+        "submit_tick": 174,
+        "application_tick": 175
+      },
+      {
+        "submit_tick": 180,
+        "application_tick": 181
+      },
+      {
+        "submit_tick": 186,
+        "application_tick": 187
+      },
+      {
+        "submit_tick": 192,
+        "application_tick": 193
+      },
+      {
+        "submit_tick": 198,
+        "application_tick": 199
+      },
+      {
+        "submit_tick": 204,
+        "application_tick": 205
+      },
+      {
+        "submit_tick": 210,
+        "application_tick": 211
+      },
+      {
+        "submit_tick": 216,
+        "application_tick": 217
+      },
+      {
+        "submit_tick": 222,
+        "application_tick": 223
+      },
+      {
+        "submit_tick": 228,
+        "application_tick": 229
+      },
+      {
+        "submit_tick": 234,
+        "application_tick": 235
+      },
+      {
+        "submit_tick": 240,
+        "application_tick": 241
+      },
+      {
+        "submit_tick": 246,
+        "application_tick": 247
+      },
+      {
+        "submit_tick": 252,
+        "application_tick": 253
+      },
+      {
+        "submit_tick": 258,
+        "application_tick": 259
+      },
+      {
+        "submit_tick": 264,
+        "application_tick": 265
+      },
+      {
+        "submit_tick": 270,
+        "application_tick": 271
+      }
+    ],
+    "B_tick": 92,
+    "integration_steps": 180,
+    "integration_dt_s": 0.01666666753590107,
+    "provenance": {
+      "rollout_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/methods/M0_NATIVE/rollout.json",
+      "rollout_sha256": "07da7802835d63a75ba6afc82abb81722df0a257ff03526a1452cf46f57895e8",
+      "tracked_path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/osa03_common_b_method_comparison_01/result_summary.json",
+      "tracked_sha256": "4f40dc51cb2995e3a383512d8bfef35405a25629ba69d560bd7a63053a75a0d8"
+    }
+  },
+  "compatibility": {
+    "compatible": true,
+    "checks": {
+      "B_tick": true,
+      "B_sim_s": true,
+      "integration_dt_s": true,
+      "next_submit_after_B": true,
+      "fresh_chunk_id": true,
+      "fresh_version": true,
+      "B_origin": true,
+      "dt": true,
+      "first_submit": true,
+      "official_settings": true,
+      "memory": true,
+      "generation": true,
+      "grid": true,
+      "release_before_next_submit": true
+    },
+    "initial_state_source": "REPEAT_01 only; R00 used only for clock compatibility",
+    "generation_note": "R01 generation is restored exactly; generation counters need not equal across independent acquisitions",
+    "restored_generation": 6,
+    "R00_generation": 3
+  },
+  "source_manifest_sha256": "45ba7ca39276456adf22d491c40920780e2ef51906848c4f6ea8adde20e932ae"
+}

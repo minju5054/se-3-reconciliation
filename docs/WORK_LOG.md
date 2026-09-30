@@ -5871,3 +5871,37 @@ Calls:2 scientific terminal+5 buffer requests+1 server warmup;7 official MPC sol
   `docs/OSA03_RELATIVE_FACTOR_ABLATION_01.md`; small tracked result tables/ledgers under
   `results/osa03_relative_factor_ablation_01/`; raw/large derivatives remain ignored.
   No scientific protocol deviation; no future stage implemented. Stage0 edits preserved.
+
+## 2026-09-30 — OSA03 R01 relative-factor replication pre-execution freeze
+
+- Fetched origin/main; starting HEAD `0cc11dfb4d2048c758fc735509c2e8297124283b`.
+  Read current repository/source/formulation/ablation reports and implementations.
+  Two unrelated Stage 0 edits remain preserved and excluded.
+- Authenticated sealed REPEAT_01 via the tracked acquisition validation hash and
+  episode/bundle ledgers. Original A-anchored FRESH and R01 B/physical command/memory
+  restored exactly. R01 generation6 (R00 generation3) is retained; equality across
+  repetitions is not required, whereas each restored result must match R01 generation.
+- Reused byte-unchanged R00 logical-release/runtime, official worker/selector/MPC,
+  safety checks and original-FRESH evaluator. R00 saved validator still passes and
+  all historical artifacts retain their hashes. No historical implementation edited.
+- Exact R00 M0 logical schedule is compatible with R01 Btick92/dt/grid/next96;
+  zero-numerical-solve official restoration preflight PASS. Two deterministic safe
+  references prepared. No scientific optimization or rollout yet.
+- New shared R01 planning entry initializes both Full/NoR at original R01 FRESH;
+  inclusion of E_R is the sole solver difference. Added paired signed effects,
+  saved selector diagnostics, explicit classification rules and ten saved-only figures.
+- New focused tests: 25 PASS (20.66 s). Full relevant regression: **409 PASS,
+  1 SKIP (39.95 s)**; skip is absent ignored EXP-01B/EXP-02B corpus. Compileall and
+  diff checks PASS. Tests are synthetic/saved-only, zero scientific planning/MPC/VLA.
+- Exact regression command:
+
+```bash
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/bin/python -m pytest -q tests/test_osa03_relative_factor_replication01.py tests/test_osa03_relative_factor_ablation01.py tests/test_osa03_common_b.py tests/test_local_se2_reconciliation.py tests/test_local_se2_saved.py tests/test_se2.py tests/test_se2_graph.py tests/test_se2_lie.py tests/test_trajectory.py tests/test_transition_graph.py tests/test_exp02d_lookahead_direction.py tests/test_osa03_native.py tests/test_osa03_native_validation.py tests/test_osa03_trackability.py tests/test_online_mpc_adapter.py tests/test_robotless_online.py tests/test_robotless_online_replay.py tests/test_robotless_online_validator.py tests/test_handoff_execution_loss.py tests/test_join_online02.py tests/test_obstacle_source03.py tests/test_join_source02_geometry.py tests/test_gp_se2_environment.py tests/test_gp_se2_diag02_environment.py
+```
+
+- Run `data/osa03_relative_factor_replication_01/primary_20260930T010000Z/`.
+  Protocol `docs/OSA03_RELATIVE_FACTOR_REPLICATION_01.md`. Only after the reviewed
+  implementation/config/tests/protocol/freeze commit is normally pushed: exactly
+  one Full and one NoR R01 planning call, then at most four fixed-order rollouts.
+  No R00 rerun, new source, tuning or retries. Identical raw local FRESH limits
+  this to paired same-scenario replication, not diverse policy-output generalization.

@@ -1,0 +1,69 @@
+experiment: OSA03_RELATIVE_FACTOR_REPLICATION_01
+label: timing-controlled offline replication
+starting_sha: 0cc11dfb4d2048c758fc735509c2e8297124283b
+order:
+- M0_NATIVE
+- M1_TAPER
+- FULL_LOCAL_SE2
+- NO_RELATIVE
+integration_steps: 180
+primary_intervals: 54
+solver:
+  max_iterations: 80
+  finite_difference_epsilon: 1.0e-06
+  initial_damping: 0.001
+  damping_increase: 10.0
+  damping_decrease: 0.3
+  maximum_damping: 1000000000000.0
+  gradient_tolerance: 1.0e-09
+  step_tolerance: 1.0e-09
+  cost_tolerance: 1.0e-12
+relative_factor:
+  FULL_LOCAL_SE2: true
+  NO_RELATIVE: false
+normalization:
+  translation_m: 0.1
+  yaw_degrees: 10.0
+initialization: original observation-anchored FRESH
+weights:
+  S: (1-s)^2
+  A: s^2
+footprint_radius_m: 0.2
+required_edge_clearance_m: 0.05
+scientific_optimizer_calls: 2
+maximum_rollouts: 4
+retries: 0
+wall_wait_timeout_s: 30.0
+reference_safety: complete polyline; no B connector; unchanged numerical reserve
+execution_safety: existing abort-only command guard
+method_definitions:
+  M0_NATIVE: F
+  M1_TAPER: Exp((1-s) Log(B A^-1)) F
+  FULL_LOCAL_SE2: one R01 E_S+E_R+E_A solve, initialized at original R01 FRESH
+  NO_RELATIVE: E_S+E_A with identical LM/safety; R omitted from objective
+waypoint_timestamps: null
+scope_exclusions:
+- new model/RGB/Isaac calls
+- MPC changes
+- new factors
+- new source
+- tuning
+- retries
+- R00 rerun
+- independent policy-output replication claim
+metric_target: ORIGINAL FRESH primary; own reference secondary only
+episode: REPEAT_01
+source_run: data/obstacle_source_acquisition_03/primary_20260923T085200Z
+tracked_acquisition: docs/results/obstacle_source_acquisition_03.json
+tracked_acquisition_sha256: eae997449e650d92cb3c6cac19be5eea1158d956ecd15f22ee19712424572710
+R00_tracked_result: results/osa03_relative_factor_ablation_01/result_summary.json
+R00_tracked_result_sha256: 5d3d3f06e25f652418091da9d6945fad26bde9c0a1f7c789158c88b25a085669
+R01_bundle_hashes_sha256: 6e744005b613f846f618bc7b0da1489e68e21764b893617b48910380d5df3b9e
+classification_rules:
+  REPLICATED_WITHIN_PAIRED_OSA03: earlier attachment; nonpositive .3/.9 position AUC
+    and .5 max deltas; all safety/caps pass; higher relative edge translation RMS/max
+  PARTIAL_REPLICATION: earlier attachment or consistent early position directions,
+    with mixed remaining criteria
+  NOT_REPLICATED: main effect reverses or disappears; also explicit planning/reference
+    failures without technical failure
+  TECHNICAL_BLOCKED: source, schedule, controller or validation failure only
