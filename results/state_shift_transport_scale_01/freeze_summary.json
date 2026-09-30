@@ -1,0 +1,4061 @@
+{
+  "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z",
+  "freeze": {
+    "files": {
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/osa03_common_b_method_comparison_01.yaml": "a616886c12deb996f99ea0d7612e07febab04ba5777392f1b0a61185309a105e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_common_b.py": "f5e18869fc35bf5f9cbfb3cfde8a70560729e69df2e41735ff1e312ad9d4cb49",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/osa03_common_b_mpc_worker.py": "baea2983eaeb315dc87d543d81f2b94759fc00bae02f5117aaedee31da3370c1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_osa03_common_b.py": "c72c2a81a30f8b48285a2f245aa5e109e58f3f7e4ad70278d6ac3c79e36980b5",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_osa03_common_b.py": "32149228e772138b6d6db00eabc2acbdd3ba493df2930d3a7aa4ffca16f5de5d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_osa03_common_b.py": "81e16ad7414c338f866c607c0ef9fcb205be138e02febdbfed4e19ce9cae2ae1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_common_b.py": "071dc866f4ad98f2ba39b6e79926b74c5e4879f79111cce014121e0b87470e69",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_native.py": "070a20c95cb5b89908dbccb52c727d07a35093dc6a3b9a094a88ee0f135131f9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/local_se2_reconciliation.py": "f6286066bdfdb54418ec23b068f526fdb950eee0a16e6142d6ef736aa9662e33",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/robotless_online.py": "af9876567ee3ec29c05dcc386252656f5b35b6f9aa8a77a1acf62cccb8e0918f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/online_pacing.py": "73f8cbb4cb4cb3856694789b7dd1be5e4b649f815beeb916d5de7818390b2aa5",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/online_mpc_adapter.py": "fd6ab46d98e68bd8dfff2e96b9ebdf66b27b1531632ea53c888024245025362a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_online02.py": "6073f7304cd9a540d9de02da97ec9c681fe42475271a1d0af8465c4c5d2a75fb",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/se2.py": "1a72740eeef3af6594ec4dc428e9a8aff67cc4f31f3712161787b690b966cde1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/trajectory.py": "1f9610846b5633d82adbe70508138ecd934f3ad413b779f6ed868266ad1c2bee",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_environment.py": "aefb92837f1567b97a109bcdd2b43e03fad1e992851a1471c1029f211d404eb7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_join01.py": "e70bb8aa9e2159691e54ecdaa81fca3c2b036c95a94f55715415abbc745d6e5a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/handoff_execution_loss.py": "2f9951ffb3f426ec643594e5285a66c82c114c2f20b12e12a659fe654413719b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_source02_geometry.py": "77ebc0536a7465420f6745a12c43d88914f7e00b89bc466204ad775f18cef60e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_source02_acquisition.py": "49454f885b79260d529249c62f4f6b0d91448d316a2aa5a2f4294a5d10bee4ba",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/online_mpc_worker.py": "8f99bfb6010a834ebef7bbfdd86474f5c58aa26f42b514bcc9886b7693d32b96",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_native_continuation.py": "406ec514f6fbbe848bee4602f7d3085ff6236fa5b6da1e068729f37d39fbb20e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_join_online02.py": "8fba9c47d277d9a50bee392baaa2fb76bf540631c03d3f65ae8a79a264b8ef7d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_local_se2_reconciliation_formulation01.py": "6cd16baefe5427f553339ad10329faec453dff2a07bd3d56213dd181628f4b21",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/robotless_online_handoffs.py": "c662fc9e97871a716600ac93bd2c3f86a56b2633e296c07567d41e369b0cd512",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/osa03_relative_factor_ablation_01.yaml": "1b10c9094461b93136ba4ecc4a593123a15a3df6b426707289140c78250150a9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_relative_factor_ablation01.py": "e8ba1e4e0a8cad8ce3d3c97bf8994e1a7768754227792eb098ad7ae4fec7560c",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_relative_ablation.py": "576150eced448dc9a5fb5af9243ae026fbe9c970f077063b665c1806cd5f794b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/graph_optimizer.py": "7d595cedc49965cf15cc6e701db371bf7d7cc69e6c3a99deffc304a32855b6f7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_osa03_relative_factor_ablation01.py": "8de04c06b2dfe599030647c8d198a19868c8ea96395e6439c0899e4654baed54",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_osa03_relative_factor_ablation01.py": "c8852fafba9a0fabc56ba522272cf2fcaeaf85f850e65e48cbfc9bd377c6fdfc",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_osa03_relative_factor_ablation01.py": "569bb85e1cbfdf9e47d82f688f5ae52fd2663c65320d7e55c9dedfae56cc843d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/fixtures/relative_ablation_full_golden.json": "22189534152074c872760b328232a42b90e30095cbf23bc1b6982b1911d66a39",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_relative_factor_replication01.py": "ddd0f0e3297423137da5e2757e9f0308cbe71d47be605532c4091e44483d0643",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_osa03_relative_factor_replication01.py": "4f3ef7ae3244a03cc29eebc51a1114d9831740c5474e396ede9f76b58280f870",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_relative_replication.py": "1236342a042e67c4274db6faf4d4e55ff4625ebb178f756db2237adab184784a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/handoff_delay_attribution.py": "507545af3dfb2ccdd35415facc9555de539780a48508f51c68ddddf7e70eaf21",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/relative_factor_multisource.py": "69d6a4c46f3a3fd9dd3a2631c621e7d48cb1d5ea18c5f5dd8faa03957d08c692",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_relative_factor_multisource01.py": "7f70adfe634f44e6f8fdf182823ffd8a2daa4ed4581e1221d72f37740d0d9a5d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_relative_factor_multisource01.py": "99bdc0f3fe0ad35985db00b08b5c502d21014896b21afae2901eb63b49f47a54",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_relative_factor_multisource01.py": "96cfdeb3d484652b793a0e206704fa550ac4e45da7fe56165c7f2b276f79909e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_relative_factor_multisource01.py": "e5141e7198fef2272cb6a3df7c2c18108a63e3152acefd0c7a7f5d1f2bdd0508",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/relative_factor_multisource_01.yaml": "05f94cdf4f445a2a3e2d85fe31d0d757a0b05f624eb271b9fa6b7d96d62564b0",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/state_shift_transport_scale.py": "823a3150d006ac53bb4d1e0a995f3417a3527596f805b2976540591259726c39",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_state_shift_transport_scale01.py": "d97a5496c9bad1475b28e7d767f62bf4c2d6b3b392918307b34a9778144b5e2f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_state_shift_transport_scale01.py": "0a24c432fcbd44cbbac7da51b458d896cfbe76f5d7321b95809693e54f6d8b0a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_state_shift_transport_scale01.py": "703ccd0b54badcf2edefb21bf5193a0871f9d593e0b328d0aa7af8f80e414263",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_state_shift_transport_scale01.py": "94c00edd0d8bf9b350606c10ed10201aa49a340b0739dc6872b2df640793a129",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/state_shift_transport_scale_01.yaml": "204d7ed5ff21e0e1d94cfddc30de20376e9ec4f1d934150f1ce0429dcde6d1be"
+    },
+    "inputs": {
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/selected_sources.json": "f4008638a6bae9062c230802f1d1feedd8e5b90b9f1706950f4a7d7d3ed0d6ac",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/protocol.json": "49421349f7ae1068acf5ebad911452784e03d534a5c9197a86f518f01cff0c50",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/protocol_document.md": "6c6447cb7608fd05a6bc7473c23d30e2b7b6aa90ba14608cd9f8a992d24b7d42",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/authentication.json": "e5196fb1e084b7627b8f2be3d362d0fe8628596ae6c324bf54caf0b4457aac78",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/reuse.json": "8d9d984e117d9abb2577f767b2983df0e69719f57a988b3afe87a4900923c8cc",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/source_audit.json": "a766875a58f714b5c9149912d737b7bea3a642be374d45106584399a8fb1ca92",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/schedule.json": "dc3ade3d6c33bfd654357bb6053a8d26171d8d64b333f5f10963b8cef7583f11",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/scenario.json": "0404f1e53c8fae3f1b689000e65c4b458ec1f31ba92676c4507e5846fce9b59b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/metric_protocol.json": "9120d8cb7f3c28beaeac4299d175438fc8e1660f2d9b427e835e409a5d411e31",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/source_manifest.json": "8c81ff8eb16426545f99c0297812165f8b4d19e8a5b1927d6bcbfd61c5136de7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/protocol.json": "49421349f7ae1068acf5ebad911452784e03d534a5c9197a86f518f01cff0c50",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/common_state.json": "679e90d730e7ebdfcfe2290ac06b4d480566a0bfd02bf8384b4df46f3ee3cc94",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/prepared_references.json": "594391c4570062330d35d25ea8d76f40220b62d5d3b9a8a0aa436dd3a20ed537",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/restoration_preflight.json": "b650b307456d6ab2b1588ea963749bfacb65c4491739455d98a300e5a42fe591",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/recorded_old_to_B.npy": "abd4ad04950f1620f3b24525ca32e4046ba9ecf6f569675e8308a965dc2f0720",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/reuse.json": "331d527978c02fee2795977ad50b0a2437728d6874c4031f5fa7fa7ac2fac06b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/source_audit.json": "00d606381b1eeda4e8186c26817281c56c2e1b6a7b66305bc933d2c5894eb60b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/schedule.json": "a373d47f22606a5ab32836c7ca52abdf937a5ab099fb65d6ea35a09123c33498",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/scenario.json": "f88b3be6214de69ba9336a16811bf685dc32a6c97c5f286de51e6e2e8f380c3b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/metric_protocol.json": "9120d8cb7f3c28beaeac4299d175438fc8e1660f2d9b427e835e409a5d411e31",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/source_manifest.json": "88d71ad79628c0934c97cb916e444d8263ceb00c2a4a7cc6a32ec69683be01f8",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/protocol.json": "49421349f7ae1068acf5ebad911452784e03d534a5c9197a86f518f01cff0c50",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/common_state.json": "ac3904a58f1a908b41b73a2bdac421909cd33f746d0f44d85fadf945ac46f8b4",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/prepared_references.json": "1e93943c84d650838930982b836ec1e0d651204d13f8305d50152a2064f909c0",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/restoration_preflight.json": "a70c9d492e86862699a81faac926717194a625b4787249c4123f58f800fd3eca",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/recorded_old_to_B.npy": "db06a709d67c53871c10b11a7cd0b3991c0c0b37b4d28b164e447c752bc35a77",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/reuse.json": "638c166f048944e1f4bbe2664be7f81a0210c4691d30cbe4639bba32b0c0e9d2",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/source_audit.json": "f89aae74d3619611d020ac9cb2714505b16132810007c7255444983f6dc83df1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/schedule.json": "6db1f0840f3d07089aec065a03d37332bdb37651f16080e9dc2a2adfdc117bfe",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/scenario.json": "63a0d1f907584fd02240b14a1a30bd1f6227beea75bf27344403c9b726163725",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/metric_protocol.json": "9120d8cb7f3c28beaeac4299d175438fc8e1660f2d9b427e835e409a5d411e31",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/source_manifest.json": "b61dd2b9c1cbe98be9299ac1c21212834c687ad249cbf38cc84632d9ed4a3c00",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/protocol.json": "49421349f7ae1068acf5ebad911452784e03d534a5c9197a86f518f01cff0c50",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/common_state.json": "0e1ca894e13467e0b5ed334be47e51728ab23a38a874afbe1bee4e378eef6d24",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/prepared_references.json": "869d74939347d35352ed4848851872a66189ed92d35b6837c367778f8200e96d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/restoration_preflight.json": "c7200e461dc2960dd6639a43b4b32ba063a0975913e156c465a2cc1375db87bc",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/recorded_old_to_B.npy": "868ce16ce52578d38d33a89e4171d781fa9beb89f03812d038047af78fe63f07",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/reuse.json": "ce7d4a6a07a8f18df944d16dadcc83173a842bea6440db72f4c002a6a6870897",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/source_audit.json": "ea0b686702de493ca1efe54d39c9c1e7e509c682537ce14c6b9d6de2138dbc67",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/schedule.json": "c8c2f58f6a586d21985671b7d94701f899f3414abf9c494bbe594edc8902df94",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/scenario.json": "b79857ef1fe6c14cdd65eb211669bf3f945e4257e96b4d5ba7fdf7162914a61a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/metric_protocol.json": "9120d8cb7f3c28beaeac4299d175438fc8e1660f2d9b427e835e409a5d411e31",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/source_manifest.json": "97e66563d89a7198a3e27f6ae6efe9f1e39bd55f883f429a4079d21560061e85",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/protocol.json": "49421349f7ae1068acf5ebad911452784e03d534a5c9197a86f518f01cff0c50",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/common_state.json": "56f6f645d2db972732366d770bd9bbd8e09bdfb50cd965e3aa66042bc96015fe",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/prepared_references.json": "9a89ccb61209c40efc6e03315a401b23ef7d61f82ede7544e69df79736bf1344",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/restoration_preflight.json": "dcca5177bb1ac1ddf91c406d4976fc2bff180d7854b054ab6c94f0a3f809c471",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/recorded_old_to_B.npy": "9431945f821847b3777c27d10a367e09be0b7370b925cbc7aca3e8cd1d9652c8",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023/references/M0_NATIVE_world.npy": "9b5c4fe575455d31eeba5942160c944121c14e3b5b85a0f80f33a2626095138b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020/references/M0_NATIVE_world.npy": "78a5d47e41728e0d82851e14507d60354e9afe85dd4557fd7782e970c58e4d36",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00/references/M0_NATIVE_world.npy": "9c8ea94f650d823ac3e1ada0a216dc36758432713fd5407cf18324069865bfc4",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013/references/M0_NATIVE_world.npy": "8bf03cf08ef9c641edb613953d3173097daa66f1281cc54a98ba1c71d381b129"
+    },
+    "new_planning_calls": 4,
+    "new_rollouts": 4,
+    "retries": 0
+  },
+  "selected_sources": [
+    {
+      "id": "OSA03_R00",
+      "kind": "osa",
+      "role": "obstacle anchor",
+      "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/OSA03_R00",
+      "raw_sha256": "8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521",
+      "raw_value_sha256": "c93deb81f79ac852c0ec98105326dca345871f966df1e4b9190082c19818b010",
+      "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00"
+    },
+    {
+      "id": "episode_001_repeat_01/handoff_013",
+      "kind": "genuine",
+      "role": "mild right / nearly straight",
+      "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_001_repeat_01__handoff_013",
+      "raw_sha256": "82bb298736fd7a1e6289a529e0a973d4def6b3ed6b00b03506ac3694833f3503",
+      "raw_value_sha256": "11fa7529bd5b7c1a998953106f33aaa85d74860ed74ee5b60d73535ab2556fa0",
+      "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013"
+    },
+    {
+      "id": "episode_008_repeat_01/handoff_023",
+      "kind": "genuine",
+      "role": "progressive left turn",
+      "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_008_repeat_01__handoff_023",
+      "raw_sha256": "ba52161d8e7ba1f0619e11cd0b93da29d201e70074d76160d374fe1f6c87517f",
+      "raw_value_sha256": "aca940cd63383e1c1f272cef370635a98ab9b60470fa7dcc55007a29f230bbf6",
+      "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023"
+    },
+    {
+      "id": "episode_013_repeat_00/handoff_020",
+      "kind": "genuine",
+      "role": "progressive right turn",
+      "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/state_shift_transport_scale_01/primary_20260930T080000Z/sources/episode_013_repeat_00__handoff_020",
+      "raw_sha256": "f5585ef9f7ff2eeeae9992640a68cf65b6b8510baacf8ff9fd2886aa40df7552",
+      "raw_value_sha256": "1f10989b3af59227172500c3989076ff71bbef95e3266881d55b23acd2692cf9",
+      "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020"
+    }
+  ],
+  "authentication": {
+    "historical_run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z",
+    "historical_result_sha256": "d935cdc58661a672cb238085f0c697c5d75d36a5d01ff5709e2782de6b0c5cc7",
+    "historical_saved_validators_passed": true,
+    "new_scientific_calls": 0,
+    "reused_references": 8,
+    "reused_rollouts": 8
+  },
+  "source_states_schedules": {
+    "OSA03_R00": {
+      "common_state": {
+        "B": [
+          19.203630553052257,
+          24.14333536015282,
+          -1.5689760264727979
+        ],
+        "B_tick": 92,
+        "B_sim_s": 1.5666667483747005,
+        "u_minus": [
+          0.8,
+          -1.5584691584098122e-06
+        ],
+        "u_B_plus": [
+          0.8,
+          0.49999844893907003
+        ],
+        "u_mem_B": [
+          0.8,
+          0.49999844893907003
+        ],
+        "delta_u_B": [
+          0.0,
+          0.5000000074082285
+        ],
+        "previous_command_application_sim_s": 1.450000075623393,
+        "fresh_capture_pose": [
+          19.203242163778583,
+          24.356668352984542,
+          -1.5689752526514715
+        ],
+        "fresh_chunk_id": "chunk_001",
+        "fresh_version": 1,
+        "original_generation": 3,
+        "integration_dt_s": 0.01666666753590107,
+        "next_submit_after_B": 96,
+        "first_FRESH_solve": {
+          "type": "solve_result",
+          "episode_id": "REPEAT_00",
+          "chunk_id": "chunk_001",
+          "reference_version": 1,
+          "official_generation": 3,
+          "solve_id": "REPEAT_00_solve_000005",
+          "input_state_id": 90,
+          "input_sim_time_s": 1.5333334133028984,
+          "input_host_monotonic_s": 80643.430119693,
+          "input_pose": [
+            19.20358201104196,
+            24.1700019840291,
+            -1.5689759745238234
+          ],
+          "previous_command": [
+            0.8,
+            -1.5584691584098122e-06
+          ],
+          "submit_host_monotonic_s": 80643.43030147,
+          "result_seen_worker_host_monotonic_s": 80643.436668187,
+          "command": [
+            0.8,
+            0.49999844893907003
+          ],
+          "official_solve_ms": 5.0312249950366095,
+          "prediction_world": [
+            [
+              19.20358201104196,
+              24.1700019840291,
+              -1.5689759745238234
+            ],
+            [
+              19.20372763914448,
+              24.090002115883077,
+              -1.5189761296299165
+            ],
+            [
+              19.207871399811896,
+              24.01010950442648,
+              -1.4189762846017255
+            ],
+            [
+              19.21997039905042,
+              23.931029707142027,
+              -1.2996324185878088
+            ],
+            [
+              19.24139863897421,
+              23.853952923026444,
+              -1.2302885441932823
+            ],
+            [
+              19.268115900218017,
+              23.77854610616981,
+              -1.2109446250965061
+            ]
+          ],
+          "result_generation": 3,
+          "selection": {
+            "nearest_index": 1,
+            "indices": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "reference_world": [
+              [
+                19.354336910512455,
+                24.096035365800496,
+                -1.0453769989245123
+              ],
+              [
+                19.42987255365256,
+                23.965736881281778,
+                -1.045478744053144
+              ],
+              [
+                19.50546426473847,
+                23.835285791513932,
+                -1.0458070464365667
+              ],
+              [
+                19.580832098216636,
+                23.705155027173276,
+                -1.0458022780649847
+              ],
+              [
+                19.65600938471402,
+                23.575444606112452,
+                -1.0456598229639715
+              ]
+            ],
+            "endpoint_repeated": false,
+            "nearest_is_final_row": false,
+            "selection_semantics": "nearest weighted XY/wrapped-yaw pose; next rows; endpoint repetition; sequential yaw unwrap",
+            "index_validation": "independent diagnostic checked against actual official reference"
+          },
+          "solve_start_host_monotonic_s": 80643.430476144,
+          "solve_end_host_monotonic_s": 80643.435514933,
+          "status": "command",
+          "command_available_for_application": true,
+          "seen_in_isaac": {
+            "host_monotonic_ns": 80643449695652,
+            "host_monotonic_s": 80643.449695652,
+            "host_utc": "2026-09-23T08:55:20.336115+00:00",
+            "sim_time_s": 1.5666667483747005,
+            "episode_time_s": 1.5333334133028984
+          },
+          "seen_sim_time_s": 1.5666667483747005
+        }
+      },
+      "schedule": {
+        "primary": {
+          "attempted_submit_ticks": [
+            96,
+            102,
+            108,
+            114,
+            120,
+            126,
+            132,
+            138,
+            144
+          ],
+          "accepted_submit_ticks": [
+            96,
+            102,
+            108,
+            114,
+            120,
+            126,
+            132,
+            138,
+            144
+          ],
+          "applications": [
+            {
+              "submit_tick": 96,
+              "application_tick": 99
+            },
+            {
+              "submit_tick": 102,
+              "application_tick": 103
+            },
+            {
+              "submit_tick": 108,
+              "application_tick": 109
+            },
+            {
+              "submit_tick": 114,
+              "application_tick": 115
+            },
+            {
+              "submit_tick": 120,
+              "application_tick": 121
+            },
+            {
+              "submit_tick": 126,
+              "application_tick": 127
+            },
+            {
+              "submit_tick": 132,
+              "application_tick": 133
+            },
+            {
+              "submit_tick": 138,
+              "application_tick": 139
+            },
+            {
+              "submit_tick": 144,
+              "application_tick": 145
+            }
+          ],
+          "complete_primary_exposure": true,
+          "endpoint_inclusive_absolute_tick": 146
+        },
+        "full": {
+          "attempted_submit_ticks": [
+            96,
+            102,
+            108,
+            114,
+            120,
+            126,
+            132,
+            138,
+            144,
+            150,
+            156,
+            162,
+            168,
+            174,
+            180,
+            186,
+            192,
+            198,
+            204,
+            210,
+            216,
+            222,
+            228,
+            234,
+            240,
+            246,
+            252,
+            258,
+            264,
+            270
+          ],
+          "accepted_submit_ticks": [
+            96,
+            102,
+            108,
+            114,
+            120,
+            126,
+            132,
+            138,
+            144,
+            150,
+            156,
+            162,
+            168,
+            174,
+            180,
+            186,
+            192,
+            198,
+            204,
+            210,
+            216,
+            222,
+            228,
+            234,
+            240,
+            246,
+            252,
+            258,
+            264,
+            270
+          ],
+          "applications": [
+            {
+              "submit_tick": 96,
+              "application_tick": 99
+            },
+            {
+              "submit_tick": 102,
+              "application_tick": 103
+            },
+            {
+              "submit_tick": 108,
+              "application_tick": 109
+            },
+            {
+              "submit_tick": 114,
+              "application_tick": 115
+            },
+            {
+              "submit_tick": 120,
+              "application_tick": 121
+            },
+            {
+              "submit_tick": 126,
+              "application_tick": 127
+            },
+            {
+              "submit_tick": 132,
+              "application_tick": 133
+            },
+            {
+              "submit_tick": 138,
+              "application_tick": 139
+            },
+            {
+              "submit_tick": 144,
+              "application_tick": 145
+            },
+            {
+              "submit_tick": 150,
+              "application_tick": 151
+            },
+            {
+              "submit_tick": 156,
+              "application_tick": 157
+            },
+            {
+              "submit_tick": 162,
+              "application_tick": 163
+            },
+            {
+              "submit_tick": 168,
+              "application_tick": 169
+            },
+            {
+              "submit_tick": 174,
+              "application_tick": 175
+            },
+            {
+              "submit_tick": 180,
+              "application_tick": 181
+            },
+            {
+              "submit_tick": 186,
+              "application_tick": 187
+            },
+            {
+              "submit_tick": 192,
+              "application_tick": 193
+            },
+            {
+              "submit_tick": 198,
+              "application_tick": 199
+            },
+            {
+              "submit_tick": 204,
+              "application_tick": 205
+            },
+            {
+              "submit_tick": 210,
+              "application_tick": 211
+            },
+            {
+              "submit_tick": 216,
+              "application_tick": 217
+            },
+            {
+              "submit_tick": 222,
+              "application_tick": 223
+            },
+            {
+              "submit_tick": 228,
+              "application_tick": 229
+            },
+            {
+              "submit_tick": 234,
+              "application_tick": 235
+            },
+            {
+              "submit_tick": 240,
+              "application_tick": 241
+            },
+            {
+              "submit_tick": 246,
+              "application_tick": 247
+            },
+            {
+              "submit_tick": 252,
+              "application_tick": 253
+            },
+            {
+              "submit_tick": 258,
+              "application_tick": 259
+            },
+            {
+              "submit_tick": 264,
+              "application_tick": 265
+            },
+            {
+              "submit_tick": 270,
+              "application_tick": 271
+            }
+          ],
+          "complete_primary_exposure": true,
+          "endpoint_inclusive_absolute_tick": 272
+        },
+        "pairs": [
+          {
+            "submit_tick": 96,
+            "application_tick": 99
+          },
+          {
+            "submit_tick": 102,
+            "application_tick": 103
+          },
+          {
+            "submit_tick": 108,
+            "application_tick": 109
+          },
+          {
+            "submit_tick": 114,
+            "application_tick": 115
+          },
+          {
+            "submit_tick": 120,
+            "application_tick": 121
+          },
+          {
+            "submit_tick": 126,
+            "application_tick": 127
+          },
+          {
+            "submit_tick": 132,
+            "application_tick": 133
+          },
+          {
+            "submit_tick": 138,
+            "application_tick": 139
+          },
+          {
+            "submit_tick": 144,
+            "application_tick": 145
+          },
+          {
+            "submit_tick": 150,
+            "application_tick": 151
+          },
+          {
+            "submit_tick": 156,
+            "application_tick": 157
+          },
+          {
+            "submit_tick": 162,
+            "application_tick": 163
+          },
+          {
+            "submit_tick": 168,
+            "application_tick": 169
+          },
+          {
+            "submit_tick": 174,
+            "application_tick": 175
+          },
+          {
+            "submit_tick": 180,
+            "application_tick": 181
+          },
+          {
+            "submit_tick": 186,
+            "application_tick": 187
+          },
+          {
+            "submit_tick": 192,
+            "application_tick": 193
+          },
+          {
+            "submit_tick": 198,
+            "application_tick": 199
+          },
+          {
+            "submit_tick": 204,
+            "application_tick": 205
+          },
+          {
+            "submit_tick": 210,
+            "application_tick": 211
+          },
+          {
+            "submit_tick": 216,
+            "application_tick": 217
+          },
+          {
+            "submit_tick": 222,
+            "application_tick": 223
+          },
+          {
+            "submit_tick": 228,
+            "application_tick": 229
+          },
+          {
+            "submit_tick": 234,
+            "application_tick": 235
+          },
+          {
+            "submit_tick": 240,
+            "application_tick": 241
+          },
+          {
+            "submit_tick": 246,
+            "application_tick": 247
+          },
+          {
+            "submit_tick": 252,
+            "application_tick": 253
+          },
+          {
+            "submit_tick": 258,
+            "application_tick": 259
+          },
+          {
+            "submit_tick": 264,
+            "application_tick": 265
+          },
+          {
+            "submit_tick": 270,
+            "application_tick": 271
+          }
+        ],
+        "B_tick": 92,
+        "integration_steps": 180,
+        "integration_dt_s": 0.01666666753590107,
+        "provenance": {
+          "rollout_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/methods/M0_NATIVE/rollout.json",
+          "rollout_sha256": "07da7802835d63a75ba6afc82abb81722df0a257ff03526a1452cf46f57895e8",
+          "tracked_path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/osa03_common_b_method_comparison_01/result_summary.json",
+          "tracked_sha256": "4f40dc51cb2995e3a383512d8bfef35405a25629ba69d560bd7a63053a75a0d8"
+        }
+      },
+      "reuse": {
+        "source_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00",
+        "copies": {
+          "common_state.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/common_state.json",
+            "sha256": "0e1ca894e13467e0b5ed334be47e51728ab23a38a874afbe1bee4e378eef6d24"
+          },
+          "source_manifest.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/source_manifest.json",
+            "sha256": "b61dd2b9c1cbe98be9299ac1c21212834c687ad249cbf38cc84632d9ed4a3c00"
+          },
+          "schedule.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/schedule.json",
+            "sha256": "6db1f0840f3d07089aec065a03d37332bdb37651f16080e9dc2a2adfdc117bfe"
+          },
+          "scenario.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/scenario.json",
+            "sha256": "63a0d1f907584fd02240b14a1a30bd1f6227beea75bf27344403c9b726163725"
+          },
+          "source_audit.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/source_audit.json",
+            "sha256": "f89aae74d3619611d020ac9cb2714505b16132810007c7255444983f6dc83df1"
+          },
+          "metric_protocol.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/metric_protocol.json",
+            "sha256": "9120d8cb7f3c28beaeac4299d175438fc8e1660f2d9b427e835e409a5d411e31"
+          },
+          "recorded_old_to_B.npy": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/recorded_old_to_B.npy",
+            "sha256": "868ce16ce52578d38d33a89e4171d781fa9beb89f03812d038047af78fe63f07"
+          },
+          "restoration_preflight.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/restoration_preflight.json",
+            "sha256": "c7200e461dc2960dd6639a43b4b32ba063a0975913e156c465a2cc1375db87bc"
+          }
+        },
+        "methods": {
+          "M0_NATIVE": {
+            "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/methods/M0_NATIVE",
+            "hashes_sha256": "c2cdeefa57acc36a0f9027cab9acb387ef2c13dcf6e148a0c66f2fc478ab318b",
+            "reference": {
+              "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/references/M0_NATIVE_world.npy",
+              "world_sha256": "9c8ea94f650d823ac3e1ada0a216dc36758432713fd5407cf18324069865bfc4",
+              "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/references/M0_NATIVE_local.npy",
+              "local_sha256": "8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521",
+              "safety": {
+                "minimum_clearance_m": 0.22948689016047874,
+                "Hospital_only_m": 0.7338624037073149,
+                "cart_only_m": 0.22948689016047874,
+                "limiting_geometry": "cart",
+                "limiting_Hospital_mesh": null,
+                "first_minimum_segment": 8,
+                "minimum_segment_fraction": 1.0,
+                "minimum_path_xy": [
+                  19.88161991957295,
+                  23.185725783431817
+                ],
+                "nearest_obstacle_xy": [
+                  19.61594947,
+                  22.84826734
+                ],
+                "per_segment_clearance_m": [
+                  1.089042383762051,
+                  1.0370237161834115,
+                  0.8980669867407352,
+                  0.7624673352289932,
+                  0.6316224704628295,
+                  0.5073845797151886,
+                  0.39503983311932384,
+                  0.30283318934201614,
+                  0.22948689016047874
+                ],
+                "workspace_known": true,
+                "clearance_valid": true,
+                "required_edge_clearance_m": 0.05,
+                "footprint_radius_m": 0.2,
+                "numerical_tolerance_m": 1e-07,
+                "query": "full union direct GEOS, no B connector, no time/execution claim"
+              },
+              "descriptor": {
+                "first_node_displacement_m": 0.0,
+                "endpoint_displacement_m": 0.0,
+                "per_node_displacement_m": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "per_node_log_correction": [
+                  [
+                    7.105427357601002e-15,
+                    8.881784197001252e-16,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    -1.7763568394002505e-15,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    -1.7763568394002505e-15,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.7763568394002505e-15,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.7763568394002505e-15,
+                    0.0
+                  ]
+                ],
+                "relative_edge_log": [
+                  [
+                    -8.673617379884035e-19,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -9.559891200248832e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -2.4596275484858688e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    6.9212774384016865e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    5.33807442872168e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -2.7927189122954065e-19,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    2.727551452289371e-18,
+                    2.752857078576476e-21,
+                    0.0
+                  ],
+                  [
+                    6.859426662459259e-18,
+                    -3.3881317890172014e-21,
+                    0.0
+                  ],
+                  [
+                    2.265151389415211e-18,
+                    6.776263578034403e-21,
+                    0.0
+                  ]
+                ],
+                "relative_translation_RMS_m": 5.1022104518253546e-18,
+                "relative_yaw_RMS_rad": 0.0,
+                "relative_translation_max_m": 9.559891200248832e-18,
+                "relative_yaw_max_rad": 0.0,
+                "rigid_fit": {
+                  "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+                  "transform": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "translation_RMS_m": 0.0,
+                  "yaw_RMS_rad": 0.0
+                },
+                "total_XY_arc_m": 1.3532455201158953,
+                "segment_length_min_m": 0.14975363083233198,
+                "segment_length_max_m": 0.15077000234301943,
+                "maximum_lateral_node_correction_m": 1.7763568394002505e-15,
+                "maximum_lateral_B_frame_m": 0.6762451072060911,
+                "maximum_yaw_correction_rad": 0.0,
+                "self_intersection": false,
+                "B_to_first_node_position_m": 0.2133240063439845,
+                "B_to_first_node_yaw_rad": 0.31417354837462597,
+                "B_projection": {
+                  "progress": 1.2257886927193453,
+                  "segment_index": 1,
+                  "alpha": 0.2257886927193453,
+                  "projected_pose": [
+                    19.295891380828646,
+                    24.196831687029654,
+                    -1.0453675388735721
+                  ],
+                  "distance_m": 0.10664856928856484,
+                  "yaw_error_rad": 0.5236084875992257
+                },
+                "first_reliable_chord_relative_B_rad": 0.5234672193016632,
+                "reliable_chord_minimum_length_m": 0.02
+              },
+              "status": "REFERENCE_GEOMETRY_SAFE"
+            }
+          },
+          "FULL_LOCAL_SE2": {
+            "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/methods/FULL_LOCAL_SE2",
+            "hashes_sha256": "c470ad35944c6139bdbc3fa8b3e589820c52980f5bd1d44c33d2e6b1c01eb839",
+            "reference": {
+              "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/references/FULL_LOCAL_SE2_world.npy",
+              "world_sha256": "bd459b0343fac1e78e4ac80831f4f99af9b86dd4876a3b0df1b45f41c21ce120",
+              "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/references/FULL_LOCAL_SE2_local.npy",
+              "local_sha256": "b7133196bdcf9ff65e7ed99b4e9f0baf144f1a470ba5d8e139baa48935ce90c0",
+              "safety": {
+                "minimum_clearance_m": 0.2278092081855581,
+                "Hospital_only_m": 0.7338016067914999,
+                "cart_only_m": 0.2278092081855581,
+                "limiting_geometry": "cart",
+                "limiting_Hospital_mesh": null,
+                "first_minimum_segment": 8,
+                "minimum_segment_fraction": 1.0,
+                "minimum_path_xy": [
+                  19.881680721352023,
+                  23.183539797358552
+                ],
+                "nearest_obstacle_xy": [
+                  19.61594947,
+                  22.84826734
+                ],
+                "per_segment_clearance_m": [
+                  0.9731214836350206,
+                  0.8492881736142639,
+                  0.7354812666959725,
+                  0.6357433489061664,
+                  0.545513146611335,
+                  0.4583128470124505,
+                  0.3730988027825704,
+                  0.29599478793365386,
+                  0.2278092081855581
+                ],
+                "workspace_known": true,
+                "clearance_valid": true,
+                "required_edge_clearance_m": 0.05,
+                "footprint_radius_m": 0.2,
+                "numerical_tolerance_m": 1e-07,
+                "query": "full union direct GEOS, no B connector, no time/execution claim"
+              },
+              "descriptor": {
+                "first_node_displacement_m": 0.21114401806645536,
+                "endpoint_displacement_m": 0.0021868314907293233,
+                "per_node_displacement_m": [
+                  0.21114401806645536,
+                  0.20547071201908632,
+                  0.19033727954971233,
+                  0.16359591201103246,
+                  0.126830670666446,
+                  0.08612571538846464,
+                  0.04951769434894798,
+                  0.022905790865167554,
+                  0.00784166016473276,
+                  0.0021868314907293233
+                ],
+                "per_node_log_correction": [
+                  [
+                    0.20076381696956716,
+                    -0.0653887533190556,
+                    0.0008834415861072031
+                  ],
+                  [
+                    0.17780698752472138,
+                    -0.10297039163241503,
+                    0.0019124708640205768
+                  ],
+                  [
+                    0.16461469657851277,
+                    -0.09555270492448628,
+                    0.0035366496184323637
+                  ],
+                  [
+                    0.141420298699657,
+                    -0.08224342508439375,
+                    0.005161910759269528
+                  ],
+                  [
+                    0.10964974450801897,
+                    -0.06374166724479942,
+                    0.005958452377385459
+                  ],
+                  [
+                    0.07450499849453376,
+                    -0.043204889162377295,
+                    0.005455459149617425
+                  ],
+                  [
+                    0.042891355291662984,
+                    -0.02474544165711929,
+                    0.0039498819142922414
+                  ],
+                  [
+                    0.019886574070657654,
+                    -0.011366602033816392,
+                    0.00221701049110834
+                  ],
+                  [
+                    0.006833907780087304,
+                    -0.0038456914671393277,
+                    0.0009126296742958395
+                  ],
+                  [
+                    0.0019235800766968984,
+                    -0.0010402267462585424,
+                    0.00025668411841506256
+                  ]
+                ],
+                "relative_edge_log": [
+                  [
+                    -0.004919274777160624,
+                    0.002693304988704364,
+                    0.0010290292779133736
+                  ],
+                  [
+                    -0.013103192731065255,
+                    0.007284626557256992,
+                    0.001624178754411787
+                  ],
+                  [
+                    -0.02310407243211054,
+                    0.0129345425971628,
+                    0.0016252611408371642
+                  ],
+                  [
+                    -0.03171909007906702,
+                    0.017815320421470035,
+                    0.0007965416181154872
+                  ],
+                  [
+                    -0.03510161356460357,
+                    0.019718310662794607,
+                    -0.0005029932277675897
+                  ],
+                  [
+                    -0.03159109914907793,
+                    0.017682279855321635,
+                    -0.001505577235325184
+                  ],
+                  [
+                    -0.02300842621847869,
+                    0.012780556512045831,
+                    -0.0017328714231839015
+                  ],
+                  [
+                    -0.013055074895398745,
+                    0.007184589666782104,
+                    -0.0013043808168125004
+                  ],
+                  [
+                    -0.004914448135695544,
+                    0.0026605167220118365,
+                    -0.000655945555881221
+                  ]
+                ],
+                "relative_translation_RMS_m": 0.026158510086507047,
+                "relative_yaw_RMS_rad": 0.0012748460674805913,
+                "relative_translation_max_m": 0.040260837674261585,
+                "relative_yaw_max_rad": 0.0017328714231839015,
+                "rigid_fit": {
+                  "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+                  "transform": [
+                    2.6469564300931268,
+                    -2.0553547373790764,
+                    0.1068589617025278
+                  ],
+                  "translation_RMS_m": 0.06683480285215623,
+                  "yaw_RMS_rad": 0.10385318376094387
+                },
+                "total_XY_arc_m": 1.178800299641546,
+                "segment_length_min_m": 0.11695880540096089,
+                "segment_length_max_m": 0.14586016584463682,
+                "maximum_lateral_node_correction_m": 0.10280030357291103,
+                "maximum_lateral_B_frame_m": 0.6763019297354728,
+                "maximum_yaw_correction_rad": 0.005958452377385459,
+                "self_intersection": false,
+                "B_to_first_node_position_m": 0.0021805013976758745,
+                "B_to_first_node_yaw_rad": 0.31505698996073317,
+                "B_projection": {
+                  "progress": 0.012964051523918304,
+                  "segment_index": 0,
+                  "alpha": 0.012964051523918304,
+                  "projected_pose": [
+                    19.20455925739731,
+                    24.143897894949536,
+                    -1.2511905350139323
+                  ],
+                  "distance_m": 0.0010857887262442712,
+                  "yaw_error_rad": 0.31778549145886537
+                },
+                "first_reliable_chord_relative_B_rad": 0.5427944713931598,
+                "reliable_chord_minimum_length_m": 0.02
+              },
+              "status": "REFERENCE_GEOMETRY_SAFE"
+            }
+          }
+        }
+      }
+    },
+    "episode_001_repeat_01/handoff_013": {
+      "common_state": {
+        "B": [
+          18.87406266585573,
+          9.874101626669443,
+          -1.44686167546041
+        ],
+        "B_tick": 997,
+        "B_sim_s": 16.65000086836517,
+        "u_minus": [
+          0.793958934126993,
+          -0.0028287967975531734
+        ],
+        "u_B_plus": [
+          0.8,
+          -0.502828799950449
+        ],
+        "u_mem_B": [
+          0.8,
+          -0.502828799950449
+        ],
+        "delta_u_B": [
+          0.006041065873007012,
+          -0.5000000031528958
+        ],
+        "previous_command_application_sim_s": 16.450000857934356,
+        "fresh_capture_pose": [
+          18.813045154168247,
+          10.362429398760288,
+          -1.4470604195744317
+        ],
+        "fresh_chunk_id": "chunk_014",
+        "fresh_version": 14,
+        "original_generation": 88,
+        "integration_dt_s": 0.01666666753590107,
+        "next_submit_after_B": 1002,
+        "first_FRESH_solve": {
+          "type": "solve_result",
+          "episode_id": "episode_001_repeat_01",
+          "chunk_id": "chunk_014",
+          "reference_version": 14,
+          "official_generation": 88,
+          "solve_id": "episode_001_repeat_01_solve_000155",
+          "input_state_id": 996,
+          "input_sim_time_s": 16.633334200829268,
+          "input_host_monotonic_s": 423216.580925784,
+          "input_pose": [
+            18.872426567578366,
+            9.887232742297055,
+            -1.4468145288446586
+          ],
+          "previous_command": [
+            0.793958934126993,
+            -0.0028287967975531734
+          ],
+          "submit_host_monotonic_s": 423216.582359552,
+          "result_seen_worker_host_monotonic_s": 423216.586639933,
+          "command": [
+            0.8,
+            -0.502828799950449
+          ],
+          "official_solve_ms": 3.6325560067780316,
+          "prediction_world": [
+            [
+              18.872426567578366,
+              9.887232742297055,
+              -1.4468145288446586
+            ],
+            [
+              18.88231972057846,
+              9.807846813727249,
+              -1.4970974088397035
+            ],
+            [
+              18.888210298219395,
+              9.728063975803906,
+              -1.5973802858387398
+            ],
+            [
+              18.88608383196036,
+              9.648092241595243,
+              -1.6546266336416626
+            ],
+            [
+              18.879385259511523,
+              9.568373177070514,
+              -1.675698480668818
+            ],
+            [
+              18.871008470569034,
+              9.488812951519975,
+              -1.678432909771986
+            ]
+          ],
+          "result_generation": 88,
+          "selection": {
+            "nearest_index": 2,
+            "indices": [
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "reference_world": [
+              [
+                18.730123830346784,
+                9.765362925136044,
+                -1.7085025146157067
+              ],
+              [
+                18.70951613903068,
+                9.616615885818659,
+                -1.7084365322739403
+              ],
+              [
+                18.68889853997111,
+                9.467604414407955,
+                -1.7082101836354058
+              ],
+              [
+                18.66824645369464,
+                9.318511531775568,
+                -1.7082082464844506
+              ],
+              [
+                18.647749994388054,
+                9.169352353599015,
+                -1.705777181640319
+              ]
+            ],
+            "endpoint_repeated": false,
+            "nearest_is_final_row": false,
+            "selection_semantics": "nearest weighted XY/wrapped-yaw pose; next rows; endpoint repetition; sequential yaw unwrap",
+            "index_validation": "independent diagnostic checked against actual official reference"
+          },
+          "solve_start_host_monotonic_s": 423216.582459664,
+          "solve_end_host_monotonic_s": 423216.586096889,
+          "status": "command",
+          "command_available_for_application": true,
+          "seen_in_isaac": {
+            "host_monotonic_ns": 423216588156770,
+            "host_monotonic_s": 423216.58815677,
+            "host_utc": "2026-09-15T09:22:20.982471+00:00",
+            "sim_time_s": 16.65000086836517,
+            "episode_time_s": 16.616667533293366
+          },
+          "seen_sim_time_s": 16.65000086836517
+        }
+      },
+      "schedule": {
+        "pairs": [
+          {
+            "submit_tick": 1002,
+            "application_tick": 1003
+          },
+          {
+            "submit_tick": 1008,
+            "application_tick": 1009
+          },
+          {
+            "submit_tick": 1014,
+            "application_tick": 1015
+          },
+          {
+            "submit_tick": 1020,
+            "application_tick": 1021
+          },
+          {
+            "submit_tick": 1026,
+            "application_tick": 1027
+          },
+          {
+            "submit_tick": 1032,
+            "application_tick": 1033
+          },
+          {
+            "submit_tick": 1038,
+            "application_tick": 1039
+          },
+          {
+            "submit_tick": 1044,
+            "application_tick": 1045
+          },
+          {
+            "submit_tick": 1050,
+            "application_tick": 1051
+          },
+          {
+            "submit_tick": 1056,
+            "application_tick": 1057
+          },
+          {
+            "submit_tick": 1062,
+            "application_tick": 1063
+          },
+          {
+            "submit_tick": 1068,
+            "application_tick": 1069
+          },
+          {
+            "submit_tick": 1074,
+            "application_tick": 1075
+          },
+          {
+            "submit_tick": 1080,
+            "application_tick": 1081
+          },
+          {
+            "submit_tick": 1086,
+            "application_tick": 1087
+          },
+          {
+            "submit_tick": 1092,
+            "application_tick": 1093
+          },
+          {
+            "submit_tick": 1098,
+            "application_tick": 1099
+          },
+          {
+            "submit_tick": 1104,
+            "application_tick": 1105
+          },
+          {
+            "submit_tick": 1110,
+            "application_tick": 1111
+          },
+          {
+            "submit_tick": 1116,
+            "application_tick": 1117
+          },
+          {
+            "submit_tick": 1122,
+            "application_tick": 1123
+          },
+          {
+            "submit_tick": 1128,
+            "application_tick": 1129
+          },
+          {
+            "submit_tick": 1134,
+            "application_tick": 1135
+          },
+          {
+            "submit_tick": 1140,
+            "application_tick": 1141
+          },
+          {
+            "submit_tick": 1146,
+            "application_tick": 1147
+          },
+          {
+            "submit_tick": 1152,
+            "application_tick": 1153
+          },
+          {
+            "submit_tick": 1158,
+            "application_tick": 1159
+          },
+          {
+            "submit_tick": 1164,
+            "application_tick": 1165
+          },
+          {
+            "submit_tick": 1170,
+            "application_tick": 1171
+          },
+          {
+            "submit_tick": 1176,
+            "application_tick": 1177
+          }
+        ],
+        "primary": {
+          "attempted_submit_ticks": [
+            1002,
+            1008,
+            1014,
+            1020,
+            1026,
+            1032,
+            1038,
+            1044,
+            1050
+          ],
+          "accepted_submit_ticks": [
+            1002,
+            1008,
+            1014,
+            1020,
+            1026,
+            1032,
+            1038,
+            1044,
+            1050
+          ],
+          "applications": [
+            {
+              "submit_tick": 1002,
+              "application_tick": 1003
+            },
+            {
+              "submit_tick": 1008,
+              "application_tick": 1009
+            },
+            {
+              "submit_tick": 1014,
+              "application_tick": 1015
+            },
+            {
+              "submit_tick": 1020,
+              "application_tick": 1021
+            },
+            {
+              "submit_tick": 1026,
+              "application_tick": 1027
+            },
+            {
+              "submit_tick": 1032,
+              "application_tick": 1033
+            },
+            {
+              "submit_tick": 1038,
+              "application_tick": 1039
+            },
+            {
+              "submit_tick": 1044,
+              "application_tick": 1045
+            },
+            {
+              "submit_tick": 1050,
+              "application_tick": 1051
+            }
+          ],
+          "complete_primary_exposure": true,
+          "endpoint_inclusive_absolute_tick": 1051
+        },
+        "full": {
+          "attempted_submit_ticks": [
+            1002,
+            1008,
+            1014,
+            1020,
+            1026,
+            1032,
+            1038,
+            1044,
+            1050,
+            1056,
+            1062,
+            1068,
+            1074,
+            1080,
+            1086,
+            1092,
+            1098,
+            1104,
+            1110,
+            1116,
+            1122,
+            1128,
+            1134,
+            1140,
+            1146,
+            1152,
+            1158,
+            1164,
+            1170,
+            1176
+          ],
+          "accepted_submit_ticks": [
+            1002,
+            1008,
+            1014,
+            1020,
+            1026,
+            1032,
+            1038,
+            1044,
+            1050,
+            1056,
+            1062,
+            1068,
+            1074,
+            1080,
+            1086,
+            1092,
+            1098,
+            1104,
+            1110,
+            1116,
+            1122,
+            1128,
+            1134,
+            1140,
+            1146,
+            1152,
+            1158,
+            1164,
+            1170,
+            1176
+          ],
+          "applications": [
+            {
+              "submit_tick": 1002,
+              "application_tick": 1003
+            },
+            {
+              "submit_tick": 1008,
+              "application_tick": 1009
+            },
+            {
+              "submit_tick": 1014,
+              "application_tick": 1015
+            },
+            {
+              "submit_tick": 1020,
+              "application_tick": 1021
+            },
+            {
+              "submit_tick": 1026,
+              "application_tick": 1027
+            },
+            {
+              "submit_tick": 1032,
+              "application_tick": 1033
+            },
+            {
+              "submit_tick": 1038,
+              "application_tick": 1039
+            },
+            {
+              "submit_tick": 1044,
+              "application_tick": 1045
+            },
+            {
+              "submit_tick": 1050,
+              "application_tick": 1051
+            },
+            {
+              "submit_tick": 1056,
+              "application_tick": 1057
+            },
+            {
+              "submit_tick": 1062,
+              "application_tick": 1063
+            },
+            {
+              "submit_tick": 1068,
+              "application_tick": 1069
+            },
+            {
+              "submit_tick": 1074,
+              "application_tick": 1075
+            },
+            {
+              "submit_tick": 1080,
+              "application_tick": 1081
+            },
+            {
+              "submit_tick": 1086,
+              "application_tick": 1087
+            },
+            {
+              "submit_tick": 1092,
+              "application_tick": 1093
+            },
+            {
+              "submit_tick": 1098,
+              "application_tick": 1099
+            },
+            {
+              "submit_tick": 1104,
+              "application_tick": 1105
+            },
+            {
+              "submit_tick": 1110,
+              "application_tick": 1111
+            },
+            {
+              "submit_tick": 1116,
+              "application_tick": 1117
+            },
+            {
+              "submit_tick": 1122,
+              "application_tick": 1123
+            },
+            {
+              "submit_tick": 1128,
+              "application_tick": 1129
+            },
+            {
+              "submit_tick": 1134,
+              "application_tick": 1135
+            },
+            {
+              "submit_tick": 1140,
+              "application_tick": 1141
+            },
+            {
+              "submit_tick": 1146,
+              "application_tick": 1147
+            },
+            {
+              "submit_tick": 1152,
+              "application_tick": 1153
+            },
+            {
+              "submit_tick": 1158,
+              "application_tick": 1159
+            },
+            {
+              "submit_tick": 1164,
+              "application_tick": 1165
+            },
+            {
+              "submit_tick": 1170,
+              "application_tick": 1171
+            }
+          ],
+          "complete_primary_exposure": true,
+          "endpoint_inclusive_absolute_tick": 1177
+        },
+        "B_tick": 997,
+        "integration_steps": 180,
+        "integration_dt_s": 0.01666666753590107,
+        "provenance": {
+          "context_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/episodes/episode_001_repeat_01/handoffs/handoff_013/context.json",
+          "context_sha256": "ff25d55040c8fcb4b810d1ff8fbc790fc2fb8a7064f99b7f8971a2cf192e52af",
+          "commands_sha256": "0856dd6981f8f93f1bb877fda2f4fb853a876fbfc56551df942b0a914bc45155",
+          "events_sha256": "a88cd45df42c247e4196a1fb035b232f9c9dfcb2cdfd6bd1d94c58e2e064b857",
+          "metadata_sha256": "387e2ea11d024a86513cfdab2f2c56a68911aa4f8b653f898a2554f678782890",
+          "first_pair": {
+            "submit_tick": 1002,
+            "application_tick": 1003
+          },
+          "first_result_id": "episode_001_repeat_01_solve_000156"
+        },
+        "rule": "repeat first saved post-cut application lag on original absolute 6-tick grid",
+        "release_lag_ticks": 1
+      },
+      "reuse": {
+        "source_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013",
+        "copies": {
+          "common_state.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/common_state.json",
+            "sha256": "56f6f645d2db972732366d770bd9bbd8e09bdfb50cd965e3aa66042bc96015fe"
+          },
+          "source_manifest.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/source_manifest.json",
+            "sha256": "97e66563d89a7198a3e27f6ae6efe9f1e39bd55f883f429a4079d21560061e85"
+          },
+          "schedule.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/schedule.json",
+            "sha256": "c8c2f58f6a586d21985671b7d94701f899f3414abf9c494bbe594edc8902df94"
+          },
+          "scenario.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/scenario.json",
+            "sha256": "b79857ef1fe6c14cdd65eb211669bf3f945e4257e96b4d5ba7fdf7162914a61a"
+          },
+          "source_audit.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/source_audit.json",
+            "sha256": "ea0b686702de493ca1efe54d39c9c1e7e509c682537ce14c6b9d6de2138dbc67"
+          },
+          "metric_protocol.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/metric_protocol.json",
+            "sha256": "9120d8cb7f3c28beaeac4299d175438fc8e1660f2d9b427e835e409a5d411e31"
+          },
+          "recorded_old_to_B.npy": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/recorded_old_to_B.npy",
+            "sha256": "9431945f821847b3777c27d10a367e09be0b7370b925cbc7aca3e8cd1d9652c8"
+          },
+          "restoration_preflight.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/restoration_preflight.json",
+            "sha256": "dcca5177bb1ac1ddf91c406d4976fc2bff180d7854b054ab6c94f0a3f809c471"
+          }
+        },
+        "methods": {
+          "M0_NATIVE": {
+            "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/methods/M0_NATIVE",
+            "hashes_sha256": "62c908e3e3e32f11072ace1d0c6b5d97b6cc5d40f0b1ec450f230d01b7fdc34d",
+            "reference": {
+              "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/references/M0_NATIVE_world.npy",
+              "world_sha256": "8bf03cf08ef9c641edb613953d3173097daa66f1281cc54a98ba1c71d381b129",
+              "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/references/M0_NATIVE_local.npy",
+              "local_sha256": "82bb298736fd7a1e6289a529e0a973d4def6b3ed6b00b03506ac3694833f3503",
+              "safety": {
+                "minimum_clearance_m": 0.5805522856545122,
+                "native_clearance_m": 0.5805522856545122,
+                "union_minus_parts_m": 0.0,
+                "limiting_geometry": "Hospital",
+                "cart_present": false,
+                "first_minimum_segment": 0,
+                "minimum_path_xy": [
+                  18.792272327481577,
+                  10.213078390995763
+                ],
+                "nearest_obstacle_xy": [
+                  19.44326705,
+                  10.64373805
+                ],
+                "per_segment_clearance_m": [
+                  0.5805522856545122,
+                  0.6874828344705908,
+                  0.8057267794051866,
+                  0.9314221633489084,
+                  1.0622877403749387,
+                  1.1972695436794465,
+                  1.3038791514737582,
+                  1.3050779135053696,
+                  1.3172315926804075
+                ],
+                "workspace_known": true,
+                "clearance_valid": true,
+                "required_edge_clearance_m": 0.05,
+                "footprint_radius_m": 0.2,
+                "numerical_tolerance_m": 1e-07,
+                "query": "full union direct GEOS; no cart in this source; no B connector"
+              },
+              "descriptor": {
+                "first_node_displacement_m": 0.0,
+                "endpoint_displacement_m": 0.0,
+                "per_node_displacement_m": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "per_node_log_correction": [
+                  [
+                    0.0,
+                    -1.3322676295501878e-15,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    8.881784197001252e-16,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    8.881784197001252e-16,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.1102230246251565e-15,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.7763568394002505e-15,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    2.220446049250313e-16,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    -4.440892098500626e-16,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.3322676295501878e-15,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.3322676295501878e-15,
+                    0.0
+                  ]
+                ],
+                "relative_edge_log": [
+                  [
+                    -6.855803456279912e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    8.575196587169121e-19,
+                    4.235164736271502e-22,
+                    0.0
+                  ],
+                  [
+                    -8.177932706534084e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    9.571490605344647e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -1.3404355120122794e-17,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -2.982374560024138e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    5.8743852474453864e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    2.819137406699125e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -8.961608581950498e-19,
+                    0.0,
+                    0.0
+                  ]
+                ],
+                "relative_translation_RMS_m": 6.976625522860437e-18,
+                "relative_yaw_RMS_rad": 0.0,
+                "relative_translation_max_m": 1.3404355120122794e-17,
+                "relative_yaw_max_rad": 0.0,
+                "rigid_fit": {
+                  "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+                  "transform": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "translation_RMS_m": 0.0,
+                  "yaw_RMS_rad": 0.0
+                },
+                "total_XY_arc_m": 1.3547669898114552,
+                "segment_length_min_m": 0.15016776833617648,
+                "segment_length_max_m": 0.15078919621679693,
+                "maximum_lateral_node_correction_m": 1.7763568394002505e-15,
+                "maximum_lateral_B_frame_m": 0.3873151177831591,
+                "maximum_yaw_correction_rad": 0.0,
+                "self_intersection": false,
+                "B_to_first_node_position_m": 0.3487046116765501,
+                "B_to_first_node_yaw_rad": 0.26199945050058826,
+                "B_projection": {
+                  "progress": 2.1527215300849805,
+                  "segment_index": 2,
+                  "alpha": 0.15272153008498043,
+                  "projected_pose": [
+                    18.74762742214254,
+                    9.891628709731863,
+                    -1.7086552066030893
+                  ],
+                  "distance_m": 0.12764430850410247,
+                  "yaw_error_rad": 0.2617935311426791
+                },
+                "first_reliable_chord_relative_B_rad": -0.26195461083934557,
+                "reliable_chord_minimum_length_m": 0.02
+              },
+              "status": "REFERENCE_GEOMETRY_SAFE"
+            }
+          },
+          "FULL_LOCAL_SE2": {
+            "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/methods/FULL_LOCAL_SE2",
+            "hashes_sha256": "be6fdd5d17f5acd1737191f6546e63bca7f0053c97a24ccae928f0850b4a79ef",
+            "reference": {
+              "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/references/FULL_LOCAL_SE2_world.npy",
+              "world_sha256": "0c4069cee232017af0e36c78d5e2326abd36076abdca954e31096ffc412554c2",
+              "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/references/FULL_LOCAL_SE2_local.npy",
+              "local_sha256": "f5b58a92cebbc73d143ee8f605b0e4b5b29dc4573e08c7f14bb635b4290e6705",
+              "safety": {
+                "minimum_clearance_m": 0.8880945110365017,
+                "native_clearance_m": 0.8880945110365017,
+                "union_minus_parts_m": 0.0,
+                "limiting_geometry": "Hospital",
+                "cart_present": false,
+                "first_minimum_segment": 0,
+                "minimum_path_xy": [
+                  18.852756058954217,
+                  9.72981987291745
+                ],
+                "nearest_obstacle_xy": [
+                  19.44326705,
+                  10.64373805
+                ],
+                "per_segment_clearance_m": [
+                  0.8880945110365017,
+                  1.015971651475651,
+                  1.127789554587232,
+                  1.218094190311089,
+                  1.2899020527237268,
+                  1.333536809656614,
+                  1.3209145071107256,
+                  1.3208181094192288,
+                  1.324104605612892
+                ],
+                "workspace_known": true,
+                "clearance_valid": true,
+                "required_edge_clearance_m": 0.05,
+                "footprint_radius_m": 0.2,
+                "numerical_tolerance_m": 1e-07,
+                "query": "full union direct GEOS; no cart in this source; no B connector"
+              },
+              "descriptor": {
+                "first_node_displacement_m": 0.48702882570552475,
+                "endpoint_displacement_m": 0.005097395678516147,
+                "per_node_displacement_m": [
+                  0.48702882570552475,
+                  0.47393441387031876,
+                  0.43900888206397787,
+                  0.3774595569532357,
+                  0.2929801396405264,
+                  0.19922148857933644,
+                  0.1146403009273962,
+                  0.05306452311164262,
+                  0.01817312259706687,
+                  0.005097395678516147
+                ],
+                "per_node_log_correction": [
+                  [
+                    0.47028098947267016,
+                    0.12662102048504206,
+                    -0.0008658836965822481
+                  ],
+                  [
+                    0.4575514212558386,
+                    0.12353383665968605,
+                    -0.002108846082182758
+                  ],
+                  [
+                    0.42371608231115077,
+                    0.11486403244379337,
+                    -0.004068337016342127
+                  ],
+                  [
+                    0.36422004957067783,
+                    0.09909543679683011,
+                    -0.00603875826079614
+                  ],
+                  [
+                    0.28267603554989895,
+                    0.07701932662566517,
+                    -0.007049958226999387
+                  ],
+                  [
+                    0.19226294080290063,
+                    0.052194854821461065,
+                    -0.006500578791714062
+                  ],
+                  [
+                    0.11068963988425443,
+                    0.02983666379397195,
+                    -0.004709155280278043
+                  ],
+                  [
+                    0.05130528401376709,
+                    0.013550389946331159,
+                    -0.0026294236197204057
+                  ],
+                  [
+                    0.01760610057983746,
+                    0.004504180136561473,
+                    -0.0010681665741394397
+                  ],
+                  [
+                    0.004961452976809421,
+                    0.0011693704534752642,
+                    -0.00030025400178246286
+                  ]
+                ],
+                "relative_edge_log": [
+                  [
+                    -0.012655309584823419,
+                    -0.003232996081911863,
+                    -0.001242962385600066
+                  ],
+                  [
+                    -0.03372180951985176,
+                    -0.008774855363009195,
+                    -0.001959490934159369
+                  ],
+                  [
+                    -0.05937263154684394,
+                    -0.01561844644134029,
+                    -0.0019704212444540126
+                  ],
+                  [
+                    -0.0814361128001304,
+                    -0.021575386849668695,
+                    -0.0010111999662036908
+                  ],
+                  [
+                    -0.09036720183271102,
+                    -0.023940923743435018,
+                    0.0005493794352853243
+                  ],
+                  [
+                    -0.08154938863118859,
+                    -0.021472254695402548,
+                    0.0017914235114360189
+                  ],
+                  [
+                    -0.05944937981226618,
+                    -0.015332887536280532,
+                    0.002079731660558082
+                  ],
+                  [
+                    -0.03374697197968935,
+                    -0.00846540711632032,
+                    0.001561257045580966
+                  ],
+                  [
+                    -0.012687994693475868,
+                    -0.0029976015934771736,
+                    0.0007679125723569769
+                  ]
+                ],
+                "relative_translation_RMS_m": 0.06078352156536428,
+                "relative_yaw_RMS_rad": 0.0015330854324112164,
+                "relative_translation_max_m": 0.09348475275018328,
+                "relative_yaw_max_rad": 0.002079731660558082,
+                "rigid_fit": {
+                  "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+                  "transform": [
+                    -1.3646351543034285,
+                    3.221334909560344,
+                    -0.17818678839870808
+                  ],
+                  "translation_RMS_m": 0.1724695581703282,
+                  "yaw_RMS_rad": 0.1746687712370744
+                },
+                "total_XY_arc_m": 0.9043914396547807,
+                "segment_length_min_m": 0.06467890361112459,
+                "segment_length_max_m": 0.13814930735705555,
+                "maximum_lateral_node_correction_m": 0.12641740035452642,
+                "maximum_lateral_B_frame_m": 0.3873859932179884,
+                "maximum_yaw_correction_rad": 0.007049958226999387,
+                "self_intersection": false,
+                "B_to_first_node_position_m": 0.1458464808057032,
+                "B_to_first_node_yaw_rad": 0.2628653341971705,
+                "B_projection": {
+                  "progress": 0.0,
+                  "segment_index": 0,
+                  "alpha": 0.0,
+                  "projected_pose": [
+                    18.852756058954217,
+                    9.72981987291745,
+                    -1.70972700965758
+                  ],
+                  "distance_m": 0.14584648080569665,
+                  "yaw_error_rad": 0.26286533419717006
+                },
+                "first_reliable_chord_relative_B_rad": -0.2861679248130313,
+                "reliable_chord_minimum_length_m": 0.02
+              },
+              "status": "REFERENCE_GEOMETRY_SAFE"
+            }
+          }
+        }
+      }
+    },
+    "episode_008_repeat_01/handoff_023": {
+      "common_state": {
+        "B": [
+          17.828542610626915,
+          31.820715881084176,
+          -0.7099805094359564
+        ],
+        "B_tick": 1804,
+        "B_sim_s": 30.10000156983733,
+        "u_minus": [
+          0.2935884395558631,
+          0.282815064430321
+        ],
+        "u_B_plus": [
+          0.49358844870431834,
+          0.7828150725091488
+        ],
+        "u_mem_B": [
+          0.49358844870431834,
+          0.7828150725091488
+        ],
+        "delta_u_B": [
+          0.20000000914845523,
+          0.5000000080788278
+        ],
+        "previous_command_application_sim_s": 29.950001562014222,
+        "fresh_capture_pose": [
+          17.46420298487384,
+          32.23488093333458,
+          -0.9543308190733302
+        ],
+        "fresh_chunk_id": "chunk_024",
+        "fresh_version": 24,
+        "original_generation": 326,
+        "integration_dt_s": 0.01666666753590107,
+        "next_submit_after_B": 1806,
+        "first_FRESH_solve": {
+          "type": "solve_result",
+          "episode_id": "episode_008_repeat_01",
+          "chunk_id": "chunk_024",
+          "reference_version": 24,
+          "official_generation": 326,
+          "solve_id": "episode_008_repeat_01_solve_000289",
+          "input_state_id": 1800,
+          "input_sim_time_s": 30.033334899693727,
+          "input_host_monotonic_s": 423497.056170147,
+          "input_pose": [
+            17.81382042137447,
+            31.83361282038906,
+            -0.7288348480479749
+          ],
+          "previous_command": [
+            0.2935884395558631,
+            0.282815064430321
+          ],
+          "submit_host_monotonic_s": 423497.057027982,
+          "result_seen_worker_host_monotonic_s": 423497.063328475,
+          "command": [
+            0.49358844870431834,
+            0.7828150725091488
+          ],
+          "official_solve_ms": 5.167019029613584,
+          "prediction_world": [
+            [
+              17.81382042137447,
+              31.83361282038906,
+              -0.7288348480479749
+            ],
+            [
+              17.850639696168486,
+              31.800739783252432,
+              -0.6505533407970601
+            ],
+            [
+              17.90583191457342,
+              31.75873420617743,
+              -0.5222718331256186
+            ],
+            [
+              17.975166964295216,
+              31.718826174216506,
+              -0.36087143765791585
+            ],
+            [
+              18.050014123726278,
+              31.690578999915193,
+              -0.24947104000617132
+            ],
+            [
+              18.12753757658743,
+              31.67082768705386,
+              -0.18807063846523886
+            ]
+          ],
+          "result_generation": 326,
+          "selection": {
+            "nearest_index": 3,
+            "indices": [
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "reference_world": [
+              [
+                18.052570171332658,
+                31.951363573399217,
+                -0.1958485416799891
+              ],
+              [
+                18.21014763932208,
+                31.92769816257525,
+                -0.08916713518203379
+              ],
+              [
+                18.38134774036268,
+                31.91974766649089,
+                0.00676183181702017
+              ],
+              [
+                18.54343279144578,
+                31.925212743747625,
+                0.09483049589096426
+              ],
+              [
+                18.64116527631135,
+                31.935723709086425,
+                0.14986942487655996
+              ]
+            ],
+            "endpoint_repeated": false,
+            "nearest_is_final_row": false,
+            "selection_semantics": "nearest weighted XY/wrapped-yaw pose; next rows; endpoint repetition; sequential yaw unwrap",
+            "index_validation": "independent diagnostic checked against actual official reference"
+          },
+          "solve_start_host_monotonic_s": 423497.057149725,
+          "solve_end_host_monotonic_s": 423497.062321614,
+          "status": "command",
+          "command_available_for_application": true,
+          "seen_in_isaac": {
+            "host_monotonic_ns": 423497072356199,
+            "host_monotonic_s": 423497.072356199,
+            "host_utc": "2026-09-15T09:27:01.466670+00:00",
+            "sim_time_s": 30.10000156983733,
+            "episode_time_s": 30.06666823476553
+          },
+          "seen_sim_time_s": 30.10000156983733
+        }
+      },
+      "schedule": {
+        "pairs": [
+          {
+            "submit_tick": 1806,
+            "application_tick": 1807
+          },
+          {
+            "submit_tick": 1812,
+            "application_tick": 1813
+          },
+          {
+            "submit_tick": 1818,
+            "application_tick": 1819
+          },
+          {
+            "submit_tick": 1824,
+            "application_tick": 1825
+          },
+          {
+            "submit_tick": 1830,
+            "application_tick": 1831
+          },
+          {
+            "submit_tick": 1836,
+            "application_tick": 1837
+          },
+          {
+            "submit_tick": 1842,
+            "application_tick": 1843
+          },
+          {
+            "submit_tick": 1848,
+            "application_tick": 1849
+          },
+          {
+            "submit_tick": 1854,
+            "application_tick": 1855
+          },
+          {
+            "submit_tick": 1860,
+            "application_tick": 1861
+          },
+          {
+            "submit_tick": 1866,
+            "application_tick": 1867
+          },
+          {
+            "submit_tick": 1872,
+            "application_tick": 1873
+          },
+          {
+            "submit_tick": 1878,
+            "application_tick": 1879
+          },
+          {
+            "submit_tick": 1884,
+            "application_tick": 1885
+          },
+          {
+            "submit_tick": 1890,
+            "application_tick": 1891
+          },
+          {
+            "submit_tick": 1896,
+            "application_tick": 1897
+          },
+          {
+            "submit_tick": 1902,
+            "application_tick": 1903
+          },
+          {
+            "submit_tick": 1908,
+            "application_tick": 1909
+          },
+          {
+            "submit_tick": 1914,
+            "application_tick": 1915
+          },
+          {
+            "submit_tick": 1920,
+            "application_tick": 1921
+          },
+          {
+            "submit_tick": 1926,
+            "application_tick": 1927
+          },
+          {
+            "submit_tick": 1932,
+            "application_tick": 1933
+          },
+          {
+            "submit_tick": 1938,
+            "application_tick": 1939
+          },
+          {
+            "submit_tick": 1944,
+            "application_tick": 1945
+          },
+          {
+            "submit_tick": 1950,
+            "application_tick": 1951
+          },
+          {
+            "submit_tick": 1956,
+            "application_tick": 1957
+          },
+          {
+            "submit_tick": 1962,
+            "application_tick": 1963
+          },
+          {
+            "submit_tick": 1968,
+            "application_tick": 1969
+          },
+          {
+            "submit_tick": 1974,
+            "application_tick": 1975
+          },
+          {
+            "submit_tick": 1980,
+            "application_tick": 1981
+          }
+        ],
+        "primary": {
+          "attempted_submit_ticks": [
+            1806,
+            1812,
+            1818,
+            1824,
+            1830,
+            1836,
+            1842,
+            1848,
+            1854
+          ],
+          "accepted_submit_ticks": [
+            1806,
+            1812,
+            1818,
+            1824,
+            1830,
+            1836,
+            1842,
+            1848,
+            1854
+          ],
+          "applications": [
+            {
+              "submit_tick": 1806,
+              "application_tick": 1807
+            },
+            {
+              "submit_tick": 1812,
+              "application_tick": 1813
+            },
+            {
+              "submit_tick": 1818,
+              "application_tick": 1819
+            },
+            {
+              "submit_tick": 1824,
+              "application_tick": 1825
+            },
+            {
+              "submit_tick": 1830,
+              "application_tick": 1831
+            },
+            {
+              "submit_tick": 1836,
+              "application_tick": 1837
+            },
+            {
+              "submit_tick": 1842,
+              "application_tick": 1843
+            },
+            {
+              "submit_tick": 1848,
+              "application_tick": 1849
+            },
+            {
+              "submit_tick": 1854,
+              "application_tick": 1855
+            }
+          ],
+          "complete_primary_exposure": true,
+          "endpoint_inclusive_absolute_tick": 1858
+        },
+        "full": {
+          "attempted_submit_ticks": [
+            1806,
+            1812,
+            1818,
+            1824,
+            1830,
+            1836,
+            1842,
+            1848,
+            1854,
+            1860,
+            1866,
+            1872,
+            1878,
+            1884,
+            1890,
+            1896,
+            1902,
+            1908,
+            1914,
+            1920,
+            1926,
+            1932,
+            1938,
+            1944,
+            1950,
+            1956,
+            1962,
+            1968,
+            1974,
+            1980
+          ],
+          "accepted_submit_ticks": [
+            1806,
+            1812,
+            1818,
+            1824,
+            1830,
+            1836,
+            1842,
+            1848,
+            1854,
+            1860,
+            1866,
+            1872,
+            1878,
+            1884,
+            1890,
+            1896,
+            1902,
+            1908,
+            1914,
+            1920,
+            1926,
+            1932,
+            1938,
+            1944,
+            1950,
+            1956,
+            1962,
+            1968,
+            1974,
+            1980
+          ],
+          "applications": [
+            {
+              "submit_tick": 1806,
+              "application_tick": 1807
+            },
+            {
+              "submit_tick": 1812,
+              "application_tick": 1813
+            },
+            {
+              "submit_tick": 1818,
+              "application_tick": 1819
+            },
+            {
+              "submit_tick": 1824,
+              "application_tick": 1825
+            },
+            {
+              "submit_tick": 1830,
+              "application_tick": 1831
+            },
+            {
+              "submit_tick": 1836,
+              "application_tick": 1837
+            },
+            {
+              "submit_tick": 1842,
+              "application_tick": 1843
+            },
+            {
+              "submit_tick": 1848,
+              "application_tick": 1849
+            },
+            {
+              "submit_tick": 1854,
+              "application_tick": 1855
+            },
+            {
+              "submit_tick": 1860,
+              "application_tick": 1861
+            },
+            {
+              "submit_tick": 1866,
+              "application_tick": 1867
+            },
+            {
+              "submit_tick": 1872,
+              "application_tick": 1873
+            },
+            {
+              "submit_tick": 1878,
+              "application_tick": 1879
+            },
+            {
+              "submit_tick": 1884,
+              "application_tick": 1885
+            },
+            {
+              "submit_tick": 1890,
+              "application_tick": 1891
+            },
+            {
+              "submit_tick": 1896,
+              "application_tick": 1897
+            },
+            {
+              "submit_tick": 1902,
+              "application_tick": 1903
+            },
+            {
+              "submit_tick": 1908,
+              "application_tick": 1909
+            },
+            {
+              "submit_tick": 1914,
+              "application_tick": 1915
+            },
+            {
+              "submit_tick": 1920,
+              "application_tick": 1921
+            },
+            {
+              "submit_tick": 1926,
+              "application_tick": 1927
+            },
+            {
+              "submit_tick": 1932,
+              "application_tick": 1933
+            },
+            {
+              "submit_tick": 1938,
+              "application_tick": 1939
+            },
+            {
+              "submit_tick": 1944,
+              "application_tick": 1945
+            },
+            {
+              "submit_tick": 1950,
+              "application_tick": 1951
+            },
+            {
+              "submit_tick": 1956,
+              "application_tick": 1957
+            },
+            {
+              "submit_tick": 1962,
+              "application_tick": 1963
+            },
+            {
+              "submit_tick": 1968,
+              "application_tick": 1969
+            },
+            {
+              "submit_tick": 1974,
+              "application_tick": 1975
+            },
+            {
+              "submit_tick": 1980,
+              "application_tick": 1981
+            }
+          ],
+          "complete_primary_exposure": true,
+          "endpoint_inclusive_absolute_tick": 1984
+        },
+        "B_tick": 1804,
+        "integration_steps": 180,
+        "integration_dt_s": 0.01666666753590107,
+        "provenance": {
+          "context_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/episodes/episode_008_repeat_01/handoffs/handoff_023/context.json",
+          "context_sha256": "7ad31d1a334280c83dda3269a61449bb018f5bad3e0c0440e12c157cdc7d609b",
+          "commands_sha256": "9fcc2fbd284e9e2a2dc126bb34f8b41b142d3ba2d7682e2b55c5a972c17bf2e0",
+          "events_sha256": "9e470b84d3f610a47307306ef5e633c2f369be34394c87b2106d061bc49b6c53",
+          "metadata_sha256": "432f769e1f38723c570883460b9e4f3ccdb7958ad5b367ac76ed5342ad47e99b",
+          "first_pair": {
+            "submit_tick": 1806,
+            "application_tick": 1807
+          },
+          "first_result_id": "episode_008_repeat_01_solve_000290"
+        },
+        "rule": "repeat first saved post-cut application lag on original absolute 6-tick grid",
+        "release_lag_ticks": 1
+      },
+      "reuse": {
+        "source_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023",
+        "copies": {
+          "common_state.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/common_state.json",
+            "sha256": "679e90d730e7ebdfcfe2290ac06b4d480566a0bfd02bf8384b4df46f3ee3cc94"
+          },
+          "source_manifest.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/source_manifest.json",
+            "sha256": "8c81ff8eb16426545f99c0297812165f8b4d19e8a5b1927d6bcbfd61c5136de7"
+          },
+          "schedule.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/schedule.json",
+            "sha256": "dc3ade3d6c33bfd654357bb6053a8d26171d8d64b333f5f10963b8cef7583f11"
+          },
+          "scenario.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/scenario.json",
+            "sha256": "0404f1e53c8fae3f1b689000e65c4b458ec1f31ba92676c4507e5846fce9b59b"
+          },
+          "source_audit.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/source_audit.json",
+            "sha256": "a766875a58f714b5c9149912d737b7bea3a642be374d45106584399a8fb1ca92"
+          },
+          "metric_protocol.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/metric_protocol.json",
+            "sha256": "9120d8cb7f3c28beaeac4299d175438fc8e1660f2d9b427e835e409a5d411e31"
+          },
+          "recorded_old_to_B.npy": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/recorded_old_to_B.npy",
+            "sha256": "abd4ad04950f1620f3b24525ca32e4046ba9ecf6f569675e8308a965dc2f0720"
+          },
+          "restoration_preflight.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/restoration_preflight.json",
+            "sha256": "b650b307456d6ab2b1588ea963749bfacb65c4491739455d98a300e5a42fe591"
+          }
+        },
+        "methods": {
+          "M0_NATIVE": {
+            "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/methods/M0_NATIVE",
+            "hashes_sha256": "daed743714f760443aec16804c9b9d2181cfbdf9f11080cb08d3cf0928088edd",
+            "reference": {
+              "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/references/M0_NATIVE_world.npy",
+              "world_sha256": "9b5c4fe575455d31eeba5942160c944121c14e3b5b85a0f80f33a2626095138b",
+              "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/references/M0_NATIVE_local.npy",
+              "local_sha256": "ba52161d8e7ba1f0619e11cd0b93da29d201e70074d76160d374fe1f6c87517f",
+              "safety": {
+                "minimum_clearance_m": 0.1313492849344136,
+                "native_clearance_m": 0.1313492849344136,
+                "union_minus_parts_m": 0.0,
+                "limiting_geometry": "Hospital",
+                "cart_present": false,
+                "first_minimum_segment": 1,
+                "minimum_path_xy": [
+                  17.64411592170996,
+                  32.111138424877936
+                ],
+                "nearest_obstacle_xy": [
+                  17.80364016,
+                  32.40155944
+                ],
+                "per_segment_clearance_m": [
+                  0.13142389070542387,
+                  0.1313492849344136,
+                  0.15763803678500848,
+                  0.21340746257456594,
+                  0.23347732000244142,
+                  0.25828624488941665,
+                  0.31008545809320814,
+                  0.39044472867304786,
+                  0.4487102555182106
+                ],
+                "workspace_known": true,
+                "clearance_valid": true,
+                "required_edge_clearance_m": 0.05,
+                "footprint_radius_m": 0.2,
+                "numerical_tolerance_m": 1e-07,
+                "query": "full union direct GEOS; no cart in this source; no B connector"
+              },
+              "descriptor": {
+                "first_node_displacement_m": 0.0,
+                "endpoint_displacement_m": 0.0,
+                "per_node_displacement_m": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "per_node_log_correction": [
+                  [
+                    0.0,
+                    -3.552713678800501e-15,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    -3.552713678800501e-15,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -8.881784197001252e-16,
+                    -3.552713678800501e-15,
+                    0.0
+                  ],
+                  [
+                    -4.440892098500626e-16,
+                    -3.552713678800501e-15,
+                    0.0
+                  ],
+                  [
+                    1.1934897514720433e-15,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    8.881784197001252e-16,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -8.881784197001252e-16,
+                    0.0,
+                    0.0
+                  ]
+                ],
+                "relative_edge_log": [
+                  [
+                    -1.1058862159352145e-17,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -8.131516293641283e-19,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -1.3010426069826053e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    6.7220534694101275e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -1.8431436932253575e-18,
+                    -8.673617379884035e-19,
+                    0.0
+                  ],
+                  [
+                    6.071532165918825e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.2793585635328952e-17,
+                    -8.673617379884035e-19,
+                    0.0
+                  ],
+                  [
+                    -5.692061405548898e-18,
+                    4.336808689942018e-19,
+                    0.0
+                  ],
+                  [
+                    2.0328790734103208e-19,
+                    0.0,
+                    0.0
+                  ]
+                ],
+                "relative_translation_RMS_m": 6.732248083745333e-18,
+                "relative_yaw_RMS_rad": 0.0,
+                "relative_translation_max_m": 1.2822954019765554e-17,
+                "relative_yaw_max_rad": 0.0,
+                "rigid_fit": {
+                  "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+                  "transform": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "translation_RMS_m": 0.0,
+                  "yaw_RMS_rad": 0.0
+                },
+                "total_XY_arc_m": 1.2613384789876216,
+                "segment_length_min_m": 0.04761642331757588,
+                "segment_length_max_m": 0.1713846112820498,
+                "maximum_lateral_node_correction_m": 3.552713678800501e-15,
+                "maximum_lateral_B_frame_m": 0.6531963407658665,
+                "maximum_yaw_correction_rad": 0.0,
+                "self_intersection": false,
+                "B_to_first_node_position_m": 0.5145618109482366,
+                "B_to_first_node_yaw_rad": 0.05918130728881943,
+                "B_projection": {
+                  "progress": 2.972584594808571,
+                  "segment_index": 2,
+                  "alpha": 0.9725845948085713,
+                  "projected_pose": [
+                    17.89727685765006,
+                    31.99213199452277,
+                    -0.32429547803296455
+                  ],
+                  "distance_m": 0.1846831899774071,
+                  "yaw_error_rad": 0.3856850314029918
+                },
+                "first_reliable_chord_relative_B_rad": 0.13213043456950135,
+                "reliable_chord_minimum_length_m": 0.02
+              },
+              "status": "REFERENCE_GEOMETRY_SAFE"
+            }
+          },
+          "FULL_LOCAL_SE2": {
+            "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/methods/FULL_LOCAL_SE2",
+            "hashes_sha256": "06734a150dd9e87b226344aec3ff9bfae230a6918613b70494f2c0c2111f1ea6",
+            "reference": {
+              "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/references/FULL_LOCAL_SE2_world.npy",
+              "world_sha256": "fd388a63b0fa8c1bf37dc6ec184b1f08a90d1805395c0deb7b9346a7aa6d602b",
+              "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/references/FULL_LOCAL_SE2_local.npy",
+              "local_sha256": "26f91a7fb59edf67a95b1d2e989411c8393fa93e3e54de9a87367882086393cf",
+              "safety": {
+                "minimum_clearance_m": 0.36937222168828004,
+                "native_clearance_m": 0.36937222168828004,
+                "union_minus_parts_m": 0.0,
+                "limiting_geometry": "Hospital",
+                "cart_present": false,
+                "first_minimum_segment": 5,
+                "minimum_path_xy": [
+                  18.403245207618976,
+                  31.86460565562034
+                ],
+                "nearest_obstacle_xy": [
+                  18.17395644,
+                  32.38576915
+                ],
+                "per_segment_clearance_m": [
+                  0.39560881377924767,
+                  0.4275261213160055,
+                  0.42586340083674296,
+                  0.39738501149933964,
+                  0.37140139040863135,
+                  0.36937222168828004,
+                  0.3718620610247895,
+                  0.41344009534453935,
+                  0.4553694141762629
+                ],
+                "workspace_known": true,
+                "clearance_valid": true,
+                "required_edge_clearance_m": 0.05,
+                "footprint_radius_m": 0.2,
+                "numerical_tolerance_m": 1e-07,
+                "query": "full union direct GEOS; no cart in this source; no B connector"
+              },
+              "descriptor": {
+                "first_node_displacement_m": 0.5444559916232524,
+                "endpoint_displacement_m": 0.002299665648744746,
+                "per_node_displacement_m": [
+                  0.5444559916232524,
+                  0.5158609796056732,
+                  0.46509786817803495,
+                  0.3846142355149488,
+                  0.2786521172407586,
+                  0.16858447389279133,
+                  0.07830121746103759,
+                  0.02653515787297255,
+                  0.007425151430712635,
+                  0.002299665648744746
+                ],
+                "per_node_log_correction": [
+                  [
+                    0.5205315804709929,
+                    -0.16415863936359554,
+                    0.24348575267736106
+                  ],
+                  [
+                    0.48458594296838614,
+                    -0.18042340618315866,
+                    0.23836575042734331
+                  ],
+                  [
+                    0.43667701568354134,
+                    -0.16288787773126787,
+                    0.22356670607479012
+                  ],
+                  [
+                    0.35151266274101806,
+                    -0.15759826095913676,
+                    0.19512718870554302
+                  ],
+                  [
+                    0.24962250118866972,
+                    -0.12443332805489678,
+                    0.15117332287179508
+                  ],
+                  [
+                    0.14964124617229724,
+                    -0.07779009318894582,
+                    0.09868486265319776
+                  ],
+                  [
+                    0.0696030175602698,
+                    -0.03588517886786214,
+                    0.04936970528903606
+                  ],
+                  [
+                    0.02372003207370017,
+                    -0.01189508786982838,
+                    0.017724393256663085
+                  ],
+                  [
+                    0.006658684645500271,
+                    -0.003285561408304309,
+                    0.005136280922865222
+                  ],
+                  [
+                    0.002070071649169743,
+                    -0.0010016319739491826,
+                    0.0016139184968442244
+                  ]
+                ],
+                "relative_edge_log": [
+                  [
+                    -0.013804747332102617,
+                    0.005936702981906865,
+                    -0.005120002250017741
+                  ],
+                  [
+                    -0.035221114175509334,
+                    0.015792450998705344,
+                    -0.014799044352553192
+                  ],
+                  [
+                    -0.0597170677869289,
+                    0.03146109886088969,
+                    -0.028439517369247103
+                  ],
+                  [
+                    -0.08061237373638483,
+                    0.04578182721928876,
+                    -0.04395386583374794
+                  ],
+                  [
+                    -0.08639030230400126,
+                    0.04880842559340489,
+                    -0.05248846021859732
+                  ],
+                  [
+                    -0.07271855419595483,
+                    0.03906984063084172,
+                    -0.0493151573641617
+                  ],
+                  [
+                    -0.042939419807704896,
+                    0.02198646373792653,
+                    -0.031645312032372974
+                  ],
+                  [
+                    -0.01644522818746726,
+                    0.008156055692940256,
+                    -0.012588112333797863
+                  ],
+                  [
+                    -0.004512304502429103,
+                    0.002197658277260167,
+                    -0.0035223624260209974
+                  ]
+                ],
+                "relative_translation_RMS_m": 0.061657969075798465,
+                "relative_yaw_RMS_rad": 0.03222368209787116,
+                "relative_translation_max_m": 0.09922472847573667,
+                "relative_yaw_max_rad": 0.05248846021859732,
+                "rigid_fit": {
+                  "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+                  "transform": [
+                    15.425863302105206,
+                    -4.823220119482482,
+                    0.4367812929198551
+                  ],
+                  "translation_RMS_m": 0.1493544539619306,
+                  "yaw_RMS_rad": 0.32830696790526004
+                },
+                "total_XY_arc_m": 0.8806001359993926,
+                "segment_length_min_m": 0.043123682219463735,
+                "segment_length_max_m": 0.1524676532281622,
+                "maximum_lateral_node_correction_m": 0.12241391754553987,
+                "maximum_lateral_B_frame_m": 0.6541631780854331,
+                "maximum_yaw_correction_rad": 0.24348575267736106,
+                "self_intersection": false,
+                "B_to_first_node_position_m": 0.03201292186660816,
+                "B_to_first_node_yaw_rad": 0.3026670599661805,
+                "B_projection": {
+                  "progress": 0.0,
+                  "segment_index": 0,
+                  "alpha": 0.0,
+                  "projected_pose": [
+                    17.856947416905776,
+                    31.805951256243098,
+                    -0.4073134494697759
+                  ],
+                  "distance_m": 0.03201292186660536,
+                  "yaw_error_rad": 0.3026670599661805
+                },
+                "first_reliable_chord_relative_B_rad": 0.4102851470825799,
+                "reliable_chord_minimum_length_m": 0.02
+              },
+              "status": "REFERENCE_GEOMETRY_SAFE"
+            }
+          }
+        }
+      }
+    },
+    "episode_013_repeat_00/handoff_020": {
+      "common_state": {
+        "B": [
+          19.668567955248744,
+          8.99227202834442,
+          -1.3595769416513406
+        ],
+        "B_tick": 1524,
+        "B_sim_s": 25.433334659785032,
+        "u_minus": [
+          0.3576412147149868,
+          0.036939556732088985
+        ],
+        "u_B_plus": [
+          0.5576412227151519,
+          -0.4630604521533619
+        ],
+        "u_mem_B": [
+          0.5576412227151519,
+          -0.4630604521533619
+        ],
+        "delta_u_B": [
+          0.20000000800016515,
+          -0.5000000088854508
+        ],
+        "previous_command_application_sim_s": 25.25000131689012,
+        "fresh_capture_pose": [
+          19.583536800537207,
+          9.408335026546553,
+          -1.371401334560742
+        ],
+        "fresh_chunk_id": "chunk_021",
+        "fresh_version": 21,
+        "original_generation": 466,
+        "integration_dt_s": 0.01666666753590107,
+        "next_submit_after_B": 1524,
+        "first_FRESH_solve": {
+          "type": "solve_result",
+          "episode_id": "episode_013_repeat_00",
+          "chunk_id": "chunk_021",
+          "reference_version": 21,
+          "official_generation": 466,
+          "solve_id": "episode_013_repeat_00_solve_000242",
+          "input_state_id": 1518,
+          "input_sim_time_s": 25.333334654569626,
+          "input_host_monotonic_s": 423659.950236535,
+          "input_pose": [
+            19.66113452757607,
+            9.027255098773363,
+            -1.3632708975172037
+          ],
+          "previous_command": [
+            0.3576412147149868,
+            0.036939556732088985
+          ],
+          "submit_host_monotonic_s": 423659.951107053,
+          "result_seen_worker_host_monotonic_s": 423659.959220517,
+          "command": [
+            0.5576412227151519,
+            -0.4630604521533619
+          ],
+          "official_solve_ms": 6.364353990647942,
+          "prediction_world": [
+            [
+              19.66113452757607,
+              9.027255098773363,
+              -1.3632708975172037
+            ],
+            [
+              19.672624114765476,
+              8.972687464419934,
+              -1.4095769427325398
+            ],
+            [
+              19.68478591550665,
+              8.897905829484761,
+              -1.5058829887048848
+            ],
+            [
+              19.68997533632684,
+              8.818074319275118,
+              -1.6521890348157031
+            ],
+            [
+              19.68347110669009,
+              8.738339163232173,
+              -1.787058975585014
+            ],
+            [
+              19.6663046397044,
+              8.660202664109358,
+              -1.8719289312798675
+            ]
+          ],
+          "result_generation": 466,
+          "selection": {
+            "nearest_index": 2,
+            "indices": [
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "reference_world": [
+              [
+                19.477663716327225,
+                8.93119956979153,
+                -1.9612921722301146
+              ],
+              [
+                19.409100015727887,
+                8.79222697663467,
+                -2.0945940859683656
+              ],
+              [
+                19.323270879196297,
+                8.658734596986658,
+                -2.2310262568362855
+              ],
+              [
+                19.21994416970937,
+                8.540337783293683,
+                -2.3562155015834474
+              ],
+              [
+                19.108076724956195,
+                8.437222374894915,
+                -2.4870991952785158
+              ]
+            ],
+            "endpoint_repeated": false,
+            "nearest_is_final_row": false,
+            "selection_semantics": "nearest weighted XY/wrapped-yaw pose; next rows; endpoint repetition; sequential yaw unwrap",
+            "index_validation": "independent diagnostic checked against actual official reference"
+          },
+          "solve_start_host_monotonic_s": 423659.951215551,
+          "solve_end_host_monotonic_s": 423659.957585224,
+          "status": "command",
+          "command_available_for_application": true,
+          "seen_in_isaac": {
+            "host_monotonic_ns": 423659969415139,
+            "host_monotonic_s": 423659.969415139,
+            "host_utc": "2026-09-15T09:29:44.363729+00:00",
+            "sim_time_s": 25.433334659785032,
+            "episode_time_s": 25.40000132471323
+          },
+          "seen_sim_time_s": 25.433334659785032
+        }
+      },
+      "schedule": {
+        "pairs": [
+          {
+            "submit_tick": 1524,
+            "application_tick": 1525
+          },
+          {
+            "submit_tick": 1530,
+            "application_tick": 1531
+          },
+          {
+            "submit_tick": 1536,
+            "application_tick": 1537
+          },
+          {
+            "submit_tick": 1542,
+            "application_tick": 1543
+          },
+          {
+            "submit_tick": 1548,
+            "application_tick": 1549
+          },
+          {
+            "submit_tick": 1554,
+            "application_tick": 1555
+          },
+          {
+            "submit_tick": 1560,
+            "application_tick": 1561
+          },
+          {
+            "submit_tick": 1566,
+            "application_tick": 1567
+          },
+          {
+            "submit_tick": 1572,
+            "application_tick": 1573
+          },
+          {
+            "submit_tick": 1578,
+            "application_tick": 1579
+          },
+          {
+            "submit_tick": 1584,
+            "application_tick": 1585
+          },
+          {
+            "submit_tick": 1590,
+            "application_tick": 1591
+          },
+          {
+            "submit_tick": 1596,
+            "application_tick": 1597
+          },
+          {
+            "submit_tick": 1602,
+            "application_tick": 1603
+          },
+          {
+            "submit_tick": 1608,
+            "application_tick": 1609
+          },
+          {
+            "submit_tick": 1614,
+            "application_tick": 1615
+          },
+          {
+            "submit_tick": 1620,
+            "application_tick": 1621
+          },
+          {
+            "submit_tick": 1626,
+            "application_tick": 1627
+          },
+          {
+            "submit_tick": 1632,
+            "application_tick": 1633
+          },
+          {
+            "submit_tick": 1638,
+            "application_tick": 1639
+          },
+          {
+            "submit_tick": 1644,
+            "application_tick": 1645
+          },
+          {
+            "submit_tick": 1650,
+            "application_tick": 1651
+          },
+          {
+            "submit_tick": 1656,
+            "application_tick": 1657
+          },
+          {
+            "submit_tick": 1662,
+            "application_tick": 1663
+          },
+          {
+            "submit_tick": 1668,
+            "application_tick": 1669
+          },
+          {
+            "submit_tick": 1674,
+            "application_tick": 1675
+          },
+          {
+            "submit_tick": 1680,
+            "application_tick": 1681
+          },
+          {
+            "submit_tick": 1686,
+            "application_tick": 1687
+          },
+          {
+            "submit_tick": 1692,
+            "application_tick": 1693
+          },
+          {
+            "submit_tick": 1698,
+            "application_tick": 1699
+          }
+        ],
+        "primary": {
+          "attempted_submit_ticks": [
+            1524,
+            1530,
+            1536,
+            1542,
+            1548,
+            1554,
+            1560,
+            1566,
+            1572,
+            1578
+          ],
+          "accepted_submit_ticks": [
+            1524,
+            1530,
+            1536,
+            1542,
+            1548,
+            1554,
+            1560,
+            1566,
+            1572,
+            1578
+          ],
+          "applications": [
+            {
+              "submit_tick": 1524,
+              "application_tick": 1525
+            },
+            {
+              "submit_tick": 1530,
+              "application_tick": 1531
+            },
+            {
+              "submit_tick": 1536,
+              "application_tick": 1537
+            },
+            {
+              "submit_tick": 1542,
+              "application_tick": 1543
+            },
+            {
+              "submit_tick": 1548,
+              "application_tick": 1549
+            },
+            {
+              "submit_tick": 1554,
+              "application_tick": 1555
+            },
+            {
+              "submit_tick": 1560,
+              "application_tick": 1561
+            },
+            {
+              "submit_tick": 1566,
+              "application_tick": 1567
+            },
+            {
+              "submit_tick": 1572,
+              "application_tick": 1573
+            }
+          ],
+          "complete_primary_exposure": true,
+          "endpoint_inclusive_absolute_tick": 1578
+        },
+        "full": {
+          "attempted_submit_ticks": [
+            1524,
+            1530,
+            1536,
+            1542,
+            1548,
+            1554,
+            1560,
+            1566,
+            1572,
+            1578,
+            1584,
+            1590,
+            1596,
+            1602,
+            1608,
+            1614,
+            1620,
+            1626,
+            1632,
+            1638,
+            1644,
+            1650,
+            1656,
+            1662,
+            1668,
+            1674,
+            1680,
+            1686,
+            1692,
+            1698
+          ],
+          "accepted_submit_ticks": [
+            1524,
+            1530,
+            1536,
+            1542,
+            1548,
+            1554,
+            1560,
+            1566,
+            1572,
+            1578,
+            1584,
+            1590,
+            1596,
+            1602,
+            1608,
+            1614,
+            1620,
+            1626,
+            1632,
+            1638,
+            1644,
+            1650,
+            1656,
+            1662,
+            1668,
+            1674,
+            1680,
+            1686,
+            1692,
+            1698
+          ],
+          "applications": [
+            {
+              "submit_tick": 1524,
+              "application_tick": 1525
+            },
+            {
+              "submit_tick": 1530,
+              "application_tick": 1531
+            },
+            {
+              "submit_tick": 1536,
+              "application_tick": 1537
+            },
+            {
+              "submit_tick": 1542,
+              "application_tick": 1543
+            },
+            {
+              "submit_tick": 1548,
+              "application_tick": 1549
+            },
+            {
+              "submit_tick": 1554,
+              "application_tick": 1555
+            },
+            {
+              "submit_tick": 1560,
+              "application_tick": 1561
+            },
+            {
+              "submit_tick": 1566,
+              "application_tick": 1567
+            },
+            {
+              "submit_tick": 1572,
+              "application_tick": 1573
+            },
+            {
+              "submit_tick": 1578,
+              "application_tick": 1579
+            },
+            {
+              "submit_tick": 1584,
+              "application_tick": 1585
+            },
+            {
+              "submit_tick": 1590,
+              "application_tick": 1591
+            },
+            {
+              "submit_tick": 1596,
+              "application_tick": 1597
+            },
+            {
+              "submit_tick": 1602,
+              "application_tick": 1603
+            },
+            {
+              "submit_tick": 1608,
+              "application_tick": 1609
+            },
+            {
+              "submit_tick": 1614,
+              "application_tick": 1615
+            },
+            {
+              "submit_tick": 1620,
+              "application_tick": 1621
+            },
+            {
+              "submit_tick": 1626,
+              "application_tick": 1627
+            },
+            {
+              "submit_tick": 1632,
+              "application_tick": 1633
+            },
+            {
+              "submit_tick": 1638,
+              "application_tick": 1639
+            },
+            {
+              "submit_tick": 1644,
+              "application_tick": 1645
+            },
+            {
+              "submit_tick": 1650,
+              "application_tick": 1651
+            },
+            {
+              "submit_tick": 1656,
+              "application_tick": 1657
+            },
+            {
+              "submit_tick": 1662,
+              "application_tick": 1663
+            },
+            {
+              "submit_tick": 1668,
+              "application_tick": 1669
+            },
+            {
+              "submit_tick": 1674,
+              "application_tick": 1675
+            },
+            {
+              "submit_tick": 1680,
+              "application_tick": 1681
+            },
+            {
+              "submit_tick": 1686,
+              "application_tick": 1687
+            },
+            {
+              "submit_tick": 1692,
+              "application_tick": 1693
+            },
+            {
+              "submit_tick": 1698,
+              "application_tick": 1699
+            }
+          ],
+          "complete_primary_exposure": true,
+          "endpoint_inclusive_absolute_tick": 1704
+        },
+        "B_tick": 1524,
+        "integration_steps": 180,
+        "integration_dt_s": 0.01666666753590107,
+        "provenance": {
+          "context_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/episodes/episode_013_repeat_00/handoffs/handoff_020/context.json",
+          "context_sha256": "9ca8f10380cba89d92b63c35a6dce556bf9e56497d7642825888176fe8d406e0",
+          "commands_sha256": "ba216437c3cdcd74f02a04f3df50405cd91446cc5d91502065a03f7bc4087610",
+          "events_sha256": "0e58cedad470f913209be3c4078a2e7097813be65df9c75144e6f66039640516",
+          "metadata_sha256": "5f897a4fb7481e15257783814cf7d4be866d168c9d50c44757ef4c0eb1c385ea",
+          "first_pair": {
+            "submit_tick": 1524,
+            "application_tick": 1525
+          },
+          "first_result_id": "episode_013_repeat_00_solve_000243"
+        },
+        "rule": "repeat first saved post-cut application lag on original absolute 6-tick grid",
+        "release_lag_ticks": 1
+      },
+      "reuse": {
+        "source_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020",
+        "copies": {
+          "common_state.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/common_state.json",
+            "sha256": "ac3904a58f1a908b41b73a2bdac421909cd33f746d0f44d85fadf945ac46f8b4"
+          },
+          "source_manifest.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/source_manifest.json",
+            "sha256": "88d71ad79628c0934c97cb916e444d8263ceb00c2a4a7cc6a32ec69683be01f8"
+          },
+          "schedule.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/schedule.json",
+            "sha256": "a373d47f22606a5ab32836c7ca52abdf937a5ab099fb65d6ea35a09123c33498"
+          },
+          "scenario.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/scenario.json",
+            "sha256": "f88b3be6214de69ba9336a16811bf685dc32a6c97c5f286de51e6e2e8f380c3b"
+          },
+          "source_audit.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/source_audit.json",
+            "sha256": "00d606381b1eeda4e8186c26817281c56c2e1b6a7b66305bc933d2c5894eb60b"
+          },
+          "metric_protocol.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/metric_protocol.json",
+            "sha256": "9120d8cb7f3c28beaeac4299d175438fc8e1660f2d9b427e835e409a5d411e31"
+          },
+          "recorded_old_to_B.npy": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/recorded_old_to_B.npy",
+            "sha256": "db06a709d67c53871c10b11a7cd0b3991c0c0b37b4d28b164e447c752bc35a77"
+          },
+          "restoration_preflight.json": {
+            "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/restoration_preflight.json",
+            "sha256": "a70c9d492e86862699a81faac926717194a625b4787249c4123f58f800fd3eca"
+          }
+        },
+        "methods": {
+          "M0_NATIVE": {
+            "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/methods/M0_NATIVE",
+            "hashes_sha256": "d3b8f5f44adeac48dc1a62fe0c92974b00faa9676b4baca86293927ea0758d21",
+            "reference": {
+              "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/references/M0_NATIVE_world.npy",
+              "world_sha256": "78a5d47e41728e0d82851e14507d60354e9afe85dd4557fd7782e970c58e4d36",
+              "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/references/M0_NATIVE_local.npy",
+              "local_sha256": "f5585ef9f7ff2eeeae9992640a68cf65b6b8510baacf8ff9fd2886aa40df7552",
+              "safety": {
+                "minimum_clearance_m": 0.918436077894875,
+                "native_clearance_m": 0.918436077894875,
+                "union_minus_parts_m": 0.0,
+                "limiting_geometry": "Hospital",
+                "cart_present": false,
+                "first_minimum_segment": 0,
+                "minimum_path_xy": [
+                  19.58011869493645,
+                  9.376912477706295
+                ],
+                "nearest_obstacle_xy": [
+                  19.714269776523743,
+                  10.487274016866325
+                ],
+                "per_segment_clearance_m": [
+                  0.918436077894875,
+                  0.9912529032055446,
+                  1.0186354682792036,
+                  1.0720853734825715,
+                  1.1550673753993324,
+                  1.2408965256116788,
+                  1.3442232472323188,
+                  1.4560907025531122,
+                  1.549120083328812
+                ],
+                "workspace_known": true,
+                "clearance_valid": true,
+                "required_edge_clearance_m": 0.05,
+                "footprint_radius_m": 0.2,
+                "numerical_tolerance_m": 1e-07,
+                "query": "full union direct GEOS; no cart in this source; no B connector"
+              },
+              "descriptor": {
+                "first_node_displacement_m": 0.0,
+                "endpoint_displacement_m": 0.0,
+                "per_node_displacement_m": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "per_node_log_correction": [
+                  [
+                    -3.552713678800501e-15,
+                    -4.218847493575595e-15,
+                    0.0
+                  ],
+                  [
+                    -3.552713678800501e-15,
+                    -3.1086244689504383e-15,
+                    0.0
+                  ],
+                  [
+                    -3.552713678800501e-15,
+                    -2.6645352591003757e-15,
+                    0.0
+                  ],
+                  [
+                    -3.552713678800501e-15,
+                    -1.3322676295501878e-15,
+                    0.0
+                  ],
+                  [
+                    8.881784197001252e-16,
+                    8.881784197001252e-16,
+                    0.0
+                  ],
+                  [
+                    1.7763568394002505e-15,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -8.881784197001252e-16,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    8.881784197001252e-16,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -8.881784197001252e-16,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -8.881784197001252e-16,
+                    0.0,
+                    0.0
+                  ]
+                ],
+                "relative_edge_log": [
+                  [
+                    -1.1587410718438829e-17,
+                    -4.336808689942018e-19,
+                    0.0
+                  ],
+                  [
+                    4.0115480381963664e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    9.974659986866641e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.1709383462843448e-17,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -9.974659986866641e-18,
+                    8.673617379884035e-19,
+                    0.0
+                  ],
+                  [
+                    -4.553649124439119e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    3.577867169202165e-18,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    -7.589415207398531e-19,
+                    -8.673617379884035e-19,
+                    0.0
+                  ],
+                  [
+                    6.762711050878334e-18,
+                    -2.168404344971009e-19,
+                    0.0
+                  ]
+                ],
+                "relative_translation_RMS_m": 7.944563396614263e-18,
+                "relative_yaw_RMS_rad": 0.0,
+                "relative_translation_max_m": 1.1709383462843448e-17,
+                "relative_yaw_max_rad": 0.0,
+                "rigid_fit": {
+                  "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+                  "transform": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "translation_RMS_m": 0.0,
+                  "yaw_RMS_rad": 0.0
+                },
+                "total_XY_arc_m": 1.28328641024781,
+                "segment_length_min_m": 0.08791360650109084,
+                "segment_length_max_m": 0.15870367387633805,
+                "maximum_lateral_node_correction_m": 4.218847493575595e-15,
+                "maximum_lateral_B_frame_m": 0.8526556493970507,
+                "maximum_yaw_correction_rad": 0.0,
+                "self_intersection": false,
+                "B_to_first_node_position_m": 0.39467904293881345,
+                "B_to_first_node_yaw_rad": 0.32863994800507434,
+                "B_projection": {
+                  "progress": 2.220541549410726,
+                  "segment_index": 2,
+                  "alpha": 0.22054154941072632,
+                  "projected_pose": [
+                    19.516333811852085,
+                    9.044315276940615,
+                    -1.8652517646249573
+                  ],
+                  "distance_m": 0.16088422588979834,
+                  "yaw_error_rad": 0.5056748229736168
+                },
+                "first_reliable_chord_relative_B_rad": -0.34294727751152143,
+                "reliable_chord_minimum_length_m": 0.02
+              },
+              "status": "REFERENCE_GEOMETRY_SAFE"
+            }
+          },
+          "FULL_LOCAL_SE2": {
+            "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/methods/FULL_LOCAL_SE2",
+            "hashes_sha256": "07b3651d2310be8614d5aec703643a1614b9421c768df1131196c3da45e29b36",
+            "reference": {
+              "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/references/FULL_LOCAL_SE2_world.npy",
+              "world_sha256": "e66214e4c888534914c80a1da5dc24934eff03e65f43f0ac50d10d0943a8d6a4",
+              "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/references/FULL_LOCAL_SE2_local.npy",
+              "local_sha256": "a0027f68e95ac618f6ccd667cbc6fd5fa2270ffbf1db1fdd34a16b86aa892c48",
+              "safety": {
+                "minimum_clearance_m": 0.8831121471232743,
+                "native_clearance_m": 0.883112143106348,
+                "union_minus_parts_m": 4.016926347105709e-09,
+                "limiting_geometry": "Hospital",
+                "cart_present": false,
+                "first_minimum_segment": 0,
+                "minimum_path_xy": [
+                  19.6647521622555,
+                  8.964921075474223
+                ],
+                "nearest_obstacle_xy": [
+                  20.74591059,
+                  9.02994705
+                ],
+                "per_segment_clearance_m": [
+                  0.8831121471232743,
+                  0.9197957643756913,
+                  0.9576308993686173,
+                  1.0178558339168056,
+                  1.102570134102579,
+                  1.207109091454861,
+                  1.3267602660616986,
+                  1.4492711023951577,
+                  1.5470216102968788
+                ],
+                "workspace_known": true,
+                "clearance_valid": true,
+                "required_edge_clearance_m": 0.05,
+                "footprint_radius_m": 0.2,
+                "numerical_tolerance_m": 1e-07,
+                "query": "full union direct GEOS; no cart in this source; no B connector"
+              },
+              "descriptor": {
+                "first_node_displacement_m": 0.4205945069821929,
+                "endpoint_displacement_m": 0.0029808544854047535,
+                "per_node_displacement_m": [
+                  0.4205945069821929,
+                  0.4097241809825167,
+                  0.3788238663669242,
+                  0.3225589685934975,
+                  0.2436112073860063,
+                  0.15603076391901685,
+                  0.08092900698534425,
+                  0.03210647871355696,
+                  0.010018044847154128,
+                  0.0029808544854047535
+                ],
+                "per_node_log_correction": [
+                  [
+                    0.39991526369165215,
+                    0.1302654014647235,
+                    0.010266024600997348
+                  ],
+                  [
+                    0.3829433602171669,
+                    0.145702080691067,
+                    0.007604395505309114
+                  ],
+                  [
+                    0.33652585216251263,
+                    0.17394803880727655,
+                    0.001996098948191083
+                  ],
+                  [
+                    0.2647868081133524,
+                    0.18420781475343626,
+                    -0.005728727272075851
+                  ],
+                  [
+                    0.1787276237998109,
+                    0.16554031629115182,
+                    -0.012227844584741021
+                  ],
+                  [
+                    0.09876110023632233,
+                    0.12079832033725303,
+                    -0.013861629322218239
+                  ],
+                  [
+                    0.043177281400836605,
+                    0.06844913441634994,
+                    -0.010260478815013574
+                  ],
+                  [
+                    0.01361808120459382,
+                    0.0290753481397819,
+                    -0.0048609379108564
+                  ],
+                  [
+                    0.0032162844838386564,
+                    0.00948771636964647,
+                    -0.0017369446150388157
+                  ],
+                  [
+                    0.0008161667179855943,
+                    0.0028669435912228648,
+                    -0.0005244287420254068
+                  ]
+                ],
+                "relative_edge_log": [
+                  [
+                    -0.010737039707632106,
+                    -0.0037600240571998016,
+                    -0.002661629095688234
+                  ],
+                  [
+                    -0.0282095300919852,
+                    -0.013755488707686423,
+                    -0.005608296557118031
+                  ],
+                  [
+                    -0.04699197768583329,
+                    -0.03124609975054856,
+                    -0.007724826220266934
+                  ],
+                  [
+                    -0.05843096503350815,
+                    -0.05228028198796838,
+                    -0.00649911731266517
+                  ],
+                  [
+                    -0.05540760443574484,
+                    -0.0660455234754523,
+                    -0.0016337847374772174
+                  ],
+                  [
+                    -0.03968240908035457,
+                    -0.06168818020791394,
+                    0.0036011505072042205
+                  ],
+                  [
+                    -0.02037149888091593,
+                    -0.042881464108590936,
+                    0.00539954090415673
+                  ],
+                  [
+                    -0.006989515360817189,
+                    -0.020416275980866726,
+                    0.0031239932958175842
+                  ],
+                  [
+                    -0.001881295366323384,
+                    -0.006630274852566607,
+                    0.001212515873013409
+                  ]
+                ],
+                "relative_translation_RMS_m": 0.053774753991792434,
+                "relative_yaw_RMS_rad": 0.004672268471963519,
+                "relative_translation_max_m": 0.08620912828961033,
+                "relative_yaw_max_rad": 0.007724826220266934,
+                "rigid_fit": {
+                  "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+                  "transform": [
+                    -1.792959836376074,
+                    6.933747768417858,
+                    -0.34903509108191405
+                  ],
+                  "translation_RMS_m": 0.10007143229476474,
+                  "yaw_RMS_rad": 0.3461865554326125
+                },
+                "total_XY_arc_m": 1.049695660198008,
+                "segment_length_min_m": 0.08601698797505676,
+                "segment_length_max_m": 0.14012399806959372,
+                "maximum_lateral_node_correction_m": 0.18344836355981675,
+                "maximum_lateral_B_frame_m": 0.8526703942027045,
+                "maximum_yaw_correction_rad": 0.013861629322218239,
+                "self_intersection": false,
+                "B_to_first_node_position_m": 0.027615845072620895,
+                "B_to_first_node_yaw_rad": 0.318373923404077,
+                "B_projection": {
+                  "progress": 0.0,
+                  "segment_index": 0,
+                  "alpha": 0.0,
+                  "projected_pose": [
+                    19.6647521622555,
+                    8.964921075474223,
+                    -1.6779508650554174
+                  ],
+                  "distance_m": 0.02761584507262155,
+                  "yaw_error_rad": 0.318373923404077
+                },
+                "first_reliable_chord_relative_B_rad": -0.35718359782101405,
+                "reliable_chord_minimum_length_m": 0.02
+              },
+              "status": "REFERENCE_GEOMETRY_SAFE"
+            }
+          }
+        }
+      }
+    }
+  }
+}

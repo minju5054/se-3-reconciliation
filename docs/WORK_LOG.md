@@ -6021,3 +6021,28 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
 - Final staged-diff review found CRLF line endings from the standard CSV writer;
   normalized the three derived tracked CSVs to LF and asserted identical parsed
   fields. Formatting audit retains before/after hashes; no scientific change.
+
+### 2026-09-30 — STATE_SHIFT_TRANSPORT_SCALE_01 implementation and protocol
+
+- Fetched origin/main; starting HEAD `0db03d81ee33605ac96fc2d0886364b8499874e9`.
+  Read current rules, reports, saved results and scientific/runtime/reporting code.
+- Authenticated the complete multisource result ledger and all source/code hashes;
+  unchanged multisource/R00/R01 saved-only validators pass. Reuse exact four Native
+  and four Full references/rollouts/metrics, with four existing Full solutions.
+- New experiment subclass changes only the state-shift target to
+  Exp(alpha Log(B A^-1)) F. Historical defaults/files remain unchanged. Alpha0 is
+  Native with no new solve; alpha1 uses exact historical Full; only alpha.5 gets
+  one original-FRESH-initialized LM solve and one official rollout per source.
+- Prepared exactly the original S1-S4 states, command/memory/generation, geometry,
+  source-specific schedules and metric protocol byte-for-byte. No new schedule,
+  source search, model, RGB, Isaac or scientific solver call during preparation.
+- Fixed classification precedence before results, with all original/own-reference
+  metrics separate. Report has exactly four compact PNGs and selector CSV/JSON.
+  Synthetic plotting smoke checks preserve null attachment and show readable axes.
+- New focused tests: 25 passed (29.30 s). Full regression and freeze review follow
+  before the single scientific execution; final counts recorded below.
+- Both Stage0 user config edits and the unrelated GPU snapshot script preserved.
+- Pre-execution regression: **492 passed, 1 skipped (91.36 s)**; the skip is the
+  absent ignored historical EXP-01B/EXP-02B corpus. Compileall and diff checks pass.
+  Scientific freeze prepared at data/state_shift_transport_scale_01/primary_20260930T080000Z;
+  commit/push must precede exactly four Half planning calls and eligible rollouts.

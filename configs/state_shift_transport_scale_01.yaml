@@ -1,0 +1,60 @@
+solver:
+  max_iterations: 80
+  finite_difference_epsilon: 1.0e-06
+  initial_damping: 0.001
+  damping_increase: 10.0
+  damping_decrease: 0.3
+  maximum_damping: 1000000000000.0
+  gradient_tolerance: 1.0e-09
+  step_tolerance: 1.0e-09
+  cost_tolerance: 1.0e-12
+normalization:
+  translation_m: 0.1
+  yaw_degrees: 10.0
+initialization: original observation-anchored FRESH
+weights:
+  S: (1-s)^2
+  A: s^2
+footprint_radius_m: 0.2
+required_edge_clearance_m: 0.05
+integration_steps: 180
+primary_intervals: 54
+retries: 0
+wall_wait_timeout_s: 30.0
+experiment: STATE_SHIFT_TRANSPORT_SCALE_01
+starting_sha: 0db03d81ee33605ac96fc2d0886364b8499874e9
+label: timing-controlled offline causal reference comparison
+alphas:
+- 0.0
+- 0.5
+- 1.0
+order:
+- M0_NATIVE
+- HALF_TRANSPORT_LOCAL_SE2
+- FULL_LOCAL_SE2
+historical_result: results/relative_factor_multisource_01/result_summary.json
+historical_hashes:
+  results/relative_factor_multisource_01/result_summary.json: d935cdc58661a672cb238085f0c697c5d75d36a5d01ff5709e2782de6b0c5cc7
+  configs/relative_factor_multisource_01.yaml: 05f94cdf4f445a2a3e2d85fe31d0d757a0b05f624eb271b9fa6b7d96d62564b0
+new_planning_calls: 4
+new_rollouts: 4
+reused_native_rollouts: 4
+reused_full_rollouts: 4
+sign_tolerance: 1.0e-09
+classification_priority:
+- TECHNICAL_BLOCKED
+- SOURCE_DEPENDENT_TRANSPORT
+- TRANSPORT_MAGNITUDE_INSUFFICIENT
+- FULL_TRANSPORT_OVERCOMPENSATES
+classification_rules:
+  TECHNICAL_BLOCKED: source/state/schedule/controller/validator/historical authentication
+    failure
+  SOURCE_DEPENDENT_TRANSPORT: at least one lower and one higher Half-Full .9 s position
+    AUC across S1-S4
+  TRANSPORT_MAGNITUDE_INSUFFICIENT: otherwise, any S2/S3/S4 fails to lower .9 s AUC,
+    or Native lower than both in any S2/S3/S4, or safety not preserved
+  FULL_TRANSPORT_OVERCOMPENSATES: 'otherwise: safe, all S2/S3/S4 lower .9 s AUC, Native
+    not strictly lower than both there'
+classification_note: Conservative precedence resolves overlapping hypotheses; report
+  attachment and all metrics independently, plus H1-compatible safe improvements.
+  No optimal alpha.
