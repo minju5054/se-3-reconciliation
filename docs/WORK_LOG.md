@@ -5905,3 +5905,38 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
   one Full and one NoR R01 planning call, then at most four fixed-order rollouts.
   No R00 rerun, new source, tuning or retries. Identical raw local FRESH limits
   this to paired same-scenario replication, not diverse policy-output generalization.
+
+## 2026-09-30 — OSA03 R01 relative-factor replication completed
+
+- Normally pushed scientific freeze `f334a44c878163fb89ae673c678432f9f84c4e81`
+  before exactly one R01 Full and one R01 No-relative optimization, followed by
+  Native/Taper/Full/No-relative rollouts. Four 180-step rollouts, 30 official MPC
+  solves each / 120 total. LightNav/RGB/Isaac/new source/R00 reruns/retries all0.
+- **REPLICATED_WITHIN_PAIRED_OSA03**. Identical primary54-step and complete180-step
+  schedules, R01 B/held command/memory/generation6, valid installation/selection/
+  integration and unchanged abort guard. All references and executions safe; no
+  skip, controller error, safety abort or censored attachment.
+- R01 No-relative minus Full: attachment -.05000000260770321 s (3 ticks, same as
+  R00); .9 s position AUC -.0038429225641817277 m·s versus R00 -.003842924796446434;
+  max .5 s error -.006150310165348644 m. All13 paired contrast signs agree, including
+  slightly higher .3 s yaw AUC and lower .9 s yaw AUC.
+- Relative-edge translation RMS/max increase .0022200031964668375 /
+  .006574429908603255 m. Linear TV increases .3999984079884431 m/s; angular TV falls
+  .03133951842028626 rad/s. Maximum reference difference6.967252621980297 mm.
+  Selector H5 sequences first differ at submit102/apply103, and also at132; same
+  differing ticks as R00. Unchanged official MPC computes the actual commands.
+- No-relative/Full swept clearance .1308209185664851 / .12574551597848094 m;
+  reference clearance .22168630099308034 / .22002951062632153 m. Endpoint error
+  .0912985751325991 / .09633541556564493 m. Both recover final original arc fraction1.
+  Full6 iterations/4 accepts/2 non-improving rejects, NoR3/2/0; no unsafe rejection.
+- Frozen code/config unchanged; R00 source/results and validator pass unchanged.
+  Saved-only solver/metric/schedule/selector validation PASS. Ten figures visually
+  inspected and numeric/hash/CSV sidecars PASS. GUI index generated and app opening
+  requested; large artifacts remain ignored. Small exact JSON/CSV summaries tracked.
+- Final same regression command: **409 passed, 1 skipped (39.93 s)**, skip absent
+  historical EXP-01B/EXP-02B corpus. Compileall and diff checks PASS. Tests/validators
+  add no scientific calls. No scientific protocol deviation or result-driven change.
+- Both repeats share identical raw local FRESH; this is paired same-scenario
+  evidence for a regularization-versus-attachment trade-off, not independent policy
+  output diversity, general E_R necessity/removal or online deployment benefit.
+  Full report and nine explicit answers: `docs/OSA03_RELATIVE_FACTOR_REPLICATION_01.md`.

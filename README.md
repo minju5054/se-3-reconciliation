@@ -7,6 +7,15 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [paired OSA03 R01 replication](docs/OSA03_RELATIVE_FACTOR_REPLICATION_01.md)
+reproduced the earlier-attachment trade-off under the same authenticated logical
+schedule: No-relative attached three ticks earlier, lowered .9 s position AUC by
+.003842923 m·s and remained safe, while increasing edge distortion and linear
+command TV. Two planning solves and four rollouts; no new LightNav/RGB/Isaac.
+R00/R01 share identical raw local FRESH, so this is same-scenario replication,
+not evidence across diverse policy outputs or online deployment.
+[Local GUI review](data/osa03_relative_factor_replication_01/primary_20260930T010000Z/index.html).
+
 The [OSA03 relative-factor ablation](docs/OSA03_RELATIVE_FACTOR_ABLATION_01.md)
 completed one No-relative planning solve and four rollouts under the authenticated
 common-B Native logical application schedule. The timing gate passed. Removing E_R
@@ -24,7 +33,7 @@ attachment at 1.4667/1.5000/1.4667 s with valid execution margin; rigid was stop
 before an unsafe command at 1.5833 s. Local-SE2's first new command applied one tick
 later, so the overall result is **TIMING_CONFOUNDED_COMMON_B_COMPARISON** and does
 not establish reference-only improvement or proposed-method superiority. Four
-rollouts/106 MPC solves; no new VLA, RGB or optimization. R01 remains unevaluated.
+rollouts/106 MPC solves; no new VLA, RGB or optimization. R01 was not evaluated in that comparison.
 [Static execution review](data/osa03_common_b_method_comparison_01/primary_20260925T162125Z/index.html).
 
 The [local discrete SE(2) formulation](docs/LOCAL_SE2_RECONCILIATION_FORMULATION_01.md)
@@ -34,7 +43,7 @@ original-FRESH anchor reduced the frozen objective 4.551116→0.765264. First-no
 correction .211144 m tapers to endpoint .002187 m; planned whole-path footprint-edge
 clearance remains valid (.227809 m versus raw .229487 m, required .05 m).
 This is planning evidence only: no GP, MPC execution, new LightNav call, baseline
-comparison or demonstrated attachment benefit. REPEAT_01 remains unevaluated.
+comparison or demonstrated attachment benefit. REPEAT_01 was not evaluated in that planning study.
 [Static planning review](data/local_se2_reconciliation_formulation_01/primary_20260925T013000Z/review/index.html).
 
 The [second bounded blind-corner search](docs/BLIND_CORNER_SOURCE_ACQUISITION_02.md)
