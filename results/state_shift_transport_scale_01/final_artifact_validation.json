@@ -1,0 +1,72 @@
+{
+  "valid": true,
+  "saved_only": true,
+  "new_scientific_calls": 0,
+  "source_and_frozen_code_hashes": true,
+  "historical_multisource_R00_R01_validators": true,
+  "exact_schedules_all_4_primary_and_full": true,
+  "result_ledger_files": 118,
+  "result_hashes_sha256": "b4aa12d3fd3ef8c166e9128e512353115952129b4978a7cb1df814cd481bf2a6",
+  "counts": {
+    "new_planning": 4,
+    "new_rollouts": 4,
+    "new_MPC": 120,
+    "reused_references": 8,
+    "reused_rollouts": 8,
+    "reused_metrics": 8,
+    "reused_planning_solutions": 4,
+    "LightNav": 0,
+    "RGB": 0,
+    "Isaac": 0,
+    "retries": 0
+  },
+  "new_successful_results_withheld_at_cap": 1,
+  "new_results_applied": 119,
+  "primary_CSV_rows": 12,
+  "comparison_CSV_rows": 4,
+  "selector_CSV_rows": 360,
+  "CSV_exact_values_and_nulls": true,
+  "PNG_numeric_sidecars": true,
+  "final_PNG_count": 4,
+  "extra_PNGs": 0,
+  "images": [
+    {
+      "file": "world_execution_overview.png",
+      "size": [
+        2700,
+        2160
+      ],
+      "sha256": "633a28b83b26a6e8a2ed283170c86a7e58359aa59ef76e5f50672a3a98aed15d"
+    },
+    {
+      "file": "transport_scale_primary_metrics.png",
+      "size": [
+        2700,
+        1620
+      ],
+      "sha256": "ea34688da4df10c42f7d500344560b7821ae1dadc704c8857fd709a36f6abdcb"
+    },
+    {
+      "file": "transport_scale_deltas.png",
+      "size": [
+        2520,
+        1620
+      ],
+      "sha256": "8617e37a5d8cf73ad8bd2e3c5371aea7152ac710acc6433b5af996d89bb62746"
+    },
+    {
+      "file": "reference_transport_overview.png",
+      "size": [
+        2700,
+        2160
+      ],
+      "sha256": "dcbe4c919f9ffcfb7b1ef88d8479a5b06950b0099089d129a124209d97c0c2c5"
+    }
+  ],
+  "test_counts": {
+    "new_focused_passed": 25,
+    "regression_passed": 492,
+    "regression_skipped": 1
+  },
+  "protocol_deviations": []
+}

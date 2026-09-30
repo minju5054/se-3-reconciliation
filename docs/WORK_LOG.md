@@ -6046,3 +6046,39 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
   absent ignored historical EXP-01B/EXP-02B corpus. Compileall and diff checks pass.
   Scientific freeze prepared at data/state_shift_transport_scale_01/primary_20260930T080000Z;
   commit/push must precede exactly four Half planning calls and eligible rollouts.
+
+### 2026-09-30 — STATE_SHIFT_TRANSPORT_SCALE_01 completed; four PNGs
+
+- Pushed freeze `92a3bdaf1d6ce14e5efbfb2c8f0a90489f73233d` before the single
+  scientific execution. Exactly four Half planning calls and four Half rollouts;
+  all converged/completed. New official MPC=120 (119 released, one S2 final result
+  withheld at the cap), LightNav/RGB/Isaac/GP=0, retries=0.
+- Authenticated/reused eight Native/Full references, eight rollouts, eight metrics
+  and four existing Full planning solutions; no Native/Full/Taper scientific rerun.
+  Every source passed exact state/memory/command/generation and logical schedule
+  parity through both 54 primary and 180 full intervals. All references/executions
+  safe; no safety abort or controller failure. Historical code/source bytes preserved.
+- Classification TRANSPORT_MAGNITUDE_INSUFFICIENT under the pushed precedence.
+  Half−Full .9 s position AUC deltas: -0.0007475210429575274,
+  -0.0048907410521694394, -0.010635373758282968, -0.012869711511727 m s.
+  Half attachment is one tick earlier in S1, ten earlier in S2; both Half/Full
+  remain null in S3/S4. Native attaches in S4 and has lower AUC than both there
+  and in S1. H1-compatible partial overcompensation evidence is explicitly retained;
+  halving transport does not solve attachment in this benchmark.
+- Half reduces deformation and endpoint error in all four sources but increases
+  .9 s yaw AUC relative to Full in all four. Own-reference and original-FRESH
+  metrics remain separate. Every source has Half/Native/Full H5 selector differences;
+  records are diagnostic CSV/JSON with no selector-causality claim.
+- Exactly four final PNGs generated once under results/state_shift_transport_scale_01/figures,
+  all visually inspected. World/reference plots use equal axes; world overview
+  includes the complete cart and safety region, B, OLD, raw rows, attachment,
+  minimum-clearance and endpoint markers. Strong S1 overlap quantified (2.01 mm).
+- Saved-only validation and unchanged multisource/R00/R01 validators pass. Final
+  artifact audit authenticates 118 saved files, 12 primary CSV rows, four comparison
+  rows, 360 selector rows and exact PNG numeric sidecars/hashes. PNG dimensions:
+  2700x2160, 2700x1620, 2520x1620, 2700x2160. Extra final PNGs=0.
+- Tests completed before science: 25 new focused passed; 492 regression passed and
+  one missing-historical-corpus skip. Final compileall and diff checks pass. No
+  scientific code changes after freeze, protocol deviations or result-driven tuning.
+  Full metrics, source/transport diagnostics, nine answers and execution commands
+  are in docs/STATE_SHIFT_TRANSPORT_SCALE_01.md. README updated conservatively.

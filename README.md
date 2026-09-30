@@ -7,6 +7,14 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [transport-magnitude diagnostic](docs/STATE_SHIFT_TRANSPORT_SCALE_01.md) reused
+the same four sources and their Native/Full executions, adding four Half-transport
+rollouts. Half lowered original-FRESH .9 s position AUC versus Full in all four,
+but S4 still attached only with Native; S3 attached with none. Frozen classification:
+**TRANSPORT_MAGNITUDE_INSUFFICIENT**. Safety passed; .9 s yaw AUC increased relative
+to Full. This is offline diagnostic evidence, without an optimal-alpha or final-method
+claim. [Four-source execution PNG](results/state_shift_transport_scale_01/figures/world_execution_overview.png).
+
 The [trajectory-diverse relative-factor benchmark](docs/RELATIVE_FACTOR_MULTISOURCE_01.md)
 compared four distinct saved raw FRESH paths under identical within-source logical
 schedules: **MIXED_EVIDENCE**. Removing E_R lowered .9 s position AUC in OSA03 but
