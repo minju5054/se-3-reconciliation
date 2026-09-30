@@ -5940,3 +5940,20 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
   evidence for a regularization-versus-attachment trade-off, not independent policy
   output diversity, general E_R necessity/removal or online deployment benefit.
   Full report and nine explicit answers: `docs/OSA03_RELATIVE_FACTOR_REPLICATION_01.md`.
+
+## 2026-09-30 — Korean PNG export of saved R01 results
+
+- Created a 3200×2600 PNG summary with saved Full/No-relative world references and
+  execution, four-method original-FRESH distance traces, paired signed effects and
+  primary numeric tables. Korean annotations retain the identical-raw-FRESH and
+  offline-schedule limitations. No scientific optimization, MPC, model or capture call.
+- Exporter authenticates the tracked result ledger and all 97 sealed result files,
+  writes outside the sealed scientific run, and records input/script/output hashes
+  plus rendering settings in its sidecar. Historical scientific artifacts unchanged.
+- PNG format/dimensions/hash checks, exact saved-summary parity, compileall, diff
+  check and final visual inspection PASS. A missing font minus glyph in the draft
+  was replaced with an ASCII minus before the final render.
+- Command: `MPLCONFIGDIR=/tmp/osa03-png-mpl .venv/bin/python scripts/export_osa03_relative_replication_png.py --out data/osa03_relative_factor_replication_01/png_export_20260930_final`.
+- Output: `data/osa03_relative_factor_replication_01/png_export_20260930_final/OSA03_R01_results_ko.png`.
+  Raw/large images remain ignored. Both Stage0 edits and the unrelated GPU snapshot
+  script are preserved and excluded from this commit.
