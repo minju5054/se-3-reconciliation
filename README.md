@@ -7,6 +7,15 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [trajectory-diverse relative-factor benchmark](docs/RELATIVE_FACTOR_MULTISOURCE_01.md)
+compared four distinct saved raw FRESH paths under identical within-source logical
+schedules: **MIXED_EVIDENCE**. Removing E_R lowered .9 s position AUC in OSA03 but
+raised it slightly in the other three paths; attachment was earlier in one source,
+later in one, and null for both methods in two. Safety passed throughout and
+relative-edge translation distortion increased in all four. This is an offline
+saved-source result, not an online or population claim.
+[Executed trajectories PNG](results/relative_factor_multisource_01/figures/world_execution_overview.png).
+
 The [paired OSA03 R01 replication](docs/OSA03_RELATIVE_FACTOR_REPLICATION_01.md)
 reproduced the earlier-attachment trade-off under the same authenticated logical
 schedule: No-relative attached three ticks earlier, lowered .9 s position AUC by

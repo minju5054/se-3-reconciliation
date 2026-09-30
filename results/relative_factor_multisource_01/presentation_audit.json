@@ -1,0 +1,48 @@
+{
+  "reason": "Include whole cart footprint; square equal-axis world panels; keep NA/tiny-delta labels inside axes; reserve space for reference annotations",
+  "science_unchanged": true,
+  "numeric_sidecars_identical": true,
+  "new_scientific_calls": 0,
+  "frozen_report_sha256": "96cfdeb3d484652b793a0e206704fa550ac4e45da7fe56165c7f2b276f79909e",
+  "presentation_script_sha256": "1802da8849840e26cfefa20f78a1e9e7db57e21660d86b2482d37d0d87cbd128",
+  "before": {
+    "world_execution_overview.png": "75bce1ad178e1d8dba6ecc64c514b9fe97b5e531c861531c0b4a5bfa36b9755f",
+    "benchmark_primary_metrics.png": "c4fd6b99a64576c4c24395c9faf7d14bf9460d917fe59a83bf3a85be2b8039a8",
+    "no_relative_minus_full_deltas.png": "45a6f5a3939abfdaf68363f958dee543916cc166382927ab27092739d7eb28d5",
+    "reference_deformation_overview.png": "aa8ddee07578ad5ce34f97b5b6d0f7fc27ddc486a0a70862b0ed0ca35426ed73",
+    "selector_diagnostic_summary.png": "8b58d6746ea1218496aafdc007a51608eff03d8195e48cc1734b1c0d0f2936d4"
+  },
+  "after": {
+    "world_execution_overview.png": "943435bbf8edafd6eab9868ffa3f189734d18632bd6b75088c089673c8c46690",
+    "benchmark_primary_metrics.png": "63b2e7b3665c558568f17dd410bb6c34ba2d2234c3a9c9dbc82638abdb9f72e1",
+    "no_relative_minus_full_deltas.png": "2b5526ba6ba8a111803c5e9b5b92742b0b48996b548c7c68d0ede0ab9d229c00",
+    "reference_deformation_overview.png": "188901cfff0ccbc54b8906aee5959bd137f5f3e141c4f44258dfe7746725499c",
+    "selector_diagnostic_summary.png": "8b58d6746ea1218496aafdc007a51608eff03d8195e48cc1734b1c0d0f2936d4"
+  },
+  "final_png_count": 5,
+  "extra_final_pngs": 0,
+  "previous_presentation_pass": {
+    "reason": "Include whole cart footprint; square equal-axis world panels; keep NA/tiny-delta labels inside axes; reserve space for reference annotations",
+    "science_unchanged": true,
+    "numeric_sidecars_identical": true,
+    "new_scientific_calls": 0,
+    "frozen_report_sha256": "96cfdeb3d484652b793a0e206704fa550ac4e45da7fe56165c7f2b276f79909e",
+    "presentation_script_sha256": "99c1ec4581675f92a045818410cc15b53d3fdd8746326427674debd90bbbc548",
+    "before": {
+      "world_execution_overview.png": "75bce1ad178e1d8dba6ecc64c514b9fe97b5e531c861531c0b4a5bfa36b9755f",
+      "benchmark_primary_metrics.png": "c4fd6b99a64576c4c24395c9faf7d14bf9460d917fe59a83bf3a85be2b8039a8",
+      "no_relative_minus_full_deltas.png": "45a6f5a3939abfdaf68363f958dee543916cc166382927ab27092739d7eb28d5",
+      "reference_deformation_overview.png": "aa8ddee07578ad5ce34f97b5b6d0f7fc27ddc486a0a70862b0ed0ca35426ed73",
+      "selector_diagnostic_summary.png": "8b58d6746ea1218496aafdc007a51608eff03d8195e48cc1734b1c0d0f2936d4"
+    },
+    "after": {
+      "world_execution_overview.png": "943435bbf8edafd6eab9868ffa3f189734d18632bd6b75088c089673c8c46690",
+      "benchmark_primary_metrics.png": "63b2e7b3665c558568f17dd410bb6c34ba2d2234c3a9c9dbc82638abdb9f72e1",
+      "no_relative_minus_full_deltas.png": "2b5526ba6ba8a111803c5e9b5b92742b0b48996b548c7c68d0ede0ab9d229c00",
+      "reference_deformation_overview.png": "7751381d4fc78cae8ab3db07c376fcdf8162b9abb67f5b776c00b6d97d3c7a11",
+      "selector_diagnostic_summary.png": "8b58d6746ea1218496aafdc007a51608eff03d8195e48cc1734b1c0d0f2936d4"
+    },
+    "final_png_count": 5,
+    "extra_final_pngs": 0
+  }
+}

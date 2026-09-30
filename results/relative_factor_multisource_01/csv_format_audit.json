@@ -1,0 +1,27 @@
+{
+  "valid": true,
+  "files": [
+    {
+      "file": "primary.csv",
+      "before_sha256": "1eb2191682c0b49a7baad27b67efa1a2005a35ce82ba04c9332d997a097bff59",
+      "after_sha256": "391c1732a4591425653edef8eb19956bfef28f944d50aeadc836b805b697d8e6",
+      "csv_rows_identical": true,
+      "change": "CRLF to LF only"
+    },
+    {
+      "file": "signed_gaps.csv",
+      "before_sha256": "96f947b90ce511b5f686af48a8e09ceda685be072926689910bd62cf36de2eb6",
+      "after_sha256": "29cd36ee2117433056493c0fc9b09b897c3f94dc67d0ef1e3e34b877468d9721",
+      "csv_rows_identical": true,
+      "change": "CRLF to LF only"
+    },
+    {
+      "file": "cross_source_signs.csv",
+      "before_sha256": "f0003f9269c28c0ff86f485aca2cd40472a8466318856eb4238cd92b4084126a",
+      "after_sha256": "d2ea6e7bcbfd6fabcea752115a7e36728c7f028099e7efa035bcbb06270492a9",
+      "csv_rows_identical": true,
+      "change": "CRLF to LF only"
+    }
+  ],
+  "new_scientific_calls": 0
+}

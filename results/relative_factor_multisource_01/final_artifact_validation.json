@@ -1,0 +1,55 @@
+{
+  "valid": true,
+  "original_scientific_ledgers_unchanged": true,
+  "frozen_code_hashes_unchanged": true,
+  "numeric_sidecars_identical": true,
+  "exact_required_PNG_set": true,
+  "figures": [
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/relative_factor_multisource_01/figures/world_execution_overview.png",
+      "sha256": "943435bbf8edafd6eab9868ffa3f189734d18632bd6b75088c089673c8c46690",
+      "dimensions": [
+        2700,
+        2160
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/relative_factor_multisource_01/figures/benchmark_primary_metrics.png",
+      "sha256": "63b2e7b3665c558568f17dd410bb6c34ba2d2234c3a9c9dbc82638abdb9f72e1",
+      "dimensions": [
+        2700,
+        1620
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/relative_factor_multisource_01/figures/no_relative_minus_full_deltas.png",
+      "sha256": "2b5526ba6ba8a111803c5e9b5b92742b0b48996b548c7c68d0ede0ab9d229c00",
+      "dimensions": [
+        2880,
+        1440
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/relative_factor_multisource_01/figures/reference_deformation_overview.png",
+      "sha256": "188901cfff0ccbc54b8906aee5959bd137f5f3e141c4f44258dfe7746725499c",
+      "dimensions": [
+        2700,
+        2160
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/relative_factor_multisource_01/figures/selector_diagnostic_summary.png",
+      "sha256": "8b58d6746ea1218496aafdc007a51608eff03d8195e48cc1734b1c0d0f2936d4",
+      "dimensions": [
+        2700,
+        2160
+      ],
+      "format": "PNG"
+    }
+  ],
+  "new_scientific_calls": 0
+}

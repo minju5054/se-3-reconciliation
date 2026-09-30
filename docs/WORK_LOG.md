@@ -5984,3 +5984,40 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
 - Freeze run: data/relative_factor_multisource_01/primary_20260930T033000Z.
   Commit/push must precede exactly 8 planning calls and up to 16 eligible rollouts.
   Preserve both unrelated Stage0 edits and the unrelated GPU snapshot script.
+
+### 2026-09-30 — RELATIVE_FACTOR_MULTISOURCE_01 completed; compact PNGs
+
+- Pushed scientific freeze `21f029fabfb0faaa00bbb6d5930460671f63e267` before any
+  new scientific call. Four fixed sources ran once: 8 planning calls (4 Full,
+  4 No-relative), 16 rollouts, 480 successful official MPC solves. New LightNav,
+  RGB, Isaac and GP calls: 0. No retries, substitutions, source changes or tuning.
+- All 16 complete references and executions pass safety; all rollouts reach the
+  180-interval cap. All four primary and full-window schedule/common-state gates
+  pass. Original source/controller/solver bytes and R00/R01 artifacts preserved.
+  The new R00 Full solve reproduces the historical world array byte-for-byte.
+- Frozen classification: MIXED_EVIDENCE. NoR-minus-Full .9 s position AUC deltas
+  are -0.003842924796446434, +0.0012339582007714345,
+  +0.0001906058259592558, +0.00015962478758496657 m s. Attachment is 3 ticks earlier
+  in OSA03, 6 ticks later in the mild source, and null for both methods in the two
+  stronger turns. Relative-edge RMS/max rises in 4/4; linear TV rises in 3/4.
+  Median .9 s AUC delta +0.00017511530677211118 m s; median relative-edge RMS delta
+  +0.005321174239517432 m. No pooled scalar or general superiority claim.
+- Saved-only validation and original R00/R01 validators PASS. Original/own-reference
+  metrics remain separate. Report includes all 18 primary metrics, 13 signed
+  contrasts, sign counts/medians/reversals, planning/factor/solver diagnostics,
+  source hashes, null outcomes, limitations and exact artifact paths.
+- Exactly 5 final PNGs under results/relative_factor_multisource_01/figures:
+  world execution, primary metrics, signed deltas, reference deformation, selector
+  diagnostics (differences actually observed in all four sources). No extra final
+  PNG/PDF. Visual inspection and PNG format/dimension/hash/numeric sidecar checks PASS.
+- Added a presentation-only finalizer after visual QA to include the whole cart,
+  improve equal-axis panel framing and prevent label overlap. Two render passes,
+  identical numeric sidecars, no scientific recomputation; original frozen report
+  and run ledgers unchanged. Presentation audit records before/after hashes.
+- Tests: pre-freeze 467 passed / 1 missing-corpus skip; final focused rerun 23 passed.
+  Final compileall/diff check PASS. Both unrelated Stage0 edits and GPU script are
+  preserved. Exact preparation/test/freeze/execution/validation/report/finalizer
+  commands are in docs/RELATIVE_FACTOR_MULTISOURCE_01.md.
+- Final staged-diff review found CRLF line endings from the standard CSV writer;
+  normalized the three derived tracked CSVs to LF and asserted identical parsed
+  fields. Formatting audit retains before/after hashes; no scientific change.
