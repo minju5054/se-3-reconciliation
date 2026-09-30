@@ -1,0 +1,3095 @@
+{
+  "summary_sha256": "ad8c6089ec86ebde2c07392c9a4894aaf09007f20cf2128550963eab919799e2",
+  "figures": [
+    {
+      "file": "correspondence_world_overview.png",
+      "sha256": "0a73524f9624ed138b3501ec45490383645db27908efa86acdad9b93ed2dc27e",
+      "numeric_sidecar": {
+        "OSA03_R00": {
+          "original_world": [
+            [
+              19.203247924329446,
+              24.356659023345408,
+              -1.2548024780981726
+            ],
+            [
+              19.278846499646342,
+              24.226227627630404,
+              -1.0453647799723331
+            ],
+            [
+              19.354336910512455,
+              24.096035365800496,
+              -1.045376998924512
+            ],
+            [
+              19.42987255365256,
+              23.965736881281778,
+              -1.0454787440531437
+            ],
+            [
+              19.50546426473847,
+              23.835285791513932,
+              -1.0458070464365665
+            ],
+            [
+              19.580832098216636,
+              23.705155027173276,
+              -1.0458022780649845
+            ],
+            [
+              19.65600938471402,
+              23.575444606112452,
+              -1.0456598229639713
+            ],
+            [
+              19.73120008209838,
+              23.44566882307013,
+              -1.0459893770449344
+            ],
+            [
+              19.806251829041486,
+              23.316079528650203,
+              -1.0462817974322025
+            ],
+            [
+              19.88161991957295,
+              23.185725783431817,
+              -1.0473832912676517
+            ]
+          ],
+          "old_world": [
+            [
+              19.203242163778583,
+              24.356668352984542,
+              -1.5689752526514715
+            ],
+            [
+              19.203260374117306,
+              24.346668368564256,
+              -1.5689753315450732
+            ],
+            [
+              19.203278583667096,
+              24.336668384142534,
+              -1.5689754104386748
+            ],
+            [
+              19.203296792427953,
+              24.326668399719377,
+              -1.5689754893322765
+            ],
+            [
+              19.203315000399872,
+              24.31666841529478,
+              -1.5689755682258781
+            ],
+            [
+              19.203339276861506,
+              24.303335103366575,
+              -1.5689756142967963
+            ],
+            [
+              19.20336355270886,
+              24.29000179143725,
+              -1.5689756603677145
+            ],
+            [
+              19.20338782794194,
+              24.276668479506807,
+              -1.5689757064386327
+            ],
+            [
+              19.203412102560737,
+              24.263335167575246,
+              -1.568975752509551
+            ],
+            [
+              19.20343637656526,
+              24.250001855642566,
+              -1.568975798580469
+            ],
+            [
+              19.203460649955506,
+              24.236668543708767,
+              -1.5689758446513873
+            ],
+            [
+              19.20348492286545,
+              24.223335231774094,
+              -1.5689758706258745
+            ],
+            [
+              19.203509195429067,
+              24.210001919838792,
+              -1.5689758966003617
+            ],
+            [
+              19.20353346764636,
+              24.196668607902858,
+              -1.568975922574849
+            ],
+            [
+              19.203557739517322,
+              24.183335295966295,
+              -1.5689759485493362
+            ],
+            [
+              19.20358201104196,
+              24.1700019840291,
+              -1.5689759745238234
+            ],
+            [
+              19.20360628222027,
+              24.156668672091275,
+              -1.5689760004983107
+            ],
+            [
+              19.203630553052257,
+              24.14333536015282,
+              -1.5689760264727979
+            ]
+          ],
+          "B": [
+            19.203630553052257,
+            24.14333536015282,
+            -1.5689760264727979
+          ],
+          "correspondences": {
+            "C0_ROW0": {
+              "arc_m": 0.0,
+              "normalized_progress": 0.0,
+              "segment": 0,
+              "alpha": 0.0,
+              "nearest_raw_row_diagnostic": 0,
+              "target_world": [
+                19.203247924329446,
+                24.356659023345408,
+                -1.2548024780981726
+              ],
+              "position_gap_m": 0.21332400634397655,
+              "yaw_gap_rad": 0.3141735483746253,
+              "tangent_gap_rad": 0.5234672193016632,
+              "remaining_arc_m": 1.3532455201158953,
+              "total_arc_m": 1.3532455201158953,
+              "pose_score": 5.99084410828341
+            },
+            "C1_XY_PROJECTION": {
+              "arc_m": 0.18473653570089893,
+              "normalized_progress": 0.136513687246552,
+              "segment": 1,
+              "alpha": 0.2257886927193452,
+              "nearest_raw_row_diagnostic": 1,
+              "target_world": [
+                19.295891380828646,
+                24.196831687029654,
+                -1.045367538873572
+              ],
+              "position_gap_m": 0.10664856928856485,
+              "yaw_gap_rad": 0.5236084875992261,
+              "tangent_gap_rad": 0.523642206901433,
+              "remaining_arc_m": 1.1685089844149963,
+              "total_arc_m": 1.3532455201158953,
+              "pose_score": 5.1375401229496465,
+              "safety": {
+                "label": "hypothetical straight connector diagnostic only",
+                "connector": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 1.09585173077347,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 2,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "suffix": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.22948689016047874,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 9,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "connector_geometric_threshold_met": true,
+                "selection_rejected": false,
+                "suffix_is_executed": false
+              }
+            },
+            "C2_SE2_PROJECTION": {
+              "arc_m": 0.09447150867104417,
+              "normalized_progress": 0.06981106330428007,
+              "segment": 0,
+              "alpha": 0.626650050572598,
+              "nearest_raw_row_diagnostic": 1,
+              "target_world": [
+                19.250621775374995,
+                24.274924182624346,
+                -1.1235583339758068
+              ],
+              "position_gap_m": 0.13972756769810435,
+              "yaw_gap_rad": 0.44541769249699104,
+              "tangent_gap_rad": 0.5234672193016632,
+              "remaining_arc_m": 1.2587740114448511,
+              "total_arc_m": 1.3532455201158953,
+              "pose_score": 4.847040079216326,
+              "safety": {
+                "label": "hypothetical straight connector diagnostic only",
+                "connector": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 1.09585173077347,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 2,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "suffix": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.22948689016047874,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 10,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "connector_geometric_threshold_met": true,
+                "selection_rejected": false,
+                "suffix_is_executed": false
+              }
+            },
+            "C3_FORWARD_SE2": {
+              "arc_m": 0.18474273839738128,
+              "normalized_progress": 0.1365182708172272,
+              "segment": 1,
+              "alpha": 0.22582990794399482,
+              "nearest_raw_row_diagnostic": 1,
+              "target_world": [
+                19.29589449218289,
+                24.196826321126334,
+                -1.0453675393771789
+              ],
+              "position_gap_m": 0.1066485694689392,
+              "yaw_gap_rad": 0.523608487095619,
+              "tangent_gap_rad": 0.523642206901433,
+              "remaining_arc_m": 1.168502781718514,
+              "total_arc_m": 1.3532455201158953,
+              "pose_score": 5.1375401191022885,
+              "safety": {
+                "label": "hypothetical straight connector diagnostic only",
+                "connector": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 1.09585173077347,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 2,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "suffix": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.22948689016047874,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 9,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "connector_geometric_threshold_met": true,
+                "selection_rejected": false,
+                "suffix_is_executed": false
+              }
+            }
+          },
+          "first_official": {
+            "M0_NATIVE": {
+              "query_tick": 96,
+              "query_time_after_B_s": 0.06666667014360428,
+              "query_pose_world": [
+                19.204616420161308,
+                24.090013606205353,
+                -1.5356427948050633
+              ],
+              "B_pose_world": [
+                19.203630553052257,
+                24.14333536015282,
+                -1.5689760264727979
+              ],
+              "nearest": {
+                "arc_m": 0.3012516776926266,
+                "normalized_progress": 0.22261420652390312,
+                "segment": 1,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 2,
+                "target_world": [
+                  19.354336910512455,
+                  24.096035365800496,
+                  -1.045376998924512
+                ],
+                "position_gap_m": 0.15795472656635076,
+                "yaw_gap_rad": 0.5235990275482858,
+                "tangent_gap_rad": 0.523642206901433,
+                "remaining_arc_m": 1.0519938424232687,
+                "total_arc_m": 1.3532455201158953,
+                "pose_score": 6.494973413978231,
+                "original_row_identity": 2,
+                "physical_target_world": [
+                  19.354336910512455,
+                  24.096035365800496,
+                  -1.0453769989245123
+                ],
+                "physical_B_position_gap_m": 0.15795472656635076,
+                "physical_B_yaw_gap_rad": 0.5235990275482856
+              },
+              "H5_start": {
+                "arc_m": 0.45186153279004126,
+                "normalized_progress": 0.3339094983675562,
+                "segment": 2,
+                "alpha": 0.9999999999999998,
+                "nearest_raw_row_diagnostic": 3,
+                "target_world": [
+                  19.42987255365256,
+                  23.965736881281778,
+                  -1.0454787440531437
+                ],
+                "position_gap_m": 0.28762243051079245,
+                "yaw_gap_rad": 0.5234972824196542,
+                "tangent_gap_rad": 0.523548238152177,
+                "remaining_arc_m": 0.901383987325854,
+                "total_arc_m": 1.3532455201158953,
+                "pose_score": 12.271115702042914,
+                "original_row_identity": 3,
+                "physical_target_world": [
+                  19.42987255365256,
+                  23.965736881281778,
+                  -1.045478744053144
+                ],
+                "physical_B_position_gap_m": 0.28762243051079245,
+                "physical_B_yaw_gap_rad": 0.523497282419654
+              }
+            },
+            "HALF_TRANSPORT_LOCAL_SE2": {
+              "query_tick": 96,
+              "query_time_after_B_s": 0.06666667014360428,
+              "query_pose_world": [
+                19.204616420161308,
+                24.090013606205353,
+                -1.5356427948050633
+              ],
+              "B_pose_world": [
+                19.203630553052257,
+                24.14333536015282,
+                -1.5689760264727979
+              ],
+              "nearest": {
+                "arc_m": 0.15075640476645832,
+                "normalized_progress": 0.11140358680333719,
+                "segment": 0,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 1,
+                "target_world": [
+                  19.278846499646342,
+                  24.226227627630404,
+                  -1.0453647799723331
+                ],
+                "position_gap_m": 0.11193107981977081,
+                "yaw_gap_rad": 0.5236112465004648,
+                "tangent_gap_rad": 0.5234672193016632,
+                "remaining_arc_m": 1.202489115349437,
+                "total_arc_m": 1.3532455201158953,
+                "pose_score": 5.2530472065806695,
+                "original_row_identity": 1,
+                "physical_target_world": [
+                  19.278997386547584,
+                  24.123492474031828,
+                  -1.0444104766151943
+                ],
+                "physical_B_position_gap_m": 0.07793522772612467,
+                "physical_B_yaw_gap_rad": 0.5245655498576036
+              },
+              "H5_start": {
+                "arc_m": 0.3012516776926266,
+                "normalized_progress": 0.22261420652390312,
+                "segment": 1,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 2,
+                "target_world": [
+                  19.354336910512455,
+                  24.096035365800496,
+                  -1.045376998924512
+                ],
+                "position_gap_m": 0.15795472656635076,
+                "yaw_gap_rad": 0.5235990275482858,
+                "tangent_gap_rad": 0.523642206901433,
+                "remaining_arc_m": 1.0519938424232687,
+                "total_arc_m": 1.3532455201158953,
+                "pose_score": 6.494973413978231,
+                "original_row_identity": 2,
+                "physical_target_world": [
+                  19.354456751873375,
+                  24.000866987041285,
+                  -1.0436133744957756
+                ],
+                "physical_B_position_gap_m": 0.20747476855722635,
+                "physical_B_yaw_gap_rad": 0.5253626519770223
+              }
+            },
+            "FULL_LOCAL_SE2": {
+              "query_tick": 96,
+              "query_time_after_B_s": 0.06666667014360428,
+              "query_pose_world": [
+                19.204616420161308,
+                24.090013606205353,
+                -1.5356427948050633
+              ],
+              "B_pose_world": [
+                19.203630553052257,
+                24.14333536015282,
+                -1.5689760264727979
+              ],
+              "nearest": {
+                "arc_m": 0.0,
+                "normalized_progress": 0.0,
+                "segment": 0,
+                "alpha": 0.0,
+                "nearest_raw_row_diagnostic": 0,
+                "target_world": [
+                  19.203247924329446,
+                  24.356659023345408,
+                  -1.2548024780981726
+                ],
+                "position_gap_m": 0.21332400634397655,
+                "yaw_gap_rad": 0.3141735483746253,
+                "tangent_gap_rad": 0.5234672193016632,
+                "remaining_arc_m": 1.3532455201158953,
+                "total_arc_m": 1.3532455201158953,
+                "pose_score": 5.99084410828341,
+                "original_row_identity": 0,
+                "physical_target_world": [
+                  19.203579583548727,
+                  24.1455152657597,
+                  -1.2539190365120654
+                ],
+                "physical_B_position_gap_m": 0.0021805013976600196,
+                "physical_B_yaw_gap_rad": 0.3150569899607325
+              },
+              "H5_start": {
+                "arc_m": 0.15075640476645832,
+                "normalized_progress": 0.11140358680333719,
+                "segment": 0,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 1,
+                "target_world": [
+                  19.278846499646342,
+                  24.226227627630404,
+                  -1.0453647799723331
+                ],
+                "position_gap_m": 0.11193107981977081,
+                "yaw_gap_rad": 0.5236112465004648,
+                "tangent_gap_rad": 0.5234672193016632,
+                "remaining_arc_m": 1.202489115349437,
+                "total_arc_m": 1.3532455201158953,
+                "pose_score": 5.2530472065806695,
+                "original_row_identity": 1,
+                "physical_target_world": [
+                  19.279148077455,
+                  24.020757136930502,
+                  -1.0434523091083128
+                ],
+                "physical_B_position_gap_m": 0.1439733214879031,
+                "physical_B_yaw_gap_rad": 0.5255237173644851
+              }
+            }
+          }
+        },
+        "episode_001_repeat_01/handoff_013": {
+          "original_world": [
+            [
+              18.792272327481577,
+              10.213078390995763,
+              -1.7088611259609978
+            ],
+            [
+              18.771529204750887,
+              10.063743180419213,
+              -1.7088156476170342
+            ],
+            [
+              18.75078243600864,
+              9.91438805569139,
+              -1.708682729259185
+            ],
+            [
+              18.730123830346784,
+              9.765362925136044,
+              -1.7085025146157067
+            ],
+            [
+              18.70951613903068,
+              9.616615885818659,
+              -1.7084365322739403
+            ],
+            [
+              18.68889853997111,
+              9.467604414407955,
+              -1.7082101836354058
+            ],
+            [
+              18.66824645369464,
+              9.318511531775568,
+              -1.7082082464844506
+            ],
+            [
+              18.647749994388054,
+              9.169352353599015,
+              -1.705777181640319
+            ],
+            [
+              18.627737511960234,
+              9.020118945321352,
+              -1.702091766849212
+            ],
+            [
+              18.608737031748472,
+              8.870809826733302,
+              -1.6920830592066567
+            ]
+          ],
+          "old_world": [
+            [
+              18.813045154168247,
+              10.362429398760288,
+              -1.4470604195744317
+            ],
+            [
+              18.814691470410565,
+              10.349198093496605,
+              -1.4469529826220695
+            ],
+            [
+              18.816339208174494,
+              10.335966965184486,
+              -1.4468455456697074
+            ],
+            [
+              18.81798836744101,
+              10.322736013976652,
+              -1.4467381087173452
+            ],
+            [
+              18.81963894819108,
+              10.309505240025823,
+              -1.446630671764983
+            ],
+            [
+              18.821290614067333,
+              10.296274601488427,
+              -1.4465740773212064
+            ],
+            [
+              18.82294302872157,
+              10.283044056447332,
+              -1.4465174828774297
+            ],
+            [
+              18.824596192148498,
+              10.269813604944913,
+              -1.446460888433653
+            ],
+            [
+              18.82624987495291,
+              10.256583218348267,
+              -1.4464389702777016
+            ],
+            [
+              18.827903847742604,
+              10.243352868000477,
+              -1.4464170521217503
+            ],
+            [
+              18.829558110516782,
+              10.230122553907897,
+              -1.446395133965799
+            ],
+            [
+              18.83121266327465,
+              10.216892276076885,
+              -1.4463732158098477
+            ],
+            [
+              18.83286750601541,
+              10.203662034513798,
+              -1.4463512976538964
+            ],
+            [
+              18.834522638738274,
+              10.190431829224988,
+              -1.446329379497945
+            ],
+            [
+              18.836177934898895,
+              10.177201644383423,
+              -1.4463265908790657
+            ],
+            [
+              18.837833267953453,
+              10.1639714641579,
+              -1.4463238022601863
+            ],
+            [
+              18.839488637901933,
+              10.150741288548522,
+              -1.446321013641307
+            ],
+            [
+              18.841144044744325,
+              10.137511117555391,
+              -1.4463182250224276
+            ],
+            [
+              18.842799488480615,
+              10.12428095117861,
+              -1.4463154364035482
+            ],
+            [
+              18.844454969110792,
+              10.111050789418282,
+              -1.4463126477846688
+            ],
+            [
+              18.846110486634842,
+              10.09782063227451,
+              -1.4463098591657895
+            ],
+            [
+              18.84776604105275,
+              10.084590479747398,
+              -1.44630707054691
+            ],
+            [
+              18.849421632364507,
+              10.071360331837047,
+              -1.4463042819280307
+            ],
+            [
+              18.851077260570097,
+              10.05813018854356,
+              -1.4463014933091514
+            ],
+            [
+              18.852732925669507,
+              10.04490004986704,
+              -1.446298704690272
+            ],
+            [
+              18.854388627662725,
+              10.031669915807592,
+              -1.4462959160713926
+            ],
+            [
+              18.856031535684053,
+              10.018539650447273,
+              -1.446343062687144
+            ],
+            [
+              18.85767382465598,
+              10.005409307643994,
+              -1.4463902093028955
+            ],
+            [
+              18.85931549457485,
+              9.992278887426941,
+              -1.446437355918647
+            ],
+            [
+              18.860956545437023,
+              9.979148389825301,
+              -1.4464845025343984
+            ],
+            [
+              18.862596977238848,
+              9.966017814868259,
+              -1.4465316491501499
+            ],
+            [
+              18.864236789976676,
+              9.952887162585004,
+              -1.4465787957659013
+            ],
+            [
+              18.865875983646866,
+              9.939756433004721,
+              -1.4466259423816528
+            ],
+            [
+              18.86751455824577,
+              9.926625626156596,
+              -1.4466730889974042
+            ],
+            [
+              18.86915251376975,
+              9.913494742069819,
+              -1.4467202356131557
+            ],
+            [
+              18.87078985021516,
+              9.900363780773576,
+              -1.446767382228907
+            ],
+            [
+              18.872426567578366,
+              9.887232742297055,
+              -1.4468145288446586
+            ],
+            [
+              18.87406266585573,
+              9.874101626669443,
+              -1.44686167546041
+            ]
+          ],
+          "B": [
+            18.87406266585573,
+            9.874101626669443,
+            -1.44686167546041
+          ],
+          "correspondences": {
+            "C0_ROW0": {
+              "arc_m": 0.0,
+              "normalized_progress": 0.0,
+              "segment": 0,
+              "alpha": 0.0,
+              "nearest_raw_row_diagnostic": 0,
+              "target_world": [
+                18.792272327481577,
+                10.213078390995763,
+                -1.7088611259609978
+              ],
+              "position_gap_m": 0.34870461167655903,
+              "yaw_gap_rad": 0.2619994505005878,
+              "tangent_gap_rad": 0.26195461083934557,
+              "remaining_arc_m": 1.3547669898114552,
+              "total_arc_m": 1.3547669898114552,
+              "pose_score": 13.161019570883374
+            },
+            "C1_XY_PROJECTION": {
+              "arc_m": 0.3245351532347025,
+              "normalized_progress": 0.2395505320659374,
+              "segment": 2,
+              "alpha": 0.15272153008498043,
+              "nearest_raw_row_diagnostic": 2,
+              "target_world": [
+                18.74762742214254,
+                9.891628709731863,
+                -1.7086552066030893
+              ],
+              "position_gap_m": 0.12764430850410247,
+              "yaw_gap_rad": 0.26179353114267934,
+              "tangent_gap_rad": 0.2616817507561673,
+              "remaining_arc_m": 1.0302318365767527,
+              "total_arc_m": 1.3547669898114552,
+              "pose_score": 2.6292622082897945,
+              "safety": {
+                "label": "hypothetical straight connector diagnostic only",
+                "connector": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.7572532867773871,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 2,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "suffix": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.8244915575856333,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 8,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "connector_geometric_threshold_met": true,
+                "selection_rejected": false,
+                "suffix_is_executed": false
+              }
+            },
+            "C2_SE2_PROJECTION": {
+              "arc_m": 0.3245809061559166,
+              "normalized_progress": 0.23958430386696167,
+              "segment": 2,
+              "alpha": 0.15302563680147266,
+              "nearest_raw_row_diagnostic": 2,
+              "target_world": [
+                18.747621139721804,
+                9.891583390188735,
+                -1.708655151798606
+              ],
+              "position_gap_m": 0.12764431670395746,
+              "yaw_gap_rad": 0.26179347633819594,
+              "tangent_gap_rad": 0.2616817507561673,
+              "remaining_arc_m": 1.0301860836555385,
+              "total_arc_m": 1.3547669898114552,
+              "pose_score": 2.6292619989567614,
+              "safety": {
+                "label": "hypothetical straight connector diagnostic only",
+                "connector": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.7572532867773871,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 2,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "suffix": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.8245290941513459,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 8,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "connector_geometric_threshold_met": true,
+                "selection_rejected": false,
+                "suffix_is_executed": false
+              }
+            },
+            "C3_FORWARD_SE2": {
+              "arc_m": 0.3245809061559166,
+              "normalized_progress": 0.23958430386696167,
+              "segment": 2,
+              "alpha": 0.15302563680147266,
+              "nearest_raw_row_diagnostic": 2,
+              "target_world": [
+                18.747621139721804,
+                9.891583390188735,
+                -1.708655151798606
+              ],
+              "position_gap_m": 0.12764431670395746,
+              "yaw_gap_rad": 0.26179347633819594,
+              "tangent_gap_rad": 0.2616817507561673,
+              "remaining_arc_m": 1.0301860836555385,
+              "total_arc_m": 1.3547669898114552,
+              "pose_score": 2.6292619989567614,
+              "safety": {
+                "label": "hypothetical straight connector diagnostic only",
+                "connector": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.7572532867773871,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 2,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "suffix": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.8245290941513459,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 8,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "connector_geometric_threshold_met": true,
+                "selection_rejected": false,
+                "suffix_is_executed": false
+              }
+            }
+          },
+          "first_official": {
+            "M0_NATIVE": {
+              "query_tick": 1002,
+              "query_time_after_B_s": 0.08333333767950535,
+              "query_pose_world": [
+                18.88091559905879,
+                9.807793015222233,
+                -1.4887640776416609
+              ],
+              "B_pose_world": [
+                18.87406266585573,
+                9.874101626669443,
+                -1.44686167546041
+              ],
+              "nearest": {
+                "arc_m": 0.4520083821314022,
+                "normalized_progress": 0.3336428961812163,
+                "segment": 2,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 3,
+                "target_world": [
+                  18.730123830346784,
+                  9.765362925136044,
+                  -1.7085025146157067
+                ],
+                "position_gap_m": 0.18039538125695054,
+                "yaw_gap_rad": 0.2616408391552967,
+                "tangent_gap_rad": 0.2616817507561673,
+                "remaining_arc_m": 0.9027586076800529,
+                "total_arc_m": 1.3547669898114552,
+                "pose_score": 4.253038502230286,
+                "original_row_identity": 3,
+                "physical_target_world": [
+                  18.730123830346784,
+                  9.765362925136044,
+                  -1.7085025146157067
+                ],
+                "physical_B_position_gap_m": 0.18039538125695054,
+                "physical_B_yaw_gap_rad": 0.2616408391552967
+              },
+              "H5_start": {
+                "arc_m": 0.6021761504675787,
+                "normalized_progress": 0.444486878552735,
+                "segment": 3,
+                "alpha": 0.9999999999999998,
+                "nearest_raw_row_diagnostic": 4,
+                "target_world": [
+                  18.70951613903068,
+                  9.616615885818659,
+                  -1.7084365322739403
+                ],
+                "position_gap_m": 0.3055723584221318,
+                "yaw_gap_rad": 0.2615748568135303,
+                "tangent_gap_rad": 0.26160019636769904,
+                "remaining_arc_m": 0.7525908393438765,
+                "total_arc_m": 1.3547669898114552,
+                "pose_score": 10.335732068342198,
+                "original_row_identity": 4,
+                "physical_target_world": [
+                  18.70951613903068,
+                  9.616615885818659,
+                  -1.7084365322739403
+                ],
+                "physical_B_position_gap_m": 0.3055723584221318,
+                "physical_B_yaw_gap_rad": 0.2615748568135303
+              }
+            },
+            "HALF_TRANSPORT_LOCAL_SE2": {
+              "query_tick": 1002,
+              "query_time_after_B_s": 0.08333333767950535,
+              "query_pose_world": [
+                18.88091559905879,
+                9.807793015222233,
+                -1.4887640776416609
+              ],
+              "B_pose_world": [
+                18.87406266585573,
+                9.874101626669443,
+                -1.44686167546041
+              ],
+              "nearest": {
+                "arc_m": 0.15076896981329796,
+                "normalized_progress": 0.11128774981023172,
+                "segment": 0,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 1,
+                "target_world": [
+                  18.771529204750887,
+                  10.063743180419213,
+                  -1.7088156476170342
+                ],
+                "position_gap_m": 0.21558531850468068,
+                "yaw_gap_rad": 0.2619539721566242,
+                "tangent_gap_rad": 0.26195461083934557,
+                "remaining_arc_m": 1.2039980199981573,
+                "total_arc_m": 1.3547669898114552,
+                "pose_score": 5.648884241631413,
+                "original_row_identity": 1,
+                "physical_target_world": [
+                  18.800973617764082,
+                  9.828612516136213,
+                  -1.709865593481719
+                ],
+                "physical_B_position_gap_m": 0.0860887224208105,
+                "physical_B_yaw_gap_rad": 0.26300391802130907
+              },
+              "H5_start": {
+                "arc_m": 0.3015581660300949,
+                "normalized_progress": 0.2225904294228952,
+                "segment": 1,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 2,
+                "target_world": [
+                  18.75078243600864,
+                  9.91438805569139,
+                  -1.708682729259185
+                ],
+                "position_gap_m": 0.12969584200925968,
+                "yaw_gap_rad": 0.2618210537987751,
+                "tangent_gap_rad": 0.2619603904778667,
+                "remaining_arc_m": 1.0532088237813602,
+                "total_arc_m": 1.3547669898114552,
+                "pose_score": 2.682266666342973,
+                "original_row_identity": 2,
+                "physical_target_world": [
+                  18.778095332045723,
+                  9.696589741015055,
+                  -1.7107072159126853
+                ],
+                "physical_B_position_gap_m": 0.20179246444596863,
+                "physical_B_yaw_gap_rad": 0.26384554045227526
+              }
+            },
+            "FULL_LOCAL_SE2": {
+              "query_tick": 1002,
+              "query_time_after_B_s": 0.08333333767950535,
+              "query_pose_world": [
+                18.88091559905879,
+                9.807793015222233,
+                -1.4887640776416609
+              ],
+              "B_pose_world": [
+                18.87406266585573,
+                9.874101626669443,
+                -1.44686167546041
+              ],
+              "nearest": {
+                "arc_m": 0.0,
+                "normalized_progress": 0.0,
+                "segment": 0,
+                "alpha": 0.0,
+                "nearest_raw_row_diagnostic": 0,
+                "target_world": [
+                  18.792272327481577,
+                  10.213078390995763,
+                  -1.7088611259609978
+                ],
+                "position_gap_m": 0.34870461167655903,
+                "yaw_gap_rad": 0.2619994505005878,
+                "tangent_gap_rad": 0.26195461083934557,
+                "remaining_arc_m": 1.3547669898114552,
+                "total_arc_m": 1.3547669898114552,
+                "pose_score": 13.161019570883374,
+                "original_row_identity": 0,
+                "physical_target_world": [
+                  18.85275605895422,
+                  9.72981987291745,
+                  -1.70972700965758
+                ],
+                "physical_B_position_gap_m": 0.14584648080569615,
+                "physical_B_yaw_gap_rad": 0.26286533419717006
+              },
+              "H5_start": {
+                "arc_m": 0.15076896981329796,
+                "normalized_progress": 0.11128774981023172,
+                "segment": 0,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 1,
+                "target_world": [
+                  18.771529204750887,
+                  10.063743180419213,
+                  -1.7088156476170342
+                ],
+                "position_gap_m": 0.21558531850468068,
+                "yaw_gap_rad": 0.2619539721566242,
+                "tangent_gap_rad": 0.26195461083934557,
+                "remaining_arc_m": 1.2039980199981573,
+                "total_arc_m": 1.3547669898114552,
+                "pose_score": 5.648884241631413,
+                "original_row_identity": 1,
+                "physical_target_world": [
+                  18.830441829721607,
+                  9.593484601263382,
+                  -1.710924493699217
+                ],
+                "physical_B_position_gap_m": 0.2839871340268526,
+                "physical_B_yaw_gap_rad": 0.26406281823880695
+              }
+            }
+          }
+        },
+        "episode_008_repeat_01/handoff_023": {
+          "original_world": [
+            [
+              17.491339630068165,
+              32.209390561490075,
+              -0.6507992021471369
+            ],
+            [
+              17.630758943839876,
+              32.118475227690524,
+              -0.5285231642156947
+            ],
+            [
+              17.76207533399305,
+              32.046344954661286,
+              -0.4590351156622279
+            ],
+            [
+              17.901087944699288,
+              31.990603828976287,
+              -0.3204974107176173
+            ],
+            [
+              18.052570171332658,
+              31.951363573399217,
+              -0.1958485416799891
+            ],
+            [
+              18.21014763932208,
+              31.92769816257525,
+              -0.08916713518203379
+            ],
+            [
+              18.38134774036268,
+              31.91974766649089,
+              0.00676183181702017
+            ],
+            [
+              18.54343279144578,
+              31.925212743747625,
+              0.09483049589096426
+            ],
+            [
+              18.64116527631135,
+              31.935723709086425,
+              0.14986942487655996
+            ],
+            [
+              18.688197815447285,
+              31.943157687293645,
+              0.17378161626755118
+            ]
+          ],
+          "old_world": [
+            [
+              17.46420298487384,
+              32.23488093333458,
+              -0.9543308190733302
+            ],
+            [
+              17.471942405952973,
+              32.2240237382613,
+              -0.9486814363055411
+            ],
+            [
+              17.479743039653076,
+              32.21321043916361,
+              -0.9430320535377521
+            ],
+            [
+              17.48760463701349,
+              32.20244138115272,
+              -0.9373826707699631
+            ],
+            [
+              17.495526947127868,
+              32.19171690792785,
+              -0.931733288002174
+            ],
+            [
+              17.503500442751992,
+              32.181030424075594,
+              -0.9278212278122222
+            ],
+            [
+              17.511515683423564,
+              32.1703752147126,
+              -0.9239091676222708
+            ],
+            [
+              17.51957254647577,
+              32.159751442908274,
+              -0.9199971074323194
+            ],
+            [
+              17.52767090860481,
+              32.149159271250895,
+              -0.9160850472423681
+            ],
+            [
+              17.535810645871763,
+              32.138598861845125,
+              -0.9121729870524167
+            ],
+            [
+              17.5439916337045,
+              32.12807037630954,
+              -0.9082609268624653
+            ],
+            [
+              17.55222060704958,
+              32.117579361569376,
+              -0.9030406075184185
+            ],
+            [
+              17.56050423446646,
+              32.107131447451685,
+              -0.8978202881743718
+            ],
+            [
+              17.56884229021244,
+              32.09672691867959,
+              -0.892599968830325
+            ],
+            [
+              17.577234547061558,
+              32.08636605879391,
+              -0.8873796494862783
+            ],
+            [
+              17.58568077631078,
+              32.07604915014539,
+              -0.8821593301422315
+            ],
+            [
+              17.59418074778624,
+              32.06577647388704,
+              -0.8769390107981847
+            ],
+            [
+              17.602734229849496,
+              32.055548309966476,
+              -0.8717186914541379
+            ],
+            [
+              17.611340989403864,
+              32.045364937118265,
+              -0.8664983721100912
+            ],
+            [
+              17.62000079190075,
+              32.03522663285634,
+              -0.8612780527660444
+            ],
+            [
+              17.628713401346058,
+              32.025133673466456,
+              -0.8560577334219976
+            ],
+            [
+              17.637478580306613,
+              32.015086333998624,
+              -0.8508374140779509
+            ],
+            [
+              17.646290250330523,
+              32.00507973495289,
+              -0.8467853377032375
+            ],
+            [
+              17.655142395406326,
+              31.995108923520053,
+              -0.8427332613285241
+            ],
+            [
+              17.664034870187994,
+              31.985174063413854,
+              -0.8386811849538107
+            ],
+            [
+              17.67296752866731,
+              31.975275317757752,
+              -0.8346291085790973
+            ],
+            [
+              17.68194844959413,
+              31.965420350960418,
+              -0.8289071350733446
+            ],
+            [
+              17.69098561305048,
+              31.955616933804468,
+              -0.8231851615675918
+            ],
+            [
+              17.700078723151567,
+              31.945865387262515,
+              -0.817463188061839
+            ],
+            [
+              17.70800927070301,
+              31.937454962697505,
+              -0.8120492462336637
+            ],
+            [
+              17.71598523535643,
+              31.929087596703553,
+              -0.8066353044054885
+            ],
+            [
+              17.72400638333077,
+              31.920763534533965,
+              -0.801221362577313
+            ],
+            [
+              17.732072479520607,
+              31.912483020172786,
+              -0.7958074207491377
+            ],
+            [
+              17.74018328750306,
+              31.904246296327642,
+              -0.7903934789209623
+            ],
+            [
+              17.748338569544718,
+              31.89605360442263,
+              -0.784979537092787
+            ],
+            [
+              17.756538086608597,
+              31.88790518459124,
+              -0.7795655952646117
+            ],
+            [
+              17.764781598361157,
+              31.879801275669315,
+              -0.7741516534364363
+            ],
+            [
+              17.773068863179343,
+              31.871742115188056,
+              -0.768737711608261
+            ],
+            [
+              17.78139963815767,
+              31.863727939367052,
+              -0.7633237697800856
+            ],
+            [
+              17.78977367911533,
+              31.855758983107368,
+              -0.7579098279519103
+            ],
+            [
+              17.79576389759864,
+              31.85012054414715,
+              -0.7524027713129988
+            ],
+            [
+              17.799343997665318,
+              31.846785028116386,
+              -0.7476891866599944
+            ],
+            [
+              17.802939780139905,
+              31.843466424181845,
+              -0.7429756020069895
+            ],
+            [
+              17.806551165131886,
+              31.84016480607573,
+              -0.7382620173539847
+            ],
+            [
+              17.81017807240409,
+              31.83688024715287,
+              -0.7335484327009798
+            ],
+            [
+              17.81382042137447,
+              31.83361282038906,
+              -0.7288348480479749
+            ],
+            [
+              17.817478131117905,
+              31.830362598379462,
+              -0.7241212633949701
+            ],
+            [
+              17.821151120367993,
+              31.82712965333699,
+              -0.7194076787419653
+            ],
+            [
+              17.824839307518847,
+              31.823914057090693,
+              -0.7146940940889608
+            ],
+            [
+              17.828542610626915,
+              31.820715881084176,
+              -0.7099805094359564
+            ]
+          ],
+          "B": [
+            17.828542610626915,
+            31.820715881084176,
+            -0.7099805094359564
+          ],
+          "correspondences": {
+            "C0_ROW0": {
+              "arc_m": 0.0,
+              "normalized_progress": 0.0,
+              "segment": 0,
+              "alpha": 0.0,
+              "nearest_raw_row_diagnostic": 0,
+              "target_world": [
+                17.491339630068165,
+                32.209390561490075,
+                -0.6507992021471369
+              ],
+              "position_gap_m": 0.51456181094824,
+              "yaw_gap_rad": 0.05918130728881942,
+              "tangent_gap_rad": 0.13213043456950135,
+              "remaining_arc_m": 1.2613384789876216,
+              "total_arc_m": 1.2613384789876216,
+              "pose_score": 26.52848701765875
+            },
+            "C1_XY_PROJECTION": {
+              "arc_m": 0.46193137914572885,
+              "normalized_progress": 0.3662231723212672,
+              "segment": 2,
+              "alpha": 0.9725845948085713,
+              "nearest_raw_row_diagnostic": 3,
+              "target_world": [
+                17.89727685765006,
+                31.99213199452277,
+                -0.3242954780329643
+              ],
+              "position_gap_m": 0.1846831899774071,
+              "yaw_gap_rad": 0.38568503140299204,
+              "tangent_gap_rad": 0.3286305258367927,
+              "remaining_arc_m": 0.7994070998418927,
+              "total_arc_m": 1.2613384789876216,
+              "pose_score": 5.58113076529024,
+              "safety": {
+                "label": "hypothetical straight connector diagnostic only",
+                "connector": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.21148985508009666,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 2,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "suffix": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.21148985508009666,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 8,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "connector_geometric_threshold_met": true,
+                "selection_rejected": false,
+                "suffix_is_executed": false
+              }
+            },
+            "C2_SE2_PROJECTION": {
+              "arc_m": 0.4156565849029082,
+              "normalized_progress": 0.3295361172494503,
+              "segment": 2,
+              "alpha": 0.6636158323272495,
+              "nearest_raw_row_diagnostic": 3,
+              "target_world": [
+                17.854326303350852,
+                32.00935426114498,
+                -0.3670993012867032
+              ],
+              "position_gap_m": 0.19039232453658905,
+              "yaw_gap_rad": 0.34288120814925316,
+              "tangent_gap_rad": 0.3286305258367927,
+              "remaining_arc_m": 0.8456818940847135,
+              "total_arc_m": 1.2613384789876216,
+              "pose_score": 5.340263327522276,
+              "safety": {
+                "label": "hypothetical straight connector diagnostic only",
+                "connector": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.19220524634946662,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 2,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "suffix": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.19220524634946662,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 8,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "connector_geometric_threshold_met": true,
+                "selection_rejected": false,
+                "suffix_is_executed": false
+              }
+            },
+            "C3_FORWARD_SE2": {
+              "arc_m": 0.46193137914572885,
+              "normalized_progress": 0.3662231723212672,
+              "segment": 2,
+              "alpha": 0.9725845948085713,
+              "nearest_raw_row_diagnostic": 3,
+              "target_world": [
+                17.89727685765006,
+                31.99213199452277,
+                -0.3242954780329643
+              ],
+              "position_gap_m": 0.1846831899774071,
+              "yaw_gap_rad": 0.38568503140299204,
+              "tangent_gap_rad": 0.3286305258367927,
+              "remaining_arc_m": 0.7994070998418927,
+              "total_arc_m": 1.2613384789876216,
+              "pose_score": 5.58113076529024,
+              "safety": {
+                "label": "hypothetical straight connector diagnostic only",
+                "connector": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.21148985508009666,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 2,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "suffix": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.21148985508009666,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 8,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "connector_geometric_threshold_met": true,
+                "selection_rejected": false,
+                "suffix_is_executed": false
+              }
+            }
+          },
+          "first_official": {
+            "M0_NATIVE": {
+              "query_tick": 1806,
+              "query_time_after_B_s": 0.03333333507180214,
+              "query_pose_world": [
+                17.84115860483165,
+                31.810155537028734,
+                -0.6838866723247516
+              ],
+              "B_pose_world": [
+                17.828542610626915,
+                31.820715881084176,
+                -0.7099805094359564
+              ],
+              "nearest": {
+                "arc_m": 0.4660374325348433,
+                "normalized_progress": 0.3694784867808801,
+                "segment": 2,
+                "alpha": 1.0000000000000002,
+                "nearest_raw_row_diagnostic": 3,
+                "target_world": [
+                  17.901087944699288,
+                  31.990603828976287,
+                  -0.3204974107176173
+                ],
+                "position_gap_m": 0.18472882919204775,
+                "yaw_gap_rad": 0.3894830987183391,
+                "tangent_gap_rad": 0.3286305258367927,
+                "remaining_arc_m": 0.7953010464527783,
+                "total_arc_m": 1.2613384789876216,
+                "pose_score": 5.625772483458189,
+                "original_row_identity": 3,
+                "physical_target_world": [
+                  17.901087944699288,
+                  31.990603828976287,
+                  -0.3204974107176173
+                ],
+                "physical_B_position_gap_m": 0.18472882919204775,
+                "physical_B_yaw_gap_rad": 0.3894830987183391
+              },
+              "H5_start": {
+                "arc_m": 0.622519580537602,
+                "normalized_progress": 0.49353888025143744,
+                "segment": 3,
+                "alpha": 0.9999999999999997,
+                "nearest_raw_row_diagnostic": 4,
+                "target_world": [
+                  18.052570171332658,
+                  31.951363573399217,
+                  -0.19584854167998916
+                ],
+                "position_gap_m": 0.2593398686338272,
+                "yaw_gap_rad": 0.5141319677559673,
+                "tangent_gap_rad": 0.4565100207507242,
+                "remaining_arc_m": 0.6388188984500196,
+                "total_arc_m": 1.2613384789876216,
+                "pose_score": 10.582382161834893,
+                "original_row_identity": 4,
+                "physical_target_world": [
+                  18.052570171332658,
+                  31.951363573399217,
+                  -0.19584854167998905
+                ],
+                "physical_B_position_gap_m": 0.2593398686338272,
+                "physical_B_yaw_gap_rad": 0.5141319677559673
+              }
+            },
+            "HALF_TRANSPORT_LOCAL_SE2": {
+              "query_tick": 1806,
+              "query_time_after_B_s": 0.03333333507180214,
+              "query_pose_world": [
+                17.84115860483165,
+                31.810155537028734,
+                -0.6838866723247516
+              ],
+              "B_pose_world": [
+                17.828542610626915,
+                31.820715881084176,
+                -0.7099805094359564
+              ],
+              "nearest": {
+                "arc_m": 0.16644321245535518,
+                "normalized_progress": 0.13195761108385928,
+                "segment": 0,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 1,
+                "target_world": [
+                  17.630758943839876,
+                  32.118475227690524,
+                  -0.5285231642156947
+                ],
+                "position_gap_m": 0.35746189634584263,
+                "yaw_gap_rad": 0.18145734522026166,
+                "tangent_gap_rad": 0.13213043456950135,
+                "remaining_arc_m": 1.0948952665322664,
+                "total_arc_m": 1.2613384789876216,
+                "pose_score": 13.258310527325143,
+                "original_row_identity": 1,
+                "physical_target_world": [
+                  17.8057845304357,
+                  31.92831602620319,
+                  -0.4094256407164418
+                ],
+                "physical_B_position_gap_m": 0.10998055029696305,
+                "physical_B_yaw_gap_rad": 0.3005548687195146
+              },
+              "H5_start": {
+                "arc_m": 0.31626567609193057,
+                "normalized_progress": 0.25073814948210604,
+                "segment": 1,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 2,
+                "target_world": [
+                  17.76207533399305,
+                  32.046344954661286,
+                  -0.4590351156622279
+                ],
+                "position_gap_m": 0.235215598348383,
+                "yaw_gap_rad": 0.2509453937737285,
+                "tangent_gap_rad": 0.20768553302462045,
+                "remaining_arc_m": 0.9450728028956911,
+                "total_arc_m": 1.2613384789876216,
+                "pose_score": 6.451438229702707,
+                "original_row_identity": 2,
+                "physical_target_world": [
+                  17.93015527448616,
+                  31.88489165773511,
+                  -0.347289614647817
+                ],
+                "physical_B_position_gap_m": 0.12018179465011636,
+                "physical_B_yaw_gap_rad": 0.3626908947881393
+              }
+            },
+            "FULL_LOCAL_SE2": {
+              "query_tick": 1806,
+              "query_time_after_B_s": 0.03333333507180214,
+              "query_pose_world": [
+                17.84115860483165,
+                31.810155537028734,
+                -0.6838866723247516
+              ],
+              "B_pose_world": [
+                17.828542610626915,
+                31.820715881084176,
+                -0.7099805094359564
+              ],
+              "nearest": {
+                "arc_m": 0.0,
+                "normalized_progress": 0.0,
+                "segment": 0,
+                "alpha": 0.0,
+                "nearest_raw_row_diagnostic": 0,
+                "target_world": [
+                  17.491339630068165,
+                  32.209390561490075,
+                  -0.6507992021471369
+                ],
+                "position_gap_m": 0.51456181094824,
+                "yaw_gap_rad": 0.05918130728881942,
+                "tangent_gap_rad": 0.13213043456950135,
+                "remaining_arc_m": 1.2613384789876216,
+                "total_arc_m": 1.2613384789876216,
+                "pose_score": 26.52848701765875,
+                "original_row_identity": 0,
+                "physical_target_world": [
+                  17.85694741690576,
+                  31.8059512562431,
+                  -0.40731344946977543
+                ],
+                "physical_B_position_gap_m": 0.03201292186659111,
+                "physical_B_yaw_gap_rad": 0.30266705996618093
+              },
+              "H5_start": {
+                "arc_m": 0.16644321245535518,
+                "normalized_progress": 0.13195761108385928,
+                "segment": 0,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 1,
+                "target_world": [
+                  17.630758943839876,
+                  32.118475227690524,
+                  -0.5285231642156947
+                ],
+                "position_gap_m": 0.35746189634584263,
+                "yaw_gap_rad": 0.18145734522026166,
+                "tangent_gap_rad": 0.13213043456950135,
+                "remaining_arc_m": 1.0948952665322664,
+                "total_arc_m": 1.2613384789876216,
+                "pose_score": 13.258310527325143,
+                "original_row_identity": 1,
+                "physical_target_world": [
+                  18.00261904882836,
+                  31.7609383588257,
+                  -0.2901574137883509
+                ],
+                "physical_B_position_gap_m": 0.184054227075241,
+                "physical_B_yaw_gap_rad": 0.41982309564760545
+              }
+            }
+          }
+        },
+        "episode_013_repeat_00/handoff_020": {
+          "original_world": [
+            [
+              19.58011869493645,
+              9.376912477706295,
+              -1.6882168896564147
+            ],
+            [
+              19.560294721628573,
+              9.227292099989302,
+              -1.7314926333793303
+            ],
+            [
+              19.52727520683788,
+              9.076320463744977,
+              -1.838077897585263
+            ],
+            [
+              19.477663716327225,
+              8.93119956979153,
+              -1.9612921722301146
+            ],
+            [
+              19.409100015727887,
+              8.79222697663467,
+              -2.0945940859683656
+            ],
+            [
+              19.323270879196297,
+              8.658734596986658,
+              -2.2310262568362855
+            ],
+            [
+              19.21994416970937,
+              8.540337783293683,
+              -2.3562155015834474
+            ],
+            [
+              19.108076724956195,
+              8.437222374894915,
+              -2.4870991952785158
+            ],
+            [
+              19.01504735085889,
+              8.372056775572236,
+              -2.6028548725017213
+            ],
+            [
+              18.938960248875233,
+              8.328016395013512,
+              -2.6577127225764894
+            ]
+          ],
+          "old_world": [
+            [
+              19.583536800537207,
+              9.408335026546553,
+              -1.371401334560742
+            ],
+            [
+              19.586177327065123,
+              9.39526577194298,
+              -1.371476559275804
+            ],
+            [
+              19.588816870454615,
+              9.382196318743532,
+              -1.371551783990866
+            ],
+            [
+              19.591455430690747,
+              9.369126667022162,
+              -1.371627008705928
+            ],
+            [
+              19.594093007758588,
+              9.35605681685283,
+              -1.3717022334209898
+            ],
+            [
+              19.596730397844397,
+              9.342986928948775,
+              -1.3716556214512117
+            ],
+            [
+              19.59936839714056,
+              9.329917163992867,
+              -1.3716090094814335
+            ],
+            [
+              19.602007005641344,
+              9.3168475220135,
+              -1.3715623975116553
+            ],
+            [
+              19.60464622334102,
+              9.30377800303907,
+              -1.3715157855418771
+            ],
+            [
+              19.607286050233853,
+              9.290708607097974,
+              -1.371469173572099
+            ],
+            [
+              19.609926486314105,
+              9.277639334218607,
+              -1.3714225616023208
+            ],
+            [
+              19.612568456382043,
+              9.264570371448762,
+              -1.3712344206539262
+            ],
+            [
+              19.61521288521026,
+              9.25150190597297,
+              -1.3710462797055316
+            ],
+            [
+              19.617859772705145,
+              9.238433938253817,
+              -1.370858138757137
+            ],
+            [
+              19.62050911877301,
+              9.225366468753865,
+              -1.3706699978087424
+            ],
+            [
+              19.62316092332008,
+              9.212299497935668,
+              -1.3704818568603478
+            ],
+            [
+              19.62581518625248,
+              9.199233026261757,
+              -1.3702937159119533
+            ],
+            [
+              19.628471907476268,
+              9.186167054194645,
+              -1.3701055749635587
+            ],
+            [
+              19.631131086897394,
+              9.173101582196828,
+              -1.369917434015164
+            ],
+            [
+              19.633792724421735,
+              9.160036610730787,
+              -1.3697292930667695
+            ],
+            [
+              19.63645681995508,
+              9.146972140258981,
+              -1.369541152118375
+            ],
+            [
+              19.639123373403123,
+              9.133908171243855,
+              -1.3693530111699803
+            ],
+            [
+              19.64179238467148,
+              9.120844704147832,
+              -1.3691648702215857
+            ],
+            [
+              19.64432363805931,
+              9.108473656032368,
+              -1.3687771361334915
+            ],
+            [
+              19.646859687933805,
+              9.096103590300022,
+              -1.3683894020453973
+            ],
+            [
+              19.649400533913706,
+              9.08373450881048,
+              -1.368001667957303
+            ],
+            [
+              19.651274926575656,
+              9.074631461377164,
+              -1.3674508433288985
+            ],
+            [
+              19.65315433313572,
+              9.065529447786405,
+              -1.366900018700494
+            ],
+            [
+              19.65503875302367,
+              9.056428470799824,
+              -1.3663491940720895
+            ],
+            [
+              19.65625072312789,
+              9.050592297437753,
+              -1.3657335347611124
+            ],
+            [
+              19.657466286096664,
+              9.044756871342374,
+              -1.3651178754501352
+            ],
+            [
+              19.65868544146925,
+              9.038922194725528,
+              -1.364502216139158
+            ],
+            [
+              19.65990818878354,
+              9.033088269798768,
+              -1.3638865568281808
+            ],
+            [
+              19.66113452757607,
+              9.027255098773363,
+              -1.3632708975172037
+            ],
+            [
+              19.662364457382015,
+              9.0214226838603,
+              -1.3626552382062265
+            ],
+            [
+              19.663597977735186,
+              9.015591027270274,
+              -1.3620395788952493
+            ],
+            [
+              19.664835088168036,
+              9.009760131213696,
+              -1.3614239195842721
+            ],
+            [
+              19.666075788211653,
+              9.003929997900688,
+              -1.360808260273295
+            ],
+            [
+              19.667320077395765,
+              8.998100629541081,
+              -1.3601926009623178
+            ],
+            [
+              19.668567955248744,
+              8.99227202834442,
+              -1.3595769416513406
+            ]
+          ],
+          "B": [
+            19.668567955248744,
+            8.99227202834442,
+            -1.3595769416513406
+          ],
+          "correspondences": {
+            "C0_ROW0": {
+              "arc_m": 0.0,
+              "normalized_progress": 0.0,
+              "segment": 0,
+              "alpha": 0.0,
+              "nearest_raw_row_diagnostic": 0,
+              "target_world": [
+                19.58011869493645,
+                9.376912477706295,
+                -1.6882168896564147
+              ],
+              "position_gap_m": 0.3946790429388128,
+              "yaw_gap_rad": 0.3286399480050741,
+              "tangent_gap_rad": 0.34294727751152143,
+              "remaining_arc_m": 1.2832864102478099,
+              "total_arc_m": 1.2832864102478099,
+              "pose_score": 17.15296324561859
+            },
+            "C1_XY_PROJECTION": {
+              "arc_m": 0.3392920662039436,
+              "normalized_progress": 0.264393095332806,
+              "segment": 2,
+              "alpha": 0.22054154941072646,
+              "nearest_raw_row_diagnostic": 2,
+              "target_world": [
+                19.516333811852085,
+                9.044315276940615,
+                -1.8652517646249573
+              ],
+              "position_gap_m": 0.16088422588979834,
+              "yaw_gap_rad": 0.5056748229736168,
+              "tangent_gap_rad": 0.5406270586452766,
+              "remaining_arc_m": 0.9439943440438663,
+              "total_arc_m": 1.2832864102478099,
+              "pose_score": 6.319202972372854,
+              "safety": {
+                "label": "hypothetical straight connector diagnostic only",
+                "connector": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.8780011834290089,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 2,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "suffix": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 1.0295768015199653,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 8,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "connector_geometric_threshold_met": true,
+                "selection_rejected": false,
+                "suffix_is_executed": false
+              }
+            },
+            "C2_SE2_PROJECTION": {
+              "arc_m": 0.30546831557487586,
+              "normalized_progress": 0.23803596230391638,
+              "segment": 1,
+              "alpha": 1.0,
+              "nearest_raw_row_diagnostic": 2,
+              "target_world": [
+                19.52727520683788,
+                9.076320463744977,
+                -1.838077897585263
+              ],
+              "position_gap_m": 0.1644012781178324,
+              "yaw_gap_rad": 0.4785009559339224,
+              "tangent_gap_rad": 0.4265421238765963,
+              "remaining_arc_m": 0.977818094672934,
+              "total_arc_m": 1.2832864102478099,
+              "pose_score": 6.043407942107248,
+              "safety": {
+                "label": "hypothetical straight connector diagnostic only",
+                "connector": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.8780011834290089,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 2,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "suffix": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 1.018635465276953,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 9,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "connector_geometric_threshold_met": true,
+                "selection_rejected": false,
+                "suffix_is_executed": false
+              }
+            },
+            "C3_FORWARD_SE2": {
+              "arc_m": 0.3392920662039436,
+              "normalized_progress": 0.264393095332806,
+              "segment": 2,
+              "alpha": 0.22054154941072646,
+              "nearest_raw_row_diagnostic": 2,
+              "target_world": [
+                19.516333811852085,
+                9.044315276940615,
+                -1.8652517646249573
+              ],
+              "position_gap_m": 0.16088422588979834,
+              "yaw_gap_rad": 0.5056748229736168,
+              "tangent_gap_rad": 0.5406270586452766,
+              "remaining_arc_m": 0.9439943440438663,
+              "total_arc_m": 1.2832864102478099,
+              "pose_score": 6.319202972372854,
+              "safety": {
+                "label": "hypothetical straight connector diagnostic only",
+                "connector": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 0.8780011834290089,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 2,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "suffix": {
+                  "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+                  "workspace_known": true,
+                  "unknown": false,
+                  "minimum_clearance_m": 1.0295768015199653,
+                  "physical_overlap": false,
+                  "clearance_valid": true,
+                  "footprint_radius_m": 0.2,
+                  "required_clearance_m": 0.05,
+                  "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+                  "sample_count": 8,
+                  "sampling_hint_m": 0.01,
+                  "first_collision_segment_index": null,
+                  "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+                },
+                "connector_geometric_threshold_met": true,
+                "selection_rejected": false,
+                "suffix_is_executed": false
+              }
+            }
+          },
+          "first_official": {
+            "M0_NATIVE": {
+              "query_tick": 1524,
+              "query_time_after_B_s": 0.0,
+              "query_pose_world": [
+                19.668567955248744,
+                8.99227202834442,
+                -1.3595769416513406
+              ],
+              "B_pose_world": [
+                19.668567955248744,
+                8.99227202834442,
+                -1.3595769416513406
+              ],
+              "nearest": {
+                "arc_m": 0.30546831557487586,
+                "normalized_progress": 0.23803596230391638,
+                "segment": 1,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 2,
+                "target_world": [
+                  19.52727520683788,
+                  9.076320463744977,
+                  -1.838077897585263
+                ],
+                "position_gap_m": 0.1644012781178324,
+                "yaw_gap_rad": 0.4785009559339224,
+                "tangent_gap_rad": 0.4265421238765963,
+                "remaining_arc_m": 0.977818094672934,
+                "total_arc_m": 1.2832864102478099,
+                "pose_score": 6.043407942107248,
+                "original_row_identity": 2,
+                "physical_target_world": [
+                  19.52727520683788,
+                  9.076320463744977,
+                  -1.838077897585263
+                ],
+                "physical_B_position_gap_m": 0.1644012781178324,
+                "physical_B_yaw_gap_rad": 0.4785009559339224
+              },
+              "H5_start": {
+                "arc_m": 0.45883511071820704,
+                "normalized_progress": 0.35754692565442453,
+                "segment": 2,
+                "alpha": 1.0000000000000002,
+                "nearest_raw_row_diagnostic": 3,
+                "target_world": [
+                  19.477663716327225,
+                  8.93119956979153,
+                  -1.9612921722301146
+                ],
+                "position_gap_m": 0.20043521055916969,
+                "yaw_gap_rad": 0.6017152305787741,
+                "tangent_gap_rad": 0.5406270586452766,
+                "remaining_arc_m": 0.8244512995296028,
+                "total_arc_m": 1.2832864102478099,
+                "pose_score": 9.299991220415258,
+                "original_row_identity": 3,
+                "physical_target_world": [
+                  19.477663716327225,
+                  8.93119956979153,
+                  -1.9612921722301146
+                ],
+                "physical_B_position_gap_m": 0.20043521055916969,
+                "physical_B_yaw_gap_rad": 0.6017152305787741
+              }
+            },
+            "HALF_TRANSPORT_LOCAL_SE2": {
+              "query_tick": 1524,
+              "query_time_after_B_s": 0.0,
+              "query_pose_world": [
+                19.668567955248744,
+                8.99227202834442,
+                -1.3595769416513406
+              ],
+              "B_pose_world": [
+                19.668567955248744,
+                8.99227202834442,
+                -1.3595769416513406
+              ],
+              "nearest": {
+                "arc_m": 0.15092795415656723,
+                "normalized_progress": 0.11761049828885992,
+                "segment": 0,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 1,
+                "target_world": [
+                  19.560294721628573,
+                  9.227292099989302,
+                  -1.7314926333793303
+                ],
+                "position_gap_m": 0.2587615257230753,
+                "yaw_gap_rad": 0.3719156917279898,
+                "tangent_gap_rad": 0.34294727751152143,
+                "remaining_arc_m": 1.1323584560912425,
+                "total_arc_m": 1.2832864102478099,
+                "pose_score": 8.713894862040858,
+                "original_row_identity": 1,
+                "physical_target_world": [
+                  19.601740192631407,
+                  9.026665493450597,
+                  -1.7276878367043078
+                ],
+                "physical_B_position_gap_m": 0.07515890032756527,
+                "physical_B_yaw_gap_rad": 0.36811089505296724
+              },
+              "H5_start": {
+                "arc_m": 0.30546831557487586,
+                "normalized_progress": 0.23803596230391638,
+                "segment": 1,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 2,
+                "target_world": [
+                  19.52727520683788,
+                  9.076320463744977,
+                  -1.838077897585263
+                ],
+                "position_gap_m": 0.1644012781178324,
+                "yaw_gap_rad": 0.4785009559339224,
+                "tangent_gap_rad": 0.4265421238765963,
+                "remaining_arc_m": 0.977818094672934,
+                "total_arc_m": 1.2832864102478099,
+                "pose_score": 6.043407942107248,
+                "original_row_identity": 2,
+                "physical_target_world": [
+                  19.566357837697154,
+                  8.890984618639521,
+                  -1.8370663544456949
+                ],
+                "physical_B_position_gap_m": 0.1438959606612975,
+                "physical_B_yaw_gap_rad": 0.4774894127943543
+              }
+            },
+            "FULL_LOCAL_SE2": {
+              "query_tick": 1524,
+              "query_time_after_B_s": 0.0,
+              "query_pose_world": [
+                19.668567955248744,
+                8.99227202834442,
+                -1.3595769416513406
+              ],
+              "B_pose_world": [
+                19.668567955248744,
+                8.99227202834442,
+                -1.3595769416513406
+              ],
+              "nearest": {
+                "arc_m": 0.0,
+                "normalized_progress": 0.0,
+                "segment": 0,
+                "alpha": 0.0,
+                "nearest_raw_row_diagnostic": 0,
+                "target_world": [
+                  19.58011869493645,
+                  9.376912477706295,
+                  -1.6882168896564147
+                ],
+                "position_gap_m": 0.3946790429388128,
+                "yaw_gap_rad": 0.3286399480050741,
+                "tangent_gap_rad": 0.34294727751152143,
+                "remaining_arc_m": 1.2832864102478099,
+                "total_arc_m": 1.2832864102478099,
+                "pose_score": 17.15296324561859,
+                "original_row_identity": 0,
+                "physical_target_world": [
+                  19.6647521622555,
+                  8.964921075474226,
+                  -1.6779508650554174
+                ],
+                "physical_B_position_gap_m": 0.027615845072618033,
+                "physical_B_yaw_gap_rad": 0.3183739234040768
+              },
+              "H5_start": {
+                "arc_m": 0.15092795415656723,
+                "normalized_progress": 0.11761049828885992,
+                "segment": 0,
+                "alpha": 1.0,
+                "nearest_raw_row_diagnostic": 1,
+                "target_world": [
+                  19.560294721628573,
+                  9.227292099989302,
+                  -1.7314926333793303
+                ],
+                "position_gap_m": 0.2587615257230753,
+                "yaw_gap_rad": 0.3719156917279898,
+                "tangent_gap_rad": 0.34294727751152143,
+                "remaining_arc_m": 1.1323584560912425,
+                "total_arc_m": 1.2832864102478099,
+                "pose_score": 8.713894862040858,
+                "original_row_identity": 1,
+                "physical_target_world": [
+                  19.644371623260927,
+                  8.826287138556538,
+                  -1.7238882378740212
+                ],
+                "physical_B_position_gap_m": 0.16773922057634616,
+                "physical_B_yaw_gap_rad": 0.36431129622268066
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "file": "selector_progress_reset.png",
+      "sha256": "f8bfc3dc11c60dc43da2cbc1764a6990872a8580a9c9512199b340018bf5f9f6",
+      "numeric_sidecar": {
+        "OSA03_R00": {
+          "M0_NATIVE": {
+            "ticks": [
+              96,
+              102,
+              108,
+              114,
+              120,
+              126,
+              132,
+              138,
+              144
+            ],
+            "first_original_arc_m": [
+              0.45186153279004126,
+              0.45186153279004126,
+              0.6026315351330607,
+              0.6026315351330607,
+              0.7530121394378568,
+              0.7530121394378568,
+              0.9029335112861909,
+              0.9029335112861909,
+              1.052918159958627
+            ],
+            "first_original_rows": [
+              3,
+              3,
+              4,
+              4,
+              5,
+              5,
+              6,
+              6,
+              7
+            ]
+          },
+          "HALF_TRANSPORT_LOCAL_SE2": {
+            "ticks": [
+              96,
+              102,
+              108,
+              114,
+              120,
+              126,
+              132,
+              138,
+              144
+            ],
+            "first_original_arc_m": [
+              0.3012516776926266,
+              0.3012516776926266,
+              0.45186153279004126,
+              0.45186153279004126,
+              0.6026315351330607,
+              0.7530121394378568,
+              0.7530121394378568,
+              0.9029335112861909,
+              0.9029335112861909
+            ],
+            "first_original_rows": [
+              2,
+              2,
+              3,
+              3,
+              4,
+              5,
+              5,
+              6,
+              6
+            ]
+          },
+          "FULL_LOCAL_SE2": {
+            "ticks": [
+              96,
+              102,
+              108,
+              114,
+              120,
+              126,
+              132,
+              138,
+              144
+            ],
+            "first_original_arc_m": [
+              0.15075640476645832,
+              0.3012516776926266,
+              0.3012516776926266,
+              0.45186153279004126,
+              0.45186153279004126,
+              0.6026315351330607,
+              0.7530121394378568,
+              0.7530121394378568,
+              0.9029335112861909
+            ],
+            "first_original_rows": [
+              1,
+              2,
+              2,
+              3,
+              3,
+              4,
+              5,
+              5,
+              6
+            ]
+          }
+        },
+        "episode_001_repeat_01/handoff_013": {
+          "M0_NATIVE": {
+            "ticks": [
+              1002,
+              1008,
+              1014,
+              1020,
+              1026,
+              1032,
+              1038,
+              1044,
+              1050
+            ],
+            "first_original_arc_m": [
+              0.6021761504675787,
+              0.6021761504675787,
+              0.7526072110998969,
+              0.7526072110998969,
+              0.9031236431570159,
+              0.9031236431570159,
+              1.0536844789623852,
+              1.0536844789623852,
+              1.2042537640078135
+            ],
+            "first_original_rows": [
+              4,
+              4,
+              5,
+              5,
+              6,
+              6,
+              7,
+              7,
+              8
+            ]
+          },
+          "HALF_TRANSPORT_LOCAL_SE2": {
+            "ticks": [
+              1002,
+              1008,
+              1014,
+              1020,
+              1026,
+              1032,
+              1038,
+              1044,
+              1050
+            ],
+            "first_original_arc_m": [
+              0.3015581660300949,
+              0.4520083821314022,
+              0.4520083821314022,
+              0.6021761504675787,
+              0.7526072110998969,
+              0.7526072110998969,
+              0.9031236431570159,
+              1.0536844789623852,
+              1.0536844789623852
+            ],
+            "first_original_rows": [
+              2,
+              3,
+              3,
+              4,
+              5,
+              5,
+              6,
+              7,
+              7
+            ]
+          },
+          "FULL_LOCAL_SE2": {
+            "ticks": [
+              1002,
+              1008,
+              1014,
+              1020,
+              1026,
+              1032,
+              1038,
+              1044,
+              1050
+            ],
+            "first_original_arc_m": [
+              0.15076896981329796,
+              0.15076896981329796,
+              0.3015581660300949,
+              0.3015581660300949,
+              0.4520083821314022,
+              0.6021761504675787,
+              0.6021761504675787,
+              0.9031236431570159,
+              1.0536844789623852
+            ],
+            "first_original_rows": [
+              1,
+              1,
+              2,
+              2,
+              3,
+              4,
+              4,
+              6,
+              7
+            ]
+          }
+        },
+        "episode_008_repeat_01/handoff_023": {
+          "M0_NATIVE": {
+            "ticks": [
+              1806,
+              1812,
+              1818,
+              1824,
+              1830,
+              1836,
+              1842,
+              1848,
+              1854
+            ],
+            "first_original_arc_m": [
+              0.622519580537602,
+              0.622519580537602,
+              0.7818642073294231,
+              0.7818642073294231,
+              0.9532488186114729,
+              0.9532488186114729,
+              1.1154259774657123,
+              1.1154259774657123,
+              1.1154259774657123
+            ],
+            "first_original_rows": [
+              4,
+              4,
+              5,
+              5,
+              6,
+              6,
+              7,
+              7,
+              7
+            ]
+          },
+          "HALF_TRANSPORT_LOCAL_SE2": {
+            "ticks": [
+              1806,
+              1812,
+              1818,
+              1824,
+              1830,
+              1836,
+              1842,
+              1848,
+              1854
+            ],
+            "first_original_arc_m": [
+              0.31626567609193057,
+              0.4660374325348433,
+              0.4660374325348433,
+              0.622519580537602,
+              0.7818642073294231,
+              0.7818642073294231,
+              0.9532488186114729,
+              0.9532488186114729,
+              1.1154259774657123
+            ],
+            "first_original_rows": [
+              2,
+              3,
+              3,
+              4,
+              5,
+              5,
+              6,
+              6,
+              7
+            ]
+          },
+          "FULL_LOCAL_SE2": {
+            "ticks": [
+              1806,
+              1812,
+              1818,
+              1824,
+              1830,
+              1836,
+              1842,
+              1848,
+              1854
+            ],
+            "first_original_arc_m": [
+              0.16644321245535518,
+              0.16644321245535518,
+              0.31626567609193057,
+              0.31626567609193057,
+              0.4660374325348433,
+              0.622519580537602,
+              0.7818642073294231,
+              0.7818642073294231,
+              0.9532488186114729
+            ],
+            "first_original_rows": [
+              1,
+              1,
+              2,
+              2,
+              3,
+              4,
+              5,
+              5,
+              6
+            ]
+          }
+        },
+        "episode_013_repeat_00/handoff_020": {
+          "M0_NATIVE": {
+            "ticks": [
+              1524,
+              1530,
+              1536,
+              1542,
+              1548,
+              1554,
+              1560,
+              1566,
+              1572,
+              1578
+            ],
+            "first_original_arc_m": [
+              0.45883511071820704,
+              0.45883511071820704,
+              0.6138007930114752,
+              0.6138007930114752,
+              0.7725044668878132,
+              0.7725044668878132,
+              0.9296483957748217,
+              0.9296483957748217,
+              1.0817901475882177,
+              1.0817901475882177
+            ],
+            "first_original_rows": [
+              3,
+              3,
+              4,
+              4,
+              5,
+              5,
+              6,
+              6,
+              7,
+              7
+            ]
+          },
+          "HALF_TRANSPORT_LOCAL_SE2": {
+            "ticks": [
+              1524,
+              1530,
+              1536,
+              1542,
+              1548,
+              1554,
+              1560,
+              1566,
+              1572,
+              1578
+            ],
+            "first_original_arc_m": [
+              0.30546831557487586,
+              0.30546831557487586,
+              0.45883511071820704,
+              0.45883511071820704,
+              0.6138007930114752,
+              0.6138007930114752,
+              0.7725044668878132,
+              0.9296483957748217,
+              0.9296483957748217,
+              1.0817901475882177
+            ],
+            "first_original_rows": [
+              2,
+              2,
+              3,
+              3,
+              4,
+              4,
+              5,
+              6,
+              6,
+              7
+            ]
+          },
+          "FULL_LOCAL_SE2": {
+            "ticks": [
+              1524,
+              1530,
+              1536,
+              1542,
+              1548,
+              1554,
+              1560,
+              1566,
+              1572,
+              1578
+            ],
+            "first_original_arc_m": [
+              0.15092795415656723,
+              0.15092795415656723,
+              0.30546831557487586,
+              0.30546831557487586,
+              0.45883511071820704,
+              0.6138007930114752,
+              0.7725044668878132,
+              0.7725044668878132,
+              0.9296483957748217,
+              0.9296483957748217
+            ],
+            "first_original_rows": [
+              1,
+              1,
+              2,
+              2,
+              3,
+              4,
+              5,
+              5,
+              6,
+              6
+            ]
+          }
+        }
+      }
+    },
+    {
+      "file": "correspondence_rule_summary.png",
+      "sha256": "26e3911a929314a68232527e57da510e6cc7418ab908670635bea90563048b30",
+      "numeric_sidecar": {
+        "arc_m": {
+          "C0_ROW0": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "C1_XY_PROJECTION": [
+            0.18473653570089893,
+            0.3245351532347025,
+            0.46193137914572885,
+            0.3392920662039436
+          ],
+          "C2_SE2_PROJECTION": [
+            0.09447150867104417,
+            0.3245809061559166,
+            0.4156565849029082,
+            0.30546831557487586
+          ],
+          "C3_FORWARD_SE2": [
+            0.18474273839738128,
+            0.3245809061559166,
+            0.46193137914572885,
+            0.3392920662039436
+          ]
+        },
+        "position_gap_m": {
+          "C0_ROW0": [
+            0.21332400634397655,
+            0.34870461167655903,
+            0.51456181094824,
+            0.3946790429388128
+          ],
+          "C1_XY_PROJECTION": [
+            0.10664856928856485,
+            0.12764430850410247,
+            0.1846831899774071,
+            0.16088422588979834
+          ],
+          "C2_SE2_PROJECTION": [
+            0.13972756769810435,
+            0.12764431670395746,
+            0.19039232453658905,
+            0.1644012781178324
+          ],
+          "C3_FORWARD_SE2": [
+            0.1066485694689392,
+            0.12764431670395746,
+            0.1846831899774071,
+            0.16088422588979834
+          ]
+        },
+        "yaw_gap_rad": {
+          "C0_ROW0": [
+            18.000818356515236,
+            15.011462748430406,
+            3.3908391337161694,
+            18.829682000089566
+          ],
+          "C1_XY_PROJECTION": [
+            30.000556456663755,
+            14.999664438302206,
+            22.098124520762063,
+            28.97303316241328
+          ],
+          "C2_SE2_PROJECTION": [
+            25.5205539005335,
+            14.999661298236608,
+            19.645646101298894,
+            27.41608526798914
+          ],
+          "C3_FORWARD_SE2": [
+            30.000556427809197,
+            14.999661298236608,
+            22.098124520762063,
+            28.97303316241328
+          ]
+        },
+        "remaining_arc_m": {
+          "C0_ROW0": [
+            1.3532455201158953,
+            1.3547669898114552,
+            1.2613384789876216,
+            1.2832864102478099
+          ],
+          "C1_XY_PROJECTION": [
+            1.1685089844149963,
+            1.0302318365767527,
+            0.7994070998418927,
+            0.9439943440438663
+          ],
+          "C2_SE2_PROJECTION": [
+            1.2587740114448511,
+            1.0301860836555385,
+            0.8456818940847135,
+            0.977818094672934
+          ],
+          "C3_FORWARD_SE2": [
+            1.168502781718514,
+            1.0301860836555385,
+            0.7994070998418927,
+            0.9439943440438663
+          ]
+        },
+        "saved_attachment_table": [
+          [
+            "S1",
+            "1.4667 s",
+            "1.4667 s",
+            "1.4833 s"
+          ],
+          [
+            "S2",
+            "1.0500 s",
+            "1.0333 s",
+            "1.2000 s"
+          ],
+          [
+            "S3",
+            "N/A (no dwell)",
+            "N/A (no dwell)",
+            "N/A (no dwell)"
+          ],
+          [
+            "S4",
+            "1.2833 s",
+            "N/A (no dwell)",
+            "N/A (no dwell)"
+          ]
+        ]
+      }
+    }
+  ],
+  "final_png_count": 3,
+  "extra_pngs": 0,
+  "new_scientific_calls": 0
+}

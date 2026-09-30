@@ -6102,3 +6102,35 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
   ignored historical EXP-01B/EXP-02B corpus. Compileall and diff check passed.
 - Reviewed code/config/protocol before freeze. Scientific evaluation follows only
   after normal push; results will be appended separately.
+
+## 2026-09-30 — SPATIAL_CORRESPONDENCE_SELECTOR_DIAG_01 saved-only result
+
+- Pushed scientific freeze `a3e2066c91f3e764827bdece04cdf341338b03e4`, then ran
+  the saved-data diagnostic once. Exactly 111 official selector queries across
+  37 matched Native submit states. New optimizer/MPC/rollout/integration/memory/
+  command-application/LightNav/RGB/Isaac counts are all zero. No retries or changes
+  to frozen code/config; no optional Genuine13 expansion or protocol deviation.
+- Classification: **TRANSPORT_PROGRESS_RESET_SUPPORTED**. Full selects earlier
+  first-H5 original progress in 9/9,9/9,9/9,10/10 queries; Half in 7/9,8/9,8/9,8/10.
+  Full maximum backward arcs S1-S4 are .301379857/.451508328/.487211386/.313669356 m;
+  Half reduces both maxima and mean backward displacement in all four sources.
+  All methods differ at the first matched submit; Full nearest row is 0 there,
+  and first H5 row is 1. Raw identities and physical targets remain distinct.
+- C1/C2/C3 arcs S1: .184736536/.094471509/.184742738 m; S2:
+  .324535153/.324580906/.324580906; S3: .461931379/.415656585/.461931379;
+  S4: .339292066/.305468316/.339292066. Minimum remaining original arc is
+  .799407100 m. All 12 candidate suffixes and 12 hypothetical straight connectors
+  pass the existing .20 m radius/.05 m clearance checker; minimum clearance
+  .192205246 m. No candidate is executed or claimed to improve tracking.
+- Full's reset coexists with worse saved original-FRESH .9 AUC in all four.
+  S3 still has null attachment for all three; S4 attaches only under Native.
+  This motivates testing an explicit forward entry while preserving downstream
+  progress, without claiming selector-to-execution causality or a successful method.
+- Saved-only validation passed twice with all four historical validators, plus the
+  report's saved-only check; each independently checked 111 records with zero
+  new official queries. Three PNGs inspected visually; every numeric sidecar
+  matched saved data exactly. PNG dimensions 2700x2160,2700x1620,2700x1800.
+- Tracked CSV/JSON/report/three PNGs only; detailed derived records remain ignored.
+  README updated conservatively. The report contains eleven explicit answers,
+  exact commands, tests (537 passed/1 skipped), counts, source/frame conventions,
+  limitations and next uncertainty. Final diff and staged-diff review passed.

@@ -179,13 +179,203 @@ Raw and existing derived artifacts remain separate and immutable.
 
 ## Repository-confirmed facts
 
-Pending pushed freeze and single saved-only evaluation. No new scientific result
-is claimed in this protocol commit.
+Scientific freeze: `a3e2066c91f3e764827bdece04cdf341338b03e4`, pushed before the single
+saved-only evaluation. Starting SHA: `1456e8eabd0e84b37203f54fdf567f53de06cf46`.
+Frozen classification: **TRANSPORT_PROGRESS_RESET_SUPPORTED**.
+Full selected an earlier original H5-start identity at **37/37 matched states**
+across all four sources. Half did so at **31/37 states**. Every source had persistent
+Full reset and a higher saved Full original-FRESH .9 s position AUC than Native.
+These are matched selector facts plus separately reused execution observations.
+
+### Authentication and counts
+
+Both prior complete result ledgers passed. The saved transport, multisource, R00
+and R01 validators passed before and after evaluation. No reference was regenerated.
+The maximum installed-versus-saved world-array roundoff was
+`1.7763568394002505e-14`; exact saved installed arrays were used, within the frozen
+1e-12 check. Original observation anchoring and A/B were unchanged. Official whole
+source and both extracted function source/AST hashes are in `freeze_summary.json`.
+
+111 scientific official-selector calls; optimizer=0, numerical MPC=0, rollouts=0,
+state integrations=0, memory updates=0, command applications=0, LightNav=0, RGB=0,
+Isaac=0. Saved validators invoke the official selector zero times; each new
+validation pass independently checks the 111 saved outputs. Synthetic test calls
+and historical saved-step verification are not scientific queries or rollouts.
+
+Initial focused tests: 35 passed. The final new namespace has 36 passing cases
+inside the **537 passed, 1 skipped** regression run (113.97 s). The skip requires
+an absent ignored historical EXP-01B/EXP-02B corpus. Compileall, working/staged diff
+checks, source authentication, all four historical validators, saved metrics,
+111 independent selection checks and exactly-three-PNG checks passed.
+No protocol deviation, retry, source change or post-freeze code/config change.
+Optional Genuine13 was not performed.
+
+### Continuous correspondence at exact B
+
+All rows below are continuous original-FRESH geometry, not selected raw rows.
+Yaw/tangent gaps are unsigned shortest angles. Segment indices start at zero;
+alpha is interpolation within the segment. C0 is the conceptual row-0 baseline.
+Full machine precision, target world poses and diagnostic nearest identities are
+in `b_correspondence.csv` and `result_summary.json`.
+
+| Source | Rule | Original arc m | s | Segment / alpha | B gap m | Yaw gap deg | Tangent gap deg | Remaining m |
+|---|---|---|---|---|---|---|---|---|
+| S1 | C0 | 0.000000000 | 0.000000000 | 0 / 0.000000000 | 0.213324006 | 18.000818 | 29.992462 | 1.353245520 |
+| S1 | C1 | 0.184736536 | 0.136513687 | 1 / 0.225788693 | 0.106648569 | 30.000556 | 30.002488 | 1.168508984 |
+| S1 | C2 | 0.094471509 | 0.069811063 | 0 / 0.626650051 | 0.139727568 | 25.520554 | 29.992462 | 1.258774011 |
+| S1 | C3 | 0.184742738 | 0.136518271 | 1 / 0.225829908 | 0.106648569 | 30.000556 | 30.002488 | 1.168502782 |
+| S2 | C0 | 0.000000000 | 0.000000000 | 0 / 0.000000000 | 0.348704612 | 15.011463 | 15.008894 | 1.354766990 |
+| S2 | C1 | 0.324535153 | 0.239550532 | 2 / 0.152721530 | 0.127644309 | 14.999664 | 14.993260 | 1.030231837 |
+| S2 | C2 | 0.324580906 | 0.239584304 | 2 / 0.153025637 | 0.127644317 | 14.999661 | 14.993260 | 1.030186084 |
+| S2 | C3 | 0.324580906 | 0.239584304 | 2 / 0.153025637 | 0.127644317 | 14.999661 | 14.993260 | 1.030186084 |
+| S3 | C0 | 0.000000000 | 0.000000000 | 0 / 0.000000000 | 0.514561811 | 3.390839 | 7.570516 | 1.261338479 |
+| S3 | C1 | 0.461931379 | 0.366223172 | 2 / 0.972584595 | 0.184683190 | 22.098125 | 18.829142 | 0.799407100 |
+| S3 | C2 | 0.415656585 | 0.329536117 | 2 / 0.663615832 | 0.190392325 | 19.645646 | 18.829142 | 0.845681894 |
+| S3 | C3 | 0.461931379 | 0.366223172 | 2 / 0.972584595 | 0.184683190 | 22.098125 | 18.829142 | 0.799407100 |
+| S4 | C0 | 0.000000000 | 0.000000000 | 0 / 0.000000000 | 0.394679043 | 18.829682 | 19.649432 | 1.283286410 |
+| S4 | C1 | 0.339292066 | 0.264393095 | 2 / 0.220541549 | 0.160884226 | 28.973033 | 30.975649 | 0.943994344 |
+| S4 | C2 | 0.305468316 | 0.238035962 | 1 / 1.000000000 | 0.164401278 | 27.416085 | 24.439063 | 0.977818095 |
+| S4 | C3 | 0.339292066 | 0.264393095 | 2 / 0.220541549 | 0.160884226 | 28.973033 | 30.975649 | 0.943994344 |
+
+Signed continuous progress differences:
+
+| Source | C2 minus C1 m | C3 minus C1 m | C3 minus C2 m |
+|---|---|---|---|
+| S1 | -0.090265027030 | +0.000006202696 | +0.090271229726 |
+| S2 | +0.000045752921 | +0.000045752921 | +0.000000000000 |
+| S3 | -0.046274794243 | +0.000000000000 | +0.046274794243 |
+| S4 | -0.033823750629 | +0.000000000000 | +0.033823750629 |
+
+C1/C3 markers overlap strongly: their maximum arc difference is 0.000045753 m. C2/C3 coincide exactly in S2; C1/C3 coincide exactly in S3 and S4. No continuous C1-C3 target has remaining arc <=0.10 m; the minimum remaining arc is 0.799407100 m. All closest XY gaps exceed .10 m, so none of these correspondences places the unmodified robot at B inside the positional attachment tube.
+
+### Matched-state progress reset
+
+Negative deltas below mean earlier original progress. Maxima are backward magnitudes for first H5 row/arc. Mean deltas retain their sign. Nearest-row and mean-H5 deltas, fractions and maxima are also saved in `progress_reset_summary.csv`; all three definitions have the same negative counts in these data.
+
+| Source | Reference | Negative ticks | Fraction | Max rows | Max backward m | Mean delta m | First different tick |
+|---|---|---|---|---|---|---|---|
+| S1 | Half | 7/9 | 77.778% | 1 | 0.150770002 | -0.117005149 | 96 |
+| S1 | Full | 9/9 | 100.000% | 2 | 0.301379857 | -0.200580383 | 96 |
+| S2 | Half | 8/9 | 88.889% | 2 | 0.300617984 | -0.167108736 | 1002 |
+| S2 | Full | 9/9 | 100.000% | 3 | 0.451508328 | -0.367734851 | 1002 |
+| S3 | Half | 8/9 | 88.889% | 2 | 0.315826775 | -0.178336777 | 1806 |
+| S3 | Full | 9/9 | 100.000% | 3 | 0.487211386 | -0.387843458 | 1806 |
+| S4 | Half | 8/10 | 80.000% | 1 | 0.158703674 | -0.124335798 | 1524 |
+| S4 | Full | 10/10 | 100.000% | 2 | 0.313669356 | -0.232342366 | 1524 |
+
+First legal matched query and original identities:
+
+| Source | Tick | Time after B s | Nearest rows N/H/F | First H5 rows N/H/F | First Half vs Full tick |
+|---|---|---|---|---|---|
+| S1 | 96 | 0.066666670 | 2/1/0 | 3/2/1 | 96 |
+| S2 | 1002 | 0.083333338 | 3/1/0 | 4/2/1 | 1002 |
+| S3 | 1806 | 0.033333335 | 3/1/0 | 4/2/1 | 1806 |
+| S4 | 1524 | 0.000000000 | 2/1/0 | 3/2/1 | 1524 |
+
+The first query differs from B in S1-S3 and equals B only in S4. Full first nearest row is 0 in all four; Native nearest rows are 2,3,3,2. The official lookahead still advances one row: Full first H5 identity is 1, never row 0. The H5 horizon is five raw identities with endpoint repetition. The physical modified targets shown in the world PNG are distinct from original row locations. The CSV provides both the original-identity B geometry (arc, normalized progress, distance/yaw/tangent, remaining arc, segment/alpha) and actual physical-target B position/yaw gaps, separately for nearest and H5-start targets.
+
+First H5 original-identity geometry relative to B:
+
+| Source | Reference | Identity | Original arc m | Original B gap m | Original yaw deg | Physical B gap m | Physical yaw deg |
+|---|---|---|---|---|---|---|---|
+| S1 | Native | 3 | 0.451861533 | 0.287622431 | 29.994185 | 0.287622431 | 29.994185 |
+| S1 | Half | 2 | 0.301251678 | 0.157954727 | 30.000014 | 0.207474769 | 30.101063 |
+| S1 | Full | 1 | 0.150756405 | 0.111931080 | 30.000715 | 0.143973321 | 30.110291 |
+| S2 | Native | 4 | 0.602176150 | 0.305572358 | 14.987135 | 0.305572358 | 14.987135 |
+| S2 | Half | 2 | 0.301558166 | 0.129695842 | 15.001241 | 0.201792464 | 15.117236 |
+| S2 | Full | 1 | 0.150768970 | 0.215585319 | 15.008857 | 0.283987134 | 15.129685 |
+| S3 | Native | 4 | 0.622519581 | 0.259339869 | 29.457592 | 0.259339869 | 29.457592 |
+| S3 | Half | 2 | 0.316265676 | 0.235215598 | 14.378112 | 0.120181795 | 20.780658 |
+| S3 | Full | 1 | 0.166443212 | 0.357461896 | 10.396740 | 0.184054227 | 24.054092 |
+| S4 | Native | 3 | 0.458835111 | 0.200435211 | 34.475743 | 0.200435211 | 34.475743 |
+| S4 | Half | 2 | 0.305468316 | 0.164401278 | 27.416085 | 0.143895961 | 27.358128 |
+| S4 | Full | 1 | 0.150927954 | 0.258761526 | 21.309199 | 0.167739221 | 20.873500 |
+
+### Descriptive geometry safety
+
+Every candidate connector and remaining original suffix passed the unchanged complete-polyline checker. These straight connectors are **hypothetical straight connector diagnostic only**; none is a current reference or execution. Footprint-edge clearance, metres:
+
+| Source | Rule | Connector clearance m | Suffix clearance m | Connector >=.05 + reserve | Suffix >=.05 + reserve |
+|---|---|---|---|---|---|
+| S1 | C1 | 1.095851731 | 0.229486890 | PASS | PASS |
+| S1 | C2 | 1.095851731 | 0.229486890 | PASS | PASS |
+| S1 | C3 | 1.095851731 | 0.229486890 | PASS | PASS |
+| S2 | C1 | 0.757253287 | 0.824491558 | PASS | PASS |
+| S2 | C2 | 0.757253287 | 0.824529094 | PASS | PASS |
+| S2 | C3 | 0.757253287 | 0.824529094 | PASS | PASS |
+| S3 | C1 | 0.211489855 | 0.211489855 | PASS | PASS |
+| S3 | C2 | 0.192205246 | 0.192205246 | PASS | PASS |
+| S3 | C3 | 0.211489855 | 0.211489855 | PASS | PASS |
+| S4 | C1 | 0.878001183 | 1.029576802 | PASS | PASS |
+| S4 | C2 | 0.878001183 | 1.018635465 | PASS | PASS |
+| S4 | C3 | 0.878001183 | 1.029576802 | PASS | PASS |
+
+### Saved execution response: observational context only
+
+These are unchanged STATE_SHIFT_TRANSPORT_SCALE_01 metrics against ORIGINAL FRESH. Attachment requires the frozen complete following .30 s dwell; nulls remain null. No execution was performed here.
+
+| Source | Reference | Position AUC .9 s m s | Attachment s | Endpoint error m |
+|---|---|---|---|---|
+| S1 | Native | 0.169065633 | 1.466666743 | 0.096439021 |
+| S1 | Half | 0.169216433 | 1.466666743 | 0.095702993 |
+| S1 | Full | 0.169963954 | 1.483333411 | 0.096335462 |
+| S2 | Native | 0.131833111 | 1.050000055 | 0.079382367 |
+| S2 | Half | 0.131791529 | 1.033333387 | 0.078431173 |
+| S2 | Full | 0.136682270 | 1.200000063 | 0.086092224 |
+| S3 | Native | 0.189624122 | null (no complete dwell) | 0.115238019 |
+| S3 | Half | 0.189328286 | null (no complete dwell) | 0.120314783 |
+| S3 | Full | 0.199963659 | null (no complete dwell) | 0.139406215 |
+| S4 | Native | 0.198189216 | 1.283333400 | 0.084539314 |
+| S4 | Half | 0.204465336 | null (no complete dwell) | 0.101967089 |
+| S4 | Full | 0.217335047 | null (no complete dwell) | 0.132316561 |
+
+Half-minus-Full saved context (no combined score):
+
+| Source | AUC delta m s | Attachment delta s (null if unavailable) | Endpoint delta m |
+|---|---|---|---|
+| S1 | -0.000747521 | -0.016666668 | -0.000632468 |
+| S2 | -0.004890741 | -0.166666675 | -0.007661052 |
+| S3 | -0.010635374 | null (no complete dwell) | -0.019091432 |
+| S4 | -0.012869712 | null (no complete dwell) | -0.030349473 |
+
+### Three PNGs and numeric sidecars
+
+- [correspondence_world_overview.png](../results/spatial_correspondence_selector_diag_01/figures/correspondence_world_overview.png)
+- [selector_progress_reset.png](../results/spatial_correspondence_selector_diag_01/figures/selector_progress_reset.png)
+- [correspondence_rule_summary.png](../results/spatial_correspondence_selector_diag_01/figures/correspondence_rule_summary.png)
+
+`figure_manifest.json` contains the plotted coordinates, original identities/progress, rule metrics, attachment table and image hashes. The images were visually inspected and checked against numeric sidecars. Dimensions: 2700x2160, 2700x1620 and 2700x1800 pixels, respectively. No extra final PNG or HTML dependency.
 
 ## Research interpretation
 
-Pending evaluation. A proximity-based correspondence does not validate semantic
-intent or establish a best entry rule.
+The four-source matched-state evidence supports a transport-induced reset of
+original FRESH progress in the official selector. Full sends the selector back
+by as much as 2/3/3/2 rows in S1/S2/S3/S4, at every sampled submit. Half reduces
+both the maximum and average backward displacement in all four sources, but
+retains reset in 7/9, 8/9, 8/9 and 8/10 queries. Transport changes the relation
+between physical row location and original row identity; physical closeness of
+a shifted target does not mean downstream original progress is preserved.
+
+The same four sources have worse saved Full .9 s position AUC than Native, and
+S4 attaches only with Native. This coexistence supports progress reset as a
+plausible mechanism, without identifying its contribution to execution error.
+The audit uses saved Native poses only. Controller commands, future states,
+terminal behavior and semantic intent under an explicit entry were not tested.
+
+A justified next study is to choose an explicit B-to-original-FRESH entry l* and
+preserve downstream original progress. **C3 is a candidate to test**, because
+its forward constraint prevents the yaw term from selecting behind the XY
+projection. C1 should remain a simple geometry control. C2 retreats relative to
+C1 by 9.03 cm in S1, 4.63 cm in S3 and 3.38 cm in S4, while reducing yaw mismatch;
+that is a geometric trade-off, not proof of a bad execution target. In S2 the
+three rules practically coincide. These observations do not establish one rule
+as optimal, and no new factor, crop, bridge or execution was implemented.
+
+The next uncertainty is whether preserving original entry progress can reduce
+early error and recover attachment under the unchanged controller while retaining
+downstream geometry and safety. Entry selection alone does not resolve how the
+robot reaches that spatial target; the geometric closest gaps are already above
+the attachment position threshold in every source.
 
 ## Limitations
 
@@ -230,3 +420,45 @@ git diff --cached --check
 git commit -m "Report matched selector progress reset with three validated PNGs"
 git push origin main
 ```
+
+## Explicit answers to the eleven research questions
+
+1. **Where does B project under C1/C2/C3?** Original arc metres (C1/C2/C3):
+   S1 0.184736536 / 0.094471509 / 0.184742738;
+   S2 0.324535153 / 0.324580906 / 0.324580906;
+   S3 0.461931379 / 0.415656585 / 0.461931379;
+   S4 0.339292066 / 0.305468316 / 0.339292066. Normalized progress,
+   containing segments and interpolation alphas are in the continuous table.
+2. **How different are the rules in original arc metres?** C2-minus-C1 is
+   -0.090265027 / +0.000045753 / -0.046274794 / -0.033823751.
+   C3-minus-C1 is +0.000006203 / +0.000045753 / 0 / 0. C3 prevents the
+   C2 backward shifts in S1/S3/S4. The full signed difference table is above.
+3. **Does Full select earlier progress at identical states?** Yes, all 37/37
+   matched queries. Maximum backward first-H5 arc: 0.301379857 / 0.451508328 /
+   0.487211386 / 0.313669356 m for S1-S4.
+4. **Does Half reduce reset?** Yes in every source by maximum and mean first-H5
+   arc displacement; its maximum backward arcs are 0.150770002 / 0.300617984 /
+   0.315826775 / 0.158703674 m. Reset remains at 31/37 queries.
+5. **Is the effect consistent?** The Full backward direction and persistent
+   effect occur in all four. Magnitudes and Half coincidence with Native vary.
+6. **Is it present at the first matched submit?** Yes for Half and Full in all
+   four, at ticks 96/1002/1806/1524. Half and Full also differ at those first
+   ticks. Native/Half/Full first H5 identities are 3/2/1, 4/2/1, 4/2/1, 3/2/1.
+7. **Does reset coexist with worse execution?** Yes: Full .9 s position AUC is
+   higher than Native in all four saved outcomes. Full attaches later in S1/S2;
+   all methods lack attachment in S3; only Native attaches in S4. This is
+   observational context, not a causal execution result of this diagnostic.
+8. **Are correspondences near the exhausted endpoint?** No C1-C3 target is
+   within the frozen 0.10 m remaining-arc label. Minimum remaining arc is
+   0.799407100 m, at S3 C1/C3.
+9. **Are candidate suffixes safe?** All 12 original suffixes pass the unchanged
+   direct geometry check. All 12 hypothetical straight connectors also pass;
+   minimum clearance across these checks is 0.192205246 m. This certifies the
+   supplied geometric polylines only, not a future robot trajectory.
+10. **Which rule is justified for the next study?** C3 is a defensible candidate
+    for an explicit forward entry, with C1 as control. No rule has demonstrated
+    execution superiority. C2's earlier yaw-favoring entries remain a trade-off.
+11. **Does evidence support an explicit B-to-FRESH spatial-entry direction?**
+    Yes as the next bounded research question: progress reset is directly
+    observed at matched states, including Full nearest-row 0 in every first
+    query. It does not yet justify claiming a successful replacement method.

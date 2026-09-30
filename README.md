@@ -7,6 +7,15 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [saved-only correspondence/selector diagnostic](docs/SPATIAL_CORRESPONDENCE_SELECTOR_DIAG_01.md)
+queried the unchanged official selector on three saved references at 37 identical
+Native states (111 queries; zero new optimizer/MPC/rollout calls). Full selected
+earlier original progress in 37/37 queries across four sources; Half reduced the
+reset but retained it in 31/37. Classification: **TRANSPORT_PROGRESS_RESET_SUPPORTED**.
+This motivates testing an explicit B-to-FRESH entry; it does not establish execution
+causality or a new successful method.
+[Matched selector PNG](results/spatial_correspondence_selector_diag_01/figures/selector_progress_reset.png).
+
 The [transport-magnitude diagnostic](docs/STATE_SHIFT_TRANSPORT_SCALE_01.md) reused
 the same four sources and their Native/Full executions, adding four Half-transport
 rollouts. Half lowered original-FRESH .9 s position AUC versus Full in all four,
