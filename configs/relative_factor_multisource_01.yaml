@@ -1,0 +1,80 @@
+order:
+- M0_NATIVE
+- M1_TAPER
+- FULL_LOCAL_SE2
+- NO_RELATIVE
+integration_steps: 180
+primary_intervals: 54
+solver:
+  max_iterations: 80
+  finite_difference_epsilon: 1.0e-06
+  initial_damping: 0.001
+  damping_increase: 10.0
+  damping_decrease: 0.3
+  maximum_damping: 1000000000000.0
+  gradient_tolerance: 1.0e-09
+  step_tolerance: 1.0e-09
+  cost_tolerance: 1.0e-12
+relative_factor:
+  FULL_LOCAL_SE2: true
+  NO_RELATIVE: false
+normalization:
+  translation_m: 0.1
+  yaw_degrees: 10.0
+initialization: original observation-anchored FRESH
+weights:
+  S: (1-s)^2
+  A: s^2
+footprint_radius_m: 0.2
+required_edge_clearance_m: 0.05
+retries: 0
+wall_wait_timeout_s: 30.0
+reference_safety: complete polyline; no B connector; unchanged numerical reserve
+execution_safety: existing abort-only command guard
+waypoint_timestamps: null
+metric_target: ORIGINAL FRESH primary; own reference secondary only
+experiment: RELATIVE_FACTOR_MULTISOURCE_01
+starting_sha: 6f31477598514738d72006d47fe04e112b3d3a28
+label: timing-controlled offline causal reference comparison
+scientific_optimizer_calls: 8
+maximum_rollouts: 16
+scan_run: data/genuine_source_moving_mismatch/scan_20260922T073107Z
+osa_run: data/osa03_relative_factor_ablation_01/primary_20260929T050000Z
+selected:
+- id: OSA03_R00
+  kind: osa
+  role: obstacle anchor
+- id: episode_001_repeat_01/handoff_013
+  kind: genuine
+  role: mild right / nearly straight
+- id: episode_008_repeat_01/handoff_023
+  kind: genuine
+  role: progressive left turn
+- id: episode_013_repeat_00/handoff_020
+  kind: genuine
+  role: progressive right turn
+replacement_policy: all selected sources must pass restoration preflight before freeze;
+  later technical failures retained and benchmark explicitly reduced; no outcome-based
+  replacement
+schedule_rule: OSA exact authenticated M0; genuine source absolute control grid with
+  constant release lag from first saved successful post-cut submit/application, including
+  B-grid submit when recorded
+sign_tolerance: 1.0e-09
+classification_rules:
+  CONSISTENT_MULTISOURCE_PATTERN: strict majority earlier/equal observed attachment,
+    all three early position deltas <= tolerance, safe Full/NoR, larger edge RMS/max;
+    positive early/attachment reversals take MIXED precedence
+  MIXED_EVIDENCE: at least one supportive early/attachment source and at least one
+    opposing source; or partial majority criteria
+  NO_SUPPORT_FOR_PATTERN: no observed early/attachment improvement and consistent
+    pattern conditions not met
+  TECHNICAL_BLOCKED: source/schedule/controller/validator/protocol failure only
+inventory_hashes:
+  data/genuine_source_moving_mismatch/scan_20260922T073107Z/source.json: d21ec75b9a0e013de9e1b4e55fe3d0e9cc6d4f6cac8415ccfe1136ceab0e0715
+  data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json: cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163
+  data/genuine_source_moving_mismatch/scan_20260922T073107Z/validation.json: f244db2961d8a634dee411af674a01bac3663cd234fd42f906831cd8ce1471e9
+  data/genuine_source_moving_mismatch/scan_20260922T073107Z/summary.json: 448459f6d45b68db358c2921df2165117744cfd0bb59a57c129f9bf36a33a769
+  data/genuine_source_moving_mismatch/scan_20260922T073107Z/protocol.yaml: f7bc853c0f9067a7c377eae3ade7f0e8f755b402f99f0e2019e4f16f35d9edff
+legacy_results:
+  results/osa03_relative_factor_ablation_01/result_summary.json: 5d3d3f06e25f652418091da9d6945fad26bde9c0a1f7c789158c88b25a085669
+  results/osa03_relative_factor_replication_01/result_summary.json: dc609522c460623e9c0a2910442689851c46fac5bd7f69ec5a7044e358d382f9

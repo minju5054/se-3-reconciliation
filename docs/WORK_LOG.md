@@ -5957,3 +5957,30 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
 - Output: `data/osa03_relative_factor_replication_01/png_export_20260930_final/OSA03_R01_results_ko.png`.
   Raw/large images remain ignored. Both Stage0 edits and the unrelated GPU snapshot
   script are preserved and excluded from this commit.
+
+### 2026-09-30 — RELATIVE_FACTOR_MULTISOURCE_01 protocol and implementation freeze
+
+- Fetched main and inspected HEAD `6f31477598514738d72006d47fe04e112b3d3a28`, rules,
+  README/log, current Local-SE2/R00/R01/acquisition docs and implementations.
+- Selected four saved, qualified raw-trajectory-distinct sources: OSA03 R00,
+  episode_001_repeat_01/handoff_013, episode_008_repeat_01/handoff_023,
+  episode_013_repeat_00/handoff_020. Both file and canonical value hashes are unique.
+  The source-only candidate inventory covers 13 events / 10 distinct raw arrays.
+- Authenticated B, actual controller poll memory, held first FRESH command, original
+  generation and observation frames. Four official restoration preflights pass with
+  numerical MPC disabled. Source-specific logical schedules preserve absolute grid
+  phase, including the right-turn source's recorded submit at B. OSA uses its
+  authenticated historical M0 schedule. New solves cannot choose release ticks.
+- Current solver/objective/safety/MPC/selector and historical artifacts unchanged.
+  Added bounded runner, saved-only validator and compact 4 + conditional 1 PNG
+  report. Tests prove the runtime differs from R00 only in geometry/scenario lookup
+  and the variable next-submit assertion. Full and No-relative use identical LM
+  settings, initialization and feasibility; only R inclusion differs.
+- Focused 23 tests PASS; relevant regression 467 passed / 1 missing-corpus skip.
+  compileall and diff check PASS. No scientific optimizer/MPC/LightNav/RGB/Isaac calls
+  yet. One pre-freeze preparation correction permits existing geometry-reserve
+  rounding between full-union and nearest-part queries (4.03e-9 m, below 1e-7 m);
+  no margin/checker changes. Earlier partial preparation remains separately saved.
+- Freeze run: data/relative_factor_multisource_01/primary_20260930T033000Z.
+  Commit/push must precede exactly 8 planning calls and up to 16 eligible rollouts.
+  Preserve both unrelated Stage0 edits and the unrelated GPU snapshot script.
