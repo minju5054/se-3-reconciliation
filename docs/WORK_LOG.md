@@ -6292,3 +6292,34 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
   result commit. Unrelated stage0 config edits and GPU-memory plotting script
   remain untouched. Full commands, facts, interpretation and limitations are in
   `docs/B_TO_ENTRY_BRIDGE_01.md`; no final-method or generalization claim.
+
+## 2026-10-02 — B_TO_ENTRY_BRIDGE_01 repeated-request saved verification
+
+- Fetched origin/main; starting HEAD and fetched main were both
+  `8f5cdd06ad784d685e59715b410d81d92e36b0ce`. Read repository rules, README,
+  latest log and the requested correspondence, entry-suffix, EXP-02A and
+  Local-SE2 records. The requested experiment was already recorded and pushed.
+- Preserved the no-retry rule: no new scientific planning solve, MPC solve,
+  rollout, LightNav, RGB or Isaac call. Scientific freeze remains
+  `274c44b550c4e37164d963c30d7927030b637e54`; result commit remains
+  `8f5cdd06ad784d685e59715b410d81d92e36b0ce`.
+- Authenticated all 12 tracked result artifacts byte-for-byte against fetched
+  origin/main. Independently checked supplementary failure-trace hashes, costs
+  and geometry; exactly four graph start records and four rollout start records
+  remain. Visually inspected the four existing PNGs without regenerating them.
+- Saved-only bridge validator and all six historical validators pass. Existing
+  counts remain four nonconverged graph attempts, four Hermite rollouts, zero
+  Graph rollouts, 120 MPC solves, 119 applications and eight historical rollouts
+  reused. Classification remains TECHNICAL_BLOCKED; validation does not imply
+  graph convergence or fill the missing four Graph executions.
+- Re-ran the full relevant regression command documented in
+  `docs/B_TO_ENTRY_BRIDGE_01.md`, with MPLCONFIGDIR=/tmp/bridge-recheck-mpl:
+  **600 passed, 1 skipped in 211.02 s**, including all 29 bridge tests. The known
+  skip requires the absent ignored EXP-01B/EXP-02B corpus. Synthetic test solves
+  are not scientific execution. Compileall and git diff checks pass.
+- Saved-only command:
+  `OPENBLAS_NUM_THREADS=1 .venv/bin/python scripts/validate_b_to_entry_bridge01.py --run data/b_to_entry_bridge_01/primary_20261002T020000Z --check-only`.
+  Also ran `.venv/bin/python -m compileall -q src scripts tests` and
+  `git diff --check`. No scientific code/config/result changes or new protocol
+  deviation. Only this verification log is committed and normally pushed;
+  unrelated Stage0 edits and the GPU-memory script remain untouched.
