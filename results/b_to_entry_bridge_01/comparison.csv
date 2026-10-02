@@ -1,0 +1,9 @@
+source_id,method,AUC_09_delta_vs_C3,attachment_recovered,endpoint_recovered,attachment_delta_s,endpoint_delta_s,endpoint_lost,clearly_later_endpoint,any_later_endpoint
+OSA03_R00,HERMITE_BRIDGE,-0.011561657797431374,False,False,0.0,0.15000000782310963,False,True,True
+OSA03_R00,SE2_GRAPH_BRIDGE,,,,,,,,
+episode_001_repeat_01/handoff_013,HERMITE_BRIDGE,0.0011584861092435728,False,False,0.05000000260770321,0.10000000521540642,False,True,True
+episode_001_repeat_01/handoff_013,SE2_GRAPH_BRIDGE,,,,,,,,
+episode_008_repeat_01/handoff_023,HERMITE_BRIDGE,-0.00430051282231636,True,True,,,False,False,False
+episode_008_repeat_01/handoff_023,SE2_GRAPH_BRIDGE,,,,,,,,
+episode_013_repeat_00/handoff_020,HERMITE_BRIDGE,-0.039215858884435156,False,False,-0.23333334550261497,0.15000000782310963,False,True,True
+episode_013_repeat_00/handoff_020,SE2_GRAPH_BRIDGE,,,,,,,,

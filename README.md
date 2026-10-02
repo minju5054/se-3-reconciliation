@@ -7,6 +7,18 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [B-to-entry bridge experiment](docs/B_TO_ENTRY_BRIDGE_01.md) is
+**TECHNICAL_BLOCKED**: all four fixed-budget graph solves reached 80 iterations
+without convergence, so no Graph rollout was run. Four new Hermite rollouts
+(120 official MPC solves) recovered S3 attachment and original-FRESH endpoint
+dwell, while delaying endpoint dwell in S1/S2/S4 by about .15/.10/.15 s.
+S4 attached earlier but reached endpoint dwell later. All executed safety checks
+passed. These results show a transition/completion trade-off; graph necessity
+or superiority remains untested. No retry or source/controller change was made.
+[Execution PNG](results/b_to_entry_bridge_01/figures/world_execution_overview.png)
+(Graph curves unavailable) and
+[attachment versus endpoint dwell](results/b_to_entry_bridge_01/figures/attachment_vs_completion.png).
+
 The [C3 entry-suffix execution experiment](docs/SPATIAL_ENTRY_SUFFIX_EXECUTION_01.md)
 reused Native/Full and ran four new suffix rollouts with unchanged official MPC
 and frozen logical schedules (120 MPC solves; zero optimizer/LightNav/RGB/Isaac).

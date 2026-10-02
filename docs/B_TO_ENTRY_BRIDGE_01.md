@@ -164,11 +164,276 @@ No HTML dependency or extra final PNGs. Plot equal-axis XY and distinguish overl
 
 ## Repository-confirmed facts
 
-Results will be appended after the pushed freeze and single bounded execution.
+Scientific freeze **`274c44b550c4e37164d963c30d7927030b637e54`** was normally pushed
+before any scientific solve or rollout. Overall classification: **TECHNICAL_BLOCKED**.
+All four Graph solves reached the frozen 80-iteration limit without convergence.
+The predeclared failure policy withheld all four Graph rollouts. Their execution
+metrics are **N/A because no rollout occurred**, distinct from Native/C3 S3 nulls
+where 3 s of execution occurred without a complete dwell. No last iterate was
+silently substituted for a returned Graph reference.
+
+Exactly **4 graph planning attempts, 0 converged graph plans, 4 Hermite rollouts,
+0 Graph rollouts, 120 official MPC solves, 119 new result applications**. The final
+S2 result was withheld beyond the frozen cap, as in the historical schedule.
+Eight historical Native/C3 rollouts were authenticated and reused byte-for-byte.
+Native/C3 reruns=0; LightNav=0; RGB=0; Isaac=0; retries=0. Each new Hermite rollout
+completed all 180 intervals without a controller error or safety abort.
+
+All executed Native/C3/Hermite comparisons match the source-specific common state
+and attempted/accepted submit and application sequences through both 54 and 180
+intervals. The four-method gate is false solely because Graph is absent. It is
+not an observed timing mismatch among the three executed/reused methods.
+No execution inference about Graph is available.
+
+The saved-only validator passes, including the six historical experiment
+validators, exact fixed boundaries/suffix, source hashes, command-memory and
+stale/generation behavior, safety, original-FRESH evaluation and independent
+endpoint-dwell parity. Its `valid=true` means the records are consistent; the
+experiment classification remains TECHNICAL_BLOCKED. Pre-freeze tests:
+**29 focused passed; 600 regression passed, 1 skipped** (missing ignored historical
+EXP-01B/EXP-02B corpus). Compileall and diff checks pass. No scientific code or
+configuration changed after the pushed freeze.
+
+### Exact frozen C3 entries
+
+These are world poses with yaw in radians. Entries exactly reproduce the prior
+diagnostic; no retuning or source change.
+
+| Source | l* m | Original arc fraction | Segment | beta | E* [x,y,yaw] |
+| --- | --- | --- | --- | --- | --- |
+| S1 | 0.18474273839738128 | 0.1365182708172272 | 1.000000000 | 0.22582990794399482 | [19.29589449218289, 24.196826321126334, -1.0453675393771789] |
+| S2 | 0.3245809061559166 | 0.23958430386696167 | 2.000000000 | 0.15302563680147266 | [18.747621139721804, 9.891583390188735, -1.708655151798606] |
+| S3 | 0.46193137914572885 | 0.3662231723212672 | 2.000000000 | 0.9725845948085713 | [17.89727685765006, 31.99213199452277, -0.3242954780329643] |
+| S4 | 0.3392920662039436 | 0.264393095332806 | 2.000000000 | 0.22054154941072646 | [19.516333811852085, 9.044315276940615, -1.8652517646249573] |
+
+### Original-FRESH transition and downstream dwell
+
+Native and C3 are reused; Hermite is new; Graph has no execution. Fractions below
+are original XY arc fractions at sustained attachment. All times are actual
+execution seconds after B. N/A is never replaced by the cap. Full machine
+precision and original fractional row identities are in `primary.csv`.
+
+| Source | Method | Pos AUC .9 m s | T_attach s | Arc fraction at attach | Remaining m | T_endpoint s | T_post s | Endpoint error at 3 s m |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| S1 | Native | 0.169065633 | 1.466666743 | 0.968605162 | 0.042484924 | 1.516666746 | 0.050000003 | 0.096439021 |
+| S1 | C3 | 0.169065632 | 1.466666743 | 0.968605161 | 0.042484925 | 1.516666746 | 0.050000003 | 0.096439021 |
+| S1 | Hermite | 0.157503975 | 1.466666743 | 0.857096753 | 0.193383179 | 1.666666754 | 0.200000010 | 0.077380067 |
+| S1 | Graph | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
+| S2 | Native | 0.131833111 | 1.050000055 | 0.854497878 | 0.197121472 | 1.250000065 | 0.200000010 | 0.079382367 |
+| S2 | C3 | 0.131833111 | 1.050000055 | 0.854497878 | 0.197121472 | 1.250000065 | 0.200000010 | 0.079382367 |
+| S2 | Hermite | 0.132991597 | 1.100000057 | 0.825298436 | 0.236679912 | 1.350000070 | 0.250000013 | 0.076037005 |
+| S2 | Graph | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
+| S3 | Native | 0.189624122 | N/A | N/A | N/A | N/A | N/A | 0.115238019 |
+| S3 | C3 | 0.186553953 | N/A | N/A | N/A | N/A | N/A | 0.112354395 |
+| S3 | Hermite | 0.182253441 | 1.466666743 | 0.767945556 | 0.292699199 | 1.766666759 | 0.300000016 | 0.060442205 |
+| S3 | Graph | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
+| S4 | Native | 0.198189216 | 1.283333400 | 0.912753530 | 0.111962209 | 1.400000073 | 0.116666673 | 0.084539314 |
+| S4 | C3 | 0.198189216 | 1.283333400 | 0.912753530 | 0.111962209 | 1.400000073 | 0.116666673 | 0.084539314 |
+| S4 | Hermite | 0.158973357 | 1.050000055 | 0.637306486 | 0.465439657 | 1.550000081 | 0.500000026 | 0.030448754 |
+| S4 | Graph | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
+
+### Position and yaw AUC
+
+Yaw AUC uses shortest-angle error in rad s. These primary errors are measured
+against the full ORIGINAL FRESH. Own-reference diagnostics are kept separately
+in `result_summary.json`.
+
+| Source | Method | Position .3 | Position .9 | Yaw .3 | Yaw .9 |
+| --- | --- | --- | --- | --- | --- |
+| S1 | Native | 0.047920362 | 0.169065633 | 0.122763625 | 0.193368049 |
+| S1 | C3 | 0.047920362 | 0.169065632 | 0.122763625 | 0.193368049 |
+| S1 | Hermite | 0.046197811 | 0.157503975 | 0.124983476 | 0.196380785 |
+| S1 | Graph | N/A | N/A | N/A | N/A |
+| S2 | Native | 0.045302491 | 0.131833111 | 0.045624120 | 0.107103978 |
+| S2 | C3 | 0.045302491 | 0.131833111 | 0.045624120 | 0.107103978 |
+| S2 | Hermite | 0.044751346 | 0.132991597 | 0.049715665 | 0.103789439 |
+| S2 | Graph | N/A | N/A | N/A | N/A |
+| S3 | Native | 0.064363537 | 0.189624122 | 0.076190590 | 0.175616043 |
+| S3 | C3 | 0.063699869 | 0.186553953 | 0.074971489 | 0.173208231 |
+| S3 | Hermite | 0.060019535 | 0.182253441 | 0.075087771 | 0.123986312 |
+| S3 | Graph | N/A | N/A | N/A | N/A |
+| S4 | Native | 0.061198617 | 0.198189216 | 0.120660784 | 0.230599468 |
+| S4 | C3 | 0.061198617 | 0.198189216 | 0.120660784 | 0.230599468 |
+| S4 | Hermite | 0.054386064 | 0.158973357 | 0.112389488 | 0.205457145 |
+| S4 | Graph | N/A | N/A | N/A | N/A |
+
+### Control, safety and termination
+
+| Source | Method | Swept clearance m | Linear TV | Angular TV | max abs(v) m/s | max abs(omega) rad/s | Termination |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| S1 | Native | 0.133561094 | 0.800000000 | 3.629555771 | 0.800000000 | 1.548333658 | OBSERVATION_CAP |
+| S1 | C3 | 0.133561095 | 0.800000016 | 3.629555770 | 0.800000000 | 1.548333658 | OBSERVATION_CAP |
+| S1 | Hermite | 0.152790687 | 2.000000061 | 3.803257746 | 0.800000000 | 1.242649202 | OBSERVATION_CAP |
+| S1 | Graph | N/A | N/A | N/A | N/A | N/A | PLANNING_FAILED |
+| S2 | Native | 0.757224041 | 0.806041069 | 2.546626244 | 0.800000000 | 1.052845289 | OBSERVATION_CAP |
+| S2 | C3 | 0.757224041 | 0.806041069 | 2.546626244 | 0.800000000 | 1.052845289 | OBSERVATION_CAP |
+| S2 | Hermite | 0.757234605 | 1.606041099 | 2.869934475 | 0.800000000 | 0.896706981 | OBSERVATION_CAP |
+| S2 | Graph | N/A | N/A | N/A | N/A | N/A | PLANNING_FAILED |
+| S3 | Native | 0.380788848 | 1.306411557 | 4.091433300 | 0.800000000 | 1.970742708 | OBSERVATION_CAP |
+| S3 | C3 | 0.380789059 | 1.306411561 | 4.053281894 | 0.800000000 | 1.963120875 | OBSERVATION_CAP |
+| S3 | Hermite | 0.380828239 | 2.435623192 | 4.117208335 | 0.800000000 | 1.236641469 | OBSERVATION_CAP |
+| S3 | Graph | N/A | N/A | N/A | N/A | N/A | PLANNING_FAILED |
+| S4 | Native | 0.870803818 | 1.453529666 | 4.825967444 | 0.800000000 | 2.271346994 | OBSERVATION_CAP |
+| S4 | C3 | 0.870803818 | 1.453529666 | 4.825967444 | 0.800000000 | 2.271346994 | OBSERVATION_CAP |
+| S4 | Hermite | 0.872961422 | 2.222189933 | 4.116810390 | 0.800000000 | 1.624542830 | OBSERVATION_CAP |
+| S4 | Graph | N/A | N/A | N/A | N/A | N/A | PLANNING_FAILED |
+
+All new executed prefixes passed the unchanged guard; no unsafe command was
+applied. Hermite's minimum swept bound across the four sources is
+0.15279068650318456 m, above the required .05 m. All four complete Hermite
+references pass the direct .20 m footprint/.05 m edge checker. Graph execution
+safety is untested because no Graph reference was admitted for execution.
+
+### Returned Hermite geometry
+
+XY length here is the sampled returned polyline; the continuous Hermite arc
+length used to choose M is listed under prepared constants. With M=2 there is
+one chord-turn angle, so maximum and RMS are equal. All returned Hermite bridges
+and complete references have self-intersection=false. Graph returned geometry
+is N/A; the next table is explicitly an unexecuted solver diagnostic.
+
+| Source | XY length m | Chord m | Length/chord | Max turn deg | RMS turn deg | Min edge m | Max edge m | Ref clearance m |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| S1 | 0.106838302 | 0.106648569 | 1.001779041 | 6.833978540 | 6.833978540 | 0.051664408 | 0.055173893 | 0.229486890 |
+| S2 | 0.127678200 | 0.127644317 | 1.000265452 | 2.640491797 | 2.640491797 | 0.062673649 | 0.065004551 | 0.757253287 |
+| S3 | 0.184775132 | 0.184683190 | 1.000497837 | 3.616027841 | 3.616027841 | 0.090304340 | 0.094470792 | 0.211489855 |
+| S4 | 0.161197131 | 0.160884226 | 1.001944908 | 7.145148804 | 7.145148804 | 0.077889553 | 0.083307578 | 0.878001187 |
+
+### Factor costs and failed Graph solves
+
+| Source | State | E_in | E_out | E_smooth | E_space | Total |
+| --- | --- | --- | --- | --- | --- | --- |
+| S1 | Hermite initial | 67.819091046 | 33.402277113 | 0.018678462 | 0.000546069 | 101.240592690 |
+| S1 | Graph last iterate, UNCONVERGED | 0.000000288 | 35.998167995 | 0.504377389 | 0.504268168 | 37.006813839 |
+| S2 | Hermite initial | 50.238256547 | 34.954364037 | 0.005858113 | 0.000239827 | 85.198718524 |
+| S2 | Graph last iterate, UNCONVERGED | 0.000000290 | 35.984215141 | 0.719216245 | 0.719191062 | 37.422622737 |
+| S3 | Hermite initial | 54.575621509 | 34.600094962 | 0.023409069 | 0.000708930 | 89.199834469 |
+| S3 | Graph last iterate, UNCONVERGED | 0.000000069 | 36.000543328 | 1.393015230 | 1.392893101 | 38.786451728 |
+| S4 | Hermite initial | 69.057008471 | 33.291099555 | 0.040753610 | 0.001268192 | 102.390129828 |
+| S4 | Graph last iterate, UNCONVERGED | 0.000006706 | 36.000621847 | 1.118258300 | 1.118210143 | 38.237096996 |
+
+All four solve attempts terminated at `maximum_iterations`, iterations=80,
+converged=false. Unsafe improving-proposal rejections=0 for every source.
+The final saved internal states retained exact B/E and downstream rows. Their
+first bridge edge lengths were 2.2400526872570977e-6, 1.8538375079497577e-6,
+2.3147443132026727e-6 and 2.544209239606101e-6 m (S1–S4). Thus the first edge became
+micrometre-sized while the other edge remained near the B→E chord length.
+These are diagnostic last accepted iterates, not returned or installed references.
+They were not repaired, restarted or executed. Full geometry/factor diagnostics
+with trace hashes are in `solver_failure_diagnostics.json`; that saved-only
+calculation made zero additional optimizer/MPC calls.
+
+### First official H5 identities
+
+The first legal submits are at ticks 96, 1002, 1806 and 1524 for S1–S4.
+Native/C3/Hermite first-submit poses are identical within each source. Bridge
+rows have explicit derived identities; they are not relabeled as raw FRESH rows.
+
+| Source | Method | First H5 selected identities |
+| --- | --- | --- |
+| S1 | Native | F_3, F_4, F_5, F_6, F_7 |
+| S1 | C3 | F_2, F_3, F_4, F_5, F_6 |
+| S1 | Hermite | bridge_1, E*, F_2, F_3, F_4 |
+| S1 | Graph | N/A |
+| S2 | Native | F_4, F_5, F_6, F_7, F_8 |
+| S2 | C3 | F_4, F_5, F_6, F_7, F_8 |
+| S2 | Hermite | bridge_1, E*, F_3, F_4, F_5 |
+| S2 | Graph | N/A |
+| S3 | Native | F_4, F_5, F_6, F_7, F_8 |
+| S3 | C3 | F_3, F_4, F_5, F_6, F_7 |
+| S3 | Hermite | bridge_1, E*, F_3, F_4, F_5 |
+| S3 | Graph | N/A |
+| S4 | Native | F_3, F_4, F_5, F_6, F_7 |
+| S4 | C3 | F_3, F_4, F_5, F_6, F_7 |
+| S4 | Hermite | bridge_1, E*, F_3, F_4, F_5 |
+| S4 | Graph | N/A |
+
+All raw downstream identities after E* remained bit-identical to the historical
+Native world installation. Derived Hermite installation roundoff maxima were
+3.552713678800501e-15, 3.552713678800501e-15, 1.7763568394002505e-14 and
+5.329070518200751e-15 (S1–S4), below the frozen 1e-12 interface check. Planning
+B/E themselves are exact copies. Original raw FRESH was never overwritten or
+re-anchored at B.
+
+### PNGs and numerical inspection
+
+Exactly four final PNGs were generated and visually inspected, with matching
+numeric sidecars and hashes in `figure_manifest.json`:
+
+1. [World execution overview](../results/b_to_entry_bridge_01/figures/world_execution_overview.png).
+   Only Native, C3 and Hermite executions exist. **The Graph legend has no curve:
+   all Graph rollouts were withheld after nonconvergence.**
+2. [Bridge geometry](../results/b_to_entry_bridge_01/figures/bridge_geometry.png).
+   Graph returned geometry is explicitly N/A. Arrows show prescribed continuous
+   endpoint tangents; coarse sampled chords do not exactly match those arrows.
+3. [Transition and completion metrics](../results/b_to_entry_bridge_01/figures/transition_and_completion_metrics.png).
+4. [Attachment versus completion](../results/b_to_entry_bridge_01/figures/attachment_vs_completion.png).
+   Graph missing executions and S3 Native/C3 missing dwell remain separate N/A rows.
+
+Native/C3 curves overlap exactly in S2 and S4; the authenticated S1 maximum XY
+difference is 5.344081835845081e-10 m. Staggered markers and different line styles
+expose those overlaps. No unobserved time is plotted at a fabricated numeric cap.
+
+### Protocol outcome and deviations
+
+The expected eight new rollouts became **four completed Hermite rollouts and four
+withheld Graph rollouts** because all four fixed-budget graph attempts failed to
+converge. This follows the failure policy declared before freeze; it prevents a
+complete four-method causal comparison. No retry, solver-budget change, relaxed
+termination, alternate initialization, result-driven method change, source change,
+MPC modification or additional scientific solve occurred. A supplementary saved
+last-iterate diagnostic JSON was added for transparent failure reporting; it is
+not an additional reference, execution or final PNG.
+
 
 ## Research interpretation
 
-Reserved until saved-only validation completes.
+Hermite recovers the unresolved S3 case under this frozen controller/schedule:
+both sustained attachment and original-FRESH endpoint dwell become observable.
+Its S3 .9 position AUC falls by 0.00430051282231636 m s (2.3052381070416517%) versus
+C3; endpoint error at the cap falls from .11235439505980861 to .0604422053494252 m.
+This is evidence that an explicit spatial transition can affect this source's
+execution. It does not establish a graph benefit.
+
+The easy controls show a cost. Hermite preserves all three previously observed
+endpoint dwells but delays them by 9, 6 and 9 integration ticks in S1/S2/S4
+(approximately .15/.10/.15 s). S2 .9 position AUC increases by .8787520089330147%.
+S1 attaches at the same time with more remaining arc. S4 attaches .23333334550261497 s
+earlier, at original arc fraction .6373064861628691 instead of .9127535301115488,
+leaving .46543965739221604 m instead of .11196220914994415 m; its endpoint dwell is
+.15000000782310963 s later. This is an observed faster-attachment/slower-endpoint
+trade-off. Hermite therefore does not meet the requested non-regression condition
+or support a SIMPLE_BRIDGE_SUFFICIENT conclusion for the joint four-source task.
+
+Overall classification remains **TECHNICAL_BLOCKED**, taking precedence over the
+observed Hermite trade-off. Graph recovery and Graph-versus-Hermite execution are
+not identifiable because no Graph rollout exists. A lower last-iterate objective
+is not evidence of improved execution.
+
+The graph traces show near-collapse of the first edge despite the finite spacing
+penalty. Its micrometre scale is close to the 1e-6 finite-difference perturbation,
+which suggests poor numerical conditioning near a direction singularity. This is
+an inference from saved iterates, not a proved explanation of nonconvergence or
+permission to retune this experiment. The fixed M=2 construction may also restrict
+how well both endpoint directions can be represented. No graph repair or new
+factor was implemented.
+
+### Answers to the research question
+
+- **Can this bridge recover S3?** Hermite did: attachment 1.4666667431592941 s,
+  endpoint dwell 1.7666667588055134 s, remaining arc at attachment .2926991990444493 m.
+  Graph execution is unavailable.
+- **Without degrading S1/S2/S4?** No for downstream dwell timing: all three are
+  later with Hermite. Safety and observation of endpoint dwell are preserved.
+- **Is simple Hermite sufficient?** It demonstrates S3 recovery, but does not meet
+  the combined recovery/non-regression criterion.
+- **Is graph optimization necessary or superior?** Not established. All four
+  bounded graph solves failed to converge; no Graph execution comparison exists.
+- **What follows?** Investigate the frozen graph's short-edge numerical behavior
+  in a separate explicitly authorized study before making another execution claim.
+  This experiment does not freeze a final reconciliation method. Any later frozen
+  method needs held-out obstacle geometries for evaluation.
+
 
 ## Limitations
 

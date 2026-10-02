@@ -6253,3 +6253,42 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
 - Exact commands, normalization, numerical conventions, category precedence and
   null policy are in `docs/B_TO_ENTRY_BRIDGE_01.md`. Unrelated stage0 config edits
   and `scripts/plot_gpu_memory_snapshot.py` are preserved outside this commit.
+
+## 2026-10-02 — B_TO_ENTRY_BRIDGE_01 results and bounded solver failure
+
+- Scientific freeze `274c44b550c4e37164d963c30d7927030b637e54` was committed and
+  normally pushed before execution. Started at actual host UTC
+  `2026-10-02T08:48:35.905548+00:00`; preserved all frozen code/config hashes.
+- All four graph attempts reached max80 without convergence. Per frozen policy,
+  no last iterate became an executable reference and all four Graph rollouts
+  were withheld. Overall classification **TECHNICAL_BLOCKED**. No retries,
+  alternate initialization, iteration increase or tolerance changes.
+- Actual budget: **4 graph solves, 4 Hermite rollouts, 0 Graph rollouts, 120 MPC
+  solves, 119 applications**. S2's final solve is withheld beyond the fixed cap.
+  Eight historical Native/C3 rollouts reused byte-for-byte. Native/C3 reruns,
+  LightNav, RGB, Isaac, source acquisition and retries all zero. The requested
+  expected eight-rollout budget could not be completed because of graph
+  nonconvergence; this is reported rather than filled with fabricated executions.
+- Hermite recovers S3 attachment at 1.4666667431592941 s and original-FRESH
+  endpoint dwell at 1.7666667588055134 s; .9 position AUC=.18225344050596992 m s
+  versus C3 .18655395332828628. Remaining arc at attachment=.2926991990444493 m.
+- Easy controls retain observed endpoint dwell but it is later by 9/6/9 ticks
+  (about .15/.10/.15 s) in S1/S2/S4. S4 attaches .23333334550261497 s earlier yet
+  has endpoint dwell .15000000782310963 s later, with .3534774482422719 m more
+  remaining arc at attachment. This is a trade-off, not a net improvement.
+- All four Hermite rollouts reach the 180-step cap safely, no controller error or
+  abort. Minimum swept clearance=.15279068650318456 m. Native/C3/Hermite common
+  states and schedules match through .9 and 3 s; the four-method gate is incomplete
+  because Graph is absent. Graph execution safety is untested.
+- Saved graph traces show first edges of about 1.85–2.54 micrometres. Added a
+  separately labeled saved-only last-iterate diagnostic JSON with factor costs,
+  geometry and trace hashes; zero new solves, no reference installation. Finite
+  spacing cost did not maintain well-separated edges in these failed attempts.
+- Saved-only new validator and all six historical validators pass. Figure/CSV
+  hashes, numeric sidecars and all four final PNGs inspected; Graph N/A is retained.
+  Frozen tests remain 29 focused / 600 regression passed, 1 known skip. Compileall
+  and diff checks pass. No scientific code/config changed after freeze.
+- Reports, four PNGs, conservative README update and this append-only log are the
+  result commit. Unrelated stage0 config edits and GPU-memory plotting script
+  remain untouched. Full commands, facts, interpretation and limitations are in
+  `docs/B_TO_ENTRY_BRIDGE_01.md`; no final-method or generalization claim.
