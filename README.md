@@ -7,12 +7,25 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [C3 entry-suffix execution experiment](docs/SPATIAL_ENTRY_SUFFIX_EXECUTION_01.md)
+reused Native/Full and ran four new suffix rollouts with unchanged official MPC
+and frozen logical schedules (120 MPC solves; zero optimizer/LightNav/RGB/Isaac).
+Classification: **ENTRY_TRANSITION_AND_COMPLETION_SUPPORTED**. C3 removed the
+stale-prefix reset and lowered original-FRESH .9 s position AUC versus Full in
+all four sources, without delaying observed original-FRESH endpoint dwell.
+S4 recovered both dwells, matching Native; S3 still had neither. C3 closely
+matched Native in three sources, and yaw AUC increased versus Full. This supports
+the bounded entry mechanism comparison, without establishing graph necessity or
+a generally successful method.
+[Four-source PNG](results/spatial_entry_suffix_execution_01/figures/world_execution_overview.png)
+and [attachment versus endpoint dwell](results/spatial_entry_suffix_execution_01/figures/attachment_vs_completion.png).
+
 The [saved-only correspondence/selector diagnostic](docs/SPATIAL_CORRESPONDENCE_SELECTOR_DIAG_01.md)
 queried the unchanged official selector on three saved references at 37 identical
 Native states (111 queries; zero new optimizer/MPC/rollout calls). Full selected
 earlier original progress in 37/37 queries across four sources; Half reduced the
 reset but retained it in 31/37. Classification: **TRANSPORT_PROGRESS_RESET_SUPPORTED**.
-This motivates testing an explicit B-to-FRESH entry; it does not establish execution
+This motivated testing an explicit B-to-FRESH entry; it does not establish execution
 causality or a new successful method.
 [Matched selector PNG](results/spatial_correspondence_selector_diag_01/figures/selector_progress_reset.png).
 

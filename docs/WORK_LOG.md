@@ -6160,3 +6160,38 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
 - Implementation corrections happened before freeze, including wrapped ±pi parity.
   No new scientific solves during development. Commit/push freeze before exactly
   four C3 rollouts, then saved-only validation and result reporting.
+
+## 2026-10-02 — SPATIAL_ENTRY_SUFFIX_EXECUTION_01 saved result
+
+- Pushed scientific freeze `124361eb61a716bca038a2fd4ce15818b0986f3e`, then executed
+  C3 once per source in frozen S1-S4 order. Exactly 4 new rollouts, 120 official
+  MPC solves, 119 released results; S2's last result remains held beyond cap as
+  scheduled. All finish 180 intervals at OBSERVATION_CAP. Reused 8 Native/Full
+  rollouts byte-for-byte. Optimizer/LightNav/RGB/Isaac/retry counts all zero.
+- Classification: **ENTRY_TRANSITION_AND_COMPLETION_SUPPORTED**. Identical B state,
+  command/memory, submit/application schedules pass through .9 s and full cap in
+  every source. C3 selects no original identity before entry, with no temporal
+  backward selection. All new reference/execution safety checks pass; minimum
+  C3 execution swept clearance lower bound .133561095 m (required .05 m).
+- C3 minus Full .9 position AUC S1-S4: -.000898322/-.004849159/-.013409706/
+  -.019145831 m·s. S1 attaches one tick earlier with equal endpoint dwell; S2
+  attaches nine ticks earlier with endpoint dwell five ticks earlier. S4 recovers
+  attachment/endpoint dwell at 1.283333400/1.400000073 s. S3 retains null for both;
+  its terminal position error falls to .112354395 m, still outside .10 m.
+- C3/Native executed XY gap: 5.344081835845081e-10/0/.009352430050584302/0 m.
+  All observed C3/Native attachment and endpoint dwell times agree. No paired
+  source shows faster attachment but later endpoint dwell. S1/S2 C3 attach with
+  more remaining arc and have longer T_post_attach, despite equal/earlier absolute
+  endpoint dwell. Yaw AUC .9 increases versus Full in all four; no scalar winner.
+- Saved-only validation passes before and after reporting, including all five
+  historical validators and independent endpoint dwell recomputation. Report
+  performs an additional saved-only check. No frozen scientific file changes.
+- Exactly four PNGs generated and visually inspected: world overview, transition/
+  endpoint metrics, progress preservation, attachment versus completion. Numeric
+  sidecars independently match saved poses/metrics and retain 4 N/A pairs apart
+  from 8 observed pairs. No HTML dependency or extra final PNGs. Detailed arrays
+  remain ignored; compact CSV/JSON/PNG and results documentation are tracked.
+- Report answers all twelve questions, preserves S3 failure and Native equivalence,
+  and proposes a fixed B/entry/suffix transition only as a future hypothesis.
+  README updated conservatively. Tests remain 571 passed/1 skipped; no post-freeze
+  code edits or new test-triggered scientific solves. No scientific protocol deviation.
