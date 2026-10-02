@@ -6227,3 +6227,29 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
   `OPENBLAS_NUM_THREADS=1 .venv/bin/python scripts/validate_spatial_entry_suffix_execution01.py --run data/spatial_entry_suffix_execution_01/primary_20261002T000000Z --check-only`.
   Also ran `.venv/bin/python -m compileall -q src scripts tests` and
   `git diff --check`. Only this verification log is committed and normally pushed.
+
+## 2026-10-02 — B_TO_ENTRY_BRIDGE_01 scientific freeze preparation
+
+- Fetched origin/main and inspected starting HEAD
+  `50b4fd7afdbb7183ab03b4222fe12514d293fb3f`, repository rules, README, latest
+  log, correspondence, entry-suffix, EXP-02A and Local-SE2 formulation records.
+- Added isolated fixed-boundary bridge module, config, bounded runner, saved-only
+  validator, four-PNG reporter and tests. Historical formulation, official MPC,
+  logical scheduler and original-FRESH/endpoint evaluator remain byte-unchanged.
+- Authenticated the completed C3 result and all prior result/input/code chains.
+  Reproduced all four C3 entries exactly. P is the actual recorded B_tick-1 pose.
+  Native-installed downstream world rows and raw A-local rows stay bit-identical.
+- Prepared deterministic Hermite references and froze spatial M=[2,2,2,2]. All
+  complete Hermite references pass safety and zero-numerical-MPC restoration.
+  Graph uses the existing right-local LM with four specified normalized residuals,
+  fixed B/E and fixed suffix. No P-to-B distance factor or waypoint timing.
+- Validation: 29 focused tests passed (51.91 s); full relevant regression suite
+  **600 passed, 1 skipped** (204.93 s). Skip: absent ignored EXP-01B/EXP-02B corpus.
+  Compileall and working/staged diff checks pass. Synthetic renderer PNGs inspected;
+  captions were separated from geometry axes before freeze. Tests are not evidence.
+- New scientific optimizer/MPC/rollout/LightNav/RGB/Isaac calls remain zero at this
+  point. Next authorized action after normal push: exactly four graph solves and
+  eight eligible bridge rollouts, with no result-driven changes or retries.
+- Exact commands, normalization, numerical conventions, category precedence and
+  null policy are in `docs/B_TO_ENTRY_BRIDGE_01.md`. Unrelated stage0 config edits
+  and `scripts/plot_gpu_memory_snapshot.py` are preserved outside this commit.

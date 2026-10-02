@@ -1,0 +1,46 @@
+experiment: B_TO_ENTRY_BRIDGE_01
+starting_sha: 50b4fd7afdbb7183ab03b4222fe12514d293fb3f
+label: timing-controlled offline causal reference comparison
+sources: [OSA03_R00, episode_001_repeat_01/handoff_013, episode_008_repeat_01/handoff_023, episode_013_repeat_00/handoff_020]
+order: [M0_NATIVE, C3_ENTRY_SUFFIX, HERMITE_BRIDGE, SE2_GRAPH_BRIDGE]
+historical_result: results/spatial_entry_suffix_execution_01/result_summary.json
+historical_result_sha256: e86083eb2f812e84c898885f2039b6520d336dd802c391dcaf29342cf17aa948
+entry: exact prior C3_FORWARD_SE2, no new correspondence rule
+fixed_boundary: exact saved B and exact frozen E; only interior graph nodes vary
+fixed_suffix: bit-identical historical Native installed world rows; original raw observation-local rows used by official installation
+incoming: exact recorded P at B_tick-1; direction only, never its timed displacement length
+Hermite_tangent_magnitude: B-to-E XY chord
+Hermite_arc_quadrature: scipy quad epsabs=1e-12 epsrel=1e-12 limit=200; error estimate <=1e-10
+Hermite_arc_inverse: scipy brentq xtol=1e-14 rtol=4*float64_epsilon
+spatial_density: d_F=median XY segment length of [E, retained original downstream rows]; M=max(2,ceil(L_H/d_F))
+yaw: shortest-angle B to E at normalized Hermite arc length; copy endpoint bits exactly
+factor_costs: unaveraged sums of squared normalized residual components; no half factor
+lambdas: {incoming: 1, outgoing: 1, smoothness: 1, spacing: 1}
+normalization: {direction_deg: 15, smooth_yaw_deg: 10, smooth_translation: d_F, spacing: d_F}
+collapsed_edge_policy: bridge XY edges <=1e-12 m infeasible; finite atan2(0,0)=0 proposal cost, no extra penalty
+solver: {max_iterations: 80, finite_difference_epsilon: 1.0e-6, initial_damping: 0.001, damping_increase: 10.0, damping_decrease: 0.3, maximum_damping: 1000000000000.0, gradient_tolerance: 1.0e-9, step_tolerance: 1.0e-9, cost_tolerance: 1.0e-12}
+integration_steps: 180
+primary_intervals: 54
+wall_wait_timeout_s: 30.0
+schedule: exact source-specific saved STATE_SHIFT_TRANSPORT_SCALE_01 bytes; host wait never advances logical clock
+initial_state: exact common B, u_minus, applied u_B_plus, previous_control, generation and integration dt
+footprint_radius_m: 0.20
+required_edge_clearance_m: 0.05
+safety: unchanged complete-polyline checker and reserve; B is explicit bridge boundary; unchanged abort-only execution guard
+metric_target: ORIGINAL full FRESH and original-FRESH endpoint dwell time
+endpoint_dwell: exact historical execution-time .10 m /15 deg / complete following .30 s interval; null never cap-imputed
+classification_tolerance: 1.0e-9
+clearly_later_endpoint_s: 0.10
+meaningful_early_improvement: S3 original-FRESH position AUC .9 lower than C3 by >1e-9; numerical sign only, magnitude always reported
+classification_precedence: [TECHNICAL_BLOCKED, BRIDGE_REFERENCE_FAILURE, BRIDGE_TRADEOFF, GRAPH_BRIDGE_SUPPORTED, SIMPLE_BRIDGE_SUFFICIENT, BRIDGE_PARTIAL_ONLY, BRIDGE_INSUFFICIENT]
+classification_detail: graph recovery beyond Hermite means a newly observed dwell where Hermite has neither, or newly observed endpoint dwell where Hermite lacks endpoint; simple sufficient requires no later easy-source endpoint beyond sign tolerance; tradeoff requires hard improvement plus easy endpoint loss or delay >.10 s; unsafe reference/execution takes failure precedence
+self_intersection: Shapely LineString.is_simple of returned polylines; diagnostic only
+execution_order: S1 through S4; each Hermite rollout then Graph solve then Graph rollout
+new_graph_solves: 4
+new_rollouts: 8
+historical_reruns: 0
+LightNav: 0
+RGB: 0
+Isaac: 0
+retries: 0
+final_pngs: [world_execution_overview.png, bridge_geometry.png, transition_and_completion_metrics.png, attachment_vs_completion.png]
