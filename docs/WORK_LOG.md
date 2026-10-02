@@ -6195,3 +6195,35 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
   and proposes a fixed B/entry/suffix transition only as a future hypothesis.
   README updated conservatively. Tests remain 571 passed/1 skipped; no post-freeze
   code edits or new test-triggered scientific solves. No scientific protocol deviation.
+
+## 2026-10-02 — SPATIAL_ENTRY_SUFFIX_EXECUTION_01 repeated-request verification
+
+- Fetched origin/main and confirmed starting HEAD
+  `0aee385411191848767709ec77cd2b178d5eed0c` already contains the completed
+  requested experiment. Scientific freeze remains
+  `124361eb61a716bca038a2fd4ce15818b0986f3e`; result/docs commit remains
+  `0aee385411191848767709ec77cd2b178d5eed0c`.
+- Re-read repository rules, current research state/work log, requested historical
+  protocols and the completed report; inspected official adapter/restoration,
+  logical release scheduler, original-FRESH evaluator, frozen C3 and PNG reporter.
+- Re-ran saved-only validation with all five historical validators: PASS. Verified
+  all 11 tracked result files match fetched origin/main byte-for-byte, including
+  exactly four PNGs. Source hashes, original suffix rows, B state/command/memory,
+  generation and per-source primary/full logical schedules remain authenticated.
+- Re-ran the documented 31-file relevant regression suite with
+  `MPLCONFIGDIR=/tmp/entry-suffix-recheck-mpl`: **571 passed, 1 skipped** in
+  159.24 s. Skip: unavailable ignored EXP-01B/EXP-02B corpus. This includes all
+  34 entry-suffix test cases. Compileall and diff check pass.
+- This verification adds **0 scientific rollouts, 0 MPC solves, 0 reconciliation
+  optimizer solves, 0 LightNav/RGB/Isaac calls and 0 retries**. The completed
+  experiment remains exactly 4 C3 rollouts / 120 MPC solves / 119 applied results,
+  with 8 byte-identical historical Native/Full rollouts reused. No scientific file,
+  result, reference, config, figure or interpretation is changed or regenerated.
+- Classification remains ENTRY_TRANSITION_AND_COMPLETION_SUPPORTED, with S3's
+  null attachment/endpoint dwell, S4 recovery, Native agreement in three sources
+  and increased C3 yaw AUC versus Full explicitly retained. No scientific protocol
+  deviation. Existing unrelated Stage0 edits and GPU script remain preserved.
+- Saved-only command:
+  `OPENBLAS_NUM_THREADS=1 .venv/bin/python scripts/validate_spatial_entry_suffix_execution01.py --run data/spatial_entry_suffix_execution_01/primary_20261002T000000Z --check-only`.
+  Also ran `.venv/bin/python -m compileall -q src scripts tests` and
+  `git diff --check`. Only this verification log is committed and normally pushed.
