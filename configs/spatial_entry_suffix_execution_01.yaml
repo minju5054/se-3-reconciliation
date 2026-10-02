@@ -1,0 +1,52 @@
+experiment: SPATIAL_ENTRY_SUFFIX_EXECUTION_01
+starting_sha: 962d63e9ec775635481f00164562afa0c0f43386
+label: timing-controlled offline causal reference comparison
+sources: [OSA03_R00, episode_001_repeat_01/handoff_013, episode_008_repeat_01/handoff_023, episode_013_repeat_00/handoff_020]
+order: [M0_NATIVE, FULL_LOCAL_SE2, C3_ENTRY_SUFFIX]
+historical_results:
+  results/spatial_correspondence_selector_diag_01/result_summary.json: 1449e0e59cb43cb22ec03004609c5e74310bf097aaad70a28dd22d8197dbef8f
+  results/state_shift_transport_scale_01/result_summary.json: 04104aa84d36cc15792cd80cfef93ef6fafdaf6810bfb71f143a2532e2880c68
+  results/relative_factor_multisource_01/result_summary.json: d935cdc58661a672cb238085f0c697c5d75d36a5d01ff5709e2782de6b0c5cc7
+correspondence: exact frozen SpatialCurve C3_FORWARD_SE2 at saved B; require exact prior diagnostic equality
+reference: continuous E followed by exact original downstream world and raw A-local rows
+vertex_duplicate_tolerance: 1.0e-12
+reference_frame: world metres/yaw radians; only E converted to A-local; no B re-anchor
+integration_steps: 180
+primary_intervals: 54
+wall_wait_timeout_s: 30.0
+schedule: byte-for-byte per-source STATE_SHIFT_TRANSPORT_SCALE_01 schedule.json
+initial_state: byte-for-byte saved common_state.json including B/u_minus/u_B_plus/u_mem_B/generation
+footprint_radius_m: 0.20
+required_edge_clearance_m: 0.05
+safety: unchanged direct complete-polyline checker; no B connector; unchanged abort-only execution guard
+metric_target: ORIGINAL full FRESH and its original endpoint
+endpoint_position_m: 0.10
+endpoint_yaw_deg: 15.0
+endpoint_dwell_s: 0.30
+endpoint_sample_tolerance_s: 1.0e-12
+endpoint_dwell_name: original-FRESH endpoint dwell time
+endpoint_null_policy: absent complete following dwell remains null; never cap-imputed
+fixed_cap: nominal 3 s is the historical 180 intervals, actual 180 * source dt; incomplete cap metrics null
+path_length: integral of absolute held linear commands over execution intervals before endpoint dwell start
+mean_abs_v: path length / endpoint dwell start time; null for zero-duration or unobserved dwell
+post_attach: endpoint dwell start minus attachment start only when both are observed; no clamping
+sign_tolerance: 1.0e-09
+substantially_more_remaining_arc_m: 0.10
+majority_AUC: C3 .9 original-FRESH position AUC lower than Full in at least 3 of 4 sources
+systematically_later_endpoint: strictly more than half of sources with an observed Native or Full endpoint dwell have C3 later or null versus at least one observed baseline
+tradeoff: any source/baseline pair with both attachments observed, C3 earlier, and endpoint later/lost or >.10 m more original arc at attachment
+classification_priority: [TECHNICAL_BLOCKED, ENTRY_REFERENCE_FAILURE, FAST_ATTACHMENT_SLOW_COMPLETION_TRADEOFF, ENTRY_TRANSITION_AND_COMPLETION_SUPPORTED, ENTRY_PROGRESS_INSUFFICIENT]
+classification_rules:
+  TECHNICAL_BLOCKED: authentication/restoration/interface/validator/runtime schedule failure or stale identity implementation failure
+  ENTRY_REFERENCE_FAILURE: unsafe complete reference, execution safety abort/clearance failure, or official numerical controller error after successful restoration
+  FAST_ATTACHMENT_SLOW_COMPLETION_TRADEOFF: any frozen paired tradeoff; show every pair, no net improvement claim
+  ENTRY_TRANSITION_AND_COMPLETION_SUPPORTED: majority lower AUC; at least one baseline endpoint observed; no systematic later/lost endpoint; safety and entry identity checks pass
+  ENTRY_PROGRESS_INSUFFICIENT: remaining valid cases; progress preservation alone not supported by joint transition/completion criteria
+new_rollouts: 4
+optimizer_calls: 0
+LightNav: 0
+RGB: 0
+Isaac: 0
+retries: 0
+half: historical descriptive context only; no new reference or rollout
+final_pngs: [world_execution_overview.png, transition_and_endpoint_metrics.png, progress_preservation.png, attachment_vs_completion.png]

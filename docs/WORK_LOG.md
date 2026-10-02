@@ -6134,3 +6134,29 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
   README updated conservatively. The report contains eleven explicit answers,
   exact commands, tests (537 passed/1 skipped), counts, source/frame conventions,
   limitations and next uncertainty. Final diff and staged-diff review passed.
+
+## 2026-10-02 — SPATIAL_ENTRY_SUFFIX_EXECUTION_01 preflight and protocol
+
+- Fetched origin/main at `962d63e9ec775635481f00164562afa0c0f43386`; read current
+  repository rules, requested formulation/entry/transport/correspondence documents,
+  controller runtime, logical scheduler, evaluator and compact report infrastructure.
+  Preserved unrelated stage0 config edits and the untracked GPU snapshot script.
+- Authenticated the same four sources and all historical correspondence, transport,
+  multisource, R00/R01 saved validators. Reuse Native/Full reference and rollout
+  bytes; no new baseline/Half execution or optimization. Exact prior C3 values
+  reproduced for all four, with suffix sizes 9/8/8/8 and positive remaining arc.
+- Added isolated suffix construction, original endpoint dwell evaluation, original
+  identity mapping, saved-only validation and four compact PNGs. Preserve original
+  downstream world AND A-local rows; official installed downstream arrays exactly
+  match Native. No historical implementation or external controller edits.
+- All four references are safe and all four zero-numerical-solve official restore
+  preflights pass. Schedules and B/held command/controller memory are byte copies.
+  Prepared references under ignored data; no new scientific rollout yet.
+- Frozen joint transition/completion classification precedence and null handling;
+  no scalar score, no endpoint-as-task-goal claim, no graph transition implementation.
+- Focused tests: 34 passed. Final relevant regression: **571 passed, 1 skipped** in
+  155.35 s; skip is missing ignored historical EXP-01B/EXP-02B corpus. Compileall
+  and diff check pass. Renderer fixture inspected; it is not experimental evidence.
+- Implementation corrections happened before freeze, including wrapped ±pi parity.
+  No new scientific solves during development. Commit/push freeze before exactly
+  four C3 rollouts, then saved-only validation and result reporting.
