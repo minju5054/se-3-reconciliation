@@ -6398,3 +6398,41 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/graph-
   diagnostics and conservative README summary. Result/docs and the presentation
   wrapper are committed and normally pushed. Unrelated Stage0 edits and the
   GPU-memory script remain preserved. Exact commands are in the report.
+
+## 2026-10-03 — B_TO_ENTRY_GRAPH_FORMULATION_DIAG_02 repeated-request saved verification
+
+- Fetched origin/main; starting HEAD and fetched main both equal
+  `65efd5be9b64046eff0c30018696ae33966a20ba`. The identical attached request is
+  already complete in that result/docs commit. Scientific freeze remains
+  `e228237fdf8e68df3db6ab27a5c83eb7da6df76c`.
+- Rechecked repository instructions, current README/log, requested historical
+  protocols, historical bridge/solver code and saved validation path. Preserved
+  both unrelated Stage0 config edits and the GPU-memory script.
+- Authenticated all eleven tracked diagnostic result artifacts byte-for-byte
+  against fetched origin/main. Independently checked the presentation audit,
+  archived originals, CSV cell equality, numerical sidecars, renderer hashes and
+  three final PNG hashes. Viewed all three PNGs without regenerating them.
+- Saved-only diagnostic validation and all historical validators pass again,
+  including A2 parity, residuals, trace decisions and exact B/E*/suffix bits.
+  Exactly twelve exclusive scientific solve records remain. No new scientific
+  solve, retry, MPC solve, rollout, integration, memory update, command application,
+  LightNav, RGB or Isaac acquisition was performed for this verification.
+- Classification remains MULTIPLE_STABLE_FORMULATIONS: V2/V3 stable in 4/4;
+  A3 nonconverged with outgoing collapse in 4/4. Safety and numerical results are
+  unchanged; no execution-performance claim. Prior focused/regression counts
+  remain 36 passed / 636 passed and one known skip. No code changed, so those
+  suites were not repeated. Compileall and working/staged diff checks pass.
+- Only this verification log is committed and normally pushed. Scientific code,
+  configuration, saved results and figures are unchanged. No new protocol
+  deviation; the existing presentation-only correction remains documented.
+- Verification commands:
+
+```bash
+git fetch origin main
+git rev-parse HEAD origin/main
+git status --short
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/graph-diag02-recheck-mpl .venv/bin/python scripts/validate_b_to_entry_graph_formulation_diag02.py --run data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z --check-only
+.venv/bin/python -m compileall -q src scripts tests
+git diff --check
+git diff --cached --check
+```
