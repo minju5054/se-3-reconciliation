@@ -6472,3 +6472,49 @@ git diff --cached --check
 - Freeze source references, schedules, metric/classification definitions and all
   implementation hashes before normal commit/push. Only after the pushed freeze
   are the four source-ordered V2 rollouts authorized; optimizer calls stay zero.
+
+## 2026-10-03 — B_TO_ENTRY_VECTOR_BRIDGE_EXECUTION_03 results
+
+- Scientific freeze `7bf24d60b87774859ffef3f6d56f524a4fb7ad15` was normally
+  pushed before execution, which started at UTC 2026-10-03T07:40:27.891713+00:00.
+  Reused exact V2 files from DIAG_02 result commit
+  `65efd5be9b64046eff0c30018696ae33966a20ba`, freeze
+  `e228237fdf8e68df3db6ab27a5c83eb7da6df76c`.
+- Exactly four V2 rollouts in S1..S4 order: 120 MPC solves, 119 applications,
+  zero reconciliation optimizer calls. S2's final result is withheld past the
+  cap by the unchanged schedule. Twelve historical Native/C3/Hermite rollouts
+  reused; historical/V3 reruns, LightNav, RGB, Isaac and retries all zero.
+- Frozen classification: **VECTOR_GRAPH_RECOVERY_NO_CLEAR_TRADEOFF_GAIN**;
+  next-step decision B. V2 works but does not reduce Hermite's easy-source
+  completion penalty enough to select it for held-out evaluation. No further
+  formulation or held-out collection was implemented.
+- S3 V2 attachment=1.4833334106951952 s, endpoint dwell=1.7666667588055134 s.
+  Attachment is one tick later than Hermite; endpoint dwell is exactly equal.
+  Original-FRESH .9 position AUC=.18190299536729632 m s versus Hermite
+  .18225344050596992 and C3 .18655395332828628. V2 endpoint error at the cap
+  .061520244210175545 m exceeds Hermite .0604422053494252 m; linear/angular TV
+  increase by .09070163199355008/.06719819014358208.
+- Easy-source endpoint delays versus C3 stay exactly .15000000782310963 /
+  .10000000521540642 / .15000000782310963 s (S1/S2/S4), matching Hermite.
+  All dwells remain observed. S4 retains the faster-attachment/slower-endpoint
+  trade-off versus C3; it is not a net completion improvement.
+- Last derived-row H5 exposure and first original-start submit are unchanged
+  versus Hermite in all sources. S3 bridge_1 count falls 5->4, while E* count
+  stays 8. First differing applied ticks: 103/1003/1807/1537. Maximum matched
+  execution XY differences: 4.802 micrometres / 1.928 micrometres / .031584 m /
+  .000762 m. These diagnostics are descriptive, with no selector causal claim.
+- All V2 rollouts reach 180 intervals, no numerical controller error or abort.
+  Minimum swept clearance .1527881035724341 m; full installed reference safety
+  passes, minimum .21148985508008777 m. Exact planning B/X1/E*, downstream
+  Native world bits and raw local FRESH are unchanged. All sixteen historical/new
+  method schedules and common-state provenance match through .9 and 3 s.
+- Saved-only new and all historical validators pass. Exactly three PNGs were
+  generated, visually inspected and checked against numeric sidecars and hashes.
+  Frozen code/configuration and all input hashes are unchanged. No scientific
+  protocol deviation, retry or result-driven modification.
+- Test counts remain 25 focused, 661 relevant regression passed / one known
+  absent-corpus skip, and one pre-freeze rendering check passed. Compileall and
+  working/staged diff checks pass. The report answers all eighteen questions and
+  contains full metrics, geometry, command/selector tables and exact commands.
+  Results/docs/README are committed and normally pushed; unrelated Stage0 edits
+  and the GPU-memory script remain preserved.

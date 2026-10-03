@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [saved V2 bridge execution study](docs/B_TO_ENTRY_VECTOR_BRIDGE_EXECUTION_03.md)
+ran four V2 rollouts with 120 official MPC solves and no new optimization.
+Classification: **VECTOR_GRAPH_RECOVERY_NO_CLEAR_TRADEOFF_GAIN**. V2 preserved
+S3 attachment and original-FRESH endpoint dwell, but all four endpoint dwell
+times matched Hermite exactly. Easy-source delays versus C3 remained about
+.15/.10/.15 s. Safety and schedule checks passed. V2 works, but this study does
+not justify selecting it for held-out evaluation yet.
+[Execution PNG](results/b_to_entry_vector_bridge_execution_03/figures/world_execution_overview.png)
+and [trade-off diagnostics](results/b_to_entry_vector_bridge_execution_03/figures/bridge_tradeoff_diagnostics.png).
+
 The [bridge formulation diagnostic](docs/B_TO_ENTRY_GRAPH_FORMULATION_DIAG_02.md)
 completed twelve planning-only solves and reused the four historical A2 failures.
 Classification: **MULTIPLE_STABLE_FORMULATIONS**. Vector-boundary V2 and V3 each
