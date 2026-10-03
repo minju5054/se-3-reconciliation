@@ -1,0 +1,40 @@
+experiment: B_TO_ENTRY_VECTOR_BRIDGE_EXECUTION_03
+starting_sha: 54eadfc9881d12dad3343fb06932236075f3f256
+label: timing-controlled offline causal reference comparison
+sources: [OSA03_R00, episode_001_repeat_01/handoff_013, episode_008_repeat_01/handoff_023, episode_013_repeat_00/handoff_020]
+order: [M0_NATIVE, C3_ENTRY_SUFFIX, HERMITE_BRIDGE, V2_GRAPH_BRIDGE]
+new_method: V2_GRAPH_BRIDGE
+M: 2
+diag_result: results/b_to_entry_graph_formulation_diag02/result_summary.json
+diag_result_sha256: 9f252ea1cdd243353cb1f5ca009ab1bed1604fae7aba90ff76a430e76c88f41f
+diag_result_commit: 65efd5be9b64046eff0c30018696ae33966a20ba
+diag_freeze_sha: e228237fdf8e68df3db6ab27a5c83eb7da6df76c
+bridge_result: results/b_to_entry_bridge_01/result_summary.json
+bridge_result_sha256: 18e79982aca83fae2035d7496883fe40508dfe346d2830285697baf801efdd6e
+entry_result: results/spatial_entry_suffix_execution_01/result_summary.json
+entry_result_sha256: e86083eb2f812e84c898885f2039b6520d336dd802c391dcaf29342cf17aa948
+selection_reason: minimal stable M2 before execution; no claim versus V3
+planning: exact saved DIAG02 V2 arrays only; no solve, reconstruction, polish or resampling
+frames: observation-anchored original raw FRESH; only derived B/X1/E rows represented as A^-1 X
+suffix: bit-identical historical Native world installation and original raw local rows
+integration_steps: 180
+primary_intervals: 54
+wall_wait_timeout_s: 30.0
+schedule: exact historical source-specific bytes and common B provenance; unchanged logical scheduler
+controller: unchanged official MPC, H5 nearest+1, Q/R, limits, memory and generation semantics
+footprint_radius_m: 0.20
+required_edge_clearance_m: 0.05
+safety: unchanged numerical reserve and complete-polyline checker; unchanged abort-only execution guard
+metric_target: full ORIGINAL FRESH; exact historical attachment and original-FRESH endpoint dwell
+scalar_atol: 1.0e-9
+time_tolerance: integration_dt_s - 1e-9
+classification_precedence: [TECHNICAL_BLOCKED, VECTOR_REFERENCE_OR_EXECUTION_FAILURE, HARD_CASE_RECOVERY_LOST, VECTOR_GRAPH_TRADEOFF_WORSE, VECTOR_GRAPH_TRADEOFF_REDUCED, VECTOR_GRAPH_RECOVERY_NO_CLEAR_TRADEOFF_GAIN, MIXED_VECTOR_EXECUTION_EFFECT]
+optimizer_calls: 0
+new_rollouts: 4
+historical_reruns: 0
+V3_rollouts: 0
+LightNav: 0
+RGB: 0
+Isaac: 0
+retries: 0
+final_pngs: [world_execution_overview.png, transition_completion_metrics.png, bridge_tradeoff_diagnostics.png]

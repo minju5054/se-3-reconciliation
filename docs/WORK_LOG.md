@@ -6436,3 +6436,39 @@ OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/graph-diag02-recheck-mpl .venv/bin/pyth
 git diff --check
 git diff --cached --check
 ```
+
+## 2026-10-03 — B_TO_ENTRY_VECTOR_BRIDGE_EXECUTION_03 freeze preparation
+
+- Fetched origin/main before implementation; starting HEAD and main were both
+  `54eadfc9881d12dad3343fb06932236075f3f256`. Read repository rules, README/log,
+  DIAG_02, bridge, entry-suffix and correspondence records and inspected the exact
+  saved V2 arrays, official adapter, logical scheduler, evaluators and safety path.
+- Added an isolated execution namespace. V2 is selected for minimality (M=2),
+  not a claim versus V3. Exact DIAG_02 bridge/reference files are copied with
+  byte/hash parity; no optimizer is called. Historical Native/C3/Hermite remain
+  immutable and are never rerun. The unchanged generic official executor and
+  source-specific common-state/schedule files are reused directly.
+- DIAG_02 and all historical validators pass. All four zero-numerical-solve
+  official preflights pass; installed downstream Native bits are exact. Derived
+  installation roundoff <=1.7763568394002505e-14; all full installed references
+  pass the unchanged safety gate (minimum .21148985508008777 m).
+- Preparation initially encountered a duplicate dictionary-key argument while
+  recording source metadata, after S1's zero-solve preflight. Fixed before freeze;
+  the partial derived preparation is retained under ignored prepare_debug_01.
+  No scientific rollout/optimizer/MPC solve was made by that preparation attempt.
+- Frozen evaluation uses full ORIGINAL FRESH and existing attachment/endpoint
+  dwell definitions. Added descriptive selector exposure and matched-tick command
+  comparisons, one-integration-tick time comparisons and requested precedence.
+  The execution entry point is guarded against reconciliation optimizer calls.
+- Focused tests: 25 passed in 63.94 s. Synthetic rendering fixtures are tests only,
+  not V2 execution evidence. Exactly three final PNGs will be produced; large
+  rollout arrays remain ignored. No external environment/controller modification.
+- Preserve both unrelated Stage0 config edits and the GPU-memory plotting script.
+- Relevant regression: **661 passed, 1 skipped in 320.02 s**. The known skip is
+  the absent ignored EXP-01B/EXP-02B corpus. After visually reviewing synthetic
+  plots, changed only the bridge-detail axes to equal square world bounds before
+  freeze; the focused rendering test passed again (1 passed in 8.25 s). Scientific
+  code was unchanged after the full regression. Compileall and diff checks pass.
+- Freeze source references, schedules, metric/classification definitions and all
+  implementation hashes before normal commit/push. Only after the pushed freeze
+  are the four source-ordered V2 rollouts authorized; optimizer calls stay zero.
