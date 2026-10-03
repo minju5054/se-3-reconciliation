@@ -1,0 +1,41 @@
+experiment: B_TO_ENTRY_GRAPH_FORMULATION_DIAG_02
+starting_sha: d60da62eafc864bb915637d70671087f9a7e2b7c
+label: saved-only planning / numerical formulation diagnostic
+historical_result: results/b_to_entry_bridge_01/result_summary.json
+historical_result_sha256: 18e79982aca83fae2035d7496883fe40508dfe346d2830285697baf801efdd6e
+historical_failure_diagnostics: results/b_to_entry_bridge_01/solver_failure_diagnostics.json
+historical_failure_diagnostics_sha256: fdee7da55be1c33aae6d5c1213ab559513cc3b3f20a8ba9a7d7f521c2773ab4e
+sources: [OSA03_R00, episode_001_repeat_01/handoff_013, episode_008_repeat_01/handoff_023, episode_013_repeat_00/handoff_020]
+source_roles: [obstacle/straight-to-detour development, mild nearly-straight control, progressive-left-turn hard case, progressive-right-turn control]
+variants: {A2: {boundary: angle, M: 2, historical: true}, A3: {boundary: angle, M: 3}, V2: {boundary: vector, M: 2}, V3: {boundary: vector, M: 3}}
+new_variant_order: [A3, V2, V3]
+initialization: exact historical M2 sample for V2; same continuous Hermite at equal XY-arc thirds for A3 and V3
+fixed: exact P/B/C3 E and Native-installed downstream suffix, same d_F and coordinate conventions
+vector_targets: each own Hermite initial first/last XY edge length times historical incoming/outgoing unit direction
+normalization: {angle_boundary_deg: 15, vector_boundary: d_F, smooth_translation: d_F, smooth_yaw_deg: 10, spacing: d_F}
+lambdas: {incoming: 1, outgoing: 1, smoothness: 1, spacing: 1}
+solver: {max_iterations: 80, finite_difference_epsilon: 1.0e-6, initial_damping: 0.001, damping_increase: 10.0, damping_decrease: 0.3, maximum_damping: 1000000000000.0, gradient_tolerance: 1.0e-9, step_tolerance: 1.0e-9, cost_tolerance: 1.0e-12}
+solver_source_sha256: 7d595cedc49965cf15cc6e701db371bf7d7cc69e6c3a99deffc304a32855b6f7
+historical_bridge_source_sha256: 4b8f4eb85c68796432bab656bb90ddb3288cbbc995d32cbdd3e40105f14057c9
+feasibility_min_edge_m: 1.0e-12
+footprint_radius_m: 0.20
+required_edge_clearance_m: 0.05
+safety: unchanged full B-to-entry-to-original-suffix polyline, Hospital/cart/workspace and numerical reserve
+numerical_collapse_threshold_m: 1.0e-5
+numerical_collapse_policy: post-solve only; min edge must be strictly greater than 10*FD epsilon
+stable: converged AND finite AND exact B/E/suffix AND reference safe AND no bridge self-intersection AND numerically noncollapsed
+classification_precedence: [TECHNICAL_BLOCKED, MULTIPLE_STABLE_FORMULATIONS, RESOLUTION_LIMIT_SUPPORTED, BOUNDARY_DEGENERACY_SUPPORTED, BOTH_RESOLUTION_AND_BOUNDARY_NEEDED, MIXED_FORMULATION_EFFECT, FORMULATION_STILL_BLOCKED]
+nonconvergence: scientific result, not technical blocked; preserve last accepted iterate without treating it as returned reference
+optional_jacobian_diagnostics: N/A; existing trace does not retain Jacobian or normal matrix
+new_graph_solves: 12
+A2_new_solves: 0
+MPC_solves: 0
+rollouts: 0
+state_integrations: 0
+controller_memory_updates: 0
+command_applications: 0
+LightNav: 0
+RGB: 0
+Isaac: 0
+retries: 0
+final_pngs: [formulation_geometry.png, convergence_and_edge_scale.png, factor_costs.png]

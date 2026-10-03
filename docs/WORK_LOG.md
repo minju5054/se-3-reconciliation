@@ -6323,3 +6323,38 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
   `git diff --check`. No scientific code/config/result changes or new protocol
   deviation. Only this verification log is committed and normally pushed;
   unrelated Stage0 edits and the GPU-memory script remain untouched.
+
+## 2026-10-03 — B_TO_ENTRY_GRAPH_FORMULATION_DIAG_02 freeze preparation
+
+- Fetched origin/main; both starting refs were
+  `d60da62eafc864bb915637d70671087f9a7e2b7c`. Read AGENTS, README, latest work
+  log, bridge/entry/correspondence/EXP-02A/Local-SE2 records and historical code.
+- Added an isolated planning-only 2x2 diagnostic: historical A2, new A3/V2/V3.
+  The solver, historical bridge, safety checker and all historical results remain
+  unchanged. No controller rollout or new source is involved.
+- Authenticated the historical bridge result and all six earlier validators.
+  A2 residuals/costs exactly match its saved traces. P/B/C3 E*/suffix/d_F and raw
+  FRESH provenance are unchanged. M2 initial files are byte-identical; A3/V3
+  share the same M3 sample of the unchanged continuous Hermite curve. All initial
+  complete references pass the original safety check.
+- Vector boundary targets use each initialization's own first/last spatial edge
+  lengths, never the P-to-B timed displacement. The existing >1e-12 m feasibility
+  condition is retained. The separate >1e-5 m STABLE criterion is post-solve only.
+  No extra length factor, solver budget, weighting or correspondence change.
+- Focused tests: **36 passed in 48.28 s**. Relevant regression: **636 passed,
+  1 skipped in 257.05 s**; skip is the absent ignored EXP-01B/EXP-02B corpus.
+  Initial test failures exposed only float representation comparisons; the
+  decimal 1e-5 threshold and machine-precision test comparisons were fixed before
+  freeze. No scientific solve informed these changes. Synthetic three-PNG
+  fixtures inspected; equal-axis layout adjusted before the passing regression.
+- Compileall, working/staged diff checks and code review pass. Freeze code,
+  config, exact prepared inputs and protocol before the normal commit/push.
+  Scientific graph solves remain zero; after pushed freeze the only authorized
+  scientific actions are S1..S4 × A3,V2,V3, exactly twelve attempts, no retries.
+- Preserve the two unrelated Stage0 config edits and GPU-memory script.
+  The protocol and exact runner/validator/report commands are in
+  `docs/B_TO_ENTRY_GRAPH_FORMULATION_DIAG_02.md`. Full regression command:
+
+```bash
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/graph-diag02-mpl .venv/bin/python -m pytest -q tests/test_b_to_entry_graph_formulation_diag02.py tests/test_b_to_entry_bridge01.py tests/test_spatial_entry_suffix_execution01.py tests/test_spatial_correspondence_selector_diag01.py tests/test_state_shift_transport_scale01.py tests/test_relative_factor_multisource01.py tests/test_osa03_relative_factor_replication01.py tests/test_osa03_relative_factor_ablation01.py tests/test_osa03_common_b.py tests/test_local_se2_reconciliation.py tests/test_local_se2_saved.py tests/test_se2.py tests/test_se2_graph.py tests/test_se2_lie.py tests/test_trajectory.py tests/test_transition_graph.py tests/test_exp02d_lookahead_direction.py tests/test_spatial_entry.py tests/test_osa03_native.py tests/test_osa03_native_validation.py tests/test_osa03_trackability.py tests/test_online_mpc_adapter.py tests/test_robotless_online.py tests/test_robotless_online_replay.py tests/test_robotless_online_validator.py tests/test_handoff_execution_loss.py tests/test_join_online02.py tests/test_obstacle_source03.py tests/test_join_source02_geometry.py tests/test_gp_se2_environment.py tests/test_gp_se2_diag02_environment.py tests/test_handoff_delay_attribution.py tests/test_genuine_source_scan.py
+```

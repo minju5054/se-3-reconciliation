@@ -1,0 +1,696 @@
+{
+  "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z",
+  "freeze": {
+    "files": {
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/osa03_common_b_method_comparison_01.yaml": "a616886c12deb996f99ea0d7612e07febab04ba5777392f1b0a61185309a105e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_common_b.py": "f5e18869fc35bf5f9cbfb3cfde8a70560729e69df2e41735ff1e312ad9d4cb49",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/osa03_common_b_mpc_worker.py": "baea2983eaeb315dc87d543d81f2b94759fc00bae02f5117aaedee31da3370c1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_osa03_common_b.py": "c72c2a81a30f8b48285a2f245aa5e109e58f3f7e4ad70278d6ac3c79e36980b5",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_osa03_common_b.py": "32149228e772138b6d6db00eabc2acbdd3ba493df2930d3a7aa4ffca16f5de5d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_osa03_common_b.py": "81e16ad7414c338f866c607c0ef9fcb205be138e02febdbfed4e19ce9cae2ae1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_common_b.py": "071dc866f4ad98f2ba39b6e79926b74c5e4879f79111cce014121e0b87470e69",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_native.py": "070a20c95cb5b89908dbccb52c727d07a35093dc6a3b9a094a88ee0f135131f9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/local_se2_reconciliation.py": "f6286066bdfdb54418ec23b068f526fdb950eee0a16e6142d6ef736aa9662e33",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/robotless_online.py": "af9876567ee3ec29c05dcc386252656f5b35b6f9aa8a77a1acf62cccb8e0918f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/online_pacing.py": "73f8cbb4cb4cb3856694789b7dd1be5e4b649f815beeb916d5de7818390b2aa5",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/online_mpc_adapter.py": "fd6ab46d98e68bd8dfff2e96b9ebdf66b27b1531632ea53c888024245025362a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_online02.py": "6073f7304cd9a540d9de02da97ec9c681fe42475271a1d0af8465c4c5d2a75fb",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/se2.py": "1a72740eeef3af6594ec4dc428e9a8aff67cc4f31f3712161787b690b966cde1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/trajectory.py": "1f9610846b5633d82adbe70508138ecd934f3ad413b779f6ed868266ad1c2bee",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_environment.py": "aefb92837f1567b97a109bcdd2b43e03fad1e992851a1471c1029f211d404eb7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_join01.py": "e70bb8aa9e2159691e54ecdaa81fca3c2b036c95a94f55715415abbc745d6e5a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/handoff_execution_loss.py": "2f9951ffb3f426ec643594e5285a66c82c114c2f20b12e12a659fe654413719b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_source02_geometry.py": "77ebc0536a7465420f6745a12c43d88914f7e00b89bc466204ad775f18cef60e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_source02_acquisition.py": "49454f885b79260d529249c62f4f6b0d91448d316a2aa5a2f4294a5d10bee4ba",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/online_mpc_worker.py": "8f99bfb6010a834ebef7bbfdd86474f5c58aa26f42b514bcc9886b7693d32b96",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_native_continuation.py": "406ec514f6fbbe848bee4602f7d3085ff6236fa5b6da1e068729f37d39fbb20e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_join_online02.py": "8fba9c47d277d9a50bee392baaa2fb76bf540631c03d3f65ae8a79a264b8ef7d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_local_se2_reconciliation_formulation01.py": "6cd16baefe5427f553339ad10329faec453dff2a07bd3d56213dd181628f4b21",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/robotless_online_handoffs.py": "c662fc9e97871a716600ac93bd2c3f86a56b2633e296c07567d41e369b0cd512",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/osa03_relative_factor_ablation_01.yaml": "1b10c9094461b93136ba4ecc4a593123a15a3df6b426707289140c78250150a9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_relative_factor_ablation01.py": "e8ba1e4e0a8cad8ce3d3c97bf8994e1a7768754227792eb098ad7ae4fec7560c",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_relative_ablation.py": "576150eced448dc9a5fb5af9243ae026fbe9c970f077063b665c1806cd5f794b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/graph_optimizer.py": "7d595cedc49965cf15cc6e701db371bf7d7cc69e6c3a99deffc304a32855b6f7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_osa03_relative_factor_ablation01.py": "8de04c06b2dfe599030647c8d198a19868c8ea96395e6439c0899e4654baed54",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_osa03_relative_factor_ablation01.py": "c8852fafba9a0fabc56ba522272cf2fcaeaf85f850e65e48cbfc9bd377c6fdfc",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_osa03_relative_factor_ablation01.py": "569bb85e1cbfdf9e47d82f688f5ae52fd2663c65320d7e55c9dedfae56cc843d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/fixtures/relative_ablation_full_golden.json": "22189534152074c872760b328232a42b90e30095cbf23bc1b6982b1911d66a39",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_osa03_relative_factor_replication01.py": "ddd0f0e3297423137da5e2757e9f0308cbe71d47be605532c4091e44483d0643",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_osa03_relative_factor_replication01.py": "4f3ef7ae3244a03cc29eebc51a1114d9831740c5474e396ede9f76b58280f870",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_relative_replication.py": "1236342a042e67c4274db6faf4d4e55ff4625ebb178f756db2237adab184784a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/handoff_delay_attribution.py": "507545af3dfb2ccdd35415facc9555de539780a48508f51c68ddddf7e70eaf21",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/relative_factor_multisource.py": "69d6a4c46f3a3fd9dd3a2631c621e7d48cb1d5ea18c5f5dd8faa03957d08c692",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_relative_factor_multisource01.py": "7f70adfe634f44e6f8fdf182823ffd8a2daa4ed4581e1221d72f37740d0d9a5d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_relative_factor_multisource01.py": "99bdc0f3fe0ad35985db00b08b5c502d21014896b21afae2901eb63b49f47a54",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_relative_factor_multisource01.py": "96cfdeb3d484652b793a0e206704fa550ac4e45da7fe56165c7f2b276f79909e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_relative_factor_multisource01.py": "e5141e7198fef2272cb6a3df7c2c18108a63e3152acefd0c7a7f5d1f2bdd0508",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/relative_factor_multisource_01.yaml": "05f94cdf4f445a2a3e2d85fe31d0d757a0b05f624eb271b9fa6b7d96d62564b0",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/state_shift_transport_scale.py": "823a3150d006ac53bb4d1e0a995f3417a3527596f805b2976540591259726c39",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_state_shift_transport_scale01.py": "d97a5496c9bad1475b28e7d767f62bf4c2d6b3b392918307b34a9778144b5e2f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_state_shift_transport_scale01.py": "0a24c432fcbd44cbbac7da51b458d896cfbe76f5d7321b95809693e54f6d8b0a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_state_shift_transport_scale01.py": "703ccd0b54badcf2edefb21bf5193a0871f9d593e0b328d0aa7af8f80e414263",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_state_shift_transport_scale01.py": "94c00edd0d8bf9b350606c10ed10201aa49a340b0739dc6872b2df640793a129",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/state_shift_transport_scale_01.yaml": "204d7ed5ff21e0e1d94cfddc30de20376e9ec4f1d934150f1ce0429dcde6d1be",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/spatial_correspondence_selector_diag_01.yaml": "e45a21e1d12d8b78e343e801f52c9e9dfd2d44c70fffb1b07f3ac5a0685a3c43",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/spatial_correspondence_selector.py": "e22209d6bd888bd6ee5c5c79f1e8d8037cc31b72b1446784c09cfb5501c89db0",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_spatial_correspondence_selector_diag01.py": "2b04ffeaa4ea6ca5adb27f075d0062c6ab5ae11b6505bd2d6472c9db13eb2670",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_spatial_correspondence_selector_diag01.py": "49ec954b244ff85fcb16f253bd5e93cfdca404b14486ac365915eb491eb1ffaa",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_spatial_correspondence_selector_diag01.py": "28b2d784f53cdc1e5d6f0eebd0294f0139bd79b6a1b5be5b0d647647ea7087ee",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_spatial_correspondence_selector_diag01.py": "ce09477211711790e7548875b4c9ec7a72469b6bc5872a1764e68daad59c19ed",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/spatial_entry_suffix_execution_01.yaml": "ab38e0f08f43525c8aff85e8d4ebd5720e2da24b4120ce3e8e863bfe7493273d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/spatial_entry_suffix.py": "c33484901411f3bf78ab13b1d9868d05fa3a8c984bec8a48e9c48267757c6962",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_spatial_entry_suffix_execution01.py": "f14df8b303c0918a5424f385c787763d7bffb227db5c4fccd34ea1c49a6c16c7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_spatial_entry_suffix_execution01.py": "c127281a3407bbefe25f42652449c6a868c63d1b2b5d91555d50df24d14690ee",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_spatial_entry_suffix_execution01.py": "eb02eed62a313df7d201c8081dfee1ef2ddcf0650d0050d5f390f24dcd410bd4",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_spatial_entry_suffix_execution01.py": "f9259fd15bf38baf3bfeccbbba8328e3c3c02c4b0104f327131f8be412739594",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/b_to_entry_bridge_01.yaml": "7edad85e8645abd93aa66e5406f042160b9ea87d17897ae06c8093dcffc409da",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/b_to_entry_bridge.py": "4b8f4eb85c68796432bab656bb90ddb3288cbbc995d32cbdd3e40105f14057c9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_b_to_entry_bridge01.py": "add5d6385fb305c75b532c40dd61a2b6220f7998080c73e0de926b728c887f88",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_b_to_entry_bridge01.py": "d845f30e91881c484b1ea075b9c4994e24ec03da01bd18967fdeae94dfaa9cec",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_b_to_entry_bridge01.py": "9640bf00b0042f237c72635fcbfecbb986c6aab25feaf4c730f48f61d473089c",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_b_to_entry_bridge01.py": "6013cbfac9d9d8b16f18dcc4ea9b25ed136859c570c5521fa98f1a68ad2bc25d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/b_to_entry_graph_formulation_diag02.yaml": "034549655dfb5a1f93f00e3fd9a9bdac2b35523332ca38b9470ee65005ce897d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/b_to_entry_graph_diag02.py": "1241024a69e9c04b2eb8e60d656f98cf6af7a56bb8314f4028116928926c36ca",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_b_to_entry_graph_formulation_diag02.py": "231e2dc0ecac318e8794683dce80e2c243c35061aaef288207ad813fa85ec1e6",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_b_to_entry_graph_formulation_diag02.py": "8be3c9f594fa82d2da8b7ad8552b6398aa4e5d22b35817c50cc5618e95dd1255",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_b_to_entry_graph_formulation_diag02.py": "8e46ef518094cab593cdecf3b2dc47082b46f026134f5bf5d025fd61f5c54ffe",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_b_to_entry_graph_formulation_diag02.py": "906bd3c4058e0eff92d09d1dd5780e24213520840381135eeda8dc7a45b11add",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/results/b_to_entry_bridge_01/result_summary.json": "18e79982aca83fae2035d7496883fe40508dfe346d2830285697baf801efdd6e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/results/b_to_entry_bridge_01/solver_failure_diagnostics.json": "fdee7da55be1c33aae6d5c1213ab559513cc3b3f20a8ba9a7d7f521c2773ab4e"
+    },
+    "inputs": {
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/selected_sources.json": "3711ec72200b84bfbc7a2c3652c613d90ca48a60409a6816e0a442b26e263b81",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/protocol.json": "371e9194b9d0bfa3d29f998dd66a27c8e07112c0112df438c29e075ddd91db01",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/protocol_document.md": "0cb09742899cb36e9b33c9ae19911d4d815df7161cf46159a5df5c8c9588a41c",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/authentication.json": "59d2032eefd960a930c0e334126881ee74a03f34fdb9497f170525c4bb5f0d58",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S1/M3_sampling.json": "8c3db9334de241827aac09cf9a44478b10496e9c4af228198afb07a71e20842b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S1/suffix.npy": "b8df9dd0e7fda8215dac873dfc0b4822b7a38d42637f7db6eaa0af61ceccbc6a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S1/initial_M2.npy": "f8376350b191a5e95239d48ea511b27f74b62229b8ccd696e52123461841db17",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S1/initial_safety.json": "5222d13e2bd46ceb96c61f825f340ddc90d6efcaf85a11fba700226a8634d7a8",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S1/input.json": "d390dd6dad76d65211fea1fc683a9e636b4202b17a905dc578ab4233369ba05a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S1/initial_M3.npy": "9765e660e81d544a19c78217c060ac44f1b8de637a6c248b4efba3ff92e49cdc",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S3/M3_sampling.json": "7f53a240fa408c1b1462f587b8637b29f3cba2f2786ecbb36467f1aa9a4d823b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S3/suffix.npy": "74253be4891fafbde9d1f55296e691fb4113273ee14d8da0c84eeedde9a782eb",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S3/initial_M2.npy": "e6b0ae9b80a0799a59730a4f826bac933efbae4fcd25b2522dee9a5257b2735d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S3/initial_safety.json": "2e68a6b1b65288b1d4765f55d7622cc7455f98720a98d382fb4765ec646a5264",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S3/input.json": "8266dac294d919af49296a6efd9966472b15cf9f2686bd693d1948427a227a6b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S3/initial_M3.npy": "00741fa81efe69700284b6456c1c988e7eb26fff81424a2eb8daf5d9948f6cff",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S2/M3_sampling.json": "09d3de447142fbd8b173c69c9fad186b2d0e794b1543f028bf532a2340ed9418",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S2/suffix.npy": "6f8f5e9d087a8a18a9512bb0586bc41b65d7458df3d292684b2a2a7fa2edd80a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S2/initial_M2.npy": "12adcb95c72ff4caae285d2a7d556b9dd920bd0daaca82fad1138f0f2bb95b7c",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S2/initial_safety.json": "0ba6de470365ebe2f47b67fe3dca2848d88082d1d490282ad41790717d6a9527",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S2/input.json": "12603e6033649c59b041922eb1a1b04ae7d3a54460547c5a541eef06b621742f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S2/initial_M3.npy": "1ca35b6f0a1e1315bc2d0f87376a746f8e03ef495a6c8ba4f5be20b887f5df89",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S4/M3_sampling.json": "efbd9367b7a97d80e0a31d1d6b73419b810d27c997177d3e701e723f2724a7bd",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S4/suffix.npy": "f20f074e672c38a20089d1fdc9cdf9e27875bdef64c22e2d30806a62eb87e3f9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S4/initial_M2.npy": "8d0aefd06f4758cfe18884b2b8323bade787754e7de12bccb2cf2ae882d5ff05",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S4/initial_safety.json": "31e14e8e3870636eb798e903b2f7afc5581f91b0126523b76df77b827d5dfdc3",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S4/input.json": "9c722cddf40a42c8e3b654ac795d0437b50fe0e9ed4c0fbbc521fe2151ae3991",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S4/initial_M3.npy": "d2014b208d2eb56ee512112ada00f0aff1d1e2bd8ba9853803f701f35f42114d"
+    },
+    "historical_result_ledger_sha256": "4e9e7a6188203a26763f0531f721a8faddef0ef08bb759a3bd1ef3cb8ab52a58",
+    "new_graph_solves": 12,
+    "MPC_solves": 0,
+    "rollouts": 0,
+    "state_integrations": 0,
+    "controller_memory_updates": 0,
+    "command_applications": 0,
+    "LightNav": 0,
+    "RGB": 0,
+    "Isaac": 0,
+    "retries": 0
+  },
+  "authentication": {
+    "historical_bridge_and_six_earlier_validators": true,
+    "A2_authentication": true,
+    "exact_C3": true,
+    "exact_P_B_E_suffix": true,
+    "M2_initialization_byte_identical": true,
+    "M3_same_continuous_curve": true,
+    "new_scientific_solves": 0,
+    "versions": {
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "numpy": "2.5.2",
+      "scipy": "1.18.1"
+    },
+    "MPC_solves": 0,
+    "rollouts": 0,
+    "state_integrations": 0,
+    "controller_memory_updates": 0,
+    "command_applications": 0,
+    "LightNav": 0,
+    "RGB": 0,
+    "Isaac": 0,
+    "retries": 0
+  },
+  "selected_sources": [
+    {
+      "label": "S1",
+      "id": "OSA03_R00",
+      "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S1",
+      "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/OSA03_R00",
+      "raw_sha256": "8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521"
+    },
+    {
+      "label": "S2",
+      "id": "episode_001_repeat_01/handoff_013",
+      "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S2",
+      "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/episode_001_repeat_01__handoff_013",
+      "raw_sha256": "82bb298736fd7a1e6289a529e0a973d4def6b3ed6b00b03506ac3694833f3503"
+    },
+    {
+      "label": "S3",
+      "id": "episode_008_repeat_01/handoff_023",
+      "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S3",
+      "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/episode_008_repeat_01__handoff_023",
+      "raw_sha256": "ba52161d8e7ba1f0619e11cd0b93da29d201e70074d76160d374fe1f6c87517f"
+    },
+    {
+      "label": "S4",
+      "id": "episode_013_repeat_00/handoff_020",
+      "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S4",
+      "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/episode_013_repeat_00__handoff_020",
+      "raw_sha256": "f5585ef9f7ff2eeeae9992640a68cf65b6b8510baacf8ff9fd2886aa40df7552"
+    }
+  ],
+  "sources": {
+    "S1": {
+      "input": {
+        "M": 2,
+        "d_F_m": 0.1501826264886162,
+        "Hermite_continuous_arc_m": 0.12379645828894754,
+        "Hermite_parameters": [
+          0.0,
+          0.5282340666552656,
+          1.0
+        ],
+        "arc_fractions": [
+          0.0,
+          0.5,
+          1.0
+        ],
+        "m0": [
+          0.00019413370320949625,
+          -0.10664839277680854
+        ],
+        "m1": [
+          0.05349632696731544,
+          -0.09226082793242879
+        ],
+        "P": [
+          19.20360628222027,
+          24.156668672091275,
+          -1.5689760004983107
+        ],
+        "B": [
+          19.203630553052257,
+          24.14333536015282,
+          -1.5689760264727979
+        ],
+        "E": [
+          19.29589449218289,
+          24.196826321126334,
+          -1.0453675393771789
+        ],
+        "next_original_pose": [
+          19.354336910512455,
+          24.096035365800496,
+          -1.0453769989245123
+        ],
+        "suffix_segment_lengths_m": [
+          0.11650893929524483,
+          0.15060985509741467,
+          0.15077000234301943,
+          0.15038060430479622,
+          0.14992137184833407,
+          0.14998464867243613,
+          0.14975363083233198,
+          0.1505737293249362
+        ],
+        "density_definition": "median segments of [E*, exact original downstream suffix]; spatial metres only",
+        "original_ids": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "P_state_id": 91,
+        "B_state_id": 92,
+        "P_sim_time_s": 1.5500000808387995,
+        "B_sim_time_s": 1.5666667483747005,
+        "entry_C3_exact": true,
+        "native_installation_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/OSA03_R00/methods/M0_NATIVE/restoration.json",
+        "native_installation_sha256": "09eba0382ef49629708c2e8aea444e092b80d95ac324473cfde85117cf0933d6",
+        "source_id": "OSA03_R00",
+        "role": "obstacle/straight-to-detour development",
+        "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/OSA03_R00"
+      },
+      "M3_sampling": {
+        "M": 3,
+        "parameters": [
+          0.0,
+          0.4116516668089409,
+          0.6451743529899446,
+          1.0
+        ],
+        "arc_fractions": [
+          0.0,
+          0.3333333333333333,
+          0.6666666666666666,
+          1.0
+        ],
+        "continuous_arc_m": 0.12379645828894754
+      },
+      "M2": [
+        [
+          19.203630553052257,
+          24.14333536015282,
+          -1.5689760264727979
+        ],
+        [
+          19.246646553238477,
+          24.171950649998397,
+          -1.3071717829249883
+        ],
+        [
+          19.29589449218289,
+          24.196826321126334,
+          -1.0453675393771789
+        ]
+      ],
+      "M3": [
+        [
+          19.203630553052257,
+          24.14333536015282,
+          -1.5689760264727979
+        ],
+        [
+          19.23235681453022,
+          24.15706740667108,
+          -1.3944398641075915
+        ],
+        [
+          19.261404038334636,
+          24.186365495680494,
+          -1.219903701742385
+        ],
+        [
+          19.29589449218289,
+          24.196826321126334,
+          -1.0453675393771789
+        ]
+      ]
+    },
+    "S2": {
+      "input": {
+        "M": 2,
+        "d_F_m": 0.15051322580364157,
+        "Hermite_continuous_arc_m": 0.14702648743330163,
+        "Hermite_parameters": [
+          0.0,
+          0.5148216731712396,
+          1.0
+        ],
+        "arc_fractions": [
+          0.0,
+          0.5,
+          1.0
+        ],
+        "m0": [
+          0.01578207336617556,
+          -0.12666490337534247
+        ],
+        "m1": [
+          -0.017527084188357415,
+          -0.1264352518353739
+        ],
+        "P": [
+          18.872426567578366,
+          9.887232742297055,
+          -1.4468145288446586
+        ],
+        "B": [
+          18.87406266585573,
+          9.874101626669443,
+          -1.44686167546041
+        ],
+        "E": [
+          18.747621139721804,
+          9.891583390188735,
+          -1.708655151798606
+        ],
+        "next_original_pose": [
+          18.730123830346784,
+          9.765362925136044,
+          -1.7085025146157067
+        ],
+        "suffix_segment_lengths_m": [
+          0.12742747597548532,
+          0.15016776833617648,
+          0.15043106063231831,
+          0.15051643205711893,
+          0.15056083580536925,
+          0.1505692850454283,
+          0.15051322580364157
+        ],
+        "density_definition": "median segments of [E*, exact original downstream suffix]; spatial metres only",
+        "original_ids": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "P_state_id": 996,
+        "B_state_id": 997,
+        "P_sim_time_s": 16.633334200829268,
+        "B_sim_time_s": 16.65000086836517,
+        "entry_C3_exact": true,
+        "native_installation_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_001_repeat_01__handoff_013/methods/M0_NATIVE/restoration.json",
+        "native_installation_sha256": "cc09449e55af9ada2d7baf841b22685fe00ede1f2ae0b77c74f7c8b4097eabba",
+        "source_id": "episode_001_repeat_01/handoff_013",
+        "role": "mild nearly-straight control",
+        "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/episode_001_repeat_01__handoff_013"
+      },
+      "M3_sampling": {
+        "M": 3,
+        "parameters": [
+          0.0,
+          0.3950406054481634,
+          0.634634752850127,
+          1.0
+        ],
+        "arc_fractions": [
+          0.0,
+          0.3333333333333333,
+          0.6666666666666666,
+          1.0
+        ],
+        "continuous_arc_m": 0.14702648743330163
+      },
+      "M2": [
+        [
+          18.87406266585573,
+          9.874101626669443,
+          -1.44686167546041
+        ],
+        [
+          18.812198060022766,
+          9.88413939468367,
+          -1.577758413629508
+        ],
+        [
+          18.747621139721804,
+          9.891583390188735,
+          -1.708655151798606
+        ]
+      ],
+      "M3": [
+        [
+          18.87406266585573,
+          9.874101626669443,
+          -1.44686167546041
+        ],
+        [
+          18.834392736443665,
+          9.873754527219736,
+          -1.534126167573142
+        ],
+        [
+          18.78984014944354,
+          9.89416237432223,
+          -1.621390659685874
+        ],
+        [
+          18.747621139721804,
+          9.891583390188735,
+          -1.708655151798606
+        ]
+      ]
+    },
+    "S3": {
+      "input": {
+        "M": 2,
+        "d_F_m": 0.15648214800275878,
+        "Hermite_continuous_arc_m": 0.21321503574581863,
+        "Hermite_parameters": [
+          0.0,
+          0.5185268742424013,
+          1.0
+        ],
+        "arc_fractions": [
+          0.0,
+          0.5,
+          1.0
+        ],
+        "m0": [
+          0.13977493731737003,
+          -0.12070976579447215
+        ],
+        "m1": [
+          0.17141611343856808,
+          -0.06873424702320527
+        ],
+        "P": [
+          17.824839307518847,
+          31.823914057090693,
+          -0.7146940940889608
+        ],
+        "B": [
+          17.828542610626915,
+          31.820715881084176,
+          -0.7099805094359564
+        ],
+        "E": [
+          17.89727685765006,
+          31.99213199452277,
+          -0.3242954780329643
+        ],
+        "next_original_pose": [
+          17.901087944699288,
+          31.990603828976287,
+          -0.3204974107176173
+        ],
+        "suffix_segment_lengths_m": [
+          0.004106053389114016,
+          0.15648214800275878,
+          0.1593446267918211,
+          0.1713846112820498,
+          0.1621771588542393,
+          0.0982960782043333,
+          0.04761642331757588
+        ],
+        "density_definition": "median segments of [E*, exact original downstream suffix]; spatial metres only",
+        "original_ids": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "P_state_id": 1803,
+        "B_state_id": 1804,
+        "P_sim_time_s": 30.08333490230143,
+        "B_sim_time_s": 30.10000156983733,
+        "entry_C3_exact": true,
+        "native_installation_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/methods/M0_NATIVE/restoration.json",
+        "native_installation_sha256": "928bf66b6e0dc45b1a4be2bd32bf678b6e50178acac709ded9c4effbb860c2d1",
+        "source_id": "episode_008_repeat_01/handoff_023",
+        "role": "progressive-left-turn hard case",
+        "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/episode_008_repeat_01__handoff_023"
+      },
+      "M3_sampling": {
+        "M": 3,
+        "parameters": [
+          0.0,
+          0.39963635899276173,
+          0.6375173075598112,
+          1.0
+        ],
+        "arc_fractions": [
+          0.0,
+          0.3333333333333333,
+          0.6666666666666666,
+          1.0
+        ],
+        "continuous_arc_m": 0.21321503574581863
+      },
+      "M2": [
+        [
+          17.828542610626915,
+          31.820715881084176,
+          -0.7099805094359564
+        ],
+        [
+          17.859429918969216,
+          31.905573691760832,
+          -0.5171379937344605
+        ],
+        [
+          17.89727685765006,
+          31.99213199452277,
+          -0.3242954780329643
+        ]
+      ],
+      "M3": [
+        [
+          17.828542610626915,
+          31.820715881084176,
+          -0.7099805094359564
+        ],
+        [
+          17.856398758848794,
+          31.870167632504007,
+          -0.581418832301626
+        ],
+        [
+          17.863185235788503,
+          31.940906201079645,
+          -0.4528571551672953
+        ],
+        [
+          17.89727685765006,
+          31.99213199452277,
+          -0.3242954780329643
+        ]
+      ]
+    },
+    "S4": {
+      "input": {
+        "M": 2,
+        "d_F_m": 0.15214175181339587,
+        "Hermite_continuous_arc_m": 0.18683023531723233,
+        "Hermite_parameters": [
+          0.0,
+          0.529027940760384,
+          1.0
+        ],
+        "arc_fractions": [
+          0.0,
+          0.5,
+          1.0
+        ],
+        "m0": [
+          0.0336813286871749,
+          -0.15731910957676484
+        ],
+        "m1": [
+          -0.05204324859619425,
+          -0.1522341433966585
+        ],
+        "P": [
+          19.667320077395765,
+          8.998100629541081,
+          -1.3601926009623178
+        ],
+        "B": [
+          19.668567955248744,
+          8.99227202834442,
+          -1.3595769416513406
+        ],
+        "E": [
+          19.516333811852085,
+          9.044315276940615,
+          -1.8652517646249573
+        ],
+        "next_original_pose": [
+          19.477663716327225,
+          8.93119956979153,
+          -1.9612921722301146
+        ],
+        "suffix_segment_lengths_m": [
+          0.11954304451426416,
+          0.15496568229326815,
+          0.15870367387633805,
+          0.15714392888700857,
+          0.15214175181339587,
+          0.11358265615850147,
+          0.08791360650109084
+        ],
+        "density_definition": "median segments of [E*, exact original downstream suffix]; spatial metres only",
+        "original_ids": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "P_state_id": 1523,
+        "B_state_id": 1524,
+        "P_sim_time_s": 25.41666799224913,
+        "B_sim_time_s": 25.433334659785032,
+        "entry_C3_exact": true,
+        "native_installation_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_013_repeat_00__handoff_020/methods/M0_NATIVE/restoration.json",
+        "native_installation_sha256": "f427885c0849dead91a18be7b8a12aa0da4394c7afc7f74eb0d784f916358dee",
+        "source_id": "episode_013_repeat_00/handoff_020",
+        "role": "progressive-right-turn control",
+        "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/episode_013_repeat_00__handoff_020"
+      },
+      "M3_sampling": {
+        "M": 3,
+        "parameters": [
+          0.0,
+          0.41263402988214737,
+          0.6458052789609285,
+          1.0
+        ],
+        "arc_fractions": [
+          0.0,
+          0.3333333333333333,
+          0.6666666666666666,
+          1.0
+        ],
+        "continuous_arc_m": 0.18683023531723233
+      },
+      "M2": [
+        [
+          19.668567955248744,
+          8.99227202834442,
+          -1.3595769416513406
+        ],
+        [
+          19.596642023704597,
+          9.022162542651428,
+          -1.612414353138149
+        ],
+        [
+          19.516333811852085,
+          9.044315276940615,
+          -1.8652517646249573
+        ]
+      ],
+      "M3": [
+        [
+          19.668567955248744,
+          8.99227202834442,
+          -1.3595769416513406
+        ],
+        [
+          19.622197580102007,
+          9.004371954629537,
+          -1.5281352159758794
+        ],
+        [
+          19.570516586294996,
+          9.039095818771171,
+          -1.6966934903004183
+        ],
+        [
+          19.516333811852085,
+          9.044315276940615,
+          -1.8652517646249573
+        ]
+      ]
+    }
+  }
+}
