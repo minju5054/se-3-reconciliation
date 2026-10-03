@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [bridge formulation diagnostic](docs/B_TO_ENTRY_GRAPH_FORMULATION_DIAG_02.md)
+completed twelve planning-only solves and reused the four historical A2 failures.
+Classification: **MULTIPLE_STABLE_FORMULATIONS**. Vector-boundary V2 and V3 each
+converged and passed the fixed numerical/safety gates in all four sources.
+Angle-boundary A3 still failed at 80 iterations and collapsed its outgoing edge.
+Increasing M alone was insufficient here; V2 already provided uniform numerical
+stability at M=2. No MPC solve or rollout was performed, so execution benefit
+remains untested. [Geometry PNG](results/b_to_entry_graph_formulation_diag02/figures/formulation_geometry.png)
+and [convergence/edge scales](results/b_to_entry_graph_formulation_diag02/figures/convergence_and_edge_scale.png).
+
 The [B-to-entry bridge experiment](docs/B_TO_ENTRY_BRIDGE_01.md) is
 **TECHNICAL_BLOCKED**: all four fixed-budget graph solves reached 80 iterations
 without convergence, so no Graph rollout was run. Four new Hermite rollouts

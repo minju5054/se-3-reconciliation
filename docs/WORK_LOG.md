@@ -6358,3 +6358,43 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 MPLCONFIGDIR=/tmp/osa03-replication-mpl .venv/b
 ```bash
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/graph-diag02-mpl .venv/bin/python -m pytest -q tests/test_b_to_entry_graph_formulation_diag02.py tests/test_b_to_entry_bridge01.py tests/test_spatial_entry_suffix_execution01.py tests/test_spatial_correspondence_selector_diag01.py tests/test_state_shift_transport_scale01.py tests/test_relative_factor_multisource01.py tests/test_osa03_relative_factor_replication01.py tests/test_osa03_relative_factor_ablation01.py tests/test_osa03_common_b.py tests/test_local_se2_reconciliation.py tests/test_local_se2_saved.py tests/test_se2.py tests/test_se2_graph.py tests/test_se2_lie.py tests/test_trajectory.py tests/test_transition_graph.py tests/test_exp02d_lookahead_direction.py tests/test_spatial_entry.py tests/test_osa03_native.py tests/test_osa03_native_validation.py tests/test_osa03_trackability.py tests/test_online_mpc_adapter.py tests/test_robotless_online.py tests/test_robotless_online_replay.py tests/test_robotless_online_validator.py tests/test_handoff_execution_loss.py tests/test_join_online02.py tests/test_obstacle_source03.py tests/test_join_source02_geometry.py tests/test_gp_se2_environment.py tests/test_gp_se2_diag02_environment.py tests/test_handoff_delay_attribution.py tests/test_genuine_source_scan.py
 ```
+
+## 2026-10-03 — B_TO_ENTRY_GRAPH_FORMULATION_DIAG_02 results
+
+- Scientific freeze `e228237fdf8e68df3db6ab27a5c83eb7da6df76c` was normally
+  pushed before scientific processing. Exactly twelve new graph solves ran in
+  S1 A3/V2/V3 through S4 A3/V2/V3 order. A2 was authenticated/reused, never rerun.
+- Frozen classification: **MULTIPLE_STABLE_FORMULATIONS**. V2 and V3 each pass
+  all eight STABLE gates in 4/4 sources. A3 remains nonconverged/collapsed in 4/4;
+  this is a scientific outcome, not TECHNICAL_BLOCKED for this diagnostic.
+- A3 retained first edges .037071–.090387 m but collapsed outgoing edges to
+  1.862–2.445 micrometres. Resolution alone moved the boundary degeneration.
+  V2 converged in 3/3/3/4 iterations and V3 in 6/6/6/7. V2/V3 rho_min spans
+  .980054164965–.992927761004; minimum edge >=.0312494925969 m.
+- Exact B/E* and downstream Native world bits remain unchanged in every saved
+  state. All eight converged vector references pass full-reference safety;
+  minimum clearance .21148985508009666 m. Bridge/full-reference self-intersection
+  flags are false for all sixteen records. Unsafe improving rejections: zero.
+- New MPC solves, rollouts, state integrations, controller memory updates,
+  command applications, LightNav, RGB and Isaac calls: all zero. Retries zero.
+  No scientific formulation/configuration/source/initialization/solver edits after
+  freeze. V2/V3 are only technically viable later-execution candidates; no new
+  execution, attachment, endpoint, navigation or real-time performance claim.
+- Saved-only new validation and historical bridge plus six earlier validators
+  pass. Costs, right-local proposals, acceptance/damping, safety, exact boundaries,
+  classification, hashes and twelve exclusive solve records are authenticated.
+  Pre-freeze counts remain 36 focused and 636 regression passed, one known skip.
+  Compileall and diff checks pass.
+- Exactly three final PNGs and machine-readable tables are generated and visually
+  inspected. A presentation-only wrapper fixes real-data inset marker overlap and
+  tick density after freeze. The frozen renderer and run ledger remain unchanged;
+  original figures/manifests are archived under ignored report_layout_01, and
+  layout_audit.json authenticates the correction. All numerical sidecars are
+  exactly unchanged. CSV line endings are normalized from CRLF to LF for the
+  staged whitespace check, with original bytes archived and parsed cells exactly
+  unchanged. This post-freeze reporting addition is explicitly disclosed;
+  it did not trigger any solve or alter any scientific outcome.
+- Appended the report's sixteen explicit answers, full per-source solver/cost/edge
+  diagnostics and conservative README summary. Result/docs and the presentation
+  wrapper are committed and normally pushed. Unrelated Stage0 edits and the
+  GPU-memory script remain preserved. Exact commands are in the report.

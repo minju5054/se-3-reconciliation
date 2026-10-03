@@ -1,0 +1,38 @@
+{
+  "label": "presentation only: inset z-order, tick density and CSV LF line endings",
+  "new_scientific_solves": 0,
+  "scientific_freeze_sha": "e228237fdf8e68df3db6ab27a5c83eb7da6df76c",
+  "source_result_ledger_sha256": "e6020fe6a2e23ae1e9310ae789c64c31fae2878d897c3fe88d5ae99c98abccf8",
+  "frozen_renderer_sha256": "8e46ef518094cab593cdecf3b2dc47082b46f026134f5bf5d025fd61f5c54ffe",
+  "layout_renderer_sha256": "1200b2c5eb5eeb033b0363a64c091123348d82c53e4aa02d8c67177b3e9a53f5",
+  "archive": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/report_layout_01",
+  "archived_hashes": {
+    "figure_manifest.json": "a1421430237e03597806cf965c35b5571b36a9b20785d3556e2635fa4f50ea03",
+    "result_summary.json": "fe480ec91c1f59b38b00369db055af11fb82da9e64ec78a2ea5b82a4f360085f",
+    "figures/convergence_and_edge_scale.png": "1274818038329f829416ca9d9350824c4d3ea1c0f3fdac0c9428742e3b2b7eb0",
+    "figures/formulation_geometry.png": "0c77e75803670eccdfc9087decfe29ed3302c772a8bbe93fc8900a340731c376",
+    "figures/factor_costs.png": "64e1e1fe83a8e06e54be52e00672cdee80717184538aa1790a615121b9529d67",
+    "tables/factor_costs.csv": "5f7d151da61771c543577bf98fa58f8822fe40c26c4a79e936c0c0adc0f29a5c",
+    "tables/edge_scale.csv": "e879061d7167d2db1b3f337747007f060a782a163a75b08c7b11d12f42535c1e",
+    "tables/convergence_summary.csv": "2aa92451796f291fbabd5ed9f0945e1d1dedfb7bb1a30d99b21551c493c0c05f",
+    "tables/variant_summary.csv": "6cba1eefadaac7cf6bcf4b6ff2c484bfa044615fec439ad2a5ec6e03834a1add"
+  },
+  "original_PNG_hashes": {
+    "formulation_geometry.png": "0c77e75803670eccdfc9087decfe29ed3302c772a8bbe93fc8900a340731c376",
+    "convergence_and_edge_scale.png": "1274818038329f829416ca9d9350824c4d3ea1c0f3fdac0c9428742e3b2b7eb0",
+    "factor_costs.png": "64e1e1fe83a8e06e54be52e00672cdee80717184538aa1790a615121b9529d67"
+  },
+  "final_PNG_hashes": {
+    "formulation_geometry.png": "676abc2b67e6b891c80744eb897e3a0f70ca74bd913113d13676786e51835e07",
+    "convergence_and_edge_scale.png": "1274818038329f829416ca9d9350824c4d3ea1c0f3fdac0c9428742e3b2b7eb0",
+    "factor_costs.png": "64e1e1fe83a8e06e54be52e00672cdee80717184538aa1790a615121b9529d67"
+  },
+  "numeric_sidecars_unchanged": true,
+  "final_table_hashes": {
+    "factor_costs.csv": "23c24cc73d2e83734f84e0c9f497459e11a66962032f496f89cd03efc2e76390",
+    "edge_scale.csv": "1cb78caf07bca7d709bd040bfd74e4b677246d9647b0ad0bb06556a21ed0c6bd",
+    "convergence_summary.csv": "306a58d37ffc6efa2bb2cb840c57c99e7f78a73c13cbc55a5fcae9a8fe6f30fd",
+    "variant_summary.csv": "31cf094ee844ee5aa9e26a0af257c562b43bf2accf794a911602e8f90d7bc980"
+  },
+  "CSV_cells_unchanged": true
+}

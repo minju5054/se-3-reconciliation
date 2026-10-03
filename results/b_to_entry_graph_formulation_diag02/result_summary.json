@@ -1,0 +1,3748 @@
+{
+  "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z",
+  "summary": {
+    "experiment": "B_TO_ENTRY_GRAPH_FORMULATION_DIAG_02",
+    "starting_sha": "d60da62eafc864bb915637d70671087f9a7e2b7c",
+    "scientific_freeze_sha": "e228237fdf8e68df3db6ab27a5c83eb7da6df76c",
+    "selected_sources": [
+      {
+        "label": "S1",
+        "id": "OSA03_R00",
+        "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S1",
+        "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/OSA03_R00",
+        "raw_sha256": "8cd364cd4acb96d9af85e2e2b97a64f11ab54d0ab4e6d2177da26982af9af521"
+      },
+      {
+        "label": "S2",
+        "id": "episode_001_repeat_01/handoff_013",
+        "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S2",
+        "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/episode_001_repeat_01__handoff_013",
+        "raw_sha256": "82bb298736fd7a1e6289a529e0a973d4def6b3ed6b00b03506ac3694833f3503"
+      },
+      {
+        "label": "S3",
+        "id": "episode_008_repeat_01/handoff_023",
+        "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S3",
+        "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/episode_008_repeat_01__handoff_023",
+        "raw_sha256": "ba52161d8e7ba1f0619e11cd0b93da29d201e70074d76160d374fe1f6c87517f"
+      },
+      {
+        "label": "S4",
+        "id": "episode_013_repeat_00/handoff_020",
+        "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S4",
+        "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/episode_013_repeat_00__handoff_020",
+        "raw_sha256": "f5585ef9f7ff2eeeae9992640a68cf65b6b8510baacf8ff9fd2886aa40df7552"
+      }
+    ],
+    "sources": {
+      "S1": {
+        "A2": {
+          "variant": "A2",
+          "historical": true,
+          "M": 2,
+          "editable_nodes": 1,
+          "converged": false,
+          "stable": false,
+          "stability_gates": {
+            "converged": false,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": false
+          },
+          "termination_reason": "maximum_iterations",
+          "iterations": 80,
+          "accepted_steps": 44,
+          "rejected_steps": 36,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 9847709021.836098,
+          "final_gradient_inf": 2819.94272327599,
+          "final_step_norm": 5.612034455767e-09,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.1947720530006336,
+          "initial_costs": {
+            "E_in": 67.81909104605714,
+            "E_out": 33.40227711281312,
+            "E_smooth": 0.01867846241253389,
+            "E_space": 0.0005460688408814568,
+            "total": 101.24059269012368
+          },
+          "final_costs": {
+            "E_in": 2.875873681946988e-07,
+            "E_out": 35.99816799480677,
+            "E_smooth": 0.5043773891103691,
+            "E_space": 0.5042681678295504,
+            "total": 37.00681383933406
+          },
+          "geometry": {
+            "M": 2,
+            "d_F_m": 0.1501826264886162,
+            "bridge_XY_length_m": 0.1066519292646457,
+            "B_to_entry_chord_m": 0.1066485694689392,
+            "length_chord_ratio": 1.000031503429659,
+            "maximum_turning_angle_rad": 2.09425815643693,
+            "RMS_turning_angle_rad": 2.09425815643693,
+            "segment_length_min_m": 2.2400526872570977e-06,
+            "segment_length_max_m": 0.10664968921195844,
+            "turning_angles_rad": [
+              2.09425815643693
+            ],
+            "segment_lengths_m": [
+              2.2400526872570977e-06,
+              0.10664968921195844
+            ],
+            "factor_costs": {
+              "E_in": 2.875873681946988e-07,
+              "E_out": 35.99816799480677,
+              "E_smooth": 0.5043773891103691,
+              "E_space": 0.5042681678295504,
+              "total": 37.00681383933406
+            },
+            "reference_clearance_m": 0.22948689016047874,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.05166440829979008,
+            0.05517389332227469
+          ],
+          "final_edge_lengths_m": [
+            2.2400526872570977e-06,
+            0.10664968921195844
+          ],
+          "first_edge_m": 2.2400526872570977e-06,
+          "outgoing_edge_m": 0.10664968921195844,
+          "rho": [
+            4.335775364461494e-05,
+            1.9329737814406158
+          ],
+          "rho_min": 4.335775364461494e-05,
+          "min_edge_over_fd": 2.240052687257098,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": true,
+          "first_direction_mismatch_rad": 0.00014039561055856353,
+          "outgoing_direction_mismatch_rad": 1.5707563581332291,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "UNCONVERGED DIAGNOSTIC \u2014 NOT A RETURNED REFERENCE",
+          "initial_bridge": [
+            [
+              19.203630553052257,
+              24.14333536015282,
+              -1.5689760264727979
+            ],
+            [
+              19.246646553238477,
+              24.171950649998397,
+              -1.3071717829249883
+            ],
+            [
+              19.29589449218289,
+              24.196826321126334,
+              -1.0453675393771789
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              19.203630553052257,
+              24.14333536015282,
+              -1.5689760264727979
+            ],
+            [
+              19.203630557444345,
+              24.143333120104437,
+              -1.3063792997561539
+            ],
+            [
+              19.29589449218289,
+              24.196826321126334,
+              -1.0453675393771789
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              19.29589449218289,
+              24.196826321126334,
+              -1.0453675393771789
+            ],
+            [
+              19.354336910512455,
+              24.096035365800496,
+              -1.0453769989245123
+            ],
+            [
+              19.42987255365256,
+              23.965736881281778,
+              -1.045478744053144
+            ],
+            [
+              19.50546426473847,
+              23.835285791513932,
+              -1.0458070464365667
+            ],
+            [
+              19.580832098216636,
+              23.705155027173276,
+              -1.0458022780649847
+            ],
+            [
+              19.65600938471402,
+              23.575444606112452,
+              -1.0456598229639715
+            ],
+            [
+              19.73120008209838,
+              23.44566882307013,
+              -1.0459893770449347
+            ],
+            [
+              19.806251829041486,
+              23.316079528650203,
+              -1.0462817974322027
+            ],
+            [
+              19.88161991957295,
+              23.185725783431817,
+              -1.047383291267652
+            ]
+          ],
+          "B": [
+            19.203630553052257,
+            24.14333536015282,
+            -1.5689760264727979
+          ],
+          "E": [
+            19.29589449218289,
+            24.196826321126334,
+            -1.0453675393771789
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/OSA03_R00/planning/SE2_GRAPH_BRIDGE/trace.json",
+          "trace_sha256": "e09127d7ee2635d1bb6cebd11f3d07cf7527edd043b1b9c763d311d2483a3f6e",
+          "solver_result_sha256": "4adc45beae3358f46a58e84c46ec054256d15f04be2762afa6e275dc27ae603f",
+          "safety": {
+            "minimum_clearance_m": 0.22948689016047874,
+            "Hospital_only_m": 0.7338624037073149,
+            "cart_only_m": 0.22948689016047874,
+            "limiting_geometry": "cart",
+            "limiting_Hospital_mesh": null,
+            "first_minimum_segment": 9,
+            "minimum_segment_fraction": 1.0,
+            "minimum_path_xy": [
+              19.88161991957295,
+              23.185725783431817
+            ],
+            "nearest_obstacle_xy": [
+              19.61594947,
+              22.84826734
+            ],
+            "per_segment_clearance_m": [
+              1.0958494908201901,
+              1.0958494908201901,
+              1.0370237161834115,
+              0.8980669867407352,
+              0.7624673352289932,
+              0.6316224704628295,
+              0.5073845797151886,
+              0.39503983311932384,
+              0.30283318934201614,
+              0.22948689016047874
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS, no B connector, no time/execution claim"
+          }
+        },
+        "A3": {
+          "variant": "A3",
+          "historical": false,
+          "M": 3,
+          "editable_nodes": 2,
+          "converged": false,
+          "stable": false,
+          "stability_gates": {
+            "converged": false,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": false
+          },
+          "termination_reason": "maximum_iterations",
+          "iterations": 80,
+          "accepted_steps": 45,
+          "rejected_steps": 35,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 295431270.655083,
+          "final_gradient_inf": 2063.2517637472615,
+          "final_step_norm": 2.477454652188221e-08,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.3280364219972398,
+          "initial_costs": {
+            "E_in": 59.233499610420566,
+            "E_out": 26.190901103948466,
+            "E_smooth": 0.035285702547916305,
+            "E_space": 0.0051374810352699885,
+            "total": 85.46482389795221
+          },
+          "final_costs": {
+            "E_in": 0.20134400383833134,
+            "E_out": 1.680239284294999e-07,
+            "E_smooth": 2.402329030096121,
+            "E_space": 1.1872849181614629,
+            "total": 3.7909581201198437
+          },
+          "geometry": {
+            "M": 3,
+            "d_F_m": 0.1501826264886162,
+            "bridge_XY_length_m": 0.20264252803846844,
+            "B_to_entry_chord_m": 0.1066485694689392,
+            "length_chord_ratio": 1.9000960729950245,
+            "maximum_turning_angle_rad": 2.380128132226238,
+            "RMS_turning_angle_rad": 2.186543779995512,
+            "segment_length_min_m": 2.4452080166978062e-06,
+            "segment_length_max_m": 0.14199385870761486,
+            "turning_angles_rad": [
+              2.380128132226238,
+              -1.9740662293498072
+            ],
+            "segment_lengths_m": [
+              0.060646224122836885,
+              0.14199385870761486,
+              2.4452080166978062e-06
+            ],
+            "factor_costs": {
+              "E_in": 0.20134400383833134,
+              "E_out": 1.680239284294999e-07,
+              "E_smooth": 2.402329030096121,
+              "E_space": 1.1872849181614629,
+              "total": 3.7909581201198437
+            },
+            "reference_clearance_m": 0.22948689016047874,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.03183971105522159,
+            0.04125674769473997,
+            0.036041923861897376
+          ],
+          "final_edge_lengths_m": [
+            0.060646224122836885,
+            0.14199385870761486,
+            2.4452080166978062e-06
+          ],
+          "first_edge_m": 0.060646224122836885,
+          "outgoing_edge_m": 2.4452080166978062e-06,
+          "rho": [
+            1.904735379591051,
+            3.441712365653058,
+            6.784343771623188e-05
+          ],
+          "rho_min": 6.784343771623188e-05,
+          "min_edge_over_fd": 2.4452080166978063,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": true,
+          "first_direction_mismatch_rad": 0.11747297757876263,
+          "outgoing_direction_mismatch_rad": -0.00010731345906567213,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "UNCONVERGED DIAGNOSTIC \u2014 NOT A RETURNED REFERENCE",
+          "initial_bridge": [
+            [
+              19.203630553052257,
+              24.14333536015282,
+              -1.5689760264727979
+            ],
+            [
+              19.23235681453022,
+              24.15706740667108,
+              -1.3944398641075915
+            ],
+            [
+              19.261404038334636,
+              24.186365495680494,
+              -1.219903701742385
+            ],
+            [
+              19.29589449218289,
+              24.196826321126334,
+              -1.0453675393771789
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              19.203630553052257,
+              24.14333536015282,
+              -1.5689760264727979
+            ],
+            [
+              19.210848093573503,
+              24.083120149373634,
+              -1.388675018670631
+            ],
+            [
+              19.295893265861356,
+              24.196828436587925,
+              -1.2162717472661555
+            ],
+            [
+              19.29589449218289,
+              24.196826321126334,
+              -1.0453675393771789
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              19.29589449218289,
+              24.196826321126334,
+              -1.0453675393771789
+            ],
+            [
+              19.354336910512455,
+              24.096035365800496,
+              -1.0453769989245123
+            ],
+            [
+              19.42987255365256,
+              23.965736881281778,
+              -1.045478744053144
+            ],
+            [
+              19.50546426473847,
+              23.835285791513932,
+              -1.0458070464365667
+            ],
+            [
+              19.580832098216636,
+              23.705155027173276,
+              -1.0458022780649847
+            ],
+            [
+              19.65600938471402,
+              23.575444606112452,
+              -1.0456598229639715
+            ],
+            [
+              19.73120008209838,
+              23.44566882307013,
+              -1.0459893770449347
+            ],
+            [
+              19.806251829041486,
+              23.316079528650203,
+              -1.0462817974322027
+            ],
+            [
+              19.88161991957295,
+              23.185725783431817,
+              -1.047383291267652
+            ]
+          ],
+          "B": [
+            19.203630553052257,
+            24.14333536015282,
+            -1.5689760264727979
+          ],
+          "E": [
+            19.29589449218289,
+            24.196826321126334,
+            -1.0453675393771789
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S1/planning/A3/trace.json",
+          "trace_sha256": "ed4a1b6c6eed19591ca9b3b99ef81b32abd52f1dfa69e96abd5b69666d762b95",
+          "solver_result_sha256": "c27baac23c2b218e50760c3460079e689ad180b2a799c27405ddb7215cb44855",
+          "safety": {
+            "minimum_clearance_m": 0.22948689016047874,
+            "Hospital_only_m": 0.7338624037073149,
+            "cart_only_m": 0.22948689016047874,
+            "limiting_geometry": "cart",
+            "limiting_Hospital_mesh": null,
+            "first_minimum_segment": 10,
+            "minimum_segment_fraction": 1.0,
+            "minimum_path_xy": [
+              19.88161991957295,
+              23.185725783431817
+            ],
+            "nearest_obstacle_xy": [
+              19.61594947,
+              22.84826734
+            ],
+            "per_segment_clearance_m": [
+              1.0357158224374388,
+              1.0357158224374388,
+              1.146234936652283,
+              1.0370237161834115,
+              0.8980669867407352,
+              0.7624673352289932,
+              0.6316224704628295,
+              0.5073845797151886,
+              0.39503983311932384,
+              0.30283318934201614,
+              0.22948689016047874
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS, no B connector, no time/execution claim"
+          }
+        },
+        "V2": {
+          "variant": "V2",
+          "historical": false,
+          "M": 2,
+          "editable_nodes": 1,
+          "converged": true,
+          "stable": true,
+          "stability_gates": {
+            "converged": true,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": true
+          },
+          "termination_reason": "cost_tolerance",
+          "iterations": 3,
+          "accepted_steps": 3,
+          "rejected_steps": 0,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 2.6999999999999996e-05,
+          "final_gradient_inf": 1.105738208859175e-05,
+          "final_step_norm": 4.764199386539231e-08,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.01664193900069222,
+          "initial_costs": {
+            "E_in": 0.36742079608933015,
+            "E_out": 0.25435830397354553,
+            "E_smooth": 0.01867846241253389,
+            "E_space": 0.0005460688408814568,
+            "total": 0.641003631316291
+          },
+          "final_costs": {
+            "E_in": 0.3374547701921657,
+            "E_out": 0.28818119946375015,
+            "E_smooth": 0.00414343766076677,
+            "E_space": 0.001199262779996584,
+            "total": 0.6309786700966792
+          },
+          "geometry": {
+            "M": 2,
+            "d_F_m": 0.1501826264886162,
+            "bridge_XY_length_m": 0.10680621712697362,
+            "B_to_entry_chord_m": 0.1066485694689392,
+            "length_chord_ratio": 1.0014781975868914,
+            "maximum_turning_angle_rad": 0.10880777570314892,
+            "RMS_turning_angle_rad": 0.10880777570314892,
+            "segment_length_min_m": 0.05080266832703703,
+            "segment_length_max_m": 0.05600354879993659,
+            "turning_angles_rad": [
+              0.10880777570314892
+            ],
+            "segment_lengths_m": [
+              0.05080266832703703,
+              0.05600354879993659
+            ],
+            "factor_costs": {
+              "E_in": 0.3374547701921657,
+              "E_out": 0.28818119946375015,
+              "E_smooth": 0.00414343766076677,
+              "E_space": 0.001199262779996584,
+              "total": 0.6309786700966792
+            },
+            "reference_clearance_m": 0.22948689016047874,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.05166440829979008,
+            0.05517389332227469
+          ],
+          "final_edge_lengths_m": [
+            0.05080266832703703,
+            0.05600354879993659
+          ],
+          "first_edge_m": 0.05080266832703703,
+          "outgoing_edge_m": 0.05600354879993659,
+          "rho": [
+            0.9833204327483501,
+            1.0150371022906761
+          ],
+          "rho_min": 0.9833204327483501,
+          "min_edge_over_fd": 50802.668327037034,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": false,
+          "first_direction_mismatch_rad": 2.0373246894377743,
+          "outgoing_direction_mismatch_rad": 1.6224902712266642,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "STABLE PLANNING REFERENCE",
+          "initial_bridge": [
+            [
+              19.203630553052257,
+              24.14333536015282,
+              -1.5689760264727979
+            ],
+            [
+              19.246646553238477,
+              24.171950649998397,
+              -1.3071717829249883
+            ],
+            [
+              19.29589449218289,
+              24.196826321126334,
+              -1.0453675393771789
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              19.203630553052257,
+              24.14333536015282,
+              -1.5689760264727979
+            ],
+            [
+              19.24896253270143,
+              24.166268365412353,
+              -1.3073180431113882
+            ],
+            [
+              19.29589449218289,
+              24.196826321126334,
+              -1.0453675393771789
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              19.29589449218289,
+              24.196826321126334,
+              -1.0453675393771789
+            ],
+            [
+              19.354336910512455,
+              24.096035365800496,
+              -1.0453769989245123
+            ],
+            [
+              19.42987255365256,
+              23.965736881281778,
+              -1.045478744053144
+            ],
+            [
+              19.50546426473847,
+              23.835285791513932,
+              -1.0458070464365667
+            ],
+            [
+              19.580832098216636,
+              23.705155027173276,
+              -1.0458022780649847
+            ],
+            [
+              19.65600938471402,
+              23.575444606112452,
+              -1.0456598229639715
+            ],
+            [
+              19.73120008209838,
+              23.44566882307013,
+              -1.0459893770449347
+            ],
+            [
+              19.806251829041486,
+              23.316079528650203,
+              -1.0462817974322027
+            ],
+            [
+              19.88161991957295,
+              23.185725783431817,
+              -1.047383291267652
+            ]
+          ],
+          "B": [
+            19.203630553052257,
+            24.14333536015282,
+            -1.5689760264727979
+          ],
+          "E": [
+            19.29589449218289,
+            24.196826321126334,
+            -1.0453675393771789
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S1/planning/V2/trace.json",
+          "trace_sha256": "1d655ff10c543ae30887db3512d78601769c46d1e7da4bab7d12bb795112d911",
+          "solver_result_sha256": "6dc41513ce9dc5c1bb06f4e7e5267c976a96daafe2822a35685674267a4233db",
+          "safety": {
+            "minimum_clearance_m": 0.22948689016047874,
+            "Hospital_only_m": 0.7338624037073149,
+            "cart_only_m": 0.22948689016047874,
+            "limiting_geometry": "cart",
+            "limiting_Hospital_mesh": null,
+            "first_minimum_segment": 9,
+            "minimum_segment_fraction": 1.0,
+            "minimum_path_xy": [
+              19.88161991957295,
+              23.185725783431817
+            ],
+            "nearest_obstacle_xy": [
+              19.61594947,
+              22.84826734
+            ],
+            "per_segment_clearance_m": [
+              1.09585173077347,
+              1.118596486147748,
+              1.0370237161834115,
+              0.8980669867407352,
+              0.7624673352289932,
+              0.6316224704628295,
+              0.5073845797151886,
+              0.39503983311932384,
+              0.30283318934201614,
+              0.22948689016047874
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS, no B connector, no time/execution claim"
+          }
+        },
+        "V3": {
+          "variant": "V3",
+          "historical": false,
+          "M": 3,
+          "editable_nodes": 2,
+          "converged": true,
+          "stable": true,
+          "stability_gates": {
+            "converged": true,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": true
+          },
+          "termination_reason": "cost_tolerance",
+          "iterations": 6,
+          "accepted_steps": 6,
+          "rejected_steps": 0,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 7.289999999999998e-07,
+          "final_gradient_inf": 6.926462484346807e-06,
+          "final_step_norm": 8.247012593073371e-08,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.036242753005353734,
+          "initial_costs": {
+            "E_in": 0.12851584385482043,
+            "E_out": 0.08881719154697401,
+            "E_smooth": 0.035285702547916305,
+            "E_space": 0.0051374810352699885,
+            "total": 0.25775621898498075
+          },
+          "final_costs": {
+            "E_in": 0.12048738435174768,
+            "E_out": 0.10981081590598607,
+            "E_smooth": 0.013907639925692175,
+            "E_space": 0.004862272456948542,
+            "total": 0.24906811264037446
+          },
+          "geometry": {
+            "M": 3,
+            "d_F_m": 0.1501826264886162,
+            "bridge_XY_length_m": 0.10746440486849262,
+            "B_to_entry_chord_m": 0.1066485694689392,
+            "length_chord_ratio": 1.0076497547376013,
+            "maximum_turning_angle_rad": 0.29742446867536687,
+            "RMS_turning_angle_rad": 0.24770486086482063,
+            "segment_length_min_m": 0.031249492596852266,
+            "segment_length_max_m": 0.04053171261502459,
+            "turning_angles_rad": [
+              0.29742446867536687,
+              -0.18507858229761753
+            ],
+            "segment_lengths_m": [
+              0.031249492596852266,
+              0.04053171261502459,
+              0.03568319965661576
+            ],
+            "factor_costs": {
+              "E_in": 0.12048738435174768,
+              "E_out": 0.10981081590598607,
+              "E_smooth": 0.013907639925692175,
+              "E_space": 0.004862272456948542,
+              "total": 0.24906811264037446
+            },
+            "reference_clearance_m": 0.22948689016047874,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.03183971105522159,
+            0.04125674769473997,
+            0.036041923861897376
+          ],
+          "final_edge_lengths_m": [
+            0.031249492596852266,
+            0.04053171261502459,
+            0.03568319965661576
+          ],
+          "first_edge_m": 0.031249492596852266,
+          "outgoing_edge_m": 0.03568319965661576,
+          "rho": [
+            0.9814628198935075,
+            0.9824262667265986,
+            0.9900470294910964
+          ],
+          "rho_min": 0.9814628198935075,
+          "min_edge_over_fd": 31249.492596852266,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": false,
+          "first_direction_mismatch_rad": 1.9449375422141388,
+          "outgoing_direction_mismatch_rad": 1.5336412346776287,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "STABLE PLANNING REFERENCE",
+          "initial_bridge": [
+            [
+              19.203630553052257,
+              24.14333536015282,
+              -1.5689760264727979
+            ],
+            [
+              19.23235681453022,
+              24.15706740667108,
+              -1.3944398641075915
+            ],
+            [
+              19.261404038334636,
+              24.186365495680494,
+              -1.219903701742385
+            ],
+            [
+              19.29589449218289,
+              24.196826321126334,
+              -1.0453675393771789
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              19.203630553052257,
+              24.14333536015282,
+              -1.5689760264727979
+            ],
+            [
+              19.23269742515939,
+              24.154809144771168,
+              -1.3942472127208871
+            ],
+            [
+              19.26438165341942,
+              24.18008619774562,
+              -1.219886994080222
+            ],
+            [
+              19.29589449218289,
+              24.196826321126334,
+              -1.0453675393771789
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              19.29589449218289,
+              24.196826321126334,
+              -1.0453675393771789
+            ],
+            [
+              19.354336910512455,
+              24.096035365800496,
+              -1.0453769989245123
+            ],
+            [
+              19.42987255365256,
+              23.965736881281778,
+              -1.045478744053144
+            ],
+            [
+              19.50546426473847,
+              23.835285791513932,
+              -1.0458070464365667
+            ],
+            [
+              19.580832098216636,
+              23.705155027173276,
+              -1.0458022780649847
+            ],
+            [
+              19.65600938471402,
+              23.575444606112452,
+              -1.0456598229639715
+            ],
+            [
+              19.73120008209838,
+              23.44566882307013,
+              -1.0459893770449347
+            ],
+            [
+              19.806251829041486,
+              23.316079528650203,
+              -1.0462817974322027
+            ],
+            [
+              19.88161991957295,
+              23.185725783431817,
+              -1.047383291267652
+            ]
+          ],
+          "B": [
+            19.203630553052257,
+            24.14333536015282,
+            -1.5689760264727979
+          ],
+          "E": [
+            19.29589449218289,
+            24.196826321126334,
+            -1.0453675393771789
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S1/planning/V3/trace.json",
+          "trace_sha256": "dd8d20a0579a71a08fd4444edb60e661dfbfb5b11f4a380a6e65c0739a00e595",
+          "solver_result_sha256": "fa6db5c7b47a38f2c4c477c452aad41e9892f575766cc5e6aeaec7f035400f67",
+          "safety": {
+            "minimum_clearance_m": 0.22948689016047874,
+            "Hospital_only_m": 0.7338624037073149,
+            "cart_only_m": 0.22948689016047874,
+            "limiting_geometry": "cart",
+            "limiting_Hospital_mesh": null,
+            "first_minimum_segment": 10,
+            "minimum_segment_fraction": 1.0,
+            "minimum_path_xy": [
+              19.88161991957295,
+              23.185725783431817
+            ],
+            "nearest_obstacle_xy": [
+              19.61594947,
+              22.84826734
+            ],
+            "per_segment_clearance_m": [
+              1.09585173077347,
+              1.107214385616094,
+              1.1325259165357042,
+              1.0370237161834115,
+              0.8980669867407352,
+              0.7624673352289932,
+              0.6316224704628295,
+              0.5073845797151886,
+              0.39503983311932384,
+              0.30283318934201614,
+              0.22948689016047874
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS, no B connector, no time/execution claim"
+          }
+        }
+      },
+      "S2": {
+        "A2": {
+          "variant": "A2",
+          "historical": true,
+          "M": 2,
+          "editable_nodes": 1,
+          "converged": false,
+          "stable": false,
+          "stability_gates": {
+            "converged": false,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": false
+          },
+          "termination_reason": "maximum_iterations",
+          "iterations": 80,
+          "accepted_steps": 44,
+          "rejected_steps": 36,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 9847709021.836102,
+          "final_gradient_inf": 3687.5641780983337,
+          "final_step_norm": 5.255050686426668e-09,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.15604608399735298,
+          "initial_costs": {
+            "E_in": 50.2382565471807,
+            "E_out": 34.9543640368474,
+            "E_smooth": 0.005858112709940274,
+            "E_space": 0.00023982749289256654,
+            "total": 85.19871852423093
+          },
+          "final_costs": {
+            "E_in": 2.899503662910502e-07,
+            "E_out": 35.984215140629935,
+            "E_smooth": 0.7192162451245596,
+            "E_space": 0.7191910616874685,
+            "total": 37.42262273739233
+          },
+          "geometry": {
+            "M": 2,
+            "d_F_m": 0.15051322580364157,
+            "bridge_XY_length_m": 0.12764664929967995,
+            "B_to_entry_chord_m": 0.12764431670395746,
+            "length_chord_ratio": 1.0000182741839412,
+            "maximum_turning_angle_rad": 1.8320162696719056,
+            "RMS_turning_angle_rad": 1.8320162696719056,
+            "segment_length_min_m": 1.8538375079497577e-06,
+            "segment_length_max_m": 0.127644795462172,
+            "turning_angles_rad": [
+              -1.8320162696719056
+            ],
+            "segment_lengths_m": [
+              1.8538375079497577e-06,
+              0.127644795462172
+            ],
+            "factor_costs": {
+              "E_in": 2.899503662910502e-07,
+              "E_out": 35.984215140629935,
+              "E_smooth": 0.7192162451245596,
+              "E_space": 0.7191910616874685,
+              "total": 37.42262273739233
+            },
+            "reference_clearance_m": 0.7572532867773871,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.06267364870162931,
+            0.06500455141477521
+          ],
+          "final_edge_lengths_m": [
+            1.8538375079497577e-06,
+            0.127644795462172
+          ],
+          "first_edge_m": 1.8538375079497577e-06,
+          "outgoing_edge_m": 0.127644795462172,
+          "rho": [
+            2.957921784281827e-05,
+            1.963628587292412
+          ],
+          "rho_min": 2.957921784281827e-05,
+          "min_edge_over_fd": 1.8538375079497578,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": true,
+          "first_direction_mismatch_rad": -0.0001409712197588675,
+          "outgoing_direction_mismatch_rad": -1.5704519168275777,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "UNCONVERGED DIAGNOSTIC \u2014 NOT A RETURNED REFERENCE",
+          "initial_bridge": [
+            [
+              18.87406266585573,
+              9.874101626669443,
+              -1.44686167546041
+            ],
+            [
+              18.812198060022766,
+              9.88413939468367,
+              -1.577758413629508
+            ],
+            [
+              18.747621139721804,
+              9.891583390188735,
+              -1.708655151798606
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              18.87406266585573,
+              9.874101626669443,
+              -1.44686167546041
+            ],
+            [
+              18.87406289480675,
+              9.874099787024115,
+              -1.5778680069516595
+            ],
+            [
+              18.747621139721804,
+              9.891583390188735,
+              -1.708655151798606
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              18.747621139721804,
+              9.891583390188735,
+              -1.708655151798606
+            ],
+            [
+              18.730123830346784,
+              9.765362925136044,
+              -1.7085025146157067
+            ],
+            [
+              18.70951613903068,
+              9.616615885818659,
+              -1.7084365322739403
+            ],
+            [
+              18.68889853997111,
+              9.467604414407955,
+              -1.7082101836354058
+            ],
+            [
+              18.66824645369464,
+              9.318511531775568,
+              -1.7082082464844506
+            ],
+            [
+              18.647749994388054,
+              9.169352353599015,
+              -1.705777181640319
+            ],
+            [
+              18.627737511960234,
+              9.020118945321352,
+              -1.702091766849212
+            ],
+            [
+              18.608737031748472,
+              8.870809826733302,
+              -1.6920830592066567
+            ]
+          ],
+          "B": [
+            18.87406266585573,
+            9.874101626669443,
+            -1.44686167546041
+          ],
+          "E": [
+            18.747621139721804,
+            9.891583390188735,
+            -1.708655151798606
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/episode_001_repeat_01__handoff_013/planning/SE2_GRAPH_BRIDGE/trace.json",
+          "trace_sha256": "62aa510f2d60930498a1ac27655a3b96867da4c79062c390d4568c89d1955318",
+          "solver_result_sha256": "15ae9a32f63b881af646e5b18f03126029814fb16825b4c43da3658f0fc97141",
+          "safety": {
+            "minimum_clearance_m": 0.7572532867773871,
+            "native_clearance_m": 0.7572532867773871,
+            "union_minus_parts_m": 0.0,
+            "limiting_geometry": "Hospital",
+            "cart_present": false,
+            "first_minimum_segment": 0,
+            "minimum_path_xy": [
+              18.87406266585573,
+              9.874101626669443
+            ],
+            "nearest_obstacle_xy": [
+              19.44326705,
+              10.64373805
+            ],
+            "per_segment_clearance_m": [
+              0.7572532867773871,
+              0.7572546297228322,
+              0.8245290941513459,
+              0.9314221633489084,
+              1.0622877403749387,
+              1.1972695436794465,
+              1.3038791514737582,
+              1.3050779135053696,
+              1.3172315926804075
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS; no cart in this source; no B connector"
+          }
+        },
+        "A3": {
+          "variant": "A3",
+          "historical": false,
+          "M": 3,
+          "editable_nodes": 2,
+          "converged": false,
+          "stable": false,
+          "stability_gates": {
+            "converged": false,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": false
+          },
+          "termination_reason": "maximum_iterations",
+          "iterations": 80,
+          "accepted_steps": 45,
+          "rejected_steps": 35,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 295431270.65508294,
+          "final_gradient_inf": 2312.560625696504,
+          "final_step_norm": 3.8924493481053373e-07,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.2846584200015059,
+          "initial_costs": {
+            "E_in": 41.47443787952151,
+            "E_out": 27.466022893502327,
+            "E_smooth": 0.046002836061664366,
+            "E_space": 0.005830162583192956,
+            "total": 68.9922937716687
+          },
+          "final_costs": {
+            "E_in": 0.07433220225447458,
+            "E_out": 1.9107301204413247e-06,
+            "E_smooth": 1.9414195426033096,
+            "E_space": 1.3216707206442673,
+            "total": 3.337424376232172
+          },
+          "geometry": {
+            "M": 3,
+            "d_F_m": 0.15051322580364157,
+            "bridge_XY_length_m": 0.17655270808470397,
+            "B_to_entry_chord_m": 0.12764431670395746,
+            "length_chord_ratio": 1.3831615276235025,
+            "maximum_turning_angle_rad": 2.0248401094647557,
+            "RMS_turning_angle_rad": 1.9321928146930363,
+            "segment_length_min_m": 2.159807770635425e-06,
+            "segment_length_max_m": 0.1394795211845418,
+            "turning_angles_rad": [
+              -2.0248401094647557,
+              1.8348734772200377
+            ],
+            "segment_lengths_m": [
+              0.03707102709239155,
+              0.1394795211845418,
+              2.159807770635425e-06
+            ],
+            "factor_costs": {
+              "E_in": 0.07433220225447458,
+              "E_out": 1.9107301204413247e-06,
+              "E_smooth": 1.9414195426033096,
+              "E_space": 1.3216707206442673,
+              "total": 3.337424376232172
+            },
+            "reference_clearance_m": 0.7572532867773871,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.03967144788870333,
+            0.049004216469224045,
+            0.04229770609672202
+          ],
+          "final_edge_lengths_m": [
+            0.03707102709239155,
+            0.1394795211845418,
+            2.159807770635425e-06
+          ],
+          "first_edge_m": 0.03707102709239155,
+          "outgoing_edge_m": 2.159807770635425e-06,
+          "rho": [
+            0.9344510741426136,
+            2.8462759173414933,
+            5.106205442197268e-05
+          ],
+          "rho_min": 5.106205442197268e-05,
+          "min_edge_over_fd": 2.159807770635425,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": true,
+          "first_direction_mismatch_rad": -0.07137680871970886,
+          "outgoing_direction_mismatch_rad": 0.00036188309965989873,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "UNCONVERGED DIAGNOSTIC \u2014 NOT A RETURNED REFERENCE",
+          "initial_bridge": [
+            [
+              18.87406266585573,
+              9.874101626669443,
+              -1.44686167546041
+            ],
+            [
+              18.834392736443665,
+              9.873754527219736,
+              -1.534126167573142
+            ],
+            [
+              18.78984014944354,
+              9.89416237432223,
+              -1.621390659685874
+            ],
+            [
+              18.747621139721804,
+              9.891583390188735,
+              -1.708655151798606
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              18.87406266585573,
+              9.874101626669443,
+              -1.44686167546041
+            ],
+            [
+              18.876011014859333,
+              9.837081834856887,
+              -1.5389653999738566
+            ],
+            [
+              18.74762143551491,
+              9.891585529645686,
+              -1.6241454422646087
+            ],
+            [
+              18.747621139721804,
+              9.891583390188735,
+              -1.708655151798606
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              18.747621139721804,
+              9.891583390188735,
+              -1.708655151798606
+            ],
+            [
+              18.730123830346784,
+              9.765362925136044,
+              -1.7085025146157067
+            ],
+            [
+              18.70951613903068,
+              9.616615885818659,
+              -1.7084365322739403
+            ],
+            [
+              18.68889853997111,
+              9.467604414407955,
+              -1.7082101836354058
+            ],
+            [
+              18.66824645369464,
+              9.318511531775568,
+              -1.7082082464844506
+            ],
+            [
+              18.647749994388054,
+              9.169352353599015,
+              -1.705777181640319
+            ],
+            [
+              18.627737511960234,
+              9.020118945321352,
+              -1.702091766849212
+            ],
+            [
+              18.608737031748472,
+              8.870809826733302,
+              -1.6920830592066567
+            ]
+          ],
+          "B": [
+            18.87406266585573,
+            9.874101626669443,
+            -1.44686167546041
+          ],
+          "E": [
+            18.747621139721804,
+            9.891583390188735,
+            -1.708655151798606
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S2/planning/A3/trace.json",
+          "trace_sha256": "7b8941e140ac575573930739c9786ff30ce28b4af38c6e20084b78aaa5ca962f",
+          "solver_result_sha256": "4a4fc9da7ffee02c19c0aeba30cc6014f6f9103b2ffb9d7e7a9b0e9e8e4b7128",
+          "safety": {
+            "minimum_clearance_m": 0.7572532867773871,
+            "native_clearance_m": 0.7572532867773871,
+            "union_minus_parts_m": 0.0,
+            "limiting_geometry": "Hospital",
+            "cart_present": false,
+            "first_minimum_segment": 0,
+            "minimum_path_xy": [
+              18.87406266585573,
+              9.874101626669443
+            ],
+            "nearest_obstacle_xy": [
+              19.44326705,
+              10.64373805
+            ],
+            "per_segment_clearance_m": [
+              0.7572532867773871,
+              0.7861407905732933,
+              0.8245273226359977,
+              0.8245290941513459,
+              0.9314221633489084,
+              1.0622877403749387,
+              1.1972695436794465,
+              1.3038791514737582,
+              1.3050779135053696,
+              1.3172315926804075
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS; no cart in this source; no B connector"
+          }
+        },
+        "V2": {
+          "variant": "V2",
+          "historical": false,
+          "M": 2,
+          "editable_nodes": 1,
+          "converged": true,
+          "stable": true,
+          "stability_gates": {
+            "converged": true,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": true
+          },
+          "termination_reason": "cost_tolerance",
+          "iterations": 3,
+          "accepted_steps": 3,
+          "rejected_steps": 0,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 2.6999999999999996e-05,
+          "final_gradient_inf": 1.1269450413131654e-06,
+          "final_step_norm": 5.258119523900264e-09,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.012924170994665474,
+          "initial_costs": {
+            "E_in": 0.4442131425842029,
+            "E_out": 0.36447890974857855,
+            "E_smooth": 0.005858112709940274,
+            "E_space": 0.00023982749289256654,
+            "total": 0.8147899925356143
+          },
+          "final_costs": {
+            "E_in": 0.4223578112262001,
+            "E_out": 0.38734692365092976,
+            "E_smooth": 0.0012719276603791563,
+            "E_space": 0.0004658554676064972,
+            "total": 0.8114425180051155
+          },
+          "geometry": {
+            "M": 2,
+            "d_F_m": 0.15051322580364157,
+            "bridge_XY_length_m": 0.12770944144543747,
+            "B_to_entry_chord_m": 0.12764431670395746,
+            "length_chord_ratio": 1.0005102047875039,
+            "maximum_turning_angle_rad": 0.06389480631406297,
+            "RMS_turning_angle_rad": 0.06389480631406297,
+            "segment_length_min_m": 0.0622304056792437,
+            "segment_length_max_m": 0.06547903576619378,
+            "turning_angles_rad": [
+              -0.06389480631406297
+            ],
+            "segment_lengths_m": [
+              0.0622304056792437,
+              0.06547903576619378
+            ],
+            "factor_costs": {
+              "E_in": 0.4223578112262001,
+              "E_out": 0.38734692365092976,
+              "E_smooth": 0.0012719276603791563,
+              "E_space": 0.0004658554676064972,
+              "total": 0.8114425180051155
+            },
+            "reference_clearance_m": 0.7572532867773871,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.06267364870162931,
+            0.06500455141477521
+          ],
+          "final_edge_lengths_m": [
+            0.0622304056792437,
+            0.06547903576619378
+          ],
+          "first_edge_m": 0.0622304056792437,
+          "outgoing_edge_m": 0.06547903576619378,
+          "rho": [
+            0.9929277610037393,
+            1.0072992481463494
+          ],
+          "rho_min": 0.9929277610037393,
+          "min_edge_over_fd": 62230.405679243704,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": false,
+          "first_direction_mismatch_rad": -1.7993828631940536,
+          "outgoing_direction_mismatch_rad": -1.6015723454440298,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "STABLE PLANNING REFERENCE",
+          "initial_bridge": [
+            [
+              18.87406266585573,
+              9.874101626669443,
+              -1.44686167546041
+            ],
+            [
+              18.812198060022766,
+              9.88413939468367,
+              -1.577758413629508
+            ],
+            [
+              18.747621139721804,
+              9.891583390188735,
+              -1.708655151798606
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              18.87406266585573,
+              9.874101626669443,
+              -1.44686167546041
+            ],
+            [
+              18.81217257028359,
+              9.880600815932327,
+              -1.5776668299536423
+            ],
+            [
+              18.747621139721804,
+              9.891583390188735,
+              -1.708655151798606
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              18.747621139721804,
+              9.891583390188735,
+              -1.708655151798606
+            ],
+            [
+              18.730123830346784,
+              9.765362925136044,
+              -1.7085025146157067
+            ],
+            [
+              18.70951613903068,
+              9.616615885818659,
+              -1.7084365322739403
+            ],
+            [
+              18.68889853997111,
+              9.467604414407955,
+              -1.7082101836354058
+            ],
+            [
+              18.66824645369464,
+              9.318511531775568,
+              -1.7082082464844506
+            ],
+            [
+              18.647749994388054,
+              9.169352353599015,
+              -1.705777181640319
+            ],
+            [
+              18.627737511960234,
+              9.020118945321352,
+              -1.702091766849212
+            ],
+            [
+              18.608737031748472,
+              8.870809826733302,
+              -1.6920830592066567
+            ]
+          ],
+          "B": [
+            18.87406266585573,
+            9.874101626669443,
+            -1.44686167546041
+          ],
+          "E": [
+            18.747621139721804,
+            9.891583390188735,
+            -1.708655151798606
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S2/planning/V2/trace.json",
+          "trace_sha256": "7c7567c80ea2a0fabb003eb4a64f247951d289a895c79dc90d9af9f457ba5361",
+          "solver_result_sha256": "782c3cf8011f860fd42f8882e7dfcf2174e0bee5ba25ff37bd5f099740f5305d",
+          "safety": {
+            "minimum_clearance_m": 0.7572532867773871,
+            "native_clearance_m": 0.7572532867773871,
+            "union_minus_parts_m": 0.0,
+            "limiting_geometry": "Hospital",
+            "cart_present": false,
+            "first_minimum_segment": 0,
+            "minimum_path_xy": [
+              18.87406266585573,
+              9.874101626669443
+            ],
+            "nearest_obstacle_xy": [
+              19.44326705,
+              10.64373805
+            ],
+            "per_segment_clearance_m": [
+              0.7572532867773871,
+              0.790282121594136,
+              0.8245290941513459,
+              0.9314221633489084,
+              1.0622877403749387,
+              1.1972695436794465,
+              1.3038791514737582,
+              1.3050779135053696,
+              1.3172315926804075
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS; no cart in this source; no B connector"
+          }
+        },
+        "V3": {
+          "variant": "V3",
+          "historical": false,
+          "M": 3,
+          "editable_nodes": 2,
+          "converged": true,
+          "stable": true,
+          "stability_gates": {
+            "converged": true,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": true
+          },
+          "termination_reason": "cost_tolerance",
+          "iterations": 6,
+          "accepted_steps": 6,
+          "rejected_steps": 0,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 7.289999999999998e-07,
+          "final_gradient_inf": 2.1021611349980596e-06,
+          "final_step_norm": 2.36994075417154e-08,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.029516291004256345,
+          "initial_costs": {
+            "E_in": 0.15491509843046647,
+            "E_out": 0.12676104388755807,
+            "E_smooth": 0.046002836061664366,
+            "E_space": 0.005830162583192956,
+            "total": 0.33350914096288187
+          },
+          "final_costs": {
+            "E_in": 0.15373899200279897,
+            "E_out": 0.146134567677322,
+            "E_smooth": 0.017410430624037545,
+            "E_space": 0.005542298220034905,
+            "total": 0.3228262885241934
+          },
+          "geometry": {
+            "M": 3,
+            "d_F_m": 0.15051322580364157,
+            "bridge_XY_length_m": 0.12868147956623954,
+            "B_to_entry_chord_m": 0.12764431670395746,
+            "length_chord_ratio": 1.0081254135637512,
+            "maximum_turning_angle_rad": 0.29284978011553964,
+            "RMS_turning_angle_rad": 0.2598795438926369,
+            "segment_length_min_m": 0.03888279140460815,
+            "segment_length_max_m": 0.048091426134390186,
+            "turning_angles_rad": [
+              -0.29284978011553964,
+              0.22206701905949489
+            ],
+            "segment_lengths_m": [
+              0.03888279140460815,
+              0.048091426134390186,
+              0.041707262027241204
+            ],
+            "factor_costs": {
+              "E_in": 0.15373899200279897,
+              "E_out": 0.146134567677322,
+              "E_smooth": 0.017410430624037545,
+              "E_space": 0.005542298220034905,
+              "total": 0.3228262885241934
+            },
+            "reference_clearance_m": 0.7572532867773871,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.03967144788870333,
+            0.049004216469224045,
+            0.04229770609672202
+          ],
+          "final_edge_lengths_m": [
+            0.03888279140460815,
+            0.048091426134390186,
+            0.041707262027241204
+          ],
+          "first_edge_m": 0.03888279140460815,
+          "outgoing_edge_m": 0.041707262027241204,
+          "rho": [
+            0.9801202999621359,
+            0.9813732286606988,
+            0.9860407543583889
+          ],
+          "rho_min": 0.9801202999621359,
+          "min_edge_over_fd": 38882.79140460816,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": false,
+          "first_direction_mismatch_rad": -1.6998851763059761,
+          "outgoing_direction_mismatch_rad": -1.5089626132979337,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "STABLE PLANNING REFERENCE",
+          "initial_bridge": [
+            [
+              18.87406266585573,
+              9.874101626669443,
+              -1.44686167546041
+            ],
+            [
+              18.834392736443665,
+              9.873754527219736,
+              -1.534126167573142
+            ],
+            [
+              18.78984014944354,
+              9.89416237432223,
+              -1.621390659685874
+            ],
+            [
+              18.747621139721804,
+              9.891583390188735,
+              -1.708655151798606
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              18.87406266585573,
+              9.874101626669443,
+              -1.44686167546041
+            ],
+            [
+              18.835180386211913,
+              9.874301118810768,
+              -1.5345019633017218
+            ],
+            [
+              18.789208283266944,
+              9.88842029082816,
+              -1.6215272158799603
+            ],
+            [
+              18.747621139721804,
+              9.891583390188735,
+              -1.708655151798606
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              18.747621139721804,
+              9.891583390188735,
+              -1.708655151798606
+            ],
+            [
+              18.730123830346784,
+              9.765362925136044,
+              -1.7085025146157067
+            ],
+            [
+              18.70951613903068,
+              9.616615885818659,
+              -1.7084365322739403
+            ],
+            [
+              18.68889853997111,
+              9.467604414407955,
+              -1.7082101836354058
+            ],
+            [
+              18.66824645369464,
+              9.318511531775568,
+              -1.7082082464844506
+            ],
+            [
+              18.647749994388054,
+              9.169352353599015,
+              -1.705777181640319
+            ],
+            [
+              18.627737511960234,
+              9.020118945321352,
+              -1.702091766849212
+            ],
+            [
+              18.608737031748472,
+              8.870809826733302,
+              -1.6920830592066567
+            ]
+          ],
+          "B": [
+            18.87406266585573,
+            9.874101626669443,
+            -1.44686167546041
+          ],
+          "E": [
+            18.747621139721804,
+            9.891583390188735,
+            -1.708655151798606
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S2/planning/V3/trace.json",
+          "trace_sha256": "dbc5fffe7fbbc4eeab46ae5a4115afb7737a679b75f7b6e2ebbaad76315aba67",
+          "solver_result_sha256": "863c753ef436d7fcc51610d23705b70b851abc6ba6d7e6c216a168266d85e002",
+          "safety": {
+            "minimum_clearance_m": 0.7572532867773871,
+            "native_clearance_m": 0.7572532867773871,
+            "union_minus_parts_m": 0.0,
+            "limiting_geometry": "Hospital",
+            "cart_present": false,
+            "first_minimum_segment": 0,
+            "minimum_path_xy": [
+              18.87406266585573,
+              9.874101626669443
+            ],
+            "nearest_obstacle_xy": [
+              19.44326705,
+              10.64373805
+            ],
+            "per_segment_clearance_m": [
+              0.7572532867773871,
+              0.7807153418575783,
+              0.7991485313309199,
+              0.8245290941513459,
+              0.9314221633489084,
+              1.0622877403749387,
+              1.1972695436794465,
+              1.3038791514737582,
+              1.3050779135053696,
+              1.3172315926804075
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS; no cart in this source; no B connector"
+          }
+        }
+      },
+      "S3": {
+        "A2": {
+          "variant": "A2",
+          "historical": true,
+          "M": 2,
+          "editable_nodes": 1,
+          "converged": false,
+          "stable": false,
+          "stability_gates": {
+            "converged": false,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": false
+          },
+          "termination_reason": "maximum_iterations",
+          "iterations": 80,
+          "accepted_steps": 44,
+          "rejected_steps": 36,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 9847709021.836102,
+          "final_gradient_inf": 1180.3144342879023,
+          "final_step_norm": 3.528374950511e-09,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.1618540870003926,
+          "initial_costs": {
+            "E_in": 54.57562150903136,
+            "E_out": 34.600094962092975,
+            "E_smooth": 0.023409068625076572,
+            "E_space": 0.000708929650544302,
+            "total": 89.19983446939996
+          },
+          "final_costs": {
+            "E_in": 6.866574335058164e-08,
+            "E_out": 36.00054332772422,
+            "E_smooth": 1.3930152300970409,
+            "E_space": 1.3928931014957917,
+            "total": 38.7864517279828
+          },
+          "geometry": {
+            "M": 2,
+            "d_F_m": 0.15648214800275878,
+            "bridge_XY_length_m": 0.18468625682298165,
+            "B_to_entry_chord_m": 0.1846831899774071,
+            "length_chord_ratio": 1.0000166059811666,
+            "maximum_turning_angle_rad": 1.9017268961830656,
+            "RMS_turning_angle_rad": 1.9017268961830656,
+            "segment_length_min_m": 2.3147443132026727e-06,
+            "segment_length_max_m": 0.18468394207866845,
+            "turning_angles_rad": [
+              1.9017268961830656
+            ],
+            "segment_lengths_m": [
+              2.3147443132026727e-06,
+              0.18468394207866845
+            ],
+            "factor_costs": {
+              "E_in": 6.866574335058164e-08,
+              "E_out": 36.00054332772422,
+              "E_smooth": 1.3930152300970409,
+              "E_space": 1.3928931014957917,
+              "total": 38.7864517279828
+            },
+            "reference_clearance_m": 0.21148985508009666,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.09030434014745671,
+            0.09447079201816076
+          ],
+          "final_edge_lengths_m": [
+            2.3147443132026727e-06,
+            0.18468394207866845
+          ],
+          "first_edge_m": 2.3147443132026727e-06,
+          "outgoing_edge_m": 0.18468394207866845,
+          "rho": [
+            2.5632702807228963e-05,
+            1.9549316580638532
+          ],
+          "rho_min": 2.5632702807228963e-05,
+          "min_edge_over_fd": 2.314744313202673,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": true,
+          "first_direction_mismatch_rad": 6.860230209415619e-05,
+          "outgoing_direction_mismatch_rad": 1.5708081803223033,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "UNCONVERGED DIAGNOSTIC \u2014 NOT A RETURNED REFERENCE",
+          "initial_bridge": [
+            [
+              17.828542610626915,
+              31.820715881084176,
+              -0.7099805094359564
+            ],
+            [
+              17.859429918969216,
+              31.905573691760832,
+              -0.5171379937344605
+            ],
+            [
+              17.89727685765006,
+              31.99213199452277,
+              -0.3242954780329643
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              17.828542610626915,
+              31.820715881084176,
+              -0.7099805094359564
+            ],
+            [
+              17.82854436261316,
+              31.82071436827704,
+              -0.516347075522932
+            ],
+            [
+              17.89727685765006,
+              31.99213199452277,
+              -0.3242954780329643
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              17.89727685765006,
+              31.99213199452277,
+              -0.3242954780329643
+            ],
+            [
+              17.901087944699288,
+              31.990603828976287,
+              -0.3204974107176173
+            ],
+            [
+              18.052570171332658,
+              31.951363573399217,
+              -0.1958485416799891
+            ],
+            [
+              18.21014763932208,
+              31.92769816257525,
+              -0.08916713518203379
+            ],
+            [
+              18.38134774036268,
+              31.91974766649089,
+              0.0067618318170201705
+            ],
+            [
+              18.54343279144578,
+              31.925212743747625,
+              0.09483049589096426
+            ],
+            [
+              18.64116527631135,
+              31.935723709086425,
+              0.14986942487655996
+            ],
+            [
+              18.688197815447285,
+              31.943157687293645,
+              0.1737816162675512
+            ]
+          ],
+          "B": [
+            17.828542610626915,
+            31.820715881084176,
+            -0.7099805094359564
+          ],
+          "E": [
+            17.89727685765006,
+            31.99213199452277,
+            -0.3242954780329643
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/episode_008_repeat_01__handoff_023/planning/SE2_GRAPH_BRIDGE/trace.json",
+          "trace_sha256": "9a6ad984464f8a7aac0efc73f07eab2d686bfece0ca82a47a181e5b7833eabf3",
+          "solver_result_sha256": "7f33e89525dcd7498147619fdc33399facf83392f36a9456b75b032a4fefeb9f",
+          "safety": {
+            "minimum_clearance_m": 0.21148985508009666,
+            "native_clearance_m": 0.21148985508009666,
+            "union_minus_parts_m": 0.0,
+            "limiting_geometry": "Hospital",
+            "cart_present": false,
+            "first_minimum_segment": 1,
+            "minimum_path_xy": [
+              17.89727685765006,
+              31.99213199452277
+            ],
+            "nearest_obstacle_xy": [
+              17.85613065,
+              32.40155951
+            ],
+            "per_segment_clearance_m": [
+              0.38084359061170486,
+              0.21148985508009666,
+              0.21148985508009666,
+              0.21340746257456594,
+              0.23347732000244142,
+              0.25828624488941665,
+              0.31008545809320814,
+              0.39044472867304786,
+              0.4487102555182106
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS; no cart in this source; no B connector"
+          }
+        },
+        "A3": {
+          "variant": "A3",
+          "historical": false,
+          "M": 3,
+          "editable_nodes": 2,
+          "converged": false,
+          "stable": false,
+          "stability_gates": {
+            "converged": false,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": false
+          },
+          "termination_reason": "maximum_iterations",
+          "iterations": 80,
+          "accepted_steps": 45,
+          "rejected_steps": 35,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 295431270.6550829,
+          "final_gradient_inf": 343.9686861558222,
+          "final_step_norm": 2.6130778605263175e-08,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.28985718700278085,
+          "initial_costs": {
+            "E_in": 45.71687287026288,
+            "E_out": 27.182539458068234,
+            "E_smooth": 0.092208579695923,
+            "E_space": 0.012066857005168892,
+            "total": 73.00368776503221
+          },
+          "final_costs": {
+            "E_in": 1.194897974874024,
+            "E_out": 5.323507002121631e-07,
+            "E_smooth": 4.31041881183186,
+            "E_space": 2.354077769359665,
+            "total": 7.85939508841625
+          },
+          "geometry": {
+            "M": 3,
+            "d_F_m": 0.15648214800275878,
+            "bridge_XY_length_m": 0.2939622360726475,
+            "B_to_entry_chord_m": 0.1846831899774071,
+            "length_chord_ratio": 1.5917108433561757,
+            "maximum_turning_angle_rad": 2.045465503935528,
+            "RMS_turning_angle_rad": 2.0232786306257933,
+            "segment_length_min_m": 1.862128419250558e-06,
+            "segment_length_max_m": 0.20743039647284767,
+            "turning_angles_rad": [
+              2.045465503935528,
+              -2.0008457478036
+            ],
+            "segment_lengths_m": [
+              0.08652997747138061,
+              0.20743039647284767,
+              1.862128419250558e-06
+            ],
+            "factor_costs": {
+              "E_in": 1.194897974874024,
+              "E_out": 5.323507002121631e-07,
+              "E_smooth": 4.31041881183186,
+              "E_space": 2.354077769359665,
+              "total": 7.85939508841625
+            },
+            "reference_clearance_m": 0.2114889923819378,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.0567577370254314,
+            0.07106336154013204,
+            0.061533085369001796
+          ],
+          "final_edge_lengths_m": [
+            0.08652997747138061,
+            0.20743039647284767,
+            1.862128419250558e-06
+          ],
+          "first_edge_m": 0.08652997747138061,
+          "outgoing_edge_m": 1.862128419250558e-06,
+          "rho": [
+            1.5245494624390887,
+            2.9189499620800268,
+            3.0262230604620922e-05
+          ],
+          "rho_min": 3.0262230604620922e-05,
+          "min_edge_over_fd": 1.862128419250558,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": true,
+          "first_direction_mismatch_rad": 0.28617654700072803,
+          "outgoing_direction_mismatch_rad": -0.00019101503019935961,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "UNCONVERGED DIAGNOSTIC \u2014 NOT A RETURNED REFERENCE",
+          "initial_bridge": [
+            [
+              17.828542610626915,
+              31.820715881084176,
+              -0.7099805094359564
+            ],
+            [
+              17.856398758848794,
+              31.870167632504007,
+              -0.581418832301626
+            ],
+            [
+              17.863185235788503,
+              31.940906201079645,
+              -0.4528571551672953
+            ],
+            [
+              17.89727685765006,
+              31.99213199452277,
+              -0.3242954780329643
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              17.828542610626915,
+              31.820715881084176,
+              -0.7099805094359564
+            ],
+            [
+              17.907333305033273,
+              31.784946292378663,
+              -0.5702951561403498
+            ],
+            [
+              17.897275129423672,
+              31.992132687888333,
+              -0.4463647645547417
+            ],
+            [
+              17.89727685765006,
+              31.99213199452277,
+              -0.3242954780329643
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              17.89727685765006,
+              31.99213199452277,
+              -0.3242954780329643
+            ],
+            [
+              17.901087944699288,
+              31.990603828976287,
+              -0.3204974107176173
+            ],
+            [
+              18.052570171332658,
+              31.951363573399217,
+              -0.1958485416799891
+            ],
+            [
+              18.21014763932208,
+              31.92769816257525,
+              -0.08916713518203379
+            ],
+            [
+              18.38134774036268,
+              31.91974766649089,
+              0.0067618318170201705
+            ],
+            [
+              18.54343279144578,
+              31.925212743747625,
+              0.09483049589096426
+            ],
+            [
+              18.64116527631135,
+              31.935723709086425,
+              0.14986942487655996
+            ],
+            [
+              18.688197815447285,
+              31.943157687293645,
+              0.1737816162675512
+            ]
+          ],
+          "B": [
+            17.828542610626915,
+            31.820715881084176,
+            -0.7099805094359564
+          ],
+          "E": [
+            17.89727685765006,
+            31.99213199452277,
+            -0.3242954780329643
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S3/planning/A3/trace.json",
+          "trace_sha256": "ade95a83da2d726eaa1eabfce6eb0d31c2aef1a71db6b49245bfc91d85f5fbed",
+          "solver_result_sha256": "f47e6bee62cdf0368617514e00b114ad7ade5450d3f0c51cedf0f567659500eb",
+          "safety": {
+            "minimum_clearance_m": 0.2114889923819378,
+            "native_clearance_m": 0.2114889923819378,
+            "union_minus_parts_m": 0.0,
+            "limiting_geometry": "Hospital",
+            "cart_present": false,
+            "first_minimum_segment": 1,
+            "minimum_path_xy": [
+              17.897275129423672,
+              31.992132687888333
+            ],
+            "nearest_obstacle_xy": [
+              17.85613065,
+              32.40155951
+            ],
+            "per_segment_clearance_m": [
+              0.38084359061170486,
+              0.2114889923819378,
+              0.2114889923819378,
+              0.21148985508009666,
+              0.21340746257456594,
+              0.23347732000244142,
+              0.25828624488941665,
+              0.31008545809320814,
+              0.39044472867304786,
+              0.4487102555182106
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS; no cart in this source; no B connector"
+          }
+        },
+        "V2": {
+          "variant": "V2",
+          "historical": false,
+          "M": 2,
+          "editable_nodes": 1,
+          "converged": true,
+          "stable": true,
+          "stability_gates": {
+            "converged": true,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": true
+          },
+          "termination_reason": "cost_tolerance",
+          "iterations": 3,
+          "accepted_steps": 3,
+          "rejected_steps": 0,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 2.6999999999999996e-05,
+          "final_gradient_inf": 7.096880599938293e-06,
+          "final_step_norm": 3.5477790546570655e-08,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.013282904998050071,
+          "initial_costs": {
+            "E_in": 0.9027324326789129,
+            "E_out": 0.7064661926380985,
+            "E_smooth": 0.023409068625076572,
+            "E_space": 0.000708929650544302,
+            "total": 1.6333166235926322
+          },
+          "final_costs": {
+            "E_in": 0.8436851830478059,
+            "E_out": 0.7701170359657824,
+            "E_smooth": 0.004706350520234659,
+            "E_space": 0.0014166914854366942,
+            "total": 1.6199252610192596
+          },
+          "geometry": {
+            "M": 2,
+            "d_F_m": 0.15648214800275878,
+            "bridge_XY_length_m": 0.1848939072093217,
+            "B_to_entry_chord_m": 0.1846831899774071,
+            "length_chord_ratio": 1.0011409659533193,
+            "maximum_turning_angle_rad": 0.09554228073632975,
+            "RMS_turning_angle_rad": 0.09554228073632975,
+            "segment_length_min_m": 0.08950204076750044,
+            "segment_length_max_m": 0.09539186644182124,
+            "turning_angles_rad": [
+              0.09554228073632975
+            ],
+            "segment_lengths_m": [
+              0.08950204076750044,
+              0.09539186644182124
+            ],
+            "factor_costs": {
+              "E_in": 0.8436851830478059,
+              "E_out": 0.7701170359657824,
+              "E_smooth": 0.004706350520234659,
+              "E_space": 0.0014166914854366942,
+              "total": 1.6199252610192596
+            },
+            "reference_clearance_m": 0.21148985508009666,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.09030434014745671,
+            0.09447079201816076
+          ],
+          "final_edge_lengths_m": [
+            0.08950204076750044,
+            0.09539186644182124
+          ],
+          "first_edge_m": 0.08950204076750044,
+          "outgoing_edge_m": 0.09539186644182124,
+          "rho": [
+            0.9911156055329544,
+            1.0097498327682424
+          ],
+          "rho_min": 0.9911156055329544,
+          "min_edge_over_fd": 89502.04076750045,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": false,
+          "first_direction_mismatch_rad": 1.8524895896231452,
+          "outgoing_direction_mismatch_rad": 1.617044552196619,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "STABLE PLANNING REFERENCE",
+          "initial_bridge": [
+            [
+              17.828542610626915,
+              31.820715881084176,
+              -0.7099805094359564
+            ],
+            [
+              17.859429918969216,
+              31.905573691760832,
+              -0.5171379937344605
+            ],
+            [
+              17.89727685765006,
+              31.99213199452277,
+              -0.3242954780329643
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              17.828542610626915,
+              31.820715881084176,
+              -0.7099805094359564
+            ],
+            [
+              17.865905785769044,
+              31.902046124197337,
+              -0.5173952620484354
+            ],
+            [
+              17.89727685765006,
+              31.99213199452277,
+              -0.3242954780329643
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              17.89727685765006,
+              31.99213199452277,
+              -0.3242954780329643
+            ],
+            [
+              17.901087944699288,
+              31.990603828976287,
+              -0.3204974107176173
+            ],
+            [
+              18.052570171332658,
+              31.951363573399217,
+              -0.1958485416799891
+            ],
+            [
+              18.21014763932208,
+              31.92769816257525,
+              -0.08916713518203379
+            ],
+            [
+              18.38134774036268,
+              31.91974766649089,
+              0.0067618318170201705
+            ],
+            [
+              18.54343279144578,
+              31.925212743747625,
+              0.09483049589096426
+            ],
+            [
+              18.64116527631135,
+              31.935723709086425,
+              0.14986942487655996
+            ],
+            [
+              18.688197815447285,
+              31.943157687293645,
+              0.1737816162675512
+            ]
+          ],
+          "B": [
+            17.828542610626915,
+            31.820715881084176,
+            -0.7099805094359564
+          ],
+          "E": [
+            17.89727685765006,
+            31.99213199452277,
+            -0.3242954780329643
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S3/planning/V2/trace.json",
+          "trace_sha256": "33b78d551cde5c66005dbe2823f89bcd37c89ac03622d1c773726ab52b413a25",
+          "solver_result_sha256": "35a1102cb9d0fad3b9a8df4db0cb460af183f851163ce0dcedcffbc8e8638c41",
+          "safety": {
+            "minimum_clearance_m": 0.21148985508009666,
+            "native_clearance_m": 0.21148985508009666,
+            "union_minus_parts_m": 0.0,
+            "limiting_geometry": "Hospital",
+            "cart_present": false,
+            "first_minimum_segment": 1,
+            "minimum_path_xy": [
+              17.89727685765006,
+              31.99213199452277
+            ],
+            "nearest_obstacle_xy": [
+              17.85613065,
+              32.40155951
+            ],
+            "per_segment_clearance_m": [
+              0.29960902301233666,
+              0.21148985508009666,
+              0.21148985508009666,
+              0.21340746257456594,
+              0.23347732000244142,
+              0.25828624488941665,
+              0.31008545809320814,
+              0.39044472867304786,
+              0.4487102555182106
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS; no cart in this source; no B connector"
+          }
+        },
+        "V3": {
+          "variant": "V3",
+          "historical": false,
+          "M": 3,
+          "editable_nodes": 2,
+          "converged": true,
+          "stable": true,
+          "stability_gates": {
+            "converged": true,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": true
+          },
+          "termination_reason": "cost_tolerance",
+          "iterations": 6,
+          "accepted_steps": 6,
+          "rejected_steps": 0,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 7.289999999999998e-07,
+          "final_gradient_inf": 4.983348677878308e-06,
+          "final_step_norm": 6.294290534029037e-08,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.030369207001058385,
+          "initial_costs": {
+            "E_in": 0.3152214343868756,
+            "E_out": 0.24604225384704248,
+            "E_smooth": 0.092208579695923,
+            "E_space": 0.012066857005168892,
+            "total": 0.66553912493501
+          },
+          "final_costs": {
+            "E_in": 0.3050488269886942,
+            "E_out": 0.2918750792587585,
+            "E_smooth": 0.035038991767194355,
+            "E_space": 0.011412328648198924,
+            "total": 0.643375226662846
+          },
+          "geometry": {
+            "M": 3,
+            "d_F_m": 0.15648214800275878,
+            "bridge_XY_length_m": 0.1862356929387789,
+            "B_to_entry_chord_m": 0.1846831899774071,
+            "length_chord_ratio": 1.0084063035816184,
+            "maximum_turning_angle_rad": 0.3082472721259464,
+            "RMS_turning_angle_rad": 0.26001435441095294,
+            "segment_length_min_m": 0.05578297429648438,
+            "segment_length_max_m": 0.06978916005401445,
+            "turning_angles_rad": [
+              0.3082472721259464,
+              -0.2004957561306524
+            ],
+            "segment_lengths_m": [
+              0.05578297429648438,
+              0.06978916005401445,
+              0.060663558588280084
+            ],
+            "factor_costs": {
+              "E_in": 0.3050488269886942,
+              "E_out": 0.2918750792587585,
+              "E_smooth": 0.035038991767194355,
+              "E_space": 0.011412328648198924,
+              "total": 0.643375226662846
+            },
+            "reference_clearance_m": 0.21148985508009666,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.0567577370254314,
+            0.07106336154013204,
+            0.061533085369001796
+          ],
+          "final_edge_lengths_m": [
+            0.05578297429648438,
+            0.06978916005401445,
+            0.060663558588280084
+          ],
+          "first_edge_m": 0.05578297429648438,
+          "outgoing_edge_m": 0.060663558588280084,
+          "rho": [
+            0.9828259056820701,
+            0.9820695016601768,
+            0.985868955286293
+          ],
+          "rho_min": 0.9820695016601768,
+          "min_edge_over_fd": 55782.97429648438,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": false,
+          "first_direction_mismatch_rad": 1.7512442170235154,
+          "outgoing_direction_mismatch_rad": 1.5280084148559538,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "STABLE PLANNING REFERENCE",
+          "initial_bridge": [
+            [
+              17.828542610626915,
+              31.820715881084176,
+              -0.7099805094359564
+            ],
+            [
+              17.856398758848794,
+              31.870167632504007,
+              -0.581418832301626
+            ],
+            [
+              17.863185235788503,
+              31.940906201079645,
+              -0.4528571551672953
+            ],
+            [
+              17.89727685765006,
+              31.99213199452277,
+              -0.3242954780329643
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              17.828542610626915,
+              31.820715881084176,
+              -0.7099805094359564
+            ],
+            [
+              17.856833650888262,
+              31.86879245814924,
+              -0.5807509200262428
+            ],
+            [
+              17.872311666838073,
+              31.93684359982447,
+              -0.45266272944338537
+            ],
+            [
+              17.89727685765006,
+              31.99213199452277,
+              -0.3242954780329643
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              17.89727685765006,
+              31.99213199452277,
+              -0.3242954780329643
+            ],
+            [
+              17.901087944699288,
+              31.990603828976287,
+              -0.3204974107176173
+            ],
+            [
+              18.052570171332658,
+              31.951363573399217,
+              -0.1958485416799891
+            ],
+            [
+              18.21014763932208,
+              31.92769816257525,
+              -0.08916713518203379
+            ],
+            [
+              18.38134774036268,
+              31.91974766649089,
+              0.0067618318170201705
+            ],
+            [
+              18.54343279144578,
+              31.925212743747625,
+              0.09483049589096426
+            ],
+            [
+              18.64116527631135,
+              31.935723709086425,
+              0.14986942487655996
+            ],
+            [
+              18.688197815447285,
+              31.943157687293645,
+              0.1737816162675512
+            ]
+          ],
+          "B": [
+            17.828542610626915,
+            31.820715881084176,
+            -0.7099805094359564
+          ],
+          "E": [
+            17.89727685765006,
+            31.99213199452277,
+            -0.3242954780329643
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S3/planning/V3/trace.json",
+          "trace_sha256": "3f62b35f2ae9f71f88fe17a1dafd00e81ac0e115ca11f6e6409ab9c0584100d3",
+          "solver_result_sha256": "9179f0c9e9c13a32edf32fcad71b3e8a7e9abe8e6b2dee47a0ee5d56429ab057",
+          "safety": {
+            "minimum_clearance_m": 0.21148985508009666,
+            "native_clearance_m": 0.21148985508009666,
+            "union_minus_parts_m": 0.0,
+            "limiting_geometry": "Hospital",
+            "cart_present": false,
+            "first_minimum_segment": 2,
+            "minimum_path_xy": [
+              17.89727685765006,
+              31.99213199452277
+            ],
+            "nearest_obstacle_xy": [
+              17.85613065,
+              32.40155951
+            ],
+            "per_segment_clearance_m": [
+              0.3327675156651326,
+              0.26499752953772043,
+              0.21148985508009666,
+              0.21148985508009666,
+              0.21340746257456594,
+              0.23347732000244142,
+              0.25828624488941665,
+              0.31008545809320814,
+              0.39044472867304786,
+              0.4487102555182106
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS; no cart in this source; no B connector"
+          }
+        }
+      },
+      "S4": {
+        "A2": {
+          "variant": "A2",
+          "historical": true,
+          "M": 2,
+          "editable_nodes": 1,
+          "converged": false,
+          "stable": false,
+          "stability_gates": {
+            "converged": false,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": false
+          },
+          "termination_reason": "maximum_iterations",
+          "iterations": 80,
+          "accepted_steps": 44,
+          "rejected_steps": 36,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 9847709021.836102,
+          "final_gradient_inf": 3647.1923404811264,
+          "final_step_norm": 1.2348653844804095e-07,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.15947995099850232,
+          "initial_costs": {
+            "E_in": 69.05700847085156,
+            "E_out": 33.29109955499714,
+            "E_smooth": 0.04075360960699951,
+            "E_space": 0.0012681924185379435,
+            "total": 102.39012982787423
+          },
+          "final_costs": {
+            "E_in": 6.7063868420568674e-06,
+            "E_out": 36.00062184691767,
+            "E_smooth": 1.11825829969553,
+            "E_space": 1.1182101431356262,
+            "total": 38.23709699613566
+          },
+          "geometry": {
+            "M": 2,
+            "d_F_m": 0.15214175181339587,
+            "bridge_XY_length_m": 0.16088807740045022,
+            "B_to_entry_chord_m": 0.16088422588979834,
+            "length_chord_ratio": 1.000023939641258,
+            "maximum_turning_angle_rad": 2.110451148496452,
+            "RMS_turning_angle_rad": 2.110451148496452,
+            "segment_length_min_m": 2.544209239606101e-06,
+            "segment_length_max_m": 0.1608855331912106,
+            "turning_angles_rad": [
+              -2.110451148496452
+            ],
+            "segment_lengths_m": [
+              2.544209239606101e-06,
+              0.1608855331912106
+            ],
+            "factor_costs": {
+              "E_in": 6.7063868420568674e-06,
+              "E_out": 36.00062184691767,
+              "E_smooth": 1.11825829969553,
+              "E_space": 1.1182101431356262,
+              "total": 38.23709699613566
+            },
+            "reference_clearance_m": 0.8780007436815849,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.07788955304808688,
+            0.08330757785120851
+          ],
+          "final_edge_lengths_m": [
+            2.544209239606101e-06,
+            0.1608855331912106
+          ],
+          "first_edge_m": 2.544209239606101e-06,
+          "outgoing_edge_m": 0.1608855331912106,
+          "rho": [
+            3.266431941181349e-05,
+            1.9312232733324715
+          ],
+          "rho_min": 3.266431941181349e-05,
+          "min_edge_over_fd": 2.544209239606101,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": true,
+          "first_direction_mismatch_rad": -0.0006779738251450063,
+          "outgoing_direction_mismatch_rad": -1.5708098933315071,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "UNCONVERGED DIAGNOSTIC \u2014 NOT A RETURNED REFERENCE",
+          "initial_bridge": [
+            [
+              19.668567955248744,
+              8.99227202834442,
+              -1.3595769416513406
+            ],
+            [
+              19.596642023704597,
+              9.022162542651428,
+              -1.612414353138149
+            ],
+            [
+              19.516333811852085,
+              9.044315276940615,
+              -1.8652517646249573
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              19.668567955248744,
+              8.99227202834442,
+              -1.3595769416513406
+            ],
+            [
+              19.668568486195557,
+              8.992269540153082,
+              -1.6125598748277665
+            ],
+            [
+              19.516333811852085,
+              9.044315276940615,
+              -1.8652517646249573
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              19.516333811852085,
+              9.044315276940615,
+              -1.8652517646249573
+            ],
+            [
+              19.477663716327225,
+              8.93119956979153,
+              -1.9612921722301146
+            ],
+            [
+              19.409100015727887,
+              8.79222697663467,
+              -2.0945940859683656
+            ],
+            [
+              19.323270879196297,
+              8.658734596986658,
+              -2.2310262568362855
+            ],
+            [
+              19.21994416970937,
+              8.540337783293683,
+              -2.3562155015834474
+            ],
+            [
+              19.108076724956195,
+              8.437222374894915,
+              -2.4870991952785158
+            ],
+            [
+              19.01504735085889,
+              8.372056775572236,
+              -2.6028548725017213
+            ],
+            [
+              18.938960248875233,
+              8.328016395013512,
+              -2.6577127225764894
+            ]
+          ],
+          "B": [
+            19.668567955248744,
+            8.99227202834442,
+            -1.3595769416513406
+          ],
+          "E": [
+            19.516333811852085,
+            9.044315276940615,
+            -1.8652517646249573
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z/sources/episode_013_repeat_00__handoff_020/planning/SE2_GRAPH_BRIDGE/trace.json",
+          "trace_sha256": "489952911baf9b8283ece51511053637cb41dbc595f7bf3d0451834564a7f681",
+          "solver_result_sha256": "e62f019e986ba375e5558b5b67652408244c2a5db69f44bef30844f41f813b75",
+          "safety": {
+            "minimum_clearance_m": 0.8780007436815849,
+            "native_clearance_m": 0.8780007397691552,
+            "union_minus_parts_m": 3.912429713537335e-09,
+            "limiting_geometry": "Hospital",
+            "cart_present": false,
+            "first_minimum_segment": 0,
+            "minimum_path_xy": [
+              19.668568486195557,
+              8.992269540153082
+            ],
+            "nearest_obstacle_xy": [
+              20.74591059,
+              9.02994705
+            ],
+            "per_segment_clearance_m": [
+              0.8780007436815849,
+              0.8780007436815849,
+              1.0295768055711656,
+              1.0720853734825715,
+              1.1550673753993324,
+              1.2408965256116788,
+              1.3442232472323188,
+              1.4560907025531122,
+              1.549120083328812
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS; no cart in this source; no B connector"
+          }
+        },
+        "A3": {
+          "variant": "A3",
+          "historical": false,
+          "M": 3,
+          "editable_nodes": 2,
+          "converged": false,
+          "stable": false,
+          "stability_gates": {
+            "converged": false,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": false
+          },
+          "termination_reason": "maximum_iterations",
+          "iterations": 80,
+          "accepted_steps": 45,
+          "rejected_steps": 35,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 295431270.65508276,
+          "final_gradient_inf": 4174.452849184047,
+          "final_step_norm": 3.6725750368370057e-08,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.27712438700837083,
+          "initial_costs": {
+            "E_in": 60.537779250909566,
+            "E_out": 26.097581702913253,
+            "E_smooth": 0.07739568369728385,
+            "E_space": 0.011531898264100903,
+            "total": 86.7242885357842
+          },
+          "final_costs": {
+            "E_in": 1.561459334350982,
+            "E_out": 6.967050034279232e-07,
+            "E_smooth": 4.5717455690770805,
+            "E_space": 2.2609675129143176,
+            "total": 8.394173113047383
+          },
+          "geometry": {
+            "M": 3,
+            "d_F_m": 0.15214175181339587,
+            "bridge_XY_length_m": 0.29090676317128034,
+            "B_to_entry_chord_m": 0.16088422588979834,
+            "length_chord_ratio": 1.8081745526161415,
+            "maximum_turning_angle_rad": 2.240217399703318,
+            "RMS_turning_angle_rad": 2.1363923631000943,
+            "segment_length_min_m": 2.362314193419539e-06,
+            "segment_length_max_m": 0.20051726281788265,
+            "turning_angles_rad": [
+              -2.240217399703318,
+              2.027256930014377
+            ],
+            "segment_lengths_m": [
+              0.09038713803920424,
+              0.20051726281788265,
+              2.362314193419539e-06
+            ],
+            "factor_costs": {
+              "E_in": 1.561459334350982,
+              "E_out": 6.967050034279232e-07,
+              "E_smooth": 4.5717455690770805,
+              "E_space": 2.2609675129143176,
+              "total": 8.394173113047383
+            },
+            "reference_clearance_m": 0.8780011873414286,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.04792306237454295,
+            0.062262925258993365,
+            0.054433590639548175
+          ],
+          "final_edge_lengths_m": [
+            0.09038713803920424,
+            0.20051726281788265,
+            2.362314193419539e-06
+          ],
+          "first_edge_m": 0.09038713803920424,
+          "outgoing_edge_m": 2.362314193419539e-06,
+          "rho": [
+            1.886088525244549,
+            3.2204921626119645,
+            4.33980960224076e-05
+          ],
+          "rho_min": 4.33980960224076e-05,
+          "min_edge_over_fd": 2.362314193419539,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": true,
+          "first_direction_mismatch_rad": -0.3271402383453772,
+          "outgoing_direction_mismatch_rad": 0.00021852095577257202,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "UNCONVERGED DIAGNOSTIC \u2014 NOT A RETURNED REFERENCE",
+          "initial_bridge": [
+            [
+              19.668567955248744,
+              8.99227202834442,
+              -1.3595769416513406
+            ],
+            [
+              19.622197580102007,
+              9.004371954629537,
+              -1.5281352159758794
+            ],
+            [
+              19.570516586294996,
+              9.039095818771171,
+              -1.6966934903004183
+            ],
+            [
+              19.516333811852085,
+              9.044315276940615,
+              -1.8652517646249573
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              19.668567955248744,
+              8.99227202834442,
+              -1.3595769416513406
+            ],
+            [
+              19.658086014771218,
+              8.902494728057857,
+              -1.54109461990763
+            ],
+            [
+              19.516334575531157,
+              9.044317512409833,
+              -1.705126074635693
+            ],
+            [
+              19.516333811852085,
+              9.044315276940615,
+              -1.8652517646249573
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              19.516333811852085,
+              9.044315276940615,
+              -1.8652517646249573
+            ],
+            [
+              19.477663716327225,
+              8.93119956979153,
+              -1.9612921722301146
+            ],
+            [
+              19.409100015727887,
+              8.79222697663467,
+              -2.0945940859683656
+            ],
+            [
+              19.323270879196297,
+              8.658734596986658,
+              -2.2310262568362855
+            ],
+            [
+              19.21994416970937,
+              8.540337783293683,
+              -2.3562155015834474
+            ],
+            [
+              19.108076724956195,
+              8.437222374894915,
+              -2.4870991952785158
+            ],
+            [
+              19.01504735085889,
+              8.372056775572236,
+              -2.6028548725017213
+            ],
+            [
+              18.938960248875233,
+              8.328016395013512,
+              -2.6577127225764894
+            ]
+          ],
+          "B": [
+            19.668567955248744,
+            8.99227202834442,
+            -1.3595769416513406
+          ],
+          "E": [
+            19.516333811852085,
+            9.044315276940615,
+            -1.8652517646249573
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S4/planning/A3/trace.json",
+          "trace_sha256": "591435f751a97246c87292458d69a3d0f1bf380b9806ca6e4e455c477338162e",
+          "solver_result_sha256": "97387ff958a8218cee4c3892b8bc6c95118647ef8802dc4dd7c362b30cf8d2d2",
+          "safety": {
+            "minimum_clearance_m": 0.8780011873414286,
+            "native_clearance_m": 0.8780011834290089,
+            "union_minus_parts_m": 3.912419721530114e-09,
+            "limiting_geometry": "Hospital",
+            "cart_present": false,
+            "first_minimum_segment": 0,
+            "minimum_path_xy": [
+              19.668567955248744,
+              8.99227202834442
+            ],
+            "nearest_obstacle_xy": [
+              20.74591059,
+              9.02994705
+            ],
+            "per_segment_clearance_m": [
+              0.8780011873414286,
+              0.8952654476610347,
+              1.029576041896399,
+              1.0295768055711656,
+              1.0720853734825715,
+              1.1550673753993324,
+              1.2408965256116788,
+              1.3442232472323188,
+              1.4560907025531122,
+              1.549120083328812
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS; no cart in this source; no B connector"
+          }
+        },
+        "V2": {
+          "variant": "V2",
+          "historical": false,
+          "M": 2,
+          "editable_nodes": 1,
+          "converged": true,
+          "stable": true,
+          "stability_gates": {
+            "converged": true,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": true
+          },
+          "termination_reason": "step_tolerance",
+          "iterations": 4,
+          "accepted_steps": 3,
+          "rejected_steps": 0,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 2.6999999999999996e-05,
+          "final_gradient_inf": 9.23949817766001e-08,
+          "final_step_norm": 5.294610473925347e-10,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.013842897998983972,
+          "initial_costs": {
+            "E_in": 0.8222360266216552,
+            "E_out": 0.5635457673309872,
+            "E_smooth": 0.04075360960699951,
+            "E_space": 0.0012681924185379435,
+            "total": 1.4278035959781799
+          },
+          "final_costs": {
+            "E_in": 0.7564456665134632,
+            "E_out": 0.637594948303054,
+            "E_smooth": 0.009353302461722716,
+            "E_space": 0.002808399786302527,
+            "total": 1.4062023170645424
+          },
+          "geometry": {
+            "M": 2,
+            "d_F_m": 0.15214175181339587,
+            "bridge_XY_length_m": 0.16108308525861798,
+            "B_to_entry_chord_m": 0.16088422588979834,
+            "length_chord_ratio": 1.0012360401880285,
+            "maximum_turning_angle_rad": 0.09951370299801532,
+            "RMS_turning_angle_rad": 0.09951370299801532,
+            "segment_length_min_m": 0.07651021697248982,
+            "segment_length_max_m": 0.08457286828612817,
+            "turning_angles_rad": [
+              -0.09951370299801532
+            ],
+            "segment_lengths_m": [
+              0.07651021697248982,
+              0.08457286828612817
+            ],
+            "factor_costs": {
+              "E_in": 0.7564456665134632,
+              "E_out": 0.637594948303054,
+              "E_smooth": 0.009353302461722716,
+              "E_space": 0.002808399786302527,
+              "total": 1.4062023170645424
+            },
+            "reference_clearance_m": 0.8780011873414286,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.07788955304808688,
+            0.08330757785120851
+          ],
+          "final_edge_lengths_m": [
+            0.07651021697248982,
+            0.08457286828612817
+          ],
+          "first_edge_m": 0.07651021697248982,
+          "outgoing_edge_m": 0.08457286828612817,
+          "rho": [
+            0.9822911286351136,
+            1.015188179365622
+          ],
+          "rho_min": 0.9822911286351136,
+          "min_edge_over_fd": 76510.21697248983,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": false,
+          "first_direction_mismatch_rad": -2.0588661849335184,
+          "outgoing_direction_mismatch_rad": -1.6180606589414435,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "STABLE PLANNING REFERENCE",
+          "initial_bridge": [
+            [
+              19.668567955248744,
+              8.99227202834442,
+              -1.3595769416513406
+            ],
+            [
+              19.596642023704597,
+              9.022162542651428,
+              -1.612414353138149
+            ],
+            [
+              19.516333811852085,
+              9.044315276940615,
+              -1.8652517646249573
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              19.668567955248744,
+              8.99227202834442,
+              -1.3595769416513406
+            ],
+            [
+              19.59497760717445,
+              9.013207022289528,
+              -1.6120899155208004
+            ],
+            [
+              19.516333811852085,
+              9.044315276940615,
+              -1.8652517646249573
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              19.516333811852085,
+              9.044315276940615,
+              -1.8652517646249573
+            ],
+            [
+              19.477663716327225,
+              8.93119956979153,
+              -1.9612921722301146
+            ],
+            [
+              19.409100015727887,
+              8.79222697663467,
+              -2.0945940859683656
+            ],
+            [
+              19.323270879196297,
+              8.658734596986658,
+              -2.2310262568362855
+            ],
+            [
+              19.21994416970937,
+              8.540337783293683,
+              -2.3562155015834474
+            ],
+            [
+              19.108076724956195,
+              8.437222374894915,
+              -2.4870991952785158
+            ],
+            [
+              19.01504735085889,
+              8.372056775572236,
+              -2.6028548725017213
+            ],
+            [
+              18.938960248875233,
+              8.328016395013512,
+              -2.6577127225764894
+            ]
+          ],
+          "B": [
+            19.668567955248744,
+            8.99227202834442,
+            -1.3595769416513406
+          ],
+          "E": [
+            19.516333811852085,
+            9.044315276940615,
+            -1.8652517646249573
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S4/planning/V2/trace.json",
+          "trace_sha256": "6cda74babf391153b5db63d08d43d9ba07a8294b75bb9f06f54b9a0d2dbc77c8",
+          "solver_result_sha256": "58630628f4108a8271bb3e2fa26c8e78331696d1d2cfb342f936606b57851215",
+          "safety": {
+            "minimum_clearance_m": 0.8780011873414286,
+            "native_clearance_m": 0.8780011834290089,
+            "union_minus_parts_m": 3.912419721530114e-09,
+            "limiting_geometry": "Hospital",
+            "cart_present": false,
+            "first_minimum_segment": 0,
+            "minimum_path_xy": [
+              19.668567955248744,
+              8.99227202834442
+            ],
+            "nearest_obstacle_xy": [
+              20.74591059,
+              9.02994705
+            ],
+            "per_segment_clearance_m": [
+              0.8780011873414286,
+              0.9510547161119098,
+              1.0295768055711656,
+              1.0720853734825715,
+              1.1550673753993324,
+              1.2408965256116788,
+              1.3442232472323188,
+              1.4560907025531122,
+              1.549120083328812
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS; no cart in this source; no B connector"
+          }
+        },
+        "V3": {
+          "variant": "V3",
+          "historical": false,
+          "M": 3,
+          "editable_nodes": 2,
+          "converged": true,
+          "stable": true,
+          "stability_gates": {
+            "converged": true,
+            "finite": true,
+            "B_bit_exact": true,
+            "E_bit_exact": true,
+            "suffix_bit_exact": true,
+            "reference_safe": true,
+            "no_bridge_self_intersection": true,
+            "numerically_noncollapsed": true
+          },
+          "termination_reason": "cost_tolerance",
+          "iterations": 7,
+          "accepted_steps": 7,
+          "rejected_steps": 0,
+          "unsafe_improving_proposals": 0,
+          "final_damping": 2.1869999999999994e-07,
+          "final_gradient_inf": 1.0451914523867956e-06,
+          "final_step_norm": 1.4083904838132141e-08,
+          "gradient_step_semantics": "last logged linearization; not recomputed at final accepted state",
+          "wall_s": 0.0330665810033679,
+          "initial_costs": {
+            "E_in": 0.28762625116747925,
+            "E_out": 0.19680954818999657,
+            "E_smooth": 0.07739568369728385,
+            "E_space": 0.011531898264100903,
+            "total": 0.5733633813188606
+          },
+          "final_costs": {
+            "E_in": 0.2699324242888403,
+            "E_out": 0.24282192305117217,
+            "E_smooth": 0.030880673918823986,
+            "E_space": 0.010941504374778132,
+            "total": 0.5545765256336146
+          },
+          "geometry": {
+            "M": 3,
+            "d_F_m": 0.15214175181339587,
+            "bridge_XY_length_m": 0.16206935654005064,
+            "B_to_entry_chord_m": 0.16088422588979834,
+            "length_chord_ratio": 1.0073663570415168,
+            "maximum_turning_angle_rad": 0.2893496913585336,
+            "RMS_turning_angle_rad": 0.24487708438035932,
+            "segment_length_min_m": 0.04696719687806104,
+            "segment_length_max_m": 0.06115530615210064,
+            "turning_angles_rad": [
+              -0.2893496913585336,
+              0.19027960747272044
+            ],
+            "segment_lengths_m": [
+              0.04696719687806104,
+              0.06115530615210064,
+              0.05394685350988895
+            ],
+            "factor_costs": {
+              "E_in": 0.2699324242888403,
+              "E_out": 0.24282192305117217,
+              "E_smooth": 0.030880673918823986,
+              "E_space": 0.010941504374778132,
+              "total": 0.5545765256336146
+            },
+            "reference_clearance_m": 0.8780011873414286,
+            "reference_safe": true,
+            "bridge_self_intersection": false,
+            "full_reference_self_intersection": false
+          },
+          "initial_edge_lengths_m": [
+            0.04792306237454295,
+            0.062262925258993365,
+            0.054433590639548175
+          ],
+          "final_edge_lengths_m": [
+            0.04696719687806104,
+            0.06115530615210064,
+            0.05394685350988895
+          ],
+          "first_edge_m": 0.04696719687806104,
+          "outgoing_edge_m": 0.05394685350988895,
+          "rho": [
+            0.980054164965266,
+            0.9822106156707961,
+            0.9910581476632264
+          ],
+          "rho_min": 0.980054164965266,
+          "min_edge_over_fd": 46967.19687806105,
+          "numerical_collapse_threshold_m": 1e-05,
+          "numerical_collapse": false,
+          "first_direction_mismatch_rad": -1.9690131922044358,
+          "outgoing_direction_mismatch_rad": -1.5277640471001588,
+          "Jacobian_column_norm_min": null,
+          "Jacobian_column_norm_max": null,
+          "normal_condition_number": null,
+          "optional_linearization_diagnostics": "N/A: unchanged solver trace does not retain Jacobian or normal matrix",
+          "final_state_label": "STABLE PLANNING REFERENCE",
+          "initial_bridge": [
+            [
+              19.668567955248744,
+              8.99227202834442,
+              -1.3595769416513406
+            ],
+            [
+              19.622197580102007,
+              9.004371954629537,
+              -1.5281352159758794
+            ],
+            [
+              19.570516586294996,
+              9.039095818771171,
+              -1.6966934903004183
+            ],
+            [
+              19.516333811852085,
+              9.044315276940615,
+              -1.8652517646249573
+            ]
+          ],
+          "last_accepted_bridge": [
+            [
+              19.668567955248744,
+              8.99227202834442,
+              -1.3595769416513406
+            ],
+            [
+              19.622422234118858,
+              9.001017884733898,
+              -1.5285566117715963
+            ],
+            [
+              19.568083628118217,
+              9.029076526334379,
+              -1.6967259868139926
+            ],
+            [
+              19.516333811852085,
+              9.044315276940615,
+              -1.8652517646249573
+            ]
+          ],
+          "fixed_suffix": [
+            [
+              19.516333811852085,
+              9.044315276940615,
+              -1.8652517646249573
+            ],
+            [
+              19.477663716327225,
+              8.93119956979153,
+              -1.9612921722301146
+            ],
+            [
+              19.409100015727887,
+              8.79222697663467,
+              -2.0945940859683656
+            ],
+            [
+              19.323270879196297,
+              8.658734596986658,
+              -2.2310262568362855
+            ],
+            [
+              19.21994416970937,
+              8.540337783293683,
+              -2.3562155015834474
+            ],
+            [
+              19.108076724956195,
+              8.437222374894915,
+              -2.4870991952785158
+            ],
+            [
+              19.01504735085889,
+              8.372056775572236,
+              -2.6028548725017213
+            ],
+            [
+              18.938960248875233,
+              8.328016395013512,
+              -2.6577127225764894
+            ]
+          ],
+          "B": [
+            19.668567955248744,
+            8.99227202834442,
+            -1.3595769416513406
+          ],
+          "E": [
+            19.516333811852085,
+            9.044315276940615,
+            -1.8652517646249573
+          ],
+          "trace_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_graph_formulation_diag02/primary_20261003T000000Z/sources/S4/planning/V3/trace.json",
+          "trace_sha256": "45201a6566bc0143d15d2ca9dcef71e6cc9c0d4d8ed2f16238e263c49f478a43",
+          "solver_result_sha256": "55d846f971e6e673b1c2cc66c6682457d8c470f1b909e77a9c5f09f8b751abc7",
+          "safety": {
+            "minimum_clearance_m": 0.8780011873414286,
+            "native_clearance_m": 0.8780011834290089,
+            "union_minus_parts_m": 3.912419721530114e-09,
+            "limiting_geometry": "Hospital",
+            "cart_present": false,
+            "first_minimum_segment": 0,
+            "minimum_path_xy": [
+              19.668567955248744,
+              8.99227202834442
+            ],
+            "nearest_obstacle_xy": [
+              20.74591059,
+              9.02994705
+            ],
+            "per_segment_clearance_m": [
+              0.8780011873414286,
+              0.9238607486710744,
+              0.9778272835807156,
+              1.0295768055711656,
+              1.0720853734825715,
+              1.1550673753993324,
+              1.2408965256116788,
+              1.3442232472323188,
+              1.4560907025531122,
+              1.549120083328812
+            ],
+            "workspace_known": true,
+            "clearance_valid": true,
+            "required_edge_clearance_m": 0.05,
+            "footprint_radius_m": 0.2,
+            "numerical_tolerance_m": 1e-07,
+            "query": "full union direct GEOS; no cart in this source; no B connector"
+          }
+        }
+      }
+    },
+    "classification": "MULTIPLE_STABLE_FORMULATIONS",
+    "stable_counts": {
+      "A2": 0,
+      "A3": 0,
+      "V2": 4,
+      "V3": 4
+    },
+    "technically_viable_all_four": [
+      "V2",
+      "V3"
+    ],
+    "counts": {
+      "new_graph_solves": 12,
+      "historical_A2_reused": 4,
+      "A2_new_solves": 0,
+      "MPC_solves": 0,
+      "rollouts": 0,
+      "state_integrations": 0,
+      "controller_memory_updates": 0,
+      "command_applications": 0,
+      "LightNav": 0,
+      "RGB": 0,
+      "Isaac": 0,
+      "retries": 0
+    }
+  },
+  "validation": {
+    "valid": true,
+    "historical_A2_authenticated": true,
+    "all_historical_validators": true,
+    "independent_residuals": true,
+    "trace_decisions": true,
+    "exact_boundaries_suffix": true,
+    "new_scientific_solves": 0
+  },
+  "result_hashes_sha256": "e6020fe6a2e23ae1e9310ae789c64c31fae2878d897c3fe88d5ae99c98abccf8",
+  "table_hashes": {
+    "factor_costs.csv": "23c24cc73d2e83734f84e0c9f497459e11a66962032f496f89cd03efc2e76390",
+    "edge_scale.csv": "1cb78caf07bca7d709bd040bfd74e4b677246d9647b0ad0bb06556a21ed0c6bd",
+    "convergence_summary.csv": "306a58d37ffc6efa2bb2cb840c57c99e7f78a73c13cbc55a5fcae9a8fe6f30fd",
+    "variant_summary.csv": "31cf094ee844ee5aa9e26a0af257c562b43bf2accf794a911602e8f90d7bc980"
+  },
+  "figures": [
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/b_to_entry_graph_formulation_diag02/figures/formulation_geometry.png",
+      "sha256": "676abc2b67e6b891c80744eb897e3a0f70ca74bd913113d13676786e51835e07"
+    },
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/b_to_entry_graph_formulation_diag02/figures/convergence_and_edge_scale.png",
+      "sha256": "1274818038329f829416ca9d9350824c4d3ea1c0f3fdac0c9428742e3b2b7eb0"
+    },
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/b_to_entry_graph_formulation_diag02/figures/factor_costs.png",
+      "sha256": "64e1e1fe83a8e06e54be52e00672cdee80717184538aa1790a615121b9529d67"
+    }
+  ],
+  "layout_audit_sha256": "7852cbced00d52fe177c0fec43fc55d82f5cd9b52ef774e4fb06d24dbeb8759d"
+}
