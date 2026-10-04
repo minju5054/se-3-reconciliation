@@ -6518,3 +6518,33 @@ git diff --cached --check
   contains full metrics, geometry, command/selector tables and exact commands.
   Results/docs/README are committed and normally pushed; unrelated Stage0 edits
   and the GPU-memory script remain preserved.
+
+## 2026-10-04 — B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04 freeze preparation
+
+- Fetched origin/main first. Starting HEAD and main both
+  `56f33a145fcd0809f4d9947cbd8813c3b83f4e24`. Read repository instructions,
+  current README/log, V2, DIAG_02, bridge, C3 and correspondence documentation;
+  inspected exact installed references, official selector/adapter, scheduler,
+  common-state restoration, original-FRESH/endpoint evaluators and safety guard.
+- New isolated method B_ENTRY_STAGE is exactly [B,E*,original suffix], without
+  X1, Hermite construction, graph solve, smoothing, resampling or retuned C3.
+  Raw FRESH remains A-anchored and immutable; downstream installed world bits
+  and raw local rows match Native. B has no original identity; E* preserves its
+  frozen fractional row/arc metadata. Historical Native/C3/Hermite/V2 stay read-only.
+- All historical validators/authentication pass. Four zero-numerical-MPC-solve
+  installation preflights pass. Reference row counts 10/9/9/9; complete actual
+  B->E*->suffix safety passes. Maximum derived installation roundoff
+  1.7763568394002505e-14; minimum installed reference clearance .21148985508008777 m.
+- Reuse unchanged generic official execution and exact schedule/common-state
+  bytes. Added actual selector physical-pose/identity records and three matched
+  command comparisons, keeping shared pre-existing B commands labeled. Freeze
+  first-submit state parity, full original-FRESH metrics and classification.
+- Focused coverage 35 passed (31 + four added checks). Relevant regression:
+  696 passed, 1 known absent-corpus skip in 403.31 s. Pre-freeze synthetic vertex
+  assertion and plot metric-key errors were corrected; no scientific calls.
+  Three fixture PNG layouts/nulls visually checked. Compileall and diff checks pass.
+- Freeze code/configuration, exact references, identity mappings, safety and
+  schedules; normal commit/push before exactly one new rollout per S1-S4.
+  Optimizer entry points are forbidden during execution; scientific optimizer
+  count stays zero. No source acquisition, external/controller/env modifications.
+  Preserve both unrelated Stage0 configuration edits and GPU memory script.

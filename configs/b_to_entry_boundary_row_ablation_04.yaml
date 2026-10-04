@@ -1,0 +1,59 @@
+experiment: B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04
+starting_sha: 56f33a145fcd0809f4d9947cbd8813c3b83f4e24
+label: timing-controlled offline causal reference comparison
+sources:
+- OSA03_R00
+- episode_001_repeat_01/handoff_013
+- episode_008_repeat_01/handoff_023
+- episode_013_repeat_00/handoff_020
+order:
+- M0_NATIVE
+- C3_ENTRY_SUFFIX
+- HERMITE_BRIDGE
+- V2_GRAPH_BRIDGE
+- B_ENTRY_STAGE
+new_method: B_ENTRY_STAGE
+frames: original raw FRESH observation-anchored; only derived B/E* represented as
+  A^-1 X
+suffix: bit-identical historical Native world installation and original raw local
+  rows
+integration_steps: 180
+primary_intervals: 54
+wall_wait_timeout_s: 30.0
+schedule: exact historical source-specific bytes and common B provenance; unchanged
+  logical scheduler
+controller: unchanged official MPC, H5 nearest+1, Q/R, limits, memory and generation
+  semantics
+footprint_radius_m: 0.2
+required_edge_clearance_m: 0.05
+safety: unchanged numerical reserve and complete-polyline checker; unchanged abort-only
+  execution guard
+metric_target: full ORIGINAL FRESH; exact historical attachment and original-FRESH
+  endpoint dwell
+scalar_atol: 1.0e-09
+time_tolerance: integration_dt_s - 1e-9
+classification_precedence:
+- TECHNICAL_BLOCKED
+- BOUNDARY_STAGE_REFERENCE_OR_EXECUTION_FAILURE
+- INTERMEDIATE_BRIDGE_NEEDED_SUPPORTED
+- STAGING_SUFFICIENT_AND_PENALTY_REDUCED
+- STAGING_SUFFICIENT_NO_PENALTY_GAIN
+- STAGING_RECOVERY_WITH_NEW_TRADEOFF
+- MIXED_STAGING_EFFECT
+optimizer_calls: 0
+new_rollouts: 4
+historical_reruns: 0
+V3_rollouts: 0
+LightNav: 0
+RGB: 0
+Isaac: 0
+retries: 0
+final_pngs:
+- world_execution_overview.png
+- staging_transition_completion.png
+- selector_staging_diagnostic.png
+vector_result: results/b_to_entry_vector_bridge_execution_03/result_summary.json
+vector_result_sha256: 7c70358be5eb509ee3698e70bd4598b65863a53cb1ca9f6f3d96d63034fdaeed
+vector_result_commit: 56f33a145fcd0809f4d9947cbd8813c3b83f4e24
+vector_freeze_sha: 7bf24d60b87774859ffef3f6d56f524a4fb7ad15
+structure: B, exact frozen E*, exact original downstream suffix; no X1
