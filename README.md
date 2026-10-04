@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [boundary-row staging ablation](docs/B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04.md)
+ran four `[B, E*, original suffix]` rollouts with 120 official MPC solves and
+zero optimization. **STAGING_SUFFICIENT_AND_PENALTY_REDUCED**: staging alone
+recovered both S3 dwells and reduced Hermite/V2 endpoint delay by 1/1/5 ticks
+in S1/S2/S4. Safety and exact logical schedules passed. Easy-source delays versus
+C3 remain, and some metrics worsen versus bridges. Direction A is to study simpler
+progress/staging; these four development sources do not establish a need for X1
+or graph superiority. [Execution PNG](results/b_to_entry_boundary_row_ablation_04/figures/world_execution_overview.png)
+and [selector diagnostic](results/b_to_entry_boundary_row_ablation_04/figures/selector_staging_diagnostic.png).
+
 The [saved V2 bridge execution study](docs/B_TO_ENTRY_VECTOR_BRIDGE_EXECUTION_03.md)
 ran four V2 rollouts with 120 official MPC solves and no new optimization.
 Classification: **VECTOR_GRAPH_RECOVERY_NO_CLEAR_TRADEOFF_GAIN**. V2 preserved

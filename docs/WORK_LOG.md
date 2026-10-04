@@ -6548,3 +6548,44 @@ git diff --cached --check
   Optimizer entry points are forbidden during execution; scientific optimizer
   count stays zero. No source acquisition, external/controller/env modifications.
   Preserve both unrelated Stage0 configuration edits and GPU memory script.
+
+## 2026-10-04 — B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04 results
+
+- Scientific freeze `94f1a70fa5721f15bca4287dbda2ff0b3634f659` was normally
+  pushed before the four source-ordered B_ENTRY_STAGE rollouts. Exactly 120
+  official MPC solves / 119 applications; S2 retains its historical final
+  result beyond the cap. Reused 16 Native/C3/Hermite/V2 rollouts without rerun.
+  Optimizer, V3, LightNav, RGB, Isaac and retries all zero.
+- Frozen classification: STAGING_SUFFICIENT_AND_PENALTY_REDUCED. Direction A:
+  investigate simpler progress/staging before graph-necessity claims. No next
+  method or held-out source collection implemented.
+- S3 B_ENTRY obtains attachment at 1.2333333976566792 s and original-FRESH
+  endpoint dwell at 1.4833334106951952 s. No X1 is needed for recovery here.
+  Endpoint dwell is 17 ticks earlier than both historical bridges. Position
+  AUC .9=.17774746247128803 versus C3 .18655395332828628, Hermite
+  .18225344050596992 and V2 .18190299536729632 m s. Cap endpoint error .06521469445869597 m
+  exceeds both bridges; angular TV is higher and linear TV lower. No scalar winner.
+- Easy endpoint dwell is retained and advances versus Hermite/V2 by 1/1/5 ticks.
+  C3-relative delays still .13333334028720856/.08333333767950535/.06666667014360428 s
+  in S1/S2/S4. All three attach earlier than C3 but reach endpoint dwell later.
+  S4 early AUC and attachment time worsen versus bridges despite earlier endpoint dwell.
+- At identical actual first submit states, B is nearest and E* first H5 in all
+  four B_ENTRY rollouts. C3 first H5 is F_2/F_4/F_3/F_3; Hermite/V2 first H5 is
+  bridge_1. B_ENTRY E* exposure counts 3/2/5/4, sampled spans .2/.1/.4/.3 s.
+  First differing post-reference commands submit at 96/1002/1806/1524 and apply
+  at 99/1003/1807/1525. S1 bridge comparison begins with only ~1e-8 numerical
+  angular differences; descriptive threshold crossing is not a large-command claim.
+- All 20 historical/new full common-state and schedule gates pass; every new
+  rollout reaches 180 intervals without controller error or safety abort.
+  Minimum B_ENTRY swept clearance .15918701209977898 m. Whole references pass
+  safety, including actual B->E* edge; boundaries/raw/suffix provenance exact.
+- Saved-only validator and all historical validators pass. Exactly three PNGs
+  visually checked, with every numeric sidecar/marker independently matched to
+  saved results. CSV counts primary20/structural16/paired4/selector20/command2520/
+  geometry20. All 87 frozen code/config and 84 input hashes unchanged.
+- Tests remain 35 focused coverage and 696 regression passed / one known corpus
+  skip. Compileall and diff checks pass. No scientific protocol deviation,
+  result-driven code/config/render change, retry or new acquisition. Detailed
+  report answers all 22 questions and preserves nulls and metric trade-offs.
+  Only results/docs and conservative README update enter the result commit;
+  unrelated Stage0 changes and GPU-memory script remain preserved.
