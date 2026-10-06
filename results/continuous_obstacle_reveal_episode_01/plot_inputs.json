@@ -1,0 +1,149 @@
+{
+  "classification": "TECHNICAL_EXECUTION_BLOCKED",
+  "chunks": [
+    {
+      "chunk_id": "chunk_000",
+      "generated": false,
+      "applied": false,
+      "observation_time_sim": null,
+      "observation_time_host": null,
+      "request_time": null,
+      "ready_time": null,
+      "install_time": null,
+      "first_application_time": null,
+      "A": null,
+      "B": null,
+      "cart_visible_pixels": null,
+      "raw_local_sha256": null,
+      "N": null,
+      "raw_reference_safety": null,
+      "world_reference_safety": null,
+      "reason": "Isaac startup ended before episode initialization"
+    },
+    {
+      "chunk_id": "chunk_001",
+      "generated": false,
+      "applied": false,
+      "observation_time_sim": null,
+      "observation_time_host": null,
+      "request_time": null,
+      "ready_time": null,
+      "install_time": null,
+      "first_application_time": null,
+      "A": null,
+      "B": null,
+      "cart_visible_pixels": null,
+      "raw_local_sha256": null,
+      "N": null,
+      "raw_reference_safety": null,
+      "world_reference_safety": null,
+      "reason": "Isaac startup ended before episode initialization"
+    },
+    {
+      "chunk_id": "chunk_002",
+      "generated": false,
+      "applied": false,
+      "observation_time_sim": null,
+      "observation_time_host": null,
+      "request_time": null,
+      "ready_time": null,
+      "install_time": null,
+      "first_application_time": null,
+      "A": null,
+      "B": null,
+      "cart_visible_pixels": null,
+      "raw_local_sha256": null,
+      "N": null,
+      "raw_reference_safety": null,
+      "world_reference_safety": null,
+      "reason": "Isaac startup ended before episode initialization"
+    },
+    {
+      "chunk_id": "chunk_003",
+      "generated": false,
+      "applied": false,
+      "observation_time_sim": null,
+      "observation_time_host": null,
+      "request_time": null,
+      "ready_time": null,
+      "install_time": null,
+      "first_application_time": null,
+      "A": null,
+      "B": null,
+      "cart_visible_pixels": null,
+      "raw_local_sha256": null,
+      "N": null,
+      "raw_reference_safety": null,
+      "world_reference_safety": null,
+      "reason": "Isaac startup ended before episode initialization"
+    }
+  ],
+  "calls": {
+    "acquisition_launch_attempts": 1,
+    "Isaac_SimulationApp_startup_attempts": 1,
+    "scientific_episodes_initialized": 0,
+    "scientific_episodes_completed": 0,
+    "terminal_LightNav_predictions": 0,
+    "buffer_only_LightNav_requests": 0,
+    "startup_model_warmups": 1,
+    "MPC_submissions": 0,
+    "MPC_solved_results": 0,
+    "MPC_physical_applications": 0,
+    "RGB_captures": 0,
+    "integration_intervals": 0,
+    "cart_reveals": 0,
+    "episode_resets": 0,
+    "episode_resets_after_initialization": 0,
+    "graph_optimizer": 0,
+    "canonical_optimizer": 0,
+    "B_ENTRY": 0,
+    "reconciliation": 0,
+    "retries": 0,
+    "new_source_searches": 0,
+    "saved_only_audit_model_MPC_optimizer": 0
+  },
+  "host_lifecycle": [
+    {
+      "event": "Server launch",
+      "host_monotonic_ns": 372046740164471,
+      "host_elapsed_s": 0.0
+    },
+    {
+      "event": "Server ready; 1 warmup",
+      "host_monotonic_ns": 372065504408167,
+      "host_elapsed_s": 18.764243696
+    },
+    {
+      "event": "Isaac launch marker",
+      "host_monotonic_ns": 372104990721946,
+      "host_elapsed_s": 58.250557475
+    },
+    {
+      "event": "Owned server stop requested",
+      "host_monotonic_ns": 372157876587561,
+      "host_elapsed_s": 111.13642309
+    },
+    {
+      "event": "Owned server exit observed",
+      "host_monotonic_ns": 372162632231278,
+      "host_elapsed_s": 115.892066807
+    }
+  ],
+  "source_sha256": {
+    "execution_start.json": "cb4854ffc35431ed5810f5ce60c54e5ff2479647dcb67ac14430662741c2bccd",
+    "generation_actual.json": "bf217d2310b77251cae91a0755eb823eea36791cd2413f4dfb64d53cdb80af57",
+    "server_launch.json": "6ba72f2308493542ad16c1bfd59f81ca5004d575813a2ca87f6943cb7a29ed6c",
+    "server_process.json": "7a435ae0e7fbc3f419d766c996cbcf19faa8eaf0e85e0780540bf17044c19680",
+    "server_shutdown.json": "0b1875b112e2abe89e4fb646adf23a9769f74a93ead3594b3193c2c5eb84dee9",
+    "logs/isaac.log": "a6e87f0ba21c72be7119a094e5f28748e5b406a31b5180c2e4c949859e42ebf2",
+    "logs/server.log": "eb46905b173a07a1e7609c70b037db87e7d6d4707dede49005d7784249836ffc",
+    "logs/saved_validator.log": "90361209a429789821def91499cd375b1ed0b2bf3f0741a01764dae630048b44",
+    "freeze.json": "f67da273cb031d8a539f15648d41241cb32466b8a2592333bd1801800bb1bfe2",
+    "external_authority.json": "73e518b5557729c0b1e4c2f3833109348fca4b96db6c8b3ea6607169e3f9a8e1",
+    "source.json": "9163b59359de4211a744922de50bb279d9a1c9f5b8ad19367a23597e0c7429a7",
+    "protocol.json": "a00fa1e2adbb0fb2cff6996b42ea3a2a6bb83913d288343de2e9156125f0f556"
+  },
+  "scientific_plot_data_available": false,
+  "processing_script_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01/primary_20261006/reporting/blocked_status.py",
+  "processing_script_sha256": "d2f74d74f815286bf5b27c78b017c819dbf5025b954e5a167277f68432ada2f2"
+}

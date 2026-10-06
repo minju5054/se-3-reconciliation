@@ -1,0 +1,11 @@
+{
+  "PNG_sha256": {
+    "continuous_world_episode.png": "237c145bf4532215641ae60f410d6e66364c5510e31f925e2db0bf0a8ffd667f",
+    "observation_local_evolution.png": "bb98f04e7e1b7b1a58cdf2b0f05d42d08652005a1386358f9d1ab0626faed7f2",
+    "episode_timeline.png": "08cc6dffd5e123919eb43ed47a35379e39352a029b6e79a74d05852a8f04aa5f",
+    "request_rgb_sequence.png": "2d908d2b4eefda27f55ac0785ad0f679f478ca901bc61f63d7bcc3afc4eb8b6b"
+  },
+  "plot_inputs_sha256": "a0994faae07cefb7ce1af8410c06fe932b62a5a60f43d912ea3318e611dcfa97",
+  "processing_script_sha256": "d2f74d74f815286bf5b27c78b017c819dbf5025b954e5a167277f68432ada2f2",
+  "all_scientific_panels_NA": true
+}

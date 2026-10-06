@@ -6823,3 +6823,25 @@ git diff --cached --check
   Compileall passes. Isaac-environment CLI import passes without SimulationApp.
 - No new model, render, MPC or optimizer scientific call before freeze. Preserve
   both unrelated Stage0 edits and the untracked GPU-memory plotting script.
+
+### 2026-10-06 — CONTINUOUS_OBSTACLE_REVEAL_EPISODE_01 blocked acquisition result
+
+- Scientific freeze `2334b8e528b77395e24bde956f31cc0ee5cb474b` normally pushed and
+  verified on origin/main before the single authorized launch. Official server
+  provenance passed and startup warmup completed once.
+- Isaac SimulationApp failed before scene/episode/worker initialization:
+  `libcusparse.so.12: undefined symbol: __nvJitLinkCreate_12_8, version libnvJitLink.so.12`.
+  Process exit was 0 despite the dependency error. No episodes directory,
+  RGB, scientific prediction, MPC solve, integration interval or cart reveal.
+- `TECHNICAL_EXECUTION_BLOCKED`; C0–C3/A/B/hash/safety/evolution all N/A.
+  Launch attempts1, initialized/completed episodes0, model warmup1, all other
+  scientific counters0. Owned server stopped; no retry or external environment
+  change. Prelaunch intended-episode counter is explicitly disambiguated.
+- Frozen saved-episode validator failed on missing episode directory; preserved
+  original log, no relaxed check or post-freeze scientific code/config change.
+  Separate saved-only technical evidence/hash audit passes. Four explicit N/A
+  status PNGs generated and visually inspected; no fabricated paths or RGB.
+- Tracked result summary, null chunk CSV, evidence/figure manifests and report;
+  ignored source bundle explicitly invalid as scientific source, with no chunks
+  or handoffs. No graph/future-stage work. 538 distinct tests pass,1 corpus skip;
+  focused30 pass, compileall/diff checks pass. User changes remain untouched.

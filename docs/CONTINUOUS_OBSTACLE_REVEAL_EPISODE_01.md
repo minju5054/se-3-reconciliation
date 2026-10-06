@@ -161,3 +161,128 @@ not physical robot dynamics. Even if qualified, it does not establish semantic
 causal obstacle recognition, full bypass, navigation-task success, reconciliation
 improvement, graph superiority, generalization or real-world performance.
 Future multi-chunk reconciliation requires a separate task and scientific freeze.
+
+## Repository-confirmed outcome
+
+**TECHNICAL_EXECUTION_BLOCKED. No continuous source episode was acquired.**
+
+Scientific freeze `2334b8e528b77395e24bde956f31cc0ee5cb474b` was committed,
+normally pushed, and confirmed by `git ls-remote origin refs/heads/main` before
+server startup or the acquisition attempt. The freeze binds 530 code/config/test
+files, nine prepared artifacts, all declared checkpoint files, the official MPC
+file and 2,350 preserved historical/input hashes. Exact hashes are in the tracked
+freeze/input manifests and the ignored authenticated source chain.
+
+The official server started, passed its environment/checkpoint/argv audit and
+completed one startup model warmup. The one authorized Isaac launch then failed
+inside `SimulationApp`, before `setup_scene`, worker construction, episode
+initialization or the first capture. Its error at `2026-10-06T08:56:16Z` was:
+
+```text
+Import error: .../omni.isaac.ml_archive/pip_prebundle/torch/lib/../../nvidia/cusparse/lib/libcusparse.so.12:
+undefined symbol: __nvJitLinkCreate_12_8, version libnvJitLink.so.12
+```
+
+This is a library-loading failure; no package installation or external environment
+change was attempted. The launch command returned exit code 0 despite that error.
+Absence of `episodes/`, `workers.json`, `acquisition_scene.json`, any activation
+and any episode-completion record establishes that no acquisition occurred.
+The prelaunch `execution_start.json` field `scientific_episodes=1` records the
+intended attempt budget, **not an acquired episode**. It remains unmodified.
+The owned LightNav server was stopped and its exit observed at
+`2026-10-06T08:57:07.545028Z`. Its inherited shutdown-reason text says collection
+complete; this does not imply successful acquisition. No retry was made.
+
+### C0–C3 availability
+
+| Chunk | Generated | Actually applied | Observation / ready / application times | A | B | Cart pixels | Raw local SHA256 | Raw/world safety |
+|---|---|---|---|---|---|---|---|---|
+| C0 | No | No | N/A | N/A | N/A | N/A | N/A | N/A |
+| C1 | No | No | N/A | N/A | N/A | N/A | N/A | N/A |
+| C2 | No | No | N/A | N/A | N/A | N/A | N/A | N/A |
+| C3 | No | No | N/A | N/A | N/A | N/A | N/A | N/A |
+
+POSE11 is an authenticated **intended initial pose**, not a measured A0 in this
+attempt. The intended scene/cart/camera/BRIGHT/instruction sources were bound;
+their live installation was not reached. C0→C1 reaction gates, C1→C2 and C2→C3
+evolution descriptors, and actual swept clearance are all N/A. Neither EVOLVING
+nor STABLE is assigned. STOP, raw-unsafe, guard-abort and controller-timeout
+stages were not reached; no such event was observed.
+
+### Call accounting
+
+| Item | Count |
+|---|---:|
+| Authorized acquisition launch / SimulationApp startup attempt | 1 |
+| Initialized scientific episodes / completed scientific episodes | 0 / 0 |
+| Terminal LightNav predictions / buffer-only requests | 0 / 0 |
+| Startup model warmup | 1 |
+| Live RGB captures | 0 |
+| MPC submissions / solved results / physical applications | 0 / 0 / 0 |
+| Integration intervals / cart reveals | 0 / 0 |
+| Episode resets, including after initialization | 0 |
+| Graph / canonical / B_ENTRY / reconciliation | 0 / 0 / 0 / 0 |
+| Retries / new source searches | 0 / 0 |
+| Saved-only validation/report scientific calls | 0 |
+
+### Validation and output status
+
+- Required regression suite: **538 passed, 1 skipped**. Skip: unavailable
+  immutable generated DATA02 v1 corpus. Final focused suite: **30 passed**;
+  these are included in the 538 distinct tests, not additional evidence.
+- Initial sandbox regression had two Unix-socket permission failures; the same
+  full suite passed outside the sandbox. No test was weakened or disabled.
+- Compileall and diff checks pass. Existing OSA03 saved validation passes.
+  Checkpoint, official MPC, frozen implementation and input hashes still match.
+- The pre-science Isaac CLI-import check passed without constructing
+  SimulationApp. It did not test this later CUDA extension-loading stage.
+- The frozen saved-episode validator was executed once and **failed**, because
+  the episode directory does not exist. It did not validate an episode or create
+  `validation.json`. Its original failure log is preserved. No frozen validator,
+  runtime, gate, configuration or method was changed after the freeze.
+- A separate saved-only **technical evidence audit** passes: source/log hashes,
+  zero-call accounting, missing episode records, explicit null fields, four PNG
+  hashes and their numeric sidecar. This is not a scientific episode validation.
+
+`results/continuous_obstacle_reveal_episode_01/result_summary.json` records these
+facts. `chunks.csv` contains four unavailable rows. The source-bundle path is
+`data/continuous_obstacle_reveal_episode_01/primary_20261006/source_bundle/`;
+its manifest explicitly says `valid_scientific_source=false`, with no chunks,
+handoffs or execution segments. It must not be used as a source for later graphs.
+
+Four PNGs were generated and visually inspected. These are **technical-status
+figures**, since no scientific geometry or RGB exists:
+
+1. [Continuous world episode — unavailable](../results/continuous_obstacle_reveal_episode_01/figures/continuous_world_episode.png)
+2. [Observation-local evolution — unavailable](../results/continuous_obstacle_reveal_episode_01/figures/observation_local_evolution.png)
+3. [Host startup lifecycle; simulation timeline unavailable](../results/continuous_obstacle_reveal_episode_01/figures/episode_timeline.png)
+4. [C0–C3 request RGB — unavailable](../results/continuous_obstacle_reveal_episode_01/figures/request_rgb_sequence.png)
+
+### Executed commands and deviations
+
+The pre-science commands above were run through freeze, verification and server
+start. The actual single launch command was:
+
+```bash
+/home/gpuadmin/isaacsim/python.sh scripts/isaac/continuous_obstacle_reveal_episode01.py --run data/continuous_obstacle_reveal_episode_01/primary_20261006 > data/continuous_obstacle_reveal_episode_01/primary_20261006/logs/isaac.log 2>&1
+.venv/bin/python scripts/run_continuous_obstacle_reveal_episode01.py --mode stop --run data/continuous_obstacle_reveal_episode_01/primary_20261006
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/continuous-reveal-mpl .venv/bin/python scripts/validate_continuous_obstacle_reveal_episode01.py --run data/continuous_obstacle_reveal_episode_01/primary_20261006 --seal > data/continuous_obstacle_reveal_episode_01/primary_20261006/logs/saved_validator.log 2>&1
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/continuous-reveal-mpl .venv/bin/python data/continuous_obstacle_reveal_episode_01/primary_20261006/reporting/blocked_status.py
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/continuous-reveal-mpl .venv/bin/python data/continuous_obstacle_reveal_episode_01/primary_20261006/reporting/validate_blocked_status.py
+```
+
+The planned ordinary saved-episode report could not run without an episode.
+The two archived reporting-only commands above instead document the technical
+failure and explicit N/A panels. Their paths/hashes are bound in tracked
+sidecars. They make no scientific calls and do not modify frozen implementation,
+configuration or historical data. This reporting substitution, the unavailable
+episode, and the frozen validator's missing-directory failure are the protocol
+deviations. There was no retry, retuning, environment repair or future-stage work.
+
+## Research interpretation
+
+There is no new evidence about continuous obstacle response or post-reveal local
+intent evolution. The intended C0→C1→C2→C3 source remains unacquired. Only the
+implementation, pre-science authentication/tests and failed startup attempt are
+established. No bypass, semantic recognition, graph/reconciliation improvement,
+navigation success or generalization claim follows.

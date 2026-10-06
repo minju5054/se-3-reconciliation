@@ -1,0 +1,12 @@
+{
+  "scientific_episode_valid": false,
+  "episode_validator_status": "FAILED_MISSING_EPISODE_DIRECTORY",
+  "historical_OSA03_saved_validation": "PASS",
+  "frozen_source_checkpoint_MPC_hash_validation": "PASS",
+  "technical_evidence_audit": "PASS",
+  "scientific_claim_supported": false,
+  "exact_four_PNGs": true,
+  "technical_source_and_figure_hashes_valid": true,
+  "new_scientific_calls": 0,
+  "preserved_raw_episode_directory_absence": true
+}

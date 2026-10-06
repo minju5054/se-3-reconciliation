@@ -7,6 +7,11 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [continuous obstacle-reveal episode attempt](docs/CONTINUOUS_OBSTACLE_REVEAL_EPISODE_01.md)
+is **TECHNICAL_EXECUTION_BLOCKED**: Isaac failed during startup with a CUDA library
+symbol error, before any live RGB, C0–C3 prediction or MPC execution. One server
+warmup, zero retries, and no new source episode or reconciliation result.
+
 The [canonical common-B execution comparison](docs/CANONICAL_GRAPH_COMMON_B_EXECUTION_01.md)
 reused the saved full-FRESH graph solutions and ran eight frozen MPC rollouts on
 E1–E4, with zero new optimization. **STAGING_REMAINS_SUFFICIENT**: one canonical

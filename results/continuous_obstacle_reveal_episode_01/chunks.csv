@@ -1,0 +1,5 @@
+chunk_id,generated,applied,observation_time_sim,ready_time,first_application_time,A,B,cart_visible_pixels,raw_local_sha256,raw_reference_safety,world_reference_safety
+chunk_000,False,False,,,,,,,,,
+chunk_001,False,False,,,,,,,,,
+chunk_002,False,False,,,,,,,,,
+chunk_003,False,False,,,,,,,,,

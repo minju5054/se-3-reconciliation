@@ -1,0 +1,11 @@
+{
+  "valid_technical_evidence": true,
+  "valid_scientific_episode": false,
+  "original_episode_validator": "FAILED_NO_EPISODE_DIRECTORY",
+  "source_authentication": true,
+  "four_status_PNGs_hash_and_numeric_parity": true,
+  "no_fabricated_scientific_data": true,
+  "checks_new_model_MPC_optimizer_calls": 0,
+  "validator_script": "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01/primary_20261006/reporting/validate_blocked_status.py",
+  "validator_sha256": "7e77157a7ccc62423c3ba01897c792ea21c0d3443e650bb169467c12245c998d"
+}
