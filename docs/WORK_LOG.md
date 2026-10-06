@@ -6802,3 +6802,24 @@ git diff --cached --check
   919 distinct tests pass / 1 historical-corpus skip; final focused60 pass.
   Compileall and diff checks pass. No post-freeze scientific changes or budget
   deviations. Pre-science precedence clarification is documented; user edits kept.
+
+### 2026-10-06 — CONTINUOUS_OBSTACLE_REVEAL_EPISODE_01 pre-science freeze
+
+- Fetched origin/main; starting HEAD `6b08712295185d1fb4fa067bc467ba05bdf98719`.
+  Read repository rules, latest source/acquisition and canonical experiment docs.
+  Revalidated OSA03 REPEAT_00 and preserved 2,350 historical/input hashes.
+- Added isolated wrappers around the unchanged OSA03 native collector, reveal,
+  official MPC and abort-only guard. One continuous EPISODE_00, max C0–C3,
+  no retry/reset/source search/reconciliation. Exact first eligible capture per
+  application; no queued substitute; full raw reference gate before installation.
+- Loaded exact POSE11/cart/Hospital/camera/BRIGHT/instruction/model settings.
+  Retained 60/10/4 Hz, no-catchup pacing, 4 s active cap and .10 s postroll.
+  Added actual USD cart-state audit, immutable handoff/segment bundle, saved-only
+  validator, frozen initial-reaction/evolution classes and four compact PNGs.
+- Regression: 538 passed, 1 skipped (absent historical v1 corpus). Initial sandbox
+  run: 536 passed, 2 existing Unix-socket permission failures, 1 skipped; identical
+  suite outside sandbox passes. Focused30 pass; saved historical partial-report
+  fixture exercises validation/bundling/PNGs without new scientific calls.
+  Compileall passes. Isaac-environment CLI import passes without SimulationApp.
+- No new model, render, MPC or optimizer scientific call before freeze. Preserve
+  both unrelated Stage0 edits and the untracked GPU-memory plotting script.

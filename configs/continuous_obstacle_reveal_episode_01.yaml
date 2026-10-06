@@ -1,0 +1,23 @@
+experiment: CONTINUOUS_OBSTACLE_REVEAL_EPISODE_01
+authority: data/obstacle_source_acquisition_03/primary_20260923T085200Z
+authority_episode: REPEAT_00
+episodes: [EPISODE_00]
+maximum_terminal_predictions: 4
+maximum_handoff_attempts: 3
+retry: false
+maximum_active_sim_s: 4.0
+postroll_sim_s: 0.10
+initial_state: exact authority selected_pose11; stationary; cart OFF
+request_rule: first scheduled capture strictly after previous chunk actual application; no terminal in flight; exact frame only
+raw_unsafe_policy: abort before installation; no repair; SCENE_INVALID runtime status with RAW_UNSAFE policy reason
+evolution:
+  symmetric_vertex_to_polyline_separation_m: 0.02
+  endpoint_lateral_difference_m: 0.02
+  wrapped_endpoint_or_net_yaw_deg: 5.0
+  definition: maximum of both directed vertex-to-continuous-XY-polyline distances; arbitrary N; no row correspondence
+classification_priority:
+  - authenticated first reaction and all three safe applications and valid timing -> CONTINUOUS_OBSTACLE_REVEAL_EPISODE_QUALIFIED
+  - authenticated first reaction but incomplete/invalid later sequence -> FIRST_REACTION_ONLY_INSUFFICIENT_SUCCESSIVE_CHUNKS
+  - technical failure prevents evaluating first reaction -> TECHNICAL_EXECUTION_BLOCKED
+  - otherwise -> CONTINUOUS_CHUNKS_NO_QUALIFIED_FIRST_REACTION
+scope: one continuous genuine native episode; zero reconciliation or source search

@@ -1,0 +1,17 @@
+{
+  "freeze_file_sha256": "f67da273cb031d8a539f15648d41241cb32466b8a2592333bd1801800bb1bfe2",
+  "external_authority_sha256": "73e518b5557729c0b1e4c2f3833109348fca4b96db6c8b3ea6607169e3f9a8e1",
+  "frozen_code_file_count": 530,
+  "input_sha256": {
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01/primary_20261006/config_snapshot.yaml": "60bc96641f5e0368d4187fd09dabaf42a8fb030ccc4cbdb7fd44709aa119c4b9",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01/primary_20261006/episode_schedule.json": "47820ad67754bdf5faaca20c3e10ff38a158df6ecab983d99929e0ef664af832",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01/primary_20261006/source.json": "9163b59359de4211a744922de50bb279d9a1c9f5b8ad19367a23597e0c7429a7",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01/primary_20261006/selected_pose11.json": "a2014e0093f7a1241c2db50a1caa2c4c2d2a140cd70a7602af46f819dc1161b0",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01/primary_20261006/side_passages.json": "a292e56c40660ae1d57043ca40e8bca956c3e547c6a761b42d311d73a0630714",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01/primary_20261006/scenario.json": "63a0d1f907584fd02240b14a1a30bd1f6227beea75bf27344403c9b726163725",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01/primary_20261006/protocol.json": "a00fa1e2adbb0fb2cff6996b42ea3a2a6bb83913d288343de2e9156125f0f556",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01/primary_20261006/external_authority.json": "73e518b5557729c0b1e4c2f3833109348fca4b96db6c8b3ea6607169e3f9a8e1",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01/primary_20261006/technical_preflight/OSA03_saved_revalidation.json": "3a8d4163be74421d0f71aff8ac780f39f08bcd152f9cd9fb1bff1aa23ff0603f"
+  },
+  "scientific_calls_before_freeze": 0
+}
