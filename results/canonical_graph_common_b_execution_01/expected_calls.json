@@ -1,0 +1,11 @@
+{
+  "rollouts": 8,
+  "MPC_solves": 240,
+  "logical_releases": 236,
+  "withheld_results": 4,
+  "executed_intervals": 1440,
+  "canonical_optimizer": 0,
+  "V2_optimizer": 0,
+  "historical_rollouts_reused": 16,
+  "conditional": "Exact full-cap count if all eligible rollouts reach cap; unsafe references skipped; safety abort prefix retained without retry"
+}

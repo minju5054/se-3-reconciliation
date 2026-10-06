@@ -1,0 +1,30 @@
+[
+  {
+    "id": "episode_009_repeat_00/handoff_001",
+    "label": "E1",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/canonical_graph_common_b_execution_01/primary_20261006/sources/E1",
+    "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/direct_transition_hard_eval_02/primary_20261006/sources/E1",
+    "canonical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/canonical_se2_graph_formulation_audit_01/primary_20261006/sources/E1"
+  },
+  {
+    "id": "episode_017_repeat_01/handoff_008",
+    "label": "E2",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/canonical_graph_common_b_execution_01/primary_20261006/sources/E2",
+    "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/direct_transition_hard_eval_02/primary_20261006/sources/E2",
+    "canonical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/canonical_se2_graph_formulation_audit_01/primary_20261006/sources/E2"
+  },
+  {
+    "id": "episode_007_repeat_01/handoff_001",
+    "label": "E3",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/canonical_graph_common_b_execution_01/primary_20261006/sources/E3",
+    "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/direct_transition_hard_eval_02/primary_20261006/sources/E3",
+    "canonical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/canonical_se2_graph_formulation_audit_01/primary_20261006/sources/E3"
+  },
+  {
+    "id": "episode_016_repeat_00/handoff_008",
+    "label": "E4",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/canonical_graph_common_b_execution_01/primary_20261006/sources/E4",
+    "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/direct_transition_hard_eval_02/primary_20261006/sources/E4",
+    "canonical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/canonical_se2_graph_formulation_audit_01/primary_20261006/sources/E4"
+  }
+]

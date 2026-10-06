@@ -1,0 +1,71 @@
+{
+  "experiment": "CANONICAL_GRAPH_COMMON_B_EXECUTION_01",
+  "starting_head": "0ed56432b968908f83b9341d6661c11b1b1f0445",
+  "sources": [
+    "episode_009_repeat_00/handoff_001",
+    "episode_017_repeat_01/handoff_008",
+    "episode_007_repeat_01/handoff_001",
+    "episode_016_repeat_00/handoff_008"
+  ],
+  "new_methods": [
+    "B_FULL_RAW",
+    "B_CANONICAL"
+  ],
+  "central_methods": [
+    "B_FULL_RAW",
+    "B_ENTRY_STAGE",
+    "B_CANONICAL"
+  ],
+  "source_policy": "previously studied development mechanism diagnostic; no source search",
+  "OSA03": "excluded from execution; retained as historical planning context only; bounded four-source primary comparison",
+  "integration_steps": 180,
+  "primary_intervals": 54,
+  "wall_wait_timeout_s": 30.0,
+  "retries": 0,
+  "footprint_radius_m": 0.2,
+  "required_edge_clearance_m": 0.05,
+  "world_local_atol": 1e-12,
+  "figures": [
+    "reference_geometry.png",
+    "execution_comparison.png",
+    "transition_control_behavior.png"
+  ],
+  "classification_rules": {
+    "scalar_atol": 1e-09,
+    "early_auc_absolute_m_s": 0.001,
+    "early_auc_relative": 0.05,
+    "command_TV_absolute": 0.1,
+    "command_TV_relative": 0.1,
+    "endpoint_tolerance": "one integration tick + 1e-9; recovery with no baseline endpoint requires observed canonical endpoint",
+    "compensation": "recovery or >=1 tick attachment improvement or meaningful AUC when both attach at zero; cannot waive positive endpoint gate",
+    "precedence": [
+      "TECHNICAL_BLOCKED",
+      "CANONICAL_INTERFACE_NOT_EXECUTABLE",
+      "CANONICAL_EXECUTION_GAIN_SUPPORTED",
+      "CANONICAL_EXECUTION_TRADEOFF",
+      "CANONICAL_EXECUTION_REGRESSION",
+      "STAGING_REMAINS_SUFFICIENT",
+      "MIXED_EXECUTION_EVIDENCE"
+    ],
+    "tradeoff": "at least two sources with meaningful transition gain AND endpoint/attachment/safety loss or TV increase >=10% AND >=.1; command units m/s and rad/s respectively",
+    "precedence_reason": "repeated tradeoffs/regressions precede broad staging condition so they cannot be masked"
+  },
+  "wrapper": "prepend exact fixed B to unchanged saved world/local rows; all local rows in observation frame A",
+  "evaluation": "full original FRESH; frozen forward-only projection and sampled .30s dwell; own reference secondary",
+  "control_window": "held interval start t in [0,.3); TV between sampled held commands including u_B_plus, excluding pre-B jump; incomplete window null",
+  "boundary_only_effect": "N/A: no compatible saved no-B raw Native rollout in these four sources",
+  "canonical": {
+    "run": "data/canonical_se2_graph_formulation_audit_01/primary_20261006",
+    "summary": "results/canonical_se2_graph_formulation_audit_01/comparison_summary.json",
+    "summary_sha256": "31e928e668987d30efe27df0350d3865fd3fc78ef93025d4ac0bf291093047d0",
+    "freeze_commit": "6344fddd848867fc9eb3480f19321fbc2ad418d9",
+    "result_commit": "0ed56432b968908f83b9341d6661c11b1b1f0445"
+  },
+  "historical": {
+    "run": "data/direct_transition_hard_eval_02/primary_20261006",
+    "summary": "results/direct_transition_hard_eval_02/result_summary.json",
+    "summary_sha256": "0073b01507599e9cb1a4094bc9108201a2ba389b887df29deb44be8eaf0fca65",
+    "freeze_commit": "8a42e3973587eea1fd6e63f2ee240609479787af",
+    "result_commit": "2b8cdf89d47eed656a83768800245d820dd82abd"
+  }
+}

@@ -6753,3 +6753,26 @@ git diff --cached --check
 - 859 distinct tests pass, 1 missing historical-corpus skip; focused 45 pass.
   Compileall and diff checks pass. No post-freeze scientific-code changes or
   protocol deviations; no historical reruns, source search or environment edits.
+
+## 2026-10-06 — CANONICAL_GRAPH_COMMON_B_EXECUTION_01 scientific freeze
+
+- Fetched origin/main; starting HEAD 0ed56432b968908f83b9341d6661c11b1b1f0445.
+  Preserved both unrelated stage0 config edits and the untracked GPU plotting script.
+- Authenticated exact canonical arrays/solver provenance and DIRECT_TRANSITION E1–E4
+  execution artifacts. No source search; OSA03 frozen as planning-only context.
+  B_ENTRY/C3/Hermite/V2 are reused, never re-executed; no compatible no-B Native
+  rollout exists for the isolated boundary-insertion comparison.
+- Added only B_FULL_RAW/B_CANONICAL wrappers and execution diagnostics. Raw/canonical
+  rows retain exact bits; all local representations use original A. Official MPC,
+  scheduler, evaluator, safety guard and historical scientific code are unchanged.
+- All eight explicit-B references and actual installations pass complete-polyline
+  safety. Zero-numerical-MPC preflight passes; max world/local roundoff 3.553e-15.
+  Frozen expected full-cap calls: 8 rollouts, 240 solves, 236 applications, 4 withheld
+  results, 1440 intervals; optimizers/acquisition/retries/historical reruns all zero.
+- Froze classification including >=5% AND >=.001 m*s AUC threshold, one-tick endpoint
+  tolerance, and repeated adverse outcomes before the broad staging category.
+  Frozen code/dependencies 780 files; prepared input hashes 117 files.
+- New focused tests 60 pass. Main regression 579 pass; disjoint controller/geometry
+  suite 338 pass, 1 absent historical-corpus skip. Two added focused cases yield
+  919 distinct passing tests total. Compileall and diff checks pass. Synthetic
+  fixtures are tests only; no new scientific rollout before commit/push.
