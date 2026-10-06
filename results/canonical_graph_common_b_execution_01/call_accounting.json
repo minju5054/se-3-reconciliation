@@ -1,0 +1,21 @@
+{
+  "canonical_optimizer_calls": 0,
+  "V2_optimizer_calls": 0,
+  "LightNav": 0,
+  "RGB": 0,
+  "Isaac": 0,
+  "new_source_acquisitions": 0,
+  "historical_scientific_reruns": 0,
+  "retries": 0,
+  "B_FULL_RAW_rollouts": 4,
+  "B_CANONICAL_rollouts": 4,
+  "historical_B_ENTRY_rollouts_reused": 4,
+  "historical_context_rollouts_reused": 12,
+  "MPC_solves": 240,
+  "MPC_logical_result_releases": 236,
+  "MPC_physical_applications": 236,
+  "withheld_results": 4,
+  "guard_blocked_applications": 0,
+  "executed_intervals": 1440,
+  "controller_numerical_failures": 0
+}

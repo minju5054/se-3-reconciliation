@@ -1,0 +1,19 @@
+{
+  "numeric_sha256": "e5256d1c102f2e479fb5efc20bb3e2e63c23d5739feb2b11b31f0de9a8237f57",
+  "figures": [
+    {
+      "file": "reference_geometry.png",
+      "sha256": "d05507a9310e1c289ed2e6edef0f452bd38759c0beb5200d4ff3956166996337"
+    },
+    {
+      "file": "execution_comparison.png",
+      "sha256": "e9b4ba64601031b3ea46b4d825fcd7d509663d051db0770f9b798b046c9cec6a"
+    },
+    {
+      "file": "transition_control_behavior.png",
+      "sha256": "8d9a361ec9b6c13ea248dda28c6392928bfe9c892e438ac79a1dfd0e69e87eb9"
+    }
+  ],
+  "saved_only": true,
+  "new_scientific_calls": 0
+}

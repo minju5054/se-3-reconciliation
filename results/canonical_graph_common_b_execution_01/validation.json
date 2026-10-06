@@ -1,0 +1,9 @@
+{
+  "valid": true,
+  "saved_only": true,
+  "new_optimizer_calls": 0,
+  "new_MPC_calls": 0,
+  "wrappers_frames_identity_safety": true,
+  "controller_memory_schedule_guard": true,
+  "metrics_selector_commands": true
+}

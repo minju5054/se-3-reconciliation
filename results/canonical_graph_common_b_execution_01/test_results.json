@@ -1,0 +1,14 @@
+{
+  "distinct_passed": 919,
+  "skipped": 1,
+  "main_regression_passed": 579,
+  "disjoint_regression_passed": 338,
+  "additional_focused_cases": 2,
+  "final_focused_passed": 60,
+  "skipped_reason": "tests/test_exp02d_lookahead_direction.py:227; ignored historical EXP-01B/EXP-02B corpus absent",
+  "compileall": true,
+  "diff_check": true,
+  "saved_only_validation": true,
+  "check_only_exports": true,
+  "scientific_code_changed_after_freeze": false
+}

@@ -6776,3 +6776,29 @@ git diff --cached --check
   suite 338 pass, 1 absent historical-corpus skip. Two added focused cases yield
   919 distinct passing tests total. Compileall and diff checks pass. Synthetic
   fixtures are tests only; no new scientific rollout before commit/push.
+
+## 2026-10-06 — CANONICAL_GRAPH_COMMON_B_EXECUTION_01 results
+
+- Pushed scientific freeze 91579bdaf56f82fa0aabfbbdf16602bef99f1ed9 before exactly
+  four B_FULL_RAW and four B_CANONICAL executions. All reach the 180-step cap.
+  240 MPC solves, 236 releases/applications, 4 withheld cap results, 1440 intervals;
+  guard-blocked commands and controller numerical failures 0. Optimizers, retries,
+  acquisitions, LightNav/RGB/Isaac and historical scientific reruns all 0.
+- Saved-only source/array/safety/controller-memory/schedule/metrics validation passes.
+  Both .9s/full-cap parity gates pass 8/8 versus authenticated historical B_ENTRY.
+  All 12 central comparisons retain attachment and original-FRESH endpoint dwell;
+  no null or censored scientific dwell outcome, no execution safety abort.
+- Frozen STAGING_REMAINS_SUFFICIENT: E3 is one early-tracking positive (position
+  AUC .9 -19.7398%, endpoint one tick earlier), with yaw AUC +73.6809% and angular
+  TV +25.0244%. E2 is one regression: endpoint two ticks later without compensating
+  primary benefit. E1 attachment is 19 ticks later, endpoint five ticks earlier.
+  E4 endpoint one tick earlier but position AUC +5.0415%. No scalar winner score.
+- Canonical linear TV decreases 4/4; angular TV decreases 3/4. First H5 is F0–F4
+  for B_FULL_RAW, X0–X4 for canonical, frozen E*/suffix for B_ENTRY. B is initially
+  nearest in all central cases but never selected in H5. Boundary-only effect N/A:
+  there is no compatible no-B Native rollout, and none was newly acquired.
+- Exactly three PNGs generated and visually inspected. Numeric sidecars, CSV/JSON,
+  hashes and saved-only check-only pass. Report directly answers all 13 questions.
+  919 distinct tests pass / 1 historical-corpus skip; final focused60 pass.
+  Compileall and diff checks pass. No post-freeze scientific changes or budget
+  deviations. Pre-science precedence clarification is documented; user edits kept.

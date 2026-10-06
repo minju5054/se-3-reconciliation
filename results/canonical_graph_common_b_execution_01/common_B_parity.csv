@@ -1,0 +1,9 @@
+source,method,available,initial_state_memory_generation_exact,first_legal_submit_state_exact,primary_09_passed,full_cap_passed,explained_safety_censor,prefix_exact,eligible_primary_causal_pair,eligible_full_cap_causal_pair
+E1,B_FULL_RAW,True,True,True,True,True,False,True,True,True
+E1,B_CANONICAL,True,True,True,True,True,False,True,True,True
+E2,B_FULL_RAW,True,True,True,True,True,False,True,True,True
+E2,B_CANONICAL,True,True,True,True,True,False,True,True,True
+E3,B_FULL_RAW,True,True,True,True,True,False,True,True,True
+E3,B_CANONICAL,True,True,True,True,True,False,True,True,True
+E4,B_FULL_RAW,True,True,True,True,True,False,True,True,True
+E4,B_CANONICAL,True,True,True,True,True,False,True,True,True

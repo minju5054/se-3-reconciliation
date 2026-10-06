@@ -1,0 +1,54 @@
+# Executed from /home/gpuadmin/Workspace/se-3-reconciliation
+# Existing .venv only; no package/system/external environment changes.
+git fetch origin main
+git status --short
+git branch --show-current
+git remote -v
+git rev-parse HEAD
+git rev-parse origin/main
+git log -1 --format=fuller
+
+# Prepare/authenticate; historical saved validators and zero-numerical-MPC preflight.
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/canonical-execution-mpl .venv/bin/python scripts/run_canonical_graph_common_b_execution01.py --run data/canonical_graph_common_b_execution_01/primary_20261006 --mode prepare
+
+# Focused suite: initial fixture-only FileExistsError failures fixed before freeze;
+# 58 then 60 passing cases; final 60 pass in 10.31s. No scientific solves.
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/canonical-execution-mpl .venv/bin/python -m pytest -q tests/test_canonical_graph_common_b_execution01.py
+
+# Exact broad regression script executed; 579 pass, then 338 pass / 1 skip.
+#!/bin/bash
+set -e
+export PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/canonical-execution-mpl
+.venv/bin/python -m pytest -q tests/test_canonical_graph_common_b_execution01.py tests/test_canonical_se2_graph.py tests/test_canonical_graph_audit01.py tests/test_local_se2_reconciliation.py tests/test_local_se2_saved.py tests/test_se2.py tests/test_se2_lie.py tests/test_se2_graph.py tests/test_transition_graph.py tests/test_b_to_entry_graph_formulation_diag02.py tests/test_b_to_entry_vector_bridge_execution03.py tests/test_b_to_entry_boundary_row_ablation04.py tests/test_b_to_entry_bridge01.py tests/test_direct_transition_hard_eval02.py tests/test_staging_graph_necessity_eval01.py tests/test_spatial_entry.py tests/test_spatial_entry_suffix_execution01.py tests/test_spatial_correspondence_selector_diag01.py tests/test_state_shift_transport_scale01.py tests/test_relative_factor_multisource01.py tests/test_osa03_relative_factor_ablation01.py tests/test_osa03_relative_factor_replication01.py tests/test_trajectory.py
+.venv/bin/python -m pytest -q tests/test_osa03_common_b.py tests/test_exp02d_lookahead_direction.py tests/test_osa03_native.py tests/test_osa03_native_validation.py tests/test_osa03_trackability.py tests/test_online_mpc_adapter.py tests/test_robotless_online.py tests/test_robotless_online_replay.py tests/test_robotless_online_validator.py tests/test_handoff_execution_loss.py tests/test_join_online02.py tests/test_obstacle_source03.py tests/test_join_source02_geometry.py tests/test_gp_se2_environment.py tests/test_gp_se2_diag02_environment.py tests/test_handoff_delay_attribution.py tests/test_genuine_source_scan.py tests/test_metrics.py
+.venv/bin/python -m compileall -q src scripts tests
+git diff --check
+
+# Freeze/review/normal push, no science before remote equality.
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/canonical-execution-mpl .venv/bin/python scripts/run_canonical_graph_common_b_execution01.py --run data/canonical_graph_common_b_execution_01/primary_20261006 --mode freeze
+git diff --cached --check
+git diff --cached --stat
+git diff --cached --name-only
+git commit -m "Freeze canonical graph common-B execution comparison"
+git push origin main
+# Freeze SHA: 91579bdaf56f82fa0aabfbbdf16602bef99f1ed9
+
+# Executed exactly once. Runner authenticates HEAD == origin/main before exclusive lock.
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/canonical-execution-mpl .venv/bin/python scripts/run_canonical_graph_common_b_execution01.py --run data/canonical_graph_common_b_execution_01/primary_20261006 --mode execute
+
+# Saved-only result computation, plotting, and independent export/hash check.
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/canonical-execution-mpl .venv/bin/python scripts/validate_canonical_graph_common_b_execution01.py --run data/canonical_graph_common_b_execution_01/primary_20261006
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/canonical-execution-mpl .venv/bin/python scripts/report_canonical_graph_common_b_execution01.py --run data/canonical_graph_common_b_execution_01/primary_20261006
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/canonical-execution-mpl .venv/bin/python scripts/validate_canonical_graph_common_b_execution01.py --run data/canonical_graph_common_b_execution_01/primary_20261006 --check-only
+.venv/bin/python -m compileall -q src scripts tests
+git diff --check
+git diff --cached --check
+
+# Result/docs commit (only requested docs, small results, exactly three PNGs).
+git add README.md docs/WORK_LOG.md docs/CANONICAL_GRAPH_COMMON_B_EXECUTION_01.md results/canonical_graph_common_b_execution_01
+git diff --cached --check
+git diff --cached --stat
+git commit -m "Report canonical common-B execution and staging comparison"
+git push origin main
+git rev-parse HEAD
+git ls-remote origin refs/heads/main

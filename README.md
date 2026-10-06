@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [canonical common-B execution comparison](docs/CANONICAL_GRAPH_COMMON_B_EXECUTION_01.md)
+reused the saved full-FRESH graph solutions and ran eight frozen MPC rollouts on
+E1–E4, with zero new optimization. **STAGING_REMAINS_SUFFICIENT**: one canonical
+positive (E3 position AUC −19.74%, with higher yaw AUC/angular TV) and one regression
+(E2 endpoint dwell two ticks later). All central references/executions were safe
+and retained both dwells. Canonical reduced linear command TV in 4/4, but did not
+establish consistent added execution benefit over B-aware staging. These are
+previously studied offline development handoffs, not a generalization result.
+[Execution PNG](results/canonical_graph_common_b_execution_01/figures/execution_comparison.png).
+
 The [canonical SE(2) formulation audit](docs/CANONICAL_SE2_GRAPH_FORMULATION_AUDIT_01.md)
 is planning only: V2 edits one bridge pose; canonical edits the complete original
 FRESH future and reuses existing Local-SE2 L/R/A algebra. All five saved-source
