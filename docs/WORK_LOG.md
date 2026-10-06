@@ -6868,3 +6868,26 @@ git diff --cached --check
   Prior sealing script rerun stopped at its exclusive-create guard; existing
   outputs preserved, same read-only checks rerun separately. Corrected an ad hoc
   symbol-name parser's trailing-comma handling; raw diagnosis logs unchanged.
+
+### 2026-10-06 — CONTINUOUS_OBSTACLE_REVEAL_EPISODE_01B pre-science freeze
+
+- Fetched origin/main; starting HEAD `e1e8ba0f3d70241cd2e9f20424daacbad51405d1`.
+  User explicitly authorized one separately frozen 01B attempt after the diagnosed
+  pre-episode startup failure. Original 01 retry=0 remains unchanged.
+- Preserved/authenticated all 39 historical 01 run/result files and 2,350
+  inherited OSA03 input/source hashes. Original collector, policy, MPC, guard,
+  validator and scientific report are byte-unchanged. No historical rerun.
+- Added separate 01B provenance/launch/report wrappers and config. Whole runtime
+  config/scenario/schedule/external authority are byte-identical; 28 scientific
+  equivalence fields pass. Only process launch environment intentionally differs;
+  administrative namespace/experiment labels identify the new attempt.
+- Parsed exact historical OSA03 sanitation: 11 removed variables, 4 explicit
+  assignments. Repeated read-only ldd: inherited 8 undefined 12_8 symbols,
+  sanitized 0. Library/launcher/log hashes recorded. No system/environment edits
+  or preliminary SimulationApp startup. Exclusive launch reservation forbids a
+  second start even if Isaac exits 0 without an episode.
+- Final regression558 pass / 1 absent DATA02 corpus skip; 01B focused20 pass.
+  Focused launch/policy tests,
+  compileall and diff checks pass. Zero model/MPC/Isaac/optimizer scientific calls
+  before freeze. Source validity requires saved validation and the unchanged
+  qualified C0–C3 outcome; partial/blocked results remain explicit.

@@ -1,0 +1,2411 @@
+{
+  "all_scientific_fields_equal": true,
+  "fields": {
+    "initial_pose": {
+      "equal": true,
+      "original": [
+        19.20312073159454,
+        24.423334915767065,
+        -1.5689742328041627
+      ],
+      "new": [
+        19.20312073159454,
+        24.423334915767065,
+        -1.5689742328041627
+      ]
+    },
+    "initial_command": {
+      "equal": true,
+      "original": [
+        0.0,
+        0.0
+      ],
+      "new": [
+        0.0,
+        0.0
+      ]
+    },
+    "instruction": {
+      "equal": true,
+      "original": "Go to the far end of the hallway. If the path is blocked, pass the supply cart on your right without touching it. Continue straight after passing it and stop at the end of the hallway.",
+      "new": "Go to the far end of the hallway. If the path is blocked, pass the supply cart on your right without touching it. Continue straight after passing it and stop at the end of the hallway."
+    },
+    "scene_provenance": {
+      "equal": true,
+      "original": {
+        "source03_input": "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_join_source_04/persistence_20260922T050237Z/source03_input.json",
+        "source04_run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_join_source_04/persistence_20260922T050237Z",
+        "center_xy": [
+          19.207161167236976,
+          22.64031056011843
+        ],
+        "forward_xy": [
+          0.002232690101752685,
+          -0.9999975075443486
+        ],
+        "cart_extents": [
+          -0.232527153520017,
+          0.2237499343435766
+        ],
+        "cart_lateral_extents": [
+          -0.4253651002495397,
+          0.4170028921303747
+        ],
+        "triangles_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_join_source_04/persistence_20260922T050237Z/frame_bank/triangles.npz",
+        "prop": {
+          "source_prim": "/World/Hospital/SM_SupplyCart_02a7",
+          "runtime_prim": "/World/JOINSource02Obstacle",
+          "source_meshes": [
+            {
+              "prim_path": "/World/Hospital/SM_SupplyCart_02a7/SM_SupplyCart_02a",
+              "instance_proxy": true,
+              "point_count": 7345,
+              "triangle_count": 8024,
+              "holes": [],
+              "source_layers": [
+                "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.0/Isaac/Environments/Hospital/Props/SM_SupplyCart_02a.usd"
+              ],
+              "world_bounds_m": [
+                [
+                  17.30200694040811,
+                  24.615506747811853,
+                  -0.005715087890624998
+                ],
+                [
+                  17.985388290714088,
+                  25.526884716708366,
+                  0.7763687874507034
+                ]
+              ],
+              "T_world_mesh_column": [
+                [
+                  -0.0034202215483545113,
+                  -0.009396918648675388,
+                  0.0,
+                  17.646392822265625
+                ],
+                [
+                  0.009396918648675388,
+                  -0.0034202215483545113,
+                  0.0,
+                  25.0766455078125
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.009999999776482582,
+                  -0.005715087890624986
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          ],
+          "actual_meshes": [
+            {
+              "prim_path": "/World/JOINSource02Obstacle/Prop/SM_SupplyCart_02a",
+              "instance_proxy": true,
+              "point_count": 7345,
+              "triangle_count": 8024,
+              "holes": [],
+              "source_layers": [
+                "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.0/Isaac/Environments/Hospital/Props/SM_SupplyCart_02a.usd"
+              ],
+              "world_bounds_m": [
+                [
+                  18.78150293807512,
+                  22.415701956973802,
+                  -0.005715087890624998
+                ],
+                [
+                  19.624579870041348,
+                  22.873642408015805,
+                  0.7763687874507034
+                ]
+              ],
+              "T_world_mesh_column": [
+                [
+                  -0.009999957878603341,
+                  2.894746639602931e-05,
+                  0.0,
+                  19.202949168323922
+                ],
+                [
+                  -2.894746639602931e-05,
+                  -0.009999957878603341,
+                  0.0,
+                  22.644694993708757
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.009999999776482582,
+                  -0.005715087890624986
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          ],
+          "original_root_world_matrix_column": [
+            [
+              -0.3420221624802422,
+              -0.9396918858712892,
+              0.0,
+              17.646392822265625
+            ],
+            [
+              0.9396918858712892,
+              -0.3420221624802422,
+              0.0,
+              25.0766455078125
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.005715087890624986
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "source_to_actual_world_matrix_column": [
+            [
+              0.33930055949019505,
+              -0.9406780162891235,
+              0.0,
+              36.804567362220055
+            ],
+            [
+              0.9406780162891235,
+              0.33930055949019505,
+              0.0,
+              -2.4633986519367674
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "wrapper_matrix_column": [
+            [
+              0.33930055949019505,
+              -0.9406780162891235,
+              0.0,
+              36.804567362220055
+            ],
+            [
+              0.9406780162891235,
+              0.33930055949019505,
+              0.0,
+              -2.4633986519367674
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "source_mesh_parity": true,
+          "source_root_yaw_rad": 1.919864325934019,
+          "desired_root_yaw_rad": -3.1386979028426887,
+          "desired_center_xy_m": [
+            19.207161167236976,
+            22.64031056011843
+          ],
+          "actual_center_xy_m": [
+            19.203041404058233,
+            22.6446721824948
+          ],
+          "actual_world_bounds_m": [
+            [
+              18.78150293807512,
+              22.415701956973802,
+              -0.005715087890624998
+            ],
+            [
+              19.624579870041348,
+              22.873642408015805,
+              0.7763687874507034
+            ]
+          ],
+          "frame": "world Z-up metres; column-vector transforms",
+          "source_geometry_unchanged": true,
+          "renderer_mesh_replaced_with_box": false,
+          "radius_m": 0.2,
+          "required_edge_clearance_m": 0.05,
+          "evaluation_height_band_m": [
+            0.05,
+            0.65
+          ],
+          "present": true,
+          "computed_visibility": "inherited"
+        },
+        "fixed_since_before_episode": true
+      },
+      "new": {
+        "source03_input": "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_join_source_04/persistence_20260922T050237Z/source03_input.json",
+        "source04_run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_join_source_04/persistence_20260922T050237Z",
+        "center_xy": [
+          19.207161167236976,
+          22.64031056011843
+        ],
+        "forward_xy": [
+          0.002232690101752685,
+          -0.9999975075443486
+        ],
+        "cart_extents": [
+          -0.232527153520017,
+          0.2237499343435766
+        ],
+        "cart_lateral_extents": [
+          -0.4253651002495397,
+          0.4170028921303747
+        ],
+        "triangles_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_join_source_04/persistence_20260922T050237Z/frame_bank/triangles.npz",
+        "prop": {
+          "source_prim": "/World/Hospital/SM_SupplyCart_02a7",
+          "runtime_prim": "/World/JOINSource02Obstacle",
+          "source_meshes": [
+            {
+              "prim_path": "/World/Hospital/SM_SupplyCart_02a7/SM_SupplyCart_02a",
+              "instance_proxy": true,
+              "point_count": 7345,
+              "triangle_count": 8024,
+              "holes": [],
+              "source_layers": [
+                "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.0/Isaac/Environments/Hospital/Props/SM_SupplyCart_02a.usd"
+              ],
+              "world_bounds_m": [
+                [
+                  17.30200694040811,
+                  24.615506747811853,
+                  -0.005715087890624998
+                ],
+                [
+                  17.985388290714088,
+                  25.526884716708366,
+                  0.7763687874507034
+                ]
+              ],
+              "T_world_mesh_column": [
+                [
+                  -0.0034202215483545113,
+                  -0.009396918648675388,
+                  0.0,
+                  17.646392822265625
+                ],
+                [
+                  0.009396918648675388,
+                  -0.0034202215483545113,
+                  0.0,
+                  25.0766455078125
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.009999999776482582,
+                  -0.005715087890624986
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          ],
+          "actual_meshes": [
+            {
+              "prim_path": "/World/JOINSource02Obstacle/Prop/SM_SupplyCart_02a",
+              "instance_proxy": true,
+              "point_count": 7345,
+              "triangle_count": 8024,
+              "holes": [],
+              "source_layers": [
+                "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.0/Isaac/Environments/Hospital/Props/SM_SupplyCart_02a.usd"
+              ],
+              "world_bounds_m": [
+                [
+                  18.78150293807512,
+                  22.415701956973802,
+                  -0.005715087890624998
+                ],
+                [
+                  19.624579870041348,
+                  22.873642408015805,
+                  0.7763687874507034
+                ]
+              ],
+              "T_world_mesh_column": [
+                [
+                  -0.009999957878603341,
+                  2.894746639602931e-05,
+                  0.0,
+                  19.202949168323922
+                ],
+                [
+                  -2.894746639602931e-05,
+                  -0.009999957878603341,
+                  0.0,
+                  22.644694993708757
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.009999999776482582,
+                  -0.005715087890624986
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          ],
+          "original_root_world_matrix_column": [
+            [
+              -0.3420221624802422,
+              -0.9396918858712892,
+              0.0,
+              17.646392822265625
+            ],
+            [
+              0.9396918858712892,
+              -0.3420221624802422,
+              0.0,
+              25.0766455078125
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.005715087890624986
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "source_to_actual_world_matrix_column": [
+            [
+              0.33930055949019505,
+              -0.9406780162891235,
+              0.0,
+              36.804567362220055
+            ],
+            [
+              0.9406780162891235,
+              0.33930055949019505,
+              0.0,
+              -2.4633986519367674
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "wrapper_matrix_column": [
+            [
+              0.33930055949019505,
+              -0.9406780162891235,
+              0.0,
+              36.804567362220055
+            ],
+            [
+              0.9406780162891235,
+              0.33930055949019505,
+              0.0,
+              -2.4633986519367674
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "source_mesh_parity": true,
+          "source_root_yaw_rad": 1.919864325934019,
+          "desired_root_yaw_rad": -3.1386979028426887,
+          "desired_center_xy_m": [
+            19.207161167236976,
+            22.64031056011843
+          ],
+          "actual_center_xy_m": [
+            19.203041404058233,
+            22.6446721824948
+          ],
+          "actual_world_bounds_m": [
+            [
+              18.78150293807512,
+              22.415701956973802,
+              -0.005715087890624998
+            ],
+            [
+              19.624579870041348,
+              22.873642408015805,
+              0.7763687874507034
+            ]
+          ],
+          "frame": "world Z-up metres; column-vector transforms",
+          "source_geometry_unchanged": true,
+          "renderer_mesh_replaced_with_box": false,
+          "radius_m": 0.2,
+          "required_edge_clearance_m": 0.05,
+          "evaluation_height_band_m": [
+            0.05,
+            0.65
+          ],
+          "present": true,
+          "computed_visibility": "inherited"
+        },
+        "fixed_since_before_episode": true
+      }
+    },
+    "cart_transform": {
+      "equal": true,
+      "original": [
+        [
+          0.33930055949019505,
+          -0.9406780162891235,
+          0.0,
+          36.804567362220055
+        ],
+        [
+          0.9406780162891235,
+          0.33930055949019505,
+          0.0,
+          -2.4633986519367674
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "new": [
+        [
+          0.33930055949019505,
+          -0.9406780162891235,
+          0.0,
+          36.804567362220055
+        ],
+        [
+          0.9406780162891235,
+          0.33930055949019505,
+          0.0,
+          -2.4633986519367674
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "camera": {
+      "equal": true,
+      "original": {
+        "prim_path": "/World/LogicalAgent/Camera",
+        "relative_translation_m": [
+          0.09,
+          0.0,
+          0.65
+        ],
+        "rotation_agent_from_camera": [
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ]
+        ],
+        "resolution_width": 480,
+        "resolution_height": 270,
+        "horizontal_fov_deg": 112.2,
+        "horizontal_aperture_mm": 20.955,
+        "clipping_range_m": [
+          0.05,
+          100.0
+        ],
+        "reference_semantics": "official_demo_camera_axes_and_resolution_and_approximate_fov",
+        "height_choice": "logical_camera_height_0.65m_is_explicitly_not_official_body_offset_0.165m"
+      },
+      "new": {
+        "prim_path": "/World/LogicalAgent/Camera",
+        "relative_translation_m": [
+          0.09,
+          0.0,
+          0.65
+        ],
+        "rotation_agent_from_camera": [
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ]
+        ],
+        "resolution_width": 480,
+        "resolution_height": 270,
+        "horizontal_fov_deg": 112.2,
+        "horizontal_aperture_mm": 20.955,
+        "clipping_range_m": [
+          0.05,
+          100.0
+        ],
+        "reference_semantics": "official_demo_camera_axes_and_resolution_and_approximate_fov",
+        "height_choice": "logical_camera_height_0.65m_is_explicitly_not_official_body_offset_0.165m"
+      }
+    },
+    "render_settings": {
+      "equal": true,
+      "original": {
+        "capture": {
+          "warmup_updates": 30,
+          "render_subframes": 1,
+          "jpeg_quality": 95
+        },
+        "lighting": {
+          "dark": "unchanged authored Hospital lights",
+          "bright": "add one neutral white ceiling fill; original lights unchanged",
+          "prim": "/World/JOINSource03Fill",
+          "type": "RectLight",
+          "intensity": 1000.0,
+          "exposure": 0.0,
+          "color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "normalize": false,
+          "width_m": 4.0,
+          "height_m": 10.0,
+          "translation_world_m": [
+            19.2,
+            24.0,
+            2.6
+          ],
+          "emission": "local -Z, ceiling downward; no rotation",
+          "renderer": "RayTracedLighting",
+          "anti_aliasing": 0,
+          "image_postprocessing": "forbidden"
+        },
+        "scene": {
+          "family": "isaac_hospital_6_0_1",
+          "asset_relative_path": "/Isaac/Environments/Hospital/hospital.usd",
+          "reference_prim_path": "/World/Hospital",
+          "stage_units_in_meters": 1.0,
+          "up_axis": "Z",
+          "lighting": "authored_hospital_lights"
+        }
+      },
+      "new": {
+        "capture": {
+          "warmup_updates": 30,
+          "render_subframes": 1,
+          "jpeg_quality": 95
+        },
+        "lighting": {
+          "dark": "unchanged authored Hospital lights",
+          "bright": "add one neutral white ceiling fill; original lights unchanged",
+          "prim": "/World/JOINSource03Fill",
+          "type": "RectLight",
+          "intensity": 1000.0,
+          "exposure": 0.0,
+          "color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "normalize": false,
+          "width_m": 4.0,
+          "height_m": 10.0,
+          "translation_world_m": [
+            19.2,
+            24.0,
+            2.6
+          ],
+          "emission": "local -Z, ceiling downward; no rotation",
+          "renderer": "RayTracedLighting",
+          "anti_aliasing": 0,
+          "image_postprocessing": "forbidden"
+        },
+        "scene": {
+          "family": "isaac_hospital_6_0_1",
+          "asset_relative_path": "/Isaac/Environments/Hospital/hospital.usd",
+          "reference_prim_path": "/World/Hospital",
+          "stage_units_in_meters": 1.0,
+          "up_axis": "Z",
+          "lighting": "authored_hospital_lights"
+        }
+      }
+    },
+    "LightNav_checkpoint_config": {
+      "equal": true,
+      "original": {
+        "paths": {
+          "lightnav_checkout": "../external/LightNav-0-official-demo",
+          "checkpoint_path": "../external/LightNav-0/checkpoints/LightNav-0",
+          "output_root": "data/robotless_online_handoffs_v1"
+        },
+        "lightnav": {
+          "expected_git_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+          "checkpoint_identifier": "LightOriginsHQ/LightNav-0",
+          "checkpoint_revision": "7221d418bfff55cfcbadd09f7a26aaab81e1f8a6",
+          "server_url": "ws://127.0.0.1:8050",
+          "checkpoint_sha256": {
+            "action_tokenizer/codebook_l0.npy": "daaea83b3ae4637a042d1f61b34a687870d735ef709689e02c1e43d39aab6e16",
+            "action_tokenizer/codebook_l1.npy": "dfde603f96b333cda4c676613ac2f772cec3906a8dbbb7a7415bfeb4aa04e4bf",
+            "action_tokenizer/codebook_l2.npy": "2a7b186159bc9375997535008028930efe09c9b239a522639aff6febfac6c51c",
+            "action_tokenizer/manifest.json": "00d77ae028edf59e0ce68b49122dd0a60da527f48508f5ee335a580993a12864",
+            "config.json": "0e047b5e9ae7981cf0066e74d8b655a2f49d7d7965c25fca386f9eea80b63e58",
+            "eval_config.json": "7f475edbef4a13d2db99fa12eff5e9dedf48916969ec777f75e6e85e2a492b57",
+            "model-00001-of-00001.safetensors": "ffc4a925378a881afa761865048eb8d07c55cacf5eaf66548b6641c39f67af18",
+            "model.safetensors.index.json": "d725f1a587bde70cdf16ae5e1e672ff13cada2740c11baf13fbcff49dd7e00b1",
+            "processor_config.json": "ac89ec99ea773dc28f5b217edec5947120071ad5b9edcd48d3843ecc63b9877e",
+            "tokenizer_config.json": "8e8e879bfe8a52ececc118c9b80a48240ab35ff01a8be88d9a071df7ee7c4803"
+          },
+          "gpu_memory_utilization": 0.55
+        }
+      },
+      "new": {
+        "paths": {
+          "lightnav_checkout": "../external/LightNav-0-official-demo",
+          "checkpoint_path": "../external/LightNav-0/checkpoints/LightNav-0",
+          "output_root": "data/robotless_online_handoffs_v1"
+        },
+        "lightnav": {
+          "expected_git_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+          "checkpoint_identifier": "LightOriginsHQ/LightNav-0",
+          "checkpoint_revision": "7221d418bfff55cfcbadd09f7a26aaab81e1f8a6",
+          "server_url": "ws://127.0.0.1:8050",
+          "checkpoint_sha256": {
+            "action_tokenizer/codebook_l0.npy": "daaea83b3ae4637a042d1f61b34a687870d735ef709689e02c1e43d39aab6e16",
+            "action_tokenizer/codebook_l1.npy": "dfde603f96b333cda4c676613ac2f772cec3906a8dbbb7a7415bfeb4aa04e4bf",
+            "action_tokenizer/codebook_l2.npy": "2a7b186159bc9375997535008028930efe09c9b239a522639aff6febfac6c51c",
+            "action_tokenizer/manifest.json": "00d77ae028edf59e0ce68b49122dd0a60da527f48508f5ee335a580993a12864",
+            "config.json": "0e047b5e9ae7981cf0066e74d8b655a2f49d7d7965c25fca386f9eea80b63e58",
+            "eval_config.json": "7f475edbef4a13d2db99fa12eff5e9dedf48916969ec777f75e6e85e2a492b57",
+            "model-00001-of-00001.safetensors": "ffc4a925378a881afa761865048eb8d07c55cacf5eaf66548b6641c39f67af18",
+            "model.safetensors.index.json": "d725f1a587bde70cdf16ae5e1e672ff13cada2740c11baf13fbcff49dd7e00b1",
+            "processor_config.json": "ac89ec99ea773dc28f5b217edec5947120071ad5b9edcd48d3843ecc63b9877e",
+            "tokenizer_config.json": "8e8e879bfe8a52ececc118c9b80a48240ab35ff01a8be88d9a071df7ee7c4803"
+          },
+          "gpu_memory_utilization": 0.55
+        }
+      }
+    },
+    "MPC_source_config": {
+      "equal": true,
+      "original": {
+        "authority": {
+          "status": "MPC_PROVENANCE_MATCHES_PINNED_OFFICIAL",
+          "current": {
+            "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+            "external_git_status": "",
+            "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+            "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+            "official_settings": {
+              "CONTROL_RATE_HZ": 10.0,
+              "HORIZON": 5,
+              "MPC_DT_S": 0.1,
+              "WAYPOINT_DT_S": 0.1,
+              "TRACK_V_MAX": 1.5,
+              "OBJNAV_V_MAX": 0.8,
+              "W_MAX": 3.0,
+              "A_MAX_V": 2.0,
+              "A_MAX_W": 5.0,
+              "Q_WEIGHTS": [
+                10.0,
+                10.0,
+                1.0
+              ],
+              "R_WEIGHTS": [
+                0.1,
+                0.1
+              ],
+              "ODOM_MATCH_MAX_GAP_S": 0.3,
+              "ODOM_TIMEOUT_S": 0.5
+            }
+          },
+          "historical": [
+            {
+              "label": "dataset",
+              "source": "data/robotless_online_handoffs_v1/primary_20260915T091900Z/logs/workers_1789464022363822358.json",
+              "source_sha256": "21b23eded2fd75be22168efb9db64e736ded978d98fbdcd4f24b72ae60176236",
+              "protocol": "official_mpc_jsonl_v1",
+              "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+              "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+              "external_git_status": "",
+              "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+              "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+              "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+              "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+              "casadi_version": "3.7.2",
+              "numpy_version": "2.4.6",
+              "official_settings": {
+                "CONTROL_RATE_HZ": 10.0,
+                "HORIZON": 5,
+                "MPC_DT_S": 0.1,
+                "WAYPOINT_DT_S": 0.1,
+                "TRACK_V_MAX": 1.5,
+                "OBJNAV_V_MAX": 0.8,
+                "W_MAX": 3.0,
+                "A_MAX_V": 2.0,
+                "A_MAX_W": 5.0,
+                "Q_WEIGHTS": [
+                  10.0,
+                  10.0,
+                  1.0
+                ],
+                "R_WEIGHTS": [
+                  0.1,
+                  0.1
+                ],
+                "ODOM_MATCH_MAX_GAP_S": 0.3,
+                "ODOM_TIMEOUT_S": 0.5
+              },
+              "effective_linear_velocity_limit_m_s": 0.8,
+              "intrinsic_model_waypoint_dt_s": null,
+              "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+              "world_frame": "metres, +Z up; yaw radians CCW",
+              "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+              "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+              "external_source_modified": false,
+              "tracker_instrumentation": "subclass timestamps super()._solve; no objective, gain, limit, selection, or solve changes",
+              "robot_backend_imported": false
+            },
+            {
+              "label": "JOIN01",
+              "source": "data/robotless_gp_se2_join_01/primary_20260921T083025Z/source_event/workers.json",
+              "source_sha256": "3ed49d8d436b490c8242fcf7eee04ef15ce74189fb70580a6ce15f272f89adf0",
+              "protocol": "official_mpc_jsonl_v1",
+              "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+              "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+              "external_git_status": "",
+              "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+              "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+              "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+              "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+              "casadi_version": "3.7.2",
+              "numpy_version": "2.4.6",
+              "official_settings": {
+                "CONTROL_RATE_HZ": 10.0,
+                "HORIZON": 5,
+                "MPC_DT_S": 0.1,
+                "WAYPOINT_DT_S": 0.1,
+                "TRACK_V_MAX": 1.5,
+                "OBJNAV_V_MAX": 0.8,
+                "W_MAX": 3.0,
+                "A_MAX_V": 2.0,
+                "A_MAX_W": 5.0,
+                "Q_WEIGHTS": [
+                  10.0,
+                  10.0,
+                  1.0
+                ],
+                "R_WEIGHTS": [
+                  0.1,
+                  0.1
+                ],
+                "ODOM_MATCH_MAX_GAP_S": 0.3,
+                "ODOM_TIMEOUT_S": 0.5
+              },
+              "effective_linear_velocity_limit_m_s": 0.8,
+              "intrinsic_model_waypoint_dt_s": null,
+              "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+              "world_frame": "metres, +Z up; yaw radians CCW",
+              "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+              "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+              "external_source_modified": false,
+              "tracker_instrumentation": "subclass timestamps super()._solve; no objective, gain, limit, selection, or solve changes",
+              "robot_backend_imported": false
+            },
+            {
+              "label": "SOURCE02",
+              "source": "data/robotless_join_source_02/source_20260921T112111Z/development/history_acquisition/workers.json",
+              "source_sha256": "26dfbea209504d35dabb6789c33e8fc8e776c13be100b6e31d938b31ce854232",
+              "protocol": "official_mpc_jsonl_v1",
+              "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+              "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+              "external_git_status": "",
+              "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+              "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+              "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+              "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+              "casadi_version": "3.7.2",
+              "numpy_version": "2.4.6",
+              "official_settings": {
+                "CONTROL_RATE_HZ": 10.0,
+                "HORIZON": 5,
+                "MPC_DT_S": 0.1,
+                "WAYPOINT_DT_S": 0.1,
+                "TRACK_V_MAX": 1.5,
+                "OBJNAV_V_MAX": 0.8,
+                "W_MAX": 3.0,
+                "A_MAX_V": 2.0,
+                "A_MAX_W": 5.0,
+                "Q_WEIGHTS": [
+                  10.0,
+                  10.0,
+                  1.0
+                ],
+                "R_WEIGHTS": [
+                  0.1,
+                  0.1
+                ],
+                "ODOM_MATCH_MAX_GAP_S": 0.3,
+                "ODOM_TIMEOUT_S": 0.5
+              },
+              "effective_linear_velocity_limit_m_s": 0.8,
+              "intrinsic_model_waypoint_dt_s": null,
+              "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+              "world_frame": "metres, +Z up; yaw radians CCW",
+              "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+              "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+              "external_source_modified": false,
+              "tracker_instrumentation": "subclass timestamps super()._solve; no objective, gain, limit, selection, or solve changes",
+              "robot_backend_imported": false
+            },
+            {
+              "label": "REF01",
+              "source": "data/robotless_gp_se2_ref_01/primary_20260919T062000Z/source.json",
+              "source_sha256": "92aab09243d99e9a44611e95401172ee9f8fd761eb5a39351e4d2e1e4c15cff8",
+              "protocol": "official_mpc_jsonl_v1",
+              "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+              "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+              "external_git_status": "",
+              "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+              "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+              "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+              "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+              "casadi_version": "3.7.2",
+              "numpy_version": "2.4.6",
+              "official_settings": {
+                "CONTROL_RATE_HZ": 10.0,
+                "HORIZON": 5,
+                "MPC_DT_S": 0.1,
+                "WAYPOINT_DT_S": 0.1,
+                "TRACK_V_MAX": 1.5,
+                "OBJNAV_V_MAX": 0.8,
+                "W_MAX": 3.0,
+                "A_MAX_V": 2.0,
+                "A_MAX_W": 5.0,
+                "Q_WEIGHTS": [
+                  10.0,
+                  10.0,
+                  1.0
+                ],
+                "R_WEIGHTS": [
+                  0.1,
+                  0.1
+                ],
+                "ODOM_MATCH_MAX_GAP_S": 0.3,
+                "ODOM_TIMEOUT_S": 0.5
+              },
+              "effective_linear_velocity_limit_m_s": 0.8,
+              "intrinsic_model_waypoint_dt_s": null,
+              "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+              "world_frame": "metres, +Z up; yaw radians CCW",
+              "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+              "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+              "external_source_modified": false,
+              "tracker_instrumentation": "subclass timestamps super()._solve; no objective, gain, limit, selection, or solve changes",
+              "robot_backend_imported": false,
+              "official_settings_sha256": "08d62ade58b93521088d9bac968817daf860a1323916a34252580b27cfa8496e",
+              "resolved_limits": {
+                "v_max": 0.8,
+                "omega_max": 3.0,
+                "a_v_max": 2.0,
+                "a_omega_max": 5.0
+              },
+              "previous_control_policy": "restore previous_command supplied to the recorded first-FRESH solve, i.e. pre-FRESH controller memory; separately restore the last physically applied u_minus at B; never seed from the historical first-FRESH output",
+              "failure_policy": "use official MpcTracker.poll behavior: a failed solve resets applied and internal previous command to zero; log the failure and continue the same fixed horizon; hold the resulting command until the next scheduled solve; collision never changes commands or terminates this counterfactual",
+              "request_sha256": "abc64897067db3342932fc687da074a1fbdb28d2d32faa1eb3b7614439576e0d",
+              "implementation_sha256": {
+                "scripts/lightnav/gp_se2_mpc_rollout.py": "27f7840c52707ccf1c0a1ccf0e042c2463a85c21847fd22dac60a2c616978062",
+                "src/reconciliation/gp_se2_rollout.py": "ec97d632f9258090fb3b8ed77de94ad886ef5625a502094e0da84c4bd41b1358"
+              }
+            },
+            {
+              "label": "REF02",
+              "source": "data/robotless_gp_se2_ref_02/primary_20260919T081000Z/source.json",
+              "source_sha256": "432094c1998bbbd2ae36e2b1001026fb3f1ac6372d9c89525dc0ab574bad2d6c",
+              "protocol": "official_mpc_jsonl_v1",
+              "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+              "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+              "external_git_status": "",
+              "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+              "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+              "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+              "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+              "casadi_version": "3.7.2",
+              "numpy_version": "2.4.6",
+              "official_settings": {
+                "CONTROL_RATE_HZ": 10.0,
+                "HORIZON": 5,
+                "MPC_DT_S": 0.1,
+                "WAYPOINT_DT_S": 0.1,
+                "TRACK_V_MAX": 1.5,
+                "OBJNAV_V_MAX": 0.8,
+                "W_MAX": 3.0,
+                "A_MAX_V": 2.0,
+                "A_MAX_W": 5.0,
+                "Q_WEIGHTS": [
+                  10.0,
+                  10.0,
+                  1.0
+                ],
+                "R_WEIGHTS": [
+                  0.1,
+                  0.1
+                ],
+                "ODOM_MATCH_MAX_GAP_S": 0.3,
+                "ODOM_TIMEOUT_S": 0.5
+              },
+              "effective_linear_velocity_limit_m_s": 0.8,
+              "intrinsic_model_waypoint_dt_s": null,
+              "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+              "world_frame": "metres, +Z up; yaw radians CCW",
+              "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+              "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+              "external_source_modified": false,
+              "tracker_instrumentation": "unchanged gp_se2_rollout._synchronous_solve; diagnostic enrichment only after complete rollout",
+              "robot_backend_imported": false,
+              "official_settings_sha256": "08d62ade58b93521088d9bac968817daf860a1323916a34252580b27cfa8496e",
+              "request_sha256": "d163dc1045ca5794d071907db560436b20235c0be69b99edbfa12d98db6903ea",
+              "implementation_sha256": {
+                "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/lightnav/gp_se2_ref01_mpc.py": "c150d3c918016ad3842f33e8de67de1e7cd7a3091f213a0149e4b4804f4111b9",
+                "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_rollout.py": "ec97d632f9258090fb3b8ed77de94ad886ef5625a502094e0da84c4bd41b1358",
+                "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_ref01_reference.py": "35256e9eccf12437c4780712270eabf868c4aa75c951823be46df11cfe515390"
+              },
+              "previous_control_policy": "restore previous_command supplied to the recorded first-FRESH solve, i.e. pre-FRESH controller memory; separately restore the last physically applied u_minus at B; never seed from the historical first-FRESH output",
+              "failure_policy": "use official MpcTracker.poll behavior: a failed solve resets applied and internal previous command to zero; log the failure and continue the same fixed horizon; hold the resulting command until the next scheduled solve; collision never changes commands or terminates this counterfactual",
+              "primary_mpc_solves_planned": 240,
+              "historical_or_other_mpc_solves_planned": 0,
+              "matched_state_selector_calls_planned": 240,
+              "runtime_load_wall_s": 0.0223347750143148,
+              "task": "GP-SE2-REF-01"
+            },
+            {
+              "label": "REF03",
+              "source": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/source.json",
+              "source_sha256": "29ff1914c8f1c453b202377f7f5d0e08c069d820a70cf97e1a5f891d8263c5b2",
+              "protocol": "official_mpc_jsonl_v1",
+              "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+              "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+              "external_git_status": "",
+              "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+              "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+              "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+              "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+              "casadi_version": "3.7.2",
+              "numpy_version": "2.4.6",
+              "official_settings": {
+                "CONTROL_RATE_HZ": 10.0,
+                "HORIZON": 5,
+                "MPC_DT_S": 0.1,
+                "WAYPOINT_DT_S": 0.1,
+                "TRACK_V_MAX": 1.5,
+                "OBJNAV_V_MAX": 0.8,
+                "W_MAX": 3.0,
+                "A_MAX_V": 2.0,
+                "A_MAX_W": 5.0,
+                "Q_WEIGHTS": [
+                  10.0,
+                  10.0,
+                  1.0
+                ],
+                "R_WEIGHTS": [
+                  0.1,
+                  0.1
+                ],
+                "ODOM_MATCH_MAX_GAP_S": 0.3,
+                "ODOM_TIMEOUT_S": 0.5
+              },
+              "effective_linear_velocity_limit_m_s": 0.8,
+              "intrinsic_model_waypoint_dt_s": null,
+              "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+              "world_frame": "metres, +Z up; yaw radians CCW",
+              "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+              "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+              "external_source_modified": false,
+              "tracker_instrumentation": "per-instance private-global selector injection in unchanged official submit code; original _solve/poll; transparent actual controller argument recorder",
+              "robot_backend_imported": false,
+              "official_settings_sha256": "08d62ade58b93521088d9bac968817daf860a1323916a34252580b27cfa8496e",
+              "request_sha256": "17486956659413d59cf282c107cbc220beb2f7fe2149eba2ab49554080100428",
+              "implementation_sha256": {
+                "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/lightnav/gp_se2_ref02_mpc.py": "caba744df46d9399f7e583f4049f0f4cf527d502d894c309ee44a1d32f651028",
+                "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_rollout.py": "ec97d632f9258090fb3b8ed77de94ad886ef5625a502094e0da84c4bd41b1358",
+                "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_ref02_reference.py": "ecda9ccff4df3b6815dab50acecb5c83c724f6f56f1ac4a926292befc8bd14a9",
+                "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_ref02_rollout.py": "cefa1109e7f35db1403faa74dcfa4d76ac5b0753a30a51e6022ed5a133d8d3fa"
+              },
+              "previous_control_policy": "restore previous_command supplied to the recorded first-FRESH solve, i.e. pre-FRESH controller memory; separately restore the last physically applied u_minus at B; never seed from the historical first-FRESH output",
+              "failure_policy": "use official MpcTracker.poll behavior: a failed solve resets applied and internal previous command to zero; log the failure and continue the same fixed horizon; hold the resulting command until the next scheduled solve; collision never changes commands or terminates this counterfactual",
+              "primary_mpc_solves_planned": 180,
+              "historical_or_other_mpc_solves_planned": 0,
+              "matched_state_selector_calls_planned": 180,
+              "runtime_load_wall_s": 0.013011631031986326,
+              "task": "GP-SE2-REF-02",
+              "controller_statement": "MPC computation is identical; reference selector differs",
+              "source_progress_stride": 1.0,
+              "float_search_policy": "strict searchsorted side=left; no tolerance; each target offset from same nearest progress"
+            }
+          ],
+          "inspected_research_files": {
+            "scripts/online_mpc_worker.py": "8f99bfb6010a834ebef7bbfdd86474f5c58aa26f42b514bcc9886b7693d32b96",
+            "src/reconciliation/online_mpc_adapter.py": "fd6ab46d98e68bd8dfff2e96b9ebdf66b27b1531632ea53c888024245025362a",
+            "scripts/isaac/robotless_online_handoffs.py": "c662fc9e97871a716600ac93bd2c3f86a56b2633e296c07567d41e369b0cd512",
+            "scripts/isaac/join_source02_collect.py": "19fc6986f26bcfa089bff961bb6842864bd6c302e943241fe9f7d42d00c89475",
+            "scripts/lightnav/join_source02_paired.py": "437133fbda6df004520fe3f091e2273af90814395bdc6785f70b94f08e23a346",
+            "scripts/online_lightnav_worker.py": "19275843ba90f0cd7edb777782b22a27b82fa901c79cea939454d4e034124003",
+            "src/reconciliation/gp_se2_ref02_rollout.py": "cefa1109e7f35db1403faa74dcfa4d76ac5b0753a30a51e6022ed5a133d8d3fa"
+          },
+          "source_chain": "online collector -> online_mpc_worker -> load_official/audited_tracker -> official MpcTracker",
+          "ref_scope": "REF01 changes input preparation; REF02/03 per-instance selector differs; official calculation unchanged; not online default",
+          "paired_terminal_scope": "independent sessions with identical restored history; no terminal MPC invocation",
+          "limitation": "unchanged MPC can still affect earlier acquired RGB indirectly through motion",
+          "new_model_calls": 0,
+          "new_MPC_solves": 0
+        },
+        "execution": {
+          "integration_hz": 60,
+          "simulation_dt_s": 0.016666666666666666,
+          "control_hz": 10,
+          "submit_on_install": false,
+          "controller_dt_s": 0.1,
+          "capture_hz": 4,
+          "capture_dt_s": 0.25,
+          "target_rtf": 1.0,
+          "command_hold_timeout_s": 0.5,
+          "controller": "official read-only MpcTracker",
+          "controller_reference_timing": "official pose-aligned nearest+1, horizon5, MPC_DT_S=.1; not intrinsic waypoint timing",
+          "intrinsic_waypoint_dt_s": null,
+          "pacing_policy": "minimum_wall_step_no_catchup_v1"
+        }
+      },
+      "new": {
+        "authority": {
+          "status": "MPC_PROVENANCE_MATCHES_PINNED_OFFICIAL",
+          "current": {
+            "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+            "external_git_status": "",
+            "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+            "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+            "official_settings": {
+              "CONTROL_RATE_HZ": 10.0,
+              "HORIZON": 5,
+              "MPC_DT_S": 0.1,
+              "WAYPOINT_DT_S": 0.1,
+              "TRACK_V_MAX": 1.5,
+              "OBJNAV_V_MAX": 0.8,
+              "W_MAX": 3.0,
+              "A_MAX_V": 2.0,
+              "A_MAX_W": 5.0,
+              "Q_WEIGHTS": [
+                10.0,
+                10.0,
+                1.0
+              ],
+              "R_WEIGHTS": [
+                0.1,
+                0.1
+              ],
+              "ODOM_MATCH_MAX_GAP_S": 0.3,
+              "ODOM_TIMEOUT_S": 0.5
+            }
+          },
+          "historical": [
+            {
+              "label": "dataset",
+              "source": "data/robotless_online_handoffs_v1/primary_20260915T091900Z/logs/workers_1789464022363822358.json",
+              "source_sha256": "21b23eded2fd75be22168efb9db64e736ded978d98fbdcd4f24b72ae60176236",
+              "protocol": "official_mpc_jsonl_v1",
+              "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+              "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+              "external_git_status": "",
+              "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+              "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+              "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+              "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+              "casadi_version": "3.7.2",
+              "numpy_version": "2.4.6",
+              "official_settings": {
+                "CONTROL_RATE_HZ": 10.0,
+                "HORIZON": 5,
+                "MPC_DT_S": 0.1,
+                "WAYPOINT_DT_S": 0.1,
+                "TRACK_V_MAX": 1.5,
+                "OBJNAV_V_MAX": 0.8,
+                "W_MAX": 3.0,
+                "A_MAX_V": 2.0,
+                "A_MAX_W": 5.0,
+                "Q_WEIGHTS": [
+                  10.0,
+                  10.0,
+                  1.0
+                ],
+                "R_WEIGHTS": [
+                  0.1,
+                  0.1
+                ],
+                "ODOM_MATCH_MAX_GAP_S": 0.3,
+                "ODOM_TIMEOUT_S": 0.5
+              },
+              "effective_linear_velocity_limit_m_s": 0.8,
+              "intrinsic_model_waypoint_dt_s": null,
+              "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+              "world_frame": "metres, +Z up; yaw radians CCW",
+              "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+              "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+              "external_source_modified": false,
+              "tracker_instrumentation": "subclass timestamps super()._solve; no objective, gain, limit, selection, or solve changes",
+              "robot_backend_imported": false
+            },
+            {
+              "label": "JOIN01",
+              "source": "data/robotless_gp_se2_join_01/primary_20260921T083025Z/source_event/workers.json",
+              "source_sha256": "3ed49d8d436b490c8242fcf7eee04ef15ce74189fb70580a6ce15f272f89adf0",
+              "protocol": "official_mpc_jsonl_v1",
+              "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+              "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+              "external_git_status": "",
+              "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+              "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+              "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+              "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+              "casadi_version": "3.7.2",
+              "numpy_version": "2.4.6",
+              "official_settings": {
+                "CONTROL_RATE_HZ": 10.0,
+                "HORIZON": 5,
+                "MPC_DT_S": 0.1,
+                "WAYPOINT_DT_S": 0.1,
+                "TRACK_V_MAX": 1.5,
+                "OBJNAV_V_MAX": 0.8,
+                "W_MAX": 3.0,
+                "A_MAX_V": 2.0,
+                "A_MAX_W": 5.0,
+                "Q_WEIGHTS": [
+                  10.0,
+                  10.0,
+                  1.0
+                ],
+                "R_WEIGHTS": [
+                  0.1,
+                  0.1
+                ],
+                "ODOM_MATCH_MAX_GAP_S": 0.3,
+                "ODOM_TIMEOUT_S": 0.5
+              },
+              "effective_linear_velocity_limit_m_s": 0.8,
+              "intrinsic_model_waypoint_dt_s": null,
+              "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+              "world_frame": "metres, +Z up; yaw radians CCW",
+              "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+              "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+              "external_source_modified": false,
+              "tracker_instrumentation": "subclass timestamps super()._solve; no objective, gain, limit, selection, or solve changes",
+              "robot_backend_imported": false
+            },
+            {
+              "label": "SOURCE02",
+              "source": "data/robotless_join_source_02/source_20260921T112111Z/development/history_acquisition/workers.json",
+              "source_sha256": "26dfbea209504d35dabb6789c33e8fc8e776c13be100b6e31d938b31ce854232",
+              "protocol": "official_mpc_jsonl_v1",
+              "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+              "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+              "external_git_status": "",
+              "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+              "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+              "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+              "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+              "casadi_version": "3.7.2",
+              "numpy_version": "2.4.6",
+              "official_settings": {
+                "CONTROL_RATE_HZ": 10.0,
+                "HORIZON": 5,
+                "MPC_DT_S": 0.1,
+                "WAYPOINT_DT_S": 0.1,
+                "TRACK_V_MAX": 1.5,
+                "OBJNAV_V_MAX": 0.8,
+                "W_MAX": 3.0,
+                "A_MAX_V": 2.0,
+                "A_MAX_W": 5.0,
+                "Q_WEIGHTS": [
+                  10.0,
+                  10.0,
+                  1.0
+                ],
+                "R_WEIGHTS": [
+                  0.1,
+                  0.1
+                ],
+                "ODOM_MATCH_MAX_GAP_S": 0.3,
+                "ODOM_TIMEOUT_S": 0.5
+              },
+              "effective_linear_velocity_limit_m_s": 0.8,
+              "intrinsic_model_waypoint_dt_s": null,
+              "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+              "world_frame": "metres, +Z up; yaw radians CCW",
+              "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+              "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+              "external_source_modified": false,
+              "tracker_instrumentation": "subclass timestamps super()._solve; no objective, gain, limit, selection, or solve changes",
+              "robot_backend_imported": false
+            },
+            {
+              "label": "REF01",
+              "source": "data/robotless_gp_se2_ref_01/primary_20260919T062000Z/source.json",
+              "source_sha256": "92aab09243d99e9a44611e95401172ee9f8fd761eb5a39351e4d2e1e4c15cff8",
+              "protocol": "official_mpc_jsonl_v1",
+              "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+              "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+              "external_git_status": "",
+              "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+              "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+              "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+              "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+              "casadi_version": "3.7.2",
+              "numpy_version": "2.4.6",
+              "official_settings": {
+                "CONTROL_RATE_HZ": 10.0,
+                "HORIZON": 5,
+                "MPC_DT_S": 0.1,
+                "WAYPOINT_DT_S": 0.1,
+                "TRACK_V_MAX": 1.5,
+                "OBJNAV_V_MAX": 0.8,
+                "W_MAX": 3.0,
+                "A_MAX_V": 2.0,
+                "A_MAX_W": 5.0,
+                "Q_WEIGHTS": [
+                  10.0,
+                  10.0,
+                  1.0
+                ],
+                "R_WEIGHTS": [
+                  0.1,
+                  0.1
+                ],
+                "ODOM_MATCH_MAX_GAP_S": 0.3,
+                "ODOM_TIMEOUT_S": 0.5
+              },
+              "effective_linear_velocity_limit_m_s": 0.8,
+              "intrinsic_model_waypoint_dt_s": null,
+              "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+              "world_frame": "metres, +Z up; yaw radians CCW",
+              "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+              "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+              "external_source_modified": false,
+              "tracker_instrumentation": "subclass timestamps super()._solve; no objective, gain, limit, selection, or solve changes",
+              "robot_backend_imported": false,
+              "official_settings_sha256": "08d62ade58b93521088d9bac968817daf860a1323916a34252580b27cfa8496e",
+              "resolved_limits": {
+                "v_max": 0.8,
+                "omega_max": 3.0,
+                "a_v_max": 2.0,
+                "a_omega_max": 5.0
+              },
+              "previous_control_policy": "restore previous_command supplied to the recorded first-FRESH solve, i.e. pre-FRESH controller memory; separately restore the last physically applied u_minus at B; never seed from the historical first-FRESH output",
+              "failure_policy": "use official MpcTracker.poll behavior: a failed solve resets applied and internal previous command to zero; log the failure and continue the same fixed horizon; hold the resulting command until the next scheduled solve; collision never changes commands or terminates this counterfactual",
+              "request_sha256": "abc64897067db3342932fc687da074a1fbdb28d2d32faa1eb3b7614439576e0d",
+              "implementation_sha256": {
+                "scripts/lightnav/gp_se2_mpc_rollout.py": "27f7840c52707ccf1c0a1ccf0e042c2463a85c21847fd22dac60a2c616978062",
+                "src/reconciliation/gp_se2_rollout.py": "ec97d632f9258090fb3b8ed77de94ad886ef5625a502094e0da84c4bd41b1358"
+              }
+            },
+            {
+              "label": "REF02",
+              "source": "data/robotless_gp_se2_ref_02/primary_20260919T081000Z/source.json",
+              "source_sha256": "432094c1998bbbd2ae36e2b1001026fb3f1ac6372d9c89525dc0ab574bad2d6c",
+              "protocol": "official_mpc_jsonl_v1",
+              "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+              "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+              "external_git_status": "",
+              "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+              "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+              "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+              "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+              "casadi_version": "3.7.2",
+              "numpy_version": "2.4.6",
+              "official_settings": {
+                "CONTROL_RATE_HZ": 10.0,
+                "HORIZON": 5,
+                "MPC_DT_S": 0.1,
+                "WAYPOINT_DT_S": 0.1,
+                "TRACK_V_MAX": 1.5,
+                "OBJNAV_V_MAX": 0.8,
+                "W_MAX": 3.0,
+                "A_MAX_V": 2.0,
+                "A_MAX_W": 5.0,
+                "Q_WEIGHTS": [
+                  10.0,
+                  10.0,
+                  1.0
+                ],
+                "R_WEIGHTS": [
+                  0.1,
+                  0.1
+                ],
+                "ODOM_MATCH_MAX_GAP_S": 0.3,
+                "ODOM_TIMEOUT_S": 0.5
+              },
+              "effective_linear_velocity_limit_m_s": 0.8,
+              "intrinsic_model_waypoint_dt_s": null,
+              "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+              "world_frame": "metres, +Z up; yaw radians CCW",
+              "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+              "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+              "external_source_modified": false,
+              "tracker_instrumentation": "unchanged gp_se2_rollout._synchronous_solve; diagnostic enrichment only after complete rollout",
+              "robot_backend_imported": false,
+              "official_settings_sha256": "08d62ade58b93521088d9bac968817daf860a1323916a34252580b27cfa8496e",
+              "request_sha256": "d163dc1045ca5794d071907db560436b20235c0be69b99edbfa12d98db6903ea",
+              "implementation_sha256": {
+                "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/lightnav/gp_se2_ref01_mpc.py": "c150d3c918016ad3842f33e8de67de1e7cd7a3091f213a0149e4b4804f4111b9",
+                "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_rollout.py": "ec97d632f9258090fb3b8ed77de94ad886ef5625a502094e0da84c4bd41b1358",
+                "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_ref01_reference.py": "35256e9eccf12437c4780712270eabf868c4aa75c951823be46df11cfe515390"
+              },
+              "previous_control_policy": "restore previous_command supplied to the recorded first-FRESH solve, i.e. pre-FRESH controller memory; separately restore the last physically applied u_minus at B; never seed from the historical first-FRESH output",
+              "failure_policy": "use official MpcTracker.poll behavior: a failed solve resets applied and internal previous command to zero; log the failure and continue the same fixed horizon; hold the resulting command until the next scheduled solve; collision never changes commands or terminates this counterfactual",
+              "primary_mpc_solves_planned": 240,
+              "historical_or_other_mpc_solves_planned": 0,
+              "matched_state_selector_calls_planned": 240,
+              "runtime_load_wall_s": 0.0223347750143148,
+              "task": "GP-SE2-REF-01"
+            },
+            {
+              "label": "REF03",
+              "source": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/source.json",
+              "source_sha256": "29ff1914c8f1c453b202377f7f5d0e08c069d820a70cf97e1a5f891d8263c5b2",
+              "protocol": "official_mpc_jsonl_v1",
+              "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+              "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+              "external_git_status": "",
+              "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+              "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+              "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+              "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+              "casadi_version": "3.7.2",
+              "numpy_version": "2.4.6",
+              "official_settings": {
+                "CONTROL_RATE_HZ": 10.0,
+                "HORIZON": 5,
+                "MPC_DT_S": 0.1,
+                "WAYPOINT_DT_S": 0.1,
+                "TRACK_V_MAX": 1.5,
+                "OBJNAV_V_MAX": 0.8,
+                "W_MAX": 3.0,
+                "A_MAX_V": 2.0,
+                "A_MAX_W": 5.0,
+                "Q_WEIGHTS": [
+                  10.0,
+                  10.0,
+                  1.0
+                ],
+                "R_WEIGHTS": [
+                  0.1,
+                  0.1
+                ],
+                "ODOM_MATCH_MAX_GAP_S": 0.3,
+                "ODOM_TIMEOUT_S": 0.5
+              },
+              "effective_linear_velocity_limit_m_s": 0.8,
+              "intrinsic_model_waypoint_dt_s": null,
+              "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+              "world_frame": "metres, +Z up; yaw radians CCW",
+              "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+              "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+              "external_source_modified": false,
+              "tracker_instrumentation": "per-instance private-global selector injection in unchanged official submit code; original _solve/poll; transparent actual controller argument recorder",
+              "robot_backend_imported": false,
+              "official_settings_sha256": "08d62ade58b93521088d9bac968817daf860a1323916a34252580b27cfa8496e",
+              "request_sha256": "17486956659413d59cf282c107cbc220beb2f7fe2149eba2ab49554080100428",
+              "implementation_sha256": {
+                "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/lightnav/gp_se2_ref02_mpc.py": "caba744df46d9399f7e583f4049f0f4cf527d502d894c309ee44a1d32f651028",
+                "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_rollout.py": "ec97d632f9258090fb3b8ed77de94ad886ef5625a502094e0da84c4bd41b1358",
+                "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_ref02_reference.py": "ecda9ccff4df3b6815dab50acecb5c83c724f6f56f1ac4a926292befc8bd14a9",
+                "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_ref02_rollout.py": "cefa1109e7f35db1403faa74dcfa4d76ac5b0753a30a51e6022ed5a133d8d3fa"
+              },
+              "previous_control_policy": "restore previous_command supplied to the recorded first-FRESH solve, i.e. pre-FRESH controller memory; separately restore the last physically applied u_minus at B; never seed from the historical first-FRESH output",
+              "failure_policy": "use official MpcTracker.poll behavior: a failed solve resets applied and internal previous command to zero; log the failure and continue the same fixed horizon; hold the resulting command until the next scheduled solve; collision never changes commands or terminates this counterfactual",
+              "primary_mpc_solves_planned": 180,
+              "historical_or_other_mpc_solves_planned": 0,
+              "matched_state_selector_calls_planned": 180,
+              "runtime_load_wall_s": 0.013011631031986326,
+              "task": "GP-SE2-REF-02",
+              "controller_statement": "MPC computation is identical; reference selector differs",
+              "source_progress_stride": 1.0,
+              "float_search_policy": "strict searchsorted side=left; no tolerance; each target offset from same nearest progress"
+            }
+          ],
+          "inspected_research_files": {
+            "scripts/online_mpc_worker.py": "8f99bfb6010a834ebef7bbfdd86474f5c58aa26f42b514bcc9886b7693d32b96",
+            "src/reconciliation/online_mpc_adapter.py": "fd6ab46d98e68bd8dfff2e96b9ebdf66b27b1531632ea53c888024245025362a",
+            "scripts/isaac/robotless_online_handoffs.py": "c662fc9e97871a716600ac93bd2c3f86a56b2633e296c07567d41e369b0cd512",
+            "scripts/isaac/join_source02_collect.py": "19fc6986f26bcfa089bff961bb6842864bd6c302e943241fe9f7d42d00c89475",
+            "scripts/lightnav/join_source02_paired.py": "437133fbda6df004520fe3f091e2273af90814395bdc6785f70b94f08e23a346",
+            "scripts/online_lightnav_worker.py": "19275843ba90f0cd7edb777782b22a27b82fa901c79cea939454d4e034124003",
+            "src/reconciliation/gp_se2_ref02_rollout.py": "cefa1109e7f35db1403faa74dcfa4d76ac5b0753a30a51e6022ed5a133d8d3fa"
+          },
+          "source_chain": "online collector -> online_mpc_worker -> load_official/audited_tracker -> official MpcTracker",
+          "ref_scope": "REF01 changes input preparation; REF02/03 per-instance selector differs; official calculation unchanged; not online default",
+          "paired_terminal_scope": "independent sessions with identical restored history; no terminal MPC invocation",
+          "limitation": "unchanged MPC can still affect earlier acquired RGB indirectly through motion",
+          "new_model_calls": 0,
+          "new_MPC_solves": 0
+        },
+        "execution": {
+          "integration_hz": 60,
+          "simulation_dt_s": 0.016666666666666666,
+          "control_hz": 10,
+          "submit_on_install": false,
+          "controller_dt_s": 0.1,
+          "capture_hz": 4,
+          "capture_dt_s": 0.25,
+          "target_rtf": 1.0,
+          "command_hold_timeout_s": 0.5,
+          "controller": "official read-only MpcTracker",
+          "controller_reference_timing": "official pose-aligned nearest+1, horizon5, MPC_DT_S=.1; not intrinsic waypoint timing",
+          "intrinsic_waypoint_dt_s": null,
+          "pacing_policy": "minimum_wall_step_no_catchup_v1"
+        }
+      }
+    },
+    "geometry_safety": {
+      "equal": true,
+      "original": {
+        "gates": {
+          "footprint_radius_m": 0.2,
+          "required_clearance_m": 0.05,
+          "visible_pixels": 20,
+          "lateral_m": 0.1,
+          "angle_deg": 20.0,
+          "reliable_chord_m": 0.02,
+          "remaining_rows": 4,
+          "remaining_arc_m": 0.6,
+          "interaction_before_front_m": 0.5,
+          "moving_v_mps": 0.2,
+          "observation_B_travel_m": 0.02,
+          "request_rtf": [
+            0.8,
+            1.2
+          ],
+          "maximum_loop_stall_s": 0.25
+        },
+        "guard": {
+          "new_command_interval_s": 0.1,
+          "held_continuation": "check every next actual integration step, including timeout",
+          "radius_m": 0.2,
+          "required_edge_clearance_m": 0.05,
+          "abort": "SAFETY_ABORT_BEFORE_UNSAFE_COMMAND",
+          "raw_future_unsafe_aborts": false
+        },
+        "raw_policy": "abort before installation; no repair; SCENE_INVALID runtime status with RAW_UNSAFE policy reason"
+      },
+      "new": {
+        "gates": {
+          "footprint_radius_m": 0.2,
+          "required_clearance_m": 0.05,
+          "visible_pixels": 20,
+          "lateral_m": 0.1,
+          "angle_deg": 20.0,
+          "reliable_chord_m": 0.02,
+          "remaining_rows": 4,
+          "remaining_arc_m": 0.6,
+          "interaction_before_front_m": 0.5,
+          "moving_v_mps": 0.2,
+          "observation_B_travel_m": 0.02,
+          "request_rtf": [
+            0.8,
+            1.2
+          ],
+          "maximum_loop_stall_s": 0.25
+        },
+        "guard": {
+          "new_command_interval_s": 0.1,
+          "held_continuation": "check every next actual integration step, including timeout",
+          "radius_m": 0.2,
+          "required_edge_clearance_m": 0.05,
+          "abort": "SAFETY_ABORT_BEFORE_UNSAFE_COMMAND",
+          "raw_future_unsafe_aborts": false
+        },
+        "raw_policy": "abort before installation; no repair; SCENE_INVALID runtime status with RAW_UNSAFE policy reason"
+      }
+    },
+    "capture_cadence": {
+      "equal": true,
+      "original": 4,
+      "new": 4
+    },
+    "MPC_cadence": {
+      "equal": true,
+      "original": 10,
+      "new": 10
+    },
+    "integration_cadence": {
+      "equal": true,
+      "original": 60,
+      "new": 60
+    },
+    "reveal_rule": {
+      "equal": true,
+      "original": {
+        "implementation_sha256": "0786e093089dc49854d7793ef0bf9f473494a1897b0ea56db45ca7d00156263c",
+        "initial_cart": false,
+        "next_capture_strictly_after_C0_application": true
+      },
+      "new": {
+        "implementation_sha256": "0786e093089dc49854d7793ef0bf9f473494a1897b0ea56db45ca7d00156263c",
+        "initial_cart": false,
+        "next_capture_strictly_after_C0_application": true
+      }
+    },
+    "request_rule": {
+      "equal": true,
+      "original": "first scheduled capture strictly after previous chunk actual application; no terminal in flight; exact frame only",
+      "new": "first scheduled capture strictly after previous chunk actual application; no terminal in flight; exact frame only"
+    },
+    "max_terminal_predictions": {
+      "equal": true,
+      "original": 4,
+      "new": 4
+    },
+    "max_handoffs": {
+      "equal": true,
+      "original": 3,
+      "new": 3
+    },
+    "postroll": {
+      "equal": true,
+      "original": 0.1,
+      "new": 0.1
+    },
+    "one_inflight": {
+      "equal": true,
+      "original": {
+        "policy_sha256": "c94eb88905d1dc9978f08acee2f95377f4ec73e19b75ea50df560d1a48ced38e",
+        "maximum": 1
+      },
+      "new": {
+        "policy_sha256": "c94eb88905d1dc9978f08acee2f95377f4ec73e19b75ea50df560d1a48ced38e",
+        "maximum": 1
+      }
+    },
+    "no_reset": {
+      "equal": true,
+      "original": 0,
+      "new": 0
+    },
+    "raw_observation_anchoring": {
+      "equal": true,
+      "original": "Isaac world XY metres +Z up CCW yaw radians; local +x forward +y left; world=A_k*raw_k",
+      "new": "Isaac world XY metres +Z up CCW yaw radians; local +x forward +y left; world=A_k*raw_k"
+    },
+    "waypoint_dt": {
+      "equal": true,
+      "original": null,
+      "new": null
+    },
+    "evolution_thresholds": {
+      "equal": true,
+      "original": {
+        "symmetric_vertex_to_polyline_separation_m": 0.02,
+        "endpoint_lateral_difference_m": 0.02,
+        "wrapped_endpoint_or_net_yaw_deg": 5.0,
+        "definition": "maximum of both directed vertex-to-continuous-XY-polyline distances; arbitrary N; no row correspondence"
+      },
+      "new": {
+        "symmetric_vertex_to_polyline_separation_m": 0.02,
+        "endpoint_lateral_difference_m": 0.02,
+        "wrapped_endpoint_or_net_yaw_deg": 5.0,
+        "definition": "maximum of both directed vertex-to-continuous-XY-polyline distances; arbitrary N; no row correspondence"
+      }
+    },
+    "classification_rules": {
+      "equal": true,
+      "original": [
+        "authenticated first reaction and all three safe applications and valid timing -> CONTINUOUS_OBSTACLE_REVEAL_EPISODE_QUALIFIED",
+        "authenticated first reaction but incomplete/invalid later sequence -> FIRST_REACTION_ONLY_INSUFFICIENT_SUCCESSIVE_CHUNKS",
+        "technical failure prevents evaluating first reaction -> TECHNICAL_EXECUTION_BLOCKED",
+        "otherwise -> CONTINUOUS_CHUNKS_NO_QUALIFIED_FIRST_REACTION"
+      ],
+      "new": [
+        "authenticated first reaction and all three safe applications and valid timing -> CONTINUOUS_OBSTACLE_REVEAL_EPISODE_QUALIFIED",
+        "authenticated first reaction but incomplete/invalid later sequence -> FIRST_REACTION_ONLY_INSUFFICIENT_SUCCESSIVE_CHUNKS",
+        "technical failure prevents evaluating first reaction -> TECHNICAL_EXECUTION_BLOCKED",
+        "otherwise -> CONTINUOUS_CHUNKS_NO_QUALIFIED_FIRST_REACTION"
+      ]
+    },
+    "retry": {
+      "equal": true,
+      "original": false,
+      "new": false
+    },
+    "episode_schedule": {
+      "equal": true,
+      "original": {
+        "episodes": [
+          {
+            "episode_id": "EPISODE_00",
+            "R0": [
+              19.20312073159454,
+              24.423334915767065,
+              -1.5689742328041627
+            ],
+            "instruction": "Go to the far end of the hallway. If the path is blocked, pass the supply cart on your right without touching it. Continue straight after passing it and stop at the end of the hallway.",
+            "cart_present_initial": false,
+            "cart_present_dynamic": true
+          }
+        ]
+      },
+      "new": {
+        "episodes": [
+          {
+            "episode_id": "EPISODE_00",
+            "R0": [
+              19.20312073159454,
+              24.423334915767065,
+              -1.5689742328041627
+            ],
+            "instruction": "Go to the far end of the hallway. If the path is blocked, pass the supply cart on your right without touching it. Continue straight after passing it and stop at the end of the hallway.",
+            "cart_present_initial": false,
+            "cart_present_dynamic": true
+          }
+        ]
+      }
+    },
+    "whole_runtime_config": {
+      "equal": true,
+      "original": {
+        "paths": {
+          "lightnav_checkout": "../external/LightNav-0-official-demo",
+          "checkpoint_path": "../external/LightNav-0/checkpoints/LightNav-0",
+          "output_root": "data/robotless_online_handoffs_v1"
+        },
+        "lightnav": {
+          "expected_git_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+          "checkpoint_identifier": "LightOriginsHQ/LightNav-0",
+          "checkpoint_revision": "7221d418bfff55cfcbadd09f7a26aaab81e1f8a6",
+          "server_url": "ws://127.0.0.1:8050",
+          "checkpoint_sha256": {
+            "action_tokenizer/codebook_l0.npy": "daaea83b3ae4637a042d1f61b34a687870d735ef709689e02c1e43d39aab6e16",
+            "action_tokenizer/codebook_l1.npy": "dfde603f96b333cda4c676613ac2f772cec3906a8dbbb7a7415bfeb4aa04e4bf",
+            "action_tokenizer/codebook_l2.npy": "2a7b186159bc9375997535008028930efe09c9b239a522639aff6febfac6c51c",
+            "action_tokenizer/manifest.json": "00d77ae028edf59e0ce68b49122dd0a60da527f48508f5ee335a580993a12864",
+            "config.json": "0e047b5e9ae7981cf0066e74d8b655a2f49d7d7965c25fca386f9eea80b63e58",
+            "eval_config.json": "7f475edbef4a13d2db99fa12eff5e9dedf48916969ec777f75e6e85e2a492b57",
+            "model-00001-of-00001.safetensors": "ffc4a925378a881afa761865048eb8d07c55cacf5eaf66548b6641c39f67af18",
+            "model.safetensors.index.json": "d725f1a587bde70cdf16ae5e1e672ff13cada2740c11baf13fbcff49dd7e00b1",
+            "processor_config.json": "ac89ec99ea773dc28f5b217edec5947120071ad5b9edcd48d3843ecc63b9877e",
+            "tokenizer_config.json": "8e8e879bfe8a52ececc118c9b80a48240ab35ff01a8be88d9a071df7ee7c4803"
+          },
+          "gpu_memory_utilization": 0.55
+        },
+        "scene": {
+          "family": "isaac_hospital_6_0_1",
+          "asset_relative_path": "/Isaac/Environments/Hospital/hospital.usd",
+          "reference_prim_path": "/World/Hospital",
+          "stage_units_in_meters": 1.0,
+          "up_axis": "Z",
+          "lighting": "authored_hospital_lights"
+        },
+        "agent": {
+          "prim_path": "/World/LogicalAgent",
+          "pose_world": [
+            19.0,
+            26.7,
+            1.5707963267948966
+          ],
+          "local_displacement": [
+            0.3,
+            0.0,
+            0.0
+          ],
+          "z_m": 0.0
+        },
+        "camera": {
+          "prim_path": "/World/LogicalAgent/Camera",
+          "relative_translation_m": [
+            0.09,
+            0.0,
+            0.65
+          ],
+          "rotation_agent_from_camera": [
+            [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "resolution_width": 480,
+          "resolution_height": 270,
+          "horizontal_fov_deg": 112.2,
+          "horizontal_aperture_mm": 20.955,
+          "clipping_range_m": [
+            0.05,
+            100.0
+          ],
+          "reference_semantics": "official_demo_camera_axes_and_resolution_and_approximate_fov",
+          "height_choice": "logical_camera_height_0.65m_is_explicitly_not_official_body_offset_0.165m"
+        },
+        "capture": {
+          "warmup_updates": 30,
+          "render_subframes": 1,
+          "jpeg_quality": 95
+        },
+        "stage": "robotless-online-handoffs-v1",
+        "execution": {
+          "integration_hz": 60,
+          "simulation_dt_s": 0.016666666666666666,
+          "control_hz": 10,
+          "submit_on_install": false,
+          "controller_dt_s": 0.1,
+          "capture_hz": 4,
+          "capture_dt_s": 0.25,
+          "target_rtf": 1.0,
+          "command_hold_timeout_s": 0.5,
+          "controller": "official read-only MpcTracker",
+          "controller_reference_timing": "official pose-aligned nearest+1, horizon5, MPC_DT_S=.1; not intrinsic waypoint timing",
+          "intrinsic_waypoint_dt_s": null,
+          "pacing_policy": "minimum_wall_step_no_catchup_v1"
+        },
+        "online": {
+          "minimum_active_before_prediction_sim_s": 0.0,
+          "bootstrap_frames": 4,
+          "maximum_handoff_attempts": 3,
+          "maximum_active_sim_s": 4.0,
+          "postroll_sim_s": 0.1,
+          "request_timeout_s": 120.0,
+          "maximum_episode_host_s": 240.0,
+          "capture_queue_capacity": 512,
+          "controller_stall_sim_s": 2.0,
+          "rtf_valid_min": 0.8,
+          "rtf_valid_max": 1.2,
+          "max_loop_stall_valid_s": 0.25,
+          "rtf_deadline_tolerance_s": 0.016666666666666666,
+          "scheduler_diagnostics": true
+        },
+        "schedule": {
+          "source_config": "configs/robotless_handoff_screening.yaml",
+          "source_run": "data/robotless_handoff_screening/20260914T101519Z",
+          "conditions": 30,
+          "repetitions": 2,
+          "no_replacement": true
+        },
+        "lighting": {
+          "dark": "unchanged authored Hospital lights",
+          "bright": "add one neutral white ceiling fill; original lights unchanged",
+          "prim": "/World/JOINSource03Fill",
+          "type": "RectLight",
+          "intensity": 1000.0,
+          "exposure": 0.0,
+          "color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "normalize": false,
+          "width_m": 4.0,
+          "height_m": 10.0,
+          "translation_world_m": [
+            19.2,
+            24.0,
+            2.6
+          ],
+          "emission": "local -Z, ceiling downward; no rotation",
+          "renderer": "RayTracedLighting",
+          "anti_aliasing": 0,
+          "image_postprocessing": "forbidden"
+        },
+        "join_online02": {
+          "experiment": "JOIN-ONLINE-03-DESTINATION-FIRST-INSTRUCTION",
+          "source04_run": "data/robotless_join_source_04/persistence_20260922T050237Z",
+          "instruction": "Go to the far end of the hallway. If the path is blocked, pass the supply cart on your right without touching it. Continue straight after passing it and stop at the end of the hallway.",
+          "candidate_center_distances_m": [
+            5.0,
+            4.5,
+            4.0
+          ],
+          "order": [
+            "OFF_REPEAT_00",
+            "ON_REPEAT_00",
+            "OFF_REPEAT_01",
+            "ON_REPEAT_01"
+          ],
+          "maximum_activated_after_C0": 20,
+          "maximum_sim_s_after_C0": 25.0,
+          "generation_environment": {
+            "VLN_EVAL_TEMPERATURE": "0",
+            "VLN_EVAL_TOP_P": "1",
+            "VLN_EVAL_TOP_K": "0",
+            "VLN_EVAL_TRAJ_TOP1": "0"
+          },
+          "guard": {
+            "new_command_interval_s": 0.1,
+            "held_continuation": "check every next actual integration step, including timeout",
+            "radius_m": 0.2,
+            "required_edge_clearance_m": 0.05,
+            "abort": "SAFETY_ABORT_BEFORE_UNSAFE_COMMAND",
+            "raw_future_unsafe_aborts": false
+          },
+          "classification": {
+            "lateral_m": 0.2,
+            "tangent_deg": 20.0,
+            "tangent_chord_m": 0.1,
+            "directional_lateral_minimum_m": 0.02,
+            "short_arc_m": 0.5,
+            "obstacle_influence_before_front_m": 0.5,
+            "rear_margin_m": 0.25,
+            "visibility_pixels": 20,
+            "priority": [
+              "SAFE_STOP",
+              "PAST_OBSTACLE",
+              "UNSAFE_INTERSECTING",
+              "SAFE_BYPASS",
+              "SAFE_BYPASS_ONSET",
+              "SAFE_SHORTEN",
+              "STRAIGHT_OR_BASELINE"
+            ]
+          },
+          "candidate_selection": "first full bypass then onset in ON_REPEAT_00; then same in ON_REPEAT_01",
+          "technical_retry": "no scientific-output retry; pre-scientific technical failure preserved under a new run",
+          "scope": "ACTUAL ONLINE EXECUTION; oracle abort only; no reconciliation"
+        },
+        "acquisition01": {
+          "experiment": "OBSTACLE-SOURCE-ACQUISITION-01",
+          "source04_run": "data/robotless_join_source_04/persistence_20260922T050237Z",
+          "online03_run": "data/robotless_join_online_03/primary_20260923T031300Z",
+          "candidate_bank_indices": [
+            10,
+            11,
+            12,
+            13
+          ],
+          "history_frames": 8,
+          "candidate_order": [
+            "POSE10",
+            "POSE11",
+            "POSE12",
+            "POSE13"
+          ],
+          "branches": [
+            "OFF",
+            "ON"
+          ],
+          "execute_all_candidates": true,
+          "selection": "first qualifying in frozen candidate order",
+          "side_rule": "valid passage with larger swept minimum clearance; exact tie RIGHT",
+          "instructions": {
+            "RIGHT": "Go to the far end of the hallway. If the path is blocked, pass the supply cart on your right without touching it. Continue straight after passing it and stop at the end of the hallway.",
+            "LEFT": "Go to the far end of the hallway. If the path is blocked, pass the supply cart on your left without touching it. Continue straight after passing it and stop at the end of the hallway."
+          },
+          "generation_environment": {
+            "VLN_EVAL_TEMPERATURE": "0",
+            "VLN_EVAL_TOP_P": "1",
+            "VLN_EVAL_TOP_K": "0",
+            "VLN_EVAL_TRAJ_TOP1": "0"
+          },
+          "gates": {
+            "footprint_radius_m": 0.2,
+            "required_clearance_m": 0.05,
+            "visible_pixels": 20,
+            "lateral_m": 0.1,
+            "angle_deg": 20.0,
+            "reliable_chord_m": 0.02,
+            "remaining_rows": 4,
+            "remaining_arc_m": 0.6,
+            "interaction_before_front_m": 0.5,
+            "moving_v_mps": 0.2,
+            "observation_B_travel_m": 0.02,
+            "request_rtf": [
+              0.8,
+              1.2
+            ],
+            "maximum_loop_stall_s": 0.25
+          },
+          "phase0": {
+            "technical_episodes": 1,
+            "start": "original ONLINE03 5m OFF start",
+            "maximum_handoffs": 3,
+            "maximum_active_sim_s": 5.0,
+            "postroll_sim_s": 0.1,
+            "qualification": "every complete request-local inflight interval passes; >=3 post-bootstrap requests; max episode loop stall passes",
+            "real_model_calls": "at most 4 technical predictions plus server startup warmup",
+            "retry": "none in this protocol"
+          },
+          "phaseB": {
+            "repetitions": 2,
+            "initial_pose_rule": "selected observation pose translated 0.40m backwards along hallway; yaw unchanged",
+            "reveal_rule": "first scheduled 4Hz capture at or beyond selected observation longitudinal plane while OLD active",
+            "first_post_reveal_only": true,
+            "maximum_handoffs": 1,
+            "maximum_active_sim_s": 4.0,
+            "postroll_sim_s": 0.1,
+            "requires": "selected PhaseA plus qualified Phase0; separate pushed selected-candidate freeze"
+          },
+          "scope": "source only; no GP/rigid/reconciliation; no reference correction; no scientific retry"
+        }
+      },
+      "new": {
+        "paths": {
+          "lightnav_checkout": "../external/LightNav-0-official-demo",
+          "checkpoint_path": "../external/LightNav-0/checkpoints/LightNav-0",
+          "output_root": "data/robotless_online_handoffs_v1"
+        },
+        "lightnav": {
+          "expected_git_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+          "checkpoint_identifier": "LightOriginsHQ/LightNav-0",
+          "checkpoint_revision": "7221d418bfff55cfcbadd09f7a26aaab81e1f8a6",
+          "server_url": "ws://127.0.0.1:8050",
+          "checkpoint_sha256": {
+            "action_tokenizer/codebook_l0.npy": "daaea83b3ae4637a042d1f61b34a687870d735ef709689e02c1e43d39aab6e16",
+            "action_tokenizer/codebook_l1.npy": "dfde603f96b333cda4c676613ac2f772cec3906a8dbbb7a7415bfeb4aa04e4bf",
+            "action_tokenizer/codebook_l2.npy": "2a7b186159bc9375997535008028930efe09c9b239a522639aff6febfac6c51c",
+            "action_tokenizer/manifest.json": "00d77ae028edf59e0ce68b49122dd0a60da527f48508f5ee335a580993a12864",
+            "config.json": "0e047b5e9ae7981cf0066e74d8b655a2f49d7d7965c25fca386f9eea80b63e58",
+            "eval_config.json": "7f475edbef4a13d2db99fa12eff5e9dedf48916969ec777f75e6e85e2a492b57",
+            "model-00001-of-00001.safetensors": "ffc4a925378a881afa761865048eb8d07c55cacf5eaf66548b6641c39f67af18",
+            "model.safetensors.index.json": "d725f1a587bde70cdf16ae5e1e672ff13cada2740c11baf13fbcff49dd7e00b1",
+            "processor_config.json": "ac89ec99ea773dc28f5b217edec5947120071ad5b9edcd48d3843ecc63b9877e",
+            "tokenizer_config.json": "8e8e879bfe8a52ececc118c9b80a48240ab35ff01a8be88d9a071df7ee7c4803"
+          },
+          "gpu_memory_utilization": 0.55
+        },
+        "scene": {
+          "family": "isaac_hospital_6_0_1",
+          "asset_relative_path": "/Isaac/Environments/Hospital/hospital.usd",
+          "reference_prim_path": "/World/Hospital",
+          "stage_units_in_meters": 1.0,
+          "up_axis": "Z",
+          "lighting": "authored_hospital_lights"
+        },
+        "agent": {
+          "prim_path": "/World/LogicalAgent",
+          "pose_world": [
+            19.0,
+            26.7,
+            1.5707963267948966
+          ],
+          "local_displacement": [
+            0.3,
+            0.0,
+            0.0
+          ],
+          "z_m": 0.0
+        },
+        "camera": {
+          "prim_path": "/World/LogicalAgent/Camera",
+          "relative_translation_m": [
+            0.09,
+            0.0,
+            0.65
+          ],
+          "rotation_agent_from_camera": [
+            [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "resolution_width": 480,
+          "resolution_height": 270,
+          "horizontal_fov_deg": 112.2,
+          "horizontal_aperture_mm": 20.955,
+          "clipping_range_m": [
+            0.05,
+            100.0
+          ],
+          "reference_semantics": "official_demo_camera_axes_and_resolution_and_approximate_fov",
+          "height_choice": "logical_camera_height_0.65m_is_explicitly_not_official_body_offset_0.165m"
+        },
+        "capture": {
+          "warmup_updates": 30,
+          "render_subframes": 1,
+          "jpeg_quality": 95
+        },
+        "stage": "robotless-online-handoffs-v1",
+        "execution": {
+          "integration_hz": 60,
+          "simulation_dt_s": 0.016666666666666666,
+          "control_hz": 10,
+          "submit_on_install": false,
+          "controller_dt_s": 0.1,
+          "capture_hz": 4,
+          "capture_dt_s": 0.25,
+          "target_rtf": 1.0,
+          "command_hold_timeout_s": 0.5,
+          "controller": "official read-only MpcTracker",
+          "controller_reference_timing": "official pose-aligned nearest+1, horizon5, MPC_DT_S=.1; not intrinsic waypoint timing",
+          "intrinsic_waypoint_dt_s": null,
+          "pacing_policy": "minimum_wall_step_no_catchup_v1"
+        },
+        "online": {
+          "minimum_active_before_prediction_sim_s": 0.0,
+          "bootstrap_frames": 4,
+          "maximum_handoff_attempts": 3,
+          "maximum_active_sim_s": 4.0,
+          "postroll_sim_s": 0.1,
+          "request_timeout_s": 120.0,
+          "maximum_episode_host_s": 240.0,
+          "capture_queue_capacity": 512,
+          "controller_stall_sim_s": 2.0,
+          "rtf_valid_min": 0.8,
+          "rtf_valid_max": 1.2,
+          "max_loop_stall_valid_s": 0.25,
+          "rtf_deadline_tolerance_s": 0.016666666666666666,
+          "scheduler_diagnostics": true
+        },
+        "schedule": {
+          "source_config": "configs/robotless_handoff_screening.yaml",
+          "source_run": "data/robotless_handoff_screening/20260914T101519Z",
+          "conditions": 30,
+          "repetitions": 2,
+          "no_replacement": true
+        },
+        "lighting": {
+          "dark": "unchanged authored Hospital lights",
+          "bright": "add one neutral white ceiling fill; original lights unchanged",
+          "prim": "/World/JOINSource03Fill",
+          "type": "RectLight",
+          "intensity": 1000.0,
+          "exposure": 0.0,
+          "color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "normalize": false,
+          "width_m": 4.0,
+          "height_m": 10.0,
+          "translation_world_m": [
+            19.2,
+            24.0,
+            2.6
+          ],
+          "emission": "local -Z, ceiling downward; no rotation",
+          "renderer": "RayTracedLighting",
+          "anti_aliasing": 0,
+          "image_postprocessing": "forbidden"
+        },
+        "join_online02": {
+          "experiment": "JOIN-ONLINE-03-DESTINATION-FIRST-INSTRUCTION",
+          "source04_run": "data/robotless_join_source_04/persistence_20260922T050237Z",
+          "instruction": "Go to the far end of the hallway. If the path is blocked, pass the supply cart on your right without touching it. Continue straight after passing it and stop at the end of the hallway.",
+          "candidate_center_distances_m": [
+            5.0,
+            4.5,
+            4.0
+          ],
+          "order": [
+            "OFF_REPEAT_00",
+            "ON_REPEAT_00",
+            "OFF_REPEAT_01",
+            "ON_REPEAT_01"
+          ],
+          "maximum_activated_after_C0": 20,
+          "maximum_sim_s_after_C0": 25.0,
+          "generation_environment": {
+            "VLN_EVAL_TEMPERATURE": "0",
+            "VLN_EVAL_TOP_P": "1",
+            "VLN_EVAL_TOP_K": "0",
+            "VLN_EVAL_TRAJ_TOP1": "0"
+          },
+          "guard": {
+            "new_command_interval_s": 0.1,
+            "held_continuation": "check every next actual integration step, including timeout",
+            "radius_m": 0.2,
+            "required_edge_clearance_m": 0.05,
+            "abort": "SAFETY_ABORT_BEFORE_UNSAFE_COMMAND",
+            "raw_future_unsafe_aborts": false
+          },
+          "classification": {
+            "lateral_m": 0.2,
+            "tangent_deg": 20.0,
+            "tangent_chord_m": 0.1,
+            "directional_lateral_minimum_m": 0.02,
+            "short_arc_m": 0.5,
+            "obstacle_influence_before_front_m": 0.5,
+            "rear_margin_m": 0.25,
+            "visibility_pixels": 20,
+            "priority": [
+              "SAFE_STOP",
+              "PAST_OBSTACLE",
+              "UNSAFE_INTERSECTING",
+              "SAFE_BYPASS",
+              "SAFE_BYPASS_ONSET",
+              "SAFE_SHORTEN",
+              "STRAIGHT_OR_BASELINE"
+            ]
+          },
+          "candidate_selection": "first full bypass then onset in ON_REPEAT_00; then same in ON_REPEAT_01",
+          "technical_retry": "no scientific-output retry; pre-scientific technical failure preserved under a new run",
+          "scope": "ACTUAL ONLINE EXECUTION; oracle abort only; no reconciliation"
+        },
+        "acquisition01": {
+          "experiment": "OBSTACLE-SOURCE-ACQUISITION-01",
+          "source04_run": "data/robotless_join_source_04/persistence_20260922T050237Z",
+          "online03_run": "data/robotless_join_online_03/primary_20260923T031300Z",
+          "candidate_bank_indices": [
+            10,
+            11,
+            12,
+            13
+          ],
+          "history_frames": 8,
+          "candidate_order": [
+            "POSE10",
+            "POSE11",
+            "POSE12",
+            "POSE13"
+          ],
+          "branches": [
+            "OFF",
+            "ON"
+          ],
+          "execute_all_candidates": true,
+          "selection": "first qualifying in frozen candidate order",
+          "side_rule": "valid passage with larger swept minimum clearance; exact tie RIGHT",
+          "instructions": {
+            "RIGHT": "Go to the far end of the hallway. If the path is blocked, pass the supply cart on your right without touching it. Continue straight after passing it and stop at the end of the hallway.",
+            "LEFT": "Go to the far end of the hallway. If the path is blocked, pass the supply cart on your left without touching it. Continue straight after passing it and stop at the end of the hallway."
+          },
+          "generation_environment": {
+            "VLN_EVAL_TEMPERATURE": "0",
+            "VLN_EVAL_TOP_P": "1",
+            "VLN_EVAL_TOP_K": "0",
+            "VLN_EVAL_TRAJ_TOP1": "0"
+          },
+          "gates": {
+            "footprint_radius_m": 0.2,
+            "required_clearance_m": 0.05,
+            "visible_pixels": 20,
+            "lateral_m": 0.1,
+            "angle_deg": 20.0,
+            "reliable_chord_m": 0.02,
+            "remaining_rows": 4,
+            "remaining_arc_m": 0.6,
+            "interaction_before_front_m": 0.5,
+            "moving_v_mps": 0.2,
+            "observation_B_travel_m": 0.02,
+            "request_rtf": [
+              0.8,
+              1.2
+            ],
+            "maximum_loop_stall_s": 0.25
+          },
+          "phase0": {
+            "technical_episodes": 1,
+            "start": "original ONLINE03 5m OFF start",
+            "maximum_handoffs": 3,
+            "maximum_active_sim_s": 5.0,
+            "postroll_sim_s": 0.1,
+            "qualification": "every complete request-local inflight interval passes; >=3 post-bootstrap requests; max episode loop stall passes",
+            "real_model_calls": "at most 4 technical predictions plus server startup warmup",
+            "retry": "none in this protocol"
+          },
+          "phaseB": {
+            "repetitions": 2,
+            "initial_pose_rule": "selected observation pose translated 0.40m backwards along hallway; yaw unchanged",
+            "reveal_rule": "first scheduled 4Hz capture at or beyond selected observation longitudinal plane while OLD active",
+            "first_post_reveal_only": true,
+            "maximum_handoffs": 1,
+            "maximum_active_sim_s": 4.0,
+            "postroll_sim_s": 0.1,
+            "requires": "selected PhaseA plus qualified Phase0; separate pushed selected-candidate freeze"
+          },
+          "scope": "source only; no GP/rigid/reconciliation; no reference correction; no scientific retry"
+        }
+      }
+    },
+    "whole_scientific_protocol": {
+      "equal": true,
+      "original": {
+        "candidate": "POSE11",
+        "initial_pose_world": [
+          19.20312073159454,
+          24.423334915767065,
+          -1.5689742328041627
+        ],
+        "initial_physical_command": [
+          0.0,
+          0.0
+        ],
+        "instruction": "Go to the far end of the hallway. If the path is blocked, pass the supply cart on your right without touching it. Continue straight after passing it and stop at the end of the hallway.",
+        "side": "RIGHT",
+        "prior_side_caveat": "ON POSE10/11/12 turn local +y (LEFT). Exact instruction names cart on your RIGHT. No claim of RIGHT-side execution or new rejection gate.",
+        "gates": {
+          "footprint_radius_m": 0.2,
+          "required_clearance_m": 0.05,
+          "visible_pixels": 20,
+          "lateral_m": 0.1,
+          "angle_deg": 20.0,
+          "reliable_chord_m": 0.02,
+          "remaining_rows": 4,
+          "remaining_arc_m": 0.6,
+          "interaction_before_front_m": 0.5,
+          "moving_v_mps": 0.2,
+          "observation_B_travel_m": 0.02,
+          "request_rtf": [
+            0.8,
+            1.2
+          ],
+          "maximum_loop_stall_s": 0.25
+        },
+        "frames": "Isaac world XY metres +Z up CCW yaw radians; local +x forward +y left; world=A_k*raw_k",
+        "waypoint_dt": null,
+        "clock_rule": "host latency only host differences; simulation latency only simulation differences",
+        "no_reconciliation": true,
+        "reset_after_initialization": 0
+      },
+      "new": {
+        "candidate": "POSE11",
+        "initial_pose_world": [
+          19.20312073159454,
+          24.423334915767065,
+          -1.5689742328041627
+        ],
+        "initial_physical_command": [
+          0.0,
+          0.0
+        ],
+        "instruction": "Go to the far end of the hallway. If the path is blocked, pass the supply cart on your right without touching it. Continue straight after passing it and stop at the end of the hallway.",
+        "side": "RIGHT",
+        "prior_side_caveat": "ON POSE10/11/12 turn local +y (LEFT). Exact instruction names cart on your RIGHT. No claim of RIGHT-side execution or new rejection gate.",
+        "gates": {
+          "footprint_radius_m": 0.2,
+          "required_clearance_m": 0.05,
+          "visible_pixels": 20,
+          "lateral_m": 0.1,
+          "angle_deg": 20.0,
+          "reliable_chord_m": 0.02,
+          "remaining_rows": 4,
+          "remaining_arc_m": 0.6,
+          "interaction_before_front_m": 0.5,
+          "moving_v_mps": 0.2,
+          "observation_B_travel_m": 0.02,
+          "request_rtf": [
+            0.8,
+            1.2
+          ],
+          "maximum_loop_stall_s": 0.25
+        },
+        "frames": "Isaac world XY metres +Z up CCW yaw radians; local +x forward +y left; world=A_k*raw_k",
+        "waypoint_dt": null,
+        "clock_rule": "host latency only host differences; simulation latency only simulation differences",
+        "no_reconciliation": true,
+        "reset_after_initialization": 0
+      }
+    }
+  },
+  "byte_equal_files": {
+    "selected_pose11.json": "a2014e0093f7a1241c2db50a1caa2c4c2d2a140cd70a7602af46f819dc1161b0",
+    "scenario.json": "63a0d1f907584fd02240b14a1a30bd1f6227beea75bf27344403c9b726163725",
+    "side_passages.json": "a292e56c40660ae1d57043ca40e8bca956c3e547c6a761b42d311d73a0630714",
+    "config_snapshot.yaml": "60bc96641f5e0368d4187fd09dabaf42a8fb030ccc4cbdb7fd44709aa119c4b9",
+    "episode_schedule.json": "47820ad67754bdf5faaca20c3e10ff38a158df6ecab983d99929e0ef664af832",
+    "external_authority.json": "73e518b5557729c0b1e4c2f3833109348fca4b96db6c8b3ea6607169e3f9a8e1"
+  },
+  "administrative_difference": "separate 01B run/output namespace and experiment labels only",
+  "intentional_difference": "process_launch_environment_only"
+}

@@ -1,0 +1,28 @@
+experiment: CONTINUOUS_OBSTACLE_REVEAL_EPISODE_01B
+scientific_protocol: configs/continuous_obstacle_reveal_episode_01.yaml
+historical_run: data/continuous_obstacle_reveal_episode_01/primary_20261006
+historical_results: results/continuous_obstacle_reveal_episode_01
+historical_commit: e1e8ba0f3d70241cd2e9f20424daacbad51405d1
+launch_source: docs/OBSTACLE_SOURCE_ACQUISITION_03_OBSTRUCTED_OLD.md
+isaac_python: /home/gpuadmin/isaacsim/python.sh
+collector: scripts/isaac/continuous_obstacle_reveal_episode01.py
+maximum_launches: 1
+retry: false
+unset_environment:
+  - LD_LIBRARY_PATH
+  - PYTHONPATH
+  - CUDA_HOME
+  - CUDA_PATH
+  - ROS_DISTRO
+  - ROS_VERSION
+  - ROS_PYTHON_VERSION
+  - AMENT_PREFIX_PATH
+  - CMAKE_PREFIX_PATH
+  - COLCON_PREFIX_PATH
+  - RMW_IMPLEMENTATION
+set_environment:
+  OPENBLAS_NUM_THREADS: '1'
+  OMP_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONUNBUFFERED: '1'
+libcusparse: /home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/libcusparse.so.12

@@ -1,0 +1,7 @@
+{
+  "freeze_file_sha256": "e29987e182839a6e265d5c638cdc0a88fbd29883c795dc841f486d519b003871",
+  "source_files": 535,
+  "prepared_input_files": 15,
+  "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01b/primary_20261006T100411Z",
+  "scientific_calls_before_freeze": 0
+}
