@@ -6682,3 +6682,34 @@ git diff --cached --check
   Synthetic3-PNG fixture inspected; no synthetic experimental evidence.
 - Freeze-before-science: implementation/config/tests/protocol plus hashes are
   committed and normally pushed before the sole execution. No retries/tuning.
+
+### 2026-10-06 — DIRECT_TRANSITION_HARD_EVAL_02 single execution and saved report
+
+- Scientific freeze 8a42e3973587eea1fd6e63f2ee240609479787af was pushed and verified
+  against origin/main before science. All 4 V2 planning solves preceded all
+  rollouts; 4 converged and passed unchanged reference gates. No retry or tuning.
+- Exactly 4 C3, 4 B_ENTRY, 4 Hermite and 4 V2 rollouts; all 16 reach the fixed cap.
+  480 MPC solves, 472 logical releases, 472 physical new-result applications,
+  8 cap-withheld results, 0 guard-blocked applications and 2880 applied intervals.
+  No controller numerical failure, safety abort, LightNav/RGB/Isaac call, new
+  source acquisition or historical rerun.
+- STAGING_HARD_TRANSITION_SUPPORTED: selected 4, shared failure 0, evaluable 4;
+  B_ENTRY BOTH_DWELLS 4/4 for both denominators; graph-specific/intermediate
+  positives 0/0, V2-specific regressions 0. Minimum reference clearance
+  0.3593838391311876 m; minimum swept execution clearance 0.38401638804443955 m.
+- B_ENTRY has lower .9 s position AUC than both bridges on all sources. C3
+  endpoint dwell is earlier than B_ENTRY by 6/2/1/1 ticks. E1 B_ENTRY attaches
+  .10 s earlier than C3 but reaches endpoint dwell .10 s later with .157762 m
+  more arc left at attachment. V2 beats Hermite on E1 but not B_ENTRY. E2–E4
+  attach at B for all methods, so geometry selection does not imply hard recovery.
+- Saved-only validation/check-only passes, including exact source selection,
+  source hashes, C3/native suffix bits, factors/trace, official selector/memory,
+  all schedule/integration/guard/endpoint metrics and three figure sidecars.
+  All 843 frozen code/config/test files, 138 prepared inputs and 3988 source files
+  remain unchanged. Historical experiment results remain immutable.
+- Generated exactly three final PNGs. A separate saved-only presentation pass
+  fixes scatter annotation overlap; numerical sidecars and frozen reporter are
+  unchanged. This is presentation polish after inspection, not a science change.
+- Report and conservative README distinguish bounded staging sufficiency from
+  graph necessity and from endpoint speed. No population/real-world/online/task
+  completion claims. Result artifacts stay small; raw logs/arrays remain ignored.

@@ -1,5 +1,9 @@
 # DIRECT_TRANSITION_HARD_EVAL_02
 
+**Result: STAGING_HARD_TRANSITION_SUPPORTED.** B_ENTRY has both dwells in 4/4
+evaluable sources; graph-specific and intermediate positives are both 0. C3 still
+reaches original-FRESH endpoint dwell earlier in all four sources.
+
 ## Research question
 
 Does `[B,E*,original suffix]` remain sufficient for meaningful direct transitions
@@ -235,11 +239,6 @@ and exactly3 PNGs live under `results/direct_transition_hard_eval_02`:
 rows, no cap-imputed N/A, and shared failures labelled. Figure numeric sidecars
 and hashes must match saved data. No HTML dependency.
 
-## Research interpretation
-
-Pending the single frozen execution. No outcome has been used to tune selection,
-formulation or classification.
-
 ## Not demonstrated
 
 Population generalization; unseen real-world evaluation; asynchronous online VLA
@@ -280,3 +279,249 @@ OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/direct02_mpl .venv/bin/python scripts/v
  git diff --check
  git diff --cached --check
 ```
+
+
+## Repository-confirmed execution results
+
+Scientific freeze: `8a42e3973587eea1fd6e63f2ee240609479787af`, normally pushed and
+verified against origin/main before any scientific call. Execution completed on
+2026-10-06. All frozen 843 code/config/test hashes, 138 prepared inputs and 3,988
+source/provenance/environment hashes remain unchanged. Final saved-only validation
+and figure sidecar/hash checks pass. Historical results were not rerun or edited.
+
+### Counts, denominators and classification
+
+| Quantity | Saved result |
+|---|---:|
+| Saved events inspected | 881 |
+| Excluded recorded episodes (includes previous E1–E6) | 39 |
+| Base eligible before meaningful gate | 90 |
+| Meaningful eligible candidates / episodes | 4 / 4 |
+| Selected / shared safety failure / evaluable | 4 / 0 / 4 |
+| B_ENTRY BOTH_DWELLS over selected / evaluable | 4/4 / 4/4 |
+| Graph-specific / intermediate positives | 0 / 0 |
+| V2-specific regressions | 0 |
+| V2 solves / converged / reference-valid | 4 / 4 / 4 |
+| V2 retries / invalid skips / nonconvergence | 0 / 0 / 0 |
+| C3 / B_ENTRY / Hermite / V2 rollouts | 4 / 4 / 4 / 4 |
+| Official MPC solves | 480 |
+| Logical releases / physical new-result applications | 472 / 472 |
+| Results withheld at cap / guard-blocked applications | 8 / 0 |
+| Applied integration intervals | 2880 |
+| Controller numerical failures / safety aborts | 0 / 0 |
+| LightNav / RGB / Isaac / new acquisition / historical reruns | 0 / 0 / 0 / 0 / 0 |
+
+All 16 rollouts terminate OBSERVATION_CAP after 180 intervals; actual cap is
+3.0000001564621925s. All primary/full logical schedules and common-state/memory
+checks pass. The 8 withheld results are the cap-ending solve in E2/E4 for each
+method; they are solved but never applied. No censored scientific rollout,
+missing dwell or failed reference is hidden in this result.
+Frozen classification: **STAGING_HARD_TRANSITION_SUPPORTED**.
+
+### Transition and downstream metrics
+
+All times are actual seconds after B. AUC position units are m·s; yaw AUC units
+are rad·s. Values below are rounded to 9 decimal places; CSV/JSON preserve the
+saved floating-point values. A zero attachment is an observed dwell beginning at
+B, not missing data. E2–E4 have zero attachment for all methods.
+
+| Source | Method | Position AUC .3 | Position AUC .9 | Yaw AUC .3 | Yaw AUC .9 | T_attach s |
+|---|---|---|---|---|---|---|
+| E1 | C3 | 0.025283379 | 0.087231440 | 0.065456349 | 0.103839863 | 0.716666704 |
+| E1 | B_ENTRY | 0.023948687 | 0.082096545 | 0.066946253 | 0.102576395 | 0.616666699 |
+| E1 | Hermite | 0.024213861 | 0.090278874 | 0.074287274 | 0.122050263 | 0.900000047 |
+| E1 | V2 | 0.024176967 | 0.084943712 | 0.071961600 | 0.110635528 | 0.716666704 |
+| E2 | C3 | 0.018809105 | 0.056820725 | 0.031193089 | 0.058796210 | 0.000000000 |
+| E2 | B_ENTRY | 0.018632748 | 0.058065860 | 0.034563037 | 0.060167525 | 0.000000000 |
+| E2 | Hermite | 0.018863349 | 0.061563834 | 0.038947605 | 0.065401770 | 0.000000000 |
+| E2 | V2 | 0.018863355 | 0.061563959 | 0.038947723 | 0.065401934 | 0.000000000 |
+| E3 | C3 | 0.020545208 | 0.055546467 | 0.013471263 | 0.043940685 | 0.000000000 |
+| E3 | B_ENTRY | 0.020473984 | 0.055381064 | 0.013521959 | 0.043917067 | 0.000000000 |
+| E3 | Hermite | 0.020560072 | 0.056806923 | 0.014719617 | 0.044039705 | 0.000000000 |
+| E3 | V2 | 0.020560080 | 0.056806994 | 0.014719688 | 0.044039750 | 0.000000000 |
+| E4 | C3 | 0.012205005 | 0.035541755 | 0.018904664 | 0.038771254 | 0.000000000 |
+| E4 | B_ENTRY | 0.012148935 | 0.036553020 | 0.021320588 | 0.040031712 | 0.000000000 |
+| E4 | Hermite | 0.012252648 | 0.037896369 | 0.023151306 | 0.042072181 | 0.000000000 |
+| E4 | V2 | 0.012252649 | 0.037896386 | 0.023151328 | 0.042072207 | 0.000000000 |
+
+| Source | Method | Attach row | Attach arc fraction | Arc left m | Endpoint dwell s | Post-attach s | Cap error m |
+|---|---|---|---|---|---|---|---|
+| E1 | C3 | 4.631946080 | 0.512727063 | 0.661280233 | 1.450000076 | 0.733333372 | 0.047143937 |
+| E1 | B_ENTRY | 3.580120003 | 0.396477722 | 0.819042723 | 1.550000081 | 0.933333382 | 0.042247435 |
+| E1 | Hermite | 5.064575823 | 0.560596874 | 0.596315904 | 1.566666748 | 0.666666701 | 0.050168114 |
+| E1 | V2 | 4.103884851 | 0.454307017 | 0.740562333 | 1.550000081 | 0.833333377 | 0.044405777 |
+| E2 | C3 | 2.608703515 | 0.287039710 | 0.968173458 | 1.133333392 | 1.133333392 | 0.039124078 |
+| E2 | B_ENTRY | 2.608703515 | 0.287039710 | 0.968173458 | 1.166666728 | 1.166666728 | 0.041104026 |
+| E2 | Hermite | 2.608703515 | 0.287039710 | 0.968173458 | 1.166666728 | 1.166666728 | 0.044906474 |
+| E2 | V2 | 2.608703515 | 0.287039710 | 0.968173458 | 1.166666728 | 1.166666728 | 0.044906624 |
+| E3 | C3 | 1.082061005 | 0.120442240 | 1.191091747 | 1.383333405 | 1.383333405 | 0.031983958 |
+| E3 | B_ENTRY | 1.082061005 | 0.120442240 | 1.191091747 | 1.400000073 | 1.400000073 | 0.026863271 |
+| E3 | Hermite | 1.082061005 | 0.120442240 | 1.191091747 | 1.416666741 | 1.416666741 | 0.028631669 |
+| E3 | V2 | 1.082061005 | 0.120442240 | 1.191091747 | 1.416666741 | 1.416666741 | 0.028631719 |
+| E4 | C3 | 1.995137357 | 0.225367117 | 1.031363385 | 1.183333395 | 1.183333395 | 0.024432880 |
+| E4 | B_ENTRY | 1.995137357 | 0.225367117 | 1.031363385 | 1.200000063 | 1.200000063 | 0.026796924 |
+| E4 | Hermite | 1.995137357 | 0.225367117 | 1.031363385 | 1.200000063 | 1.200000063 | 0.027752635 |
+| E4 | V2 | 1.995137357 | 0.225367117 | 1.031363385 | 1.200000063 | 1.200000063 | 0.027752647 |
+
+`primary.csv` also preserves initial XY/yaw, maximum XY in first .5 s, initial
+separation growth, first endpoint tube entry, path length and mean commanded
+speed before endpoint dwell, original projected progress/remaining arc at cap,
+and all abort/termination fields. These use the unchanged original-FRESH evaluator.
+No method-reference metric replaces the primary target.
+
+### Safety and control
+
+All complete references pass the unchanged checker. Minimum reference clearance
+across the16 references is 0.3593838391311876m. Minimum swept execution clearance
+across the16 rollouts is 0.38401638804443955m, above the required .05 m. There are
+zero safety abort ticks and zero unsafe applied commands. The observed generous
+clearance does not establish obstacle generalization.
+
+| Source | Method | Swept clearance m | Linear TV | Angular TV | Max abs(v) m/s | Max abs(omega) rad/s |
+|---|---|---|---|---|---|---|
+| E1 | C3 | 2.537979796 | 0.800000012 | 3.034602379 | 0.800000000 | 1.455500336 |
+| E1 | B_ENTRY | 2.537995094 | 1.600000032 | 3.214469925 | 0.800000000 | 1.206340539 |
+| E1 | Hermite | 2.537988565 | 1.600000046 | 2.985862078 | 0.800000000 | 1.139803951 |
+| E1 | V2 | 2.537993222 | 1.600000035 | 2.700230256 | 0.800000000 | 1.296230670 |
+| E2 | C3 | 0.566258863 | 1.020028881 | 2.305058399 | 0.800000000 | 1.127767667 |
+| E2 | B_ENTRY | 0.566263994 | 1.420028904 | 1.989961852 | 0.800000000 | 0.967275161 |
+| E2 | Hermite | 0.566263143 | 1.420028907 | 2.329088882 | 0.800000000 | 0.998688695 |
+| E2 | V2 | 0.566263144 | 1.420028907 | 2.329089571 | 0.800000000 | 0.998682762 |
+| E3 | C3 | 0.396152141 | 0.799999996 | 1.443018274 | 0.800000000 | 0.776921665 |
+| E3 | B_ENTRY | 0.395481424 | 0.983307099 | 1.432638381 | 0.800000000 | 0.776921665 |
+| E3 | Hermite | 0.396714166 | 1.200000007 | 1.453867623 | 0.800000000 | 0.776921665 |
+| E3 | V2 | 0.396714246 | 1.200000007 | 1.453886570 | 0.800000000 | 0.776921665 |
+| E4 | C3 | 0.384016388 | 0.800000009 | 1.259677864 | 0.800000000 | 0.608791098 |
+| E4 | B_ENTRY | 0.384739716 | 1.200000020 | 1.304985634 | 0.800000000 | 0.520465292 |
+| E4 | Hermite | 0.386081179 | 1.200000023 | 1.679581569 | 0.800000000 | 0.554579416 |
+| E4 | V2 | 0.386081195 | 1.200000023 | 1.679586155 | 0.800000000 | 0.554579984 |
+
+### Planning diagnostics
+
+Hermite M=2 and V2 M=2 for every source. All V2 stability gates pass. All
+solves use 2 accepted steps, no rejected steps and no unsafe improving proposal.
+E1–E3 terminate on step tolerance; E4 on cost tolerance. The existing edge cutoff
+remains strictly >1e-5m. No solver setting, reference repair or retry changed.
+
+| Source | Initial total | E_in | E_out | E_smooth | E_space | Final total | Min bridge edge m |
+|---|---|---|---|---|---|---|---|
+| E1 | 0.130643656 | 0.066324450 | 0.063585012 | 0.000157987 | 0.000044148 | 0.130111596 | 0.025358902 |
+| E2 | 0.110296470 | 0.056492193 | 0.053509565 | 0.000070323 | 0.000026945 | 0.110099026 | 0.023502590 |
+| E3 | 0.175231966 | 0.089526656 | 0.085426631 | 0.000067637 | 0.000028198 | 0.175049122 | 0.030077047 |
+| E4 | 0.045559576 | 0.023098132 | 0.022404824 | 0.000012623 | 0.000004574 | 0.045520154 | 0.015282029 |
+
+All downstream original suffix rows coincide exactly. The following differences
+are descriptive saved-array comparisons; no additional solve was made.
+
+| Source | Max Hermite–V2 execution XY difference m | Max Hermite–V2 bridge row XY difference m |
+|---|---|---|
+| E1 | 0.011799985 | 0.001411666 |
+| E2 | 0.000000230 | 0.000855217 |
+| E3 | 0.000000114 | 0.000825712 |
+| E4 | 0.000000028 | 0.000378975 |
+
+E2–E4 Hermite/V2 maximum executed XY differences are approximately 2.30e-7,
+1.14e-7 and 2.76e-8 m. E1 differs by 0.01179998457835085m, with different attachment
+threshold-crossing times. These small observed differences are not repeatability
+or robustness estimates. Factor-cost improvement alone is not execution benefit.
+
+### What the official selector consumed
+
+All methods share each source's exact state at its first submit. The first
+submitted result already differs between C3/B_ENTRY, B_ENTRY/Hermite and
+B_ENTRY/V2; it first applies at the frozen release tick. No state is advanced by
+host solve time. Threshold for command-difference diagnostics remains1e-9.
+
+| Source | Method | First official H5 identities | Submits including E* | First original H5 submit tick |
+|---|---|---|---|---|
+| E1 | C3 | F_2, F_3, F_4, F_5, F_6 | 0 | 192 |
+| E1 | B_ENTRY | E*, F_1, F_2, F_3, F_4 | 2 | 204 |
+| E1 | Hermite | bridge_1, E*, F_1, F_2, F_3 | 2 | 204 |
+| E1 | V2 | bridge_1, E*, F_1, F_2, F_3 | 2 | 204 |
+| E2 | C3 | F_4, F_5, F_6, F_7, F_8 | 0 | 678 |
+| E2 | B_ENTRY | E*, F_3, F_4, F_5, F_6 | 1 | 684 |
+| E2 | Hermite | bridge_1, E*, F_3, F_4, F_5 | 1 | 684 |
+| E2 | V2 | bridge_1, E*, F_3, F_4, F_5 | 1 | 684 |
+| E3 | C3 | F_2, F_3, F_4, F_5, F_6 | 0 | 192 |
+| E3 | B_ENTRY | E*, F_2, F_3, F_4, F_5 | 1 | 198 |
+| E3 | Hermite | bridge_1, E*, F_2, F_3, F_4 | 1 | 198 |
+| E3 | V2 | bridge_1, E*, F_2, F_3, F_4 | 1 | 198 |
+| E4 | C3 | F_3, F_4, F_5, F_6, F_7 | 0 | 654 |
+| E4 | B_ENTRY | E*, F_2, F_3, F_4, F_5 | 1 | 660 |
+| E4 | Hermite | bridge_1, E*, F_2, F_3, F_4 | 1 | 660 |
+| E4 | V2 | bridge_1, E*, F_2, F_3, F_4 | 1 | 660 |
+
+C3 never exposes E* in a sampled successful H5 on these sources. B_ENTRY begins
+with E* in H5; Hermite/V2 begin with bridge_1 then E*. The rows after E* are exact
+original identities. First differing submit ticks are 192/678/192/654 and first
+differing application ticks 193/679/193/655 for E1/E2/E3/E4. `selector_exposure.csv`
+and result_summary.json retain first H5 poses, sampled E* exposure, first original
+row and first different submitted/applied commands. These records describe actual
+controller inputs; they do not identify a unique causal mechanism for the outcomes.
+
+### Trade-offs without a scalar winner
+
+- E1 B_ENTRY attaches 0.10000000521540642s earlier than C3 but reaches endpoint
+  dwell 0.10000000521540642s later. It has 0.1577624894980182m more original arc
+  left at attachment. Fast attachment is not fast endpoint dwell.
+- E1 V2 improves over Hermite: attachment earlier by 0.18333334289491177s and
+  endpoint dwell earlier by 0.01666666753590107s. It still attaches 0.10000000521540642s
+  later than B_ENTRY and only ties B_ENTRY endpoint dwell; no graph-specific positive.
+- E2–E4 all methods already satisfy sustained attachment at B. V2 and Hermite
+  endpoint dwell times are identical. B_ENTRY ties them in E2/E4 and precedes
+  them by one tick in E3. A recovery claim is inappropriate for these sources.
+- B_ENTRY position AUC.9 is lower than both bridges in all 4 sources. Compared to
+  C3 it is lower in E1/E3 and higher in E2/E4. C3 endpoint dwell precedes B_ENTRY
+  by 6/2/1/1 ticks across E1–E4, respectively.
+
+## Research interpretation
+
+Under the tested saved-corpus conditions, explicit B-aware staging remains
+sufficient even after excluding near-zero B→E* transition artifacts. No
+graph-specific necessity is supported.
+
+This conclusion concerns the frozen BOTH_DWELLS criterion, not universal speed
+or optimality. All methods have both dwells, so the experiment establishes no
+new recovery advantage for staging or graph. B_ENTRY has lower early position
+AUC than either bridge and preserves both dwells; C3 has earlier endpoint dwell
+in every source. V2's E1 improvement over Hermite does not exceed the simpler
+B_ENTRY comparison required by the frozen graph-positive rule.
+
+The corrected gate removes the micrometre-gap selection artifact. It does not
+guarantee hard execution: three selected sources are attached from B, and all
+rho_jump values remain below 1. Only 4 episodes survive the fixed gates. This is
+useful negative evidence about graph necessity within this available subset,
+not proof that meaningful geometry never needs intermediate reconciliation.
+No new graph or future study is implemented here.
+
+## Post-execution validation, artifacts and deviations
+
+Saved-only validation reproduces source selection, initial state, exact C3/raw
+suffix, complete reference safety, V2 costs and accepted/rejected trace semantics,
+official selector/memory, every integration state, logical schedule, guard and
+original-FRESH/endpoint metrics. Hash and numeric-sidecar `--check-only` passes.
+Validation performs zero new scientific solves or rollouts.
+
+Exactly 3 final PNGs were generated and inspected:
+
+1. [Direct-transition geometry](../results/direct_transition_hard_eval_02/figures/direct_transition_geometry.png)
+2. [Execution outcome](../results/direct_transition_hard_eval_02/figures/execution_outcome.png)
+3. [Severity versus method differences](../results/direct_transition_hard_eval_02/figures/severity_vs_method_difference.png)
+
+[Primary CSV](../results/direct_transition_hard_eval_02/primary.csv),
+[result summary](../results/direct_transition_hard_eval_02/result_summary.json),
+[call accounting](../results/direct_transition_hard_eval_02/call_accounting.json)
+and [validation](../results/direct_transition_hard_eval_02/validation.json) provide
+machine-readable facts. Large arrays/logs remain ignored under data/.
+
+No scientific protocol deviation: one solve/source, one rollout/method/source,
+no retry/tuning/acquisition, unchanged classifier and historical implementations.
+After visual inspection, a separate saved-only presentation script added scatter
+label padding/alternating offsets to prevent overlap. It leaves the frozen
+reporter, all numeric sidecars and all scientific hashes unchanged; the final
+figure manifest records its hash. No extra final PNG is retained.
+
+Claim boundaries remain those listed above: no population, real-world, real robot,
+async VLA, navigation-task-success, semantic-intent, full editable-FRESH-graph or
+automatic-correspondence claim. Normal freeze and result commits/pushes are used;
+no history rewrite or environment modification.

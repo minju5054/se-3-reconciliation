@@ -7,6 +7,20 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [meaningful direct-transition evaluation](docs/DIRECT_TRANSITION_HARD_EVAL_02.md)
+excludes all six prior evaluation episodes and requires a B→E* gap of at least 2 cm and rho of at least .10.
+Of 881 saved events, 90 pass the base gates and 4 independent episodes pass the new
+meaningful gate. **STAGING_HARD_TRANSITION_SUPPORTED**: B_ENTRY has both dwells
+in 4/4 evaluable sources, with zero shared safety failures, graph-specific positives,
+intermediate positives or V2-specific regressions. All four V2 solves converge;
+16 rollouts use 480 MPC solves and 472 physical result applications. B_ENTRY has
+lower early position AUC than both bridges, while C3 has earlier original-FRESH
+endpoint dwell in all four sources. Three sources already attach at B; all jumps
+are shorter than one original row spacing. No general graph-necessity or speed
+claim follows. No acquisition or retry.
+[Outcome PNG](results/direct_transition_hard_eval_02/figures/execution_outcome.png)
+and [geometry](results/direct_transition_hard_eval_02/figures/direct_transition_geometry.png).
+
 The [source-disjoint staging/graph evaluation](docs/STAGING_GRAPH_NECESSITY_EVAL_01.md)
 selected six saved handoffs before method outcomes, after excluding 33 prior
 development episodes from the 881-event corpus. **GRAPH_FORMULATION_NOT_ROBUST**:
