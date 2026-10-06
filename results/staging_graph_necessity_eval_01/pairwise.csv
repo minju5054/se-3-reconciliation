@@ -1,0 +1,13 @@
+source_id,baseline,position_auc_09_m_s,sustained_attachment_s,original_FRESH_endpoint_dwell_s
+episode_011_repeat_01/handoff_001,B_ENTRY_STAGE,0.004266428265858602,0.15000000782310963,0.0
+episode_011_repeat_01/handoff_001,HERMITE_BRIDGE,2.9516872734891564e-07,0.0,0.0
+episode_015_repeat_01/handoff_005,B_ENTRY_STAGE,,0.0,
+episode_015_repeat_01/handoff_005,HERMITE_BRIDGE,,0.0,
+episode_018_repeat_00/handoff_018,B_ENTRY_STAGE,0.003349315680044679,0.0,0.05000000260770321
+episode_018_repeat_00/handoff_018,HERMITE_BRIDGE,2.8225218863531243e-07,0.0,0.0
+episode_003_repeat_01/handoff_010,B_ENTRY_STAGE,,,
+episode_003_repeat_01/handoff_010,HERMITE_BRIDGE,,,
+episode_026_repeat_01/handoff_008,B_ENTRY_STAGE,,,
+episode_026_repeat_01/handoff_008,HERMITE_BRIDGE,,,
+episode_024_repeat_01/handoff_009,B_ENTRY_STAGE,,,
+episode_024_repeat_01/handoff_009,HERMITE_BRIDGE,,,

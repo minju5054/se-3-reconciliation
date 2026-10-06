@@ -1,0 +1,273 @@
+{
+  "saved_only": true,
+  "new_scientific_calls": 0,
+  "definition": "Frozen MPC_applications counts scheduler result releases; physical count requires at least one applied integration command carrying that result ID. Guard-blocked release is not physical application.",
+  "counts": {
+    "solves": 539,
+    "logical_result_releases": 536,
+    "new_MPC_results_physically_applied": 532,
+    "executed_intervals": 3234
+  },
+  "rows": [
+    {
+      "source": "episode_011_repeat_01/handoff_001",
+      "method": "C3_ENTRY_SUFFIX",
+      "rollout_sha256": "dc8740330fbae98b1cd60c10752e1b2f1408e17080b7c34690a4fd6523fb4eb8",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_011_repeat_01/handoff_001",
+      "method": "B_ENTRY_STAGE",
+      "rollout_sha256": "400f93fea6dbf4b9aa985a55b8c388b09f828500c43917621c42625ee7eb13df",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_011_repeat_01/handoff_001",
+      "method": "HERMITE_BRIDGE",
+      "rollout_sha256": "38cb6230f2cce2c16d8ab4d56c335240ed00c5e3022cbd99a1ca1e3be3b84388",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_011_repeat_01/handoff_001",
+      "method": "V2_GRAPH_BRIDGE",
+      "rollout_sha256": "9777824da69a3ab1327d145c3a44fe66d24d45606bc910bef020a0ec421b4e89",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_015_repeat_01/handoff_005",
+      "method": "C3_ENTRY_SUFFIX",
+      "rollout_sha256": "8392b7e28c458d2cf470a3b52e4050cd5203c0fc83fcc35efba0bda5593c9f3a",
+      "solves": 7,
+      "logical_result_releases": 7,
+      "new_MPC_results_physically_applied": 6,
+      "released_but_guard_blocked": [
+        "C3_ENTRY_SUFFIX_NEW_000006"
+      ],
+      "executed_intervals": 42,
+      "termination": "SAFETY_ABORT_BEFORE_UNSAFE_COMMAND",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_015_repeat_01/handoff_005",
+      "method": "B_ENTRY_STAGE",
+      "rollout_sha256": "a08da400f5a518828acd3a887a990db6d39d67d4898a849ed297a55555cad4a9",
+      "solves": 8,
+      "logical_result_releases": 8,
+      "new_MPC_results_physically_applied": 7,
+      "released_but_guard_blocked": [
+        "B_ENTRY_STAGE_NEW_000007"
+      ],
+      "executed_intervals": 48,
+      "termination": "SAFETY_ABORT_BEFORE_UNSAFE_COMMAND",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_015_repeat_01/handoff_005",
+      "method": "HERMITE_BRIDGE",
+      "rollout_sha256": "d97bd0ad2863d3377426f2b9d5a1393f0869befabb0562eb87d7f877b651ed55",
+      "solves": 7,
+      "logical_result_releases": 7,
+      "new_MPC_results_physically_applied": 6,
+      "released_but_guard_blocked": [
+        "HERMITE_BRIDGE_NEW_000006"
+      ],
+      "executed_intervals": 42,
+      "termination": "SAFETY_ABORT_BEFORE_UNSAFE_COMMAND",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_015_repeat_01/handoff_005",
+      "method": "V2_GRAPH_BRIDGE",
+      "rollout_sha256": "c185d01caf4947c7cb5dc349bf391826a512089b3427c6de621edf799444df80",
+      "solves": 7,
+      "logical_result_releases": 7,
+      "new_MPC_results_physically_applied": 6,
+      "released_but_guard_blocked": [
+        "V2_GRAPH_BRIDGE_NEW_000006"
+      ],
+      "executed_intervals": 42,
+      "termination": "SAFETY_ABORT_BEFORE_UNSAFE_COMMAND",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_018_repeat_00/handoff_018",
+      "method": "C3_ENTRY_SUFFIX",
+      "rollout_sha256": "0305d406c2b8f44951258e3716102cd7ae869172953a551a6a61f99bb22c6b13",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_018_repeat_00/handoff_018",
+      "method": "B_ENTRY_STAGE",
+      "rollout_sha256": "1d67ca64f106215b39d76cb268d87db7098ccf135a1d79a5a21a19746f0c37a2",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_018_repeat_00/handoff_018",
+      "method": "HERMITE_BRIDGE",
+      "rollout_sha256": "51c513f483db2d95c16938a3295fe30f49443a775d9c89dc462a62c8e3889b06",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_018_repeat_00/handoff_018",
+      "method": "V2_GRAPH_BRIDGE",
+      "rollout_sha256": "849d351d2e3e2f0d81a78319a2f40786142ca0f207ce724103ef976bb1a709e1",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_003_repeat_01/handoff_010",
+      "method": "C3_ENTRY_SUFFIX",
+      "rollout_sha256": "d5f1a3286a3b012db59abdc64e8c908a1501c2c845d2c0db91d3672658bc723e",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_003_repeat_01/handoff_010",
+      "method": "B_ENTRY_STAGE",
+      "rollout_sha256": "9a373fee60c49c58e52fc4527a0eea3f10858826a3929f2a6947c8489ccda5f4",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_003_repeat_01/handoff_010",
+      "method": "HERMITE_BRIDGE",
+      "rollout_sha256": "758774a867c5a07e4d75c9e00488cf6570eb2242f8904509e958dd647497db6e",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_026_repeat_01/handoff_008",
+      "method": "C3_ENTRY_SUFFIX",
+      "rollout_sha256": "d1b99b92f5d717c40bf9e9e04b903fe6a31aa721cfff87c6914f7e621ed60123",
+      "solves": 30,
+      "logical_result_releases": 29,
+      "new_MPC_results_physically_applied": 29,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_026_repeat_01/handoff_008",
+      "method": "B_ENTRY_STAGE",
+      "rollout_sha256": "49591767378a057debbdff293936418d367613db6f408936d667045858bae871",
+      "solves": 30,
+      "logical_result_releases": 29,
+      "new_MPC_results_physically_applied": 29,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_026_repeat_01/handoff_008",
+      "method": "HERMITE_BRIDGE",
+      "rollout_sha256": "bb26405efd6b5a85b81b8dbfd4117a66c5e8b685180749c2952f552a3fa94edc",
+      "solves": 30,
+      "logical_result_releases": 29,
+      "new_MPC_results_physically_applied": 29,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_024_repeat_01/handoff_009",
+      "method": "C3_ENTRY_SUFFIX",
+      "rollout_sha256": "1eecbe7e723fc0788545985a55d5c12129284c21a364e2c6edf1f86acac8ca3c",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_024_repeat_01/handoff_009",
+      "method": "B_ENTRY_STAGE",
+      "rollout_sha256": "bee23a2ec25960ad54b1c9cc1abecf62c9545b44c75138984163a084e8e86efd",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    },
+    {
+      "source": "episode_024_repeat_01/handoff_009",
+      "method": "HERMITE_BRIDGE",
+      "rollout_sha256": "7dffac0f7f14b04d08b739b8b227faf64d8d3f60f268b8ba0efdf39d56680fa3",
+      "solves": 30,
+      "logical_result_releases": 30,
+      "new_MPC_results_physically_applied": 30,
+      "released_but_guard_blocked": [],
+      "executed_intervals": 180,
+      "termination": "OBSERVATION_CAP",
+      "frozen_schedule_prefix_exact": true
+    }
+  ]
+}

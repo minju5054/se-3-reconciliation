@@ -7,6 +7,18 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [source-disjoint staging/graph evaluation](docs/STAGING_GRAPH_NECESSITY_EVAL_01.md)
+selected six saved handoffs before method outcomes, after excluding 33 prior
+development episodes from the 881-event corpus. **GRAPH_FORMULATION_NOT_ROBUST**:
+zero graph-specific/intermediate positive sources; three converged V2 references
+fail the unchanged minimum-edge gate and are skipped. B_ENTRY reaches both dwells
+in five sources, while every method is guard-aborted on E2. Executable V2 closely
+matches Hermite with no dwell-time gain. Six V2 solves and 21 rollouts used 539 MPC
+solves; no new acquisition or retry. These are controlled saved-corpus results,
+not population or online-deployment evidence.
+[Outcome PNG](results/staging_graph_necessity_eval_01/figures/execution_outcome.png)
+and [severity diagnostic](results/staging_graph_necessity_eval_01/figures/severity_vs_benefit.png).
+
 The [boundary-row staging ablation](docs/B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04.md)
 ran four `[B, E*, original suffix]` rollouts with 120 official MPC solves and
 zero optimization. **STAGING_SUFFICIENT_AND_PENALTY_REDUCED**: staging alone

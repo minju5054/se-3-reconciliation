@@ -260,18 +260,118 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/stagin
 
 ## Repository-confirmed facts
 
-Scientific results pending pushed freeze and single execution.
+Scientific freeze: `926d1ad3cf27259d160171beb6529a6fb687ce6b`, pushed before all selected-source solves. No frozen code/config/input changed afterward. Saved-only validation and PNG numeric/hash parity passed. Full machine precision is retained in [primary.csv](../results/staging_graph_necessity_eval_01/primary.csv) and [result_summary.json](../results/staging_graph_necessity_eval_01/result_summary.json).
+
+### Frozen classification and accounting
+
+**GRAPH_FORMULATION_NOT_ROBUST**. Graph-specific positive=0; intermediate-geometry positive=0. V2 regressions=4: one guard abort (E2, shared by every method), plus three skipped invalid references whose simpler baselines retain both dwells (E4–E6). These are not four executed comparative degradations. V2 nonconvergence=0; invalid final references=3.
+
+All six V2 solves preceded all rollouts. C3/B_ENTRY/Hermite ran six each; V2 ran three. Total 21 rollouts, 17 complete caps and 4 censored guard-abort prefixes. Optimizer 6; MPC solves 539. Retries, new Native/historical scientific reruns, LightNav, RGB, Isaac and source acquisition all 0.
+
+The frozen legacy `MPC_applications` counter is 536 logical result releases. Four releases at the E2 abort ticks never produced an applied integration command. **532 newly computed MPC results were physically applied**, across 3,234 valid integration intervals. Three solved results were withheld at the cap. The already-applied common-B command is restored, not a new solve. [Application accounting](../results/staging_graph_necessity_eval_01/application_accounting.json) audits command IDs and every retained schedule prefix. This labeling clarification changes no execution, metric or classification.
+
+Predeclared upper counts were 720 solves/712 releases over 24 rollouts. Three invalid V2 skips remove 90 solves/89 releases; E2 abort prefixes remove 91 solves/87 releases. Actual totals 539/536 follow exactly. C3: 7 / B_ENTRY: 8 / Hermite: 7 / V2: 7 solves occurred on E2; each complete rollout used 30.
+
+### Transition and downstream results
+
+All metrics below target FULL ORIGINAL FRESH. Seconds are actual execution time after B. Endpoint dwell is original-FRESH endpoint dwell, never navigation-task completion. Zero attachment means the full following .30s dwell already starts at B. N/A is null, never an imputed cap. E2 attachment at 0 is observed, but none of its methods is a safety-valid BOTH_DWELLS success.
+
+| Source | Method | XY AUC .9 [m s] | Attachment [s] | Original row at attach | Remaining arc [m] | Endpoint dwell [s] | Post-attach [s] | Endpoint error at cap [m] |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| E1 | C3 | 0.0931448 | 0.8 | 5.14133 | 0.58478 | 1.45 | 0.65 | 0.0502537 |
+| E1 | B_ENTRY | 0.0840841 | 0.616667 | 3.66389 | 0.806497 | 1.53333 | 0.916667 | 0.041869 |
+| E1 | Hermite | 0.0883502 | 0.766667 | 4.44836 | 0.688843 | 1.53333 | 0.766667 | 0.0458936 |
+| E1 | V2 | 0.0883505 | 0.766667 | 4.44836 | 0.688843 | 1.53333 | 0.766667 | 0.0458939 |
+| E2 | C3 | N/A | 0 | 1.39049 | 1.15061 | N/A | N/A | N/A |
+| E2 | B_ENTRY | N/A | 0 | 1.39049 | 1.15061 | N/A | N/A | N/A |
+| E2 | Hermite | N/A | 0 | 1.39049 | 1.15061 | N/A | N/A | N/A |
+| E2 | V2 | N/A | 0 | 1.39049 | 1.15061 | N/A | N/A | N/A |
+| E3 | C3 | 0.0745426 | 0 | 2.21844 | 0.849087 | 0.983333 | 0.983333 | 0.0546082 |
+| E3 | B_ENTRY | 0.0734368 | 0 | 2.21844 | 0.849087 | 1.03333 | 1.03333 | 0.0530693 |
+| E3 | Hermite | 0.0767859 | 0 | 2.21844 | 0.849087 | 1.08333 | 1.08333 | 0.0542706 |
+| E3 | V2 | 0.0767862 | 0 | 2.21844 | 0.849087 | 1.08333 | 1.08333 | 0.0542709 |
+| E4 | C3 | 3.97556e-06 | 0 | 2.43612 | 0.985801 | 1.11667 | 1.11667 | 0.0148294 |
+| E4 | B_ENTRY | 3.84588e-06 | 0 | 2.43612 | 0.985801 | 1.15 | 1.15 | 0.0172294 |
+| E4 | Hermite | 4.02463e-06 | 0 | 2.43612 | 0.985801 | 1.15 | 1.15 | 0.0172294 |
+| E4 | V2 (invalid; skipped) | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
+| E5 | C3 | 2.75547e-05 | 0 | 2.56192 | 0.875382 | 1 | 1 | 0.0158037 |
+| E5 | B_ENTRY | 2.75547e-05 | 0 | 2.56192 | 0.875382 | 1 | 1 | 0.0158037 |
+| E5 | Hermite | 2.75547e-05 | 0 | 2.56192 | 0.875382 | 1 | 1 | 0.0158037 |
+| E5 | V2 (invalid; skipped) | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
+| E6 | C3 | 1.72849e-05 | 0 | 2.09744 | 0.945215 | 1.06667 | 1.06667 | 0.0150307 |
+| E6 | B_ENTRY | 1.69311e-05 | 0 | 2.09744 | 0.945215 | 1.06667 | 1.06667 | 0.0157255 |
+| E6 | Hermite | 1.69311e-05 | 0 | 2.09744 | 0.945215 | 1.06667 | 1.06667 | 0.0157255 |
+| E6 | V2 (invalid; skipped) | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
+
+The complete CSV also records .3s position AUC, .3/.9s yaw AUC, initial errors, max first-.5s error, separation growth, original arc fraction, first endpoint tube entry, path length/speed before dwell, command TV/limits, clearance and abort tick.
+
+### Planning status
+
+| Source | Solver exit | Iterations | Min edge [m] | Numerical gate (>1e-5 m) | Initial cost | Final cost |
+|---|---|---:|---:|---|---:|---:|
+| E1 | cost_tolerance | 3 | 0.0276235254929 | PASS | 0.172198206941 | 0.171225498484 |
+| E2 | step_tolerance | 3 | 0.0284493252516 | PASS | 0.170284089662 | 0.169701380184 |
+| E3 | step_tolerance | 3 | 0.0351744749997 | PASS | 0.249796278981 | 0.249089373789 |
+| E4 | gradient_tolerance | 1 | 7.57317890323e-07 | FAIL | 1.01866783034e-10 | 1.01866783034e-10 |
+| E5 | step_tolerance | 1 | 8.24192561714e-07 | FAIL | 1.20232314008e-10 | 1.20232314008e-10 |
+| E6 | step_tolerance | 1 | 1.31921896619e-06 | FAIL | 3.0795930805e-10 | 3.0795930805e-10 |
+
+All six solvers report convergence. E4–E6 terminate on the initial state with edges shorter than 1.4 micrometres, below the unchanged 1e-5 m stability gate. Their feasible last iterates and traces are preserved as diagnostics and never executed. These sources were selected before outcomes because prescribed abs(log rho) ranks extreme compression highly. This is a numerical-domain failure of the frozen method on those selected geometries, not a collision or a max-iteration failure.
+
+All 24 complete supplied/diagnostic references passed direct geometry safety, with minimum edge clearance 0.10573980422963852 m. All have no polyline self-intersection. Exact B/E*, original downstream Native-installed bits, raw observation-local rows, official controller source/settings and frozen input hashes remained unchanged. Factor costs and complete bridge geometry remain in result_summary.json and reference_geometry.csv.
+
+### Safety, censoring and schedule comparability
+
+17 executed methods complete 180 intervals with exact primary/full schedule equality. All 21 restored the exact common state; all attempted submits and released results match the predetermined schedule through each retained prefix. Paused wall-clock waits preserve simulation state. E2 has no full .9s comparison: it stops before that window, so all four .9s AUC values and cap endpoint errors remain N/A. The source is not removed and no continuation is fabricated.
+
+| E2 method | Abort tick | Prefix duration [s] | Executed swept clearance lower bound [m] | Rejected hold clearance lower bound [m] |
+|---|---:|---:|---:|---:|
+| C3 | 475 | 0.700000036508 | 0.0616492093027 | 0.0434064906531 |
+| B_ENTRY | 481 | 0.800000041723 | 0.0500313839412 | 0.0400276289393 |
+| Hermite | 475 | 0.700000036508 | 0.0649263308449 | 0.04422875812 |
+| V2 | 475 | 0.700000036508 | 0.0649261090237 | 0.0442285584355 |
+
+The unchanged guard evaluates the nominal next .1s command hold, with its curved-path reserve. Each rejected command has `command_applied=false`; the command never advances the physical state. Minimum clearance across all retained executed prefixes is 0.05003138394115632 m. Safe prefixes do not establish successful continuation beyond the abort. Controller numerical errors=0; unsafe reference geometries=0; execution guard aborts=4, all E2.
+
+### Actual selector exposure and near-overlap
+
+| Source | C3 nearest / first H5 | B_ENTRY nearest / first H5 | Hermite nearest / first H5 | V2 nearest / first H5 |
+|---|---|---|---|---|
+| E1 | E* / F_2 | B / E* | B / bridge_1 | B / bridge_1 |
+| E2 | F_2 / F_3 | B / E* | B / bridge_1 | B / bridge_1 |
+| E3 | E* / F_3 | B / E* | B / bridge_1 | B / bridge_1 |
+| E4 | E* / F_3 | B / E* | B / bridge_1 | N/A (skipped) |
+| E5 | F_3 / F_4 | F_3 / F_4 | F_3 / F_4 | N/A (skipped) |
+| E6 | E* / F_3 | B / E* | bridge_1 / E* | N/A (skipped) |
+
+All H5 identities, entry/bridge exposure counts and first original-H5 submit are saved in selector_exposure.csv; full sampled event arrays remain in ignored data. These are descriptive observations, not a separate selector causal experiment.
+
+V2 versus Hermite maximum reference XY differences in E1/E2/E3 are 0.0018996485520544875 / 0.0014756306875389864 / 0.0016372143375418093 m. Maximum matched execution XY differences are only 6.284376713596705e-7 / 2.2972667883036726e-7 / 4.785213079184686e-7 m. E1 and E3 attachment/endpoint times match exactly; E2 shares the same 0.7 s abort time. E5 reported tracking/control metrics are identical for C3/B_ENTRY/Hermite; E6 B_ENTRY/Hermite metrics match. Numerical differences are preserved without calling them graph-specific gains.
+
+### Figures and validation
+
+Exactly three final PNGs, generated from saved records with matched numeric/hash sidecars and visually inspected:
+
+- [Source/reference geometry](../results/staging_graph_necessity_eval_01/figures/source_reference_geometry.png). Equal axes; invalid V2 last iterates labeled diagnostic only.
+- [Execution outcomes](../results/staging_graph_necessity_eval_01/figures/execution_outcome.png). Zero and N/A remain distinct; E4–E6 AUCs are tiny positive values, preserved in the CSV.
+- [Severity versus paired benefit](../results/staging_graph_necessity_eval_01/figures/severity_vs_benefit.png). Missing dwell/invalid V2 differences listed explicitly; no statistical fit.
+
+Saved-only validation passed before rendering and check-only validation passed afterward. It reproduced the 881-record source selection; audited every V2 trace/damping/feasibility decision and factor cost; restored controller memory/generation, official selections, held-command integrations, guard outcomes and endpoint dwell; matched all CSV hashes, figure hashes and numeric sidecars. No new scientific solve was made by validation or reporting.
+
+No scientific protocol deviation, source replacement, retry, tuning, frozen-code/config change or extra acquisition occurred. The initial inventory used the same functions inline before the CLI existed, as declared before freeze. The application counter clarification and explicit abort-prefix audit are saved-only reporting additions. An interim progress message mistakenly generalized the cap-completion logs; it was corrected upon the full audit. Scientific records were unchanged.
 
 ## Research interpretation
 
-No scientific method outcome has been generated at this protocol stage.
+This subset provides no graph-specific or intermediate-geometry positive source under the frozen criteria. Where V2 is executable, it is nearly indistinguishable from deterministic Hermite in actual motion and has no attachment/endpoint advantage. B_ENTRY obtains both dwells in five of six sources, but E2 prevents the stronger STAGING_EVALUATION_SUPPORTED classification. No method resolves that source safely within this run.
+
+E1 shows a transition/completion trade-off: B_ENTRY attachment is 0.18333334289491177 s earlier than C3, while original-FRESH endpoint dwell is 0.08333333767950535 s later and more original arc remains at attachment. Relative to Hermite/V2, B_ENTRY attaches 0.15000000782310963 s earlier with equal endpoint dwell. E3 B_ENTRY endpoint dwell is 0.05000000260770321 s earlier than either bridge but 0.05000000260770321 s later than C3. This does not support one scalar ranking.
+
+The three V2-invalid cases expose a limitation of this frozen M2 bridge domain and numerical gate when the selected entry is micrometres from B. They do not show optimizer nonconvergence. Together with zero graph-specific gains, the results do not justify advancing a more complex editable-FRESH graph on the strength of this experiment. No new factor, correspondence method or future stage was implemented.
 
 ## Not demonstrated / limitations
 
-Not unseen population evaluation, online asynchronous VLA validation, real-world
-validation, navigation task success, semantic intent proof, automatic correspondence
-validation, full editable-FRESH graph validation or graph superiority unless the
-frozen GRAPH_SPECIFIC_GAIN_SUPPORTED criterion passes. Episode-repeat separation
-is not scenario-family separation. Shared raw arrays limit diversity. Numerical
-micrometre gaps and the fixed V2 collapse gate may be relevant; no threshold is
-changed to favor a result. The next full-FRESH graph/correspondence stage is excluded.
+Not unseen population evaluation, online asynchronous VLA validation, real-world validation, navigation task success, semantic intent proof, automatic correspondence validation, full editable-FRESH graph validation or graph superiority. GRAPH_SPECIFIC_GAIN_SUPPORTED did not pass.
+
+Six saved sources are disjoint from registered development episodes, but episode-repeat separation is not scenario-family separation. E5/E6 share raw FRESH geometry, so there are only five unique raw arrays. Selection deliberately emphasizes two geometric extremes; it is not a random population sample. All executed methods in E2–E6 satisfy the initial attachment dwell, limiting attachment-timing discrimination. E4–E6 severity is dominated by micrometre compression, not a long transition gap. The fixed numerical gate and finite-difference scale limit V2 availability there.
+
+E2 is censored before .9s for all methods. Its observed t=0 attachment and safe executed prefix do not imply downstream safety or endpoint recovery. Guard-blocked results are never physically applied. All timing is controlled offline; host solver speed does not determine application time. No result establishes obstacle generalization or a final reconciliation method.

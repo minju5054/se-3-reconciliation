@@ -1,0 +1,18 @@
+{
+  "saved_source_records_inspected": 881,
+  "eligible_candidates": 134,
+  "selected_source_count": 6,
+  "new_V2_optimizer_solves": 6,
+  "V2_retries": 0,
+  "MPC_solves": 539,
+  "MPC_applications": 536,
+  "LightNav": 0,
+  "RGB": 0,
+  "Isaac": 0,
+  "new_source_acquisitions": 0,
+  "historical_scientific_reruns": 0,
+  "C3_ENTRY_SUFFIX_rollouts": 6,
+  "B_ENTRY_STAGE_rollouts": 6,
+  "HERMITE_BRIDGE_rollouts": 6,
+  "V2_GRAPH_BRIDGE_rollouts": 3
+}

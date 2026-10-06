@@ -6616,3 +6616,43 @@ git diff --cached --check
   latest focused 48 passed (744 distinct passed across runs). Compileall and diff
   checks pass. Three synthetic PNGs visually checked; no synthetic scientific claim.
   Full commands and limitations are in docs/STAGING_GRAPH_NECESSITY_EVAL_01.md.
+
+
+## 2026-10-06 — STAGING_GRAPH_NECESSITY_EVAL_01 saved results
+
+- Pushed scientific freeze 926d1ad3cf27259d160171beb6529a6fb687ce6b before all
+  selected-source solves. All 836 code/config/test and 201 prepared-input hashes
+  remain exact, as do the 3,987 source authentication hashes. No result-driven
+  source/config/code changes, retries, acquisition or historical scientific reruns.
+- Six V2 solves converge. E1-E3 pass every stability gate; E4-E6 fail only the
+  unchanged >1e-5 m edge gate (minimum edges .757/.824/1.319 micrometres).
+  Their last feasible iterates are preserved; their rollouts are skipped.
+- Ran C3/B_ENTRY/Hermite six each and V2 three: 21 rollouts. 17 complete 180 intervals.
+  E2 all four guard-abort, retaining 42/48/42/42 intervals (.7/.8/.7/.7s).
+  No unsafe command is applied and no continuation is fabricated. Minimum retained
+  swept clearance .05003138394115632m; every complete reference passes geometry.
+- Actual MPC solves 539; frozen legacy MPC_applications counter 536 denotes logical
+  result releases. Four E2 releases are guard-blocked, so 532 new MPC results reach
+  physical integration. Application-accounting sidecar authenticates each rollout,
+  applied command IDs and exact retained schedule prefixes; three results withheld
+  at cap. Total 3,234 integration intervals. Optimizer6/retry0; Native/LightNav/RGB/
+  Isaac/new-source/historical-rerun counts0. Reporting clarifies the legacy counter
+  without changing frozen code, scheduling, metrics or classification.
+- Frozen classification GRAPH_FORMULATION_NOT_ROBUST. Graph-specific positive0,
+  intermediate positive0, V2 nonconvergence0, invalid reference3, regressions4:
+  E2 guard abort shared by all methods, plus unavailable V2 dwells in E4-E6 while
+  both simpler references retain them. These are not four executed regressions.
+- B_ENTRY has both dwells in 5/6, so E2 prevents STAGING_EVALUATION_SUPPORTED.
+  E1 B_ENTRY attaches .1833333429s before C3 but endpoint dwell is .0833333377s
+  later; more original arc remains at attachment. E3 B_ENTRY endpoint is .05s
+  before bridges and .05s after C3. V2/Hermite dwell times match on E1/E3;
+  E2 shares the .7s abort. Their maximum matched XY difference is below 6.3e-7 m.
+- Saved-only validation and post-render check-only validation pass; independent
+  CSV/summary and application-accounting checks pass. Exactly three final PNGs
+  visually inspected with numeric/hash parity. E2 censored .9s AUC/endpoint and
+  E4-E6 skipped V2 remain N/A. No graph-superiority, population, asynchronous
+  deployment, navigation-task-success or semantic-intent claim is made.
+- Regression 742 passed/one known missing-corpus skip; latest focused 48 passed
+  (744 distinct across runs), compileall/diff checks pass. Only small results/docs
+  and a conservative README update enter this result commit; large data stays
+  ignored and unrelated user changes remain preserved.
