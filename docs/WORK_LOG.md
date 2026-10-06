@@ -6845,3 +6845,26 @@ git diff --cached --check
   ignored source bundle explicitly invalid as scientific source, with no chunks
   or handoffs. No graph/future-stage work. 538 distinct tests pass,1 corpus skip;
   focused30 pass, compileall/diff checks pass. User changes remain untouched.
+
+### 2026-10-06 — continuous episode startup loader diagnosis
+
+- Fetched origin/main; starting HEAD `a8409a0013d4fab91b9384ac6511bdaa9b3512f3`.
+  Reattached request is unchanged, including retry=0. No acquisition was retried.
+- Identified assistant launch-command omission: the historical OSA03 command
+  clears inherited CUDA/ROS environment variables, but the failed new launch
+  omitted that prefix. Inherited LD_LIBRARY_PATH selects system CUDA 12.6
+  nvJitLink, which lacks the required 12_8 symbols.
+- Read-only `ldd -r` comparison: inherited environment has 8 undefined symbols;
+  removing only LD_LIBRARY_PATH selects Isaac's existing bundled nvJitLink and
+  has 0. Both exit codes are 0; output and library hashes are saved in the tracked
+  startup_loader_diagnosis.json. Full SimulationApp startup remains untested.
+- Appended the cause and launch omission as a protocol deviation. Preserved
+  original freeze, failed run, result summary and four unavailable-data PNGs.
+  No external installation, scientific code/config edit or new scientific call.
+  TECHNICAL_EXECUTION_BLOCKED remains unchanged. A new attempt requires an
+  explicit exception to retry=0 and a separately preserved run/pushed freeze.
+- Focused30 pass; frozen code/input/external hash verification, compileall and
+  diff checks pass. Saved-only diagnosis/prior technical evidence audit passes.
+  Prior sealing script rerun stopped at its exclusive-create guard; existing
+  outputs preserved, same read-only checks rerun separately. Corrected an ad hoc
+  symbol-name parser's trailing-comma handling; raw diagnosis logs unchanged.

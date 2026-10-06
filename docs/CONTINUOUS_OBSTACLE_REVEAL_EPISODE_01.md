@@ -286,3 +286,85 @@ intent evolution. The intended C0→C1→C2→C3 source remains unacquired. Only
 implementation, pre-science authentication/tests and failed startup attempt are
 established. No bypass, semantic recognition, graph/reconciliation improvement,
 navigation success or generalization claim follows.
+
+## 2026-10-06 startup diagnosis addendum
+
+Starting HEAD and fetched origin/main for this diagnosis:
+`a8409a0013d4fab91b9384ac6511bdaa9b3512f3`.
+The repeated attachment contains the same experiment and `retry = 0` constraint.
+No second acquisition was launched. The scientific freeze remains
+`2334b8e528b77395e24bde956f31cc0ee5cb474b`; the failed result and its raw logs
+remain preserved.
+
+### Confirmed cause and correction to the earlier account
+
+The assistant omitted the environment-cleaning prefix documented in
+[the OSA03 launch command](OBSTACLE_SOURCE_ACQUISITION_03_OBSTRUCTED_OLD.md).
+The inherited `LD_LIBRARY_PATH` placed `/usr/local/cuda/lib64` before Isaac's
+bundled libraries. This selected CUDA 12.6 `libnvJitLink.so.12.6.20`, which lacks
+the `12_8` symbols required by Isaac's bundled `libcusparse.so.12`. This launch
+omission is an additional protocol deviation. There is no evidence here that a
+PyTorch package needs installation.
+
+Read-only loader relocation checks on the same `libcusparse.so.12` establish:
+
+| Process environment | Selected nvJitLink | Undefined symbols |
+|---|---|---:|
+| Inherited `LD_LIBRARY_PATH` | System CUDA 12.6 | 8 |
+| `LD_LIBRARY_PATH` removed | Isaac bundled nvJitLink | 0 |
+
+Both `ldd -r` commands returned exit code 0; their text output, rather than the
+exit code alone, establishes the difference. The exact commands, library paths,
+SHA256 hashes, output hashes and historical command are recorded in
+[startup_loader_diagnosis.json](../results/continuous_obstacle_reveal_episode_01/startup_loader_diagnosis.json).
+The two diagnostic commands were:
+
+```bash
+ldd -r /home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/libcusparse.so.12
+env -u LD_LIBRARY_PATH ldd -r /home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/libcusparse.so.12
+```
+
+Removing the variable applies only to the diagnostic child process. No external
+file, system Python, package or virtual environment was changed. This check
+resolves the observed relocation failure; it does **not** validate SimulationApp
+startup, live rendering, timing qualification or acquisition.
+
+### Execution boundary and proposed recovery
+
+Additional LightNav predictions, warmups, RGB captures, SimulationApp starts,
+MPC solves and research optimizer calls during this diagnosis are all **0**.
+The classification remains **TECHNICAL_EXECUTION_BLOCKED**, with no valid new
+source episode. The four existing PNGs continue to show unavailable scientific
+data; they have not been replaced with inferred geometry or images.
+
+A recovery attempt would preserve this failed run, prepare a separately named
+run with separately preserved manifests, authenticate the same OSA03 inputs,
+and commit/push a new freeze before starting. Its launch would use the exact
+historical OSA03 environment cleanup, as recorded in the diagnosis JSON's
+`proposed_launch_template`; no installation or scientific-method change is
+proposed. No such recovery has been executed. The attachment's section 5 says
+`retry = 0`, and section 19 says `Do not retry`; an explicit user exception is
+required before an additional acquisition attempt.
+
+### Diagnosis validation
+
+Focused tests: **30 passed**. Frozen implementation/input/external hashes,
+compileall and diff checks pass. A saved-only audit verifies the recorded
+library/log/source hashes, the 8-versus-0 symbol counts, and the unchanged prior
+technical result, CSV and four PNGs. Its archived path/hash is in the diagnosis
+JSON. This is not a scientific episode validation.
+
+Reexecuting the prior technical evidence script reached its exclusive-create
+guard because `chunks.csv` already exists. No output was overwritten. The new
+audit executes that script's exact read-only assertions, then checks the existing
+outputs; it does not execute its output-writing block. An initial ad hoc loader
+hash check captured the trailing comma after each symbol name; the final parser
+checks symbol names without this punctuation. The raw loader logs are unchanged.
+
+```bash
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/continuous-reveal-mpl .venv/bin/python -m pytest -q tests/test_continuous_obstacle_reveal_episode01.py
+.venv/bin/python scripts/run_continuous_obstacle_reveal_episode01.py --mode verify --run data/continuous_obstacle_reveal_episode_01/primary_20261006
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/continuous-reveal-mpl .venv/bin/python data/continuous_obstacle_reveal_episode_01/primary_20261006/reporting/loader_diagnosis/validate_saved.py
+.venv/bin/python -m compileall -q src scripts tests
+git diff --check
+```

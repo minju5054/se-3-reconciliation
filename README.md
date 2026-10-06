@@ -11,6 +11,9 @@ The [continuous obstacle-reveal episode attempt](docs/CONTINUOUS_OBSTACLE_REVEAL
 is **TECHNICAL_EXECUTION_BLOCKED**: Isaac failed during startup with a CUDA library
 symbol error, before any live RGB, C0–C3 prediction or MPC execution. One server
 warmup, zero retries, and no new source episode or reconciliation result.
+Read-only diagnosis traced the error to an omitted OSA03 launch environment
+cleanup; using the bundled library resolves the checked symbols. Full startup
+remains untested, and the no-retry constraint remains in effect.
 
 The [canonical common-B execution comparison](docs/CANONICAL_GRAPH_COMMON_B_EXECUTION_01.md)
 reused the saved full-FRESH graph solutions and ran eight frozen MPC rollouts on

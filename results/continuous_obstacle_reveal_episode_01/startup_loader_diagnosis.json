@@ -1,0 +1,84 @@
+{
+  "starting_sha": "a8409a0013d4fab91b9384ac6511bdaa9b3512f3",
+  "scope": "read-only loader relocation diagnosis; no SimulationApp or scientific call",
+  "root_cause": "Prior launch omitted the historical OSA03 environment-cleaning prefix; inherited LD_LIBRARY_PATH selects system CUDA 12.6 nvJitLink lacking required 12_8 symbols.",
+  "responsibility": "Assistant launch-command omission; no evidence of a missing installed PyTorch package.",
+  "inherited_LD_LIBRARY_PATH": "/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib:/usr/local/cuda/lib64:",
+  "libcusparse_path": "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/libcusparse.so.12",
+  "libcusparse_sha256": "437651d1ec5d0e5b1b4d07b8c492f153cb4825222fe2d763232a407f667d9bb2",
+  "historical_launch_source": "docs/OBSTACLE_SOURCE_ACQUISITION_03_OBSTRUCTED_OLD.md",
+  "historical_launch_source_sha256": "6fc028ef42604f3089ccc07c3c4e64725cbb1723b1638ee2e62ac208a95a0a93",
+  "historical_launch_command": "env -u LD_LIBRARY_PATH -u PYTHONPATH -u CUDA_HOME -u CUDA_PATH -u ROS_DISTRO -u ROS_VERSION -u ROS_PYTHON_VERSION -u AMENT_PREFIX_PATH -u CMAKE_PREFIX_PATH -u COLCON_PREFIX_PATH -u RMW_IMPLEMENTATION OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONUNBUFFERED=1 /home/gpuadmin/isaacsim/python.sh scripts/isaac/obstacle_source03_online.py --run data/obstacle_source_acquisition_03/primary_20260923T085200Z",
+  "proposed_launch_template": "env -u LD_LIBRARY_PATH -u PYTHONPATH -u CUDA_HOME -u CUDA_PATH -u ROS_DISTRO -u ROS_VERSION -u ROS_PYTHON_VERSION -u AMENT_PREFIX_PATH -u CMAKE_PREFIX_PATH -u COLCON_PREFIX_PATH -u RMW_IMPLEMENTATION OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONUNBUFFERED=1 /home/gpuadmin/isaacsim/python.sh scripts/isaac/continuous_obstacle_reveal_episode01.py --run NEW_AUTHORIZED_RUN",
+  "cases": [
+    {
+      "case": "inherited",
+      "command": [
+        "ldd",
+        "-r",
+        "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/libcusparse.so.12"
+      ],
+      "selected_library": "/usr/local/cuda/lib64/libnvJitLink.so.12",
+      "resolved_library": "/usr/local/cuda-12.6/targets/x86_64-linux/lib/libnvJitLink.so.12.6.20",
+      "library_sha256": "b70f0f325cbd43f37028c559612b49d9c208649ed9184cc24b6e55abf04e341b",
+      "undefined_symbols": [
+        "__nvJitLinkCreate_12_8",
+        "__nvJitLinkGetErrorLog_12_8",
+        "__nvJitLinkComplete_12_8",
+        "__nvJitLinkDestroy_12_8",
+        "__nvJitLinkAddData_12_8",
+        "__nvJitLinkGetLinkedCubin_12_8",
+        "__nvJitLinkGetLinkedCubinSize_12_8",
+        "__nvJitLinkGetErrorLogSize_12_8"
+      ],
+      "returncode": 0,
+      "stdout_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01/primary_20261006/reporting/loader_diagnosis/inherited.txt",
+      "stdout_sha256": "a52707fa7d77a82c7d67d21e078af0e19feba41da6776aef44498e6cb51b6535"
+    },
+    {
+      "case": "LD_LIBRARY_PATH_removed",
+      "command": [
+        "env",
+        "-u",
+        "LD_LIBRARY_PATH",
+        "ldd",
+        "-r",
+        "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/libcusparse.so.12"
+      ],
+      "selected_library": "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/../../nvjitlink/lib/libnvJitLink.so.12",
+      "resolved_library": "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/nvjitlink/lib/libnvJitLink.so.12",
+      "library_sha256": "0369e6867d44b800437de4e146d72c65afc6c75adf677a15c2ecd8e6a7ac135f",
+      "undefined_symbols": [],
+      "returncode": 0,
+      "stdout_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_episode_01/primary_20261006/reporting/loader_diagnosis/LD_LIBRARY_PATH_removed.txt",
+      "stdout_sha256": "79cc5f5bf73cb1ac4d138da39b6c02191a2731e2088e2f07acc34c76a7c5c084"
+    }
+  ],
+  "conclusion": "Removing LD_LIBRARY_PATH resolves all eight libcusparse relocation failures in this check. Full Isaac startup and acquisition remain untested.",
+  "external_file_or_environment_installation_changes": 0,
+  "scientific_runtime_or_config_edits": 0,
+  "additional_LightNav_predictions": 0,
+  "additional_warmups": 0,
+  "additional_RGB_captures": 0,
+  "additional_SimulationApp_starts": 0,
+  "additional_MPC_solves": 0,
+  "additional_research_optimizer_calls": 0,
+  "prior_run_preserved": true,
+  "scientific_classification_unchanged": "TECHNICAL_EXECUTION_BLOCKED",
+  "next_execution_requires": "explicit exception to attachment sections 5/19 retry=0; new run and new pushed freeze, preserving old evidence",
+  "saved_evidence_audit": {
+    "status": "PASS",
+    "script_path": "data/continuous_obstacle_reveal_episode_01/primary_20261006/reporting/loader_diagnosis/validate_saved.py",
+    "script_sha256": "919d8dce4e40b775317ac003e8d57bf6ae8a9dafa00f4e3ec661b754fd380ad5",
+    "command": "OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/continuous-reveal-mpl .venv/bin/python data/continuous_obstacle_reveal_episode_01/primary_20261006/reporting/loader_diagnosis/validate_saved.py",
+    "scope": "loader/source/log hashes and original read-only technical evidence assertions; no scientific episode validated",
+    "prior_sealing_script_reexecution": "Stopped at exclusive-create guard because chunks.csv already exists; no old output overwritten."
+  },
+  "validation": {
+    "focused_tests_passed": 30,
+    "frozen_code_input_and_external_hashes": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS",
+    "new_scientific_episode_validation": "NOT_POSSIBLE_NO_EPISODE"
+  }
+}
