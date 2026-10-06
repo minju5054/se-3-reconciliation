@@ -1,0 +1,17 @@
+{
+  "full_suite_passed": 810,
+  "full_suite_skipped": 1,
+  "final_focused_passed": 65,
+  "additional_prefix_cases_after_full_collection": 4,
+  "distinct_passed": 814,
+  "skip": "ignored historical EXP-01B/EXP-02B corpus absent",
+  "previous_staging_saved_only_valid": true,
+  "compileall": true,
+  "diff_check": true,
+  "logs": {
+    "/tmp/direct02_regression.log": "e56010b9c5cfd539ccc3d6b02fabeb213c4ab791a67fe53343f9089a30f8cf68",
+    "/tmp/direct02_focused_final.log": "6a167f418205e080427e063d16fad0f0519c691905a1e3cb738f8a80527358cf",
+    "/tmp/direct02_historical_validation.log": "6d38420c894490754945dadbd8ec270b6a1ff3bd10da0ef11441c2a551220772"
+  },
+  "scientific_calls_before_freeze": 0
+}

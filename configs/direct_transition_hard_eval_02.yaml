@@ -1,0 +1,113 @@
+experiment: DIRECT_TRANSITION_HARD_EVAL_02
+starting_head: b7113842ca3bd61922a37fec24413e572d35af6e
+source_run: data/robotless_online_handoffs_v1/primary_20260915T091900Z
+inventory_run: data/robotless_gp_se2_ref_03/primary_20260919T141000Z
+moving_ledger: data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json
+development_manifests:
+- data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json
+- data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json
+additional_development_sources:
+  episode_021_repeat_01/handoff_003: docs/GP_SE2_ATTACH_01_FIXED_CORRESPONDENCE_DURATION.md
+  episode_001_repeat_01/handoff_013: docs/B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04.md
+  episode_008_repeat_01/handoff_023: docs/B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04.md
+  episode_013_repeat_00/handoff_020: docs/B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04.md
+authority_hashes:
+  data/robotless_gp_se2_ref_03/primary_20260919T141000Z/candidate_catalog.json: 28bba4d778a1fd07700dc298c9040806ed7574675a1cd8da603f8c1c7213ac56
+  data/robotless_gp_se2_ref_03/primary_20260919T141000Z/source.json: 29ff1914c8f1c453b202377f7f5d0e08c069d820a70cf97e1a5f891d8263c5b2
+  data/robotless_gp_se2_ref_03/primary_20260919T141000Z/execution_freeze.json: 2193e9de97d403c8d66c56e94cfaad60e9ffeb59626aa61fec50d2f8bcd2d9ff
+  data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json: 2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58
+  data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json: 30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d
+  data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json: cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163
+  docs/GP_SE2_ATTACH_01_FIXED_CORRESPONDENCE_DURATION.md: 934b7aa5da8455b54c6870f227ccfcd9f1072dc84b72af67bd3536f766616e86
+  docs/B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04.md: a33d13432dfbb720578d11bfab3ec843ec39b9492aa8b14d36320cccd7c2b70f
+  results/staging_graph_necessity_eval_01/selected_sources.json: 8de905ad261d2515577d5709167da7cb47cad4c45e6e89cf06049ef208846b14
+selection:
+  target: 6
+  minimum: 4
+  minimum_v_minus_strict_mps: 0.2
+  minimum_history_travel_m: 0.02
+  minimum_remaining_arc_m: 0.5
+  minimum_suffix_rows: 5
+  direction_epsilon_m: 1.0e-12
+  ordering: top3 delta_phi descending; then top3 rho_jump descending; lexical case
+    ID ties; unique recorded episode
+  minimum_B_to_entry_chord_m: 0.02
+  minimum_rho_jump: 0.1
+methods:
+- C3_ENTRY_SUFFIX
+- B_ENTRY_STAGE
+- HERMITE_BRIDGE
+- V2_GRAPH_BRIDGE
+V2_variant: V2
+M: 2
+integration_steps: 180
+primary_intervals: 54
+wall_wait_timeout_s: 30.0
+retries: 0
+footprint_radius_m: 0.2
+required_edge_clearance_m: 0.05
+normalization:
+  vector: d_F
+  smooth_xy: d_F
+  smooth_yaw_deg: 10
+  weights:
+  - 1
+  - 1
+  - 1
+  - 1
+solver:
+  max_iterations: 80
+  finite_difference_epsilon: 1.0e-06
+  initial_damping: 0.001
+  damping_increase: 10.0
+  damping_decrease: 0.3
+  maximum_damping: 1000000000000.0
+  gradient_tolerance: 1.0e-09
+  step_tolerance: 1.0e-09
+  cost_tolerance: 1.0e-12
+classification_precedence:
+- TECHNICAL_BLOCKED
+- INSUFFICIENT_MEANINGFUL_TRANSITION_SOURCES
+- GRAPH_SPECIFIC_GAIN_SUPPORTED
+- INTERMEDIATE_GEOMETRY_NEEDED
+- STAGING_HARD_TRANSITION_SUPPORTED
+- GRAPH_FORMULATION_NOT_ROBUST
+- MIXED_EVIDENCE
+classification_rules:
+  both_dwells: safe valid method with both observed, never cap-imputed
+  graph_specific: valid/safe V2 both; either simpler methods both fail BOTH_DWELLS,
+    or >=one-tick earlier attachment than BOTH and endpoint no later than BOTH
+  graph_specific_required_sources: 2
+  intermediate_required_sources: 2
+  regression: V2 unsafe while B/H planning valid; V2 guard abort while neither B/H
+    aborts; V2 loses attachment or endpoint retained by both safe valid B/H; shared
+    failure suppresses regression
+  timing_threshold: integration_dt_s - 1e-9
+  scalar_atol: 1.0e-09
+  staging: nonempty evaluable set; all B_ENTRY both dwells; graph positive count exactly
+    zero
+  robustness: at least two V2 invalid/nonconverged with BOTH B_ENTRY/Hermite valid
+    safe full-cap executions; after staging in precedence
+  shared_failure: all four methods terminate SAFETY_ABORT_BEFORE_UNSAFE_COMMAND; exclude
+    from evaluable denominator and V2 regression
+  catastrophic_regression: V2-specific unsafe reference, attributable guard abort,
+    or endpoint loss retained by both B/H; attachment loss separately reported
+source_policy:
+  timing: reuse raw acquisition interval timing gates from genuine source scan
+  d_F: median [E*, original suffix] XY edges, including first partial edge
+  minimum_suffix_rows_reason: E* plus >=4 downstream rows; full H5 spatial content
+    at entry
+  episode_exclusion: exact recorded episode including repeat; GP01 REF03 Genuine13
+    execution development and ATTACH01; plus whole previous E1-E6 episodes
+  direction_degeneracy: <=1e-12 m, same frozen bridge EPS; no reliability threshold
+    tuning
+  claim: source-disjoint saved DEVELOPMENT corpus controlled evaluation; not unseen
+    independent population
+previous_evaluation_manifest: results/staging_graph_necessity_eval_01/selected_sources.json
+excluded_previous_episodes:
+- episode_011_repeat_01
+- episode_015_repeat_01
+- episode_018_repeat_00
+- episode_003_repeat_01
+- episode_026_repeat_01
+- episode_024_repeat_01

@@ -6656,3 +6656,29 @@ git diff --cached --check
   (744 distinct across runs), compileall/diff checks pass. Only small results/docs
   and a conservative README update enter this result commit; large data stays
   ignored and unrelated user changes remain preserved.
+
+### 2026-10-06 — DIRECT_TRANSITION_HARD_EVAL_02 pre-science freeze
+
+- Started/fetched main at b7113842ca3bd61922a37fec24413e572d35af6e. Preserved
+  unrelated two Stage0 config edits and untracked GPU plotting script.
+- Added isolated selection/classification/orchestration namespace. Reused original
+  C3, B_ENTRY, Hermite, V2 vector M2 factors/solver/edge gates, controller/executor
+  and evaluators without modifying historical experiments.
+- Excluded all previous E1–E6 recorded episodes plus existing registry:39 episodes.
+  Authenticated3,988 files and881 events. Base eligible90; meaningful chord>=.02m
+  AND rho_jump>=.10 leaves4 candidates/4 episodes. Frozen top3 direction then
+  descending rho rule selects009r00/h001,017r01/h008,007r01/h001,016r00/h008.
+  All four raw FRESH arrays differ. Chords.030877–.060944m; rho.208046–.405272;
+  all Hermite M2 under unchanged rule. No claim of testing rho>1 long jumps.
+- Explicit shared all-method safety-abort category, selected/shared/evaluable
+  denominators and V2-specific regression. Distinguish logical releases from
+  physical applications, withheld results and guard-blocked applications.
+- Zero-numerical-solve installation/state preflight passed. Prepared immutable
+  raw/native suffix identities, C3 entries, common B states, schedules and initials.
+  No scientific planning/rollout yet. Planned4 V2 solves and up to16 rollouts.
+- Full regression810 passed/1 known absent-corpus skip; final focused65 passed,
+  including4 added abort-prefix cases (814 distinct passes across runs).
+  Historical staging saved-only check passed. Compileall and diff checks passed.
+  Synthetic3-PNG fixture inspected; no synthetic experimental evidence.
+- Freeze-before-science: implementation/config/tests/protocol plus hashes are
+  committed and normally pushed before the sole execution. No retries/tuning.

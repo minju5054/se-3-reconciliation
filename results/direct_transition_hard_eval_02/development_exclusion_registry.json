@@ -1,0 +1,1076 @@
+{
+  "source_run": "data/robotless_online_handoffs_v1/primary_20260915T091900Z",
+  "excluded_episodes": {
+    "episode_000_repeat_00": [
+      {
+        "case_id": "episode_000_repeat_00/handoff_011",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+            "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+          }
+        ]
+      }
+    ],
+    "episode_000_repeat_01": [
+      {
+        "case_id": "episode_000_repeat_01/handoff_019",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+            "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_000_repeat_01/handoff_025",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_001_repeat_00": [
+      {
+        "case_id": "episode_001_repeat_00/handoff_000",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+            "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+          }
+        ]
+      }
+    ],
+    "episode_001_repeat_01": [
+      {
+        "case_id": "episode_001_repeat_01/handoff_002",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          },
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+            "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_001_repeat_01/handoff_011",
+        "evidence": [
+          {
+            "reason": "prior Genuine13 execution-loss/delay-attribution development",
+            "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+            "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_001_repeat_01/handoff_013",
+        "evidence": [
+          {
+            "reason": "prior Genuine13 execution-loss/delay-attribution development",
+            "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+            "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+          },
+          {
+            "reason": "documented staging/Local-SE2 or GP ATTACH development",
+            "evidence": "docs/B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04.md",
+            "sha256": "a33d13432dfbb720578d11bfab3ec843ec39b9492aa8b14d36320cccd7c2b70f"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_001_repeat_01/handoff_018",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_002_repeat_00": [
+      {
+        "case_id": "episode_002_repeat_00/handoff_024",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_002_repeat_00/handoff_039",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+            "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+          }
+        ]
+      }
+    ],
+    "episode_002_repeat_01": [
+      {
+        "case_id": "episode_002_repeat_01/handoff_000",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+            "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+          }
+        ]
+      }
+    ],
+    "episode_003_repeat_00": [
+      {
+        "case_id": "episode_003_repeat_00/handoff_009",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_004_repeat_00": [
+      {
+        "case_id": "episode_004_repeat_00/handoff_006",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_004_repeat_01": [
+      {
+        "case_id": "episode_004_repeat_01/handoff_014",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_006_repeat_00": [
+      {
+        "case_id": "episode_006_repeat_00/handoff_000",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+            "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_006_repeat_00/handoff_004",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_008_repeat_01": [
+      {
+        "case_id": "episode_008_repeat_01/handoff_023",
+        "evidence": [
+          {
+            "reason": "prior Genuine13 execution-loss/delay-attribution development",
+            "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+            "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+          },
+          {
+            "reason": "documented staging/Local-SE2 or GP ATTACH development",
+            "evidence": "docs/B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04.md",
+            "sha256": "a33d13432dfbb720578d11bfab3ec843ec39b9492aa8b14d36320cccd7c2b70f"
+          }
+        ]
+      }
+    ],
+    "episode_009_repeat_01": [
+      {
+        "case_id": "episode_009_repeat_01/handoff_007",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_010_repeat_00": [
+      {
+        "case_id": "episode_010_repeat_00/handoff_007",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_010_repeat_01": [
+      {
+        "case_id": "episode_010_repeat_01/handoff_000",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_011_repeat_00": [
+      {
+        "case_id": "episode_011_repeat_00/handoff_008",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_012_repeat_00": [
+      {
+        "case_id": "episode_012_repeat_00/handoff_027",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_013_repeat_00": [
+      {
+        "case_id": "episode_013_repeat_00/handoff_020",
+        "evidence": [
+          {
+            "reason": "prior Genuine13 execution-loss/delay-attribution development",
+            "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+            "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+          },
+          {
+            "reason": "documented staging/Local-SE2 or GP ATTACH development",
+            "evidence": "docs/B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04.md",
+            "sha256": "a33d13432dfbb720578d11bfab3ec843ec39b9492aa8b14d36320cccd7c2b70f"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_013_repeat_00/handoff_026",
+        "evidence": [
+          {
+            "reason": "prior Genuine13 execution-loss/delay-attribution development",
+            "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+            "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_013_repeat_00/handoff_032",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_013_repeat_00/handoff_033",
+        "evidence": [
+          {
+            "reason": "prior Genuine13 execution-loss/delay-attribution development",
+            "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+            "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+          }
+        ]
+      }
+    ],
+    "episode_013_repeat_01": [
+      {
+        "case_id": "episode_013_repeat_01/handoff_021",
+        "evidence": [
+          {
+            "reason": "prior Genuine13 execution-loss/delay-attribution development",
+            "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+            "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_013_repeat_01/handoff_024",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+            "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+          },
+          {
+            "reason": "prior Genuine13 execution-loss/delay-attribution development",
+            "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+            "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_013_repeat_01/handoff_029",
+        "evidence": [
+          {
+            "reason": "prior Genuine13 execution-loss/delay-attribution development",
+            "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+            "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_013_repeat_01/handoff_034",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_014_repeat_00": [
+      {
+        "case_id": "episode_014_repeat_00/handoff_029",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_014_repeat_01": [
+      {
+        "case_id": "episode_014_repeat_01/handoff_025",
+        "evidence": [
+          {
+            "reason": "prior Genuine13 execution-loss/delay-attribution development",
+            "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+            "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_014_repeat_01/handoff_026",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          },
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+            "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+          }
+        ]
+      }
+    ],
+    "episode_015_repeat_00": [
+      {
+        "case_id": "episode_015_repeat_00/handoff_017",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_016_repeat_01": [
+      {
+        "case_id": "episode_016_repeat_01/handoff_001",
+        "evidence": [
+          {
+            "reason": "prior Genuine13 execution-loss/delay-attribution development",
+            "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+            "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+          }
+        ]
+      },
+      {
+        "case_id": "episode_016_repeat_01/handoff_007",
+        "evidence": [
+          {
+            "reason": "prior Genuine13 execution-loss/delay-attribution development",
+            "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+            "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+          }
+        ]
+      }
+    ],
+    "episode_017_repeat_00": [
+      {
+        "case_id": "episode_017_repeat_00/handoff_007",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          },
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+            "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+          }
+        ]
+      }
+    ],
+    "episode_018_repeat_01": [
+      {
+        "case_id": "episode_018_repeat_01/handoff_006",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_020_repeat_00": [
+      {
+        "case_id": "episode_020_repeat_00/handoff_017",
+        "evidence": [
+          {
+            "reason": "prior Genuine13 execution-loss/delay-attribution development",
+            "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+            "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+          }
+        ]
+      }
+    ],
+    "episode_020_repeat_01": [
+      {
+        "case_id": "episode_020_repeat_01/handoff_004",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_021_repeat_01": [
+      {
+        "case_id": "episode_021_repeat_01/handoff_003",
+        "evidence": [
+          {
+            "reason": "documented staging/Local-SE2 or GP ATTACH development",
+            "evidence": "docs/GP_SE2_ATTACH_01_FIXED_CORRESPONDENCE_DURATION.md",
+            "sha256": "934b7aa5da8455b54c6870f227ccfcd9f1072dc84b72af67bd3536f766616e86"
+          }
+        ]
+      }
+    ],
+    "episode_022_repeat_00": [
+      {
+        "case_id": "episode_022_repeat_00/handoff_005",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_022_repeat_01": [
+      {
+        "case_id": "episode_022_repeat_01/handoff_006",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_026_repeat_00": [
+      {
+        "case_id": "episode_026_repeat_00/handoff_010",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_027_repeat_00": [
+      {
+        "case_id": "episode_027_repeat_00/handoff_005",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_029_repeat_00": [
+      {
+        "case_id": "episode_029_repeat_00/handoff_003",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_029_repeat_01": [
+      {
+        "case_id": "episode_029_repeat_01/handoff_001",
+        "evidence": [
+          {
+            "reason": "prior GP/formulation/reference-selector development selection",
+            "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+            "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+          }
+        ]
+      }
+    ],
+    "episode_011_repeat_01": [
+      {
+        "case_id": "episode_011_repeat_01/handoff_001",
+        "evidence": [
+          {
+            "reason": "previous STAGING_GRAPH_NECESSITY_EVAL_01 evaluation; identity only",
+            "evidence": "results/staging_graph_necessity_eval_01/selected_sources.json",
+            "sha256": "8de905ad261d2515577d5709167da7cb47cad4c45e6e89cf06049ef208846b14"
+          }
+        ]
+      }
+    ],
+    "episode_015_repeat_01": [
+      {
+        "case_id": "episode_015_repeat_01/handoff_005",
+        "evidence": [
+          {
+            "reason": "previous STAGING_GRAPH_NECESSITY_EVAL_01 evaluation; identity only",
+            "evidence": "results/staging_graph_necessity_eval_01/selected_sources.json",
+            "sha256": "8de905ad261d2515577d5709167da7cb47cad4c45e6e89cf06049ef208846b14"
+          }
+        ]
+      }
+    ],
+    "episode_018_repeat_00": [
+      {
+        "case_id": "episode_018_repeat_00/handoff_018",
+        "evidence": [
+          {
+            "reason": "previous STAGING_GRAPH_NECESSITY_EVAL_01 evaluation; identity only",
+            "evidence": "results/staging_graph_necessity_eval_01/selected_sources.json",
+            "sha256": "8de905ad261d2515577d5709167da7cb47cad4c45e6e89cf06049ef208846b14"
+          }
+        ]
+      }
+    ],
+    "episode_003_repeat_01": [
+      {
+        "case_id": "episode_003_repeat_01/handoff_010",
+        "evidence": [
+          {
+            "reason": "previous STAGING_GRAPH_NECESSITY_EVAL_01 evaluation; identity only",
+            "evidence": "results/staging_graph_necessity_eval_01/selected_sources.json",
+            "sha256": "8de905ad261d2515577d5709167da7cb47cad4c45e6e89cf06049ef208846b14"
+          }
+        ]
+      }
+    ],
+    "episode_026_repeat_01": [
+      {
+        "case_id": "episode_026_repeat_01/handoff_008",
+        "evidence": [
+          {
+            "reason": "previous STAGING_GRAPH_NECESSITY_EVAL_01 evaluation; identity only",
+            "evidence": "results/staging_graph_necessity_eval_01/selected_sources.json",
+            "sha256": "8de905ad261d2515577d5709167da7cb47cad4c45e6e89cf06049ef208846b14"
+          }
+        ]
+      }
+    ],
+    "episode_024_repeat_01": [
+      {
+        "case_id": "episode_024_repeat_01/handoff_009",
+        "evidence": [
+          {
+            "reason": "previous STAGING_GRAPH_NECESSITY_EVAL_01 evaluation; identity only",
+            "evidence": "results/staging_graph_necessity_eval_01/selected_sources.json",
+            "sha256": "8de905ad261d2515577d5709167da7cb47cad4c45e6e89cf06049ef208846b14"
+          }
+        ]
+      }
+    ]
+  },
+  "exact_source_membership": {
+    "episode_014_repeat_01/handoff_026": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      },
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+        "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+      }
+    ],
+    "episode_001_repeat_01/handoff_002": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      },
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+        "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+      }
+    ],
+    "episode_017_repeat_00/handoff_007": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      },
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+        "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+      }
+    ],
+    "episode_010_repeat_00/handoff_007": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_006_repeat_00/handoff_004": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_022_repeat_00/handoff_005": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_013_repeat_00/handoff_032": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_020_repeat_01/handoff_004": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_022_repeat_01/handoff_006": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_012_repeat_00/handoff_027": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_014_repeat_00/handoff_029": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_009_repeat_01/handoff_007": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_011_repeat_00/handoff_008": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_015_repeat_00/handoff_017": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_013_repeat_01/handoff_034": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_004_repeat_01/handoff_014": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_001_repeat_01/handoff_018": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_000_repeat_01/handoff_025": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_002_repeat_00/handoff_024": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_026_repeat_00/handoff_010": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_018_repeat_01/handoff_006": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_029_repeat_01/handoff_001": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_003_repeat_00/handoff_009": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_027_repeat_00/handoff_005": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_004_repeat_00/handoff_006": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_029_repeat_00/handoff_003": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_010_repeat_01/handoff_000": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_ref_03/primary_20260919T141000Z/case_manifest.json",
+        "sha256": "2ced16a2066ee43f56de7ae982dd68e9c9f58a869302dc6ff8235ab3c3001e58"
+      }
+    ],
+    "episode_013_repeat_01/handoff_024": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+        "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+      },
+      {
+        "reason": "prior Genuine13 execution-loss/delay-attribution development",
+        "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+        "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+      }
+    ],
+    "episode_000_repeat_01/handoff_019": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+        "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+      }
+    ],
+    "episode_000_repeat_00/handoff_011": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+        "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+      }
+    ],
+    "episode_002_repeat_00/handoff_039": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+        "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+      }
+    ],
+    "episode_006_repeat_00/handoff_000": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+        "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+      }
+    ],
+    "episode_001_repeat_00/handoff_000": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+        "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+      }
+    ],
+    "episode_002_repeat_01/handoff_000": [
+      {
+        "reason": "prior GP/formulation/reference-selector development selection",
+        "evidence": "data/robotless_gp_se2_01/primary_20260918T054000Z/case_manifest.json",
+        "sha256": "30e884c600a01e452e97dc159bc1c4742a6137190822ca25eea815befe83605d"
+      }
+    ],
+    "episode_001_repeat_01/handoff_011": [
+      {
+        "reason": "prior Genuine13 execution-loss/delay-attribution development",
+        "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+        "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+      }
+    ],
+    "episode_001_repeat_01/handoff_013": [
+      {
+        "reason": "prior Genuine13 execution-loss/delay-attribution development",
+        "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+        "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+      },
+      {
+        "reason": "documented staging/Local-SE2 or GP ATTACH development",
+        "evidence": "docs/B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04.md",
+        "sha256": "a33d13432dfbb720578d11bfab3ec843ec39b9492aa8b14d36320cccd7c2b70f"
+      }
+    ],
+    "episode_008_repeat_01/handoff_023": [
+      {
+        "reason": "prior Genuine13 execution-loss/delay-attribution development",
+        "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+        "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+      },
+      {
+        "reason": "documented staging/Local-SE2 or GP ATTACH development",
+        "evidence": "docs/B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04.md",
+        "sha256": "a33d13432dfbb720578d11bfab3ec843ec39b9492aa8b14d36320cccd7c2b70f"
+      }
+    ],
+    "episode_013_repeat_00/handoff_020": [
+      {
+        "reason": "prior Genuine13 execution-loss/delay-attribution development",
+        "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+        "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+      },
+      {
+        "reason": "documented staging/Local-SE2 or GP ATTACH development",
+        "evidence": "docs/B_TO_ENTRY_BOUNDARY_ROW_ABLATION_04.md",
+        "sha256": "a33d13432dfbb720578d11bfab3ec843ec39b9492aa8b14d36320cccd7c2b70f"
+      }
+    ],
+    "episode_013_repeat_00/handoff_026": [
+      {
+        "reason": "prior Genuine13 execution-loss/delay-attribution development",
+        "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+        "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+      }
+    ],
+    "episode_013_repeat_00/handoff_033": [
+      {
+        "reason": "prior Genuine13 execution-loss/delay-attribution development",
+        "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+        "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+      }
+    ],
+    "episode_013_repeat_01/handoff_021": [
+      {
+        "reason": "prior Genuine13 execution-loss/delay-attribution development",
+        "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+        "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+      }
+    ],
+    "episode_013_repeat_01/handoff_029": [
+      {
+        "reason": "prior Genuine13 execution-loss/delay-attribution development",
+        "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+        "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+      }
+    ],
+    "episode_014_repeat_01/handoff_025": [
+      {
+        "reason": "prior Genuine13 execution-loss/delay-attribution development",
+        "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+        "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+      }
+    ],
+    "episode_016_repeat_01/handoff_001": [
+      {
+        "reason": "prior Genuine13 execution-loss/delay-attribution development",
+        "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+        "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+      }
+    ],
+    "episode_016_repeat_01/handoff_007": [
+      {
+        "reason": "prior Genuine13 execution-loss/delay-attribution development",
+        "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+        "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+      }
+    ],
+    "episode_020_repeat_00/handoff_017": [
+      {
+        "reason": "prior Genuine13 execution-loss/delay-attribution development",
+        "evidence": "data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json",
+        "sha256": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163"
+      }
+    ],
+    "episode_021_repeat_01/handoff_003": [
+      {
+        "reason": "documented staging/Local-SE2 or GP ATTACH development",
+        "evidence": "docs/GP_SE2_ATTACH_01_FIXED_CORRESPONDENCE_DURATION.md",
+        "sha256": "934b7aa5da8455b54c6870f227ccfcd9f1072dc84b72af67bd3536f766616e86"
+      }
+    ],
+    "episode_011_repeat_01/handoff_001": [
+      {
+        "reason": "previous STAGING_GRAPH_NECESSITY_EVAL_01 evaluation; identity only",
+        "evidence": "results/staging_graph_necessity_eval_01/selected_sources.json",
+        "sha256": "8de905ad261d2515577d5709167da7cb47cad4c45e6e89cf06049ef208846b14"
+      }
+    ],
+    "episode_015_repeat_01/handoff_005": [
+      {
+        "reason": "previous STAGING_GRAPH_NECESSITY_EVAL_01 evaluation; identity only",
+        "evidence": "results/staging_graph_necessity_eval_01/selected_sources.json",
+        "sha256": "8de905ad261d2515577d5709167da7cb47cad4c45e6e89cf06049ef208846b14"
+      }
+    ],
+    "episode_018_repeat_00/handoff_018": [
+      {
+        "reason": "previous STAGING_GRAPH_NECESSITY_EVAL_01 evaluation; identity only",
+        "evidence": "results/staging_graph_necessity_eval_01/selected_sources.json",
+        "sha256": "8de905ad261d2515577d5709167da7cb47cad4c45e6e89cf06049ef208846b14"
+      }
+    ],
+    "episode_003_repeat_01/handoff_010": [
+      {
+        "reason": "previous STAGING_GRAPH_NECESSITY_EVAL_01 evaluation; identity only",
+        "evidence": "results/staging_graph_necessity_eval_01/selected_sources.json",
+        "sha256": "8de905ad261d2515577d5709167da7cb47cad4c45e6e89cf06049ef208846b14"
+      }
+    ],
+    "episode_026_repeat_01/handoff_008": [
+      {
+        "reason": "previous STAGING_GRAPH_NECESSITY_EVAL_01 evaluation; identity only",
+        "evidence": "results/staging_graph_necessity_eval_01/selected_sources.json",
+        "sha256": "8de905ad261d2515577d5709167da7cb47cad4c45e6e89cf06049ef208846b14"
+      }
+    ],
+    "episode_024_repeat_01/handoff_009": [
+      {
+        "reason": "previous STAGING_GRAPH_NECESSITY_EVAL_01 evaluation; identity only",
+        "evidence": "results/staging_graph_necessity_eval_01/selected_sources.json",
+        "sha256": "8de905ad261d2515577d5709167da7cb47cad4c45e6e89cf06049ef208846b14"
+      }
+    ]
+  },
+  "policy": "exclude entire recorded episode including repeat; no method outcome used",
+  "outside_corpus": [
+    {
+      "source": "OSA03_R00/REPEAT_01",
+      "reason": "separate OSA03 acquisition; all development, never candidates"
+    },
+    {
+      "source": "historical EXP/DATA02",
+      "reason": "different pre-cleanup acquisition lineage; absent from this 881-event corpus"
+    }
+  ],
+  "corpus_claim": "development corpus; source/episode disjoint from registered prior use, not unseen population",
+  "previous_evaluation_episodes": [
+    "episode_011_repeat_01",
+    "episode_015_repeat_01",
+    "episode_018_repeat_00",
+    "episode_003_repeat_01",
+    "episode_026_repeat_01",
+    "episode_024_repeat_01"
+  ]
+}

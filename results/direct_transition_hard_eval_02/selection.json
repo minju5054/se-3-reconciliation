@@ -1,0 +1,44 @@
+{
+  "selected_ids": [
+    "episode_009_repeat_00/handoff_001",
+    "episode_017_repeat_01/handoff_008",
+    "episode_007_repeat_01/handoff_001",
+    "episode_016_repeat_00/handoff_008"
+  ],
+  "selected_count": 4,
+  "selection_trace": [
+    {
+      "case_id": "episode_009_repeat_00/handoff_001",
+      "axis": "delta_phi_rad",
+      "value": 1.7674650496284894,
+      "rank_in_axis": 1
+    },
+    {
+      "case_id": "episode_017_repeat_01/handoff_008",
+      "axis": "delta_phi_rad",
+      "value": 1.7360893514213158,
+      "rank_in_axis": 2
+    },
+    {
+      "case_id": "episode_007_repeat_01/handoff_001",
+      "axis": "delta_phi_rad",
+      "value": 1.7034222438876716,
+      "rank_in_axis": 3
+    },
+    {
+      "case_id": "episode_016_repeat_00/handoff_008",
+      "axis": "rho_jump",
+      "value": 0.20804627744816925,
+      "rank_in_axis": 1
+    }
+  ],
+  "eligible_candidates": 4,
+  "eligible_episodes": 4,
+  "status": "READY_FOR_FREEZE",
+  "outcome_fields_used": false,
+  "episode_unit": "exact recorded episode_id, including repeat",
+  "eligible_before_meaningful_gate": 90,
+  "meaningful_transition_candidates": 4,
+  "excluded_episodes": 39,
+  "saved_records_inspected": 881
+}

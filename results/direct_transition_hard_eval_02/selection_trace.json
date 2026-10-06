@@ -1,0 +1,26 @@
+[
+  {
+    "case_id": "episode_009_repeat_00/handoff_001",
+    "axis": "delta_phi_rad",
+    "value": 1.7674650496284894,
+    "rank_in_axis": 1
+  },
+  {
+    "case_id": "episode_017_repeat_01/handoff_008",
+    "axis": "delta_phi_rad",
+    "value": 1.7360893514213158,
+    "rank_in_axis": 2
+  },
+  {
+    "case_id": "episode_007_repeat_01/handoff_001",
+    "axis": "delta_phi_rad",
+    "value": 1.7034222438876716,
+    "rank_in_axis": 3
+  },
+  {
+    "case_id": "episode_016_repeat_00/handoff_008",
+    "axis": "rho_jump",
+    "value": 0.20804627744816925,
+    "rank_in_axis": 1
+  }
+]
