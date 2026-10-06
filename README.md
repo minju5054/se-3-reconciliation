@@ -7,6 +7,15 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [separately authorized continuous episode 01B](docs/CONTINUOUS_OBSTACLE_REVEAL_EPISODE_01B.md)
+resolved the startup library conflict and ran once. **CONTINUOUS_CHUNKS_NO_QUALIFIED_FIRST_REACTION**:
+C0 executed; C1 was generated but rejected before installation because its edge
+clearance was .007997 m < .05 m. C2/C3 were never requested. Actual execution
+remained safe (1.069783 m lower bound). The validated partial record is preserved;
+there is no qualified continuous C0–C3 source, retry or reconciliation result.
+[World PNG](results/continuous_obstacle_reveal_episode_01b/figures/continuous_world_episode.png)
+and [exact request RGBs](results/continuous_obstacle_reveal_episode_01b/figures/request_rgb_sequence.png).
+
 The [continuous obstacle-reveal episode attempt](docs/CONTINUOUS_OBSTACLE_REVEAL_EPISODE_01.md)
 is **TECHNICAL_EXECUTION_BLOCKED**: Isaac failed during startup with a CUDA library
 symbol error, before any live RGB, C0–C3 prediction or MPC execution. One server

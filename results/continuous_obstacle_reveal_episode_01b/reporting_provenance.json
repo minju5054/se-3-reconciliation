@@ -1,0 +1,48 @@
+{
+  "scientific_freeze_sha": "86c54fbd78b66282c4eb6707a8b9f38e5faba12e",
+  "source_bundle_valid": false,
+  "validated_partial_data": true,
+  "classification": "CONTINUOUS_CHUNKS_NO_QUALIFIED_FIRST_REACTION",
+  "protocol_deviations": [
+    "Passive /proc observer raised PermissionError and did not emit final supervisor metadata.",
+    "Missing launch_result.json was explicitly derived from saved collector completion and process records; child exit code remains null.",
+    "Report CSV line endings normalized CRLF to LF with value parity verified."
+  ],
+  "scientific_code_or_config_changes_after_freeze": 0,
+  "new_scientific_calls_for_reporting": 0,
+  "saved_validation_and_check_again": "PASS",
+  "figure_numeric_hash_checks": "PASS",
+  "four_PNGs_visually_inspected": true,
+  "CSV_value_parity": true,
+  "tests": {
+    "regression_passed": 558,
+    "regression_skipped": 1,
+    "focused_01B_passed": 20,
+    "skip": "immutable generated DATA02 v1 corpus absent"
+  },
+  "reporting_scripts": {
+    "data/continuous_obstacle_reveal_episode_01b/primary_20261006T100411Z/reporting/derive_launch_record.py": "798703b4d71176859f6f6d90f112e0416c4f5c4b2e52ee056a3956ad64459ad5",
+    "data/continuous_obstacle_reveal_episode_01b/primary_20261006T100411Z/reporting/validate_recovered_record.py": "f7c0ba5d8012eeca6d917ebc8db5a631a8f108d720a852f53708fcc8a5907d65"
+  },
+  "supervisor_error_path": "data/continuous_obstacle_reveal_episode_01b/primary_20261006T100411Z/reporting/supervisor_error.json",
+  "supervisor_error_sha256": "c68d6c55d96a421edfaa9148a12df8f535427e7cc154d8babe6e31f87a768e62",
+  "qualification_path": "data/continuous_obstacle_reveal_episode_01b/primary_20261006T100411Z/source_bundle/qualification.json",
+  "qualification_sha256": "219c8bf68a1441e41b711962e9d1fb8407a2384e5dda24ed1be6bded187f2fbf",
+  "output_sha256": {
+    "chunks.csv": "f7262836ecd006bb08c7ea23bfac08d93bd025b8f49761ea61f1344e77b52866",
+    "execution_audit.json": "cea9e483169851251c80242661fa56412b6270717fdfed91e9acfd2ece1f3096",
+    "figure_manifest.json": "fd06f37b9b5dcee854c7e1e9d0632053d71b9b7732300e057fdc2cdd6e54b5b5",
+    "figures/continuous_world_episode.png": "e172af2aa0ac4de738ced22071d42aa1ca151baedd922c22bd4908b2dba9d331",
+    "figures/episode_timeline.png": "7972ba4a5ceeb5563cc84ba7e84b48939736141983281752faa775725fca8b36",
+    "figures/observation_local_evolution.png": "4c8eca5af0cf7b01c403ede2d7b50db0bf6a068922836a51376f600564c1cf5f",
+    "figures/request_rgb_sequence.png": "b2b086c816aee961a90e9970a3ff320a49a27c53b909daa2731ab24976edd4e7",
+    "freeze_manifest.json": "df633bad57f4ec83fdeaf2c9bd89cdd5bfd40ec7062199298dec1f46f7ff409e",
+    "launch_environment.json": "726fbe7dacd64d5e5f428f3224aea97ddc079385e1a2bbc3779af7519116e8cf",
+    "loader_verification.json": "7edf416f056a6ee392ed40c63ca6354d92695d3aaf213e5e6fec069633c94fbd",
+    "plot_inputs.json": "dd13e268821b6739773d3acd0651ea63be6cd1a60e364851e77032b7b67763d0",
+    "protocol_equivalence.json": "95f08ea09e436937a5b987dfa1b5389252e469175ac5a67c59862830de370f89",
+    "protocol_inputs.json": "11064dfa1cf5ff3a751fcae13bc1e3bb554fe418f628236f7b890385f5e97594",
+    "report_validation.json": "ffef7b7e618498c9328616f335be26bd94d074322f6f9817e25617f4354e9bce",
+    "result_summary.json": "95c62db783aa7b4357e410d1961da810a5508d38ff82030894d4d4bbcb0259f3"
+  }
+}

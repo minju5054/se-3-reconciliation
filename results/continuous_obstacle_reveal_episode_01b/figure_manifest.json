@@ -1,0 +1,10 @@
+{
+  "PNG_sha256": {
+    "continuous_world_episode.png": "e172af2aa0ac4de738ced22071d42aa1ca151baedd922c22bd4908b2dba9d331",
+    "observation_local_evolution.png": "4c8eca5af0cf7b01c403ede2d7b50db0bf6a068922836a51376f600564c1cf5f",
+    "episode_timeline.png": "7972ba4a5ceeb5563cc84ba7e84b48939736141983281752faa775725fca8b36",
+    "request_rgb_sequence.png": "b2b086c816aee961a90e9970a3ff320a49a27c53b909daa2731ab24976edd4e7"
+  },
+  "plot_inputs_sha256": "dd13e268821b6739773d3acd0651ea63be6cd1a60e364851e77032b7b67763d0",
+  "report_script_sha256": "11d304cdf793068e6f7f7a0a7c8de67e951b4c8b68d49c000213ba62cd988810"
+}

@@ -1,0 +1,6 @@
+{
+  "valid": true,
+  "exactly_four_PNGs": true,
+  "numeric_and_hash_parity": true,
+  "new_model_MPC_optimizer_calls": 0
+}

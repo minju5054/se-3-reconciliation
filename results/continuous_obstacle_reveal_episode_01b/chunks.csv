@@ -1,0 +1,5 @@
+chunk,generated,applied,observation_sim_s,ready_sim_s,application_sim_s,cart_pixels,N,arc_m,raw_sha256,raw_safe,clearance_m
+chunk_000,True,True,0.7833333741873503,1.0166667196899652,1.1166667249053717,0,10,1.351820588145103,6d53cfff6ca770055ca6563548fc80b6696e2336fd4343f35c2c4e01da1bd5ae,True,1.1175140107938666
+chunk_001,True,False,1.2833334002643824,1.5166667457669973,,3992,10,1.3660895841364071,bee96feb024de770e98f217d60c7262830a76fadd8abf2a29d499e64b94b25be,False,0.00799722992900126
+chunk_002,False,False,,,,,,,,,
+chunk_003,False,False,,,,,,,,,

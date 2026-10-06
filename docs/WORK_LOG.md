@@ -6891,3 +6891,29 @@ git diff --cached --check
   compileall and diff checks pass. Zero model/MPC/Isaac/optimizer scientific calls
   before freeze. Source validity requires saved validation and the unchanged
   qualified C0–C3 outcome; partial/blocked results remain explicit.
+
+### 2026-10-06 — CONTINUOUS_OBSTACLE_REVEAL_EPISODE_01B bounded result
+
+- Pushed freeze `86c54fbd78b66282c4eb6707a8b9f38e5faba12e` before the single
+  sanitized launch. Actual /proc mappings show Isaac bundled nvJitLink; old
+  CUDA symbol conflict resolved and SimulationApp/scene/episode initialized.
+- C0 generated/applied; first post-reveal C1 generated nonSTOP but rejected
+  before installation: whole reference clearance .00799722992900126 m < .05 m.
+  C2/C3 never requested. Frozen CONTINUOUS_CHUNKS_NO_QUALIFIED_FIRST_REACTION;
+  RAW_UNSAFE / SCENE_INVALID termination. No qualified C0–C3 source.
+- Actual prefix swept bound 1.0697830924553602 m, no execution guard abort,
+  collision, controller error or timeout. Reveal once; no reset after initialization.
+  New calls: startup1, initialized/finalized episode1/1, predictions2, buffers4,
+  warmup1, RGB6, MPC submit/solve/application5/5/5, integration89. All optimizer,
+  reconciliation, source-search and retry counts0. Server stopped.
+- Parent /proc observer hit PermissionError and missed its final launch metadata.
+  Scientific child completion/RAW_UNSAFE record and library samples survived.
+  Saved-only derived launch record explicitly keeps child exit code null and
+  binds recovery script/inputs; independent recovery audit passes. No scientific
+  code/config edit, repaired reference, replacement output or relaunch.
+- Frozen saved scientific validator and 01B equivalence/preservation/environment
+  audits pass, as do report numeric/hash checks. Validated partial source marked
+  invalid as a continuous C0–C3 source. Later evolution N/A. Four actual-data PNGs
+  visually inspected, C2/C3 missing. CSV LF normalization is presentation only.
+- Regression558 pass / 1 absent corpus skip; 01B focused20 pass. Historical 01
+  39-file evidence remains unchanged. No new scientific calls during validation.
