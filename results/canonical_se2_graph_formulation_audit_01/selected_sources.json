@@ -1,0 +1,27 @@
+[
+  {
+    "label": "OSA03_R00",
+    "id": "OSA03_R00",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/canonical_se2_graph_formulation_audit_01/primary_20261006/sources/OSA03_R00"
+  },
+  {
+    "label": "E1",
+    "id": "episode_009_repeat_00/handoff_001",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/canonical_se2_graph_formulation_audit_01/primary_20261006/sources/E1"
+  },
+  {
+    "label": "E2",
+    "id": "episode_017_repeat_01/handoff_008",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/canonical_se2_graph_formulation_audit_01/primary_20261006/sources/E2"
+  },
+  {
+    "label": "E3",
+    "id": "episode_007_repeat_01/handoff_001",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/canonical_se2_graph_formulation_audit_01/primary_20261006/sources/E3"
+  },
+  {
+    "label": "E4",
+    "id": "episode_016_repeat_00/handoff_008",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/canonical_se2_graph_formulation_audit_01/primary_20261006/sources/E4"
+  }
+]

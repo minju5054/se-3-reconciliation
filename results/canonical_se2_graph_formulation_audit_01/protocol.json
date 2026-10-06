@@ -1,0 +1,104 @@
+{
+  "experiment": "CANONICAL_SE2_GRAPH_FORMULATION_AUDIT_01",
+  "starting_sha": "2b8cdf89d47eed656a83768800245d820dd82abd",
+  "historical_results": {
+    "results/b_to_entry_boundary_row_ablation_04/result_summary.json": "ed1309b6da2532b51dcdc4b57da9cf0ff1fa228e5a1ab54a5e026c5218405ee7",
+    "results/direct_transition_hard_eval_02/result_summary.json": "0073b01507599e9cb1a4094bc9108201a2ba389b887df29deb44be8eaf0fca65"
+  },
+  "local_history": "data/local_se2_reconciliation_formulation_01/primary_20260925T013000Z",
+  "selected_sources": [
+    {
+      "label": "OSA03_R00",
+      "id": "OSA03_R00",
+      "folder": "data/b_to_entry_boundary_row_ablation_04/primary_20261004T000000Z/sources/S1"
+    },
+    {
+      "label": "E1",
+      "id": "episode_009_repeat_00/handoff_001",
+      "folder": "data/direct_transition_hard_eval_02/primary_20261006/sources/E1"
+    },
+    {
+      "label": "E2",
+      "id": "episode_017_repeat_01/handoff_008",
+      "folder": "data/direct_transition_hard_eval_02/primary_20261006/sources/E2"
+    },
+    {
+      "label": "E3",
+      "id": "episode_007_repeat_01/handoff_001",
+      "folder": "data/direct_transition_hard_eval_02/primary_20261006/sources/E3"
+    },
+    {
+      "label": "E4",
+      "id": "episode_016_repeat_00/handoff_008",
+      "folder": "data/direct_transition_hard_eval_02/primary_20261006/sources/E4"
+    }
+  ],
+  "input_selection": "all original FRESH rows, selected suffix starts at row 0",
+  "normalization": {
+    "translation_m": 0.1,
+    "yaw_degrees": 10.0
+  },
+  "lambdas": {
+    "L": 1.0,
+    "R": 1.0,
+    "A": 1.0
+  },
+  "progress": "original XY arc / total arc; fail on zero total",
+  "weights": {
+    "L": "(1-s)^2",
+    "A": "s^2"
+  },
+  "residual_order": [
+    "L",
+    "R",
+    "A"
+  ],
+  "reduction": "weighted mean L/A; edge mean R",
+  "initialization": "exact original FRESH",
+  "solver": {
+    "max_iterations": 80,
+    "finite_difference_epsilon": 1e-06,
+    "initial_damping": 0.001,
+    "damping_increase": 10.0,
+    "damping_decrease": 0.3,
+    "maximum_damping": 1000000000000.0,
+    "gradient_tolerance": 1e-09,
+    "step_tolerance": 1e-09,
+    "cost_tolerance": 1e-12
+  },
+  "safety": {
+    "radius_m": 0.2,
+    "edge_clearance_m": 0.05,
+    "numerical_tolerance": "unchanged environment metadata",
+    "implicit_B_connector": false
+  },
+  "interpretation": {
+    "distinct_XY_m": 0.0001,
+    "distinct_yaw_rad": 0.0001,
+    "endpoint_first_ratio_max": 0.5,
+    "relative_translation_RMS_bound_m": 0.1,
+    "relative_translation_max_bound_m": 0.2,
+    "relative_yaw_RMS_bound_rad": 0.17453292519943295,
+    "relative_yaw_max_bound_rad": 0.3490658503988659,
+    "repeated_invalid_count": 2
+  },
+  "algebra_atol": 1e-12,
+  "historical_solution_atol": 1e-10,
+  "comparison": "both directed node-to-continuous-XY-polyline projections; exact squared-distance ties earliest segment/fraction; shortest interpolated yaw; maxima over vertices, not continuous Hausdorff; diagnostic only",
+  "canonical_scientific_solves": 5,
+  "retries": 0,
+  "MPC": 0,
+  "controller_rollouts": 0,
+  "LightNav": 0,
+  "RGB": 0,
+  "Isaac": 0,
+  "GP": 0,
+  "historical_optimization_calls": 0,
+  "figures": [
+    "formulation_geometry.png",
+    "canonical_correction_profile.png",
+    "relative_motion_nonrigidity.png",
+    "v2_hermite_geometry.png"
+  ],
+  "formulation_audit_sha256": "8adbd7aa07bdb4bcb66f428d3a6f77e53da0b93c108b028db8c14e51d5768674"
+}

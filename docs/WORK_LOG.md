@@ -6713,3 +6713,23 @@ git diff --cached --check
 - Report and conservative README distinguish bounded staging sufficiency from
   graph necessity and from endpoint speed. No population/real-world/online/task
   completion claims. Result artifacts stay small; raw logs/arrays remain ignored.
+
+## 2026-10-06 — CANONICAL_SE2_GRAPH_FORMULATION_AUDIT_01 scientific freeze
+
+- Fetched main; starting HEAD/origin main2b8cdf89d47eed656a83768800245d820dd82abd.
+  Preserved two unrelated Stage0 config edits and untracked GPU-memory script.
+- Read the latest direct-transition/staging/bridge/Local-SE2 lineage and actual
+  implementations. Requested se2_lie.py is absent; Lie operations live in se2.py.
+- Wrote Markdown/JSON formulation audit before implementing an isolated canonical
+  wrapper. V2 edits X1 with fixed B/E*/suffix; canonical delegates unchanged
+  Local-SE2 L/R/A algebra over all original FRESH rows, with no correspondence.
+- Prepared OSA03_R00 plus fixed E1–E4 from DIRECT_TRANSITION_HARD_EVAL_02. Reused
+  historical B_ENTRY/Hermite/V2 and installed references; authenticated339 selected
+  source/history files plus historical authority chains. No new source search.
+- Froze numerical structural predicates, comparison projections, safety/solver
+  defaults and exactly four planning PNGs. No controller execution or preflight.
+  Scientific solves remain0 before commit/push; budget5, retry0.
+- Tests: main519 pass; disjoint geometry/timing338 pass/1 skipped; final focused45
+  pass including2 additional cases.859 distinct pass/1 historical-corpus skip.
+  Compileall passes. Reviewed staged implementation/config/tests and diff checks.
+  Ambient ROS pytest plugin autoload disabled (missing lark), no environment edits.
