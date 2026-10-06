@@ -1,0 +1,98 @@
+[
+  {
+    "id": "episode_011_repeat_01/handoff_001",
+    "kind": "genuine",
+    "label": "E1",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/staging_graph_necessity_eval_01/primary_20261006/sources/E1",
+    "Hermite_M": 2,
+    "V2_M": 2,
+    "severity": {
+      "delta_phi_rad": 1.939936928085367,
+      "rho_d": 0.38126877930818603,
+      "spacing_severity_abs_log_rho": 0.9642506950718124,
+      "d_F_m": 0.15013729401109577,
+      "B_to_entry_chord_m": 0.05724266281624471
+    },
+    "remaining_arc_m": 1.2041004964321875
+  },
+  {
+    "id": "episode_015_repeat_01/handoff_005",
+    "kind": "genuine",
+    "label": "E2",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/staging_graph_necessity_eval_01/primary_20261006/sources/E2",
+    "Hermite_M": 2,
+    "V2_M": 2,
+    "severity": {
+      "delta_phi_rad": 1.8348969117241083,
+      "rho_d": 0.3876622289403629,
+      "spacing_severity_abs_log_rho": 0.9476208624704574,
+      "d_F_m": 0.15058455818441333,
+      "B_to_entry_chord_m": 0.05837594546976944
+    },
+    "remaining_arc_m": 1.1506105257306818
+  },
+  {
+    "id": "episode_018_repeat_00/handoff_018",
+    "kind": "genuine",
+    "label": "E3",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/staging_graph_necessity_eval_01/primary_20261006/sources/E3",
+    "Hermite_M": 2,
+    "V2_M": 2,
+    "severity": {
+      "delta_phi_rad": 1.7896053579339593,
+      "rho_d": 0.47417471299605507,
+      "spacing_severity_abs_log_rho": 0.7461794323820241,
+      "d_F_m": 0.15154881976367504,
+      "B_to_entry_chord_m": 0.07186061811633149
+    },
+    "remaining_arc_m": 0.8490869530932807
+  },
+  {
+    "id": "episode_003_repeat_01/handoff_010",
+    "kind": "genuine",
+    "label": "E4",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/staging_graph_necessity_eval_01/primary_20261006/sources/E4",
+    "Hermite_M": 2,
+    "V2_M": 2,
+    "severity": {
+      "delta_phi_rad": 1.57081911748484,
+      "rho_d": 1.009285005640219e-05,
+      "spacing_severity_abs_log_rho": 11.503683300015053,
+      "d_F_m": 0.1500704288571704,
+      "B_to_entry_chord_m": 1.514638336355393e-06
+    },
+    "remaining_arc_m": 0.9858005117552081
+  },
+  {
+    "id": "episode_026_repeat_01/handoff_008",
+    "kind": "genuine",
+    "label": "E5",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/staging_graph_necessity_eval_01/primary_20261006/sources/E5",
+    "Hermite_M": 2,
+    "V2_M": 2,
+    "severity": {
+      "delta_phi_rad": 1.571105913728517,
+      "rho_d": 1.0964201081893385e-05,
+      "spacing_severity_abs_log_rho": 11.420875039497334,
+      "d_F_m": 0.15034592275051445,
+      "B_to_entry_chord_m": 1.6484229288794499e-06
+    },
+    "remaining_arc_m": 0.8753823006301287
+  },
+  {
+    "id": "episode_024_repeat_01/handoff_009",
+    "kind": "genuine",
+    "label": "E6",
+    "folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/staging_graph_necessity_eval_01/primary_20261006/sources/E6",
+    "Hermite_M": 2,
+    "V2_M": 2,
+    "severity": {
+      "delta_phi_rad": 1.5706842932567273,
+      "rho_d": 1.7549260947795104e-05,
+      "spacing_severity_abs_log_rho": 10.95049872017585,
+      "d_F_m": 0.15034592275051445,
+      "B_to_entry_chord_m": 2.6384598307858225e-06
+    },
+    "remaining_arc_m": 0.9452150683408016
+  }
+]

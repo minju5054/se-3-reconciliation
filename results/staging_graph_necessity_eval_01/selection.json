@@ -1,0 +1,54 @@
+{
+  "selected_ids": [
+    "episode_011_repeat_01/handoff_001",
+    "episode_015_repeat_01/handoff_005",
+    "episode_018_repeat_00/handoff_018",
+    "episode_003_repeat_01/handoff_010",
+    "episode_026_repeat_01/handoff_008",
+    "episode_024_repeat_01/handoff_009"
+  ],
+  "selected_count": 6,
+  "selection_trace": [
+    {
+      "case_id": "episode_011_repeat_01/handoff_001",
+      "axis": "delta_phi_rad",
+      "value": 1.939936928085367,
+      "rank_in_axis": 1
+    },
+    {
+      "case_id": "episode_015_repeat_01/handoff_005",
+      "axis": "delta_phi_rad",
+      "value": 1.8348969117241083,
+      "rank_in_axis": 2
+    },
+    {
+      "case_id": "episode_018_repeat_00/handoff_018",
+      "axis": "delta_phi_rad",
+      "value": 1.7896053579339593,
+      "rank_in_axis": 3
+    },
+    {
+      "case_id": "episode_003_repeat_01/handoff_010",
+      "axis": "spacing_severity_abs_log_rho",
+      "value": 11.503683300015053,
+      "rank_in_axis": 1
+    },
+    {
+      "case_id": "episode_026_repeat_01/handoff_008",
+      "axis": "spacing_severity_abs_log_rho",
+      "value": 11.420875039497334,
+      "rank_in_axis": 2
+    },
+    {
+      "case_id": "episode_024_repeat_01/handoff_009",
+      "axis": "spacing_severity_abs_log_rho",
+      "value": 10.95049872017585,
+      "rank_in_axis": 3
+    }
+  ],
+  "eligible_candidates": 134,
+  "eligible_episodes": 23,
+  "status": "READY_FOR_FREEZE",
+  "outcome_fields_used": false,
+  "episode_unit": "exact recorded episode_id, including repeat"
+}

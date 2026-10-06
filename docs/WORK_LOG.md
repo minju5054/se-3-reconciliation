@@ -6589,3 +6589,30 @@ git diff --cached --check
   report answers all 22 questions and preserves nulls and metric trade-offs.
   Only results/docs and conservative README update enter the result commit;
   unrelated Stage0 changes and GPU-memory script remain preserved.
+
+
+## 2026-10-06 — STAGING_GRAPH_NECESSITY_EVAL_01 pre-science freeze
+
+- Fetched origin/main and confirmed starting HEAD 4e26e547cbda3cbfee8dc842a40091388cde7543.
+  Preserved two unrelated Stage0 edits and the untracked GPU-memory plotting script.
+- Authenticated 881 saved acquisition events / 3,987 file hashes. Registered 47
+  prior development handoffs and excluded their 33 complete recorded episodes.
+  Outcome-blind source gates leave 134 eligible candidates in 23 episodes; select
+  E1=011/01/001, E2=015/01/005, E3=018/00/018, E4=003/01/010,
+  E5=026/01/008, E6=024/01/009 by top-three direction, then top-three spacing
+  severity with lexical ties and distinct episode IDs. Re-scan reproduced exactly.
+- Froze C3/B_ENTRY/Hermite geometry, original Native-installed suffix bits,
+  common B/memory/generation and source-specific schedules. Six Hermite M2;
+  six V2 M2 inputs, unchanged vector formulation, solver and acceptance machinery.
+  E4-E6 micrometre gaps remain selected by prescribed abs(log rho); no gap tuning.
+  E5/E6 raw FRESH arrays match, so source separation is not path/population independence.
+- Added isolated selection/classification/runner/validator/reporter/tests namespace.
+  Historical source, official MPC and safety implementations unchanged. Twelve
+  zero-solve worker preflights installed 24 references; no scientific solve/rollout yet.
+- Expected upper grid: six V2 solves, 24 rollouts, 720 MPC solves, 712 applications;
+  invalid V2 references skip execution without retry. All planning precedes rollouts.
+  Seven requested experiment categories frozen with exact precedence and one-tick rule.
+- Relevant regression 742 passed / one known EXP-01B/EXP-02B missing-corpus skip;
+  latest focused 48 passed (744 distinct passed across runs). Compileall and diff
+  checks pass. Three synthetic PNGs visually checked; no synthetic scientific claim.
+  Full commands and limitations are in docs/STAGING_GRAPH_NECESSITY_EVAL_01.md.
