@@ -6917,3 +6917,24 @@ git diff --cached --check
   visually inspected, C2/C3 missing. CSV LF normalization is presentation only.
 - Regression558 pass / 1 absent corpus skip; 01B focused20 pass. Historical 01
   39-file evidence remains unchanged. No new scientific calls during validation.
+
+## 2026-10-06 — CONTINUOUS_OBSTACLE_REVEAL_EXPLORATORY_02 pre-science freeze
+
+- Starting fetched HEAD/main: `0f21559cbac6cda0d58b28870b2d823b4de7e409`.
+- Separately authorized one continuous native C0–C3 acquisition, no retry/search
+  or reconciliation. Isolated adapter keeps the .20 m footprint/direct checker
+  and changes only additional clearance .05→.00 for reference and command gates.
+  Legacy .05 checks remain explicit diagnostics. Historical code/config/artifacts
+  and official LightNav/MPC remain byte-identical; exact input interface retained.
+- Saved-only 01B and OSA03 validators pass; 140 old-run/result files and inherited
+  authority authenticated. Sanitized loader check selects bundled nvJitLink with
+  zero undefined symbols. No model/Isaac/optimizer scientific calls yet.
+- Frozen policy/classification, original sequence, dual clearance, raw/history
+  provenance, actual-interval/guard-lookahead distinction, source bundle and four
+  compact PNGs documented in `docs/CONTINUOUS_OBSTACLE_REVEAL_EXPLORATORY_02.md`.
+- New focused tests: 30; relevant regression suite: **588 passed, 1 skipped**
+  (missing immutable DATA02 generated v1 corpus). Initial restricted test run had
+  two Unix-socket permission failures; unchanged suite passed outside sandbox.
+  Compileall and diff checks pass. Synthetic/saved fixtures are not new evidence.
+- Unrelated stage0 YAML edits and `scripts/plot_gpu_memory_snapshot.py` preserved.
+  Commit/push this freeze before the single server startup/acquisition launch.

@@ -1,0 +1,27 @@
+{
+  "unchanged_runtime_and_model_input_files": {
+    "selected_pose11.json": "a2014e0093f7a1241c2db50a1caa2c4c2d2a140cd70a7602af46f819dc1161b0",
+    "scenario.json": "63a0d1f907584fd02240b14a1a30bd1f6227beea75bf27344403c9b726163725",
+    "side_passages.json": "a292e56c40660ae1d57043ca40e8bca956c3e547c6a761b42d311d73a0630714",
+    "config_snapshot.yaml": "60bc96641f5e0368d4187fd09dabaf42a8fb030ccc4cbdb7fd44709aa119c4b9",
+    "episode_schedule.json": "47820ad67754bdf5faaca20c3e10ff38a158df6ecab983d99929e0ef664af832",
+    "external_authority.json": "73e518b5557729c0b1e4c2f3833109348fca4b96db6c8b3ea6607169e3f9a8e1"
+  },
+  "unchanged_old_protocol_except_namespace_classification_and_policy": true,
+  "sole_scientific_intervention": {
+    "old_required_extra_clearance_m": 0.05,
+    "new_policy": {
+      "footprint_radius_m": 0.2,
+      "required_extra_clearance_m": 0.0,
+      "legacy_required_extra_clearance_m": 0.05,
+      "guard_enabled": true,
+      "physical_overlap_rejection": true
+    }
+  },
+  "scope": "reference acceptance and execution guard only; not a LightNav input",
+  "administrative_changes": [
+    "new namespace",
+    "classification/dual diagnostics",
+    "passive observer OSError handling"
+  ]
+}

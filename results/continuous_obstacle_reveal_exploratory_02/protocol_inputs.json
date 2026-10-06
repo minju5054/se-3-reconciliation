@@ -1,0 +1,26 @@
+{
+  "experiment": "CONTINUOUS_OBSTACLE_REVEAL_EXPLORATORY_02",
+  "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_exploratory_02/primary_20261006",
+  "starting_sha": "0f21559cbac6cda0d58b28870b2d823b4de7e409",
+  "prepared_sha256": {
+    "config_snapshot.yaml": "60bc96641f5e0368d4187fd09dabaf42a8fb030ccc4cbdb7fd44709aa119c4b9",
+    "episode_schedule.json": "47820ad67754bdf5faaca20c3e10ff38a158df6ecab983d99929e0ef664af832",
+    "protocol_equivalence.json": "05c2017087a86c195048ace1963c2f2141309297ca29a01beb98d86a3215dc88",
+    "source.json": "5a2a45b479c080af2185d681b418aa6a93b092f528c34ba5f6a9e96f4a1b7e5a",
+    "selected_pose11.json": "a2014e0093f7a1241c2db50a1caa2c4c2d2a140cd70a7602af46f819dc1161b0",
+    "side_passages.json": "a292e56c40660ae1d57043ca40e8bca956c3e547c6a761b42d311d73a0630714",
+    "historical01b_preservation.json": "2dcdd3636a47479b858f42c470350998d83b8affa4f8d1f7e8e78782b408b0ca",
+    "loader_verification.json": "4b5ecee29ba6025bc65761ffc32fe26611e20319ffd5e89eb695174afb26a20f",
+    "scenario.json": "63a0d1f907584fd02240b14a1a30bd1f6227beea75bf27344403c9b726163725",
+    "protocol.json": "b091cfb778ae232598d20b86a6d89792bab7857da5048d89fa88e21e4cb7b949",
+    "launch_environment.json": "13186d82a75320f691ad90bc7ba94fab7928d45a41479b70700ad7b0219600e9",
+    "external_authority.json": "73e518b5557729c0b1e4c2f3833109348fca4b96db6c8b3ea6607169e3f9a8e1",
+    "technical_preflight/OSA03_saved_revalidation.json": "3a8d4163be74421d0f71aff8ac780f39f08bcd152f9cd9fb1bff1aa23ff0603f",
+    "technical_preflight/loader_sanitized.txt": "2aaac01c80a0d6f182a3d750d8e9167b6d397208646a11189e24d60a5014e414",
+    "technical_preflight/loader_inherited.txt": "7f78567b9ff49aac3ee082ccfe05e0ca85d77ede699f2abad55f0168b57fc034"
+  },
+  "preserved01_files": 140,
+  "inherited_authority_files": 2389,
+  "loader_preflight_pass": true,
+  "scientific_calls": 0
+}

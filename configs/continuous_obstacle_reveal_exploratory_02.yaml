@@ -1,0 +1,39 @@
+experiment: CONTINUOUS_OBSTACLE_REVEAL_EXPLORATORY_02
+scientific_protocol: configs/continuous_obstacle_reveal_episode_01.yaml
+historical_run: data/continuous_obstacle_reveal_episode_01b/primary_20261006T100411Z
+historical_results: results/continuous_obstacle_reveal_episode_01b
+historical_commit: 0f21559cbac6cda0d58b28870b2d823b4de7e409
+launch_source: docs/OBSTACLE_SOURCE_ACQUISITION_03_OBSTRUCTED_OLD.md
+isaac_python: /home/gpuadmin/isaacsim/python.sh
+collector: scripts/isaac/continuous_obstacle_reveal_exploratory02.py
+maximum_launches: 1
+retry: false
+unset_environment:
+- LD_LIBRARY_PATH
+- PYTHONPATH
+- CUDA_HOME
+- CUDA_PATH
+- ROS_DISTRO
+- ROS_VERSION
+- ROS_PYTHON_VERSION
+- AMENT_PREFIX_PATH
+- CMAKE_PREFIX_PATH
+- COLCON_PREFIX_PATH
+- RMW_IMPLEMENTATION
+set_environment:
+  OPENBLAS_NUM_THREADS: '1'
+  OMP_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONUNBUFFERED: '1'
+libcusparse: /home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/libcusparse.so.12
+exploratory_clearance:
+  footprint_radius_m: 0.2
+  required_extra_clearance_m: 0.0
+  legacy_required_extra_clearance_m: 0.05
+  guard_enabled: true
+  physical_overlap_rejection: true
+classification_priority:
+- all C0-C3 applied, valid timing/provenance, no executed overlap -> CONTINUOUS_EXPLORATORY_C0_C3_ACQUIRED
+- C0 and C1 applied but incomplete -> PARTIAL_CONTINUOUS_EXPLORATORY_SEQUENCE
+- C1 physical overlap, unapplied -> FIRST_POST_REVEAL_REFERENCE_OVERLAPS
+- infrastructure/timing/validator failure -> TECHNICAL_EXECUTION_BLOCKED; uncovered behavior-only pre-C1 stops -> null with exact reason
