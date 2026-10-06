@@ -7,6 +7,17 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [zero-extra-reserve exploratory acquisition](docs/CONTINUOUS_OBSTACLE_REVEAL_EXPLORATORY_02.md)
+is **PARTIAL_CONTINUOUS_EXPLORATORY_SEQUENCE**: one episode generated C0–C3;
+C0/C1/C2 applied, while C3 was rejected before installation for physical footprint
+overlap (−.139375 m). C1/C2 references pass the unchanged .20 m footprint checker
+at .006271/.047950 m but fail the historical extra .05 m reserve. The actual
+executed prefix has .377714 m swept-clearance lower bound. Both later raw pairs
+are **EVOLVING**. The validated partial bundle has no B3 or applied C3 and is not
+a qualified fully executed C0–C3 source or navigation-safety result.
+[Local chunks PNG](results/continuous_obstacle_reveal_exploratory_02/figures/observation_local_evolution.png)
+and [exact RGBs](results/continuous_obstacle_reveal_exploratory_02/figures/request_rgb_sequence.png).
+
 The [separately authorized continuous episode 01B](docs/CONTINUOUS_OBSTACLE_REVEAL_EPISODE_01B.md)
 resolved the startup library conflict and ran once. **CONTINUOUS_CHUNKS_NO_QUALIFIED_FIRST_REACTION**:
 C0 executed; C1 was generated but rejected before installation because its edge

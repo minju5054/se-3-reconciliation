@@ -6938,3 +6938,27 @@ git diff --cached --check
   Compileall and diff checks pass. Synthetic/saved fixtures are not new evidence.
 - Unrelated stage0 YAML edits and `scripts/plot_gpu_memory_snapshot.py` preserved.
   Commit/push this freeze before the single server startup/acquisition launch.
+
+## 2026-10-06 — EXPLORATORY_02 single acquisition results
+
+- Pushed scientific freeze: `d9d29e73b8261702b7c3e5b3249d3b82c58a9226`.
+  Exactly one Isaac launch/episode; all four nonSTOP raw chunks generated.
+- **PARTIAL_CONTINUOUS_EXPLORATORY_SEQUENCE**: C0/C1/C2 applied; C3 reference
+  clearance −.139375182 m and physical overlap, so rejected before installation.
+  No B3, post-C3 continuation, retry, repair or new source search.
+- C1/C2 reference clearances .006270831/.047950498 m pass exploratory zero reserve
+  but fail old .05 m. Actual executed swept lower bound .377713861 m, all 150
+  intervals also above .05; no execution guard abort or executed overlap.
+- C1→C2 / C2→C3 local separation .382287447/.957243513 m: both EVOLVING.
+  These include the generated but unapplied C3; no semantic/safety claim follows.
+- Terminal4 / buffers6 / warmup1 / RGB10 / MPC solved15 / initialized episodes1 /
+  reveals1. Graph, canonical, B_ENTRY, reconciliation, search, retries all0.
+- Saved-only scientific/bundle/PNG validators pass. Bundle122 raw +11 derived
+  files is valid partial data; qualified applied C0–C3 source=false. Historical
+  hashes preserved. Regression588 passed /1 missing-corpus skip; new focused30.
+- Four PNGs inspected. Separate reporting-only script fixes RGB metadata spacing
+  with original render bytes archived; frozen code unchanged, zero new calls.
+  Shutdown observer PermissionError was recorded by the frozen handler; child
+  exited0 and actual bundled nvJitLink provenance was captured. Server stopped.
+- Documentation/README distinguish low-margin references, rejected physical
+  overlap and the actually executed prefix. No future reconciliation implemented.

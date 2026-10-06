@@ -1,0 +1,19 @@
+{
+  "PNG_sha256": {
+    "continuous_world_episode.png": "c726e1bbdd70764750c2e8802ea7342b5b79741455bc30094c57646a335132e5",
+    "observation_local_evolution.png": "4224e2c0a2d9333924ff7314164d2c9bb7c0f95b322d62b68bcc1e1258ee7b41",
+    "episode_timeline.png": "674d33e60a4a179684199464ccc506fd4023ba6059737367357494a824692102",
+    "request_rgb_sequence.png": "55bb71041a15c3a2db38761646581d70d45082b756a66871600168da18c566da"
+  },
+  "plot_inputs_sha256": "c903785d89c939eb2e0506729b787e6b901bb1d4ccc5047ae8f2dff44588858c",
+  "report_script_sha256": "4377adc2549e4be744fa7354abad22b02fd929823575f28a845897b627589949",
+  "layout_correction": {
+    "script": "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_continuous_obstacle_reveal_exploratory02_layout.py",
+    "script_sha256": "907867a1fe9519c42730829b956dbd8c672613f0b119eaea24c8bd380e1b414e",
+    "original_manifest": "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_exploratory_02/primary_20261006/reporting/original_frozen_report/figure_manifest.json",
+    "original_manifest_sha256": "6b11f8c446d7b5c0ed67e055eac22098177fc770ce206a1c156c4ac79f08d762",
+    "original_RGB_PNG_sha256": "b8f3b94e52a15e08d8787865c66271ac7d11086ad5f751c430296243b2d491e7",
+    "reason": "dedicated metadata axes prevent title overlap",
+    "new_scientific_calls": 0
+  }
+}
