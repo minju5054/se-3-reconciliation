@@ -6733,3 +6733,23 @@ git diff --cached --check
   pass including2 additional cases.859 distinct pass/1 historical-corpus skip.
   Compileall passes. Reviewed staged implementation/config/tests and diff checks.
   Ambient ROS pytest plugin autoload disabled (missing lark), no environment edits.
+
+## 2026-10-06 — CANONICAL_SE2_GRAPH_FORMULATION_AUDIT_01 results
+
+- Scientific freeze 6344fddd848867fc9eb3480f19321fbc2ad418d9 was normally pushed and
+  authenticated before the five one-shot canonical solves. 5/5 converge; retry 0.
+  MPC/controller rollouts/LightNav/RGB/Isaac/GP/historical optimizations all 0.
+- OSA03 canonical world array matches historical Local-SE2 exactly (max difference 0).
+  All 5 references differ from fixed-suffix bridge geometry and are non-rigid.
+  First corrections .211144–.540300m; endpoint .002187–.005586m; rigid-fit XY
+  RMS .066835–.191101m. Min complete-polyline clearance .2278092081855581m.
+- Frozen classification CANONICAL_DISTINCT_AND_STRUCTURALLY_PLAUSIBLE,5/5 predicates
+  met; Direction A recommends a separate later execution study, not implemented.
+  Existing Local-SE2 already supplies this algebra; no new objective or execution
+  benefit is claimed. V2/Hermite E1–E4 X1 differences .379–1.412mm are descriptive.
+- Saved-only independent costs, acceptance/damping/retractions, safety checks,
+  source/frame/hash parity and exact historical solution parity pass. Four PNGs
+  generated and visually reviewed; CSV/JSON/figure sidecars and hashes agree.
+- 859 distinct tests pass, 1 missing historical-corpus skip; focused 45 pass.
+  Compileall and diff checks pass. No post-freeze scientific-code changes or
+  protocol deviations; no historical reruns, source search or environment edits.

@@ -7,6 +7,15 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [canonical SE(2) formulation audit](docs/CANONICAL_SE2_GRAPH_FORMULATION_AUDIT_01.md)
+is planning only: V2 edits one bridge pose; canonical edits the complete original
+FRESH future and reuses existing Local-SE2 L/R/A algebra. All five saved-source
+solves converge and pass reference safety, with non-rigid early correction and
+small endpoint displacement. OSA03 reproduces historical Local-SE2 exactly.
+**CANONICAL_DISTINCT_AND_STRUCTURALLY_PLAUSIBLE** recommends a separate later
+execution comparison; it demonstrates no controller or execution benefit.
+No MPC, LightNav, RGB or Isaac calls. [Planning PNG](results/canonical_se2_graph_formulation_audit_01/figures/formulation_geometry.png).
+
 The [meaningful direct-transition evaluation](docs/DIRECT_TRANSITION_HARD_EVAL_02.md)
 excludes all six prior evaluation episodes and requires a B→E* gap of at least 2 cm and rho of at least .10.
 Of 881 saved events, 90 pass the base gates and 4 independent episodes pass the new

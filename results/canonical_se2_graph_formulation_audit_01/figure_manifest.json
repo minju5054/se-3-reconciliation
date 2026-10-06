@@ -1,0 +1,23 @@
+{
+  "numeric_sha256": "80a5c614d2786248379cd9d1b95a12e16ae794945179a78390b727464dc8e86a",
+  "figures": [
+    {
+      "file": "formulation_geometry.png",
+      "sha256": "98ff608100153059165f056b77f81b88e14eefa2ac18dc3e3be34b3625e8d44d"
+    },
+    {
+      "file": "canonical_correction_profile.png",
+      "sha256": "261afdbbd43df283e15d5000d9339865a27bf85c9fe43adfbdd484bc958fd181"
+    },
+    {
+      "file": "relative_motion_nonrigidity.png",
+      "sha256": "dd5b7c6cfa861d1be8522df642b8d467cb2e2362d22a2ceeefd28d6d25536963"
+    },
+    {
+      "file": "v2_hermite_geometry.png",
+      "sha256": "ede011a68e7a25478d18100c3a0edf92e1b7d09e5252d4365095d87b72c54786"
+    }
+  ],
+  "scope": "planning only",
+  "count": 4
+}

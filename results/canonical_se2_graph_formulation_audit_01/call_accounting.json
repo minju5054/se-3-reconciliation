@@ -1,0 +1,11 @@
+{
+  "canonical_scientific_solves": 5,
+  "retries": 0,
+  "MPC": 0,
+  "controller_rollouts": 0,
+  "LightNav": 0,
+  "RGB": 0,
+  "Isaac": 0,
+  "GP": 0,
+  "historical_optimization_calls": 0
+}

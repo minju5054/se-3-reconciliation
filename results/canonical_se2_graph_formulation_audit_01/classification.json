@@ -1,0 +1,52 @@
+{
+  "classification": "CANONICAL_DISTINCT_AND_STRUCTURALLY_PLAUSIBLE",
+  "direction": "A",
+  "predicates": {
+    "OSA03_R00": {
+      "valid": true,
+      "distinct": true,
+      "nonrigid": true,
+      "bounded": true,
+      "recovery": true,
+      "early": true,
+      "plausible": true
+    },
+    "E1": {
+      "valid": true,
+      "distinct": true,
+      "nonrigid": true,
+      "bounded": true,
+      "recovery": true,
+      "early": true,
+      "plausible": true
+    },
+    "E2": {
+      "valid": true,
+      "distinct": true,
+      "nonrigid": true,
+      "bounded": true,
+      "recovery": true,
+      "early": true,
+      "plausible": true
+    },
+    "E3": {
+      "valid": true,
+      "distinct": true,
+      "nonrigid": true,
+      "bounded": true,
+      "recovery": true,
+      "early": true,
+      "plausible": true
+    },
+    "E4": {
+      "valid": true,
+      "distinct": true,
+      "nonrigid": true,
+      "bounded": true,
+      "recovery": true,
+      "early": true,
+      "plausible": true
+    }
+  },
+  "execution_benefit_demonstrated": false
+}

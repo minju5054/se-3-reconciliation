@@ -1,0 +1,37 @@
+{
+  "valid": true,
+  "saved_only": true,
+  "new_scientific_solves": 0,
+  "source_hashes": true,
+  "independent_costs": true,
+  "right_local_and_acceptance": true,
+  "frame_parity": true,
+  "OSA03_historical_solution_parity": true,
+  "sources": {
+    "OSA03_R00": {
+      "accepted": 4,
+      "unsafe_rejected": 0,
+      "checked_feasibility": 5
+    },
+    "E1": {
+      "accepted": 5,
+      "unsafe_rejected": 0,
+      "checked_feasibility": 6
+    },
+    "E2": {
+      "accepted": 6,
+      "unsafe_rejected": 0,
+      "checked_feasibility": 7
+    },
+    "E3": {
+      "accepted": 5,
+      "unsafe_rejected": 0,
+      "checked_feasibility": 6
+    },
+    "E4": {
+      "accepted": 5,
+      "unsafe_rejected": 0,
+      "checked_feasibility": 6
+    }
+  }
+}
