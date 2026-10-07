@@ -1,0 +1,15 @@
+{
+  "saved_only_audit_valid": true,
+  "source_authentication_valid": true,
+  "source_guard_recomputation_valid": true,
+  "schedule_prerequisite_pass": false,
+  "scientific_parity_pass": null,
+  "no_scientific_calls": true,
+  "no_final_PNG_expected": true,
+  "live_restoration_unverified": [
+    "Isaac B pose",
+    "actual cart transform",
+    "live MPC memory/generation"
+  ],
+  "classification": "TECHNICAL_BLOCKED"
+}

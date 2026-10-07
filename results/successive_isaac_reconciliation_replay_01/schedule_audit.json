@@ -1,0 +1,134 @@
+{
+  "start_tick": 92,
+  "stop_before_application_tick": 122,
+  "integration_steps": 30,
+  "initial_generation": 3,
+  "attempted_submit_ticks": [
+    96,
+    102,
+    108,
+    114,
+    120
+  ],
+  "accepted_submit_ticks": [
+    96,
+    102,
+    108,
+    114,
+    120
+  ],
+  "new_application_ticks": [
+    97,
+    103,
+    109,
+    115
+  ],
+  "initial_application_restored": 92,
+  "submissions": [
+    {
+      "event_row": 15,
+      "submit_tick": 96,
+      "chunk_id": "chunk_001",
+      "reference_version": 1,
+      "generation": 3,
+      "solve_id": "EPISODE_00_solve_000006",
+      "application_tick": 97,
+      "result_status": "command",
+      "result_generation": 3,
+      "result_seen_tick": 97
+    },
+    {
+      "event_row": 17,
+      "submit_tick": 102,
+      "chunk_id": "chunk_001",
+      "reference_version": 1,
+      "generation": 3,
+      "solve_id": "EPISODE_00_solve_000007",
+      "application_tick": 103,
+      "result_status": "command",
+      "result_generation": 3,
+      "result_seen_tick": 103
+    },
+    {
+      "event_row": 19,
+      "submit_tick": 108,
+      "chunk_id": "chunk_001",
+      "reference_version": 1,
+      "generation": 3,
+      "solve_id": "EPISODE_00_solve_000008",
+      "application_tick": 109,
+      "result_status": "command",
+      "result_generation": 3,
+      "result_seen_tick": 109
+    },
+    {
+      "event_row": 21,
+      "submit_tick": 114,
+      "chunk_id": "chunk_001",
+      "reference_version": 1,
+      "generation": 3,
+      "solve_id": "EPISODE_00_solve_000009",
+      "application_tick": 115,
+      "result_status": "command",
+      "result_generation": 3,
+      "result_seen_tick": 115
+    },
+    {
+      "event_row": 24,
+      "submit_tick": 120,
+      "chunk_id": "chunk_002",
+      "reference_version": 2,
+      "generation": 4,
+      "solve_id": "EPISODE_00_solve_000010",
+      "application_tick": 122,
+      "result_status": "command",
+      "result_generation": 4,
+      "result_seen_tick": 122
+    }
+  ],
+  "installs": [
+    {
+      "event_row": 23,
+      "install_tick": 120,
+      "reply_seen_tick": 121,
+      "chunk_id": "chunk_002",
+      "reference_version": 2,
+      "generation": 4
+    }
+  ],
+  "foreign_reference_events": [
+    {
+      "kind": "install",
+      "event_row": 23,
+      "install_tick": 120,
+      "reply_seen_tick": 121,
+      "chunk_id": "chunk_002",
+      "reference_version": 2,
+      "generation": 4
+    },
+    {
+      "kind": "submit",
+      "event_row": 24,
+      "submit_tick": 120,
+      "chunk_id": "chunk_002",
+      "reference_version": 2,
+      "generation": 4,
+      "solve_id": "EPISODE_00_solve_000010",
+      "application_tick": 122,
+      "result_status": "command",
+      "result_generation": 4,
+      "result_seen_tick": 122
+    }
+  ],
+  "generation_changes": [
+    {
+      "event_row": 23,
+      "install_tick": 120,
+      "reply_seen_tick": 121,
+      "chunk_id": "chunk_002",
+      "reference_version": 2,
+      "generation": 4
+    }
+  ],
+  "raw_only_eligible": false
+}

@@ -1,0 +1,34 @@
+{
+  "initial_B_pose_error": {
+    "value": null,
+    "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+  },
+  "per_tick_pose_max_error": {
+    "value": null,
+    "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+  },
+  "applied_command_max_error": {
+    "value": null,
+    "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+  },
+  "application_ticks_equal": {
+    "value": null,
+    "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+  },
+  "controller_memory_equal": {
+    "value": null,
+    "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+  },
+  "guard_decisions_equal": {
+    "value": null,
+    "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+  },
+  "minimum_swept_clearance_m": {
+    "value": null,
+    "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+  },
+  "horizon_termination_equal": {
+    "value": null,
+    "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+  }
+}

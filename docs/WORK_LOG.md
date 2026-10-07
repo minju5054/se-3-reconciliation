@@ -7093,3 +7093,36 @@ git diff --cached --check
 - Documentation/README updated conservatively. One DEVELOPMENT SOURCE only; no
   semantic side-compliance, complete bypass, task success, safety/generalization,
   reconciliation or graph-benefit claim. Stop after normal result push.
+
+## 2026-10-07 — SUCCESSIVE_ISAAC_RECONCILIATION_REPLAY_01 prerequisite audit
+
+- Fetched origin/main; starting HEAD e4f61465c13996cc8c5c70504a5735dabfa6e944
+  equals remote main. Scope is RAW C0→C1 Isaac parity only, same CANDIDATE_01.
+  Preserved unrelated stage0 config changes and GPU-memory plotting script.
+- Authenticated tracked source result, source freeze ee330244d867fad3749c60b6a5f1630b1471ec2a,
+  complete401-file seal,297 episode inputs, exact C0/C1 raw/world arrays and
+  boundary state/memory/clocks. Original saved-only accounting validator passes.
+- TECHNICAL_BLOCKED before scientific launch: C1 physical commands span ticks92–121
+  (30 steps), but original controller installs C2/gen4 and submits solve000010 at120.
+  C2 applies at122. Full submit ticks96/102/108/114/120 contain a non-C1 reference
+  and generation change inside the requested C1-active window. Existing fixed-gen
+  LogicalRelease/common-B worker cannot directly reproduce this; RAW C1-only scope
+  excludes installing/solving C2. No filtering, replacement or shortened horizon.
+- Added small saved-only loader/auditor, config, blocked preflight snapshot,
+  source/schedule evidence, validation and null parity JSON. Scientific freeze SHA
+  is null; no eligible scientific run was frozen. One focused audit/result commit.
+  Followed the task's explicit stop-on-scheduling-prerequisite-failure rule.
+- Source consistency only:30 historical integration steps reproduce exactly
+  (component error0.0);30 saved guards recompute. Reference clearance.821280919083059 m,
+  minimum C1 guard bound1.0379373625059845 m, legacy.05 margin passes. No new safety
+  or live restoration result; all scientific parity metrics remain null/NOT_RUN.
+- New Isaac launches/rollouts/MPC/LightNav/RGB/optimizer/B_ENTRY/Hermite/retries all0.
+  No PNG because no replay occurred; no visual playback substituted for science.
+  Physical C1 reproduction itself is not disproven; strict controller-event scope
+  is the blocker. B_ENTRY comparison is not justified before RAW parity is established.
+- Focused16 passed; relevant regression900 passed in54.36 s. compileall, saved-only
+  equality validator and diff checks pass. Initial pytest plugin autoload encountered
+  ROS's missing lark; established PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 resolved startup
+  without changing environments. Exact commands are in the experiment report.
+- README unchanged: no new scientific capability/result. Source/external code,
+  raw arrays, historical results and thresholds unchanged. Stop after normal push.

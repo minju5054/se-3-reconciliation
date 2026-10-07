@@ -1,0 +1,33 @@
+experiment: SUCCESSIVE_ISAAC_RECONCILIATION_REPLAY_01
+source: data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01
+source_scientific_freeze: ee330244d867fad3749c60b6a5f1630b1471ec2a
+source_result_commit: e4f61465c13996cc8c5c70504a5735dabfa6e944
+source_integrity: results/successive_native_source_acquisition_02/selected_source_integrity.json
+handoff: C0_to_C1
+allowed_reference: chunk_001
+method: RAW
+horizon: all C1-command integration intervals; stop before first C2 command
+schedule: authenticate all attempted/accepted submissions and installs inside the horizon
+foreign_reference_policy: TECHNICAL_BLOCKED; no filtering, replacement or shortened horizon
+frame: observation-A anchored saved world rows; XY metres, yaw radians CCW, +Z up
+local_frame: +x forward, +y left, yaw CCW
+waypoint_time: null
+restoration: exact saved B/P, physical u_minus, already-applied command, memory, generation/version
+integration_dt: exact saved Isaac resolved integration dt
+controller: unchanged official source/settings; saved pre-tracker OBJNAV_V_MAX intervention = 0.4
+safety: unchanged source exploratory physical-footprint guard; legacy 0.05 m margin diagnostic
+parity_tolerance_source: configs/osa03_common_b_method_comparison_01.yaml
+pose_atol: 1.0e-10
+command_atol: 1.0e-10
+selection_atol: 1.0e-12
+parity_rtol: 0.0
+byte_exact: [raw_files, world_files, restored_state_values, schedule_ticks, version, generation]
+budget:
+  Isaac_scientific_launches_max: 1
+  RAW_rollouts_max: 1
+  LightNav_calls: 0
+  RGB_model_requests: 0
+  optimizer_calls: 0
+  B_ENTRY_Hermite_calls: 0
+  retries: 0
+launch_rule: no science unless every prerequisite passes and scientific freeze is pushed

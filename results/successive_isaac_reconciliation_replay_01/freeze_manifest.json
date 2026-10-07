@@ -1,0 +1,636 @@
+{
+  "kind": "BLOCKED_PREFLIGHT_SNAPSHOT_NOT_SCIENTIFIC_FREEZE",
+  "scientific_freeze_sha": null,
+  "scientific_launch_authorized": false,
+  "config_sha256": "ad7712e97a60df8973b629df6b1f16e41d2643e723c7a2ed971becfaff47135b",
+  "source_authentication": {
+    "valid": true,
+    "result_commit": "e4f61465c13996cc8c5c70504a5735dabfa6e944",
+    "source_scientific_freeze": "ee330244d867fad3749c60b6a5f1630b1471ec2a",
+    "integrity_sha256": "59934496185fafb43212ba86b4a20424d6b536719030869e4f7cfed5aae4306a",
+    "seal_sha256": "b61db35d34ee9a34e73395ca497a7babb2435be701f29462b97ea13bfc4c1a20",
+    "sealed_file_count": 401,
+    "episode_input_count": 297,
+    "historical_classification": "SUCCESSIVE_SOURCE_MAX_REACHED",
+    "boundary": {
+      "A": [
+        19.201407937708954,
+        25.363333351859286,
+        -1.5689749934176171
+      ],
+      "A_old": [
+        19.20129863861204,
+        25.42333325575427,
+        -1.5689742328041627
+      ],
+      "B": [
+        19.20161431701553,
+        25.250000200523026,
+        -1.5689755606609315
+      ],
+      "P": [
+        19.201602178508843,
+        25.25666685648663,
+        -1.5689755391010196
+      ],
+      "B_tick": 92,
+      "B_sim_s": 1.5666667483747005,
+      "u_minus": [
+        0.4,
+        -1.2935946487914903e-06
+      ],
+      "u_B_plus": [
+        0.4,
+        -0.04625916114685449
+      ],
+      "controller_memory": {
+        "available": true,
+        "previous_control": [
+          0.4,
+          -0.04625916114685449
+        ],
+        "cut_host_s": 452692.673532835,
+        "confirmed_by_host_s": 452692.669011271,
+        "source_event_row": 14,
+        "source_kind": "accepted_result",
+        "reason": null
+      },
+      "reference_version": 1,
+      "generation": 3,
+      "integration_dt_s": 0.01666666753590107,
+      "first_solve_id": "EPISODE_00_solve_000005",
+      "reference_files": {
+        "old_raw_local": {
+          "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/chunks/chunk_000/raw_local.npy",
+          "sha256": "6d53cfff6ca770055ca6563548fc80b6696e2336fd4343f35c2c4e01da1bd5ae"
+        },
+        "old_world": {
+          "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/chunks/chunk_000/world.npy",
+          "sha256": "c8fe233b8a54be87d499d054535938975f73b4c158d3c71b005c51be54aebbb9"
+        },
+        "fresh_raw_local": {
+          "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/chunks/chunk_001/raw_local.npy",
+          "sha256": "6f6b97c922b9e6cf8d455cf4cc4b1686375b93a40a0a67f557278137a751450b"
+        },
+        "fresh_world": {
+          "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/chunks/chunk_001/world.npy",
+          "sha256": "a93c28ce754a81f814f2ac94f4d5aa2497de28b27ffd15c2d96670622bcdbb14"
+        }
+      },
+      "clocks": {
+        "t_obs_fresh": {
+          "bootstrap": false,
+          "bytes": 27053,
+          "camera": {
+            "T_agent_camera": [
+              [
+                -1.8771991185202174e-19,
+                0.0,
+                -1.0,
+                0.08999999999999986
+              ],
+              [
+                -1.0,
+                0.0,
+                1.4488601449122205e-20,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.65
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_agent": [
+              [
+                0.0018213323703083477,
+                0.999998341372823,
+                0.0,
+                19.201407937708954
+              ],
+              [
+                -0.999998341372823,
+                0.0018213323703083477,
+                0.0,
+                25.363333351859286
+              ],
+              [
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_camera": [
+              [
+                -0.999998341372823,
+                0.0,
+                -0.0018213323703083477,
+                19.20157185762228
+              ],
+              [
+                -0.0018213323703083477,
+                0.0,
+                0.999998341372823,
+                25.27333350113573
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.65
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "actual_intrinsics": {
+              "K": [
+                [
+                  161.27331226477605,
+                  0.0,
+                  240.0
+                ],
+                [
+                  0.0,
+                  161.2733097162889,
+                  135.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ],
+              "K_pixel_center_convention": "continuous pixel coordinates, principal point=(width/2,height/2)",
+              "clipping_range_m": [
+                0.05000000074505806,
+                100.0
+              ],
+              "distortion": "none; USD perspective pinhole",
+              "focal_length_mm": 7.040587812662125,
+              "horizontal_aperture_mm": 20.954999327659607,
+              "horizontal_fov_deg": 112.19999830277474,
+              "resolution_width_height": [
+                480,
+                270
+              ],
+              "usd_aperture_focal_units": "tenths of a stage unit; ratios determine pinhole intrinsics",
+              "usd_focal_length": 0.07040587812662125,
+              "usd_horizontal_aperture": 0.20954999327659607,
+              "usd_vertical_aperture": 0.11787187308073044,
+              "vertical_aperture_mm": 11.787187308073044,
+              "vertical_fov_deg": 79.8646135596113
+            },
+            "basis_checks": {
+              "image_right_maps_to_agent_negative_y": true,
+              "image_up_maps_to_agent_positive_z": true,
+              "optical_forward_maps_to_agent_positive_x": true,
+              "proper_rotation_determinant_positive_one": true,
+              "translation_matches_configuration": true
+            },
+            "camera_prim_path": "/World/LogicalAgent/Camera",
+            "configured": {
+              "clipping_range_m": [
+                0.05,
+                100.0
+              ],
+              "height_choice": "logical_camera_height_0.65m_is_explicitly_not_official_body_offset_0.165m",
+              "horizontal_aperture_mm": 20.955,
+              "horizontal_fov_deg": 112.2,
+              "prim_path": "/World/LogicalAgent/Camera",
+              "reference_semantics": "official_demo_camera_axes_and_resolution_and_approximate_fov",
+              "relative_translation_m": [
+                0.09,
+                0.0,
+                0.65
+              ],
+              "resolution_height": 270,
+              "resolution_width": 480,
+              "rotation_agent_from_camera": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            },
+            "matrix_convention": "column vectors; T_target_source; translation in metres",
+            "parent_prim_path": "/World/LogicalAgent",
+            "usd_camera_axes": "+X=image right, +Y=image up, -Z=optical forward"
+          },
+          "capture_host_utc": "2026-10-07T07:19:17.141622+00:00",
+          "capture_monotonic_ns": 452692228807268,
+          "capture_sim_time_s": 1.2833334002643824,
+          "display_annotations_cleared_before_capture": true,
+          "episode_time_s": 1.2500000651925802,
+          "frame_id": "frame_000005",
+          "path": "rgb/frame_000005.jpg",
+          "pose_world": [
+            19.201407937708954,
+            25.363333351859286,
+            -1.5689749934176171
+          ],
+          "readback_finished_host": {
+            "episode_time_s": 1.2500000651925802,
+            "host_monotonic_ns": 452692309850382,
+            "host_monotonic_s": 452692.309850382,
+            "host_utc": "2026-10-07T07:19:17.222666+00:00",
+            "sim_time_s": 1.2833334002643824
+          },
+          "render_sim_time_after_s": 1.2833334002643824,
+          "render_sim_time_before_s": 1.2833334002643824,
+          "render_state_stable": true,
+          "rendered_state_id": 75,
+          "resolution_width_height": [
+            480,
+            270
+          ],
+          "sha256": "968880662632441eec8d239061e3bae161d146f10d1e202fb22e832a166f1a93",
+          "stationary": false,
+          "transmission_status": "CAPTURED_NOT_SENT",
+          "wire_seq": null
+        },
+        "t_request_fresh": {
+          "monotonic_ns": 452692328649469,
+          "utc": "2026-10-07T07:19:17.241461Z"
+        },
+        "t_receipt_fresh": {
+          "monotonic_ns": 452692542768553,
+          "utc": "2026-10-07T07:19:17.455572Z"
+        },
+        "t_ready_fresh": {
+          "monotonic_ns": 452692542768553,
+          "utc": "2026-10-07T07:19:17.455572Z"
+        },
+        "t_ready_seen": {
+          "sim_time_s": 1.5166667457669973,
+          "episode_time_s": 1.4833334106951952,
+          "host_monotonic_s": 452692.547454902,
+          "host_monotonic_ns": 452692547454902,
+          "host_utc": "2026-10-07T07:19:17.460269+00:00"
+        },
+        "t_install_fresh": {
+          "host_monotonic_ns": 452692547686585,
+          "host_monotonic_s": 452692.547686585,
+          "host_utc": "2026-10-07T07:19:17.460501+00:00",
+          "sim_time_s": 1.5166667457669973,
+          "episode_time_s": 1.4833334106951952
+        },
+        "t_switch_fresh": {
+          "host_monotonic_ns": 452692673532835,
+          "host_monotonic_s": 452692.673532835,
+          "host_utc": "2026-10-07T07:19:17.586348+00:00",
+          "sim_time_s": 1.5666667483747005,
+          "episode_time_s": 1.5333334133028984
+        }
+      },
+      "saved_kinematic_max_component_error": 0.0,
+      "saved_kinematic_check_is_replay": false
+    },
+    "mpc": {
+      "protocol": "official_mpc_jsonl_v1",
+      "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+      "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+      "external_git_status": "",
+      "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+      "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+      "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+      "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+      "casadi_version": "3.7.2",
+      "numpy_version": "2.4.6",
+      "official_settings": {
+        "CONTROL_RATE_HZ": 10.0,
+        "HORIZON": 5,
+        "MPC_DT_S": 0.1,
+        "WAYPOINT_DT_S": 0.1,
+        "TRACK_V_MAX": 1.5,
+        "OBJNAV_V_MAX": 0.4,
+        "W_MAX": 3.0,
+        "A_MAX_V": 2.0,
+        "A_MAX_W": 5.0,
+        "Q_WEIGHTS": [
+          10.0,
+          10.0,
+          1.0
+        ],
+        "R_WEIGHTS": [
+          0.1,
+          0.1
+        ],
+        "ODOM_MATCH_MAX_GAP_S": 0.3,
+        "ODOM_TIMEOUT_S": 0.5
+      },
+      "effective_linear_velocity_limit_m_s": 0.4,
+      "intrinsic_model_waypoint_dt_s": null,
+      "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+      "world_frame": "metres, +Z up; yaw radians CCW",
+      "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+      "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+      "external_source_modified": false,
+      "tracker_instrumentation": "unchanged timing subclass; isolated loader sets only native OBJNAV_V_MAX before construction",
+      "robot_backend_imported": false,
+      "speed_intervention": {
+        "prior_workers": "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_exploratory_02/primary_20261006/workers.json",
+        "prior_workers_sha256": "344b6a952f739dccabe58a669331832aa9439708a6fb53aa4b59d6b329d913d0",
+        "external_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+        "external_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+        "external_git_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+        "base_effective_linear_limit_m_s": 0.8,
+        "new_effective_linear_limit_m_s": 0.4,
+        "ratio": 0.5,
+        "prior_settings": {
+          "CONTROL_RATE_HZ": 10.0,
+          "HORIZON": 5,
+          "MPC_DT_S": 0.1,
+          "WAYPOINT_DT_S": 0.1,
+          "TRACK_V_MAX": 1.5,
+          "OBJNAV_V_MAX": 0.8,
+          "W_MAX": 3.0,
+          "A_MAX_V": 2.0,
+          "A_MAX_W": 5.0,
+          "Q_WEIGHTS": [
+            10.0,
+            10.0,
+            1.0
+          ],
+          "R_WEIGHTS": [
+            0.1,
+            0.1
+          ],
+          "ODOM_MATCH_MAX_GAP_S": 0.3,
+          "ODOM_TIMEOUT_S": 0.5
+        },
+        "changed_setting": "OBJNAV_V_MAX",
+        "mechanism": "module OBJNAV_V_MAX assigned before tracker construction; native solve sets existing CasADi v_max parameter",
+        "added_output_postprocessing": false,
+        "official_extraction_unchanged": true,
+        "intrinsic_model_waypoint_dt_s": null
+      },
+      "configured_before_tracker_construction": true
+    },
+    "cart_transform": [
+      [
+        0.33930055949019505,
+        -0.9406780162891235,
+        0.0,
+        36.804567362220055
+      ],
+      [
+        0.9406780162891235,
+        0.33930055949019505,
+        0.0,
+        -2.4633986519367674
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "reveal_state_id": 75,
+    "obstacle_present_at_saved_B": true,
+    "source_reference_clearance_m": 0.821280919083059,
+    "source_C1_guard_minimum_clearance_lower_bound_m": 1.0379373625059845,
+    "source_C1_guard_checks": 30,
+    "source_guard_recomputation_pass": true,
+    "source_C1_guard_legacy_5cm_pass": true,
+    "live_Isaac_pose_cart_restoration_verified": false
+  },
+  "input_hashes": {
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/source_bundle/handoffs/C0_to_C1/ready_record.json": "7dfaf982edd7d68a6b24e36fbb496da89840dc22943130ddc068cc282d865db4",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/source_bundle/handoffs/C0_to_C1/context.json": "7b7c81afc4f68fdf20952f85ae4df851f580426c2b45db269310c325399e4118",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/source_bundle/chunks.json": "36af464ede64569d0c8714edead768a4302f772f1c8086ed4a225e34c2ff076c",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/source_bundle/manifest.json": "f61665c1d222d1cf502d7aa6ff060a74855efdc6ae1c88ec3ce22a1283e6609c",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/final_saved_artifact_seal.json": "b61db35d34ee9a34e73395ca497a7babb2435be701f29462b97ea13bfc4c1a20",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/workers.json": "55acf46ede47e43c90e07139de7040ffc3ea03d12855492e8e5fa86fe9ead4b6",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/scenario.json": "63a0d1f907584fd02240b14a1a30bd1f6227beea75bf27344403c9b726163725",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/acquisition_scene.json": "34604e31190f744d5c39cd863ac12c47f324ca34628a85712e8330046ce1de63",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/protocol.json": "fa5cdea99ba6f54200d3b37fa8af47427ccedf2c091907ad68ea9be6b6af46db",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/config_snapshot.yaml": "8af10472e1e8e90896af747c68ce62e4a891aae6cd734f6549ec167fdbdd8836",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/validation.json": "97a8503402fc69dc6ad2135cfdcec4223190f3675d22f79b83166b7c2063ab1b",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/execution.csv": "59fbc289d0171a5384d6a1d70b78debfd36a7acf1f5d9cd82f19abc9ddbb4c22",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/commands.csv": "6f67f07699f1852ad2e9acd2435c8eb75582440228f582c067f5c2aeaaeff1b8",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/scheduler.jsonl": "1da6e1dc6ae8531ec2c66ebdd124f90e261e396ad24b5d76684bc3bf9025f699",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/controller/events.jsonl": "9956efd67724b0cc333bc59de43e4336a4465644e911f76c39938600e9d79fbf",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/guard.jsonl": "963178a07083cbcbf317da59abb0b5ebd436578494540c31e92bce2ee8063b11",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/metadata.json": "2396d4e2fdd044fa313aa9a98595ea2c8e14329794bb4e51ddc6b8323ced7722",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/obstacle_reveal.json": "860cf60290c9f52f50a9dec378cad1b024ef83b02974bf1173620b9a40f774ad",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/chunks/chunk_000/raw_local.npy": "6d53cfff6ca770055ca6563548fc80b6696e2336fd4343f35c2c4e01da1bd5ae",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/chunks/chunk_000/world.npy": "c8fe233b8a54be87d499d054535938975f73b4c158d3c71b005c51be54aebbb9",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/chunks/chunk_001/raw_local.npy": "6f6b97c922b9e6cf8d455cf4cc4b1686375b93a40a0a67f557278137a751450b",
+    "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/chunks/chunk_001/world.npy": "a93c28ce754a81f814f2ac94f4d5aa2497de28b27ffd15c2d96670622bcdbb14"
+  },
+  "code_hashes": {
+    "src/reconciliation/successive_isaac_replay01.py": "1f6e30eba05ab303826bb18ea453d113bbd26aecad7b505339044159702d7e4a",
+    "scripts/audit_successive_isaac_replay01.py": "9cd734a4d71fc0f21887a3bf9027033d31179d52ad473434cf4263161b712e2b",
+    "tests/test_successive_isaac_replay01.py": "6a6de7f59e8b0fb801e8ed2acc5cfe6eb1d69f20effb608b936668205dd1d066",
+    "src/reconciliation/osa03_relative_ablation.py": "576150eced448dc9a5fb5af9243ae026fbe9c970f077063b665c1806cd5f794b",
+    "src/reconciliation/osa03_common_b.py": "071dc866f4ad98f2ba39b6e79926b74c5e4879f79111cce014121e0b87470e69",
+    "scripts/osa03_common_b_mpc_worker.py": "baea2983eaeb315dc87d543d81f2b94759fc00bae02f5117aaedee31da3370c1",
+    "src/reconciliation/online_mpc_adapter.py": "fd6ab46d98e68bd8dfff2e96b9ebdf66b27b1531632ea53c888024245025362a",
+    "src/reconciliation/long_source_mpc01.py": "81557996a02ce7766602ede79fa2d85bca67821fbc30a4313c1141e6fadf06b1",
+    "scripts/long_source_mpc_worker01.py": "67dac6e66872f35c3792c414e794d701434da1646959710e0cab676e42c49bee",
+    "scripts/online_mpc_worker.py": "8f99bfb6010a834ebef7bbfdd86474f5c58aa26f42b514bcc9886b7693d32b96",
+    "scripts/run_continuous_obstacle_reveal_episode01b.py": "704581736d2289a053b0056609ab2d5c4d4801bf9b1f3c6448f2f732a8068faa",
+    "scripts/run_successive_native_source_acquisition02.py": "418fe1766fd7eaf8d6ee171841a0a923d035e3616628b45be126651286cffb68",
+    "scripts/isaac/join_online02_collect.py": "784ba3b8f01caba018ee41785db7f8ec7e0b6cd3d7bd88e1cae9f818bb337c76",
+    "scripts/isaac/robotless_online_handoffs.py": "c662fc9e97871a716600ac93bd2c3f86a56b2633e296c07567d41e369b0cd512",
+    "src/reconciliation/robotless_online.py": "af9876567ee3ec29c05dcc386252656f5b35b6f9aa8a77a1acf62cccb8e0918f",
+    "src/reconciliation/join_online02.py": "6073f7304cd9a540d9de02da97ec9c681fe42475271a1d0af8465c4c5d2a75fb",
+    "src/reconciliation/join_source02.py": "615cb73e18aa7ac92e061254e99bbc9ce18c13a11d58ec7f33b8f65720151eb9",
+    "scripts/continuous_obstacle_reveal_exploratory_geometry02.py": "ad6c1efbead9e4131b024602ab10a4b3f4aea72a13940fdc4c5c72066363fc03",
+    "scripts/validate_successive_source02_accounting_addendum.py": "9c4bfbc1d1c90d54de2fe1f6be383c8bb2570057e2c5e5d2e68500f81c81fb1e"
+  },
+  "logical_schedule": {
+    "start_tick": 92,
+    "stop_before_application_tick": 122,
+    "integration_steps": 30,
+    "initial_generation": 3,
+    "attempted_submit_ticks": [
+      96,
+      102,
+      108,
+      114,
+      120
+    ],
+    "accepted_submit_ticks": [
+      96,
+      102,
+      108,
+      114,
+      120
+    ],
+    "new_application_ticks": [
+      97,
+      103,
+      109,
+      115
+    ],
+    "initial_application_restored": 92,
+    "submissions": [
+      {
+        "event_row": 15,
+        "submit_tick": 96,
+        "chunk_id": "chunk_001",
+        "reference_version": 1,
+        "generation": 3,
+        "solve_id": "EPISODE_00_solve_000006",
+        "application_tick": 97,
+        "result_status": "command",
+        "result_generation": 3,
+        "result_seen_tick": 97
+      },
+      {
+        "event_row": 17,
+        "submit_tick": 102,
+        "chunk_id": "chunk_001",
+        "reference_version": 1,
+        "generation": 3,
+        "solve_id": "EPISODE_00_solve_000007",
+        "application_tick": 103,
+        "result_status": "command",
+        "result_generation": 3,
+        "result_seen_tick": 103
+      },
+      {
+        "event_row": 19,
+        "submit_tick": 108,
+        "chunk_id": "chunk_001",
+        "reference_version": 1,
+        "generation": 3,
+        "solve_id": "EPISODE_00_solve_000008",
+        "application_tick": 109,
+        "result_status": "command",
+        "result_generation": 3,
+        "result_seen_tick": 109
+      },
+      {
+        "event_row": 21,
+        "submit_tick": 114,
+        "chunk_id": "chunk_001",
+        "reference_version": 1,
+        "generation": 3,
+        "solve_id": "EPISODE_00_solve_000009",
+        "application_tick": 115,
+        "result_status": "command",
+        "result_generation": 3,
+        "result_seen_tick": 115
+      },
+      {
+        "event_row": 24,
+        "submit_tick": 120,
+        "chunk_id": "chunk_002",
+        "reference_version": 2,
+        "generation": 4,
+        "solve_id": "EPISODE_00_solve_000010",
+        "application_tick": 122,
+        "result_status": "command",
+        "result_generation": 4,
+        "result_seen_tick": 122
+      }
+    ],
+    "installs": [
+      {
+        "event_row": 23,
+        "install_tick": 120,
+        "reply_seen_tick": 121,
+        "chunk_id": "chunk_002",
+        "reference_version": 2,
+        "generation": 4
+      }
+    ],
+    "foreign_reference_events": [
+      {
+        "kind": "install",
+        "event_row": 23,
+        "install_tick": 120,
+        "reply_seen_tick": 121,
+        "chunk_id": "chunk_002",
+        "reference_version": 2,
+        "generation": 4
+      },
+      {
+        "kind": "submit",
+        "event_row": 24,
+        "submit_tick": 120,
+        "chunk_id": "chunk_002",
+        "reference_version": 2,
+        "generation": 4,
+        "solve_id": "EPISODE_00_solve_000010",
+        "application_tick": 122,
+        "result_status": "command",
+        "result_generation": 4,
+        "result_seen_tick": 122
+      }
+    ],
+    "generation_changes": [
+      {
+        "event_row": 23,
+        "install_tick": 120,
+        "reply_seen_tick": 121,
+        "chunk_id": "chunk_002",
+        "reference_version": 2,
+        "generation": 4
+      }
+    ],
+    "raw_only_eligible": false
+  },
+  "restoration_rules": "exact saved B/P, physical u_minus, already-applied command, memory, generation/version",
+  "expected_budget": {
+    "Isaac_scientific_launches_max": 1,
+    "RAW_rollouts_max": 1,
+    "LightNav_calls": 0,
+    "RGB_model_requests": 0,
+    "optimizer_calls": 0,
+    "B_ENTRY_Hermite_calls": 0,
+    "retries": 0
+  },
+  "parity_tolerances": {
+    "pose_atol": 1e-10,
+    "command_atol": 1e-10,
+    "selection_atol": 1e-12,
+    "parity_rtol": 0.0,
+    "byte_exact": [
+      "raw_files",
+      "world_files",
+      "restored_state_values",
+      "schedule_ticks",
+      "version",
+      "generation"
+    ]
+  }
+}

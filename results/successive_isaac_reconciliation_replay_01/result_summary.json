@@ -1,0 +1,197 @@
+{
+  "experiment": "SUCCESSIVE_ISAAC_RECONCILIATION_REPLAY_01",
+  "classification": "TECHNICAL_BLOCKED",
+  "starting_sha": "e4f61465c13996cc8c5c70504a5735dabfa6e944",
+  "scientific_freeze_sha": null,
+  "source": "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01",
+  "handoff": "C0_to_C1",
+  "method": "RAW",
+  "prerequisite_failure": "TECHNICAL_BLOCKED: full native schedule requires an in-window non-RAW reference",
+  "scientific_execution_occurred": false,
+  "source_schedule": {
+    "start_tick": 92,
+    "stop_before_application_tick": 122,
+    "integration_steps": 30,
+    "initial_generation": 3,
+    "attempted_submit_ticks": [
+      96,
+      102,
+      108,
+      114,
+      120
+    ],
+    "accepted_submit_ticks": [
+      96,
+      102,
+      108,
+      114,
+      120
+    ],
+    "new_application_ticks": [
+      97,
+      103,
+      109,
+      115
+    ],
+    "initial_application_restored": 92,
+    "submissions": [
+      {
+        "event_row": 15,
+        "submit_tick": 96,
+        "chunk_id": "chunk_001",
+        "reference_version": 1,
+        "generation": 3,
+        "solve_id": "EPISODE_00_solve_000006",
+        "application_tick": 97,
+        "result_status": "command",
+        "result_generation": 3,
+        "result_seen_tick": 97
+      },
+      {
+        "event_row": 17,
+        "submit_tick": 102,
+        "chunk_id": "chunk_001",
+        "reference_version": 1,
+        "generation": 3,
+        "solve_id": "EPISODE_00_solve_000007",
+        "application_tick": 103,
+        "result_status": "command",
+        "result_generation": 3,
+        "result_seen_tick": 103
+      },
+      {
+        "event_row": 19,
+        "submit_tick": 108,
+        "chunk_id": "chunk_001",
+        "reference_version": 1,
+        "generation": 3,
+        "solve_id": "EPISODE_00_solve_000008",
+        "application_tick": 109,
+        "result_status": "command",
+        "result_generation": 3,
+        "result_seen_tick": 109
+      },
+      {
+        "event_row": 21,
+        "submit_tick": 114,
+        "chunk_id": "chunk_001",
+        "reference_version": 1,
+        "generation": 3,
+        "solve_id": "EPISODE_00_solve_000009",
+        "application_tick": 115,
+        "result_status": "command",
+        "result_generation": 3,
+        "result_seen_tick": 115
+      },
+      {
+        "event_row": 24,
+        "submit_tick": 120,
+        "chunk_id": "chunk_002",
+        "reference_version": 2,
+        "generation": 4,
+        "solve_id": "EPISODE_00_solve_000010",
+        "application_tick": 122,
+        "result_status": "command",
+        "result_generation": 4,
+        "result_seen_tick": 122
+      }
+    ],
+    "installs": [
+      {
+        "event_row": 23,
+        "install_tick": 120,
+        "reply_seen_tick": 121,
+        "chunk_id": "chunk_002",
+        "reference_version": 2,
+        "generation": 4
+      }
+    ],
+    "foreign_reference_events": [
+      {
+        "kind": "install",
+        "event_row": 23,
+        "install_tick": 120,
+        "reply_seen_tick": 121,
+        "chunk_id": "chunk_002",
+        "reference_version": 2,
+        "generation": 4
+      },
+      {
+        "kind": "submit",
+        "event_row": 24,
+        "submit_tick": 120,
+        "chunk_id": "chunk_002",
+        "reference_version": 2,
+        "generation": 4,
+        "solve_id": "EPISODE_00_solve_000010",
+        "application_tick": 122,
+        "result_status": "command",
+        "result_generation": 4,
+        "result_seen_tick": 122
+      }
+    ],
+    "generation_changes": [
+      {
+        "event_row": 23,
+        "install_tick": 120,
+        "reply_seen_tick": 121,
+        "chunk_id": "chunk_002",
+        "reference_version": 2,
+        "generation": 4
+      }
+    ],
+    "raw_only_eligible": false
+  },
+  "parity": {
+    "initial_B_pose_error": {
+      "value": null,
+      "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+    },
+    "per_tick_pose_max_error": {
+      "value": null,
+      "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+    },
+    "applied_command_max_error": {
+      "value": null,
+      "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+    },
+    "application_ticks_equal": {
+      "value": null,
+      "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+    },
+    "controller_memory_equal": {
+      "value": null,
+      "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+    },
+    "guard_decisions_equal": {
+      "value": null,
+      "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+    },
+    "minimum_swept_clearance_m": {
+      "value": null,
+      "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+    },
+    "horizon_termination_equal": {
+      "value": null,
+      "status": "NOT_RUN_SCHEDULE_PREREQUISITE_FAILED"
+    }
+  },
+  "safety_result": "REPLAY_NOT_RUN",
+  "source_safety_only": {
+    "reference_clearance_m": 0.821280919083059,
+    "guard_minimum_clearance_lower_bound_m": 1.0379373625059845
+  },
+  "calls": {
+    "Isaac_scientific_launches": 0,
+    "scientific_rollouts": 0,
+    "MPC_solves": 0,
+    "LightNav_calls": 0,
+    "RGB_model_requests": 0,
+    "optimizer_calls": 0,
+    "B_ENTRY_Hermite_calls": 0,
+    "retries": 0
+  },
+  "next_B_ENTRY_scientifically_valid": false,
+  "figure": null,
+  "protocol_deviation": "No scientific launch/freeze: followed the explicit schedule-prerequisite STOP rule. No schedule filtering, horizon shortening or C2 execution."
+}
