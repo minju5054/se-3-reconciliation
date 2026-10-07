@@ -1,0 +1,172 @@
+{
+  "experiment": "SUCCESSIVE_NATIVE_SOURCE_ACQUISITION_02",
+  "starting_sha": "e39d465762e0680d0c806f58079127b313312855",
+  "scientific_freeze_sha": "ee330244d867fad3749c60b6a5f1630b1471ec2a",
+  "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01",
+  "historical02_preserved": true,
+  "historical02_calls": {
+    "scientific_episodes": 1,
+    "terminal_predictions": 3,
+    "buffer_only": 5,
+    "startup_model_warmups": 1,
+    "MPC_submit_attempts": 10,
+    "MPC_submissions": 10,
+    "MPC_saved_results": 10,
+    "MPC_successful_results": 10,
+    "MPC_unobserved_result_ids": [],
+    "MPC_physical_new_applications": 10,
+    "integration_intervals": 120,
+    "cart_reveals": 1,
+    "initialization_resets": 1,
+    "resets_after_initialization": 0,
+    "graph_optimizer": 0,
+    "canonical_optimizer": 0,
+    "B_ENTRY": 0,
+    "Hermite": 0,
+    "V2": 0,
+    "GP": 0,
+    "rigid": 0,
+    "correspondence_optimization": 0,
+    "retries": 0,
+    "new_source_searches": 0,
+    "validation_model_MPC_optimizer": 0
+  },
+  "protocol_delta_valid": true,
+  "intentional_difference": "frozen backward pose; max12; cap10s; direction independent qualification; corrected capture-phase audit",
+  "policy": {
+    "footprint_radius_m": 0.2,
+    "required_extra_clearance_m": 0.0,
+    "legacy_required_extra_clearance_m": 0.05,
+    "guard_enabled": true,
+    "physical_overlap_rejection": true
+  },
+  "loader_verification": {
+    "valid": true,
+    "cases": [
+      {
+        "case": "inherited",
+        "command": [
+          "ldd",
+          "-r",
+          "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/libcusparse.so.12"
+        ],
+        "selected_path": "/usr/local/cuda/lib64/libnvJitLink.so.12",
+        "resolved_path": "/usr/local/cuda-12.6/targets/x86_64-linux/lib/libnvJitLink.so.12.6.20",
+        "library_sha256": "b70f0f325cbd43f37028c559612b49d9c208649ed9184cc24b6e55abf04e341b",
+        "undefined_symbols": [
+          "__nvJitLinkCreate_12_8",
+          "__nvJitLinkGetErrorLog_12_8",
+          "__nvJitLinkComplete_12_8",
+          "__nvJitLinkDestroy_12_8",
+          "__nvJitLinkAddData_12_8",
+          "__nvJitLinkGetLinkedCubin_12_8",
+          "__nvJitLinkGetLinkedCubinSize_12_8",
+          "__nvJitLinkGetErrorLogSize_12_8"
+        ],
+        "returncode": 0,
+        "output": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/technical_preflight/loader_inherited.txt",
+        "output_sha256": "e13ee69fdd52a3bca19b5659df191a8243bf104fed81fdcb316a4fe8c5979de4"
+      },
+      {
+        "case": "sanitized",
+        "command": [
+          "ldd",
+          "-r",
+          "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/libcusparse.so.12"
+        ],
+        "selected_path": "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/../../nvjitlink/lib/libnvJitLink.so.12",
+        "resolved_path": "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/nvjitlink/lib/libnvJitLink.so.12",
+        "library_sha256": "0369e6867d44b800437de4e146d72c65afc6c75adf677a15c2ecd8e6a7ac135f",
+        "undefined_symbols": [],
+        "returncode": 0,
+        "output": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/technical_preflight/loader_sanitized.txt",
+        "output_sha256": "f446195e230533e2141f6de6251f976c8de43d559b2aee22c65c498633838441"
+      }
+    ],
+    "libcusparse_sha256": "437651d1ec5d0e5b1b4d07b8c492f153cb4825222fe2d763232a407f667d9bb2",
+    "process_only": true,
+    "full_SimulationApp_starts": 0,
+    "status": "PASS"
+  },
+  "actual_nvJitLink_paths": [
+    "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/nvjitlink/lib/libnvJitLink.so.12"
+  ],
+  "actual_library_mapping_observed": true,
+  "launch": {
+    "returncode": 0,
+    "at": {
+      "host_monotonic_ns": 452700380745950,
+      "host_monotonic_s": 452700.38074595,
+      "host_utc": "2026-10-07T07:19:25.293565+00:00"
+    },
+    "observer_errors": [
+      {
+        "error": "PermissionError(13, 'Permission denied')",
+        "at": {
+          "host_monotonic_ns": 452700079681630,
+          "host_monotonic_s": 452700.07968163,
+          "host_utc": "2026-10-07T07:19:24.992499+00:00"
+        }
+      }
+    ],
+    "full_launch_attempts": 1,
+    "episode_directory_exists": true,
+    "scene_initialized": true,
+    "schedule_completed": true,
+    "actual_library_sha256": {
+      "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/libcusparse.so.12": "437651d1ec5d0e5b1b4d07b8c492f153cb4825222fe2d763232a407f667d9bb2",
+      "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/nvjitlink/lib/libnvJitLink.so.12": "0369e6867d44b800437de4e146d72c65afc6c75adf677a15c2ecd8e6a7ac135f"
+    },
+    "no_retry": true,
+    "result_is_not_inferred_from_exit_code": true
+  },
+  "scientific_episode_validator_passed": false,
+  "scientific_validator_error": "AssertionError: ('MPC_submissions', 58, 57)",
+  "source_bundle_valid": false,
+  "partial_data_valid": false,
+  "source_bundle": null,
+  "classification": "TECHNICAL_EXECUTION_BLOCKED",
+  "calls": {
+    "full_SimulationApp_launch_attempts": 1,
+    "scientific_episodes_initialized": 1,
+    "scientific_episodes_completed": 1,
+    "terminal_LightNav_predictions": 12,
+    "buffer_only_LightNav_requests": 15,
+    "warmups": 1,
+    "RGB_captures": 27,
+    "MPC_submissions": 58,
+    "MPC_solved_results": 58,
+    "MPC_successful_results": 57,
+    "MPC_physical_applications": 50,
+    "integration_intervals": 403,
+    "cart_reveals": 1,
+    "episode_initialization_resets": 1,
+    "episode_resets_after_initialization": 0,
+    "graph_optimizer": 0,
+    "canonical_optimizer": 0,
+    "B_ENTRY": 0,
+    "Hermite": 0,
+    "V2": 0,
+    "GP": 0,
+    "rigid_transport": 0,
+    "correspondence_optimization": 0,
+    "retries": 0,
+    "new_source_searches": 0,
+    "saved_validation_model_MPC_optimizer_Isaac": 0
+  },
+  "technical_evidence_sha256": {
+    "schedule_completion.json": "ead8b52800d22f1fe05ed7b74134f1d6b629385dbc6b13a41534f5c27d4ef527",
+    "server_shutdown.json": "4f97e16cfd8d42688b47404c85f2e8ceb50bcd94e2e4c85177c8a789919e852b",
+    "launch_result.json": "4137c51481bdf7e7c785485c5da9ec1f373c76cb61bd1e5a95305bb0d30628e4",
+    "generation_actual.json": "7704c58472b1908b71073f7292be5ca3102b42a3d41519d7b2a38fea38caa6d8",
+    "execution_start.json": "8b7a6a4aca9d12690de4f3d6f995755cd4b96cabcd13c220df135eec8396bcc6",
+    "launch_attempt.json": "85fe1706627bddd06ff4f271cc0134809ca338a52f91e03e75b7c8b55ed23d45",
+    "process_observations/002.json": "18ba3a33832fea84b331e2df06cd783f845efa7d5b33bd4f60536965eb46679a",
+    "process_observations/001.json": "2fed9fc0b1b391b00b406cb9d4180a79f94f40237bc182b0ba194b5ff5d429bf",
+    "logs/isaac.log": "859fd69259cd2883351216b9a358fab70846a924ed2aa96bf7147d05ab7a3576",
+    "logs/mpc_worker.log": "41b8c85d13285798fd486c9431da59fb4e382867d11077b44b0cdf30e0ee23c9",
+    "logs/server.log": "3d098350f02e98cad2888fc84cfcacac38b73f57b04a2752ac38be64f29ff773",
+    "logs/lightnav_worker.log": "5631fcc55c5cbb4afcf8bd50875af35b2090c401122af1e6f732ed83f30bb38d",
+    "logs/geometry.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

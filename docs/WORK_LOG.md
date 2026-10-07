@@ -7051,3 +7051,45 @@ git diff --cached --check
   --run data/successive_native_source_acquisition_02/primary_20261007 --mode prepare`
   then `--mode freeze`. Full pytest glob command and live commands will be recorded
   in the separate result report. No reconciliation or future stage implemented.
+
+## 2026-10-07 — SUCCESSIVE_NATIVE_SOURCE_ACQUISITION_02 result
+
+- Pushed scientific freeze ee330244d867fad3749c60b6a5f1630b1471ec2a;
+  audit correction 3c940abe1fbaea9081f1eb1f985ccf774cca1734. First candidate
+  (1.0 m backward) ran exactly once and applied C0–C11. CANDIDATE_02/03 not run.
+- SUCCESSIVE_SOURCE_MAX_REACHED under unchanged scientific qualification plus
+  explicit complete-accounting addendum. 12 generated/consecutive applied,
+  11 usable handoffs, 10 post-reveal. ATTEMPT_LIMIT after C11 + .1 s postroll;
+  no STOP, rejection, guard abort, overlap, reset after initialization or retry.
+- Actual/raw reference safety passes .20 m physical footprint and legacy .05 m.
+  Minimum reference clearance .0638260557443 m (C9); actual swept and guard
+  lookahead lower bounds .332976666846 m. Native internal limit/max actual |v|=.4.
+  Official source, settings, command values and 58 memory checks authenticate.
+- Twelve request RTFs .989470–.991077; maximum loop stall .229252355 s; zero bursts;
+  every C1–C11 inference retains the prior physically active chunk. All observation
+  anchors, first eligible frames, RGB/history/raw/controller hashes pass.
+- Counts: one episode/Isaac launch, terminal12, buffer15, warmup1, RGB27, MPC
+  accepted/solved58/58, successful57, stale rejected1, new physical applications50,
+  integration403, reveal1. All reconciliation/optimizer calls0. Server570280 stopped.
+- Post-freeze deviation: frozen inner audit counted57 in-loop accepted submissions;
+  outer auditor correctly counted58 including a final shutdown-drained submit/result
+  at state402. Preserved original outer TECHNICAL_EXECUTION_BLOCKED record/seal.
+  Separate saved-only addendum authenticates both and reruns every frozen scientific
+  gate with complete counting. Late solve000057 remained unapplied; no time advance.
+  No collector/controller/raw/threshold change, rerun or additional candidate.
+- Exact-clock CSV helper preserves native monotonic_ns/UTC separately from sim time;
+  frozen plotting CSV's optional host-second columns use another schema and are
+  blank. Exact event table and JSON hold complete timestamps. Reporting only.
+- Nine EVOLVING pairs, two STABLE pairs (C8/C9 and C10/C11 byte-identical local
+  arrays, different RGB/history/world anchors). k_react=1 descriptive, not a gate.
+  No lateral-side qualification. Cart pixels1494 at C1 increase to20593 at C11.
+- Bundle integrity297 source/59 derived files with11 handoff readiness indices;
+  all raw/large arrays ignored in data. Four PNGs inspected; execution colored
+  by active chunk and original RGB metadata outside pixels. Curves that coincide
+  are stated numerically in report. Source-summary CSV includes active duration.
+- Final tests660 passed/1 existing absent DATA02 v1 corpus skip; focused37 before
+  freeze, additional8 accounting/clock tests. Saved-only validation/report parity,
+  compileall and diff checks pass. No scientific calls during reporting/validation.
+- Documentation/README updated conservatively. One DEVELOPMENT SOURCE only; no
+  semantic side-compliance, complete bypass, task success, safety/generalization,
+  reconciliation or graph-benefit claim. Stop after normal result push.

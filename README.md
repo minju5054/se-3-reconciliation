@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [bounded successive source acquisition](docs/SUCCESSIVE_NATIVE_SOURCE_ACQUISITION_02.md)
+reached **SUCCESSIVE_SOURCE_MAX_REACHED**: the first predeclared pose, 1 m behind
+POSE11, generated and actually applied C0–C11 at the native .4 m/s bound. There are
+11 handoffs (10 post-reveal), with .332977 m minimum executed swept clearance and
+no overlap, STOP or retry. Other candidates were not run. A saved-only accounting
+addendum reconciles one shutdown-drained submission; the original outer-audit
+failure is preserved. This is a development source, not navigation or method
+validation. [Colored execution PNG](results/successive_native_source_acquisition_02/figures/continuous_world_episode.png)
+and [exact RGBs](results/successive_native_source_acquisition_02/figures/request_rgb_sequence.png).
+
 The [longer, half-speed source acquisition](docs/LONG_CONTINUOUS_OBSTACLE_REVEAL_SOURCE_01.md)
 did not reach the six-chunk minimum: C0/C1 applied, while C2 was rejected before
 installation for footprint overlap (−.036750 m). The effective native MPC bound

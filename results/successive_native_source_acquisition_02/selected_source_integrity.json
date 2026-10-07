@@ -1,0 +1,10 @@
+{
+  "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01",
+  "complete_candidate_seal_sha256": "b61db35d34ee9a34e73395ca497a7babb2435be701f29462b97ea13bfc4c1a20",
+  "original_candidate_seal_sha256": "8f1149dc4900b4c99738a9fcb49870ed3217cd2deffb97e7163c8fec672ebe19",
+  "accounting_addendum_sha256": "58573e376ee2c44493688d944aa12a13d3de02e7af740c64c8b81fbefbcc4ad1",
+  "validation_sha256": "97a8503402fc69dc6ad2135cfdcec4223190f3675d22f79b83166b7c2063ab1b",
+  "bundle_manifest_sha256": "f61665c1d222d1cf502d7aa6ff060a74855efdc6ae1c88ec3ce22a1283e6609c",
+  "selected_source": "DEVELOPMENT SOURCE",
+  "no_next_stage": true
+}

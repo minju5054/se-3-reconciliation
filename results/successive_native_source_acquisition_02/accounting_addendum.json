@@ -1,0 +1,27 @@
+{
+  "valid": true,
+  "classification": "SUCCESSIVE_SOURCE_MAX_REACHED",
+  "complete_controller_accounting": {
+    "accepted_in_loop": 57,
+    "accepted_in_shutdown_drain": 1,
+    "accepted_total": 58,
+    "solved_total": 58,
+    "successful_total": 57,
+    "stale_rejected_total": 1,
+    "physical_new_applications": 50,
+    "late_submission_ids": [
+      "EPISODE_00_solve_000057"
+    ],
+    "late_results_unapplied": true,
+    "no_simulation_advance": true,
+    "unobserved_result_ids": []
+  },
+  "frozen_outer_classification_unchanged": "TECHNICAL_EXECUTION_BLOCKED",
+  "frozen_error": "AssertionError: ('MPC_submissions', 58, 57)",
+  "original_attempt_sha256": "4bc037e3cf348187fc4ea5d3f286f858eadfe6315fb00b976b3dd6d06d608161",
+  "original_candidate_seal_sha256": "8f1149dc4900b4c99738a9fcb49870ed3217cd2deffb97e7163c8fec672ebe19",
+  "new_LightNav_MPC_Isaac_optimizer_calls": 0,
+  "scientific_qualification_unchanged": true,
+  "protocol_deviation": "Post-freeze saved-only accounting addendum: include accepted submission replies drained at shutdown, as the existing outer call auditor already does. Frozen code, frozen attempt result, scientific collection and selection thresholds are unchanged.",
+  "addendum_script_sha256": "9c4bfbc1d1c90d54de2fe1f6be383c8bb2570057e2c5e5d2e68500f81c81fb1e"
+}

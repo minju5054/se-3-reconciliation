@@ -1,0 +1,75 @@
+{
+  "experiment": "SUCCESSIVE_NATIVE_SOURCE_ACQUISITION_02",
+  "source_type": "DEVELOPMENT SOURCE",
+  "classification": "SUCCESSIVE_SOURCE_MAX_REACHED",
+  "selected_candidate": "CANDIDATE_01",
+  "primary_figure_candidate": "CANDIDATE_01",
+  "candidates": [
+    {
+      "candidate_id": "CANDIDATE_01",
+      "pose": [
+        19.20129863861204,
+        25.42333325575427,
+        -1.5689742328041627
+      ],
+      "geometry_valid": true,
+      "executed": true,
+      "reason": "12 consecutive applied; all frozen gates pass under complete accounting"
+    },
+    {
+      "candidate_id": "CANDIDATE_02",
+      "pose": [
+        19.201754161857664,
+        25.17333367075747,
+        -1.5689742328041627
+      ],
+      "geometry_valid": true,
+      "executed": false,
+      "reason": "not run: first candidate qualifies"
+    },
+    {
+      "candidate_id": "CANDIDATE_03",
+      "pose": [
+        19.20220968510329,
+        24.923334085760665,
+        -1.5689742328041627
+      ],
+      "geometry_valid": true,
+      "executed": false,
+      "reason": "not run: first candidate qualifies"
+    }
+  ],
+  "aggregate_call_accounting": {
+    "full_SimulationApp_launch_attempts": 1,
+    "scientific_episodes_initialized": 1,
+    "scientific_episodes_completed": 1,
+    "terminal_LightNav_predictions": 12,
+    "buffer_only_LightNav_requests": 15,
+    "warmups": 1,
+    "RGB_captures": 27,
+    "MPC_submissions": 58,
+    "MPC_solved_results": 58,
+    "MPC_successful_results": 57,
+    "MPC_physical_applications": 50,
+    "integration_intervals": 403,
+    "cart_reveals": 1,
+    "episode_initialization_resets": 1,
+    "episode_resets_after_initialization": 0,
+    "graph_optimizer": 0,
+    "canonical_optimizer": 0,
+    "B_ENTRY": 0,
+    "Hermite": 0,
+    "V2": 0,
+    "GP": 0,
+    "rigid_transport": 0,
+    "correspondence_optimization": 0,
+    "retries": 0,
+    "new_source_searches": 0,
+    "saved_validation_model_MPC_optimizer_Isaac": 0
+  },
+  "source_search_candidates_executed": 1,
+  "first_qualified_stop": true,
+  "retries": 0,
+  "addendum_sha256": "58573e376ee2c44493688d944aa12a13d3de02e7af740c64c8b81fbefbcc4ad1",
+  "new_validation_model_MPC_Isaac_optimizer_calls": 0
+}

@@ -1,0 +1,49 @@
+{
+  "valid": true,
+  "classification": "SUCCESSIVE_SOURCE_MAX_REACHED",
+  "original_frozen_outer_call_check": false,
+  "complete_saved_accounting_addendum": true,
+  "frozen_scientific_gates_pass": true,
+  "bundle": {
+    "valid": true,
+    "source_files": 297,
+    "derived_files": 59,
+    "new_scientific_calls": 0
+  },
+  "report": {
+    "valid": true,
+    "PNG_count": 4,
+    "numeric_and_hash_parity": true,
+    "new_scientific_calls": 0
+  },
+  "tests": {
+    "pre_freeze_focused": 37,
+    "pre_freeze_regression": 652,
+    "final_regression": 660,
+    "skipped": 1,
+    "post_freeze_accounting_and_clocks": 8
+  },
+  "frozen_source_files_unchanged": 566,
+  "prior_LONG01_classification_unchanged": true,
+  "all_raw_bytes_preserved": true,
+  "scientific_freeze_sha": "ee330244d867fad3749c60b6a5f1630b1471ec2a",
+  "saved_only_new_model_MPC_Isaac_optimizer_calls": 0,
+  "visual_inspection": "all four PNGs inspected",
+  "deviations": [
+    "saved-only shutdown-drain accounting addendum",
+    "exact event-clock table supplements frozen plotting CSV stamp-schema mismatch"
+  ],
+  "owned_server_stopped": {
+    "exit_observed_event": {
+      "monotonic_ns": 452712558859436,
+      "utc": "2026-10-07T07:19:37.471657Z"
+    },
+    "process_id": 570280,
+    "reason": "online collection complete; release the persistent model server GPU allocation",
+    "request_event": {
+      "monotonic_ns": 452711808022089,
+      "utc": "2026-10-07T07:19:36.720822Z"
+    },
+    "signal_sent": "SIGTERM"
+  }
+}

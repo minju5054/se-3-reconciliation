@@ -1,0 +1,409 @@
+[
+  {
+    "pair": "C0->C1",
+    "available": true,
+    "local_polyline_separation_m": 0.13291602529964047,
+    "endpoint_local_delta": [
+      -0.00725400447845459,
+      -0.13291610690293965,
+      -0.25827877624124085
+    ],
+    "max_lateral_delta_m": 0.13290821102918926,
+    "wrapped_net_yaw_delta_rad": -0.2596425434931007,
+    "reliable_initial_tangent_delta_rad": 0.0003859161786756715,
+    "meaningful": true,
+    "observation_translation_m": 0.060000003447498305,
+    "observation_yaw_change_rad": -7.606134544424492e-07,
+    "max_absolute_local_yaw_difference_deg": 14.796900644391728,
+    "classification": "C0_TO_C1_EVOLVING",
+    "raw_hash_equal": false,
+    "world_hash_equal": false,
+    "observation_pose_delta": [
+      0.00010929909691270723,
+      -0.05999990389498322,
+      -7.606134544424492e-07
+    ],
+    "world_polyline_separation_m": 0.14300045624990382,
+    "cart_clearance_delta_m": -0.052596631596314,
+    "cart_pixels_delta": 1494,
+    "cart_pixels": [
+      0,
+      1494
+    ],
+    "reference_clearance_m": [
+      1.0170210191133011,
+      0.821280919083059
+    ],
+    "reference_clearance_delta_m": -0.19574010003024211
+  },
+  {
+    "pair": "C1->C2",
+    "available": true,
+    "local_polyline_separation_m": 0.4871873421559301,
+    "endpoint_local_delta": [
+      -0.07694852352142334,
+      0.5178804099559784,
+      0.78078892827034
+    ],
+    "max_lateral_delta_m": 0.2520560920238495,
+    "wrapped_net_yaw_delta_rad": 0.7797943083569407,
+    "reliable_initial_tangent_delta_rad": 0.0042258804698680486,
+    "meaningful": true,
+    "observation_translation_m": 0.19999923201288483,
+    "observation_yaw_change_rad": -0.008355883127583397,
+    "max_absolute_local_yaw_difference_deg": 15.24364521793843,
+    "classification": "C1_TO_C2_EVOLVING",
+    "raw_hash_equal": false,
+    "world_hash_equal": false,
+    "observation_pose_delta": [
+      -3.36644327454394e-05,
+      -0.19999922917963886,
+      -0.008355883127583397
+    ],
+    "world_polyline_separation_m": 0.5210552517651806,
+    "cart_clearance_delta_m": -0.15180305588516574,
+    "cart_pixels_delta": 209,
+    "cart_pixels": [
+      1494,
+      1703
+    ],
+    "reference_clearance_m": [
+      0.821280919083059,
+      0.6694778631978933
+    ],
+    "reference_clearance_delta_m": -0.15180305588516574
+  },
+  {
+    "pair": "C2->C3",
+    "available": true,
+    "local_polyline_separation_m": 0.2526034885138948,
+    "endpoint_local_delta": [
+      -0.0622553825378418,
+      0.2448117434978485,
+      0.0034331083297729492
+    ],
+    "max_lateral_delta_m": 0.2448117434978485,
+    "wrapped_net_yaw_delta_rad": -0.1831286745145917,
+    "reliable_initial_tangent_delta_rad": 0.23323016646123618,
+    "meaningful": true,
+    "observation_translation_m": 0.19995295479279687,
+    "observation_yaw_change_rad": 0.06173213224929963,
+    "max_absolute_local_yaw_difference_deg": 0.09336527085948987,
+    "classification": "C2_TO_C3_EVOLVING",
+    "raw_hash_equal": false,
+    "world_hash_equal": false,
+    "observation_pose_delta": [
+      0.00064730534612778,
+      -0.1999519070330642,
+      0.06173213224929963
+    ],
+    "world_polyline_separation_m": 0.34297570979576963,
+    "cart_clearance_delta_m": -0.027499384295263996,
+    "cart_pixels_delta": 362,
+    "cart_pixels": [
+      1703,
+      2065
+    ],
+    "reference_clearance_m": [
+      0.6694778631978933,
+      0.6419784789026293
+    ],
+    "reference_clearance_delta_m": -0.027499384295263996
+  },
+  {
+    "pair": "C3->C4",
+    "available": true,
+    "local_polyline_separation_m": 0.3979989592198775,
+    "endpoint_local_delta": [
+      0.1219627857208252,
+      -0.38929903507232666,
+      -0.6392640173435211
+    ],
+    "max_lateral_delta_m": -0.38059866428375244,
+    "wrapped_net_yaw_delta_rad": -0.7121822983026505,
+    "reliable_initial_tangent_delta_rad": 0.023277785025626052,
+    "meaningful": true,
+    "observation_translation_m": 0.19939247631019433,
+    "observation_yaw_change_rad": 0.26001427835020063,
+    "max_absolute_local_yaw_difference_deg": -15.132676842040526,
+    "classification": "C3_TO_C4_EVOLVING",
+    "raw_hash_equal": false,
+    "world_hash_equal": false,
+    "observation_pose_delta": [
+      0.028436084772103243,
+      -0.19735437337932282,
+      0.26001427835020063
+    ],
+    "world_polyline_separation_m": 0.2090951828460553,
+    "cart_clearance_delta_m": -0.18166785041254974,
+    "cart_pixels_delta": 988,
+    "cart_pixels": [
+      2065,
+      3053
+    ],
+    "reference_clearance_m": [
+      0.6419784789026293,
+      0.4603106284900796
+    ],
+    "reference_clearance_delta_m": -0.18166785041254968
+  },
+  {
+    "pair": "C4->C5",
+    "available": true,
+    "local_polyline_separation_m": 0.3800339080715969,
+    "endpoint_local_delta": [
+      0.014275193214416504,
+      -0.37976570427417755,
+      -0.18328800797462463
+    ],
+    "max_lateral_delta_m": -0.10989658534526825,
+    "wrapped_net_yaw_delta_rad": 0.07816864163032733,
+    "reliable_initial_tangent_delta_rad": -0.26106739250242406,
+    "meaningful": true,
+    "observation_translation_m": 0.19961786223394506,
+    "observation_yaw_change_rad": 0.21337437101179457,
+    "max_absolute_local_yaw_difference_deg": 1.991812935569948,
+    "classification": "C4_TO_C5_EVOLVING",
+    "raw_hash_equal": false,
+    "world_hash_equal": false,
+    "observation_pose_delta": [
+      0.08492162883189991,
+      -0.18065328084313137,
+      0.21337437101179457
+    ],
+    "world_polyline_separation_m": 0.21110822441007565,
+    "cart_clearance_delta_m": -0.15703952349626316,
+    "cart_pixels_delta": 2856,
+    "cart_pixels": [
+      3053,
+      5909
+    ],
+    "reference_clearance_m": [
+      0.4603106284900796,
+      0.30327110499381643
+    ],
+    "reference_clearance_delta_m": -0.15703952349626316
+  },
+  {
+    "pair": "C5->C6",
+    "available": true,
+    "local_polyline_separation_m": 0.21131574677246945,
+    "endpoint_local_delta": [
+      -0.20845544338226318,
+      -0.03465072810649872,
+      -0.33420830965042114
+    ],
+    "max_lateral_delta_m": 0.03465072810649872,
+    "wrapped_net_yaw_delta_rad": -0.41068937987438403,
+    "reliable_initial_tangent_delta_rad": 0.08934094792021074,
+    "meaningful": true,
+    "observation_translation_m": 0.1999948862295215,
+    "observation_yaw_change_rad": 0.008295643821975673,
+    "max_absolute_local_yaw_difference_deg": 19.14872562117047,
+    "classification": "C5_TO_C6_EVOLVING",
+    "raw_hash_equal": false,
+    "world_hash_equal": false,
+    "observation_pose_delta": [
+      0.10412798440040305,
+      -0.17074928223178176,
+      0.008295643821975673
+    ],
+    "world_polyline_separation_m": 0.2036445476258391,
+    "cart_clearance_delta_m": -0.016715806740092154,
+    "cart_pixels_delta": 2845,
+    "cart_pixels": [
+      5909,
+      8754
+    ],
+    "reference_clearance_m": [
+      0.30327110499381643,
+      0.2865552982537243
+    ],
+    "reference_clearance_delta_m": -0.016715806740092154
+  },
+  {
+    "pair": "C6->C7",
+    "available": true,
+    "local_polyline_separation_m": 0.2212851501476448,
+    "endpoint_local_delta": [
+      0.16077840328216553,
+      -0.1520441472530365,
+      0.11849838495254517
+    ],
+    "max_lateral_delta_m": 0.1520441472530365,
+    "wrapped_net_yaw_delta_rad": 0.19504842310561799,
+    "reliable_initial_tangent_delta_rad": -0.08874127309709534,
+    "meaningful": true,
+    "observation_translation_m": 0.19998964871014208,
+    "observation_yaw_change_rad": -0.007320464958169737,
+    "max_absolute_local_yaw_difference_deg": -6.789457336897378,
+    "classification": "C6_TO_C7_EVOLVING",
+    "raw_hash_equal": false,
+    "world_hash_equal": false,
+    "observation_pose_delta": [
+      0.09905789623621786,
+      -0.17373368350570573,
+      -0.007320464958169737
+    ],
+    "world_polyline_separation_m": 0.39503769796244287,
+    "cart_clearance_delta_m": -0.14360856845667674,
+    "cart_pixels_delta": 1692,
+    "cart_pixels": [
+      8754,
+      10446
+    ],
+    "reference_clearance_m": [
+      0.2865552982537243,
+      0.14294672979704753
+    ],
+    "reference_clearance_delta_m": -0.14360856845667674
+  },
+  {
+    "pair": "C7->C8",
+    "available": true,
+    "local_polyline_separation_m": 0.06767678161865967,
+    "endpoint_local_delta": [
+      -0.009314537048339844,
+      -0.06703272461891174,
+      -0.013765573501586914
+    ],
+    "max_lateral_delta_m": 0.06703272461891174,
+    "wrapped_net_yaw_delta_rad": 0.011069657659390941,
+    "reliable_initial_tangent_delta_rad": -0.03685313554797576,
+    "meaningful": true,
+    "observation_translation_m": 0.19997542288112588,
+    "observation_yaw_change_rad": -0.0333464858712027,
+    "max_absolute_local_yaw_difference_deg": 0.7887092642180527,
+    "classification": "C7_TO_C8_EVOLVING",
+    "raw_hash_equal": false,
+    "world_hash_equal": false,
+    "observation_pose_delta": [
+      0.10169668084198946,
+      -0.17218581492738494,
+      -0.0333464858712027
+    ],
+    "world_polyline_separation_m": 0.21025806094213667,
+    "cart_clearance_delta_m": -0.007563192507549443,
+    "cart_pixels_delta": 1513,
+    "cart_pixels": [
+      10446,
+      11959
+    ],
+    "reference_clearance_m": [
+      0.14294672979704753,
+      0.1353835372894981
+    ],
+    "reference_clearance_delta_m": -0.007563192507549443
+  },
+  {
+    "pair": "C8->C9",
+    "available": true,
+    "local_polyline_separation_m": 0.0,
+    "endpoint_local_delta": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "max_lateral_delta_m": 0.0,
+    "wrapped_net_yaw_delta_rad": 0.0,
+    "reliable_initial_tangent_delta_rad": 0.0,
+    "meaningful": false,
+    "observation_translation_m": 0.19988977394189675,
+    "observation_yaw_change_rad": -0.10859558990705409,
+    "max_absolute_local_yaw_difference_deg": 0.0,
+    "classification": "C8_TO_C9_STABLE",
+    "raw_hash_equal": true,
+    "world_hash_equal": false,
+    "observation_pose_delta": [
+      0.08627683821159593,
+      -0.18031147749034915,
+      -0.10859558990705409
+    ],
+    "world_polyline_separation_m": 0.22068654283391798,
+    "cart_clearance_delta_m": -0.0715574815451756,
+    "cart_pixels_delta": 2498,
+    "cart_pixels": [
+      11959,
+      14457
+    ],
+    "reference_clearance_m": [
+      0.1353835372894981,
+      0.06382605574432249
+    ],
+    "reference_clearance_delta_m": -0.0715574815451756
+  },
+  {
+    "pair": "C9->C10",
+    "available": true,
+    "local_polyline_separation_m": 0.20614133808768148,
+    "endpoint_local_delta": [
+      0.07067298889160156,
+      0.19459712505340576,
+      0.2703404128551483
+    ],
+    "max_lateral_delta_m": -0.19459712505340576,
+    "wrapped_net_yaw_delta_rad": 0.24697706382721663,
+    "reliable_initial_tangent_delta_rad": 0.03412101869983397,
+    "meaningful": true,
+    "observation_translation_m": 0.19989094500953386,
+    "observation_yaw_change_rad": -0.10777882073200029,
+    "max_absolute_local_yaw_difference_deg": -15.489364688424224,
+    "classification": "C9_TO_C10_EVOLVING",
+    "raw_hash_equal": false,
+    "world_hash_equal": false,
+    "observation_pose_delta": [
+      0.06642797052657556,
+      -0.1885304077026433,
+      -0.10777882073200029
+    ],
+    "world_polyline_separation_m": 0.24144673701202612,
+    "cart_clearance_delta_m": 0.08333592487558877,
+    "cart_pixels_delta": 3094,
+    "cart_pixels": [
+      14457,
+      17551
+    ],
+    "reference_clearance_m": [
+      0.06382605574432249,
+      0.14716198061991126
+    ],
+    "reference_clearance_delta_m": 0.08333592487558877
+  },
+  {
+    "pair": "C10->C11",
+    "available": true,
+    "local_polyline_separation_m": 0.0,
+    "endpoint_local_delta": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "max_lateral_delta_m": 0.0,
+    "wrapped_net_yaw_delta_rad": 0.0,
+    "reliable_initial_tangent_delta_rad": 0.0,
+    "meaningful": false,
+    "observation_translation_m": 0.19993268643768422,
+    "observation_yaw_change_rad": -0.06875324209180489,
+    "max_absolute_local_yaw_difference_deg": 0.0,
+    "classification": "C10_TO_C11_STABLE",
+    "raw_hash_equal": true,
+    "world_hash_equal": false,
+    "observation_pose_delta": [
+      0.04674604541845184,
+      -0.19439106549408436,
+      -0.06875324209180489
+    ],
+    "world_polyline_separation_m": 0.2140242986338611,
+    "cart_clearance_delta_m": -0.027073567939807364,
+    "cart_pixels_delta": 3042,
+    "cart_pixels": [
+      17551,
+      20593
+    ],
+    "reference_clearance_m": [
+      0.14716198061991126,
+      0.1200884126801039
+    ],
+    "reference_clearance_delta_m": -0.027073567939807364
+  }
+]

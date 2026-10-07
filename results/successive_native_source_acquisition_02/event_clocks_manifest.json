@@ -1,0 +1,7 @@
+{
+  "validation_sha256": "97a8503402fc69dc6ad2135cfdcec4223190f3675d22f79b83166b7c2063ab1b",
+  "output_sha256": "80dab6cb43286e18a5515eb5724ae6d098af7bf9a885b8e56a622d39cd3d51f2",
+  "script_sha256": "be91a8056d829eac19d7cef805c00b1a4c85d90838a915dd340d2035240b77b9",
+  "new_scientific_calls": 0,
+  "note": "Exact native monotonic_ns and UTC stamps. Frozen plotting CSV optional host-second columns expect another stamp schema and remain blank; use this explicit table or original JSON. No timestamp or source alteration."
+}
