@@ -1,0 +1,77 @@
+{
+  "classification_unchanged": "TECHNICAL_EXECUTION_BLOCKED",
+  "raw_termination": "RAW_UNSAFE",
+  "frozen_capture_gate": false,
+  "actual_capture_ticks": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    75,
+    90,
+    105
+  ],
+  "frozen_expected_capture_ticks": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    75,
+    90,
+    105,
+    120
+  ],
+  "completed_integration_capture_ticks": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    75,
+    90,
+    105
+  ],
+  "terminal_loop": {
+    "start_state_id": 120,
+    "loop_start_host_s": 439908.156585627,
+    "simulation_start_s": 2.0333334393799305,
+    "prior_completion_host_s": 439908.15654539,
+    "intended_wall_deadline_s": 439908.17321205756,
+    "deadline_error_at_start_s": -0.01662643055897206,
+    "inference_in_flight_at_start": true,
+    "sim_steps": 0,
+    "capture_happened": false,
+    "render_readback_s": null,
+    "mpc_received": [],
+    "model_received": [
+      {
+        "type": "result",
+        "kind": "prediction",
+        "status": "SCENE_INVALID",
+        "chunk_id": "chunk_002"
+      }
+    ],
+    "mpc_submitted": false,
+    "wire_request_kind": null,
+    "mpc_poll_wall_s": 5.059991963207722e-06
+  },
+  "terminal_loop_executed_steps": 0,
+  "interpretation": "Frozen scheduler_audit includes the abort-only final loop in expected captures. The unchanged collector handles model rejection before capture. No capture or integration follows rejection.",
+  "no_reclassification": true,
+  "no_runtime_or_frozen_validator_change": true,
+  "new_scientific_calls": 0,
+  "input_sha256": {
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/long_continuous_obstacle_reveal_source_01/primary_20261007/episodes/EPISODE_00/scheduler.jsonl": "bae04c07cb262617216cd6ba06483d2fb219ad042d5676c71ff860b67a4a5d5e",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/long_continuous_obstacle_reveal_source_01/primary_20261007/episodes/EPISODE_00/capture.jsonl": "5099c1f5b4b29f274966525812cd791d1a5dfebf5baf5d88590c54cb97284ac6",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/long_continuous_obstacle_reveal_source_01/primary_20261007/episodes/EPISODE_00/metadata.json": "18480d56dba3e6023dfd5a1da16589be9da0087b94badf9ca482220576f8ce03",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/long_continuous_obstacle_reveal_source_01/primary_20261007/episodes/EPISODE_00/raw_unsafe_abort.json": "3c4f34137dc0d468de40d839c59f38cc84217fcbe427af75319d647d09979f90"
+  },
+  "validation_sha256": "5a0f53b7fe5c032d45bcd936959c9ab2ac1576c8f81e008d2850468c7c3679e3",
+  "implementation_sha256": {
+    "scripts/isaac/robotless_online_handoffs.py": "c662fc9e97871a716600ac93bd2c3f86a56b2633e296c07567d41e369b0cd512",
+    "scripts/validate_obstacle_source_acquisition02.py": "f92aaf16eab201f82efba4cdef98c19715f4563178335dd521bc1824dd4df27a"
+  },
+  "diagnostic_script_sha256": "551fdd32c1a57f3099951fada2f83de0712aa2b83f569d8e1d73ca8890ec469f"
+}

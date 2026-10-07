@@ -1,0 +1,76 @@
+[
+  {
+    "pair": "C0->C1",
+    "available": true,
+    "local_polyline_separation_m": 0.7506085364710099,
+    "endpoint_local_delta": [
+      -0.3298097848892212,
+      0.67624031094374,
+      0.5215835382214209
+    ],
+    "max_lateral_delta_m": 0.67624031094374,
+    "wrapped_net_yaw_delta_rad": 0.20740896068673464,
+    "reliable_initial_tangent_delta_rad": 0.5234732569035776,
+    "meaningful": true,
+    "observation_translation_m": 0.060000003447498305,
+    "observation_yaw_change_rad": -7.606134544424492e-07,
+    "max_absolute_local_yaw_difference_deg": 29.99976963298518,
+    "classification": "C0_TO_C1_EVOLVING",
+    "raw_hash_equal": false,
+    "world_hash_equal": false,
+    "observation_pose_delta": [
+      0.00010929909691270723,
+      -0.05999990389498322,
+      -7.606134544424492e-07
+    ],
+    "world_polyline_separation_m": 0.720669836215717,
+    "cart_clearance_delta_m": 0.3599530115252219,
+    "cart_pixels_delta": 4073,
+    "cart_pixels": [
+      0,
+      4073
+    ],
+    "reference_clearance_m": [
+      1.1175140107938666,
+      0.23473751791079572
+    ],
+    "reference_clearance_delta_m": -0.8827764928830708
+  },
+  {
+    "pair": "C1->C2",
+    "available": true,
+    "local_polyline_separation_m": 0.4527470272660435,
+    "endpoint_local_delta": [
+      0.2833230495452881,
+      -0.35314008593559265,
+      -0.5015081223100424
+    ],
+    "max_lateral_delta_m": -0.35314008593559265,
+    "wrapped_net_yaw_delta_rad": -0.44719493947923183,
+    "reliable_initial_tangent_delta_rad": -0.26449680830098377,
+    "meaningful": true,
+    "observation_translation_m": 0.19972971178721619,
+    "observation_yaw_change_rad": 0.18949104250640136,
+    "max_absolute_local_yaw_difference_deg": -14.848641717858252,
+    "classification": "C1_TO_C2_EVOLVING",
+    "raw_hash_equal": false,
+    "world_hash_equal": false,
+    "observation_pose_delta": [
+      0.0069152612379213,
+      -0.1996099620074503,
+      0.18949104250640136
+    ],
+    "world_polyline_separation_m": 0.4036823666490811,
+    "cart_clearance_delta_m": -0.27148766612343245,
+    "cart_pixels_delta": 1799,
+    "cart_pixels": [
+      4073,
+      5872
+    ],
+    "reference_clearance_m": [
+      0.23473751791079572,
+      -0.03675014821263675
+    ],
+    "reference_clearance_delta_m": -0.27148766612343245
+  }
+]

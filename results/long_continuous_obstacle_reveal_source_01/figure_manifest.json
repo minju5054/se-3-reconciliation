@@ -1,0 +1,12 @@
+{
+  "PNG_sha256": {
+    "continuous_world_episode.png": "54baa80bc0fff61e16d3a84c3b40d48c03e80cb5fb92d063478e320d34805607",
+    "observation_local_evolution.png": "c4c7ec8ce20b5851e5fb8be92d12ba5c1936b8c0e9e9732e3555b06d92885dac",
+    "episode_timeline.png": "dcbe93b0dadf0e2fb183d4492c999261f0fe7208949971dc8849980688d104c9",
+    "request_rgb_sequence.png": "a651c871ce5c615f8aeea33893a888f2efd2c64505885a87c92db53b9e052d29"
+  },
+  "plot_inputs_sha256": "8a0e5424d9e7e1e483eff84220789c16b8d0ae0ca62ebab5dc2b7b52b23be163",
+  "report_script_sha256": "2e93c671f34e5b75d121ecc9893417d4662b31ec8e30eaeb0f3f636902f8786c",
+  "actual_segment_identity": "command i integrates state i to i+1",
+  "clock_display": "simulation seen events; host send/receipt retained separately"
+}

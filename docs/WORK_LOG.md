@@ -6983,3 +6983,36 @@ git diff --cached --check
   Compileall/diff checks pass. Tests use synthetic/saved fixtures; no new science.
 - Unrelated Stage0 YAML edits and GPU-memory plotting script remain excluded.
   Commit/push implementation/config/protocol before the one authorized launch.
+
+## 2026-10-07 — LONG_CONTINUOUS_OBSTACLE_REVEAL_SOURCE_01 single-attempt results
+
+- Pushed freeze `56c2c88c58559f9b16005b076dbfe03e4d3e190b`; one full Isaac launch,
+  one finalized episode, no retry. Native bound .8→.4 m/s configured before tracker;
+  observed maximum .4. All10 memories and applied commands match official results.
+- C0–C2 generated; C0/C1 applied. C2 raw clearance −.036750148 m, physical overlap,
+  rejected before installation. No B2/C2 execution or C3–C9 request. Runtime
+  SCENE_INVALID/RAW_UNSAFE; the six-chunk acquisition goal was not reached.
+- Frozen classification **TECHNICAL_EXECUTION_BLOCKED**: inherited capture gate
+  expects tick120 because it counts the last abort-only loop. Saved row120 receives
+  C2 rejection before capture, has zero integration steps and no submission.
+  Captures0..105 cover every completed scheduled capture; no bursts, all three
+  request RTFs≈.991 and maximum stall .226493 pass. Frozen validator/category kept
+  unchanged; separate saved-only diagnostic records this terminal-boundary issue.
+- First reaction qualifies geometrically; C0→C1/C1→C2 both EVOLVING. C1 reference
+  clearance .234737518 m passes both margins; actual120 intervals minimum swept
+  lower bound1.022053074 m, guard lookahead1.016070320 m. No guard abort/executed
+  overlap/controller error/STOP. One reveal, no reset after initialization.
+- Counts: episodes1, Isaac1, terminal3, buffers5, warmup1, RGB8, MPC submit/solve/
+  new physical application10/10/10, integration120. All reconciliation/optimizer/
+  source-search/retry counts0. Experiment-owned server stopped.
+- Source/controller/history/integration/safety checks and sealed result rerun
+  pass; overall scheduler qualification fails as above. Bundle101 source/9 derived
+  hashes pass, qualification=false, reproducible partial_data=true. One actual
+  C0→C1 handoff, zero post-reveal applied-to-applied handoffs. No rejected B.
+- Four final PNGs rendered and visually inspected, execution colored by active
+  C0/C1, C2 labeled rejected, exact RGB metadata outside pixels. Numeric/hash
+  checks pass. No fifth figure (<6 applied), HTML, method comparison or new solve.
+- Tests615 passed/1 absent-corpus skip; focused27. Compileall and diff checks pass.
+  Shutdown observer PermissionError was caught by the frozen handler; exit0 and
+  actual bundled-library mappings preserved. No science/protocol tuning; the
+  only post-freeze code addition is the saved-only terminal audit diagnosis.

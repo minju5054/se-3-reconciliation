@@ -1,0 +1,11 @@
+{
+  "entries": [
+    {
+      "path": "handoffs/C0_to_C1/ready_record.json",
+      "sha256": "a6c02b9f1d198ecf270b4faa2a9faf710974c19dbddd2a75acc9af46ef5a6db6"
+    }
+  ],
+  "actual_handoff_count": 1,
+  "usable_post_reveal_handoffs": 0,
+  "no_generated_only_B": true
+}

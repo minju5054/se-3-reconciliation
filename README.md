@@ -7,6 +7,17 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [longer, half-speed source acquisition](docs/LONG_CONTINUOUS_OBSTACLE_REVEAL_SOURCE_01.md)
+did not reach the six-chunk minimum: C0/C1 applied, while C2 was rejected before
+installation for footprint overlap (−.036750 m). The effective native MPC bound
+was .4 m/s; actual executed clearance stayed above 1.022053 m. The frozen
+classification is **TECHNICAL_EXECUTION_BLOCKED** because its capture audit expects
+a frame on the final abort-only tick; the exact boundary evidence is preserved
+without changing the validator. One recoverable handoff, zero post-reveal
+applied-to-applied handoffs, no retry or reconciliation. The partial bundle is
+not a qualified long source. [Colored execution PNG](results/long_continuous_obstacle_reveal_source_01/figures/continuous_world_episode.png)
+and [active-reference timeline](results/long_continuous_obstacle_reveal_source_01/figures/episode_timeline.png).
+
 The [zero-extra-reserve exploratory acquisition](docs/CONTINUOUS_OBSTACLE_REVEAL_EXPLORATORY_02.md)
 is **PARTIAL_CONTINUOUS_EXPLORATORY_SEQUENCE**: one episode generated C0–C3;
 C0/C1/C2 applied, while C3 was rejected before installation for physical footprint
