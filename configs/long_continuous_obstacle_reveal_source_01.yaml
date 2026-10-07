@@ -1,0 +1,49 @@
+experiment: LONG_CONTINUOUS_OBSTACLE_REVEAL_SOURCE_01
+scientific_protocol: configs/continuous_obstacle_reveal_episode_01.yaml
+historical_run: data/continuous_obstacle_reveal_exploratory_02/primary_20261006
+historical_results: results/continuous_obstacle_reveal_exploratory_02
+historical_commit: c0a862acb45449db6269aada8bd8ff910136ddd0
+launch_source: docs/OBSTACLE_SOURCE_ACQUISITION_03_OBSTRUCTED_OLD.md
+isaac_python: /home/gpuadmin/isaacsim/python.sh
+collector: scripts/isaac/long_continuous_obstacle_reveal_source01.py
+maximum_launches: 1
+retry: false
+unset_environment:
+- LD_LIBRARY_PATH
+- PYTHONPATH
+- CUDA_HOME
+- CUDA_PATH
+- ROS_DISTRO
+- ROS_VERSION
+- ROS_PYTHON_VERSION
+- AMENT_PREFIX_PATH
+- CMAKE_PREFIX_PATH
+- COLCON_PREFIX_PATH
+- RMW_IMPLEMENTATION
+set_environment:
+  OPENBLAS_NUM_THREADS: '1'
+  OMP_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONUNBUFFERED: '1'
+libcusparse: /home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/libcusparse.so.12
+exploratory_clearance:
+  footprint_radius_m: 0.2
+  required_extra_clearance_m: 0.0
+  legacy_required_extra_clearance_m: 0.05
+  guard_enabled: true
+  physical_overlap_rejection: true
+classification_priority:
+- unclean speed configuration before science -> SLOW_EXECUTION_CONFIGURATION_BLOCKED
+- infrastructure/timing/provenance failure -> TECHNICAL_EXECUTION_BLOCKED
+- first reaction fails -> FIRST_REACTION_NOT_QUALIFIED
+- all gates and 10 applied -> LONG_CONTINUOUS_SOURCE_MAX_REACHED
+- all gates and 8-9 applied -> LONG_CONTINUOUS_SOURCE_TARGET_REACHED
+- all gates and 6-7 applied -> LONG_CONTINUOUS_SOURCE_QUALIFIED
+- C0/C1 applied, first reaction valid, 2-5 applied -> PARTIAL_CONTINUOUS_SOURCE
+maximum_terminal_predictions: 10
+maximum_handoff_attempts: 9
+maximum_active_sim_s: 8.0
+postroll_sim_s: 0.1
+minimum_qualified_chunks: 6
+preferred_chunks: 8
+effective_velocity_ratio: 0.5

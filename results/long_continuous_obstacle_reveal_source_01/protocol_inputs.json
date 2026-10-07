@@ -1,0 +1,27 @@
+{
+  "experiment": "LONG_CONTINUOUS_OBSTACLE_REVEAL_SOURCE_01",
+  "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/long_continuous_obstacle_reveal_source_01/primary_20261007",
+  "starting_sha": "c0a862acb45449db6269aada8bd8ff910136ddd0",
+  "prepared_sha256": {
+    "config_snapshot.yaml": "829a621a58675fbe466427a6f27f1d7cb96096db5efd645f327de081f5bf29f7",
+    "episode_schedule.json": "47820ad67754bdf5faaca20c3e10ff38a158df6ecab983d99929e0ef664af832",
+    "protocol_equivalence.json": "7408c0d82e84ec460bd159eb9503e8c1d280d6dfeb3a746ef8432a2f3fdda2cb",
+    "speed_intervention.json": "094fa9c32117515cea0452bf2504276da30f9d506864a4a8234a4fd6ba80f475",
+    "source.json": "ec248e8e1b7a094159287341c9367ee0169fd110c42361451e49ac7c02beca81",
+    "selected_pose11.json": "a2014e0093f7a1241c2db50a1caa2c4c2d2a140cd70a7602af46f819dc1161b0",
+    "side_passages.json": "a292e56c40660ae1d57043ca40e8bca956c3e547c6a761b42d311d73a0630714",
+    "historical02_preservation.json": "accf3a7966cf378033f37dcf9203801af8dcba78d80694433c4edfdb8759aaa9",
+    "loader_verification.json": "11bab2f18183479e78b9a1ef6ccfa9b1eb6020c49050ff30bf17ff791443b4e2",
+    "scenario.json": "63a0d1f907584fd02240b14a1a30bd1f6227beea75bf27344403c9b726163725",
+    "protocol.json": "3e9aeb5faac378c849b23d30aeabff5143bf05fd40011c4cc3b9f7394d85e267",
+    "launch_environment.json": "242b9d20ea4832c5b92c3b622d60ef567fa23e19e16715d8b7cd9f4fd2c8f0f3",
+    "external_authority.json": "73e518b5557729c0b1e4c2f3833109348fca4b96db6c8b3ea6607169e3f9a8e1",
+    "technical_preflight/OSA03_saved_revalidation.json": "3a8d4163be74421d0f71aff8ac780f39f08bcd152f9cd9fb1bff1aa23ff0603f",
+    "technical_preflight/loader_sanitized.txt": "9c8825b69d35d05da42ebd9e96d7911e7fcdda9021d274bce809d40633b717f9",
+    "technical_preflight/loader_inherited.txt": "aaab0808014026aec67ae6e0888f6b0f74db1e1d38ce7fbd2f2eb4e015432922"
+  },
+  "preserved01_files": 192,
+  "inherited_authority_files": 2529,
+  "loader_preflight_pass": true,
+  "scientific_calls": 0
+}

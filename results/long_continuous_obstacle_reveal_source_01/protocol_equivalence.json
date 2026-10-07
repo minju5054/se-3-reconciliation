@@ -1,0 +1,55 @@
+{
+  "unchanged_input_files": {
+    "selected_pose11.json": "a2014e0093f7a1241c2db50a1caa2c4c2d2a140cd70a7602af46f819dc1161b0",
+    "scenario.json": "63a0d1f907584fd02240b14a1a30bd1f6227beea75bf27344403c9b726163725",
+    "side_passages.json": "a292e56c40660ae1d57043ca40e8bca956c3e547c6a761b42d311d73a0630714",
+    "episode_schedule.json": "47820ad67754bdf5faaca20c3e10ff38a158df6ecab983d99929e0ef664af832",
+    "external_authority.json": "73e518b5557729c0b1e4c2f3833109348fca4b96db6c8b3ea6607169e3f9a8e1"
+  },
+  "velocity_intervention": {
+    "prior_workers": "/home/gpuadmin/Workspace/se-3-reconciliation/data/continuous_obstacle_reveal_exploratory_02/primary_20261006/workers.json",
+    "prior_workers_sha256": "344b6a952f739dccabe58a669331832aa9439708a6fb53aa4b59d6b329d913d0",
+    "external_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+    "external_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+    "external_git_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+    "base_effective_linear_limit_m_s": 0.8,
+    "new_effective_linear_limit_m_s": 0.4,
+    "ratio": 0.5,
+    "prior_settings": {
+      "CONTROL_RATE_HZ": 10.0,
+      "HORIZON": 5,
+      "MPC_DT_S": 0.1,
+      "WAYPOINT_DT_S": 0.1,
+      "TRACK_V_MAX": 1.5,
+      "OBJNAV_V_MAX": 0.8,
+      "W_MAX": 3.0,
+      "A_MAX_V": 2.0,
+      "A_MAX_W": 5.0,
+      "Q_WEIGHTS": [
+        10.0,
+        10.0,
+        1.0
+      ],
+      "R_WEIGHTS": [
+        0.1,
+        0.1
+      ],
+      "ODOM_MATCH_MAX_GAP_S": 0.3,
+      "ODOM_TIMEOUT_S": 0.5
+    },
+    "changed_setting": "OBJNAV_V_MAX",
+    "mechanism": "module OBJNAV_V_MAX assigned before tracker construction; native solve sets existing CasADi v_max parameter",
+    "added_output_postprocessing": false,
+    "official_extraction_unchanged": true,
+    "intrinsic_model_waypoint_dt_s": null
+  },
+  "runtime_delta": {
+    "maximum_terminal_predictions": 10,
+    "maximum_handoff_attempts": 9,
+    "maximum_active_sim_s": 8.0,
+    "postroll_sim_s": 0.1
+  },
+  "unchanged_scene_model_history_instruction_safety_and_scheduler": true,
+  "no_model_waypoint_time": true,
+  "no_command_postprocessing": true
+}

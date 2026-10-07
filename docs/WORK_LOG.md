@@ -6962,3 +6962,24 @@ git diff --cached --check
   exited0 and actual bundled nvJitLink provenance was captured. Server stopped.
 - Documentation/README distinguish low-margin references, rejected physical
   overlap and the actually executed prefix. No future reconciliation implemented.
+
+## 2026-10-07 — LONG_CONTINUOUS_OBSTACLE_REVEAL_SOURCE_01 pre-science freeze
+
+- Starting fetched HEAD/main: `c0a862acb45449db6269aada8bd8ff910136ddd0`.
+- Authenticated EXPLORATORY_02 and inherited OSA03 saved results, complete source
+  hashes and exact tracked result bytes. Prior effective MPC OBJNAV_V_MAX=.8 m/s;
+  isolated loader sets .4 before tracker construction; pinned native solve uses
+  the existing CasADi bound. No added output clipping/scaling or external edit.
+- Same source/model/input/scene/history, angular/acceleration limits, native memory
+  and asynchronous pacing. Extend terminal budget to10, active cap8s, postroll.1s;
+  no stopping at six/eight. Existing .20 footprint, zero extra reserve and legacy
+  .05 diagnostics retained; rejected raw reference never installed or repaired.
+- Separate namespace includes acquisition, saved-only full lineage/speed/memory/
+  timing/safety audit, handoff-ready bundle, per-adjacent-pair evolution and four
+  PNGs plus a fifth only with >=6 applied. Actual execution colored by command
+  identity; exact RGB metadata in dedicated axes. No reconciliation implemented.
+- Focused27 passed; relevant regression **615 passed, 1 skipped** (missing immutable
+  DATA02 v1 corpus). Unix-socket worker tests used required execution permissions.
+  Compileall/diff checks pass. Tests use synthetic/saved fixtures; no new science.
+- Unrelated Stage0 YAML edits and GPU-memory plotting script remain excluded.
+  Commit/push implementation/config/protocol before the one authorized launch.

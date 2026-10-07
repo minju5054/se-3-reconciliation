@@ -1,0 +1,48 @@
+{
+  "valid": true,
+  "cases": [
+    {
+      "case": "inherited",
+      "command": [
+        "ldd",
+        "-r",
+        "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/libcusparse.so.12"
+      ],
+      "selected_path": "/usr/local/cuda/lib64/libnvJitLink.so.12",
+      "resolved_path": "/usr/local/cuda-12.6/targets/x86_64-linux/lib/libnvJitLink.so.12.6.20",
+      "library_sha256": "b70f0f325cbd43f37028c559612b49d9c208649ed9184cc24b6e55abf04e341b",
+      "undefined_symbols": [
+        "__nvJitLinkCreate_12_8",
+        "__nvJitLinkGetErrorLog_12_8",
+        "__nvJitLinkComplete_12_8",
+        "__nvJitLinkDestroy_12_8",
+        "__nvJitLinkAddData_12_8",
+        "__nvJitLinkGetLinkedCubin_12_8",
+        "__nvJitLinkGetLinkedCubinSize_12_8",
+        "__nvJitLinkGetErrorLogSize_12_8"
+      ],
+      "returncode": 0,
+      "output": "/home/gpuadmin/Workspace/se-3-reconciliation/data/long_continuous_obstacle_reveal_source_01/primary_20261007/technical_preflight/loader_inherited.txt",
+      "output_sha256": "aaab0808014026aec67ae6e0888f6b0f74db1e1d38ce7fbd2f2eb4e015432922"
+    },
+    {
+      "case": "sanitized",
+      "command": [
+        "ldd",
+        "-r",
+        "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/libcusparse.so.12"
+      ],
+      "selected_path": "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/cusparse/lib/../../nvjitlink/lib/libnvJitLink.so.12",
+      "resolved_path": "/home/gpuadmin/isaacsim/extsDeprecated/omni.isaac.ml_archive/pip_prebundle/nvidia/nvjitlink/lib/libnvJitLink.so.12",
+      "library_sha256": "0369e6867d44b800437de4e146d72c65afc6c75adf677a15c2ecd8e6a7ac135f",
+      "undefined_symbols": [],
+      "returncode": 0,
+      "output": "/home/gpuadmin/Workspace/se-3-reconciliation/data/long_continuous_obstacle_reveal_source_01/primary_20261007/technical_preflight/loader_sanitized.txt",
+      "output_sha256": "9c8825b69d35d05da42ebd9e96d7911e7fcdda9021d274bce809d40633b717f9"
+    }
+  ],
+  "libcusparse_sha256": "437651d1ec5d0e5b1b4d07b8c492f153cb4825222fe2d763232a407f667d9bb2",
+  "process_only": true,
+  "full_SimulationApp_starts": 0,
+  "status": "PASS"
+}

@@ -1,0 +1,7 @@
+{
+  "freeze_file_sha256": "b65674099ebdc38b775a7580c6ce8e85b0d83cf6ceaf07f96b80eeb24388328a",
+  "source_files": 553,
+  "prepared_input_files": 16,
+  "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/long_continuous_obstacle_reveal_source_01/primary_20261007",
+  "scientific_calls_before_freeze": 0
+}
