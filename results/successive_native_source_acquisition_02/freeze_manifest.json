@@ -1,0 +1,9 @@
+{
+  "candidates": {
+    "CANDIDATE_01": "365792e523d0d4fc34a214207dc8b63407de9da5629d6948f44248acdd09a40e",
+    "CANDIDATE_02": "cd259a16708add71f1440aed13a24591223b87f9565ad371fd82d897518c2657",
+    "CANDIDATE_03": "c6c411ac2c3db120d360420c3a3c579743b9e4526d8b896085eb05fe1c6d0d78"
+  },
+  "source_files": 566,
+  "scientific_calls_before_freeze": 0
+}

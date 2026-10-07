@@ -1,0 +1,734 @@
+[
+  {
+    "candidate_id": "CANDIDATE_01",
+    "execution_order": 1,
+    "backward_offset_m": 1.0,
+    "pose_world": [
+      19.20129863861204,
+      25.42333325575427,
+      -1.5689742328041627
+    ],
+    "original_POSE11": [
+      19.20312073159454,
+      24.423334915767065,
+      -1.5689742328041627
+    ],
+    "initial_clearance": {
+      "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+      "workspace_known": true,
+      "unknown": false,
+      "minimum_clearance_m": 1.1585661663954936,
+      "physical_overlap": false,
+      "clearance_valid": true,
+      "footprint_radius_m": 0.2,
+      "required_clearance_m": 0.0,
+      "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+      "sample_count": 1,
+      "sampling_hint_m": 0.01,
+      "first_collision_segment_index": null,
+      "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+      "physical_footprint_clearance_m": 1.1585661663954936,
+      "exploratory_overlap_free": true,
+      "legacy_5cm_margin_pass": true,
+      "legacy_5cm_check": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 1.1585661663954936,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.05,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 1,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+      },
+      "exploratory_policy": {
+        "footprint_radius_m": 0.2,
+        "required_extra_clearance_m": 0.0,
+        "legacy_required_extra_clearance_m": 0.05,
+        "guard_enabled": true,
+        "physical_overlap_rejection": true
+      }
+    },
+    "corridor_to_POSE11": {
+      "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+      "workspace_known": true,
+      "unknown": false,
+      "minimum_clearance_m": 1.017023007741935,
+      "physical_overlap": false,
+      "clearance_valid": true,
+      "footprint_radius_m": 0.2,
+      "required_clearance_m": 0.0,
+      "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+      "sample_count": 2,
+      "sampling_hint_m": 0.01,
+      "first_collision_segment_index": null,
+      "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+      "physical_footprint_clearance_m": 1.017023007741935,
+      "exploratory_overlap_free": true,
+      "legacy_5cm_margin_pass": true,
+      "legacy_5cm_check": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 1.017023007741935,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.05,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 2,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+      },
+      "exploratory_policy": {
+        "footprint_radius_m": 0.2,
+        "required_extra_clearance_m": 0.0,
+        "legacy_required_extra_clearance_m": 0.05,
+        "guard_enabled": true,
+        "physical_overlap_rejection": true
+      }
+    },
+    "camera_XY_footprint_check": {
+      "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+      "workspace_known": true,
+      "unknown": false,
+      "minimum_clearance_m": 1.1221577469448176,
+      "physical_overlap": false,
+      "clearance_valid": true,
+      "footprint_radius_m": 0.2,
+      "required_clearance_m": 0.0,
+      "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+      "sample_count": 1,
+      "sampling_hint_m": 0.01,
+      "first_collision_segment_index": null,
+      "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+      "physical_footprint_clearance_m": 1.1221577469448176,
+      "exploratory_overlap_free": true,
+      "legacy_5cm_margin_pass": true,
+      "legacy_5cm_check": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 1.1221577469448176,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.05,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 1,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+      },
+      "exploratory_policy": {
+        "footprint_radius_m": 0.2,
+        "required_extra_clearance_m": 0.0,
+        "legacy_required_extra_clearance_m": 0.05,
+        "guard_enabled": true,
+        "physical_overlap_rejection": true
+      }
+    },
+    "camera_placement_scope": "Inherited calibrated camera height/basis; finite proper transform and conservative XY footprint/workspace check. Actual USD camera/agent matrices authenticated before model requests.",
+    "T_world_agent": [
+      [
+        0.001822092982500689,
+        0.9999983399872038,
+        0.0,
+        19.20129863861204
+      ],
+      [
+        -0.9999983399872038,
+        0.001822092982500689,
+        0.0,
+        25.42333325575427
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_world_camera": [
+      [
+        -0.999998339987204,
+        0.0,
+        -0.001822092982500689,
+        19.201462626980465
+      ],
+      [
+        -0.0018220929825006893,
+        0.0,
+        0.9999983399872038,
+        25.333333405155425
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.65
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_agent_camera": [
+      [
+        -2.6553490315165106e-19,
+        0.0,
+        -1.0,
+        0.0899999999999963
+      ],
+      [
+        -1.0000000000000002,
+        0.0,
+        -4.869446865455015e-20,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.65
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "cart_transform": [
+      [
+        0.33930055949019505,
+        -0.9406780162891235,
+        0.0,
+        36.804567362220055
+      ],
+      [
+        0.9406780162891235,
+        0.33930055949019505,
+        0.0,
+        -2.4633986519367674
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "geometry_valid": true,
+    "transform": "T_candidate=T0*Trans(-d,0,0); world XY metres +Z up CCW radians; local +x forward +y left",
+    "additional_scene_launches": 0,
+    "model_calls": 0
+  },
+  {
+    "candidate_id": "CANDIDATE_02",
+    "execution_order": 2,
+    "backward_offset_m": 0.75,
+    "pose_world": [
+      19.201754161857664,
+      25.17333367075747,
+      -1.5689742328041627
+    ],
+    "original_POSE11": [
+      19.20312073159454,
+      24.423334915767065,
+      -1.5689742328041627
+    ],
+    "initial_clearance": {
+      "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+      "workspace_known": true,
+      "unknown": false,
+      "minimum_clearance_m": 1.0690210451408508,
+      "physical_overlap": false,
+      "clearance_valid": true,
+      "footprint_radius_m": 0.2,
+      "required_clearance_m": 0.0,
+      "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+      "sample_count": 1,
+      "sampling_hint_m": 0.01,
+      "first_collision_segment_index": null,
+      "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+      "physical_footprint_clearance_m": 1.0690210451408508,
+      "exploratory_overlap_free": true,
+      "legacy_5cm_margin_pass": true,
+      "legacy_5cm_check": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 1.0690210451408508,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.05,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 1,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+      },
+      "exploratory_policy": {
+        "footprint_radius_m": 0.2,
+        "required_extra_clearance_m": 0.0,
+        "legacy_required_extra_clearance_m": 0.05,
+        "guard_enabled": true,
+        "physical_overlap_rejection": true
+      }
+    },
+    "corridor_to_POSE11": {
+      "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+      "workspace_known": true,
+      "unknown": false,
+      "minimum_clearance_m": 1.0170230077419342,
+      "physical_overlap": false,
+      "clearance_valid": true,
+      "footprint_radius_m": 0.2,
+      "required_clearance_m": 0.0,
+      "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+      "sample_count": 2,
+      "sampling_hint_m": 0.01,
+      "first_collision_segment_index": null,
+      "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+      "physical_footprint_clearance_m": 1.0170230077419342,
+      "exploratory_overlap_free": true,
+      "legacy_5cm_margin_pass": true,
+      "legacy_5cm_check": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 1.0170230077419342,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.05,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 2,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+      },
+      "exploratory_policy": {
+        "footprint_radius_m": 0.2,
+        "required_extra_clearance_m": 0.0,
+        "legacy_required_extra_clearance_m": 0.05,
+        "guard_enabled": true,
+        "physical_overlap_rejection": true
+      }
+    },
+    "camera_XY_footprint_check": {
+      "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+      "workspace_known": true,
+      "unknown": false,
+      "minimum_clearance_m": 1.0465139842268971,
+      "physical_overlap": false,
+      "clearance_valid": true,
+      "footprint_radius_m": 0.2,
+      "required_clearance_m": 0.0,
+      "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+      "sample_count": 1,
+      "sampling_hint_m": 0.01,
+      "first_collision_segment_index": null,
+      "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+      "physical_footprint_clearance_m": 1.0465139842268971,
+      "exploratory_overlap_free": true,
+      "legacy_5cm_margin_pass": true,
+      "legacy_5cm_check": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 1.0465139842268971,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.05,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 1,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+      },
+      "exploratory_policy": {
+        "footprint_radius_m": 0.2,
+        "required_extra_clearance_m": 0.0,
+        "legacy_required_extra_clearance_m": 0.05,
+        "guard_enabled": true,
+        "physical_overlap_rejection": true
+      }
+    },
+    "camera_placement_scope": "Inherited calibrated camera height/basis; finite proper transform and conservative XY footprint/workspace check. Actual USD camera/agent matrices authenticated before model requests.",
+    "T_world_agent": [
+      [
+        0.001822092982500689,
+        0.9999983399872038,
+        0.0,
+        19.201754161857664
+      ],
+      [
+        -0.9999983399872038,
+        0.001822092982500689,
+        0.0,
+        25.17333367075747
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_world_camera": [
+      [
+        -0.999998339987204,
+        0.0,
+        -0.001822092982500689,
+        19.20191815022609
+      ],
+      [
+        -0.0018220929825006893,
+        0.0,
+        0.9999983399872038,
+        25.083333820158625
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.65
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_agent_camera": [
+      [
+        -2.6553490315165106e-19,
+        0.0,
+        -1.0,
+        0.0899999999999963
+      ],
+      [
+        -1.0000000000000002,
+        0.0,
+        -4.869446865455015e-20,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.65
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "cart_transform": [
+      [
+        0.33930055949019505,
+        -0.9406780162891235,
+        0.0,
+        36.804567362220055
+      ],
+      [
+        0.9406780162891235,
+        0.33930055949019505,
+        0.0,
+        -2.4633986519367674
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "geometry_valid": true,
+    "transform": "T_candidate=T0*Trans(-d,0,0); world XY metres +Z up CCW radians; local +x forward +y left",
+    "additional_scene_launches": 0,
+    "model_calls": 0
+  },
+  {
+    "candidate_id": "CANDIDATE_03",
+    "execution_order": 3,
+    "backward_offset_m": 0.5,
+    "pose_world": [
+      19.20220968510329,
+      24.923334085760665,
+      -1.5689742328041627
+    ],
+    "original_POSE11": [
+      19.20312073159454,
+      24.423334915767065,
+      -1.5689742328041627
+    ],
+    "initial_clearance": {
+      "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+      "workspace_known": true,
+      "unknown": false,
+      "minimum_clearance_m": 1.0219427706941069,
+      "physical_overlap": false,
+      "clearance_valid": true,
+      "footprint_radius_m": 0.2,
+      "required_clearance_m": 0.0,
+      "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+      "sample_count": 1,
+      "sampling_hint_m": 0.01,
+      "first_collision_segment_index": null,
+      "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+      "physical_footprint_clearance_m": 1.0219427706941069,
+      "exploratory_overlap_free": true,
+      "legacy_5cm_margin_pass": true,
+      "legacy_5cm_check": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 1.0219427706941069,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.05,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 1,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+      },
+      "exploratory_policy": {
+        "footprint_radius_m": 0.2,
+        "required_extra_clearance_m": 0.0,
+        "legacy_required_extra_clearance_m": 0.05,
+        "guard_enabled": true,
+        "physical_overlap_rejection": true
+      }
+    },
+    "corridor_to_POSE11": {
+      "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+      "workspace_known": true,
+      "unknown": false,
+      "minimum_clearance_m": 1.017023007741935,
+      "physical_overlap": false,
+      "clearance_valid": true,
+      "footprint_radius_m": 0.2,
+      "required_clearance_m": 0.0,
+      "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+      "sample_count": 2,
+      "sampling_hint_m": 0.01,
+      "first_collision_segment_index": null,
+      "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+      "physical_footprint_clearance_m": 1.017023007741935,
+      "exploratory_overlap_free": true,
+      "legacy_5cm_margin_pass": true,
+      "legacy_5cm_check": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 1.017023007741935,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.05,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 2,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+      },
+      "exploratory_policy": {
+        "footprint_radius_m": 0.2,
+        "required_extra_clearance_m": 0.0,
+        "legacy_required_extra_clearance_m": 0.05,
+        "guard_enabled": true,
+        "physical_overlap_rejection": true
+      }
+    },
+    "camera_XY_footprint_check": {
+      "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+      "workspace_known": true,
+      "unknown": false,
+      "minimum_clearance_m": 1.0171798694993377,
+      "physical_overlap": false,
+      "clearance_valid": true,
+      "footprint_radius_m": 0.2,
+      "required_clearance_m": 0.0,
+      "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+      "sample_count": 1,
+      "sampling_hint_m": 0.01,
+      "first_collision_segment_index": null,
+      "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+      "physical_footprint_clearance_m": 1.0171798694993377,
+      "exploratory_overlap_free": true,
+      "legacy_5cm_margin_pass": true,
+      "legacy_5cm_check": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 1.0171798694993377,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.05,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 1,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+      },
+      "exploratory_policy": {
+        "footprint_radius_m": 0.2,
+        "required_extra_clearance_m": 0.0,
+        "legacy_required_extra_clearance_m": 0.05,
+        "guard_enabled": true,
+        "physical_overlap_rejection": true
+      }
+    },
+    "camera_placement_scope": "Inherited calibrated camera height/basis; finite proper transform and conservative XY footprint/workspace check. Actual USD camera/agent matrices authenticated before model requests.",
+    "T_world_agent": [
+      [
+        0.001822092982500689,
+        0.9999983399872038,
+        0.0,
+        19.20220968510329
+      ],
+      [
+        -0.9999983399872038,
+        0.001822092982500689,
+        0.0,
+        24.923334085760665
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_world_camera": [
+      [
+        -0.999998339987204,
+        0.0,
+        -0.001822092982500689,
+        19.202373673471715
+      ],
+      [
+        -0.0018220929825006893,
+        0.0,
+        0.9999983399872038,
+        24.83333423516182
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.65
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_agent_camera": [
+      [
+        -2.6553490315165106e-19,
+        0.0,
+        -1.0,
+        0.0899999999999963
+      ],
+      [
+        -1.0000000000000002,
+        0.0,
+        -4.869446865455015e-20,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.65
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "cart_transform": [
+      [
+        0.33930055949019505,
+        -0.9406780162891235,
+        0.0,
+        36.804567362220055
+      ],
+      [
+        0.9406780162891235,
+        0.33930055949019505,
+        0.0,
+        -2.4633986519367674
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "geometry_valid": true,
+    "transform": "T_candidate=T0*Trans(-d,0,0); world XY metres +Z up CCW radians; local +x forward +y left",
+    "additional_scene_launches": 0,
+    "model_calls": 0
+  }
+]

@@ -7029,3 +7029,25 @@ git diff --cached --check
   technical classification included this audit-definition limitation.
 - Synthetic cases A–E and historical LONG regression: 37 passed. No scientific calls.
   Compileall and diff checks pass. Acquisition protocol preparation follows separately.
+
+## 2026-10-07 — SUCCESSIVE_NATIVE_SOURCE_ACQUISITION_02 scientific freeze
+
+- Corrected audit commit 3c940ab pushed first; saved LONG_SOURCE_01 audit passes
+  with its frozen historical classification unchanged. No historical file edited.
+- Prepared all three exact backward local poses (1.0/.75/.50 m) in fixed order.
+  All .20 m initial footprint/corridor/camera XY checks pass with known workspace.
+  Same cart/lighting/camera/instruction/model/history; no new scene launch to prepare.
+- New namespace reuses native async collector, geometry guard and exact prior .4 m/s
+  pre-tracker speed configuration. Max12 terminal predictions, cap10 s; one attempt
+  per candidate, max3, first qualified six-plus prefix stops the search. Direction,
+  C0/cart overlap and immediate C1 evolution do not affect qualification.
+- Added frozen protocol, loader/input/source hashes, candidate manifest, 12-request
+  policy, isolated validator, bundle indices, bounded search gate and four-PNG
+  saved-only report with source-summary CSV. Historical sources remain immutable.
+- Tests: focused37 passed; full relevant regression652 passed/1 skip (absent v1
+  corpus); final focused37 rerun passed after descriptive field additions.
+  compileall and diff checks pass. No scientific calls before pushed freeze.
+- Commands: `.venv/bin/python scripts/run_successive_native_source_acquisition02.py
+  --run data/successive_native_source_acquisition_02/primary_20261007 --mode prepare`
+  then `--mode freeze`. Full pytest glob command and live commands will be recorded
+  in the separate result report. No reconciliation or future stage implemented.

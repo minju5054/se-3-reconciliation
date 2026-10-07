@@ -1,0 +1,14 @@
+{
+  "batch": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007",
+  "starting_sha": "e39d465762e0680d0c806f58079127b313312855",
+  "audit_fix_sha": "3c940abe1fbaea9081f1eb1f985ccf774cca1734",
+  "candidate_order": [
+    "CANDIDATE_01",
+    "CANDIDATE_02",
+    "CANDIDATE_03"
+  ],
+  "maximum_live_episodes": 3,
+  "maximum_Isaac_launches": 3,
+  "preserved_historical_files": 172,
+  "scientific_calls": 0
+}
