@@ -1,0 +1,154 @@
+{
+  "corrected_scheduler": {
+    "valid": true,
+    "burst_state_ids": [],
+    "minimum_wall_step_s": 0.016755727003328502,
+    "capture_ticks_valid": true,
+    "capture_ticks": [
+      0,
+      15,
+      30,
+      45,
+      60,
+      75,
+      90,
+      105
+    ],
+    "control_ticks_valid": true,
+    "control_ticks": [
+      60,
+      66,
+      72,
+      78,
+      84,
+      90,
+      96,
+      102,
+      108,
+      114
+    ],
+    "simulation_tick_dt_s": 0.01666666753590107,
+    "requests": [
+      {
+        "chunk_id": "chunk_000",
+        "observation_state_id": 45,
+        "observation_sim_s": 0.7833333741873503,
+        "request_host_s": 439906.607538516,
+        "receipt_host_s": 439906.821678621,
+        "client_RTT_s": 0.214140105,
+        "first_inflight_state": 47,
+        "last_inflight_state": 58,
+        "inflight_intervals": 11,
+        "request_local_RTF": 0.9901681435452682,
+        "fast_intervals": 0,
+        "maximum_consecutive_fast_steps": 0,
+        "fastest_inflight_step_s": 0.01678261801134795,
+        "deadline_debt_first_inflight_s": 0.00018750649178400636,
+        "debt_after_observation_render_s": 0.07053505344083533,
+        "observation_render_s": 0.079715783,
+        "observation_to_last_inflight_sim_s": 0.2166666779667139,
+        "window_definition": "unchanged first/last saved state within actual send/receipt; not full RTT quotient",
+        "measured_no_sleep_steps": 0,
+        "maximum_consecutive_no_sleep_steps": 0,
+        "measured_burst_steps": 0
+      },
+      {
+        "chunk_id": "chunk_001",
+        "observation_state_id": 75,
+        "observation_sim_s": 1.2833334002643824,
+        "request_host_s": 439907.26938476,
+        "receipt_host_s": 439907.492789475,
+        "client_RTT_s": 0.223404715,
+        "first_inflight_state": 77,
+        "last_inflight_state": 89,
+        "inflight_intervals": 12,
+        "request_local_RTF": 0.990997336881889,
+        "fast_intervals": 0,
+        "maximum_consecutive_fast_steps": 0,
+        "fastest_inflight_step_s": 0.016794249997474253,
+        "deadline_debt_first_inflight_s": 0.0001669874764047563,
+        "debt_after_observation_render_s": 0.0835705294739455,
+        "observation_render_s": 0.081975998,
+        "observation_to_last_inflight_sim_s": 0.23333334550261497,
+        "window_definition": "unchanged first/last saved state within actual send/receipt; not full RTT quotient",
+        "measured_no_sleep_steps": 0,
+        "maximum_consecutive_no_sleep_steps": 0,
+        "measured_burst_steps": 0
+      },
+      {
+        "chunk_id": "chunk_002",
+        "observation_state_id": 105,
+        "observation_sim_s": 1.7833334263414145,
+        "request_host_s": 439907.921959303,
+        "receipt_host_s": 439908.150212949,
+        "client_RTT_s": 0.228253646,
+        "first_inflight_state": 107,
+        "last_inflight_state": 119,
+        "inflight_intervals": 12,
+        "request_local_RTF": 0.9907181720919116,
+        "fast_intervals": 0,
+        "maximum_consecutive_fast_steps": 0,
+        "fastest_inflight_step_s": 0.016794700000900775,
+        "deadline_debt_first_inflight_s": 0.00025150744477286935,
+        "debt_after_observation_render_s": 0.0733326764893718,
+        "observation_render_s": 0.081026768,
+        "observation_to_last_inflight_sim_s": 0.23333334550261497,
+        "window_definition": "unchanged first/last saved state within actual send/receipt; not full RTT quotient",
+        "measured_no_sleep_steps": 0,
+        "maximum_consecutive_no_sleep_steps": 0,
+        "measured_burst_steps": 0
+      }
+    ],
+    "buffered_scheduler_records": 121,
+    "exact_one_step_per_completed_outer_loop": true,
+    "wall_rate_is_not_forced_to_simulation_rate": true,
+    "capture_phase_audit": {
+      "valid": true,
+      "expected_capture_ticks": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        75,
+        90,
+        105
+      ],
+      "capture_ticks": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        75,
+        90,
+        105
+      ],
+      "exact_capture_state_and_time": true,
+      "before_capture_terminal_exemptions": [
+        {
+          "state_id": 120,
+          "terminal_results": [
+            {
+              "type": "result",
+              "kind": "prediction",
+              "status": "SCENE_INVALID",
+              "chunk_id": "chunk_002"
+            }
+          ]
+        }
+      ],
+      "rule": "Scheduled capture required only when the loop reaches capture phase; final in-flight terminal zero-step abort before capture is exempt."
+    }
+  },
+  "historical_classification_unchanged": "TECHNICAL_EXECUTION_BLOCKED",
+  "historical_validation_sha256": "5a0f53b7fe5c032d45bcd936959c9ab2ac1576c8f81e008d2850468c7c3679e3",
+  "inputs": {
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/long_continuous_obstacle_reveal_source_01/primary_20261007/episodes/EPISODE_00/scheduler.jsonl": "bae04c07cb262617216cd6ba06483d2fb219ad042d5676c71ff860b67a4a5d5e",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/long_continuous_obstacle_reveal_source_01/primary_20261007/episodes/EPISODE_00/capture.jsonl": "5099c1f5b4b29f274966525812cd791d1a5dfebf5baf5d88590c54cb97284ac6",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/long_continuous_obstacle_reveal_source_01/primary_20261007/episodes/EPISODE_00/metadata.json": "18480d56dba3e6023dfd5a1da16589be9da0087b94badf9ca482220576f8ce03",
+    "/home/gpuadmin/Workspace/se-3-reconciliation/data/long_continuous_obstacle_reveal_source_01/primary_20261007/episodes/EPISODE_00/execution.csv": "5974c10a71745f7f0bdf088f6b6c4fbd3d16d85ba1e0dbac690f501895a9836f"
+  },
+  "explanation": "The previous technical classification included an audit-definition limitation. Original result and frozen validator are unchanged. This saved-only audit does not increase its two-chunk applied prefix.",
+  "new_LightNav_MPC_Isaac_optimizer_calls": 0
+}

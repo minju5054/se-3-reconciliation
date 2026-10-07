@@ -7016,3 +7016,16 @@ git diff --cached --check
   Shutdown observer PermissionError was caught by the frozen handler; exit0 and
   actual bundled-library mappings preserved. No science/protocol tuning; the
   only post-freeze code addition is the saved-only terminal audit diagnosis.
+
+## 2026-10-07 — SUCCESSIVE_NATIVE_SOURCE_ACQUISITION_02 audit correction (before science)
+
+- Starting HEAD e39d465762e0680d0c806f58079127b313312855, fetched origin/main equal.
+- Added isolated saved-only capture-phase audit. Only a final, zero-step loop
+  receiving an in-flight unsafe/STOP terminal response before capture is exempt;
+  normal cadence and exact rendered state/simulation timestamps remain checked.
+- Saved LONG_SOURCE_01 corrected scheduler passes: its terminal state120 is exempt,
+  captures0..105 are complete. Its original TECHNICAL_EXECUTION_BLOCKED result,
+  frozen validator, two-chunk prefix and all raw files remain unchanged. The old
+  technical classification included this audit-definition limitation.
+- Synthetic cases A–E and historical LONG regression: 37 passed. No scientific calls.
+  Compileall and diff checks pass. Acquisition protocol preparation follows separately.
