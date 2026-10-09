@@ -1,0 +1,67 @@
+experiment: S3_ISAAC_RELATIVE_FACTOR_ABLATION_01
+starting_sha: dc400b15f32b38251a14d5226e225ea0e6cbb84d
+historical_result: results/b_to_entry_boundary_row_ablation_04/result_summary.json
+historical_result_sha256: ed1309b6da2532b51dcdc4b57da9cf0ff1fa228e5a1ab54a5e026c5218405ee7
+historical_result_commit: 4e26e547cbda3cbfee8dc842a40091388cde7543
+source_id: episode_008_repeat_01/handoff_023
+source_label: S3
+order: [RAW, B_ENTRY, FULL_GRAPH, GRAPH_NO_R]
+checks_only:
+  entry_arc_m: 0.46193137914572885
+  entry_progress: 0.3662231723212672
+  entry_segment: 2
+  entry_alpha: 0.9725845948085713
+  B_tick: 1804
+  first_submit_tick: 1806
+  integration_steps: 180
+  primary_intervals: 54
+  cart_present: false
+  effective_speed_mps: 0.8
+relative_factor: {FULL_GRAPH: true, GRAPH_NO_R: false}
+normalization: {translation_m: 0.10, yaw_deg: 10.0, direction_deg: 15.0}
+weights: {T: 1.0, R: 1.0, A: 1.0}
+initialization: existing ProgressGraph.initial; bit-identical variants; fixed B/end
+solver:
+  max_iterations: 80
+  finite_difference_epsilon: 1.0e-6
+  initial_damping: 1.0e-3
+  damping_increase: 10.0
+  damping_decrease: 0.3
+  maximum_damping: 1.0e+12
+  gradient_tolerance: 1.0e-9
+  step_tolerance: 1.0e-9
+  cost_tolerance: 1.0e-12
+parity: {pose_atol: 1.0e-10, command_atol: 1.0e-10, selection_atol: 1.0e-12, rtol: 0.0}
+safety: {footprint_radius_m: 0.20, required_edge_clearance_m: 0.05, numerical_reserve_m: 1.0e-7, noncollapsed_edge_min_m: 1.0e-12}
+runtime:
+  startup_timeout_s: 300.0
+  wall_wait_timeout_s: 30.0
+  clock: unchanged prime_clock in batches of at most 1000, frozen maximum B_tick+2 zero-motion steps
+  actual_Isaac: World.reset per method, double USD logical agent write/readback, World.step(render=False)
+  controller: unchanged osa03_common_b_mpc_worker; no speed intervention
+metrics:
+  target: entire immutable original FRESH
+  primary_horizon_s: 0.30
+  secondary_horizon_s: 0.90
+  full_horizon: authenticated 180 intervals
+  turn50: unchanged successive_handoff_severity01.turn50; two consecutive saved samples; epsilon1e-12; null censoring
+  classification_latency_horizon_s: 0.30
+  scalar_equality_atol: 1.0e-9
+  observable_latency_difference: integration_dt_s - 1e-9
+  AUC: unchanged forward_projection and successive_isaac_four_method01.auc; exact horizon interpolation
+  no_deformation_threshold: report magnitudes; category7 requires conflicting yaw or safety when prior categories do not apply
+budget:
+  FULL_GRAPH_solves: 1
+  GRAPH_NO_R_solves: 1
+  RAW_rollouts: 1
+  B_ENTRY_rollouts: 1
+  FULL_GRAPH_rollouts: 1
+  GRAPH_NO_R_rollouts: 1
+  SimulationApp_launches: 1
+  maximum_MPC_solves: 120
+  LightNav: 0
+  RGB_model_requests: 0
+  new_source_acquisition: 0
+  Hermite_execution: 0
+  retries: 0
+figures: [s3_isaac_execution_comparison.png, s3_response_and_deformation.png]

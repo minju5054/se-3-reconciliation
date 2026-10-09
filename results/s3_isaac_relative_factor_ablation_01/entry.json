@@ -1,0 +1,153 @@
+{
+  "correspondence": {
+    "arc_m": 0.46193137914572885,
+    "normalized_progress": 0.3662231723212672,
+    "segment": 2,
+    "alpha": 0.9725845948085713,
+    "nearest_raw_row_diagnostic": 3,
+    "target_world": [
+      17.89727685765006,
+      31.99213199452277,
+      -0.3242954780329643
+    ],
+    "position_gap_m": 0.1846831899774071,
+    "yaw_gap_rad": 0.38568503140299204,
+    "tangent_gap_rad": 0.3286305258367927,
+    "remaining_arc_m": 0.7994070998418927,
+    "total_arc_m": 1.2613384789876216,
+    "pose_score": 5.58113076529024
+  },
+  "row_count": 8,
+  "original_count": 10,
+  "raw_prefix_rows_removed": 3,
+  "first_raw_identity_presented": 3,
+  "row_original_identities": [
+    null,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "row_fractional_original_progress": [
+    2.972584594808571,
+    3.0,
+    4.0,
+    5.0,
+    6.0,
+    7.0,
+    8.0,
+    9.0
+  ],
+  "row_original_arc_m": [
+    0.46193137914572885,
+    0.4660374325348433,
+    0.622519580537602,
+    0.7818642073294231,
+    0.9532488186114729,
+    1.1154259774657123,
+    1.2137220556700457,
+    1.2613384789876216
+  ],
+  "remaining_original_arc_at_start_m": 0.7994070998418927,
+  "first_presented_original_arc_m": 0.46193137914572885,
+  "first_presented_fractional_original_row": 2.972584594808571,
+  "duplicate_handling": "continuous entry followed by unchanged original rows",
+  "original_downstream_world_and_local_rows_exact": true,
+  "frame": "world metres/yaw radians; entry local = A^-1 E; original raw suffix retained, no B re-anchor",
+  "historical_C3": {
+    "arc_m": 0.46193137914572885,
+    "normalized_progress": 0.3662231723212672,
+    "segment": 2,
+    "alpha": 0.9725845948085713,
+    "nearest_raw_row_diagnostic": 3,
+    "target_world": [
+      17.89727685765006,
+      31.99213199452277,
+      -0.3242954780329643
+    ],
+    "position_gap_m": 0.1846831899774071,
+    "yaw_gap_rad": 0.38568503140299204,
+    "tangent_gap_rad": 0.3286305258367927,
+    "remaining_arc_m": 0.7994070998418927,
+    "total_arc_m": 1.2613384789876216,
+    "pose_score": 5.58113076529024,
+    "safety": {
+      "label": "hypothetical straight connector diagnostic only",
+      "connector": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 0.21148985508009666,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.05,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 2,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+      },
+      "suffix": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 0.21148985508009666,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.05,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 8,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+      },
+      "connector_geometric_threshold_met": true,
+      "selection_rejected": false,
+      "suffix_is_executed": false
+    }
+  },
+  "historical_C3_exact": true,
+  "B_connector_is_not_reference": true,
+  "safety": {
+    "minimum_clearance_m": 0.21148985508009666,
+    "native_clearance_m": 0.21148985508009666,
+    "union_minus_parts_m": 0.0,
+    "limiting_geometry": "Hospital",
+    "cart_present": false,
+    "first_minimum_segment": 0,
+    "minimum_path_xy": [
+      17.89727685765006,
+      31.99213199452277
+    ],
+    "nearest_obstacle_xy": [
+      17.85613065,
+      32.40155951
+    ],
+    "per_segment_clearance_m": [
+      0.21148985508009666,
+      0.21340746257456594,
+      0.23347732000244142,
+      0.25828624488941665,
+      0.31008545809320814,
+      0.39044472867304786,
+      0.4487102555182106
+    ],
+    "workspace_known": true,
+    "clearance_valid": true,
+    "required_edge_clearance_m": 0.05,
+    "footprint_radius_m": 0.2,
+    "numerical_tolerance_m": 1e-07,
+    "query": "full union direct GEOS; no cart in this source; no B connector"
+  },
+  "eligibility": {
+    "N_at_least_two": true,
+    "positive_remaining_arc": true,
+    "well_defined_C3": true,
+    "geometry_valid": true
+  }
+}

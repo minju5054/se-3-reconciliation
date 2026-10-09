@@ -1,0 +1,203 @@
+{
+  "valid": true,
+  "source_id": "episode_008_repeat_01/handoff_023",
+  "historical_result_commit": "4e26e547cbda3cbfee8dc842a40091388cde7543",
+  "historical_chain": {
+    "spatial_entry_suffix_execution_01": {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/spatial_entry_suffix_execution_01/result_summary.json",
+      "sha256": "e86083eb2f812e84c898885f2039b6520d336dd802c391dcaf29342cf17aa948",
+      "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/spatial_entry_suffix_execution_01/primary_20261002T000000Z",
+      "scientific_freeze_sha": "124361eb61a716bca038a2fd4ce15818b0986f3e",
+      "result_hashes_sha256": "e3a4131d60a4cc9f4bf1c9862e37ef71cdb47ef302dcfd9b22a81ba4a2196d19"
+    },
+    "b_to_entry_bridge_01": {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/b_to_entry_bridge_01/result_summary.json",
+      "sha256": "18e79982aca83fae2035d7496883fe40508dfe346d2830285697baf801efdd6e",
+      "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_bridge_01/primary_20261002T020000Z",
+      "scientific_freeze_sha": "274c44b550c4e37164d963c30d7927030b637e54",
+      "result_hashes_sha256": "4e9e7a6188203a26763f0531f721a8faddef0ef08bb759a3bd1ef3cb8ab52a58"
+    },
+    "b_to_entry_vector_bridge_execution_03": {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/b_to_entry_vector_bridge_execution_03/result_summary.json",
+      "sha256": "7c70358be5eb509ee3698e70bd4598b65863a53cb1ca9f6f3d96d63034fdaeed",
+      "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_vector_bridge_execution_03/primary_20261003T100000Z",
+      "scientific_freeze_sha": "7bf24d60b87774859ffef3f6d56f524a4fb7ad15",
+      "result_hashes_sha256": "6ba15dc23c45c2aad0150cdfcc65b3a83ab0cfac2f678ca248e407c7db14ced4"
+    },
+    "b_to_entry_boundary_row_ablation_04": {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/b_to_entry_boundary_row_ablation_04/result_summary.json",
+      "sha256": "ed1309b6da2532b51dcdc4b57da9cf0ff1fa228e5a1ab54a5e026c5218405ee7",
+      "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_boundary_row_ablation_04/primary_20261004T000000Z",
+      "scientific_freeze_sha": "94f1a70fa5721f15bca4287dbda2ff0b3634f659",
+      "result_hashes_sha256": "b00881a784e28b5bd499d922fe002edbe646b0a75a70c19b055a9bd2a42dc6ac"
+    }
+  },
+  "source_manifest": {
+    "kind": "genuine",
+    "source": "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z",
+    "source_id": "episode_008_repeat_01/handoff_023",
+    "environment_export": "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment",
+    "mpc": {
+      "protocol": "official_mpc_jsonl_v1",
+      "lightnav_checkout": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo",
+      "lightnav_sha": "c6f40e3220edbf7011e4f17eaf2c865416737d4d",
+      "external_git_status": "",
+      "mpc_source": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py",
+      "mpc_source_sha256": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+      "python_executable": "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/.venv/bin/python",
+      "python_version": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+      "casadi_version": "3.7.2",
+      "numpy_version": "2.4.6",
+      "official_settings": {
+        "CONTROL_RATE_HZ": 10.0,
+        "HORIZON": 5,
+        "MPC_DT_S": 0.1,
+        "WAYPOINT_DT_S": 0.1,
+        "TRACK_V_MAX": 1.5,
+        "OBJNAV_V_MAX": 0.8,
+        "W_MAX": 3.0,
+        "A_MAX_V": 2.0,
+        "A_MAX_W": 5.0,
+        "Q_WEIGHTS": [
+          10.0,
+          10.0,
+          1.0
+        ],
+        "R_WEIGHTS": [
+          0.1,
+          0.1
+        ],
+        "ODOM_MATCH_MAX_GAP_S": 0.3,
+        "ODOM_TIMEOUT_S": 0.5
+      },
+      "effective_linear_velocity_limit_m_s": 0.8,
+      "intrinsic_model_waypoint_dt_s": null,
+      "controller_reference_timing_convention": "pose-aligned next-row horizon at MPC_DT_S; WAYPOINT_DT_S is a declared upstream constant, not model waypoint timing",
+      "world_frame": "metres, +Z up; yaw radians CCW",
+      "local_frame": "+x forward, +y left, +z up; yaw radians CCW",
+      "projection": "T_W_waypoint = T_W_agent_at_capture * T_agent_raw_cumulative_waypoint",
+      "external_source_modified": false,
+      "tracker_instrumentation": "subclass timestamps super()._solve; no objective, gain, limit, selection, or solve changes",
+      "robot_backend_imported": false
+    },
+    "FRESH_sha256": "ba52161d8e7ba1f0619e11cd0b93da29d201e70074d76160d374fe1f6c87517f",
+    "FRESH_world_sha256": "9b5c4fe575455d31eeba5942160c944121c14e3b5b85a0f80f33a2626095138b",
+    "OLD_sha256": "cc1dba6e428f65088e26e92b81a77cb2b3e738581fce40400d2157789397de29",
+    "hashes": {
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/episodes/episode_008_repeat_01/handoffs/handoff_023/context.json": "7ad31d1a334280c83dda3269a61449bb018f5bad3e0c0440e12c157cdc7d609b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/episodes/episode_008_repeat_01/handoffs/handoff_023/metrics.json": "a8534c04f95508c5457a081a560bd28c9fc00cb7f21a955be6d9a2d44bf9fd8f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/episodes/episode_008_repeat_01/chunks/chunk_023/raw_local.npy": "cc1dba6e428f65088e26e92b81a77cb2b3e738581fce40400d2157789397de29",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/episodes/episode_008_repeat_01/chunks/chunk_023/world.npy": "d1c05c0b164e40f5d5dc27b18776acffe5f72a7f3abde89c37412d876085c5cf",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/episodes/episode_008_repeat_01/chunks/chunk_024/raw_local.npy": "ba52161d8e7ba1f0619e11cd0b93da29d201e70074d76160d374fe1f6c87517f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/episodes/episode_008_repeat_01/chunks/chunk_024/world.npy": "9b5c4fe575455d31eeba5942160c944121c14e3b5b85a0f80f33a2626095138b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/episodes/episode_008_repeat_01/execution.csv": "1d310acd8c2f0ea0f491f82cf4496bdfed048b5f92d06a2fef55403b390c094d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/episodes/episode_008_repeat_01/commands.csv": "9fcc2fbd284e9e2a2dc126bb34f8b41b142d3ba2d7682e2b55c5a972c17bf2e0",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/episodes/episode_008_repeat_01/controller/events.jsonl": "9e470b84d3f610a47307306ef5e633c2f369be34394c87b2106d061bc49b6c53",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/episodes/episode_008_repeat_01/metadata.json": "432f769e1f38723c570883460b9e4f3ccdb7958ad5b367ac76ed5342ad47e99b",
+      "/home/gpuadmin/Workspace/external/LightNav-0-official-demo/mujoco_demo/vln_mujoco/mpc.py": "2de99fdf75b60c6836a645ae995c686417c93a5ccbc7df6d8b984d20c1d83ce1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/technical_retry.json": "fbdf78940e1cf41830f2dee3b483d6d3eaf9bc5f736aa5fc38029c02a5f17c45",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/gate_catalog.json": "fab89b8d868e4958bf3edf11b8ce023f39143afa1b5218790b7518fae13248ce",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/doorway_gates.json": "b6a570dba9fc4b11051a1c1a23f9af323d5c0a27167055964da98328f746d03b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/scene_provenance.json": "d01be9835856f5c08b651c5c77efd1fae1763e440f284da2a3138df249bd5e15",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/validation.json": "9f8bdc7cb9316bf7a7a1b0c00d8e3c9b48b9dee4c81fd3b3f1735671c80afa2c",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/corner_gate_candidate.json": "8517d37502e6b45e27aa6c1269538ba62f8cea4d45f1cb5ac0df0743f0633b97",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/evidence/corridor_check_points.json": "9e9212b7f75a5c681f5dc92434fb70a0b6eb4b058a37d0b5a2d032cb203ee715",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/evidence/environment_validation_map.png": "6016252db1f99077d67df6f53341fb3549552f75bcf8e6dff97abcc5f26ab6c9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/evidence/hospital_corridor_checkpoints.png": "22457b20ec7ce8b36f51c8b3cb35b50408a404e212083d587944ab36c75cfcc7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/evidence/corner_check_points.json": "2b617c19aac5fa5c04f7eb95b567a4a63274b95127939620844d1cd50faebfda",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/evidence/actual_corner_passage_transform_and_layer_validation.json": "4df2000c249411557691acfd4512aac69ac80ac6cc4d1dcfaa9b4d432a2af7e2",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/evidence/actual_corner_passage.json": "c89fd516f34b495d7378708ff2b406562724a3eeb402351563bc0370bfcc6817",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/evidence/check_points.json": "ef3328c1e740e5b81aaf7c2a0f82d32b6b8fdf80a465172d7b54bd55a7ccb666",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/evidence/hospital_scene_context.png": "f1c6c58b280597e5aed640b4cffa1c45b28c772a2d6f5189ab4d79448b9fa65e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/evidence/transform_and_layer_validation.json": "462527805a8437c8e1432992f623b759c2595eca12c4442ccd12d8fc15d7273f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/evidence/hospital_corridor_checkpoints.json": "9507e3cceaebd30e998905f2842ae6cf3f8a0f4073e9ccb8c883862a069d1e7b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/evidence/actual_corner_passage.png": "6928fc9cfec678f8343b86ac5fc57029cadbb6cc72822aabba1aff5f399c2e0d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/evidence/scene_context.json": "a20f572dc0b904e7a13c42b605305537f868146f3b1c6bcb561d6a92d2e87fb2",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/geometry/world_triangles.npz": "712f24f751898ecea299502e7593d502708c44380fde831077519d91d2a56387",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/geometry/render_geometry.json": "6024f1c068bc4d1f2380dd4fb21393e5692b886a818bdefed9cff4879e1c2c41",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/geometry/meshes.json": "1ce42fb0d7a9e4f3079c39e8f1c7024fe9b0293bc8b919d7db8154ff4b6ad8ee",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/geometry/projected/unknown_interiors.wkb": "fc8ca284e6f63fec60c844d355f86a11f1529ac0ca1b00db654c1d4d442a668f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/geometry/projected/projection.json": "dac93bd2b0b494262c85bce2859271a3053e39d0110dc3e399b54f665a6ca91c",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/geometry/projected/obstacle_parts.json": "5302d83517c26d1f2bc8680ef68da5be03a50fe5163ed7cc81abbcb02b439e91",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/geometry/projected/distance_grid.npz": "4bdeafca48a16e7d242537aeaf9034bedff556129d7ad14c895fdaa736d10419",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/geometry/projected/workspace.wkb": "aec8475028f5a0d04f45564a7cb591d4447450319255c56d131c7f0077361a85",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/geometry/projected/obstacles.wkb": "b282b44efb31989acc3fe2763510a2194d176317d9437b3a160e3321fc9127e6",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/genuine_source_moving_mismatch/scan_20260922T073107Z/source.json": "d21ec75b9a0e013de9e1b4e55fe3d0e9cc6d4f6cac8415ccfe1136ceab0e0715",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/genuine_source_moving_mismatch/scan_20260922T073107Z/ledger.json": "cd60ba9cfb212a36ba8ba1a7f9bd50245f482377a9ab369701fcc2a2bbb61163",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/genuine_source_moving_mismatch/scan_20260922T073107Z/validation.json": "f244db2961d8a634dee411af674a01bac3663cd234fd42f906831cd8ce1471e9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/genuine_source_moving_mismatch/scan_20260922T073107Z/summary.json": "448459f6d45b68db358c2921df2165117744cfd0bb59a57c129f9bf36a33a769",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/genuine_source_moving_mismatch/scan_20260922T073107Z/protocol.yaml": "f7bc853c0f9067a7c377eae3ade7f0e8f755b402f99f0e2019e4f16f35d9edff",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/config_snapshot.yaml": "adc70b2f8d68b6228cda69b0a44e4de0c1753252601d6df50ef17e3fbf95e049"
+    }
+  },
+  "source_manifest_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_boundary_row_ablation_04/primary_20261004T000000Z/sources/S3/source_manifest.json",
+  "source_manifest_sha256": "8c81ff8eb16426545f99c0297812165f8b4d19e8a5b1927d6bcbfd61c5136de7",
+  "historical_native_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/relative_factor_multisource_01/primary_20260930T033000Z/sources/episode_008_repeat_01__handoff_023/methods/M0_NATIVE",
+  "historical_native_rollout_sha256": "f853c2e8124ddb844fdac3067d0281d63e0274dfb7923bb3814a45e77f0a2567",
+  "historical_folder": "/home/gpuadmin/Workspace/se-3-reconciliation/data/b_to_entry_boundary_row_ablation_04/primary_20261004T000000Z/sources/S3",
+  "source_config_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_online_handoffs_v1/primary_20260915T091900Z/config_snapshot.yaml",
+  "source_config_sha256": "adc70b2f8d68b6228cda69b0a44e4de0c1753252601d6df50ef17e3fbf95e049",
+  "scene_provenance_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/robotless_gp_se2_01/primary_20260918T054000Z/environment/scene_provenance.json",
+  "scene_provenance_sha256": "d01be9835856f5c08b651c5c77efd1fae1763e440f284da2a3138df249bd5e15",
+  "P": [
+    17.824839307518847,
+    31.823914057090693,
+    -0.7146940940889608
+  ],
+  "A": [
+    17.46420298487384,
+    32.23488093333458,
+    -0.9543308190733302
+  ],
+  "B": [
+    17.828542610626915,
+    31.820715881084176,
+    -0.7099805094359564
+  ],
+  "clocks": {
+    "t_obs": {
+      "sim_time_s": 29.28333486057818,
+      "episode_time_s": 29.250001525506377,
+      "host_monotonic_ns": 423496255699170,
+      "host_monotonic_s": 423496.25569917,
+      "host_utc": "2026-09-15T09:27:00.650013+00:00"
+    },
+    "t_request": {
+      "host_monotonic_ns": 423496313725055,
+      "host_monotonic_s": 423496.313725055,
+      "host_utc": "2026-09-15T09:27:00.708034Z"
+    },
+    "t_ready_host": {
+      "host_monotonic_ns": 423496966555731,
+      "host_monotonic_s": 423496.966555731,
+      "host_utc": "2026-09-15T09:27:01.360856Z"
+    },
+    "t_ready_seen_sim": {
+      "sim_time_s": 30.016668232157826,
+      "episode_time_s": 29.983334897086024,
+      "host_monotonic_s": 423496.989027168,
+      "host_monotonic_ns": 423496989027168,
+      "host_utc": "2026-09-15T09:27:01.383341+00:00"
+    },
+    "t_install": {
+      "host_monotonic_ns": 423496991826556,
+      "host_monotonic_s": 423496.991826556,
+      "host_utc": "2026-09-15T09:27:01.386141+00:00",
+      "sim_time_s": 30.016668232157826,
+      "episode_time_s": 29.983334897086024
+    },
+    "t_switch": {
+      "host_monotonic_ns": 423497072383962,
+      "host_monotonic_s": 423497.072383962,
+      "host_utc": "2026-09-15T09:27:01.466698+00:00",
+      "sim_time_s": 30.10000156983733,
+      "episode_time_s": 30.06666823476553
+    }
+  },
+  "C3_exact": true,
+  "B_ENTRY_exact": true,
+  "raw_A_anchored_bit_exact": true,
+  "cart_present": false,
+  "historical_native_installation_roundoff_max": 2.7755575615628914e-17,
+  "zero_scientific_calls": true
+}

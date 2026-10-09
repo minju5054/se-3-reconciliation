@@ -7252,3 +7252,37 @@ git diff --cached --check
 - Isaac/MPC/Graph/Hermite-for-execution/B_ENTRY/LightNav/RGB/model/acquisition/retry0.
   No scientific protocol deviation. No future four-method run or relative-factor
   modification. README records geometry screening only; unrelated user edits kept.
+
+## 2026-10-09 — S3_ISAAC_RELATIVE_FACTOR_ABLATION_01 freeze
+
+- Fetched origin/main; starting HEAD dc400b15f32b38251a14d5226e225ea0e6cbb84d
+  equals remote main. Preserve unrelated stage0 config edits/GPU plotting script.
+- Authenticate exact historical S3 episode_008_repeat_01/handoff_023 through
+  C3 Entry-Suffix / Bridge / Vector / Boundary chain and official MPC hash.
+  Saved-only historical boundary validator passes with its full upstream chain.
+- C3 exactly reproduced: arc .46193137914572885m, fraction .3662231723212672,
+  segment2/beta .9725845948085713. Preserve original A-anchored FRESH and separate
+  historical Native installation (maximum pre-existing yaw roundoff2.78e-17rad).
+- Reuse source speed .8m/s, generation326/version24, exact B/P/A/u_minus/u_B_plus/
+  previous_control and original no-added-cart Hospital. Copy180-interval/30-pair
+  absolute schedule; no regenerated schedule or recent .4m/s intervention.
+- Current ProgressGraph T/R/A remains untouched. Experiment-local subclass removes
+  R from NO_R optimization only, keeps diagnostic R. Eight-node suffix, six
+  editable internal poses, fixed B/end, identical initial .npy hashes, same LM.
+- Zero-solve official installation preflight passed for RAW/B_ENTRY/two graph
+  initials. Tuple/list provenance comparison was fixed before freeze; resume only
+  the unfinished preflight stage. No scientific retry. Historical validator's
+  default exclusive-output guard prevented an accidental rewrite; use check-only.
+- Freeze actual-Isaac reset/clock restoration, source-specific guard and RAW-first
+  historical parity. Existing prime_clock batches1000+806 restore exact S3 clock;
+  no model reads, wheel dynamics or host-time simulation advancement.
+- Primary original-FRESH .30position/yawAUC and exact severity-audit T_turn50;
+  secondary .90/full metrics, endpoint dwell, control/safety/deformation. Primary
+  latency classification .30s; incomplete windows unordered; no post-hoc threshold.
+- Focused25 tests passed; synthetic callbacks/replays/plots are not evidence.
+  Freeze before exactly2 real graph solves and at most4 actual-Isaac rollouts /
+  one SimulationApp /120 MPC solves. RAW gate stops later methods on mismatch.
+  Pre-freeze scientific Graph/MPC/Isaac/LightNav/RGB/Hermite/acquisition calls0.
+- Final pre-freeze regression1302 passed in416.98s; focused25 passed in11.45s.
+  Historical saved-only validator/compileall/diff checks pass. Final synthetic PNG
+  layout review precedes freeze; no result-driven code change.
