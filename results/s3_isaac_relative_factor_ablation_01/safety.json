@@ -1,0 +1,34 @@
+{
+  "RAW": {
+    "reference_status": "REFERENCE_SAFE",
+    "reference_clearance_m": 0.1313492849344136,
+    "executed": false,
+    "execution_clearance_m": null,
+    "guard_abort": null,
+    "physical_overlap": null
+  },
+  "B_ENTRY": {
+    "reference_status": "REFERENCE_SAFE",
+    "reference_clearance_m": 0.21148985508009666,
+    "executed": false,
+    "execution_clearance_m": null,
+    "guard_abort": null,
+    "physical_overlap": null
+  },
+  "FULL_GRAPH": {
+    "reference_status": "GRAPH_PLANNING_FAILED",
+    "reference_clearance_m": null,
+    "executed": false,
+    "execution_clearance_m": null,
+    "guard_abort": null,
+    "physical_overlap": null
+  },
+  "GRAPH_NO_R": {
+    "reference_status": "GRAPH_PLANNING_FAILED",
+    "reference_clearance_m": null,
+    "executed": false,
+    "execution_clearance_m": null,
+    "guard_abort": null,
+    "physical_overlap": null
+  }
+}

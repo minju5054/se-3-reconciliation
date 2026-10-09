@@ -1,0 +1,173 @@
+{
+  "RAW": {
+    "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/s3_isaac_relative_factor_ablation_01/primary_20261009/references/RAW_world.npy",
+    "world_sha256": "9b5c4fe575455d31eeba5942160c944121c14e3b5b85a0f80f33a2626095138b",
+    "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/s3_isaac_relative_factor_ablation_01/primary_20261009/references/RAW_local.npy",
+    "local_sha256": "ba52161d8e7ba1f0619e11cd0b93da29d201e70074d76160d374fe1f6c87517f",
+    "labels": [
+      "F_0",
+      "F_1",
+      "F_2",
+      "F_3",
+      "F_4",
+      "F_5",
+      "F_6",
+      "F_7",
+      "F_8",
+      "F_9"
+    ],
+    "safety": {
+      "minimum_clearance_m": 0.1313492849344136,
+      "native_clearance_m": 0.1313492849344136,
+      "union_minus_parts_m": 0.0,
+      "limiting_geometry": "Hospital",
+      "cart_present": false,
+      "first_minimum_segment": 1,
+      "minimum_path_xy": [
+        17.64411592170996,
+        32.111138424877936
+      ],
+      "nearest_obstacle_xy": [
+        17.80364016,
+        32.40155944
+      ],
+      "per_segment_clearance_m": [
+        0.13142389070542387,
+        0.1313492849344136,
+        0.15763803678500848,
+        0.21340746257456594,
+        0.23347732000244142,
+        0.25828624488941665,
+        0.31008545809320814,
+        0.39044472867304786,
+        0.4487102555182106
+      ],
+      "workspace_known": true,
+      "clearance_valid": true,
+      "required_edge_clearance_m": 0.05,
+      "footprint_radius_m": 0.2,
+      "numerical_tolerance_m": 1e-07,
+      "query": "full union direct GEOS; no cart in this source; no B connector"
+    },
+    "installed_roundtrip_safety": {
+      "minimum_clearance_m": 0.1313492849344136,
+      "native_clearance_m": 0.1313492849344136,
+      "union_minus_parts_m": 0.0,
+      "limiting_geometry": "Hospital",
+      "cart_present": false,
+      "first_minimum_segment": 1,
+      "minimum_path_xy": [
+        17.64411592170996,
+        32.111138424877936
+      ],
+      "nearest_obstacle_xy": [
+        17.80364016,
+        32.40155944
+      ],
+      "per_segment_clearance_m": [
+        0.13142389070542387,
+        0.1313492849344136,
+        0.15763803678500848,
+        0.21340746257456594,
+        0.23347732000244142,
+        0.25828624488941665,
+        0.31008545809320814,
+        0.39044472867304786,
+        0.4487102555182106
+      ],
+      "workspace_known": true,
+      "clearance_valid": true,
+      "required_edge_clearance_m": 0.05,
+      "footprint_radius_m": 0.2,
+      "numerical_tolerance_m": 1e-07,
+      "query": "full union direct GEOS; no cart in this source; no B connector"
+    },
+    "installed_roundtrip_max_error": 0.0,
+    "valid": true,
+    "actual_checked_polyline": "all supplied rows and edges; includes B when supplied; no implicit connector"
+  },
+  "B_ENTRY": {
+    "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/s3_isaac_relative_factor_ablation_01/primary_20261009/references/B_ENTRY_world.npy",
+    "world_sha256": "2f4605a65239153e6bf21acfb893a58ae8e04f63e242ffaf59f9b4fd11b7c18a",
+    "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/s3_isaac_relative_factor_ablation_01/primary_20261009/references/B_ENTRY_local.npy",
+    "local_sha256": "ddfcbb4979a19987142a2af27028568edaf00866d3ca3fb6625cc7e5215148bf",
+    "labels": [
+      "B",
+      "E*",
+      "F_3",
+      "F_4",
+      "F_5",
+      "F_6",
+      "F_7",
+      "F_8",
+      "F_9"
+    ],
+    "safety": {
+      "minimum_clearance_m": 0.21148985508009666,
+      "native_clearance_m": 0.21148985508009666,
+      "union_minus_parts_m": 0.0,
+      "limiting_geometry": "Hospital",
+      "cart_present": false,
+      "first_minimum_segment": 0,
+      "minimum_path_xy": [
+        17.89727685765006,
+        31.99213199452277
+      ],
+      "nearest_obstacle_xy": [
+        17.85613065,
+        32.40155951
+      ],
+      "per_segment_clearance_m": [
+        0.21148985508009666,
+        0.21148985508009666,
+        0.21340746257456594,
+        0.23347732000244142,
+        0.25828624488941665,
+        0.31008545809320814,
+        0.39044472867304786,
+        0.4487102555182106
+      ],
+      "workspace_known": true,
+      "clearance_valid": true,
+      "required_edge_clearance_m": 0.05,
+      "footprint_radius_m": 0.2,
+      "numerical_tolerance_m": 1e-07,
+      "query": "full union direct GEOS; no cart in this source; no B connector"
+    },
+    "installed_roundtrip_safety": {
+      "minimum_clearance_m": 0.21148985508008777,
+      "native_clearance_m": 0.21148985508008777,
+      "union_minus_parts_m": 0.0,
+      "limiting_geometry": "Hospital",
+      "cart_present": false,
+      "first_minimum_segment": 0,
+      "minimum_path_xy": [
+        17.89727685765004,
+        31.992131994522776
+      ],
+      "nearest_obstacle_xy": [
+        17.85613065,
+        32.40155951
+      ],
+      "per_segment_clearance_m": [
+        0.21148985508008777,
+        0.21148985508008777,
+        0.21340746257456594,
+        0.23347732000244142,
+        0.25828624488941665,
+        0.31008545809320814,
+        0.39044472867304786,
+        0.4487102555182106
+      ],
+      "workspace_known": true,
+      "clearance_valid": true,
+      "required_edge_clearance_m": 0.05,
+      "footprint_radius_m": 0.2,
+      "numerical_tolerance_m": 1e-07,
+      "query": "full union direct GEOS; no cart in this source; no B connector"
+    },
+    "installed_roundtrip_max_error": 1.7763568394002505e-14,
+    "valid": true,
+    "actual_checked_polyline": "all supplied rows and edges; includes B when supplied; no implicit connector"
+  }
+}

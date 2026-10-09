@@ -1,0 +1,204 @@
+{
+  "files": [
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/s3_isaac_relative_factor_ablation_01/figures/s3_isaac_execution_comparison.png",
+      "sha256": "5923806d2a7e95557c27f9201602e9711ab73a69a64cd4ba1b53210aa140c0a3"
+    },
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/s3_isaac_relative_factor_ablation_01/figures/s3_response_and_deformation.png",
+      "sha256": "df7c5166fb293d39c6c1bc1c5ce75d64b4c09da229cd502691fefccc87d584c8"
+    }
+  ],
+  "figure_count": 2,
+  "classification": "TECHNICAL_BLOCKED",
+  "metrics": {
+    "RAW": null,
+    "B_ENTRY": null,
+    "FULL_GRAPH": null,
+    "GRAPH_NO_R": null
+  },
+  "planning_deformation": {
+    "FULL_GRAPH": {
+      "per_node_translation_m": [
+        0.1846831899774071,
+        0.1847301851548936,
+        0.14753545697839246,
+        0.09854361058717231,
+        0.05450326544312529,
+        0.024743581287108553,
+        0.008803059836242494,
+        0.0
+      ],
+      "translation_RMS_m": 0.11367223761891448,
+      "translation_max_m": 0.1847301851548936,
+      "per_node_yaw_correction_rad": [
+        0.3856850314029918,
+        0.23973687859833293,
+        0.12988488884092586,
+        0.05902992033130072,
+        0.02336619070368684,
+        0.008996563419823023,
+        0.0029868698365747015,
+        0.0
+      ],
+      "yaw_RMS_rad": 0.16852936267336568,
+      "yaw_max_rad": 0.3856850314029918,
+      "endpoint_displacement_m": 0.0,
+      "endpoint_yaw_correction_rad": 0.0,
+      "first_edge_direction_rad": -0.7122885427755004,
+      "first_edge_length_m": 4.4627509175833774e-06,
+      "total_XY_arc_m": 0.8719928539993831,
+      "minimum_edge_length_m": 4.4627509175833774e-06,
+      "relative_distortion": {
+        "per_edge_log": [
+          [
+            -0.0040685005783873615,
+            0.0005479943063417591,
+            0.1459481528046589
+          ],
+          [
+            -0.0009687319234864113,
+            0.07468980194872026,
+            0.10985198975740705
+          ],
+          [
+            0.010578029253439451,
+            0.0686835081339376,
+            0.07085496850962514
+          ],
+          [
+            0.016609691135118003,
+            0.05107742106600965,
+            0.03566372962761388
+          ],
+          [
+            0.014753917463406591,
+            0.029752453505388035,
+            0.014369627283863819
+          ],
+          [
+            0.008913288971687023,
+            0.01412409364590473,
+            0.006009693583248321
+          ],
+          [
+            0.005179528829526135,
+            0.007261997501968315,
+            0.002986869836574701
+          ]
+        ],
+        "translation_RMS_m": 0.04593761167458904,
+        "translation_max_m": 0.07469608394473326,
+        "yaw_RMS_rad": 0.07550986229897143,
+        "yaw_max_rad": 0.1459481528046589,
+        "normalized_squared_residual": 2.7874243360796602,
+        "optimized": true,
+        "label": "optimized R cost"
+      },
+      "factor_costs": {
+        "T": 3.468742752757678e-08,
+        "R": 2.7874243360796602,
+        "A": 0.45314540124881175,
+        "total": 3.2405697720158995
+      }
+    },
+    "GRAPH_NO_R": {
+      "per_node_translation_m": [
+        0.1846831899774071,
+        0.1847305761957805,
+        3.552713678800501e-15,
+        3.552713678800501e-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "translation_RMS_m": 0.09235344230309997,
+      "translation_max_m": 0.1847305761957805,
+      "per_node_yaw_correction_rad": [
+        0.3856850314029918,
+        0.3732099610747599,
+        2.22101759206339e-09,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaw_RMS_rad": 0.18974938026702173,
+      "yaw_max_rad": 0.3856850314029918,
+      "endpoint_displacement_m": 0.0,
+      "endpoint_yaw_correction_rad": 0.0,
+      "first_edge_direction_rad": -0.7123365464486385,
+      "first_edge_length_m": 5.748821329220696e-06,
+      "total_XY_arc_m": 0.8981626503663361,
+      "minimum_edge_length_m": 5.748821329220696e-06,
+      "relative_distortion": {
+        "per_edge_log": [
+          [
+            -0.00409109416058861,
+            0.00027519950466016517,
+            0.012475070328231919
+          ],
+          [
+            0.007282814307418627,
+            0.2440694692346458,
+            0.37320995885374236
+          ],
+          [
+            2.118840222833694e-11,
+            3.532757046732017e-10,
+            2.22101759206339e-09
+          ],
+          [
+            6.071532165918825e-18,
+            0.0,
+            0.0
+          ],
+          [
+            1.2793585635328952e-17,
+            -8.673617379884035e-19,
+            0.0
+          ],
+          [
+            -5.692061405548898e-18,
+            4.336808689942018e-19,
+            0.0
+          ],
+          [
+            2.0328790734103208e-19,
+            0.0,
+            0.0
+          ]
+        ],
+        "translation_RMS_m": 0.09230365879059664,
+        "translation_max_m": 0.24417810138650445,
+        "yaw_RMS_rad": 0.14113888841811428,
+        "yaw_max_rad": 0.37320995885374236,
+        "normalized_squared_residual": 10.54156367441973,
+        "optimized": false,
+        "label": "diagnostic relative-edge distortion, not optimized cost"
+      },
+      "factor_costs": {
+        "T": 8.323721019362987e-12,
+        "A": 0.00021171570195058115,
+        "total": 0.00021171571027430217
+      }
+    }
+  },
+  "max_matched_XY_separation_m": {
+    "RAW vs B_ENTRY": null,
+    "RAW vs FULL_GRAPH": null,
+    "RAW vs GRAPH_NO_R": null,
+    "B_ENTRY vs FULL_GRAPH": null,
+    "B_ENTRY vs GRAPH_NO_R": null,
+    "FULL_GRAPH vs GRAPH_NO_R": null
+  },
+  "missing_execution": [
+    "RAW",
+    "B_ENTRY",
+    "FULL_GRAPH",
+    "GRAPH_NO_R"
+  ],
+  "no_new_scientific_calls": true
+}

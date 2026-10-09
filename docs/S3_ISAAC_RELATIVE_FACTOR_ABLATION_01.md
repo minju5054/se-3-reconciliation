@@ -240,8 +240,105 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/s3-mpl
 
 ## Repository-confirmed results
 
-Pending pushed freeze and bounded execution. No S3 scientific solve or Isaac
-launch has occurred at protocol preparation.
+**TECHNICAL_BLOCKED. No actual-Isaac rollout occurred.** Both graph solves also failed convergence. The reported final iterates are invalid planning candidates, not executable references.
+
+Scientific freeze `0f56a781177880d148383c3120491a3c991234f5` was normally pushed before either solve. Source and code hashes still match the freeze. RAW parity is **NOT_RUN**, not PASS or FAIL.
+
+### Infrastructure blocker and accounting
+
+`scripts/isaac/s3_relative_ablation01.py` imported `prime_s3_clock` through the new graph/metric module. Its transitive `boundary_row_ablation04` import required `shapely`, unavailable in the Isaac Python startup environment. The worker failed before importing/constructing SimulationApp. The source-specific zero-solve preflight covered official controller installation; it did not catch this Isaac-side import dependency.
+
+One launcher attempt; **zero SimulationApp constructions, zero RAW/B_ENTRY/FULL_GRAPH/GRAPH_NO_R rollouts, zero MPC solves**. FULL and NO_R each consumed their one allowed planning solve. LightNav, RGB/model requests, acquisition, Hermite and retries all0. The raw driver field `Isaac_launches=1` denotes its launch attempt; the marker-based validator and `call_accounting.json` distinguish the actual SimulationApp count0. See `technical_failure.json` for the preserved traceback.
+
+The intended execution comparison was not completed. This follows the frozen technical-stop branch. No post-outcome scientific code/config change, fallback, tuning, environment modification, repeated solve or repeated launch. README remains unchanged because no execution mechanism result was established.
+
+### Planning outcomes
+
+| Method | Calls | Iterations | Converged | Termination | Executable reference |
+|---|---:|---:|---|---|---|
+| FULL_GRAPH | 1 | 80 | false | maximum_iterations | None |
+| GRAPH_NO_R | 1 | 80 | false | maximum_iterations | None |
+
+Factor costs at the final **nonconverged** candidate; these objectives contain different blocks and cannot be compared as execution scores.
+
+| Candidate | T | Optimized R | A | Optimized total | R diagnostic |
+|---|---:|---:|---:|---:|---:|
+| FULL_GRAPH | 3.46874275276e-08 | 2.78742433608 | 0.453145401249 | 3.24056977202 | 2.78742433608 |
+| GRAPH_NO_R | 8.32372101936e-12 | absent | 0.000211715701951 | 0.000211715710274 | 10.5415636744 |
+
+NO_R R is **diagnostic relative-edge distortion, not optimized cost**. Initial FULL T/R/A = 0.48157187939767576 / 3.3628749022934885 / 2.7941456526192088. Initial NO_R has identical T/A and no R. Initial arrays are byte-identical.
+
+### Deformation of invalid planning candidates
+
+| Diagnostic | FULL_GRAPH | GRAPH_NO_R |
+|---|---:|---:|
+| Node translation RMS [m] | 0.113672237619 | 0.0923534423031 |
+| Node translation max [m] | 0.184730185155 | 0.184730576196 |
+| Node yaw RMS [rad] | 0.168529362673 | 0.189749380267 |
+| Node yaw max [rad] | 0.385685031403 | 0.385685031403 |
+| Endpoint displacement [m] | 0 | 0 |
+| Endpoint yaw correction [rad] | 0 | 0 |
+| First edge direction [rad] | -0.712288542776 | -0.712336546449 |
+| First edge length [m] | 4.46275091758e-06 | 5.74882132922e-06 |
+| Total XY arc [m] | 0.871992853999 | 0.898162650366 |
+| Minimum edge length [m] | 4.46275091758e-06 | 5.74882132922e-06 |
+| Relative edge translation RMS [m] | 0.0459376116746 | 0.0923036587906 |
+| Relative edge translation max [m] | 0.0746960839447 | 0.244178101387 |
+| Relative edge yaw RMS [rad] | 0.075509862299 | 0.141138888418 |
+| Relative edge yaw max [rad] | 0.145948152805 | 0.373209958854 |
+
+Per-node corrections (world XY metres and absolute wrapped yaw radians):
+
+| Node | FULL XY | NO_R XY | FULL yaw | NO_R yaw |
+|---:|---:|---:|---:|---:|
+| 0 | 0.184683189977 | 0.184683189977 | 0.385685031403 | 0.385685031403 |
+| 1 | 0.184730185155 | 0.184730576196 | 0.239736878598 | 0.373209961075 |
+| 2 | 0.147535456978 | 3.5527136788e-15 | 0.129884888841 | 2.22101759206e-09 |
+| 3 | 0.0985436105872 | 3.5527136788e-15 | 0.0590299203313 | 0 |
+| 4 | 0.0545032654431 | 0 | 0.0233661907037 | 0 |
+| 5 | 0.0247435812871 | 0 | 0.00899656341982 | 0 |
+| 6 | 0.00880305983624 | 0 | 0.00298686983657 | 0 |
+| 7 | 0 | 0 | 0 | 0 |
+
+Both final candidates have first edges of only a few micrometres. The frozen numerical noncollapse threshold was 1e-12m; no stronger threshold was introduced afterward. Both nevertheless fail the mandatory convergence requirement, so neither was returned as a valid reference.
+
+### Primary and secondary execution results
+
+| Method | Position AUC .30 [m s] | Yaw AUC .30 [rad s] | T_turn50 .30 | T_turn50 .90 | Position/yaw AUC .90 |
+|---|---|---|---|---|---|
+| RAW | N/A | N/A | NOT_RUN | NOT_RUN | N/A |
+| B_ENTRY | N/A | N/A | NOT_RUN | NOT_RUN | N/A |
+| FULL_GRAPH | N/A | N/A | NOT_RUN | NOT_RUN | N/A |
+| GRAPH_NO_R | N/A | N/A | NOT_RUN | NOT_RUN | N/A |
+
+All full-horizon metrics, first method-specific command, TV, max v/omega, endpoint dwell and endpoint error are N/A. No time was substituted with a cap. Signed FULL−RAW, FULL−B_ENTRY, NO_R−FULL and NO_R−B_ENTRY differences are all null; there is no latency ordering or schedule-comparable execution.
+
+### Safety
+
+| Method | Reference edge clearance [m] | Reference status | Execution clearance / abort / overlap |
+|---|---:|---|---|
+| RAW | 0.131349284934 | REFERENCE_SAFE | N/A — not executed |
+| B_ENTRY | 0.21148985508 | REFERENCE_SAFE | N/A — not executed |
+| FULL_GRAPH | N/A | GRAPH_PLANNING_FAILED | N/A — not executed |
+| GRAPH_NO_R | N/A | GRAPH_PLANNING_FAILED | N/A — not executed |
+
+RAW/B_ENTRY reference safety was authenticated/preflight-checked. Neither graph has an accepted final reference; do not describe its execution as safe or unsafe. No unsafe command was applied because no execution began.
+
+### Research interpretation
+
+**This run does not establish that R limits useful transition correction.** It shows different nonconverged candidate deformations under the frozen objectives. NO_R has larger relative-edge distortion concentrated near the beginning, but no valid solution or robot response comparison. Lower NO_R cost cannot demonstrate tracking improvement. Planning failure is reported independently of the higher-precedence infrastructure blocker. No weak-R variant or additional experiment was performed.
+
+### Figures and saved-only validation
+
+[World/reference view](../results/s3_isaac_relative_factor_ablation_01/figures/s3_isaac_execution_comparison.png) and [response/deformation view](../results/s3_isaac_relative_factor_ablation_01/figures/s3_response_and_deformation.png). Exactly two final PNGs, inspected with numeric/hash sidecars. Execution panels explicitly show N/A; the world figure contains historical OLD-to-B and prepared reference geometry only. Its frozen 3s execution panel title describes the planned window, not an observed rollout. The deformation panel labels both candidates invalid.
+
+Saved-only validator and PNG checker pass, with zero new scientific calls. Raw logs, solver traces, rejected/accepted proposal checks and nonconverged candidates remain in ignored data under the authenticated result seal. The frozen renderer has minor footer/axis crowding in the no-execution layout; it was preserved under the no-post-outcome-code-change rule.
+
+Final post-execution relevant regression: **236 passed in154.51s**. Saved-only validation, figure checker, source/code hashes, compileall, diff and staged-diff checks pass. Exact regression command:
+
+```bash
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/s3-mpl .venv/bin/python -m pytest -q tests/test_s3_isaac_relative_factor_ablation01.py tests/test_successive_isaac_four_method01.py tests/test_successive_handoff_severity01.py tests/test_successive_isaac_replay01.py tests/test_b_to_entry_boundary_row_ablation04.py tests/test_spatial_entry_suffix_execution01.py tests/test_spatial_correspondence_selector_diag01.py tests/test_se2*.py tests/test_canonical_se2_graph.py
+```
 
 ## Limitations and claim boundary
 

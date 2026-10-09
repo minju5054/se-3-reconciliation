@@ -7286,3 +7286,36 @@ git diff --cached --check
 - Final pre-freeze regression1302 passed in416.98s; focused25 passed in11.45s.
   Historical saved-only validator/compileall/diff checks pass. Final synthetic PNG
   layout review precedes freeze; no result-driven code change.
+
+## 2026-10-09 — S3_ISAAC_RELATIVE_FACTOR_ABLATION_01 technical stop
+
+- Scientific freeze0f56a781177880d148383c3120491a3c991234f5 normally pushed before
+  one FULL_GRAPH and one GRAPH_NO_R solve. Both reached80iterations without
+  convergence (maximum_iterations). No executable graph reference returned;
+  no last-iterate fallback, tuning or second solve.
+- Final invalid candidate first edges: FULL4.4627509175833774e-6m,
+  NO_R5.748821329220696e-6m. Relative-edge translation RMS .04593761167458904 /
+  .09230365879059664m; yaw RMS .07550986229897143 / .14113888841811428rad.
+  NO_R R=10.54156367441973 is diagnostic only. Different objective totals are not
+  execution scores. No useful-correction or robot-response conclusion is supported.
+- TECHNICAL_BLOCKED takes precedence: the new Isaac clock helper imported the
+  graph/metric module, transitively requiring shapely before SimulationApp.
+  Isaac Python lacked shapely; worker import failed before app construction.
+  Repository tests/official-controller zero-solve preflight missed this separate
+  Isaac import dependency. Preserved exact traceback and launch accounting.
+- Launcher attempt1, actual SimulationApp0, all four rollouts0, MPC0. RAW parity
+  NOT_RUN. LightNav/RGB/model/acquisition/Hermite/retries0. Raw driver launch field1
+  is an attempt; validated marker-based call_accounting correctly records app0.
+- All AUC/T_turn50/signed paired/command/endpoint/execution safety metrics N/A,
+  not cap values or fabricated continuations. RAW/B_ENTRY reference clearance
+  .1313492849344136/.21148985508009666m pass historical safety; graph references
+  unavailable due convergence. No unsafe command applied; no execution occurred.
+- Saved-only validator and exactly2 PNG/hash/numeric sidecars pass and were viewed.
+  Plots mark execution N/A and invalid planning candidates. Frozen no-execution
+  layout has minor footer/axis crowding, documented without post-outcome edits.
+- No scientific code/config/environment changes after freeze; no retries. The
+  requested execution comparison is incomplete under the explicit technical-stop
+  branch. README unchanged because no execution mechanism result was established.
+- Post-execution relevant regression236 passed in154.51s. Saved-only validator,
+  figure checker, source/frozen-code authentication, compileall and diff/staged
+  checks pass. Final result commit contains only compact results and documentation.

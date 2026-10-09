@@ -1,0 +1,53 @@
+{
+  "classification": "TECHNICAL_BLOCKED",
+  "execution_summary": {
+    "classification": "TECHNICAL_BLOCKED",
+    "executed_methods": [],
+    "error": "Traceback (most recent call last):\n  File \"/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_s3_isaac_relative_factor_ablation01.py\", line 224, in execute\n    ready=isaac.await_type('ready',timeout=cfg['runtime']['startup_timeout_s']);save(run/'isaac_ready.json',ready)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/robotless_online_handoffs.py\", line 80, in await_type\n    if msg.get('type') in ('fatal','worker_exit','error'): raise RuntimeError(msg)\n                                                           ^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'type': 'fatal', 'error': 'Traceback (most recent call last):\\n  File \"/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/s3_relative_ablation01.py\", line 25, in main\\n    from reconciliation.s3_isaac_ablation01 import prime_s3_clock\\n  File \"/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/s3_isaac_ablation01.py\", line 4, in <module>\\n    from .successive_isaac_four_method01 import ProgressGraph, SCALES, auc, metrics, parity\\n  File \"/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/successive_isaac_four_method01.py\", line 6, in <module>\\n    from .boundary_row_ablation04 import staged_reference\\n  File \"/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/boundary_row_ablation04.py\", line 3, in <module>\\n    from shapely.geometry import LineString\\nModuleNotFoundError: No module named \\'shapely\\'\\n'}\n",
+    "graph_solves": 2,
+    "Isaac_launches": 1,
+    "LightNav": 0,
+    "RGB": 0,
+    "Hermite_execution": 0,
+    "retries": 0
+  },
+  "actual_call_accounting": {
+    "Graph_FULL": 1,
+    "Graph_NO_R": 1,
+    "SimulationApp": 0,
+    "launch_attempts": 1,
+    "rollouts": {
+      "RAW": 0,
+      "B_ENTRY": 0,
+      "FULL_GRAPH": 0,
+      "GRAPH_NO_R": 0
+    },
+    "official_MPC_solves": 0,
+    "LightNav": 0,
+    "RGB_model_requests": 0,
+    "new_source_acquisition": 0,
+    "Hermite_execution": 0,
+    "retries": 0
+  },
+  "failure_stage": "Isaac worker import before SimulationApp import/construction",
+  "cause": "prime_s3_clock imported from s3_isaac_ablation01 -> successive_isaac_four_method01 -> boundary_row_ablation04 -> shapely.geometry; Isaac Python has no shapely before app startup",
+  "preflight_gap": "Repository Python tests and official-controller zero-solve preflight did not test this transitive import inside Isaac Python.",
+  "launch_count_note": "execution_summary.Isaac_launches=1 records the launcher attempt; marker-based actual SimulationApp count is 0. No isaac_start.json or method execution_start exists.",
+  "action": "No code/config/environment modification or retry after scientific start. Preserve both nonconverged planning candidates for diagnostics only.",
+  "RAW_parity_status": "NOT_RUN",
+  "planning_failures": {
+    "FULL_GRAPH": {
+      "status": "GRAPH_PLANNING_FAILED",
+      "converged": false,
+      "iterations": 80,
+      "reason": "maximum_iterations"
+    },
+    "GRAPH_NO_R": {
+      "status": "GRAPH_PLANNING_FAILED",
+      "converged": false,
+      "iterations": 80,
+      "reason": "maximum_iterations"
+    }
+  },
+  "comparison_completed": false
+}

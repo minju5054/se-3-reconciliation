@@ -1,0 +1,11 @@
+{
+  "post_execution_regression_passed": 236,
+  "seconds": 154.51,
+  "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/s3-mpl .venv/bin/python -m pytest -q tests/test_s3_isaac_relative_factor_ablation01.py tests/test_successive_isaac_four_method01.py tests/test_successive_handoff_severity01.py tests/test_successive_isaac_replay01.py tests/test_b_to_entry_boundary_row_ablation04.py tests/test_spatial_entry_suffix_execution01.py tests/test_spatial_correspondence_selector_diag01.py tests/test_se2*.py tests/test_canonical_se2_graph.py",
+  "saved_only_validation": true,
+  "figure_check": true,
+  "compileall": true,
+  "diff_check": true,
+  "frozen_scientific_code_unchanged": true,
+  "actual_Isaac_comparison_completed": false
+}

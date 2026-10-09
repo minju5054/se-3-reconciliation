@@ -1,0 +1,18 @@
+{
+  "Graph_FULL": 1,
+  "Graph_NO_R": 1,
+  "SimulationApp": 0,
+  "launch_attempts": 1,
+  "rollouts": {
+    "RAW": 0,
+    "B_ENTRY": 0,
+    "FULL_GRAPH": 0,
+    "GRAPH_NO_R": 0
+  },
+  "official_MPC_solves": 0,
+  "LightNav": 0,
+  "RGB_model_requests": 0,
+  "new_source_acquisition": 0,
+  "Hermite_execution": 0,
+  "retries": 0
+}
