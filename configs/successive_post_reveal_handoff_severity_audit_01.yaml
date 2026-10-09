@@ -1,0 +1,33 @@
+experiment: SUCCESSIVE_POST_REVEAL_HANDOFF_SEVERITY_AUDIT_01
+starting_sha: ec369a9733001d07c079960fba42acc08edb3e13
+source_config: configs/successive_isaac_reconciliation_replay_01.yaml
+source_result_commit: e4f61465c13996cc8c5c70504a5735dabfa6e944
+handoffs: [C1_to_C2, C2_to_C3, C3_to_C4, C4_to_C5, C5_to_C6, C6_to_C7, C7_to_C8, C8_to_C9, C9_to_C10, C10_to_C11]
+stable_controls: [C8_to_C9, C10_to_C11]
+selector: unchanged SpatialCurve C3_FORWARD_SE2 and suffix_reference
+position_scale_m: 0.10
+yaw_scale_deg: 15.0
+selector_tie_atol: 1.0e-12
+incoming_displacement_epsilon_m: 1.0e-12
+turn_near_zero_epsilon_rad: 1.0e-12
+rank_dimensions: [progress, gap, turn, fresh_turn, revision]
+rank_order: descending full precision; ties by descending gap, descending absolute suffix net yaw, earlier handoff index
+pareto: larger on all five axes means more severe; dominate iff >= every axis and > at least one; exact float comparisons
+candidate_roles: [TURN, PROGRESS, REVISION]
+role_rule: highest turn; highest progress among remaining; highest revision among remaining; same tie breaks
+selection_inputs: only five geometry dimensions and handoff index; no native or method outcome
+fresh_turn: absolute wrapped E*-to-endpoint pose yaw change
+suffix_tangent_change: maximum absolute wrapped retained segment tangent minus original entry-segment tangent
+legacy_yaw_field: preserve signed difference of chunk maximum absolute local yaw in degrees; not maximum pairwise yaw error
+additional_yaw_descriptor: maximum absolute wrapped same-row local yaw difference; null for unequal row counts; not used for selection
+native_window_s: 0.30
+native_scope: B through state at next install before processing install; final episode state when no next install
+native_minimum_coverage_s: 0.30
+AUC: existing forward_projection + successive_isaac_four_method01.auc; exact .30 interpolation; full-window separately
+T_turn50: sign(delta)*wrap(theta(t)-theta_B)/abs(delta) >= .5 at two consecutive saved states within the window; first state time; no interpolation
+T_turn50_near_zero: null N/A when abs(delta)<=1e-12; never zero or cap imputation
+T_turn50_horizons: primary .30 s; full pre-next-install window separately; all native metrics null when total coverage<.30 s
+safety: unchanged source .20m physical footprint; legacy .05m diagnostic; hypothetical connector never executed or used to reject candidates
+invalid_geometry: record reason and TECHNICAL_BLOCKED if a required ranking descriptor is undefined; no repair or retuned entry
+C0_to_C1: sanity only; excluded from all rankings and recommendations
+budget: {Isaac: 0, MPC: 0, Graph: 0, Hermite: 0, B_ENTRY_execution: 0, LightNav: 0, RGB_model: 0, acquisition: 0, retries: 0}
