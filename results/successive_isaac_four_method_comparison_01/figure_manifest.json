@@ -1,0 +1,78 @@
+{
+  "files": [
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/successive_isaac_four_method_comparison_01/figures/four_method_world_execution.png",
+      "sha256": "3e5ac1eb788df0c3a0dcb5161b78370db481a501712fe804dbc1124b7bca8318"
+    },
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/successive_isaac_four_method_comparison_01/figures/transition_metrics.png",
+      "sha256": "3e5faad8725af3a33ba630fcf031c44a51113dbefadc82584d59272c6306dd83"
+    }
+  ],
+  "numeric_sidecar": {
+    "position_auc_full_m_s": {
+      "RAW": 0.0020329058408564524,
+      "B_ENTRY": 0.0020329058408564524,
+      "HERMITE": 0.001968172762981748,
+      "GRAPH": 0.0020606619551382047
+    },
+    "yaw_auc_full_rad_s": {
+      "RAW": 0.004767249881570226,
+      "B_ENTRY": 0.004767249881570226,
+      "HERMITE": 0.003959796762900096,
+      "GRAPH": 0.005642477234437219
+    },
+    "position_auc_03_m_s": {
+      "RAW": 0.0018340517699304282,
+      "B_ENTRY": 0.0018340517699304282,
+      "HERMITE": 0.0018148516972458985,
+      "GRAPH": 0.001834955859582008
+    },
+    "yaw_auc_03_rad_s": {
+      "RAW": 0.0022463951221886936,
+      "B_ENTRY": 0.0022463951221886936,
+      "HERMITE": 0.001723670764412314,
+      "GRAPH": 0.0022845481700232177
+    },
+    "abs_delta_v_from_u_B_plus": {
+      "RAW": 0.0,
+      "B_ENTRY": 0.0,
+      "HERMITE": 0.0,
+      "GRAPH": 0.0
+    },
+    "abs_delta_omega_from_u_B_plus": {
+      "RAW": 0.009510379771787633,
+      "B_ENTRY": 0.009510379771787633,
+      "HERMITE": 0.044811302137816776,
+      "GRAPH": 0.008176965395756748
+    },
+    "linear_TV": {
+      "RAW": 0.0,
+      "B_ENTRY": 0.0,
+      "HERMITE": 0.0,
+      "GRAPH": 0.0
+    },
+    "angular_TV": {
+      "RAW": 0.09018917287500136,
+      "B_ENTRY": 0.09018917287500136,
+      "HERMITE": 0.14450259053324144,
+      "GRAPH": 0.09950130939805676
+    },
+    "swept_clearance_lower_bound_m": {
+      "RAW": 1.0408031374535707,
+      "B_ENTRY": 1.0408031374535707,
+      "HERMITE": 1.0411188761206496,
+      "GRAPH": 1.0404616059233063
+    }
+  },
+  "max_matched_execution_XY_separation_m": {
+    "RAW_vs_B_ENTRY": 0.0,
+    "RAW_vs_HERMITE": 0.000322981136264662,
+    "RAW_vs_GRAPH": 0.0003500901783163986,
+    "B_ENTRY_vs_HERMITE": 0.000322981136264662,
+    "B_ENTRY_vs_GRAPH": 0.0003500901783163986,
+    "HERMITE_vs_GRAPH": 0.0006730667535219206
+  },
+  "final_png_count": 2,
+  "new_scientific_calls": 0
+}

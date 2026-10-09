@@ -7152,3 +7152,43 @@ git diff --cached --check
   Exact commands/formulas/tolerances/gates documented in the experiment protocol.
 - Freeze implementation/config/tests/protocol/source/code/external clock hashes;
   normal push precedes any Graph solve or Isaac launch. No outcome-driven changes.
+
+## 2026-10-09 — SUCCESSIVE_ISAAC_FOUR_METHOD_COMPARISON_01 result
+
+- Pushed scientific freeze 7640c1126e24b69837dfcd6f97471a82c24eb26a before
+  exactly one Graph solve and one real SimulationApp launch. C0→C1 only,
+  intervals92–119, no event at120. All four references/rollouts pass safety.
+- RAW parity passes with maximum pose/command/memory/guard-clearance error0.0;
+  exact B, reference identity/version/generation and logical schedule match source.
+  RAW/B_ENTRY/Hermite/Graph each complete28 intervals and four new official MPC
+  solves. Fresh controller per method, identical restored memory/u_B_plus, World
+  reset plus92 zero-motion initialization steps. All16 solver waits preserve
+  actual Isaac pose/time. One SimulationApp closes normally, returncode0.
+- Graph converges in3 iterations by cost tolerance, cost .05721558510371845→
+  .03120742223186173; final T/R/A 3.978259363010347e-8/.023471344358307847/
+  .0077360380909602565. Fixed B/end exact; relative-edge translation RMS/max
+  .005104878791/.008375417430 m, yaw RMS/max .000243622226/.000444366720 rad.
+- FOUR_METHOD_MIXED_EVIDENCE. Full-window position AUC RAW/B_ENTRY .002032905841,
+  Hermite .001968172763, Graph .002060661955 m s; yaw AUC .004767249882/
+  .003959796763/.005642477234 rad s. RAW and B_ENTRY execution is exactly identical.
+  Hermite improves error AUC but increases angular TV; Graph has the smallest
+  first new angular-command change but higher AUC than every comparator.
+- Minimum reference clearance .821280919083059 m for all; executed swept lower
+  bounds RAW/B_ENTRY1.040803137454, Hermite1.041118876121, Graph1.040461605923 m.
+  No overlap/guard abort, unchanged physical footprint/legacy.05 diagnostics pass.
+  All v=.4, linear TV0. No downstream completion or general graph-benefit claim.
+- Counts: Graph scientific solve1, SimulationApp1, each method rollout1, MPC16,
+  LightNav/RGB/model/source acquisition/retries0. No post-freeze code/config change.
+  Saved-only validation/report and raw-result hash seal pass, no added science.
+- Exactly two compact PNGs inspected with numeric sidecars. Matched execution
+  maximum XY separation0 for RAW/B_ENTRY; maximum across all methods .000673066754 m.
+  Report signed differences, exact identity retention and selector effects rather
+  than a scalar winner. README updated conservatively with this actual result.
+- No scientific protocol deviation. Shortened horizon was explicitly authorized
+  before freeze; historical longer-window blocked audit remains unchanged. The
+  result establishes bounded Isaac parity, not a case for Graph efficacy in a
+  multi-handoff experiment. No further experiment implemented.
+- Final relevant regression repeats the pre-freeze suite: 1159 passed in353.84 s;
+  focused17 also passed before freeze. compileall, saved-only equality/figure/hash
+  checks and staged diff checks pass. CSV CRLF→LF formatting only; every field
+  matches validated JSON exactly. No frozen writer/scientific code change.

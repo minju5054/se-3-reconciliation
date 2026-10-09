@@ -7,6 +7,18 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [isolated C0→C1 four-method Isaac comparison](docs/SUCCESSIVE_ISAAC_FOUR_METHOD_COMPARISON_01.md)
+completed RAW/B_ENTRY/Hermite/progress-aligned Graph under one common scene/state
+and logical schedule, stopping before C2 installation. RAW exactly reproduces the
+saved 28-step prefix. **FOUR_METHOD_MIXED_EVIDENCE**: RAW and B_ENTRY coincide;
+Hermite lowers error AUC but increases angular command TV; Graph reduces the first
+angular-command change but has higher position/yaw AUC than all comparators.
+All references/executions pass safety. One Graph solve, one Isaac launch, four
+rollouts, 16 MPC solves, no new model calls. E*=F0 removes no prefix in this source;
+the .4667 s window establishes no downstream completion or general method benefit.
+[World execution PNG](results/successive_isaac_four_method_comparison_01/figures/four_method_world_execution.png)
+and [transition metrics](results/successive_isaac_four_method_comparison_01/figures/transition_metrics.png).
+
 The [bounded successive source acquisition](docs/SUCCESSIVE_NATIVE_SOURCE_ACQUISITION_02.md)
 reached **SUCCESSIVE_SOURCE_MAX_REACHED**: the first predeclared pose, 1 m behind
 POSE11, generated and actually applied C0–C11 at the native .4 m/s bound. There are

@@ -1,0 +1,19 @@
+{
+  "focused_passed": 17,
+  "pre_freeze_regression_passed": 1159,
+  "post_science_regression_passed": 1159,
+  "pre_freeze_seconds": 356.53,
+  "post_science_seconds": 353.84,
+  "same_regression_suite_repeated": true,
+  "compileall": true,
+  "diff_check": true,
+  "saved_only_validation": true,
+  "source_accounting_validation": true,
+  "figure_count": 2,
+  "figure_hash_validation": true,
+  "visual_inspection": true,
+  "CSV_LF_formatting_only": true,
+  "CSV_fields_exactly_equal_validated_JSON": true,
+  "scientific_code_changed_after_freeze": false,
+  "new_scientific_calls_in_validation": 0
+}

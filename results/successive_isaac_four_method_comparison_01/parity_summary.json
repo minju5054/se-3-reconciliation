@@ -1,0 +1,16 @@
+{
+  "initial_B_exact": true,
+  "pose_max_error": 0.0,
+  "command_max_error": 0.0,
+  "memory_max_error": 0.0,
+  "solve_count_equal": true,
+  "attempts_equal": true,
+  "accepted_equal": true,
+  "applications_equal": true,
+  "reference_identity_equal": true,
+  "generations_equal": true,
+  "guard_decisions_equal": true,
+  "guard_clearance_max_error": 0.0,
+  "horizon_completed": true,
+  "passed": true
+}

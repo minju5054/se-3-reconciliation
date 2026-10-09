@@ -1,0 +1,1285 @@
+{
+  "experiment": "SUCCESSIVE_ISAAC_FOUR_METHOD_COMPARISON_01",
+  "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009",
+  "starting_sha": "d4831fa94474b1d138ca2f1eae3fce0a16c4d8cd",
+  "scientific_freeze_sha": "7640c1126e24b69837dfcd6f97471a82c24eb26a",
+  "classification": "FOUR_METHOD_MIXED_EVIDENCE",
+  "source": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01",
+  "handoff": "C0_to_C1",
+  "horizon": {
+    "start_tick": 92,
+    "stop_tick": 120,
+    "integration_steps": 28,
+    "attempted_submit_ticks": [
+      96,
+      102,
+      108,
+      114
+    ],
+    "accepted_submit_ticks": [
+      96,
+      102,
+      108,
+      114
+    ],
+    "application_ticks": [
+      97,
+      103,
+      109,
+      115
+    ],
+    "pairs": [
+      {
+        "submit_tick": 96,
+        "application_tick": 97
+      },
+      {
+        "submit_tick": 102,
+        "application_tick": 103
+      },
+      {
+        "submit_tick": 108,
+        "application_tick": 109
+      },
+      {
+        "submit_tick": 114,
+        "application_tick": 115
+      }
+    ],
+    "excluded_next_install": {
+      "event_row": 23,
+      "install_tick": 120,
+      "reply_seen_tick": 121,
+      "chunk_id": "chunk_002",
+      "reference_version": 2,
+      "generation": 4
+    },
+    "original_generation": 3,
+    "window_rule": "[B application, next reference installation); terminal state before install"
+  },
+  "entry": {
+    "correspondence": {
+      "arc_m": 0.0,
+      "normalized_progress": 0.0,
+      "segment": 0,
+      "alpha": 0.0,
+      "nearest_raw_row_diagnostic": 0,
+      "target_world": [
+        19.201732994894844,
+        25.212761781627275,
+        -1.5676130291471446
+      ],
+      "position_gap_m": 0.03723860800693844,
+      "yaw_gap_rad": 0.0013625315137868466,
+      "tangent_gap_rad": 0.00037967199874056057,
+      "remaining_arc_m": 1.3574525636380002,
+      "total_arc_m": 1.3574525636380002,
+      "pose_score": 0.13869847931450946
+    },
+    "row_count": 10,
+    "original_count": 10,
+    "raw_prefix_rows_removed": 0,
+    "first_raw_identity_presented": 0,
+    "row_original_identities": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "row_fractional_original_progress": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0
+    ],
+    "row_original_arc_m": [
+      0.0,
+      0.15143908158403918,
+      0.3023308748591847,
+      0.4532125627045822,
+      0.6037503063963792,
+      0.7532810497713824,
+      0.9047361364407918,
+      1.0551454867495045,
+      1.2081156364254308,
+      1.3574525636380002
+    ],
+    "remaining_original_arc_at_start_m": 1.3574525636380002,
+    "first_presented_original_arc_m": 0.0,
+    "first_presented_fractional_original_row": 0.0,
+    "duplicate_handling": "exact start vertex: preserve one original row",
+    "original_downstream_world_and_local_rows_exact": true,
+    "frame": "world metres/yaw radians; entry local = A^-1 E; original raw suffix retained, no B re-anchor"
+  },
+  "graph_planning": {
+    "solver": {
+      "initial_cost": 0.05721558510371845,
+      "final_cost": 0.03120742223186173,
+      "iterations": 3,
+      "converged": true,
+      "termination_reason": "cost_tolerance",
+      "cost_history": [
+        0.05721558510371845,
+        0.031207426441370815,
+        0.031207422231976405,
+        0.03120742223186173
+      ],
+      "damping_history": [
+        0.001,
+        0.0003,
+        8.999999999999999e-05
+      ]
+    },
+    "error": null,
+    "wall_s": 0.023861206995206885,
+    "initial_costs": {
+      "T": 9.068088010433863e-06,
+      "R": 0.015473562821499217,
+      "A": 0.0417329541942088,
+      "total": 0.05721558510371845
+    },
+    "final_costs": {
+      "T": 3.978259363010347e-08,
+      "R": 0.023471344358307847,
+      "A": 0.0077360380909602565,
+      "total": 0.031207422231861733
+    },
+    "valid": true,
+    "optimizer_calls": 1
+  },
+  "geometry": {
+    "RAW": {
+      "rows": 10,
+      "XY_arc_m": 1.357452563638,
+      "B_first_gap_m": 0.03723860800693844,
+      "incoming_first_segment_mismatch_rad": 0.000379661218582239,
+      "min_edge_m": 0.14933692721256922,
+      "reference_clearance_m": 0.821280919083059,
+      "physical_overlap": false,
+      "legacy_5cm_margin_pass": true,
+      "valid": true,
+      "bit_identical_original_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "B_ENTRY": {
+      "rows": 11,
+      "XY_arc_m": 1.3946911716449384,
+      "B_first_gap_m": 0.0,
+      "incoming_first_segment_mismatch_rad": 0.0013661864704594961,
+      "min_edge_m": 0.03723860800693844,
+      "reference_clearance_m": 0.821280919083059,
+      "physical_overlap": false,
+      "legacy_5cm_margin_pass": true,
+      "valid": true,
+      "bit_identical_original_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "HERMITE": {
+      "rows": 12,
+      "XY_arc_m": 1.3946911718126778,
+      "B_first_gap_m": 0.0,
+      "incoming_first_segment_mismatch_rad": 0.0012712712789149094,
+      "min_edge_m": 0.018619303567608034,
+      "reference_clearance_m": 0.821280919083059,
+      "physical_overlap": false,
+      "legacy_5cm_margin_pass": true,
+      "valid": true,
+      "bit_identical_original_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "GRAPH": {
+      "rows": 10,
+      "XY_arc_m": 1.3945955351404344,
+      "B_first_gap_m": 0.0,
+      "incoming_first_segment_mismatch_rad": 5.221739155114591e-05,
+      "min_edge_m": 0.149695504398616,
+      "reference_clearance_m": 0.821280919083059,
+      "physical_overlap": false,
+      "legacy_5cm_margin_pass": true,
+      "valid": true,
+      "bit_identical_original_rows": [
+        9
+      ],
+      "deformation_against_original_suffix": {
+        "first_node_displacement_m": 0.03723860800693844,
+        "endpoint_displacement_m": 0.0,
+        "per_node_displacement_m": [
+          0.03723860800693844,
+          0.028864632645019577,
+          0.020849655649352018,
+          0.013869274074193493,
+          0.008434917677988983,
+          0.004667774920780129,
+          0.002335573088810043,
+          0.0010392438709875683,
+          0.00037165612406419554,
+          0.0
+        ],
+        "per_node_log_correction": [
+          [
+            -0.037238602152596195,
+            -2.550589539229488e-05,
+            -0.0013625315137866245
+          ],
+          [
+            -0.028864573183215305,
+            -5.9086501648225675e-05,
+            -0.0009181647942400062
+          ],
+          [
+            -0.020849296230048702,
+            -0.0001224628378864383,
+            -0.0005184829591522444
+          ],
+          [
+            -0.013866309915405176,
+            -0.0002867285357584544,
+            -0.0001899042929336403
+          ],
+          [
+            -0.00842465038594176,
+            -0.000416055425568323,
+            3.674703357603448e-05
+          ],
+          [
+            -0.004637512037208452,
+            -0.0005306645372557777,
+            0.00013930058854150218
+          ],
+          [
+            -0.0022982974888090626,
+            -0.0004156083682220999,
+            0.00014535581801755626
+          ],
+          [
+            -0.0010166763466507734,
+            -0.00021539969933355077,
+            0.00010115199472071623
+          ],
+          [
+            -0.0003605023387958214,
+            -9.036779464035972e-05,
+            5.0927730649519276e-05
+          ],
+          [
+            -3.552713678800501e-15,
+            -6.217248937900877e-15,
+            0.0
+          ]
+        ],
+        "relative_edge_log": [
+          [
+            0.008374416436421405,
+            0.0001294854325441633,
+            0.00044436671954617424
+          ],
+          [
+            0.008015122990087421,
+            7.913154049966634e-05,
+            0.0003996818350877618
+          ],
+          [
+            0.006979698045563196,
+            0.00014941623086709306,
+            0.0003285786662186041
+          ],
+          [
+            0.00542928806875712,
+            0.00025560796609533685,
+            0.0002266513265096748
+          ],
+          [
+            0.003744442257661429,
+            0.0004091688452919374,
+            0.0001025535549654677
+          ],
+          [
+            0.00229524206166624,
+            0.0003972842316804402,
+            6.05522947605408e-06
+          ],
+          [
+            0.0012663746272510853,
+            0.0002556582792040889,
+            -4.420382329684003e-05
+          ],
+          [
+            0.0006458979819046828,
+            0.00015430967757192805,
+            -5.0224264071196956e-05
+          ],
+          [
+            0.0003589217078283125,
+            8.873086825891756e-05,
+            -5.0927730649519276e-05
+          ]
+        ],
+        "relative_translation_RMS_m": 0.005104878790556552,
+        "relative_yaw_RMS_rad": 0.00024362222584400025,
+        "relative_translation_max_m": 0.00837541743006557,
+        "relative_yaw_max_rad": 0.00044436671954617424,
+        "rigid_fit": {
+          "definition": "closed-form minimum XY squared-error single left SE(2) transform; yaw assessed separately",
+          "transform": [
+            0.049383162569967,
+            -0.02680914789738864,
+            0.0020149287048230598
+          ],
+          "translation_RMS_m": 0.012466565682005973,
+          "yaw_RMS_rad": 0.0023193965454840625
+        }
+      },
+      "factor_costs": {
+        "T": 3.978259363010347e-08,
+        "R": 0.023471344358307847,
+        "A": 0.0077360380909602565,
+        "total": 0.031207422231861733
+      },
+      "endpoint_bit_exact": true
+    }
+  },
+  "method_references": {
+    "RAW": {
+      "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/RAW_world.npy",
+      "world_sha256": "a93c28ce754a81f814f2ac94f4d5aa2497de28b27ffd15c2d96670622bcdbb14",
+      "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/RAW_local.npy",
+      "local_sha256": "6f6b97c922b9e6cf8d455cf4cc4b1686375b93a40a0a67f557278137a751450b",
+      "labels": [
+        "F_0",
+        "F_1",
+        "F_2",
+        "F_3",
+        "F_4",
+        "F_5",
+        "F_6",
+        "F_7",
+        "F_8",
+        "F_9"
+      ],
+      "safety": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 0.821280919083059,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.0,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 10,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+        "physical_footprint_clearance_m": 0.821280919083059,
+        "exploratory_overlap_free": true,
+        "legacy_5cm_margin_pass": true,
+        "legacy_5cm_check": {
+          "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+          "workspace_known": true,
+          "unknown": false,
+          "minimum_clearance_m": 0.821280919083059,
+          "physical_overlap": false,
+          "clearance_valid": true,
+          "footprint_radius_m": 0.2,
+          "required_clearance_m": 0.05,
+          "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+          "sample_count": 10,
+          "sampling_hint_m": 0.01,
+          "first_collision_segment_index": null,
+          "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+        },
+        "exploratory_policy": {
+          "footprint_radius_m": 0.2,
+          "required_extra_clearance_m": 0.0,
+          "legacy_required_extra_clearance_m": 0.05,
+          "guard_enabled": true,
+          "physical_overlap_rejection": true
+        },
+        "original_row_count": 10,
+        "checked_row_count": 10,
+        "original_first_row_index": 0,
+        "original_last_row_index": 9,
+        "connector_included": false,
+        "rows_deleted": false
+      },
+      "installed_roundtrip_safety": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 0.821280919083059,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.0,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 10,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+        "physical_footprint_clearance_m": 0.821280919083059,
+        "exploratory_overlap_free": true,
+        "legacy_5cm_margin_pass": true,
+        "legacy_5cm_check": {
+          "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+          "workspace_known": true,
+          "unknown": false,
+          "minimum_clearance_m": 0.821280919083059,
+          "physical_overlap": false,
+          "clearance_valid": true,
+          "footprint_radius_m": 0.2,
+          "required_clearance_m": 0.05,
+          "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+          "sample_count": 10,
+          "sampling_hint_m": 0.01,
+          "first_collision_segment_index": null,
+          "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+        },
+        "exploratory_policy": {
+          "footprint_radius_m": 0.2,
+          "required_extra_clearance_m": 0.0,
+          "legacy_required_extra_clearance_m": 0.05,
+          "guard_enabled": true,
+          "physical_overlap_rejection": true
+        },
+        "original_row_count": 10,
+        "checked_row_count": 10,
+        "original_first_row_index": 0,
+        "original_last_row_index": 9,
+        "connector_included": false,
+        "rows_deleted": false
+      },
+      "installed_roundtrip_max_error": 0.0,
+      "valid": true
+    },
+    "B_ENTRY": {
+      "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/B_ENTRY_world.npy",
+      "world_sha256": "570bd2e94c90c65c4003f0c970e97ba7f578bd2bb478fba8e3be0ffb044ee69a",
+      "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/B_ENTRY_local.npy",
+      "local_sha256": "33a64d614aa1782231be9ec0867faec75a1062e210d177a8afd115dd2c5db873",
+      "labels": [
+        "B",
+        "E*",
+        "F_1",
+        "F_2",
+        "F_3",
+        "F_4",
+        "F_5",
+        "F_6",
+        "F_7",
+        "F_8",
+        "F_9"
+      ],
+      "safety": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 0.821280919083059,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.0,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 11,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+        "physical_footprint_clearance_m": 0.821280919083059,
+        "exploratory_overlap_free": true,
+        "legacy_5cm_margin_pass": true,
+        "legacy_5cm_check": {
+          "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+          "workspace_known": true,
+          "unknown": false,
+          "minimum_clearance_m": 0.821280919083059,
+          "physical_overlap": false,
+          "clearance_valid": true,
+          "footprint_radius_m": 0.2,
+          "required_clearance_m": 0.05,
+          "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+          "sample_count": 11,
+          "sampling_hint_m": 0.01,
+          "first_collision_segment_index": null,
+          "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+        },
+        "exploratory_policy": {
+          "footprint_radius_m": 0.2,
+          "required_extra_clearance_m": 0.0,
+          "legacy_required_extra_clearance_m": 0.05,
+          "guard_enabled": true,
+          "physical_overlap_rejection": true
+        },
+        "original_row_count": 11,
+        "checked_row_count": 11,
+        "original_first_row_index": 0,
+        "original_last_row_index": 10,
+        "connector_included": false,
+        "rows_deleted": false
+      },
+      "installed_roundtrip_safety": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 0.821280919083059,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.0,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 11,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+        "physical_footprint_clearance_m": 0.821280919083059,
+        "exploratory_overlap_free": true,
+        "legacy_5cm_margin_pass": true,
+        "legacy_5cm_check": {
+          "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+          "workspace_known": true,
+          "unknown": false,
+          "minimum_clearance_m": 0.821280919083059,
+          "physical_overlap": false,
+          "clearance_valid": true,
+          "footprint_radius_m": 0.2,
+          "required_clearance_m": 0.05,
+          "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+          "sample_count": 11,
+          "sampling_hint_m": 0.01,
+          "first_collision_segment_index": null,
+          "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+        },
+        "exploratory_policy": {
+          "footprint_radius_m": 0.2,
+          "required_extra_clearance_m": 0.0,
+          "legacy_required_extra_clearance_m": 0.05,
+          "guard_enabled": true,
+          "physical_overlap_rejection": true
+        },
+        "original_row_count": 11,
+        "checked_row_count": 11,
+        "original_first_row_index": 0,
+        "original_last_row_index": 10,
+        "connector_included": false,
+        "rows_deleted": false
+      },
+      "installed_roundtrip_max_error": 7.105427357601002e-15,
+      "valid": true
+    },
+    "HERMITE": {
+      "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/HERMITE_world.npy",
+      "world_sha256": "319f7b62d93eb22c824fd243c2529b6403fb59293ff3e4b9bbdb550310aff8d7",
+      "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/HERMITE_local.npy",
+      "local_sha256": "adb875d4e447a5aa0e91b3f9c0cfcd57799b8c0256c5e9abc7a8adb253b30166",
+      "labels": [
+        "B",
+        "H_1",
+        "E*",
+        "F_1",
+        "F_2",
+        "F_3",
+        "F_4",
+        "F_5",
+        "F_6",
+        "F_7",
+        "F_8",
+        "F_9"
+      ],
+      "safety": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 0.821280919083059,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.0,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 12,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+        "physical_footprint_clearance_m": 0.821280919083059,
+        "exploratory_overlap_free": true,
+        "legacy_5cm_margin_pass": true,
+        "legacy_5cm_check": {
+          "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+          "workspace_known": true,
+          "unknown": false,
+          "minimum_clearance_m": 0.821280919083059,
+          "physical_overlap": false,
+          "clearance_valid": true,
+          "footprint_radius_m": 0.2,
+          "required_clearance_m": 0.05,
+          "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+          "sample_count": 12,
+          "sampling_hint_m": 0.01,
+          "first_collision_segment_index": null,
+          "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+        },
+        "exploratory_policy": {
+          "footprint_radius_m": 0.2,
+          "required_extra_clearance_m": 0.0,
+          "legacy_required_extra_clearance_m": 0.05,
+          "guard_enabled": true,
+          "physical_overlap_rejection": true
+        },
+        "original_row_count": 12,
+        "checked_row_count": 12,
+        "original_first_row_index": 0,
+        "original_last_row_index": 11,
+        "connector_included": false,
+        "rows_deleted": false
+      },
+      "installed_roundtrip_safety": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 0.821280919083059,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.0,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 12,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+        "physical_footprint_clearance_m": 0.821280919083059,
+        "exploratory_overlap_free": true,
+        "legacy_5cm_margin_pass": true,
+        "legacy_5cm_check": {
+          "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+          "workspace_known": true,
+          "unknown": false,
+          "minimum_clearance_m": 0.821280919083059,
+          "physical_overlap": false,
+          "clearance_valid": true,
+          "footprint_radius_m": 0.2,
+          "required_clearance_m": 0.05,
+          "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+          "sample_count": 12,
+          "sampling_hint_m": 0.01,
+          "first_collision_segment_index": null,
+          "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+        },
+        "exploratory_policy": {
+          "footprint_radius_m": 0.2,
+          "required_extra_clearance_m": 0.0,
+          "legacy_required_extra_clearance_m": 0.05,
+          "guard_enabled": true,
+          "physical_overlap_rejection": true
+        },
+        "original_row_count": 12,
+        "checked_row_count": 12,
+        "original_first_row_index": 0,
+        "original_last_row_index": 11,
+        "connector_included": false,
+        "rows_deleted": false
+      },
+      "installed_roundtrip_max_error": 7.105427357601002e-15,
+      "valid": true
+    },
+    "GRAPH": {
+      "world_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/GRAPH_world.npy",
+      "world_sha256": "ba80d871c832c52619209a5b494aa80ca829d516e119a6069395fd1f557b024d",
+      "local_path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/GRAPH_local.npy",
+      "local_sha256": "bb0807280d3468eecd7ae5d2703c6243626bba7fe1ead773232472afe7ca1755",
+      "labels": [
+        "B",
+        "X_1",
+        "X_2",
+        "X_3",
+        "X_4",
+        "X_5",
+        "X_6",
+        "X_7",
+        "X_8",
+        "F_end"
+      ],
+      "safety": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 0.821280919083059,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.0,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 10,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+        "physical_footprint_clearance_m": 0.821280919083059,
+        "exploratory_overlap_free": true,
+        "legacy_5cm_margin_pass": true,
+        "legacy_5cm_check": {
+          "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+          "workspace_known": true,
+          "unknown": false,
+          "minimum_clearance_m": 0.821280919083059,
+          "physical_overlap": false,
+          "clearance_valid": true,
+          "footprint_radius_m": 0.2,
+          "required_clearance_m": 0.05,
+          "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+          "sample_count": 10,
+          "sampling_hint_m": 0.01,
+          "first_collision_segment_index": null,
+          "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+        },
+        "exploratory_policy": {
+          "footprint_radius_m": 0.2,
+          "required_extra_clearance_m": 0.0,
+          "legacy_required_extra_clearance_m": 0.05,
+          "guard_enabled": true,
+          "physical_overlap_rejection": true
+        },
+        "original_row_count": 10,
+        "checked_row_count": 10,
+        "original_first_row_index": 0,
+        "original_last_row_index": 9,
+        "connector_included": false,
+        "rows_deleted": false
+      },
+      "installed_roundtrip_safety": {
+        "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+        "workspace_known": true,
+        "unknown": false,
+        "minimum_clearance_m": 0.821280919083059,
+        "physical_overlap": false,
+        "clearance_valid": true,
+        "footprint_radius_m": 0.2,
+        "required_clearance_m": 0.0,
+        "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+        "sample_count": 10,
+        "sampling_hint_m": 0.01,
+        "first_collision_segment_index": null,
+        "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation",
+        "physical_footprint_clearance_m": 0.821280919083059,
+        "exploratory_overlap_free": true,
+        "legacy_5cm_margin_pass": true,
+        "legacy_5cm_check": {
+          "status": "SWEPT_POLYLINE_CLEARANCE_VALID",
+          "workspace_known": true,
+          "unknown": false,
+          "minimum_clearance_m": 0.821280919083059,
+          "physical_overlap": false,
+          "clearance_valid": true,
+          "footprint_radius_m": 0.2,
+          "required_clearance_m": 0.05,
+          "checker": "DIRECT_GEOMETRY_SWEPT_CIRCLE_ALONG_PIECEWISE_LINEAR_XY",
+          "sample_count": 10,
+          "sampling_hint_m": 0.01,
+          "first_collision_segment_index": null,
+          "continuous_time_claim": "only the supplied piecewise-linear path; callers must bound curved-path deviation"
+        },
+        "exploratory_policy": {
+          "footprint_radius_m": 0.2,
+          "required_extra_clearance_m": 0.0,
+          "legacy_required_extra_clearance_m": 0.05,
+          "guard_enabled": true,
+          "physical_overlap_rejection": true
+        },
+        "original_row_count": 10,
+        "checked_row_count": 10,
+        "original_first_row_index": 0,
+        "original_last_row_index": 9,
+        "connector_included": false,
+        "rows_deleted": false
+      },
+      "installed_roundtrip_max_error": 1.0658141036401503e-14,
+      "valid": true
+    }
+  },
+  "RAW_parity": {
+    "initial_B_exact": true,
+    "pose_max_error": 0.0,
+    "command_max_error": 0.0,
+    "memory_max_error": 0.0,
+    "solve_count_equal": true,
+    "attempts_equal": true,
+    "accepted_equal": true,
+    "applications_equal": true,
+    "reference_identity_equal": true,
+    "generations_equal": true,
+    "guard_decisions_equal": true,
+    "guard_clearance_max_error": 0.0,
+    "horizon_completed": true,
+    "passed": true
+  },
+  "primary_metrics": {
+    "RAW": {
+      "position_auc_03_m_s": 0.0018340517699304282,
+      "position_auc_full_m_s": 0.0020329058408564524,
+      "yaw_auc_03_rad_s": 0.0022463951221886936,
+      "yaw_auc_full_rad_s": 0.004767249881570226,
+      "initial_position_error_m": 0.03723860800693844,
+      "initial_yaw_error_rad": 0.0013625315137870686,
+      "first_new_command": [
+        0.4,
+        -0.036748781375066854
+      ],
+      "first_new_application_tick": 97,
+      "abs_delta_v_from_u_B_plus": 0.0,
+      "abs_delta_omega_from_u_B_plus": 0.009510379771787633,
+      "linear_TV": 0.0,
+      "angular_TV": 0.09018917287500136,
+      "max_abs_v": 0.4,
+      "max_abs_omega": 0.0770850419112612,
+      "swept_clearance_lower_bound_m": 1.0408031374535707,
+      "physical_overlap": false,
+      "guard_abort": false,
+      "termination": "PRE_NEXT_INSTALL_CAP",
+      "integration_steps": 28
+    },
+    "B_ENTRY": {
+      "position_auc_03_m_s": 0.0018340517699304282,
+      "position_auc_full_m_s": 0.0020329058408564524,
+      "yaw_auc_03_rad_s": 0.0022463951221886936,
+      "yaw_auc_full_rad_s": 0.004767249881570226,
+      "initial_position_error_m": 0.03723860800693844,
+      "initial_yaw_error_rad": 0.0013625315137870686,
+      "first_new_command": [
+        0.4,
+        -0.036748781375066854
+      ],
+      "first_new_application_tick": 97,
+      "abs_delta_v_from_u_B_plus": 0.0,
+      "abs_delta_omega_from_u_B_plus": 0.009510379771787633,
+      "linear_TV": 0.0,
+      "angular_TV": 0.09018917287500136,
+      "max_abs_v": 0.4,
+      "max_abs_omega": 0.0770850419112612,
+      "swept_clearance_lower_bound_m": 1.0408031374535707,
+      "physical_overlap": false,
+      "guard_abort": false,
+      "termination": "PRE_NEXT_INSTALL_CAP",
+      "integration_steps": 28
+    },
+    "HERMITE": {
+      "position_auc_03_m_s": 0.0018148516972458985,
+      "position_auc_full_m_s": 0.001968172762981748,
+      "yaw_auc_03_rad_s": 0.001723670764412314,
+      "yaw_auc_full_rad_s": 0.003959796762900096,
+      "initial_position_error_m": 0.03723860800693844,
+      "initial_yaw_error_rad": 0.0013625315137870686,
+      "first_new_command": [
+        0.4,
+        -0.0014478590090377082
+      ],
+      "first_new_application_tick": 97,
+      "abs_delta_v_from_u_B_plus": 0.0,
+      "abs_delta_omega_from_u_B_plus": 0.044811302137816776,
+      "linear_TV": 0.0,
+      "angular_TV": 0.14450259053324144,
+      "max_abs_v": 0.4,
+      "max_abs_omega": 0.08363882073383613,
+      "swept_clearance_lower_bound_m": 1.0411188761206496,
+      "physical_overlap": false,
+      "guard_abort": false,
+      "termination": "PRE_NEXT_INSTALL_CAP",
+      "integration_steps": 28
+    },
+    "GRAPH": {
+      "position_auc_03_m_s": 0.001834955859582008,
+      "position_auc_full_m_s": 0.0020606619551382047,
+      "yaw_auc_03_rad_s": 0.0022845481700232177,
+      "yaw_auc_full_rad_s": 0.005642477234437219,
+      "initial_position_error_m": 0.03723860800693844,
+      "initial_yaw_error_rad": 0.0013625315137870686,
+      "first_new_command": [
+        0.4,
+        -0.03808219575109774
+      ],
+      "first_new_application_tick": 97,
+      "abs_delta_v_from_u_B_plus": 0.0,
+      "abs_delta_omega_from_u_B_plus": 0.008176965395756748,
+      "linear_TV": 0.0,
+      "angular_TV": 0.09950130939805676,
+      "max_abs_v": 0.4,
+      "max_abs_omega": 0.08183556479411372,
+      "swept_clearance_lower_bound_m": 1.0404616059233063,
+      "physical_overlap": false,
+      "guard_abort": false,
+      "termination": "PRE_NEXT_INSTALL_CAP",
+      "integration_steps": 28
+    }
+  },
+  "signed_differences": {
+    "GRAPH_minus_RAW": {
+      "position_auc_03_m_s": 9.040896515799188e-07,
+      "position_auc_full_m_s": 2.775611428175234e-05,
+      "yaw_auc_03_rad_s": 3.8153047834524074e-05,
+      "yaw_auc_full_rad_s": 0.0008752273528669927,
+      "abs_delta_v_from_u_B_plus": 0.0,
+      "abs_delta_omega_from_u_B_plus": -0.001333414376030885,
+      "linear_TV": 0.0,
+      "angular_TV": 0.009312136523055403,
+      "swept_clearance_lower_bound_m": -0.000341531530264394
+    },
+    "GRAPH_minus_B_ENTRY": {
+      "position_auc_03_m_s": 9.040896515799188e-07,
+      "position_auc_full_m_s": 2.775611428175234e-05,
+      "yaw_auc_03_rad_s": 3.8153047834524074e-05,
+      "yaw_auc_full_rad_s": 0.0008752273528669927,
+      "abs_delta_v_from_u_B_plus": 0.0,
+      "abs_delta_omega_from_u_B_plus": -0.001333414376030885,
+      "linear_TV": 0.0,
+      "angular_TV": 0.009312136523055403,
+      "swept_clearance_lower_bound_m": -0.000341531530264394
+    },
+    "GRAPH_minus_HERMITE": {
+      "position_auc_03_m_s": 2.010416233610957e-05,
+      "position_auc_full_m_s": 9.248919215645683e-05,
+      "yaw_auc_03_rad_s": 0.0005608774056109038,
+      "yaw_auc_full_rad_s": 0.0016826804715371225,
+      "abs_delta_v_from_u_B_plus": 0.0,
+      "abs_delta_omega_from_u_B_plus": -0.03663433674206003,
+      "linear_TV": 0.0,
+      "angular_TV": -0.04500128113518467,
+      "swept_clearance_lower_bound_m": -0.000657270197343296
+    }
+  },
+  "selector_progress": {
+    "RAW": [
+      {
+        "submit_tick": 96,
+        "indices": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "labels": [
+          "F_1",
+          "F_2",
+          "F_3",
+          "F_4",
+          "F_5"
+        ]
+      },
+      {
+        "submit_tick": 102,
+        "indices": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "labels": [
+          "F_1",
+          "F_2",
+          "F_3",
+          "F_4",
+          "F_5"
+        ]
+      },
+      {
+        "submit_tick": 108,
+        "indices": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "labels": [
+          "F_1",
+          "F_2",
+          "F_3",
+          "F_4",
+          "F_5"
+        ]
+      },
+      {
+        "submit_tick": 114,
+        "indices": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "labels": [
+          "F_2",
+          "F_3",
+          "F_4",
+          "F_5",
+          "F_6"
+        ]
+      }
+    ],
+    "B_ENTRY": [
+      {
+        "submit_tick": 96,
+        "indices": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "labels": [
+          "F_1",
+          "F_2",
+          "F_3",
+          "F_4",
+          "F_5"
+        ]
+      },
+      {
+        "submit_tick": 102,
+        "indices": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "labels": [
+          "F_1",
+          "F_2",
+          "F_3",
+          "F_4",
+          "F_5"
+        ]
+      },
+      {
+        "submit_tick": 108,
+        "indices": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "labels": [
+          "F_1",
+          "F_2",
+          "F_3",
+          "F_4",
+          "F_5"
+        ]
+      },
+      {
+        "submit_tick": 114,
+        "indices": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "labels": [
+          "F_2",
+          "F_3",
+          "F_4",
+          "F_5",
+          "F_6"
+        ]
+      }
+    ],
+    "HERMITE": [
+      {
+        "submit_tick": 96,
+        "indices": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "labels": [
+          "E*",
+          "F_1",
+          "F_2",
+          "F_3",
+          "F_4"
+        ]
+      },
+      {
+        "submit_tick": 102,
+        "indices": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "labels": [
+          "F_1",
+          "F_2",
+          "F_3",
+          "F_4",
+          "F_5"
+        ]
+      },
+      {
+        "submit_tick": 108,
+        "indices": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "labels": [
+          "F_1",
+          "F_2",
+          "F_3",
+          "F_4",
+          "F_5"
+        ]
+      },
+      {
+        "submit_tick": 114,
+        "indices": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "labels": [
+          "F_2",
+          "F_3",
+          "F_4",
+          "F_5",
+          "F_6"
+        ]
+      }
+    ],
+    "GRAPH": [
+      {
+        "submit_tick": 96,
+        "indices": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "labels": [
+          "X_1",
+          "X_2",
+          "X_3",
+          "X_4",
+          "X_5"
+        ]
+      },
+      {
+        "submit_tick": 102,
+        "indices": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "labels": [
+          "X_1",
+          "X_2",
+          "X_3",
+          "X_4",
+          "X_5"
+        ]
+      },
+      {
+        "submit_tick": 108,
+        "indices": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "labels": [
+          "X_2",
+          "X_3",
+          "X_4",
+          "X_5",
+          "X_6"
+        ]
+      },
+      {
+        "submit_tick": 114,
+        "indices": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "labels": [
+          "X_2",
+          "X_3",
+          "X_4",
+          "X_5",
+          "X_6"
+        ]
+      }
+    ]
+  },
+  "calls": {
+    "graph_planning_solves": 1,
+    "SimulationApp_launches": 1,
+    "method_rollouts": {
+      "RAW": 1,
+      "B_ENTRY": 1,
+      "HERMITE": 1,
+      "GRAPH": 1
+    },
+    "MPC_solves": 16,
+    "MPC_submissions": 16,
+    "LightNav": 0,
+    "RGB_model_requests": 0,
+    "source_acquisition": 0,
+    "retries": 0
+  },
+  "interpretation_rule": "numeric signed differences only; no applicable material-effect threshold; FOUR_METHOD_MIXED_EVIDENCE for a valid complete comparison",
+  "multi_handoff_justified": false
+}

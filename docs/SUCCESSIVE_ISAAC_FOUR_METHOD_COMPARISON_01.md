@@ -1,5 +1,9 @@
 # SUCCESSIVE_ISAAC_FOUR_METHOD_COMPARISON_01
 
+**Result: FOUR_METHOD_MIXED_EVIDENCE.** RAW parity is exact and all four Isaac
+rollouts are safe. RAW/B_ENTRY coincide; Hermite reduces error AUC with higher
+angular TV; Graph gives no added tracking improvement in this isolated window.
+
 ## Frozen protocol
 
 One DEVELOPMENT SOURCE, one C0→C1 obstacle-reveal handoff. This is a
@@ -188,3 +192,194 @@ Only this frozen C0→C1 handoff, identical scene/state/controller/logical sched
 No general graph superiority, VLA improvement, navigation success, obstacle
 avoidance superiority, real-world result or population claim. This task stops after
 saved-only reporting and normal result push; no automatic multi-handoff experiment.
+
+## Repository-confirmed results
+
+Scientific freeze **7640c1126e24b69837dfcd6f97471a82c24eb26a** was normally pushed
+before the single Graph solve and SimulationApp launch. All four complete
+references passed; all four real Isaac rollouts completed the exact 28 intervals.
+The saved-only validator reports `valid=true`, `schedule_comparable=true` and
+`RAW_parity_pass=true`. No retry or post-freeze code/config change occurred.
+
+### Actual Isaac parity, reset and schedule
+
+RAW initial B is bit-exact. Maximum per-tick pose, command, observable memory and
+guard-clearance errors against the original saved prefix are **0.0**. Guard
+decisions, active reference identity/version, generation, attempted/accepted
+submissions and physical new applications all match. This is new official MPC
+execution with real World stepping and USD readback, not saved-command playback.
+
+Each method has 29 actual states and 28 applied command intervals, four accepted
+MPC submissions at 96/102/108/114 and four new applications at 97/103/109/115.
+Each controller starts with identical memory/held command and empty future state.
+All 16 solver waits leave Isaac pose/time unchanged; no C2 event is processed.
+World.reset leaves time 0.03333333507180214 s; **92 additional zero-motion physics
+steps per method** restore saved B time 1.5666667483747005 s, World step index 94.
+These are pre-clock initialization steps, separate from 112 comparison intervals
+across four rollouts. Exact B/cart checks pass after every reset. The one Isaac
+process exits normally with return code 0.
+
+### Transition metrics against original C1
+
+All methods start with position error 0.03723860800693844 m and yaw error
+0.0013625315137870686 rad. Full window is 0.46666669100522995 s. Lower error AUC
+means less integrated geometric tracking error in this window.
+
+| Method | Position AUC .3 (m s) | Position AUC full (m s) | Yaw AUC .3 (rad s) | Yaw AUC full (rad s) |
+|---|---:|---:|---:|---:|
+| RAW | .001834051770 | .002032905841 | .002246395122 | .004767249882 |
+| B_ENTRY | .001834051770 | .002032905841 | .002246395122 | .004767249882 |
+| HERMITE | .001814851697 | .001968172763 | .001723670764 | .003959796763 |
+| GRAPH | .001834955860 | .002060661955 | .002284548170 | .005642477234 |
+
+### Commands and execution safety
+
+First NEW command applies at tick 97 for every method. Common u_B_plus is
+[.4, −.04625916114685449]; v remains exactly .4 throughout every rollout.
+Thus first |delta v| and linear TV are 0 for all methods, and max|v|=.4 m/s.
+
+| Method | First NEW omega (rad/s) | First abs(delta omega) | Angular TV | Max abs(omega) | Swept clearance lower bound (m) |
+|---|---:|---:|---:|---:|---:|
+| RAW | −.0367487813751 | .00951037977179 | .0901891728750 | .0770850419113 | 1.040803137454 |
+| B_ENTRY | −.0367487813751 | .00951037977179 | .0901891728750 | .0770850419113 | 1.040803137454 |
+| HERMITE | −.00144785900904 | .0448113021378 | .144502590533 | .0836388207338 | 1.041118876121 |
+| GRAPH | −.0380821957511 | .00817696539576 | .0995013093981 | .0818355647941 | 1.040461605923 |
+
+Every termination is PRE_NEXT_INSTALL_CAP; guard abort=false and physical
+overlap=false. All reference minimum clearances are **.821280919083059 m**;
+all physical checks and legacy .05 m diagnostics pass. This short interval remains
+far from contact; clearance differences do not establish an obstacle-avoidance gain.
+
+### Signed paired differences: Graph minus comparator
+
+Positive error AUC/TV means Graph is larger; positive clearance means Graph has
+more clearance. These quantities are not combined into a scalar score.
+
+| Metric | vs RAW | vs B_ENTRY | vs HERMITE |
+|---|---:|---:|---:|
+| Position AUC .3 (m s) | +.000000904090 | +.000000904090 | +.000020104162 |
+| Position AUC full (m s) | +.000027756114 | +.000027756114 | +.000092489192 |
+| Yaw AUC .3 (rad s) | +.000038153048 | +.000038153048 | +.000560877406 |
+| Yaw AUC full (rad s) | +.000875227353 | +.000875227353 | +.001682680472 |
+| First abs(delta omega) (rad/s) | −.001333414376 | −.001333414376 | −.036634336742 |
+| Angular TV (rad/s) | +.009312136523 | +.009312136523 | −.045001281135 |
+| Swept clearance (m) | −.000341531530 | −.000341531530 | −.000657270197 |
+
+First |delta v| and linear TV paired differences are 0 throughout.
+
+### Planning, intent proxies and selector identities
+
+| Method | Rows | XY arc (m) | B→first gap (m) | Incoming/first-segment mismatch (rad) | Minimum edge (m) | Exact original rows retained |
+|---|---:|---:|---:|---:|---:|---|
+| RAW | 10 | 1.357452563638 | .037238608007 | .000379661219 | .149336927213 | F0–F9 |
+| B_ENTRY | 11 | 1.394691171645 | 0 | .001366186470 | .037238608007 | F0–F9 |
+| HERMITE | 12 | 1.394691171813 | 0 | .001271271279 | .018619303568 | F0–F9 |
+| GRAPH | 10 | 1.394595535140 | 0 | .000052217392 | .149695504399 | F9 |
+
+Graph converged in 3 iterations by cost_tolerance. Initial total cost
+.05721558510371845 became .03120742223186173. Final costs:
+T=3.978259363010347e−8, R=.023471344358307847, A=.0077360380909602565.
+Its relative-edge translation RMS/max are .005104878790556552/
+.00837541743006557 m; yaw RMS/max .00024362222584400025/
+.00044436671954617424 rad. Endpoint world row remains bit-exact, displacement 0 m.
+
+Per-node displacement from S, including fixed B replacing S0, in metres:
+[.03723860800693844, .028864632645019577, .020849655649352018,
+.013869274074193493, .008434917677988983, .004667774920780129,
+.002335573088810043, .0010392438709875683, .00037165612406419554, 0].
+Only the eight internal rows carry optimized A factors. The saved floating-point
+SE(2) log at the exact endpoint has translation roundoff below 7e−15; the direct
+endpoint row comparison and Euclidean displacement are exactly zero.
+
+First official H5 selected identities at tick 96:
+
+| Method | Identities |
+|---|---|
+| RAW | F1,F2,F3,F4,F5 |
+| B_ENTRY | F1,F2,F3,F4,F5 |
+| HERMITE | E*=F0,F1,F2,F3,F4 |
+| GRAPH | X1,X2,X3,X4,X5 |
+
+RAW/B_ENTRY select F1–F5 also at 102/108, then F2–F6 at 114. Hermite selects
+F1–F5 at 102/108 and F2–F6 at 114. Graph selects X1–X5 at 102 and X2–X6 at 108/114.
+Graph Xi denotes a deformed row associated with Si, not an untouched original pose.
+Reference row insertion changes the unchanged nearest+1 selector's first H5 set
+for Hermite. The measured differences therefore cannot be assigned solely to
+smooth curve shape.
+
+### Call accounting and figures
+
+Graph scientific solves 1; SimulationApp launches 1; RAW/B_ENTRY/HERMITE/GRAPH
+rollouts 1 each; new official MPC submissions/solves 16/16; LightNav 0,
+RGB/model requests 0, source acquisition 0, retries 0. Validation/reporting adds 0
+scientific calls. All execution, reference and result hashes are sealed.
+
+Exactly two PNGs were generated and visually inspected:
+
+- [World execution](../results/successive_isaac_four_method_comparison_01/figures/four_method_world_execution.png)
+- [Transition metrics](../results/successive_isaac_four_method_comparison_01/figures/transition_metrics.png)
+
+World panels have equal XY axes. Curves strongly overlap: RAW/B_ENTRY maximum
+matched XY separation is exactly 0. RAW/Hermite .000322981136264662 m;
+RAW/Graph .0003500901783163986 m; Hermite/Graph .0006730667535219206 m.
+Markers/styles and the metric PNG/numeric sidecar expose these small differences.
+No additional final PNG or HTML dependency was created.
+
+## Research interpretation
+
+**FOUR_METHOD_MIXED_EVIDENCE.** Graph gives a smaller first NEW angular-command
+change, but higher position/yaw AUC than all three comparators. It also has higher
+angular TV than RAW/B_ENTRY, and lower angular TV than Hermite. Graph's lower
+planning objective and smaller initial tangent mismatch do not establish improved
+execution. Its small spatial/yaw reference corrections are distinct from the
+angular velocity commands selected by the official MPC.
+
+RAW and B_ENTRY are numerically identical in this window. E*=F0 removes no prefix,
+and their selected original poses match. Hermite has lower error AUC but a larger
+first angular-command change and angular TV. This is an observed trade-off, not a
+net improvement or evidence that optimization is necessary. Exact downstream
+identity for RAW/B_ENTRY/Hermite and Graph's small relative-edge errors are geometry
+proxies; neither establishes semantic intent preservation.
+
+RAW parity and method isolation establish the technical ability to perform this
+bounded Isaac comparison. **These results do not justify advancing Graph as an
+improved method into a multi-handoff successive comparison on efficacy grounds.**
+A separately specified future mechanism study could examine selector/row-density
+and larger transition gaps before broader execution; this task performs none.
+
+## Limitations and protocol deviations
+
+One development source/handoff; E*=F0; B gap 3.72 cm; short .4667 s isolated window;
+submillimetre matched execution differences; logical SE(2) agent without robot
+actuator dynamics; offline controlled releases, not online timing. No downstream
+completion, task success, general obstacle avoidance or population result is tested.
+
+No scientific protocol deviation: no new source, no C2, no retry, no post-outcome
+code/config/threshold change. The horizon correction and zero-motion clock
+initialization were explicit before freeze. The prior replay remains blocked under
+its original longer-window requirements. Only documentation/compact saved results
+are added after science. Unrelated user changes remain uncommitted.
+
+## Validation and completion record
+
+Focused tests: **17 passed**. The full relevant regression command listed above
+passed **1,159 tests before freeze (356.53 s)** and **1,159 again after science
+(353.84 s)**. These are repeated runs of the same suite, not 2,318 unique tests.
+Historical saved validators included in that suite pass. The source accounting
+addendum was also checked directly with:
+
+```bash
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/four-method-mpl .venv/bin/python scripts/validate_successive_source02_accounting_addendum.py --run data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01
+```
+
+Post-science saved-only JSON/figure checks, source/code/raw-result hashes,
+`python -m compileall -q src scripts tests`, `git diff --check` and staged diff
+checks pass. Figures were visually inspected and CSV fields compared exactly to
+validated JSON. The generated CSV's CRLF line endings were normalized to LF for
+Git whitespace checks; no numeric field or frozen writer code changed.
+
+Git actions: `git commit -m 'Freeze isolated C0 to C1 four-method Isaac comparison'`
+and `git push origin main` preceded science. Completion uses
+`git commit -m 'Report isolated four-method Isaac transition results'` and normal
+`git push origin main`. No force push, history rewrite, environment edit or
+additional experiment. The result commit is the commit containing this section.

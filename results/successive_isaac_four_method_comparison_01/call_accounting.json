@@ -1,0 +1,16 @@
+{
+  "graph_planning_solves": 1,
+  "SimulationApp_launches": 1,
+  "method_rollouts": {
+    "RAW": 1,
+    "B_ENTRY": 1,
+    "HERMITE": 1,
+    "GRAPH": 1
+  },
+  "MPC_solves": 16,
+  "MPC_submissions": 16,
+  "LightNav": 0,
+  "RGB_model_requests": 0,
+  "source_acquisition": 0,
+  "retries": 0
+}
