@@ -1,0 +1,71 @@
+experiment: SUCCESSIVE_ISAAC_FOUR_METHOD_COMPARISON_01
+starting_sha: d4831fa94474b1d138ca2f1eae3fce0a16c4d8cd
+source_config: configs/successive_isaac_reconciliation_replay_01.yaml
+source: data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01
+handoff: C0_to_C1
+order: [RAW, B_ENTRY, HERMITE, GRAPH]
+start_tick: 92
+stop_tick: 120
+integration_steps: 28
+submit_ticks: [96, 102, 108, 114]
+application_ticks: [97, 103, 109, 115]
+horizon_rule: before first next-reference install; terminal state120 before any C2 event
+entry: unchanged SpatialCurve C3_FORWARD_SE2 and suffix_reference
+B_ENTRY: unchanged boundary_row_ablation04.staged_reference
+HERMITE: unchanged b_to_entry_bridge.hermite_bridge; spatial arc density
+GRAPH:
+  suffix: S=[E*, exact original downstream FRESH]
+  fixed: X0=B; XM=S[-1]
+  variables: X[1:-1] only
+  factors: T wrapped incoming direction; R Log((D_S)^-1 D_X); A s*Log(S^-1 X) internal only
+  lambda_T: 1.0
+  lambda_R: 1.0
+  lambda_A: 1.0
+  sigma_translation_m: 0.10
+  sigma_yaw_deg: 10.0
+  sigma_direction_deg: 15.0
+  initialization: Exp((1-s)*Log(B*S0^-1))*S; copy fixed endpoint bits
+  noncollapsed_edge_min_m: 1.0e-12
+  acceptance: finite noncollapsed complete reference passes existing source checker
+  nonconvergence: GRAPH_PLANNING_FAILED; no last-iterate fallback
+solver:
+  max_iterations: 80
+  finite_difference_epsilon: 1.0e-6
+  initial_damping: 1.0e-3
+  damping_increase: 10.0
+  damping_decrease: 0.3
+  maximum_damping: 1.0e+12
+  gradient_tolerance: 1.0e-9
+  step_tolerance: 1.0e-9
+  cost_tolerance: 1.0e-12
+parity:
+  source: configs/osa03_common_b_method_comparison_01.yaml
+  pose_atol: 1.0e-10
+  command_atol: 1.0e-10
+  selection_atol: 1.0e-12
+  rtol: 0.0
+runtime:
+  wall_wait_timeout_s: 30.0
+  startup_timeout_s: 300.0
+  SimulationApp_launches: 1
+  reset: World.reset; zero-motion pre-clock steps to saved B time; exact B/cart readback; new MPC worker per method
+  schedule: unchanged LogicalRelease; no wall-time simulation advance
+  agent: existing logical SE2 Xform; physics-only World.step and double USD pose write/readback
+  clock: native World time; no forged timestamps; pre-clock initialization steps reported separately
+  no_model_no_RGB_requests: true
+safety: exact source exploratory .20m physical footprint guard; legacy .05m diagnostic; abort only
+metrics:
+  target: original immutable C1; continuous forward-only XY projection and shortest-angle yaw
+  windows_s: [0.3, full_28_intervals]
+  AUC: trapezoid on execution samples; interpolate errors at exactly .3s; null for incomplete windows
+  TV: post-B consecutive commands; initial shared u_B_plus excluded from method-specific change
+  classification: numeric signed differences only; no applicable material-effect threshold; FOUR_METHOD_MIXED_EVIDENCE for a valid complete comparison
+budget:
+  graph_solves: 1
+  rollouts: 4
+  maximum_new_MPC_solves: 16
+  SimulationApp_launches: 1
+  LightNav: 0
+  RGB_model_requests: 0
+  source_acquisition: 0
+  retries: 0

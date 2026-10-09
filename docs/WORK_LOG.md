@@ -7126,3 +7126,29 @@ git diff --cached --check
   without changing environments. Exact commands are in the experiment report.
 - README unchanged: no new scientific capability/result. Source/external code,
   raw arrays, historical results and thresholds unchanged. Stop after normal push.
+
+## 2026-10-09 — SUCCESSIVE_ISAAC_FOUR_METHOD_COMPARISON_01 scientific freeze
+
+- Fetched origin/main; starting HEAD d4831fa94474b1d138ca2f1eae3fce0a16c4d8cd
+  equals remote main. Preserved unrelated two stage0 configs/GPU plotting script.
+- User explicitly replaces the prior blocked full-command window with [92,120):
+  28 intervals, before C2 install. Saved submits96/102/108/114 and applications
+  97/103/109/115 authenticated from original events. Prior replay audit unchanged.
+- Reauthenticated401-file source seal/297 episode inputs and saved source accounting.
+  C0→C1 only. Frozen C3 selects E*=F0, arc0; no stale prefix is removed here.
+  B→E* .03723860800693844 m, Hermite M=2, Graph suffix10/internal8 rows.
+- Reuse RAW, frozen B_ENTRY and Hermite; add only progress-aligned Graph T/R/A,
+  fixed exact B/end, normalized original suffix arc, existing LM defaults and
+  complete-reference feasibility acceptance. No canonical full transport factor.
+- Add real Isaac step/reset RPC with exact clock initialization, cart/pose readback,
+  fresh official worker per method, unchanged common-B/LogicalRelease machinery.
+  RAW gate first; parity failure forbids remaining methods. Source native.4 setting
+  and real official controller object restoration pass zero-solve preflight.
+- Freeze maximum1 Graph solve,1 SimulationApp,4 method rollouts/16 official MPC
+  solves; LightNav/RGB/model/source/retry0. No new scientific calls before freeze.
+  Tests use synthetic simulation only and do not constitute scientific evidence.
+- Focused17 passed; strongest relevant regression1159 passed in356.53 s. Source
+  accounting saved-only validator passes. compileall/diff/staged checks pass.
+  Exact commands/formulas/tolerances/gates documented in the experiment protocol.
+- Freeze implementation/config/tests/protocol/source/code/external clock hashes;
+  normal push precedes any Graph solve or Isaac launch. No outcome-driven changes.

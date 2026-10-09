@@ -1,0 +1,627 @@
+{
+  "run": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009",
+  "manifest": {
+    "files": {
+      "/home/gpuadmin/Workspace/se-3-reconciliation/configs/successive_isaac_four_method_comparison_01.yaml": "864260b6a396a2681f59cb279c95d2dc9948d093adddfb4c7c539812a6e78456",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/audit_successive_isaac_replay01.py": "9cd734a4d71fc0f21887a3bf9027033d31179d52ad473434cf4263161b712e2b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/continuous_obstacle_reveal_exploratory_geometry02.py": "ad6c1efbead9e4131b024602ab10a4b3f4aea72a13940fdc4c5c72066363fc03",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/join_online02_collect.py": "784ba3b8f01caba018ee41785db7f8ec7e0b6cd3d7bd88e1cae9f818bb337c76",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/join_source02_preflight.py": "493b7098b09858fa9a16224dbcf856420bc45014829773fa96a22523cd5674bb",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/join_source03_render.py": "27de10ea76e11ad249e5b973ecec9797667f4955a228da63f7c73c6b4826e345",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/robotless_old_consistent_observation.py": "63bb34bc678ae18d453fc237a5a47f1033d78b51a83121dfab1e0edcaa6d63cd",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/robotless_online_handoffs.py": "c662fc9e97871a716600ac93bd2c3f86a56b2633e296c07567d41e369b0cd512",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/robotless_runtime.py": "411d88134d688449e46408cb7ae0fa48a6a74e7a816066a2f72681f7dda49c4b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/isaac/successive_four_method01.py": "9a1cf5188a4f58a4765edeb24db0ab05a08bd29ebb8c74b62835b91f0524d237",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/long_source_mpc_worker01.py": "67dac6e66872f35c3792c414e794d701434da1646959710e0cab676e42c49bee",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/online_mpc_worker.py": "8f99bfb6010a834ebef7bbfdd86474f5c58aa26f42b514bcc9886b7693d32b96",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/osa03_common_b_mpc_worker.py": "baea2983eaeb315dc87d543d81f2b94759fc00bae02f5117aaedee31da3370c1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/report_successive_isaac_four_method01.py": "7eabef042519b0123f2694273214fae05fd88da86740d4146804e3f84cf1d5d9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_continuous_obstacle_reveal_episode01b.py": "704581736d2289a053b0056609ab2d5c4d4801bf9b1f3c6448f2f732a8068faa",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_successive_isaac_four_method01.py": "5972f32f2aec066293535043afad0fa39215b79689c2bd7cdc95384fe992c193",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/run_successive_native_source_acquisition02.py": "418fe1766fd7eaf8d6ee171841a0a923d035e3616628b45be126651286cffb68",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/successive_four_method_mpc_worker01.py": "fcc8886a07861f83f1c96d38c8ba3a16c03eddedc3696c008c7cdcce6f669a69",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_successive_isaac_four_method01.py": "e5dd11a77d6c71072838bd18a4e2f322b9a20c45f9057c00311d05749c9297e1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/scripts/validate_successive_source02_accounting_addendum.py": "9c4bfbc1d1c90d54de2fe1f6be383c8bb2570057e2c5e5d2e68500f81c81fb1e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/b_to_entry_bridge.py": "4b8f4eb85c68796432bab656bb90ddb3288cbbc995d32cbdd3e40105f14057c9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/boundary_row_ablation04.py": "01d445a997e6adbce16fdc1ca7c3b0616b97be3f6b3d08e1c281ea32ab8b90f6",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/gp_se2_join01.py": "e70bb8aa9e2159691e54ecdaa81fca3c2b036c95a94f55715415abbc745d6e5a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/graph_optimizer.py": "7d595cedc49965cf15cc6e701db371bf7d7cc69e6c3a99deffc304a32855b6f7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/isaac_clock_restore01.py": "f7b4d48aefb94330f75917ff62ded93161f5d588cd29fd0f43cc300ca6c42fe9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_online02.py": "6073f7304cd9a540d9de02da97ec9c681fe42475271a1d0af8465c4c5d2a75fb",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/join_source02.py": "615cb73e18aa7ac92e061254e99bbc9ce18c13a11d58ec7f33b8f65720151eb9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/long_source_mpc01.py": "81557996a02ce7766602ede79fa2d85bca67821fbc30a4313c1141e6fadf06b1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/online_mpc_adapter.py": "fd6ab46d98e68bd8dfff2e96b9ebdf66b27b1531632ea53c888024245025362a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_common_b.py": "071dc866f4ad98f2ba39b6e79926b74c5e4879f79111cce014121e0b87470e69",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/osa03_relative_ablation.py": "576150eced448dc9a5fb5af9243ae026fbe9c970f077063b665c1806cd5f794b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/robotless_online.py": "af9876567ee3ec29c05dcc386252656f5b35b6f9aa8a77a1acf62cccb8e0918f",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/se2.py": "1a72740eeef3af6594ec4dc428e9a8aff67cc4f31f3712161787b690b966cde1",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/spatial_correspondence_selector.py": "e22209d6bd888bd6ee5c5c79f1e8d8037cc31b72b1446784c09cfb5501c89db0",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/spatial_entry.py": "6a6ffd7fe76ed54c3be5e629c46da58db909835bc8330336ea76ed3a6dd62d96",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/spatial_entry_suffix.py": "c33484901411f3bf78ab13b1d9868d05fa3a8c984bec8a48e9c48267757c6962",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/successive_isaac_four_method01.py": "0b0e353f380bb13806073bc912591054765f98ce6da8c6076a13740f899e916b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/src/reconciliation/successive_isaac_replay01.py": "1f6e30eba05ab303826bb18ea453d113bbd26aecad7b505339044159702d7e4a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_successive_isaac_four_method01.py": "b7f771a5a39f7cc118386e69a9a4ab57aaffa76ff522785c13aae5ce4510b49e",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/tests/test_successive_isaac_replay01.py": "6a6de7f59e8b0fb801e8ed2acc5cfe6eb1d69f20effb608b936668205dd1d066"
+    },
+    "external_files": {
+      "/home/gpuadmin/isaacsim/python.sh": "37f7e3717f1fce1800d0b15b55fcd754c909978bd2455b9d6de3d22d77a92bc3",
+      "/home/gpuadmin/isaacsim/setup_python_env.sh": "0f73e6dac65efa1a28f994939f4734859d2c39eb236c658bfad9fab70c8882e6",
+      "/home/gpuadmin/isaacsim/extsDeprecated/isaacsim.core.api/isaacsim/core/api/world/world.py": "62b002a2ad2faf6de7cffa0f284181d351fa4994ef0333cdb3aa748a994cc72e",
+      "/home/gpuadmin/isaacsim/extsDeprecated/isaacsim.core.api/isaacsim/core/api/simulation_context/simulation_context.py": "c0aed535eed228c62e613e1efa9e61430122aa7f410463b201d2c63616cc2317"
+    },
+    "inputs": {
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/common_state.json": "b4bd6f6ce6ee7ec13c4ea6385a8861c6551a0ae38035b159e9e6d8af526dddad",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/config_snapshot.yaml": "8af10472e1e8e90896af747c68ce62e4a891aae6cd734f6549ec167fdbdd8836",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/entry.json": "4d469453b0ad130a911b264fb578c3ee6ddfad61bd0932af7978384682cae663",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/graph_initial.npy": "442bc50e30be3887475ac56060326dc7f70af47084d78cc4d8d1dde3449c530a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/hermite.json": "d99331963db4d7ae2257bfbb977253abac27a103543a0e947e80363b6956aef3",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/historical_prefix.json": "5c577d3048288e8e5163392dee8a8dc487f14036504c82d3aff7c765fd0e6548",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/launch_config.json": "44f4909b4d6dd1034f3f27efd578ccc556e2041f64896f71e6d8322e4cfd70ea",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/launch_environment.json": "5536ee21f11c5be72030fc1f2223e1c2b744cf22d6cb8b8070ba18c4a48f8e83",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/loader_verification.json": "0218a4bdfd0e5bade8f0ba1dde8d4b7cd8d104e2ae501b11e775d661048fc58d",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/mpc_provenance.json": "c3277cc000da5e9659feb6a022982e0c0473343bc7f9038c23ad79fdb56fac86",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/old.npy": "c8fe233b8a54be87d499d054535938975f73b4c158d3c71b005c51be54aebbb9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/pre_science_tests.json": "25c171f4ec7b6c71041586c4785d3d2cdc5f54be865184aa3a7ea8331feb7404",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/preflight_references.json": "c95272038c5c839f30040e20b53087b3172f864da7c76b5c59aaeb197b80c7a8",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/prepared_references.json": "d0802d1f5af37a42babd09be17895aba9bc2c6a68e338e1c10a9f94f4ab84ab9",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/protocol.json": "5b6971146f353b00de177a2f0e3065909d8eb8a661da4ae29311b46c22ccd060",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/protocol_document.md": "405fdb125e1214064c761dc1ff9b04dc06172d27da17c130046762fd6e9e27bc",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/B_ENTRY_local.npy": "33a64d614aa1782231be9ec0867faec75a1062e210d177a8afd115dd2c5db873",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/B_ENTRY_world.npy": "570bd2e94c90c65c4003f0c970e97ba7f578bd2bb478fba8e3be0ffb044ee69a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/GRAPH_INITIAL_DIAGNOSTIC_local.npy": "1e68698a3b7f24bda64c95b29023372357c7656cc85567de6508a52f4bbb4c5a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/GRAPH_INITIAL_DIAGNOSTIC_world.npy": "442bc50e30be3887475ac56060326dc7f70af47084d78cc4d8d1dde3449c530a",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/HERMITE_local.npy": "adb875d4e447a5aa0e91b3f9c0cfcd57799b8c0256c5e9abc7a8adb253b30166",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/HERMITE_world.npy": "319f7b62d93eb22c824fd243c2529b6403fb59293ff3e4b9bbdb550310aff8d7",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/RAW_local.npy": "6f6b97c922b9e6cf8d455cf4cc4b1686375b93a40a0a67f557278137a751450b",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/references/RAW_world.npy": "a93c28ce754a81f814f2ac94f4d5aa2497de28b27ffd15c2d96670622bcdbb14",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/restoration_preflight.json": "ef74b8275b367bd6928cffb17bd338a5a54b1ad9d0fe8b402d6c1516b70a76b2",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/scenario.json": "63a0d1f907584fd02240b14a1a30bd1f6227beea75bf27344403c9b726163725",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/schedule.json": "1071cccb690b60f57970b747fb129f3b44d68988112e84c57e686b089202eeb2",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/source_authentication.json": "65e50e17edc63bf3d824b900057c86d7caba88f4a44298eb7046b006541f1624",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/speed_intervention.json": "094fa9c32117515cea0452bf2504276da30f9d506864a4a8234a4fd6ba80f475",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/suffix.npy": "a93c28ce754a81f814f2ac94f4d5aa2497de28b27ffd15c2d96670622bcdbb14",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/technical_preflight/loader_inherited.txt": "55d0308ce799e12da40bb9344c8887369851b2773ba0112f89bca0fd503c1466",
+      "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_isaac_four_method_comparison_01/primary_20261009/technical_preflight/loader_sanitized.txt": "17da5181a40dc561b85de5463825a56919c3f072397ee4cd053a1c697cfcefd9"
+    },
+    "budget": {
+      "graph_solves": 1,
+      "rollouts": 4,
+      "maximum_new_MPC_solves": 16,
+      "SimulationApp_launches": 1,
+      "LightNav": 0,
+      "RGB_model_requests": 0,
+      "source_acquisition": 0,
+      "retries": 0
+    }
+  },
+  "source": {
+    "valid": true,
+    "result_commit": "e4f61465c13996cc8c5c70504a5735dabfa6e944",
+    "source_scientific_freeze": "ee330244d867fad3749c60b6a5f1630b1471ec2a",
+    "integrity_sha256": "59934496185fafb43212ba86b4a20424d6b536719030869e4f7cfed5aae4306a",
+    "seal_sha256": "b61db35d34ee9a34e73395ca497a7babb2435be701f29462b97ea13bfc4c1a20",
+    "sealed_file_count": 401,
+    "episode_input_count": 297,
+    "historical_classification": "SUCCESSIVE_SOURCE_MAX_REACHED",
+    "boundary": {
+      "A": [
+        19.201407937708954,
+        25.363333351859286,
+        -1.5689749934176171
+      ],
+      "A_old": [
+        19.20129863861204,
+        25.42333325575427,
+        -1.5689742328041627
+      ],
+      "B": [
+        19.20161431701553,
+        25.250000200523026,
+        -1.5689755606609315
+      ],
+      "P": [
+        19.201602178508843,
+        25.25666685648663,
+        -1.5689755391010196
+      ],
+      "B_tick": 92,
+      "B_sim_s": 1.5666667483747005,
+      "u_minus": [
+        0.4,
+        -1.2935946487914903e-06
+      ],
+      "u_B_plus": [
+        0.4,
+        -0.04625916114685449
+      ],
+      "controller_memory": {
+        "available": true,
+        "previous_control": [
+          0.4,
+          -0.04625916114685449
+        ],
+        "cut_host_s": 452692.673532835,
+        "confirmed_by_host_s": 452692.669011271,
+        "source_event_row": 14,
+        "source_kind": "accepted_result",
+        "reason": null
+      },
+      "reference_version": 1,
+      "generation": 3,
+      "integration_dt_s": 0.01666666753590107,
+      "first_solve_id": "EPISODE_00_solve_000005",
+      "reference_files": {
+        "old_raw_local": {
+          "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/chunks/chunk_000/raw_local.npy",
+          "sha256": "6d53cfff6ca770055ca6563548fc80b6696e2336fd4343f35c2c4e01da1bd5ae"
+        },
+        "old_world": {
+          "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/chunks/chunk_000/world.npy",
+          "sha256": "c8fe233b8a54be87d499d054535938975f73b4c158d3c71b005c51be54aebbb9"
+        },
+        "fresh_raw_local": {
+          "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/chunks/chunk_001/raw_local.npy",
+          "sha256": "6f6b97c922b9e6cf8d455cf4cc4b1686375b93a40a0a67f557278137a751450b"
+        },
+        "fresh_world": {
+          "path": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00/chunks/chunk_001/world.npy",
+          "sha256": "a93c28ce754a81f814f2ac94f4d5aa2497de28b27ffd15c2d96670622bcdbb14"
+        }
+      },
+      "clocks": {
+        "t_obs_fresh": {
+          "bootstrap": false,
+          "bytes": 27053,
+          "camera": {
+            "T_agent_camera": [
+              [
+                -1.8771991185202174e-19,
+                0.0,
+                -1.0,
+                0.08999999999999986
+              ],
+              [
+                -1.0,
+                0.0,
+                1.4488601449122205e-20,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.65
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_agent": [
+              [
+                0.0018213323703083477,
+                0.999998341372823,
+                0.0,
+                19.201407937708954
+              ],
+              [
+                -0.999998341372823,
+                0.0018213323703083477,
+                0.0,
+                25.363333351859286
+              ],
+              [
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_camera": [
+              [
+                -0.999998341372823,
+                0.0,
+                -0.0018213323703083477,
+                19.20157185762228
+              ],
+              [
+                -0.0018213323703083477,
+                0.0,
+                0.999998341372823,
+                25.27333350113573
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.65
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "actual_intrinsics": {
+              "K": [
+                [
+                  161.27331226477605,
+                  0.0,
+                  240.0
+                ],
+                [
+                  0.0,
+                  161.2733097162889,
+                  135.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ],
+              "K_pixel_center_convention": "continuous pixel coordinates, principal point=(width/2,height/2)",
+              "clipping_range_m": [
+                0.05000000074505806,
+                100.0
+              ],
+              "distortion": "none; USD perspective pinhole",
+              "focal_length_mm": 7.040587812662125,
+              "horizontal_aperture_mm": 20.954999327659607,
+              "horizontal_fov_deg": 112.19999830277474,
+              "resolution_width_height": [
+                480,
+                270
+              ],
+              "usd_aperture_focal_units": "tenths of a stage unit; ratios determine pinhole intrinsics",
+              "usd_focal_length": 0.07040587812662125,
+              "usd_horizontal_aperture": 0.20954999327659607,
+              "usd_vertical_aperture": 0.11787187308073044,
+              "vertical_aperture_mm": 11.787187308073044,
+              "vertical_fov_deg": 79.8646135596113
+            },
+            "basis_checks": {
+              "image_right_maps_to_agent_negative_y": true,
+              "image_up_maps_to_agent_positive_z": true,
+              "optical_forward_maps_to_agent_positive_x": true,
+              "proper_rotation_determinant_positive_one": true,
+              "translation_matches_configuration": true
+            },
+            "camera_prim_path": "/World/LogicalAgent/Camera",
+            "configured": {
+              "clipping_range_m": [
+                0.05,
+                100.0
+              ],
+              "height_choice": "logical_camera_height_0.65m_is_explicitly_not_official_body_offset_0.165m",
+              "horizontal_aperture_mm": 20.955,
+              "horizontal_fov_deg": 112.2,
+              "prim_path": "/World/LogicalAgent/Camera",
+              "reference_semantics": "official_demo_camera_axes_and_resolution_and_approximate_fov",
+              "relative_translation_m": [
+                0.09,
+                0.0,
+                0.65
+              ],
+              "resolution_height": 270,
+              "resolution_width": 480,
+              "rotation_agent_from_camera": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ]
+            },
+            "matrix_convention": "column vectors; T_target_source; translation in metres",
+            "parent_prim_path": "/World/LogicalAgent",
+            "usd_camera_axes": "+X=image right, +Y=image up, -Z=optical forward"
+          },
+          "capture_host_utc": "2026-10-07T07:19:17.141622+00:00",
+          "capture_monotonic_ns": 452692228807268,
+          "capture_sim_time_s": 1.2833334002643824,
+          "display_annotations_cleared_before_capture": true,
+          "episode_time_s": 1.2500000651925802,
+          "frame_id": "frame_000005",
+          "path": "rgb/frame_000005.jpg",
+          "pose_world": [
+            19.201407937708954,
+            25.363333351859286,
+            -1.5689749934176171
+          ],
+          "readback_finished_host": {
+            "episode_time_s": 1.2500000651925802,
+            "host_monotonic_ns": 452692309850382,
+            "host_monotonic_s": 452692.309850382,
+            "host_utc": "2026-10-07T07:19:17.222666+00:00",
+            "sim_time_s": 1.2833334002643824
+          },
+          "render_sim_time_after_s": 1.2833334002643824,
+          "render_sim_time_before_s": 1.2833334002643824,
+          "render_state_stable": true,
+          "rendered_state_id": 75,
+          "resolution_width_height": [
+            480,
+            270
+          ],
+          "sha256": "968880662632441eec8d239061e3bae161d146f10d1e202fb22e832a166f1a93",
+          "stationary": false,
+          "transmission_status": "CAPTURED_NOT_SENT",
+          "wire_seq": null
+        },
+        "t_request_fresh": {
+          "monotonic_ns": 452692328649469,
+          "utc": "2026-10-07T07:19:17.241461Z"
+        },
+        "t_receipt_fresh": {
+          "monotonic_ns": 452692542768553,
+          "utc": "2026-10-07T07:19:17.455572Z"
+        },
+        "t_ready_fresh": {
+          "monotonic_ns": 452692542768553,
+          "utc": "2026-10-07T07:19:17.455572Z"
+        },
+        "t_ready_seen": {
+          "sim_time_s": 1.5166667457669973,
+          "episode_time_s": 1.4833334106951952,
+          "host_monotonic_s": 452692.547454902,
+          "host_monotonic_ns": 452692547454902,
+          "host_utc": "2026-10-07T07:19:17.460269+00:00"
+        },
+        "t_install_fresh": {
+          "host_monotonic_ns": 452692547686585,
+          "host_monotonic_s": 452692.547686585,
+          "host_utc": "2026-10-07T07:19:17.460501+00:00",
+          "sim_time_s": 1.5166667457669973,
+          "episode_time_s": 1.4833334106951952
+        },
+        "t_switch_fresh": {
+          "host_monotonic_ns": 452692673532835,
+          "host_monotonic_s": 452692.673532835,
+          "host_utc": "2026-10-07T07:19:17.586348+00:00",
+          "sim_time_s": 1.5666667483747005,
+          "episode_time_s": 1.5333334133028984
+        }
+      },
+      "saved_kinematic_max_component_error": 0.0,
+      "saved_kinematic_check_is_replay": false
+    },
+    "source": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01",
+    "episode": "/home/gpuadmin/Workspace/se-3-reconciliation/data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01/episodes/EPISODE_00"
+  },
+  "entry": {
+    "correspondence": {
+      "arc_m": 0.0,
+      "normalized_progress": 0.0,
+      "segment": 0,
+      "alpha": 0.0,
+      "nearest_raw_row_diagnostic": 0,
+      "target_world": [
+        19.201732994894844,
+        25.212761781627275,
+        -1.5676130291471446
+      ],
+      "position_gap_m": 0.03723860800693844,
+      "yaw_gap_rad": 0.0013625315137868466,
+      "tangent_gap_rad": 0.00037967199874056057,
+      "remaining_arc_m": 1.3574525636380002,
+      "total_arc_m": 1.3574525636380002,
+      "pose_score": 0.13869847931450946
+    },
+    "row_count": 10,
+    "original_count": 10,
+    "raw_prefix_rows_removed": 0,
+    "first_raw_identity_presented": 0,
+    "row_original_identities": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "row_fractional_original_progress": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0
+    ],
+    "row_original_arc_m": [
+      0.0,
+      0.15143908158403918,
+      0.3023308748591847,
+      0.4532125627045822,
+      0.6037503063963792,
+      0.7532810497713824,
+      0.9047361364407918,
+      1.0551454867495045,
+      1.2081156364254308,
+      1.3574525636380002
+    ],
+    "remaining_original_arc_at_start_m": 1.3574525636380002,
+    "first_presented_original_arc_m": 0.0,
+    "first_presented_fractional_original_row": 0.0,
+    "duplicate_handling": "exact start vertex: preserve one original row",
+    "original_downstream_world_and_local_rows_exact": true,
+    "frame": "world metres/yaw radians; entry local = A^-1 E; original raw suffix retained, no B re-anchor"
+  },
+  "schedule": {
+    "start_tick": 92,
+    "stop_tick": 120,
+    "integration_steps": 28,
+    "attempted_submit_ticks": [
+      96,
+      102,
+      108,
+      114
+    ],
+    "accepted_submit_ticks": [
+      96,
+      102,
+      108,
+      114
+    ],
+    "application_ticks": [
+      97,
+      103,
+      109,
+      115
+    ],
+    "pairs": [
+      {
+        "submit_tick": 96,
+        "application_tick": 97
+      },
+      {
+        "submit_tick": 102,
+        "application_tick": 103
+      },
+      {
+        "submit_tick": 108,
+        "application_tick": 109
+      },
+      {
+        "submit_tick": 114,
+        "application_tick": 115
+      }
+    ],
+    "excluded_next_install": {
+      "event_row": 23,
+      "install_tick": 120,
+      "reply_seen_tick": 121,
+      "chunk_id": "chunk_002",
+      "reference_version": 2,
+      "generation": 4
+    },
+    "original_generation": 3,
+    "window_rule": "[B application, next reference installation); terminal state before install"
+  },
+  "reference_definitions": {
+    "experiment": "SUCCESSIVE_ISAAC_FOUR_METHOD_COMPARISON_01",
+    "starting_sha": "d4831fa94474b1d138ca2f1eae3fce0a16c4d8cd",
+    "source_config": "configs/successive_isaac_reconciliation_replay_01.yaml",
+    "source": "data/successive_native_source_acquisition_02/primary_20261007/CANDIDATE_01",
+    "handoff": "C0_to_C1",
+    "order": [
+      "RAW",
+      "B_ENTRY",
+      "HERMITE",
+      "GRAPH"
+    ],
+    "start_tick": 92,
+    "stop_tick": 120,
+    "integration_steps": 28,
+    "submit_ticks": [
+      96,
+      102,
+      108,
+      114
+    ],
+    "application_ticks": [
+      97,
+      103,
+      109,
+      115
+    ],
+    "horizon_rule": "before first next-reference install; terminal state120 before any C2 event",
+    "entry": "unchanged SpatialCurve C3_FORWARD_SE2 and suffix_reference",
+    "B_ENTRY": "unchanged boundary_row_ablation04.staged_reference",
+    "HERMITE": "unchanged b_to_entry_bridge.hermite_bridge; spatial arc density",
+    "GRAPH": {
+      "suffix": "S=[E*, exact original downstream FRESH]",
+      "fixed": "X0=B; XM=S[-1]",
+      "variables": "X[1:-1] only",
+      "factors": "T wrapped incoming direction; R Log((D_S)^-1 D_X); A s*Log(S^-1 X) internal only",
+      "lambda_T": 1.0,
+      "lambda_R": 1.0,
+      "lambda_A": 1.0,
+      "sigma_translation_m": 0.1,
+      "sigma_yaw_deg": 10.0,
+      "sigma_direction_deg": 15.0,
+      "initialization": "Exp((1-s)*Log(B*S0^-1))*S; copy fixed endpoint bits",
+      "noncollapsed_edge_min_m": 1e-12,
+      "acceptance": "finite noncollapsed complete reference passes existing source checker",
+      "nonconvergence": "GRAPH_PLANNING_FAILED; no last-iterate fallback"
+    },
+    "solver": {
+      "max_iterations": 80,
+      "finite_difference_epsilon": 1e-06,
+      "initial_damping": 0.001,
+      "damping_increase": 10.0,
+      "damping_decrease": 0.3,
+      "maximum_damping": 1000000000000.0,
+      "gradient_tolerance": 1e-09,
+      "step_tolerance": 1e-09,
+      "cost_tolerance": 1e-12
+    },
+    "parity": {
+      "source": "configs/osa03_common_b_method_comparison_01.yaml",
+      "pose_atol": 1e-10,
+      "command_atol": 1e-10,
+      "selection_atol": 1e-12,
+      "rtol": 0.0
+    },
+    "runtime": {
+      "wall_wait_timeout_s": 30.0,
+      "startup_timeout_s": 300.0,
+      "SimulationApp_launches": 1,
+      "reset": "World.reset; zero-motion pre-clock steps to saved B time; exact B/cart readback; new MPC worker per method",
+      "schedule": "unchanged LogicalRelease; no wall-time simulation advance",
+      "agent": "existing logical SE2 Xform; physics-only World.step and double USD pose write/readback",
+      "clock": "native World time; no forged timestamps; pre-clock initialization steps reported separately",
+      "no_model_no_RGB_requests": true
+    },
+    "safety": "exact source exploratory .20m physical footprint guard; legacy .05m diagnostic; abort only",
+    "metrics": {
+      "target": "original immutable C1; continuous forward-only XY projection and shortest-angle yaw",
+      "windows_s": [
+        0.3,
+        "full_28_intervals"
+      ],
+      "AUC": "trapezoid on execution samples; interpolate errors at exactly .3s; null for incomplete windows",
+      "TV": "post-B consecutive commands; initial shared u_B_plus excluded from method-specific change",
+      "classification": "numeric signed differences only; no applicable material-effect threshold; FOUR_METHOD_MIXED_EVIDENCE for a valid complete comparison"
+    },
+    "budget": {
+      "graph_solves": 1,
+      "rollouts": 4,
+      "maximum_new_MPC_solves": 16,
+      "SimulationApp_launches": 1,
+      "LightNav": 0,
+      "RGB_model_requests": 0,
+      "source_acquisition": 0,
+      "retries": 0
+    }
+  },
+  "historical_replay_audit_unchanged": true,
+  "scientific_calls_before_freeze": 0
+}
