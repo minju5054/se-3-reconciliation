@@ -1,0 +1,101 @@
+{
+  "rankings": {
+    "progress": [
+      "C3_to_C4",
+      "C2_to_C3",
+      "C1_to_C2",
+      "C5_to_C6",
+      "C9_to_C10",
+      "C4_to_C5",
+      "C7_to_C8",
+      "C6_to_C7"
+    ],
+    "gap": [
+      "C3_to_C4",
+      "C2_to_C3",
+      "C1_to_C2",
+      "C5_to_C6",
+      "C9_to_C10",
+      "C4_to_C5",
+      "C7_to_C8",
+      "C6_to_C7"
+    ],
+    "turn": [
+      "C2_to_C3",
+      "C5_to_C6",
+      "C3_to_C4",
+      "C9_to_C10",
+      "C7_to_C8",
+      "C4_to_C5",
+      "C1_to_C2",
+      "C6_to_C7"
+    ],
+    "fresh_turn": [
+      "C5_to_C6",
+      "C1_to_C2",
+      "C6_to_C7",
+      "C7_to_C8",
+      "C3_to_C4",
+      "C2_to_C3",
+      "C4_to_C5",
+      "C9_to_C10"
+    ],
+    "revision": [
+      "C1_to_C2",
+      "C3_to_C4",
+      "C4_to_C5",
+      "C2_to_C3",
+      "C6_to_C7",
+      "C5_to_C6",
+      "C9_to_C10",
+      "C7_to_C8"
+    ]
+  },
+  "top3": {
+    "progress": [
+      "C3_to_C4",
+      "C2_to_C3",
+      "C1_to_C2"
+    ],
+    "gap": [
+      "C3_to_C4",
+      "C2_to_C3",
+      "C1_to_C2"
+    ],
+    "turn": [
+      "C2_to_C3",
+      "C5_to_C6",
+      "C3_to_C4"
+    ],
+    "fresh_turn": [
+      "C5_to_C6",
+      "C1_to_C2",
+      "C6_to_C7"
+    ],
+    "revision": [
+      "C1_to_C2",
+      "C3_to_C4",
+      "C4_to_C5"
+    ]
+  },
+  "pareto_hard": [
+    "C1_to_C2",
+    "C2_to_C3",
+    "C3_to_C4",
+    "C5_to_C6"
+  ],
+  "recommended": {
+    "TURN": "C2_to_C3",
+    "PROGRESS": "C3_to_C4",
+    "REVISION": "C1_to_C2"
+  },
+  "selection_inputs": [
+    "removed_prefix_fraction",
+    "B_to_E_gap_m",
+    "abs_transition_turn_demand_rad",
+    "fresh_suffix_abs_net_yaw_rad",
+    "local_polyline_separation_m",
+    "handoff_index"
+  ],
+  "no_weighted_scalar": true
+}

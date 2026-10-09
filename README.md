@@ -7,6 +7,16 @@ here is separate from LightNav.
 
 ## Current research state
 
+The [saved-only post-reveal severity audit](docs/SUCCESSIVE_POST_REVEAL_HANDOFF_SEVERITY_AUDIT_01.md)
+authenticates ten handoffs and selects TURN=C2→C3, PROGRESS=C3→C4 and
+REVISION=C1→C2 using geometry only. **HANDOFF_SEVERITY_AUDIT_COMPLETE**:
+all ten C3 entries are F0 with zero removed progress; the PROGRESS role is resolved
+by the frozen gap tie-break. C2→C3 has 9.879° incoming-to-FRESH turn versus C0→C1's
+.02175°, but no method necessity or execution benefit is established. Two stable
+controls remain separate. No new Isaac/MPC/Graph/model calls or method runs.
+[Severity PNG](results/successive_post_reveal_handoff_severity_audit_01/figures/handoff_severity_overview.png)
+and [candidate geometry](results/successive_post_reveal_handoff_severity_audit_01/figures/hard_candidate_geometry.png).
+
 The [isolated C0→C1 four-method Isaac comparison](docs/SUCCESSIVE_ISAAC_FOUR_METHOD_COMPARISON_01.md)
 completed RAW/B_ENTRY/Hermite/progress-aligned Graph under one common scene/state
 and logical schedule, stopping before C2 installation. RAW exactly reproduces the

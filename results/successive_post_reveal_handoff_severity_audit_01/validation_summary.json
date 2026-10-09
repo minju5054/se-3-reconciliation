@@ -1,0 +1,10 @@
+{
+  "valid": true,
+  "saved_only": true,
+  "source_authentication": true,
+  "exact_ten_handoffs": true,
+  "stable_controls": true,
+  "C3_unchanged": true,
+  "geometry_only_selection": true,
+  "no_new_scientific_calls": true
+}

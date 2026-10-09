@@ -1,0 +1,127 @@
+{
+  "files": [
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/successive_post_reveal_handoff_severity_audit_01/figures/handoff_severity_overview.png",
+      "sha256": "97298fbe59833d85f9bdc185c70bfef30f98fd8445484fe9152003af262d83f3"
+    },
+    {
+      "path": "/home/gpuadmin/Workspace/se-3-reconciliation/results/successive_post_reveal_handoff_severity_audit_01/figures/hard_candidate_geometry.png",
+      "sha256": "0f4499a63da99676b78cddec15b42ab607bdc74ded3adb306af71830f56867d2"
+    }
+  ],
+  "figure_count": 2,
+  "geometry_only": true,
+  "recommended": {
+    "TURN": "C2_to_C3",
+    "PROGRESS": "C3_to_C4",
+    "REVISION": "C1_to_C2"
+  },
+  "stable_controls": [
+    "C8_to_C9",
+    "C10_to_C11"
+  ],
+  "numeric_sidecar": [
+    {
+      "handoff": "C1_to_C2",
+      "evolution": "EVOLVING",
+      "candidate_role": "REVISION",
+      "B_to_E_gap_m": 0.03743237936479145,
+      "abs_transition_turn_demand_rad": 0.01626463131368272,
+      "removed_prefix_fraction": 0.0,
+      "local_polyline_separation_m": 0.4871873421559301,
+      "fresh_suffix_abs_net_yaw_rad": 0.5201619910076261
+    },
+    {
+      "handoff": "C2_to_C3",
+      "evolution": "EVOLVING",
+      "candidate_role": "TURN",
+      "B_to_E_gap_m": 0.0421319385542338,
+      "abs_transition_turn_demand_rad": 0.17242303606433396,
+      "removed_prefix_fraction": 0.0,
+      "local_polyline_separation_m": 0.2526034885138948,
+      "fresh_suffix_abs_net_yaw_rad": 0.33703331649303436
+    },
+    {
+      "handoff": "C3_to_C4",
+      "evolution": "EVOLVING",
+      "candidate_role": "PROGRESS",
+      "B_to_E_gap_m": 0.044487450112538685,
+      "abs_transition_turn_demand_rad": 0.12001322112329271,
+      "removed_prefix_fraction": 0.0,
+      "local_polyline_separation_m": 0.3979989592198775,
+      "fresh_suffix_abs_net_yaw_rad": 0.3751489818096161
+    },
+    {
+      "handoff": "C4_to_C5",
+      "evolution": "EVOLVING",
+      "candidate_role": null,
+      "B_to_E_gap_m": 0.0048438556216767355,
+      "abs_transition_turn_demand_rad": 0.026328600686903236,
+      "removed_prefix_fraction": 0.0,
+      "local_polyline_separation_m": 0.3800339080715969,
+      "fresh_suffix_abs_net_yaw_rad": 0.29698034017928876
+    },
+    {
+      "handoff": "C5_to_C6",
+      "evolution": "EVOLVING",
+      "candidate_role": null,
+      "B_to_E_gap_m": 0.01350733778406224,
+      "abs_transition_turn_demand_rad": 0.12547771175671407,
+      "removed_prefix_fraction": 0.0,
+      "local_polyline_separation_m": 0.21131574677246945,
+      "fresh_suffix_abs_net_yaw_rad": 0.7076697200536728
+    },
+    {
+      "handoff": "C6_to_C7",
+      "evolution": "EVOLVING",
+      "candidate_role": null,
+      "B_to_E_gap_m": 0.003638400392425048,
+      "abs_transition_turn_demand_rad": 0.001443224114882291,
+      "removed_prefix_fraction": 0.0,
+      "local_polyline_separation_m": 0.2212851501476448,
+      "fresh_suffix_abs_net_yaw_rad": 0.5126212969480548
+    },
+    {
+      "handoff": "C7_to_C8",
+      "evolution": "EVOLVING",
+      "candidate_role": null,
+      "B_to_E_gap_m": 0.004661993318630727,
+      "abs_transition_turn_demand_rad": 0.039263081194009786,
+      "removed_prefix_fraction": 0.0,
+      "local_polyline_separation_m": 0.06767678161865967,
+      "fresh_suffix_abs_net_yaw_rad": 0.5015516392886639
+    },
+    {
+      "handoff": "C8_to_C9",
+      "evolution": "STABLE",
+      "candidate_role": "STABLE_CONTROL",
+      "B_to_E_gap_m": 0.004570428201147133,
+      "abs_transition_turn_demand_rad": 0.037831254863803565,
+      "removed_prefix_fraction": 0.0,
+      "local_polyline_separation_m": 0.0,
+      "fresh_suffix_abs_net_yaw_rad": 0.5015516392886639
+    },
+    {
+      "handoff": "C9_to_C10",
+      "evolution": "EVOLVING",
+      "candidate_role": null,
+      "B_to_E_gap_m": 0.006302361401206966,
+      "abs_transition_turn_demand_rad": 0.07277579950389512,
+      "removed_prefix_fraction": 0.0,
+      "local_polyline_separation_m": 0.20614133808768148,
+      "fresh_suffix_abs_net_yaw_rad": 0.25457457546144724
+    },
+    {
+      "handoff": "C10_to_C11",
+      "evolution": "STABLE",
+      "candidate_role": "STABLE_CONTROL",
+      "B_to_E_gap_m": 0.0040025223711138876,
+      "abs_transition_turn_demand_rad": 0.005647044249965649,
+      "removed_prefix_fraction": 0.0,
+      "local_polyline_separation_m": 0.0,
+      "fresh_suffix_abs_net_yaw_rad": 0.25457457546144724
+    }
+  ],
+  "presentation_note": "Post-freeze label placement only; frozen reporter and numeric sidecar unchanged.",
+  "layout_script_sha256": "42d8ecf20bba4312b3e2d52a8fa34e21eab0f781368765b0c7c20131099f983f"
+}
